@@ -1,0 +1,18 @@
+scrollbar($color-thumb, $color-track = transparent)
+  // firefox
+  scrollbar-color $color-thumb $color-track
+  scrollbar-width thin
+
+  // chrome
+  &::-webkit-scrollbar
+    width 6px
+    height 6px
+
+  &::-webkit-scrollbar-track
+    box-shadow none
+    background-color $color-track
+
+  &::-webkit-scrollbar-thumb
+    padding 12px
+    border-radius 3px
+    background-color $color-thumb

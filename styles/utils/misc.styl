@@ -1,0 +1,11 @@
+merge-transition()
+  if (@transition)
+    transition @transition, arguments
+  else
+    transition arguments
+
+merge-will-change()
+  if (@will-change)
+    will-change @will-change, arguments
+  else
+    will-change arguments

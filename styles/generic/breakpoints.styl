@@ -1,0 +1,9 @@
+/**
+ * Breakpoints
+ */
+generate-breakpoints-css-variables()
+  :root
+    for $breakpoint_name, $breakpoint_value in $breakpoints
+      {'--breakpoint--' + $breakpoint_name} $breakpoint_value
+
+generate-breakpoints-css-variables()

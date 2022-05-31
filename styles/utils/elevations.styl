@@ -1,0 +1,29 @@
+/**
+ * Elevations
+ */
+elevation-transition()
+  merge-transition box-shadow $elevation-duration var(--transition--ease-out), background-color $elevation-duration var(--transition--ease-out)
+  merge-will-change box-shadow, background-color
+
+elevation-light($z)
+  if ($z == 'inset')
+    box-shadow $shadow-inset-light
+
+  else if ($z == 0)
+    box-shadow none
+
+  else
+    box-shadow $shadow-umbra-light[$z - 1], $shadow-penumbra-light[$z - 1]
+
+elevation($z)
+  if ($z == 'inset')
+    box-shadow $shadow-inset-dark
+
+  else if ($z == 0)
+    box-shadow none
+
+  else if ($z == 1)
+    box-shadow $shadow-umbra-dark[0], $shadow-penumbra-dark[0]
+
+  else
+    box-shadow $shadow-umbra-dark[$z - 1], $shadow-penumbra-dark[$z - 1]

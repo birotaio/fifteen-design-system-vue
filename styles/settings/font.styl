@@ -1,0 +1,134 @@
+/**
+ * Typography
+ */
+$font-family-heading ?= 'ES-Build', sans-serif
+$font-family-text ?= 'Poppins', sans-serif
+$weights ?= {
+  extra-light: 100,
+  lighter: 200,
+  light: 300,
+  normal: 400,
+  medium: 500,
+  semi-bold: 600,
+  bold: 700,
+  bolder: 800,
+  extra-bold: 900
+}
+$fonts ?= {
+  bigger-1: {
+    font-size: rem-fluid('xs', 88px, 'lg', 192px),
+    line-height: rem-fluid('xs', 96px, 'lg', 200px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading,
+    letter-spacing: rem(-1.5px)
+  },
+  bigger-2: {
+    font-size: rem-fluid('xs', 80px, 'lg', 168px),
+    line-height: rem-fluid('xs', 88px, 'lg', 176px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading,
+    letter-spacing: rem(-1.5px)
+  },
+  bigger-3: {
+    font-size: rem-fluid('xs', 72px, 'lg', 144px),
+    line-height: rem-fluid('xs', 80px, 'lg', 152px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading,
+    letter-spacing: rem(-1.5px)
+  },
+  bigger-4: {
+    font-size: rem-fluid('xs', 64px, 'lg', 120px),
+    line-height: rem-fluid('xs', 72px, 'lg', 128px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading,
+    letter-spacing: rem(-1.5px)
+  },
+  heading-1: {
+    font-size: rem-fluid('xs', 56px, 'lg', 96px),
+    line-height: rem-fluid('xs', 64px, 'lg', 104px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading,
+    letter-spacing: rem(-1.5px)
+  },
+  heading-2: {
+    font-size: rem-fluid('xs', 48px, 'lg', 64px),
+    line-height: rem-fluid('xs', 56px, 'lg', 72px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading,
+    letter-spacing: rem(-0.5px)
+  },
+  heading-3: {
+    font-size: rem-fluid('xs', 40px, 'lg', 48px),
+    line-height: rem-fluid('xs', 48px, 'lg', 56px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading
+  },
+  heading-4: {
+    font-size: rem(32px),
+    line-height: rem(40px),
+    letter-spacing: rem(0.25px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading
+  },
+  heading-5: {
+    font-size: rem(24px),
+    line-height: rem(32px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading
+  },
+  heading-6: {
+    font-size: rem(20px),
+    line-height: rem(24px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading,
+    letter-spacing: rem(0.15px)
+  },
+  subtitle-1: {
+    font-size: rem(16px),
+    line-height: rem(24px),
+    font-weight: $weights.bold,
+    font-family: $font-family-text,
+    letter-spacing: rem(0.15px)
+  },
+  subtitle-2: {
+    font-size: rem(14px),
+    line-height: rem-fluid('xs', 16px, 'lg', 24px),
+    font-weight: $weights.bold,
+    font-family: $font-family-text,
+    letter-spacing: rem(0.1px)
+  },
+  body-1: {
+    font-size: rem-fluid('xs', 16px, 'lg', 24px),
+    line-height: rem-fluid('xs', 24px, 'lg', 32px),
+    font-weight: $weights.medium,
+    font-family: $font-family-text,
+    letter-spacing: rem(0.25px)
+  },
+  body-2: {
+    font-size: rem(16px),
+    line-height: rem(24px),
+    font-weight: $weights.medium,
+    font-family: $font-family-text,
+    letter-spacing: rem(0.5px)
+  },
+  button: {
+    font-size: rem(14px),
+    line-height: rem(16px),
+    font-weight: $weights.bolder,
+    font-family: $font-family-heading
+  },
+  caption: {
+    font-size: rem(12px),
+    line-height: rem(16px),
+    font-weight: $weights.medium,
+    font-family: $font-family-text,
+    letter-spacing: rem(0.4px)
+  },
+  overline: {
+    font-size: rem(16px),
+    line-height: rem(24px),
+    font-weight: $weights.bold,
+    font-family: $font-family-text,
+    letter-spacing: rem(1px)
+  }
+}

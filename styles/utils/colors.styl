@@ -1,0 +1,25 @@
+css-color-var($color)
+  return unquote('var(--color--' + $color + ')');
+
+bg-color-transition()
+  merge-transition background-color 0.12s ease, border-color 0.12s ease
+  merge-will-change background-color, border-color
+
+bg-color($color)
+  background-color css-color-var($color)
+  border-color css-color-var($color)
+
+text-color-transition()
+  merge-transition color 0.12s ease, caret-color 0.12s ease
+  merge-will-change color, caret-color
+
+  path
+    merge-transition fill 0.12s ease
+    merge-will-change fill
+
+text-color($color)
+  color css-color-var($color)
+  caret-color css-color-var($color)
+
+  path
+    fill css-color-var($color)

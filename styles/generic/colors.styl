@@ -1,0 +1,16 @@
+/**
+ * Colors
+ */
+create-css-var-colors()
+  :root
+    for $color_name, $color_shades in $colors
+      for $color_shade, $color_value in $color_shades
+        if ($color_shade == 'base')
+          {'--color--' + $color_name} $color_value
+          {'--color--' + $color_name + '--rgb'} red($color_value), green($color_value), blue($color_value)
+
+        else
+          {'--color--' + $color_name + '--' + $color_shade} $color_value
+          {'--color--' + $color_name + '--' + $color_shade + '--rgb'} red($color_value), green($color_value), blue($color_value)
+
+create-css-var-colors()

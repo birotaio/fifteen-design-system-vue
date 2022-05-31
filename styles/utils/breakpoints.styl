@@ -1,0 +1,14 @@
+/**
+ * Breakpoints
+ */
+media-down($breakpoint_name)
+  @media (max-width: $breakpoints[$breakpoint_name] - $epsilon)
+    {block}
+
+media-up($breakpoint_name)
+  @media (min-width: $breakpoints[$breakpoint_name])
+    {block}
+
+media-between($breakpoint_name_1, $breakpoint_name_2)
+  @media (min-width: $breakpoints[$breakpoint_name_1]) and (max-width: $breakpoints[$breakpoint_name_2] - $epsilon)
+    {block}

@@ -1,0 +1,25 @@
+clamped-fluid-size($xmin, $ymin, $xmax, $ymax)
+  // size min & max: $ymin & $ymax
+  // breakpoint min & max: $xmin & $xmax
+  // y = a * x + b linear interpolation function,
+  // where x is the window size so 100vw
+  $a = unit((($ymax - $ymin) / ($xmax - $xmin)), '') // unitless slope
+  $b = (($ymin * $xmax - $ymax * $xmin) / ($xmax - $xmin))
+  return 'clamp(%s, %s + %s, %s)' % ($ymin ($a * 100vw) $b $ymax)
+
+rem-fluid($breakmin, $ymin, $breakmax, $ymax)
+  return clamped-fluid-size(
+    rem($breakpoints[$breakmin]),
+    rem($ymin),
+    rem($breakpoints[$breakmax]),
+    rem($ymax)
+  )
+
+font-prop($name, $prop)
+  if ($prop in $fonts[$name])
+    {$prop}: $fonts[$name][$prop]
+
+use-font($name)
+  color inherit
+  for $prop, $value in $fonts[$name]
+    {$prop} $value

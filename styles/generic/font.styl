@@ -1,0 +1,68 @@
+html, body
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  font-family $font-family-text
+
+h1, h2, h3, h4, h5, h6, p, ul, li, label, small, caption
+  margin 0
+
+code
+  background-color rgba(0, 0, 0, 0.12)
+  white-space pre
+  display inline-block
+  padding 1px 4px
+  border-radius 4px
+
+caption
+  display inline-block
+  text-align inherit
+  width 100%
+
+ol
+  list-style-type decimal
+
+ul
+  list-style-type disc
+
+b, strong
+  font-weight $weights.bold
+
+i, em
+  font-style italic
+
+u
+  text-decoration none
+
+a
+  color inherit
+  border-radius rem(4)
+
+a[href]
+  transition color 0.12s ease
+
+  &:hover
+    color var(--color--primary)
+
+  &:focus-visible
+    outline-offset rem(4)
+    outline solid rem(3) currentColor
+    transition $outline-transition
+
+    @media (prefers-reduced-motion)
+      transition none
+
+for num in (1..6)
+  h{num}
+    use-font('heading-' + num)
+
+a, p, ul, ol, li
+  use-font('body-1')
+
+body, label, input, small
+  use-font('body-2')
+
+button, input[type=submit]
+  use-font('button')
+
+caption, figcaption
+  use-font('caption')

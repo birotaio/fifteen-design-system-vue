@@ -1,0 +1,41 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:vue/vue3-recommended"
+  ],
+  "ignorePatterns": [
+    "auto-imports.d.ts",
+    "components.d.ts",
+    "storybook/components.d.ts",
+    "storybook/auto-imports.d.ts",
+    "assets/tracking/*.mjs"
+  ],
+  "overrides": [
+    {
+      "files": ["pages/**/*.vue"],
+      "rules": {
+        "vue/multi-word-component-names": 0
+      }
+    }
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module"
+  },
+  "plugins": ["vue"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "vue/component-tags-order": [
+      "error",
+      {
+        "order": ["template", "style", "script"]
+      }
+    ]
+  }
+}

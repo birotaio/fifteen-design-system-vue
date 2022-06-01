@@ -1,0 +1,12 @@
+{
+  "insertColons": false,
+  "insertSemicolons": false,
+  "insertBraces": false,
+  "sortProperties": false,
+  "alwaysUseZeroWithoutUnit": true,
+  "selectorSeparator": ",\n",
+  "tabStopChar": "  ",
+  "newLineChar": "\n",
+  "insertNewLineBeforeElse": true,
+  "insertParenthesisAroundIfCondition": false
+}

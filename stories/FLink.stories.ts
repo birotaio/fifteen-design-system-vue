@@ -1,19 +1,5 @@
-import { Story, app } from '@storybook/vue3';
+import { Story } from '@storybook/vue3';
 import FLink, { FLinkProps } from '@/components/FLink.vue';
-import { createRouter, createWebHistory } from 'vue-router';
-
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    {
-      path: '/:lang/test',
-      name: 'test',
-      redirect: '/',
-    },
-  ],
-});
-
-app.use(router);
 
 export default {
   title: 'Components/FLink',

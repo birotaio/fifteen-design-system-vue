@@ -16,6 +16,8 @@ FImage.FAvatar(
 </style>
 
 <script setup lang="ts">
+import FImage from '@/components/FImage.vue';
+
 export interface FAvatarProps {
   /**
    * Source of the avatar
@@ -39,7 +41,7 @@ export interface FAvatarProps {
   loading?: 'lazy' | 'eager';
 }
 
-const props = withDefaults(defineProps<FAvatarProps>(), {
+withDefaults(defineProps<FAvatarProps>(), {
   src: '',
   alt: '',
   loading: 'lazy',

@@ -328,8 +328,13 @@ square($size)
 </style>
 
 <script setup lang="ts">
-import { colorDesignTokens } from '../config/colors';
-import FLink from './FLink.vue';
+import FLogo from '@/components/FLogo.vue';
+import FLink from '@/components/FLink.vue';
+
+import { ref, computed } from 'vue';
+import { colorDesignTokens } from '@/config/colors';
+import { getCssColor } from '@/utils/getCssColor';
+import { useFBreakpoints } from '@/composables/useFBreakpoints';
 
 export type FButtonAnchorPoint = 'left' | 'right' | 'center';
 export type FButtonSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
@@ -551,7 +556,7 @@ const style = computed(
 const buttonRef = ref<HTMLElement>();
 
 function onClick(e: MouseEvent | KeyboardEvent, blur: boolean): void {
-  if (blur && !props.preventBlurOnClick && !isLink) {
+  if (blur && !props.preventBlurOnClick && !isLink.value) {
     buttonRef.value?.blur();
   }
   if (!props.href && !props.submit) e.preventDefault();

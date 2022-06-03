@@ -19,8 +19,6 @@ export const cssUnits = [
   'rpx',
 ] as const;
 
-export type CssUnit = typeof cssUnits[number];
-
 type SizeRaw = string | number | null | undefined;
 
 const unitRegexp = new RegExp('^(-?[0-9.]+)([a-z]+)?$', 'i');

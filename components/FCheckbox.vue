@@ -129,6 +129,14 @@
 </style>
 
 <script setup lang="ts">
+import FIcon from '@/components/FIcon.vue';
+import FFieldHint from '@/components/FFieldHint.vue';
+
+import { computed } from 'vue';
+import { getCssColor } from '@/utils/getCssColor';
+import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
+import { useInputEventBindings } from '@/composables/useInputEventBindings';
+
 export interface FCheckboxProps {
   /**
    * Checkbox v-model value

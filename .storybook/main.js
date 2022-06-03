@@ -1,7 +1,5 @@
 const path = require('path');
 const ViteSvgLoader = require('vite-svg-loader');
-const AutoImport = require('unplugin-auto-import/vite');
-const Components = require('unplugin-vue-components/vite');
 
 module.exports = {
   stories: ['../stories/**/*.stories.ts'],
@@ -22,15 +20,7 @@ module.exports = {
       },
       plugins: [
         ...config.plugins,
-        // ImportComposables.vite(),
         ViteSvgLoader(),
-        AutoImport({
-          imports: ['vue', '@vueuse/core', 'vee-validate'],
-          dirs: ['composables', 'utils'],
-        }),
-        Components({
-          dirs: ['components'],
-        }),
       ],
       css: {
         preprocessorOptions: {

@@ -39,7 +39,11 @@
 </style>
 
 <script setup lang="ts">
-import type { FLinkProps } from './FLink.vue';
+import FLink from '@/components/FLink.vue';
+import type { FLinkProps } from '@/components/FLink.vue';
+
+import { computed } from 'vue';
+import { getCssColor } from '@/utils/getCssColor';
 
 export interface FBreadcrumbLink extends FLinkProps {
   text: string;

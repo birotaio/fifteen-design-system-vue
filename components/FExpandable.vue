@@ -70,6 +70,11 @@
 </style>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+import { genSize } from '@/utils/genSize';
+import { useVModelProxy } from '@/composables/useVModelProxy';
+import { useElementSize } from '@vueuse/core';
+
 export interface FExpandableProps {
   /**
    * Value of the component

@@ -24,6 +24,9 @@
 </style>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+import { getCssColor } from '@/utils/getCssColor';
+
 export interface FFieldHintProps {
   /**
    * Text to display as a form field hint

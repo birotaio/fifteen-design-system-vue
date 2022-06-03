@@ -12,7 +12,9 @@
 </style>
 
 <script setup lang="ts">
-import { columns } from '../config/grid';
+import { computed } from 'vue';
+import { genSize } from '@/utils/genSize';
+import { columns } from '@/config/grid';
 
 export interface FGridProps {
   /**

@@ -1,9 +1,10 @@
-import * as icons from '../config/icons';
+import * as icons from '@/config/icons';
 import type { Ref, ComputedRef, SVGAttributes } from 'vue';
+import { computed, unref } from 'vue';
 
-export type PickedIcon = keyof typeof import('../config/icons');
+type PickedIcon = keyof typeof import('@/config/icons');
 
-export interface UseIconReturn {
+interface UseIconReturn {
   /**
    * Render function that defines a proper svg for the icon
    */

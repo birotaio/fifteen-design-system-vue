@@ -50,6 +50,10 @@
 
 <script setup lang="ts">
 import type CSS from 'csstype';
+import { ref, computed } from 'vue';
+import { useLazyImage } from '@/composables/useLazyImage';
+import { genSize } from '@/utils/genSize';
+import { getCssColor } from '@/utils/getCssColor';
 
 export interface FBackgroundImageProps {
   /**

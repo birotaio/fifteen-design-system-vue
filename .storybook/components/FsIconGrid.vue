@@ -32,6 +32,8 @@ $border = lightgay
 </style>
 
 <script setup lang="ts">
+import FIcon from '@/components/FIcon.vue';
+
 import { withDefaults, ref } from 'vue';
 import { getIconList } from '../../config/icons/.utils';
 

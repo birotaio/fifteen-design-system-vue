@@ -54,7 +54,12 @@ picture.FImage(
 </style>
 
 <script setup lang="ts">
+import FLogo from '@/components/FLogo.vue';
+
 import type CSS from 'csstype';
+import { ref, computed } from 'vue';
+import { genSize } from '@/utils/genSize';
+import { useLazyImage } from '@/composables/useLazyImage';
 
 export interface FImageProps {
   /**
@@ -120,6 +125,7 @@ const borderRadius = computed(() => {
       return '0';
     case 'circular':
       return '50%';
+    default:
     case 'rounded':
       return genSize(16);
   }

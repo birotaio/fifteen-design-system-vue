@@ -87,8 +87,17 @@
 </style>
 
 <script setup lang="ts">
+import FIcon from '@/components/FIcon.vue';
+import FFieldHint from '@/components/FFieldHint.vue';
+
 import type CSS from 'csstype';
 import type { TextareaHTMLAttributes } from 'vue';
+import { ref, computed } from 'vue';
+import { genSize } from '@/utils/genSize';
+import { getCssColor } from '@/utils/getCssColor';
+import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
+import { useInputEventBindings } from '@/composables/useInputEventBindings';
+import { useElementBounding } from '@vueuse/core';
 
 export interface FTextareaProps {
   /**

@@ -99,6 +99,9 @@ a.FLink(
 </style>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+import { getCssColor } from '@/utils/getCssColor';
+
 export interface FLinkProps {
   /**
    * Color of the link

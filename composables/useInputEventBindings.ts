@@ -1,3 +1,5 @@
+import { getCurrentInstance } from 'vue';
+
 type TriggerEvent = 'focus' | 'blur' | 'change' | 'input' | null;
 
 /**

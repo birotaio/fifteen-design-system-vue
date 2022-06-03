@@ -1,4 +1,6 @@
 import type { Ref } from 'vue';
+import { ref } from 'vue';
+import { useIntersectionObserver } from '@vueuse/core';
 
 // Arbitrary value to anticipate as much as possible image load before it is actually visible
 const ROOT_MARGIN = '400px';

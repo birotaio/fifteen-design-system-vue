@@ -1,4 +1,5 @@
-import { UnwrapRef, WritableComputedRef } from 'vue';
+import type { UnwrapRef, WritableComputedRef } from 'vue';
+import { ref, computed, watch, getCurrentInstance } from 'vue';
 
 /**
  * Shorthand for v-model binding. Use an internal value to ensure that a component can works regardless v-model is assigned or not.

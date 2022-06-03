@@ -9,7 +9,8 @@ declare module '*.vue' {
 
 declare module 'vue3-popper/dist/popper.esm';
 
-declare module '*.svg' {
-  const content: string | undefined;
-  export default content;
+declare module '*.svg?component' {
+  import type { FunctionalComponent, SVGAttributes } from 'vue';
+  const svgComponent: FunctionalComponent<SVGAttributes>;
+  export default svgComponent;
 }

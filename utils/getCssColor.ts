@@ -1,11 +1,11 @@
 import { unref, Ref } from 'vue';
-import { colorDesignTokens } from '@/config/colors';
+import { colorDesignTokens } from '../config/colors';
 
 const designSystemColorRegex = new RegExp(
   `^(${colorDesignTokens.join('|')})(--rgb)?$`
 );
 
-export default function getCssColor(
+export function getCssColor(
   color: Ref<Color | null> | Color | null
 ): string {
   const colorValue = unref(color);

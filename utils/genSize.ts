@@ -1,24 +1,6 @@
 import { Ref, unref } from 'vue';
 
-export type CssUnit =
-  | 'em'
-  | 'ex'
-  | '%'
-  | 'px'
-  | 'cm'
-  | 'mm'
-  | 'in'
-  | 'pt'
-  | 'pc'
-  | 'ch'
-  | 'rem'
-  | 'vh'
-  | 'vw'
-  | 'vmin'
-  | 'vmax'
-  | 'rpx';
-
-export const cssUnits: CssUnit[] = [
+export const cssUnits = [
   'em',
   'ex',
   '%',
@@ -35,7 +17,9 @@ export const cssUnits: CssUnit[] = [
   'vmin',
   'vmax',
   'rpx',
-];
+] as const;
+
+export type CssUnit = typeof cssUnits[number];
 
 type SizeRaw = string | number | null | undefined;
 
@@ -46,7 +30,7 @@ const unitRegexp = new RegExp('^(-?[0-9.]+)([a-z]+)?$', 'i');
  * @param size - Size to parse
  * @returns Proper CSS size value
  */
-export default function genSize(size: Ref<SizeRaw> | SizeRaw): string {
+export function genSize(size: Ref<SizeRaw> | SizeRaw): string {
   const sizeValue = unref(size);
   if (!sizeValue && sizeValue !== 0) {
     return ''; // fallback to empty string so that we handle default in CSS

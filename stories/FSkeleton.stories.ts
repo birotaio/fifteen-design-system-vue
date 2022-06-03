@@ -1,5 +1,4 @@
 import { Story } from '@storybook/vue3';
-import { genSize } from '@/modules/utils';
 import FSkeleton, { FSkeletonProps } from '@/components/FSkeleton.vue';
 
 export default {
@@ -24,8 +23,8 @@ Rounded.args = {
 export const RoundedFull: Story<FSkeletonProps> = Template.bind({});
 RoundedFull.args = {
   roundedFull: true,
-  height: genSize(64),
-  width: genSize(150),
+  height: 64,
+  width: 150,
 };
 
 export const Colored: Story<FSkeletonProps> = Template.bind({});

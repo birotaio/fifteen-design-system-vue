@@ -15,20 +15,20 @@ $border = lightgay
 
 .FsIconGrid
   display grid
-  grid-template-columns repeat(auto-fill, 180px)
-  grid-gap rem(4px)
+  grid-template-columns repeat(auto-fill, 11rem)
+  grid-gap rem(4)
 
 .FsIconGrid__item
   display flex
-  height 100px
+  height rem(100)
   flex-direction column
   align-items center
   justify-content center
-  padding rem(2px)
-  font-size rem(12px)
+  padding rem(2)
+  font-size rem(12)
 
   * + *
-    margin-top rem(4px)
+    margin-top rem(4)
 </style>
 
 <script setup lang="ts">

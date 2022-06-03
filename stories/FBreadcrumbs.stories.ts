@@ -1,8 +1,6 @@
 import { Story } from '@storybook/vue3';
 import { colorDesignTokens } from '@/config/colors';
-import FBreadcrumbs, {
-  FBreadcrumbsProps,
-} from '@/components/FBreadcrumbs.vue';
+import FBreadcrumbs, { FBreadcrumbsProps } from '@/components/FBreadcrumbs.vue';
 
 export default {
   title: 'Components/FBreadcrumbs',
@@ -47,7 +45,7 @@ ThreeItems.args = {
 export const FiveItems: Story<FBreadcrumbsProps> = Template.bind({});
 FiveItems.args = {
   items: [
-    { text: 'Guide', location: '/resources/guides' },
+    { text: 'Guide', href: '/resources/guides' },
     { text: 'Operators' },
     { text: '9 ways to boost user retention' },
     { text: 'Another level' },

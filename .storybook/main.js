@@ -25,8 +25,8 @@ module.exports = {
         // ImportComposables.vite(),
         ViteSvgLoader(),
         AutoImport({
-          imports: ['vue', '@vueuse/core'],
-          dirs: ['composables'],
+          imports: ['vue', '@vueuse/core', 'vee-validate'],
+          dirs: ['composables', 'utils'],
         }),
         Components({
           dirs: ['components'],

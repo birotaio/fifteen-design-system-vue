@@ -6,7 +6,6 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 
 export default defineConfig({
-  server: { port: 3003 },
   root: '.',
   resolve: {
     alias: {
@@ -16,22 +15,19 @@ export default defineConfig({
   plugins: [
     vue(),
     ViteSvgLoader(),
-    AutoImport({ imports: ['vue', '@vueuse/core'] }),
+    AutoImport({
+      imports: ['vue', '@vueuse/core', 'vee-validate'],
+      dirs: ['composables', 'utils'],
+    }),
     Components({
-      resolvers: [
-        async name => {
-          if (name.startsWith('F')) {
-            return `@/components/${name}.vue`;
-          }
-        },
-      ],
+      dirs: ['components'],
     }),
   ],
   css: {
     preprocessorOptions: {
       stylus: {
         // import this file so that is is available for each component
-        imports: [path.resolve(__dirname, './styles/components.styl')],
+        imports: [path.resolve(__dirname, 'styles/components.styl')],
       },
     },
   },

@@ -1,4 +1,6 @@
-import FsIconGrid, { FsIconGridProps } from '@/.storybook/components/FsIconGrid.vue';
+import FsIconGrid, {
+  FsIconGridProps,
+} from '@/stories/components/FsIconGrid.vue';
 import { Story } from '@storybook/vue3';
 import { colorDesignTokens } from '@/config/colors';
 

@@ -1,6 +1,6 @@
 import { Story } from '@storybook/vue3';
-import FsColorsCssVars from '@/.storybook/components/FsColorsCssVars.vue';
-import FsColorsMixins from '@/.storybook/components/FsColorsMixins.vue';
+import FsColorsCssVars from '@/stories/components/FsColorsCssVars.vue';
+import FsColorsMixins from '@/stories/components/FsColorsMixins.vue';
 
 export default {
   title: 'Styles/Colors',

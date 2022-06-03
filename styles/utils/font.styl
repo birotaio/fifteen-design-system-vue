@@ -1,25 +1,28 @@
 clamped-fluid-size($xmin, $ymin, $xmax, $ymax)
+  // all given input sizes should unitless and will be considered in pixels
   // size min & max: $ymin & $ymax
   // breakpoint min & max: $xmin & $xmax
   // y = a * x + b linear interpolation function,
   // where x is the window size so 100vw
-  $a = unit((($ymax - $ymin) / ($xmax - $xmin)), '') // unitless slope
-  $b = (($ymin * $xmax - $ymax * $xmin) / ($xmax - $xmin))
-  return 'clamp(%s, %s + %s, %s)' % ($ymin ($a * 100vw) $b $ymax)
-
-rem-fluid($breakmin, $ymin, $breakmax, $ymax)
-  return clamped-fluid-size(
-    rem($breakpoints[$breakmin]),
-    rem($ymin),
-    rem($breakpoints[$breakmax]),
-    rem($ymax)
-  )
-
-font-prop($name, $prop)
-  if ($prop in $fonts[$name])
-    {$prop}: $fonts[$name][$prop]
+  $ax = '((%s - %s) / (%s - %s)) * 100vw' % ($ymax $ymin $xmax $xmin)
+  $b = '(%s * %s - %s * %s) / (%s - %s) * 0.0625rem' % ($ymin $xmax $ymax $xmin $xmax $xmin)
+  return 'clamp(%s * 0.0625rem, %s + %s, %s * 0.0625rem)' % ($ymin $ax $b $ymax)
 
 use-font($name)
   color inherit
-  for $prop, $value in $fonts[$name]
-    {$prop} $value
+  --x1 var(--fluid-font--breakpoint-min-px)
+  --x2 var(--fluid-font--breakpoint-max-px)
+
+  for $prop in $fonts[$name]
+    if ($prop == 'font-size')
+      --f1 unquote('var(--' + $name + '--' + $prop + '-min-px)')
+      --f2 unquote('var(--' + $name + '--' + $prop + '-max-px)')
+      {$prop} clamped-fluid-size(var(--x1), var(--f1), var(--x2), var(--f2))
+
+    else if ($prop == 'line-height')
+      --l1 unquote('var(--' + $name + '--' + $prop + '-min-px)')
+      --l2 unquote('var(--' + $name + '--' + $prop + '-max-px)')
+      {$prop} clamped-fluid-size(var(--x1), var(--l1), var(--x2), var(--l2))
+
+    else
+      {$prop} unquote('var(--' + $name + '--' + $prop + ')')

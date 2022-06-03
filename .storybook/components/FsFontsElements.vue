@@ -27,9 +27,9 @@
 .FsFontsElements__element
   display flex
   align-items center
-  margin 8px 0
+  margin rem(8) 0
 
   code
-    font-prop('caption', 'font-size')
-    margin-left 8px
+    font-size rem(12)
+    margin-left rem(8)
 </style>

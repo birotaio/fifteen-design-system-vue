@@ -1,0 +1,37 @@
+:root
+  // build breakpoints
+  for $breakpoint_name, $breakpoint_value in $breakpoints
+    {'--breakpoint--' + $breakpoint_name} $breakpoint_value
+
+  // build colors
+  for $color_name, $color_shades in $colors
+    for $color_shade, $color_value in $color_shades
+      if ($color_shade == 'base')
+        {'--color--' + $color_name} $color_value
+        {'--color--' + $color_name + '--rgb'} red($color_value), green($color_value), blue($color_value)
+
+      else
+        {'--color--' + $color_name + '--' + $color_shade} $color_value
+        {'--color--' + $color_name + '--' + $color_shade + '--rgb'} red($color_value), green($color_value), blue($color_value)
+
+  // build transitions
+  for $transition_name, $transition_value in $transitions
+    {'--transition--' + $transition_name} $transition_value
+
+  // build elements
+  for $element_name, $element_settings in $elements
+    for $element_prop, $element_value in $element_settings
+      {'--' + $element_name + '--' + $element_prop} $element_value
+
+  // build font & typography
+  for $breakpoint_name, $breakpoint_value in $fluid-font
+    {'--fluid-font--' + $breakpoint_name + '-px'} unit($breakpoint_value, '')
+
+  for $font_name, $font_settings in $fonts
+    for $font_prop, $font_value in $font_settings
+      if ($font_prop == 'font-size' || ($font_prop == 'line-height'))
+        {'--' + $font_name + '--' + $font_prop + '-min-px'} unit($font_value.min, '')
+        {'--' + $font_name + '--' + $font_prop + '-max-px'} unit($font_value.max, '')
+
+      else
+        {'--' + $font_name + '--' + $font_prop} $font_value

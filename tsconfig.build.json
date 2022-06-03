@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "rootDir": "./",
+    "paths": {
+      "@/*": ["./*"],
+      "react": ["./stubs/types__react"]
+    },
+    "outDir": "dist",
+    "declaration": true
+  },
+  "include": [
+    "index.ts",
+    "./components/*.vue",
+    "./(composables|utils|config)/*.ts",
+    "./types/*.d.ts"
+  ]
+}

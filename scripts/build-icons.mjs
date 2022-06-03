@@ -1,15 +1,18 @@
 #!/usr/bin/env zx
+import * as fs from 'fs/promises';
+import * as path from 'path';
+import { readFileSync } from 'fs';
 import { parse } from 'node-html-parser';
 import camelCalse from 'camelcase';
 
 const OUTPUT_UTILS_FILE = 'config/icons/.utils.ts';
 const OUTPUT_LIST_FILE = 'config/icons/.icons.ts';
 
-const iconUrls = await globby('assets/icons/design-system');
+const iconUrls = await globby('assets/icons');
 
 const icons = iconUrls.map(url => {
   const name = path.basename(url, '.svg');
-  const data = fs.readFileSync(url, 'utf-8');
+  const data = readFileSync(url, 'utf-8');
   const parsedSvg = parse(data);
   const paths = parsedSvg.querySelectorAll('path');
   return {

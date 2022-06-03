@@ -22,6 +22,9 @@
   },
   "homepage": "https://fifteen.eu",
   "types": "types/index.d.ts",
+    "./resolvers": {
+      "import": "./resolvers/index.ts"
+    }
   "scripts": {
     "dev": "yarn sb",
     "sb": "start-storybook -p 3003",

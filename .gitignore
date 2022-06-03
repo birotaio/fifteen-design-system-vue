@@ -7,3 +7,5 @@ dump.rdb
 components.d.ts
 auto-imports.d.ts
 coverage
+dist
+resolvers/dist

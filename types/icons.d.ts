@@ -1,7 +1,3 @@
-import { IconName } from '@/config/icons/.icons';
+import { IconName } from '../config/icons/.utils';
 
-declare global {
-  type Icon = IconName;
-}
-
-export {};
+export type Icon = IconName;

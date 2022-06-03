@@ -1,7 +1,3 @@
-import { spanValues } from '@/config/grid';
+import { spanValues } from '../config/grid';
 
-declare global {
-  type Span = typeof spanValues[number];
-}
-
-export {};
+export type Span = typeof spanValues[number];

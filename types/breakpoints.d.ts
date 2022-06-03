@@ -1,7 +1,3 @@
-import { breakpointsValues } from '@/config/breakpoints';
+import { breakpointsValues } from '../config/breakpoints';
 
-declare global {
-  type Breakpoint = keyof typeof breakpointsValues;
-}
-
-export {};
+export type Breakpoint = keyof typeof breakpointsValues;

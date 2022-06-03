@@ -1,1 +1,1 @@
-type FontFamily = 'ES-Build' | 'Poppins';
+export type FontFamily = 'ES-Build' | 'Poppins';

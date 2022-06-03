@@ -1,10 +1,6 @@
-import type { CSSProperties } from '@vue/runtime-dom';
+import type { CSSProperties } from 'vue';
 
-declare global {
-  type CSSVariable = `--${string}`;
-  interface Style extends CSSProperties {
-    [key: CSSVariable]: string;
-  }
+export type CSSVariable = `--${string}`;
+export interface Style extends CSSProperties {
+  [key: CSSVariable]: string;
 }
-
-export {};

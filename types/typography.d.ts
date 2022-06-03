@@ -1,7 +1,3 @@
-import { typographies } from '@/config/typography';
+import { typographies } from '../config/typography';
 
-declare global {
-  type Typography = typeof typographies[number];
-}
-
-export {};
+export type Typography = typeof typographies[number];

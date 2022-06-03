@@ -1,9 +1,5 @@
-import { baseColorDesignTokens, colorDesignTokens } from '@/config/colors';
+import { baseColorDesignTokens, colorDesignTokens } from '../config/colors';
 
-declare global {
-  type BaseColorDesignToken = typeof baseColorDesignTokens[number];
-  type ColorDesignToken = typeof colorDesignTokens[number];
-  type Color = ColorDesignToken | string;
-}
-
-export {};
+export type BaseColorDesignToken = typeof baseColorDesignTokens[number];
+export type ColorDesignToken = typeof colorDesignTokens[number];
+export type Color = ColorDesignToken | string;

@@ -1,1 +1,1 @@
-type ValidationRule = (value: unknown) => boolean;
+export type ValidationRule = (value: unknown) => boolean;

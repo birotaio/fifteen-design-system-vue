@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import genSize, { cssUnits } from './gen-size';
+import { genSize, cssUnits } from './genSize';
 import { describe, it, expect } from 'vitest';
 
 const cssUnitsWithoutPixel = cssUnits.filter(unit => unit !== 'px');

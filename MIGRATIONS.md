@@ -1,2 +1,3 @@
 - FLink => to be wrapped
 - FImage : corners
+- Expandable => slot

@@ -7,21 +7,16 @@ FSvgImage.FLogo(
 )
 </template>
 
-<style lang="stylus">
-.FLogo
-  svg
-    fill var(--flogo--color)
-</style>
+<style lang="stylus"></style>
 
 <script setup lang="ts">
-import logoHorizontal from '@/assets/images/logos/fifteen_horizontal.svg?component';
-import logoVertical from '@/assets/images/logos/fifteen_vertical.svg?component';
-import logoTextOnly from '@/assets/images/logos/fifteen_text-only.svg?component';
-import logoImageOnly from '@/assets/images/logos/fifteen_image-only.svg?component';
-import logoHalfImageOnly from '@/assets/images/logos/fifteen_half-image-only.svg?component';
+import logoHorizontal from '../assets/images/logos/fifteen_horizontal.svg?component';
+import logoVertical from '../assets/images/logos/fifteen_vertical.svg?component';
+import logoTextOnly from '../assets/images/logos/fifteen_text-only.svg?component';
+import logoImageOnly from '../assets/images/logos/fifteen_image-only.svg?component';
+import logoHalfImageOnly from '../assets/images/logos/fifteen_half-image-only.svg?component';
 
 import type { FunctionalComponent, SVGAttributes } from 'vue';
-import type { FSvgAttribute } from '@/components/FSvgImage.vue';
 
 export type FLogoVariant =
   | 'horizontal'

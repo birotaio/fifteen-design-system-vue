@@ -29,7 +29,6 @@ picture.FImage(
   height var(--fimage--height)
   width var(--fimage--width)
   border-radius var(--fimage--border-radius)
-  overflow hidden
 
   &--placeholder
     filter blur(4px)
@@ -55,7 +54,6 @@ picture.FImage(
 </style>
 
 <script setup lang="ts">
-import { genSize } from '@/modules/utils';
 import type CSS from 'csstype';
 
 export interface FImageProps {

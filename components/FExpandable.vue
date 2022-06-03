@@ -70,8 +70,6 @@
 </style>
 
 <script setup lang="ts">
-import { genSize } from '@/modules/utils';
-
 export interface FExpandableProps {
   /**
    * Value of the component

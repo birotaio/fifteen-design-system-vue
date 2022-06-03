@@ -42,7 +42,7 @@ square($size)
   background-image none
   background-color var(--fbutton--background-color)
 
-  @media (prefers-reduced-motion)
+  @media (prefers-reduced-motion )
     transition none
 
   &,
@@ -328,11 +328,8 @@ square($size)
 </style>
 
 <script setup lang="ts">
-import { getCssColor } from '@/modules/utils';
-import { colorDesignTokens } from '@/config/colors';
-import FLink from '@/components/FLink.vue';
-
-import type { RouteLocationRaw } from 'vue-router';
+import { colorDesignTokens } from '../config/colors';
+import FLink from './FLink.vue';
 
 export type FButtonAnchorPoint = 'left' | 'right' | 'center';
 export type FButtonSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';

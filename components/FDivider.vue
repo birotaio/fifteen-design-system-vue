@@ -30,8 +30,6 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor, genSize } from '@/modules/utils';
-
 export interface FDividerProps {
   /**
    * Color of the divider

@@ -1,4 +1,3 @@
-import { useField } from 'vee-validate';
 import type { Ref, ComputedRef } from 'vue';
 
 type BaseProps<Value> = {

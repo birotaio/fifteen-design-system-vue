@@ -88,7 +88,6 @@
 
 <script setup lang="ts">
 import type CSS from 'csstype';
-import { getCssColor, genSize } from '@/modules/utils';
 import type { TextareaHTMLAttributes } from 'vue';
 
 export interface FTextareaProps {

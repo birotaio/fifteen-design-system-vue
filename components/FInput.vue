@@ -80,7 +80,6 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor } from '@/modules/utils';
 import type { InputHTMLAttributes } from 'vue';
 
 export interface FInputProps {

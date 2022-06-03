@@ -1,4 +1,4 @@
-import { breakpointsValues } from '@/config/breakpoints';
+import { breakpointsValues } from '../config/breakpoints';
 
 /**
  * Returns breakpoints boolean values and utils breakpoints functions

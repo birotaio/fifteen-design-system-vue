@@ -202,7 +202,6 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor, genSize } from '@/modules/utils';
 import Popper from 'vue3-popper/dist/popper.esm';
 
 export interface FSelectOption {

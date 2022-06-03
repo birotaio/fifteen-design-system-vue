@@ -25,8 +25,6 @@
 </style>
 
 <script setup lang="ts">
-import { genSize, getCssColor } from '@/modules/utils';
-
 export interface FProgressBarProps {
   /**
    * The progress bar value in percentage

@@ -50,7 +50,6 @@
 
 <script setup lang="ts">
 import type CSS from 'csstype';
-import { genSize, getCssColor } from '@/modules/utils';
 
 export interface FBackgroundImageProps {
   /**

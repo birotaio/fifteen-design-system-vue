@@ -24,8 +24,6 @@ svg.FLogoAnimatable(
 </style>
 
 <script setup lang="ts">
-import { genSize, getCssColor } from '@/modules/utils';
-
 export type FLogoLineNumber =
   | 1
   | 2

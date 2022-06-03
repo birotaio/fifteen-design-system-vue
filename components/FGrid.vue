@@ -12,12 +12,11 @@
 </style>
 
 <script setup lang="ts">
-import { columns } from '@/config/grid';
-import { genSize } from '@/modules/utils';
+import { columns } from '../config/grid';
 
 export interface FGridProps {
   /**
-   * Number of columns, default is set by the value in @/config/grid
+   * Number of columns, default is set by the value in config/grid
    */
   columns?: string | number;
   /**

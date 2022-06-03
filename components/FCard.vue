@@ -14,8 +14,6 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor, genSize } from '@/modules/utils';
-
 export interface FCardProps {
   /**
    * Background color of the card

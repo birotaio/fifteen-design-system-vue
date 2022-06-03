@@ -6,8 +6,8 @@
     :data-separator="separator"
   )
     FLink(
-      v-if="item.location"
-      :location="item.location"
+      v-if="item.href"
+      :location="item.href"
       :hover-color="activeItemColor"
       hide-arrow
       uppercase
@@ -22,7 +22,7 @@
 
   span,
   a
-    font-weight: $weights.bold
+    font-weight 700
 
   &::after
     content attr(data-separator)
@@ -39,9 +39,7 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor } from '@/modules/utils';
-
-import type { FLinkProps } from '@/components/FLink.vue';
+import type { FLinkProps } from './FLink.vue';
 
 export interface FBreadcrumbLink extends FLinkProps {
   text: string;

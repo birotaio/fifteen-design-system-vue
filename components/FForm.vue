@@ -7,9 +7,7 @@ form.FForm(@submit="submit")
 <style lang="stylus"></style>
 
 <script setup lang="ts">
-import { useForm } from 'vee-validate';
-
-interface FFormProps {
+export interface FFormProps {
   /**
    * Initial values of the form
    */

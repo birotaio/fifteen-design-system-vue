@@ -56,8 +56,6 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor, genSize } from '@/modules/utils';
-
 export interface FIconProps {
   /**
    * Name of the icon

@@ -99,8 +99,6 @@ a.FLink(
 </style>
 
 <script setup lang="ts">
-import { getCssColor } from '@/modules/utils';
-
 export interface FLinkProps {
   /**
    * Color of the link

@@ -24,8 +24,6 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor } from '@/modules/utils';
-
 export interface FFieldHintProps {
   /**
    * Text to display as a form field hint

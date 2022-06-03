@@ -54,14 +54,7 @@
 </style>
 
 <script setup lang="ts">
-import { getCssColor, genSize } from '@/modules/utils';
-
 import type { VNode, FunctionalComponent, SVGAttributes } from 'vue';
-
-export interface FSvgAttribute {
-  name: string;
-  value: string;
-}
 
 export interface FSvgImageProps {
   /**

@@ -20,6 +20,7 @@
     "outDir": "dist",
     "declaration": true
   },
+  "exclude": ["./dist/**/*"],
   "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

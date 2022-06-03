@@ -41,7 +41,9 @@
     "build:sb": "build-storybook",
     "build:lib": "vite build",
     "build:types": "vue-tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",
-    "build": "yarn build:lib && yarn build:types",
+    "build:theme": "zx scripts/build-theme.mjs",
+    "build:icons": "zx scripts/build-icons.mjs",
+    "build": "yarn build:icons && yarn build:lib && yarn build:types && yarn build:theme",
     "release": "echo RELEASE",
     "lint-staged": "lint-staged",
     "eslint": "eslint --ext .ts,.vue .",
@@ -52,8 +54,7 @@
     "test-related": "vitest related",
     "coverage": "vitest run --coverage",
     "postinstall": "husky install",
-    "prepush": "yarn husky:pre-commit",
-    "icongen": "zx scripts/icongen.mjs"
+    "prepush": "yarn husky:pre-commit"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",

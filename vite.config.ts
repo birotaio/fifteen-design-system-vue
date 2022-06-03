@@ -1,9 +1,7 @@
 import * as path from 'path';
 import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import Vue from '@vitejs/plugin-vue';
 import ViteSvgLoader from 'vite-svg-loader';
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
 
 export default defineConfig({
   root: '.',
@@ -12,23 +10,25 @@ export default defineConfig({
       '@': __dirname,
     },
   },
-  plugins: [
-    vue(),
-    ViteSvgLoader(),
-    AutoImport({
-      imports: ['vue', '@vueuse/core', 'vee-validate'],
-      dirs: ['composables', 'utils'],
-    }),
-    Components({
-      dirs: ['components'],
-    }),
-  ],
+  plugins: [Vue(), ViteSvgLoader()],
   css: {
     preprocessorOptions: {
       stylus: {
         // import this file so that is is available for each component
         imports: [path.resolve(__dirname, 'styles/components.styl')],
       },
+    },
+  },
+  build: {
+    lib: {
+      formats: ['es'],
+      entry: path.resolve(__dirname, 'index.ts'),
+      name: 'fifteen-design-system-vue',
+      fileName: () => 'index.js',
+    },
+    rollupOptions: {
+      // externalize deps that shouldn't be bundled into the library
+      external: ['vue', '@vueuse/core', 'vee-validate'],
     },
   },
 });

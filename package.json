@@ -24,17 +24,11 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "types"
+    "types",
+    "resolvers",
+    "styles"
   ],
   "main": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    },
-    "./resolvers": {
-      "import": "./resolvers/index.ts"
-    }
-  },
   "scripts": {
     "dev": "yarn sb",
     "sb": "start-storybook -p 3003",

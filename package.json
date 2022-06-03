@@ -1,5 +1,5 @@
 {
-  "name": "fifteen-design-system-vue",
+  "name": "@fifteen/design-system-vue",
   "version": "0.1.0",
   "private": false,
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
@@ -21,9 +21,12 @@
     "url": "https://github.com/birotaio/fifteen-design-system-vue/issues"
   },
   "homepage": "https://fifteen.eu",
+  "types": "types/index.d.ts",
   "scripts": {
+    "dev": "yarn sb",
     "sb": "start-storybook -p 3003",
-    "build-storybook": "build-storybook",
+    "build:sb": "build-storybook",
+    "build:lib": "vite build",
     "release": "echo RELEASE",
     "lint-staged": "lint-staged",
     "eslint": "eslint --ext .ts,.vue .",
@@ -57,6 +60,7 @@
     "eslint": "^8.16.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-vue": "^9.0.1",
+    "globby": "^13.1.1",
     "husky": "^8.0.1",
     "lint-staged": "^12.4.3",
     "prettier": "^2.6.2",
@@ -74,7 +78,6 @@
     "zx": "^6.1.0"
   },
   "dependencies": {
-    "@vee-validate/rules": "^4.5.11",
     "@vueuse/core": "^8.5.0",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.36",

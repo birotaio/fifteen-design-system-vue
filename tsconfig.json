@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -8,7 +9,6 @@
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
@@ -17,7 +17,9 @@
     "paths": {
       "@/*": ["./*"],
       "react": ["./stubs/types__react"]
-    }
+    },
+    "outDir": "dist",
+    "declaration": true
   },
   "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

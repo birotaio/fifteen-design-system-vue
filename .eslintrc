@@ -9,18 +9,7 @@
   ],
   "ignorePatterns": [
     "auto-imports.d.ts",
-    "components.d.ts",
-    "storybook/components.d.ts",
-    "storybook/auto-imports.d.ts",
-    "assets/tracking/*.mjs"
-  ],
-  "overrides": [
-    {
-      "files": ["pages/**/*.vue"],
-      "rules": {
-        "vue/multi-word-component-names": 0
-      }
-    }
+    "components.d.ts"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -29,6 +18,7 @@
   },
   "plugins": ["vue"],
   "rules": {
+    "@typescript-eslint/triple-slash-reference": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/no-empty-interface": "off",
     "vue/component-tags-order": [

@@ -35,7 +35,7 @@
     "build:sb": "build-storybook",
     "build:lib": "vite build",
     "build:types": "vue-tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",
-    "build:theme": "zx scripts/build-theme.mjs",
+    "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp assets/fonts/* dist/assets/fonts",
     "build:icons": "zx scripts/build-icons.mjs",
     "build": "yarn build:icons && yarn build:lib && yarn build:types && yarn build:theme",
     "release": "make release",

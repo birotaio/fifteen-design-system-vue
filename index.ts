@@ -31,8 +31,15 @@ export { default as FTextarea } from '@/components/FTextarea.vue';
 export type { FCardProps } from '@/components/FCard.vue';
 export type { FAvatarProps } from '@/components/FAvatar.vue';
 export type { FBackgroundImageProps } from '@/components/FBackgroundImage.vue';
-export type { FBreadcrumbsProps } from '@/components/FBreadcrumbs.vue';
-export type { FButtonProps } from '@/components/FButton.vue';
+export type {
+  FBreadcrumbsProps,
+  FBreadcrumbLink,
+} from '@/components/FBreadcrumbs.vue';
+export type {
+  FButtonProps,
+  FButtonAnchorPoint,
+  FButtonSize,
+} from '@/components/FButton.vue';
 export type { FCheckboxProps } from '@/components/FCheckbox.vue';
 export type { FDividerProps } from '@/components/FDivider.vue';
 export type { FExpandableProps } from '@/components/FExpandable.vue';
@@ -44,10 +51,14 @@ export type { FIconProps } from '@/components/FIcon.vue';
 export type { FImageProps } from '@/components/FImage.vue';
 export type { FInputProps } from '@/components/FInput.vue';
 export type { FLinkProps } from '@/components/FLink.vue';
-export type { FLogoProps } from '@/components/FLogo.vue';
-export type { FLogoAnimatableProps } from '@/components/FLogoAnimatable.vue';
+export type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
+export type {
+  FLogoAnimatableProps,
+  FLogoLineDelta,
+  FLogoLineNumber,
+} from '@/components/FLogoAnimatable.vue';
 export type { FProgressBarProps } from '@/components/FProgressBar.vue';
-export type { FSelectProps } from '@/components/FSelect.vue';
+export type { FSelectProps, FSelectOption } from '@/components/FSelect.vue';
 export type { FSkeletonProps } from '@/components/FSkeleton.vue';
 export type { FSvgImageProps } from '@/components/FSvgImage.vue';
 export type { FTextareaProps } from '@/components/FTextarea.vue';
@@ -72,3 +83,18 @@ export { breakpointsValues } from '@/config/breakpoints';
 export { baseColorDesignTokens, colorDesignTokens } from '@/config/colors';
 export { columns, spanValues } from '@/config/grid';
 export { typographies } from '@/config/typography';
+/**
+ * Types
+ */
+export type { Breakpoint } from '@/types/breakpoints';
+export type { Typography } from '@/types/typography';
+export type {
+  Color,
+  BaseColorDesignToken,
+  ColorDesignToken,
+} from '@/types/colors';
+export type { FontFamily } from '@/types/font-family';
+export type { ValidationRule } from '@/types/forms';
+export type { Span } from '@/types/grid';
+export type { Icon } from '@/types/icons';
+export type { CSSVariable, Style } from '@/types/styles';

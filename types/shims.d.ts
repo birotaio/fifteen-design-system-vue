@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="vite-svg-loader" />
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue';
@@ -8,9 +9,3 @@ declare module '*.vue' {
 }
 
 declare module 'vue3-popper/dist/popper.esm';
-
-declare module '*.svg?component' {
-  import type { FunctionalComponent, SVGAttributes } from 'vue';
-  const svgComponent: FunctionalComponent<SVGAttributes>;
-  export default svgComponent;
-}

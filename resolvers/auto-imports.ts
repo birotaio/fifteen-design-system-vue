@@ -1,4 +1,3 @@
-import * as path from 'path';
 import type { Resolver } from 'unplugin-auto-import/types';
 
 const composables = [
@@ -12,17 +11,15 @@ const composables = [
 
 const utils = ['getCssColor', 'genSize'];
 
-export function FifteenAutoImportsResolver(
-  base = '@fifteen/design-system-vue'
-): Resolver {
+export function FifteenAutoImportsResolver(): Resolver {
   return {
     type: 'component',
     resolve: async (name: string) => {
       if (composables.includes(name)) {
-        return { name, from: path.join(base, 'composables', name) };
+        return { name, from: '@fifteen/design-system-vue' };
       }
       if (utils.includes(name)) {
-        return { name, from: path.join(base, 'utils', name) };
+        return { name, from: '@fifteen/design-system-vue' };
       }
     },
   };

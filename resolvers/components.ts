@@ -1,4 +1,3 @@
-import * as path from 'path';
 import type { ComponentResolver } from 'unplugin-vue-components/types';
 
 const components = [
@@ -27,14 +26,12 @@ const components = [
   'FTextarea',
 ];
 
-export function FifteenComponentsResolver(
-  base = '@fifteen/design-system-vue'
-): ComponentResolver {
+export function FifteenComponentsResolver(): ComponentResolver {
   return {
     type: 'component',
     resolve: async (name: string) => {
       if (components.includes(name)) {
-        return { from: path.join(base, 'components', `${name}.vue`) };
+        return { name, from: '@fifteen/design-system-vue' };
       }
     },
   };

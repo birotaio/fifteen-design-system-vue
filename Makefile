@@ -13,5 +13,5 @@ release:
 	@if [ -z "$(GIT_STATUS)" ]; then echo "Working dir is clean"; else echo "\x1b[31mYou have uncommited changes. Aborting.\x1b[0m"; exit 1; fi
 	yarn test
 	yarn build
-	npm publish
+	npm publish --access public
 	make tag

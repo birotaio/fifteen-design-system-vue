@@ -37,8 +37,8 @@
     "build:types": "vue-tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",
     "build:theme": "zx scripts/build-theme.mjs",
     "build:icons": "zx scripts/build-icons.mjs",
-    "build": "yarn test && yarn build:icons && yarn build:lib && yarn build:types && yarn build:theme",
-    "release": "echo RELEASE",
+    "build": "yarn build:icons && yarn build:lib && yarn build:types && yarn build:theme",
+    "release": "make release",
     "lint-staged": "lint-staged",
     "eslint": "eslint --ext .ts,.vue .",
     "type-check": "vue-tsc --noEmit",
@@ -67,7 +67,6 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "babel-loader": "^8.2.5",
     "camelcase": "^6.3.0",
-    "csstype": "^3.1.0",
     "eslint": "^8.16.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-vue": "^9.0.1",
@@ -81,8 +80,6 @@
     "stylus-supremacy": "^2.15.0",
     "tsc-alias": "^1.6.8",
     "typescript": "^4.7.2",
-    "unplugin-auto-import": "^0.8.7",
-    "unplugin-vue-components": "^0.19.6",
     "vite": "^2.9.9",
     "vite-svg-loader": "^3.3.0",
     "vitest": "^0.13.0",
@@ -94,6 +91,9 @@
     "@vueuse/core": "^8.5.0",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.36",
+    "unplugin-auto-import": "^0.8.7",
+    "unplugin-vue-components": "^0.19.6",
+    "csstype": "^3.1.0",
     "vue3-popper": "^1.5.0"
   }
 }

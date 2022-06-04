@@ -15,7 +15,7 @@ component.FButton(
     FLogo.FButton__loadingIcon(
       v-if="loading"
       variant="image-only"
-      :fill-color="baseColor"
+      :color="baseColor"
     )
 </template>
 

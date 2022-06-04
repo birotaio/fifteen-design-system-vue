@@ -29,6 +29,7 @@ picture.FImage(
   height var(--fimage--height)
   width var(--fimage--width)
   border-radius var(--fimage--border-radius)
+  overflow hidden
 
   &--placeholder
     filter blur(4px)

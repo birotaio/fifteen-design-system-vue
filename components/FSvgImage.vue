@@ -54,7 +54,7 @@
 </style>
 
 <script setup lang="ts">
-import type { VNode, FunctionalComponent, SVGAttributes } from 'vue';
+import type { FunctionalComponent, SVGAttributes } from 'vue';
 import { computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
@@ -67,7 +67,7 @@ export interface FSvgImageProps {
   /**
    * Use a built component (_e.g._ from vite-svg-loader)
    */
-  component?: FunctionalComponent<SVGAttributes> | VNode | null;
+  component?: FunctionalComponent<SVGAttributes> | null;
   /**
    * Use a src (public image url)
    */

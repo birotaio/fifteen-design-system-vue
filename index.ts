@@ -1,4 +1,7 @@
-/// <reference path="types/global.d.ts" />
+/**
+ * Shared style
+ */
+import '@/styles/elements.styl';
 /**
  * Components
  */

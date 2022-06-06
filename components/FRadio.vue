@@ -90,6 +90,9 @@
   .FRadio__radio
     cursor default
 
+    &::before
+      background var(--color--neutral--light-3)
+
     &,
     &:hover,
     &:focus
@@ -98,7 +101,7 @@
 
       &:checked
         border 2px solid var(--color--neutral--light-3)
-        background var(--color--neutral--light-3)
+        background var(--color--neutral--light-5)
 
   .FRadio__label,
   .FRadio__labelText

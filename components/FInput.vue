@@ -3,6 +3,11 @@
   :style="style"
   :class="classes"
 )
+  FFieldLabel(
+    :name="_name"
+    :label="label"
+    :text-color="labelTextColor"
+  )
   input.FInput__input(
     v-bind="attrs"
     v-model="value"
@@ -13,6 +18,7 @@
     @focus="handleFocus"
     @blur="handleBlur"
     @input="handleInput"
+    :name="_name"
   )
   FIcon.FInput__errorIcon(
     v-if="!isValid"
@@ -54,6 +60,10 @@
     background var(--finput--focus-color)
     box-shadow 0 0 0 2px var(--finput--focus-border-color), 0 0 0 6px 'rgba(%s, 0.8)' % var(--finput--outline-color)
 
+.FInput__label
+  color var(--finput--label)
+  margin-bottom rem(8)
+
 .FInput--error
   .FInput__input
     &,
@@ -81,11 +91,13 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
+import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 
 import type { InputHTMLAttributes } from 'vue';
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
+import { genId } from '@/utils/genId';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
@@ -94,6 +106,10 @@ export interface FInputProps {
    * Input value
    */
   modelValue?: string;
+  /**
+   * Label, placed on top of input
+   */
+  label?: string;
   /**
    * Disable the attribute
    */
@@ -125,6 +141,10 @@ export interface FInputProps {
    * Text color of the input
    */
   textColor?: Color;
+  /**
+   * Text color of the label
+   */
+  labelTextColor?: Color;
   /**
    * Color of the outline
    */
@@ -183,6 +203,8 @@ const props = withDefaults(defineProps<FInputProps>(), {
   modelValue: '',
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
+  label: '',
+  labelTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   type: 'text',
   placeholderTextColor: 'neutral--dark-3',
@@ -201,6 +223,8 @@ const props = withDefaults(defineProps<FInputProps>(), {
   rules: () => [],
   errorMessage: '',
 });
+
+const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;

@@ -27,12 +27,32 @@ Default.args = {
   placeholder: 'Email address',
 };
 
+export const WithLabel: Story<FInputProps> = Template.bind({});
+WithLabel.parameters = {
+  backgrounds: { default: 'primary' },
+};
+WithLabel.args = {
+  label: 'Email address',
+  placeholder: 'contact@fifteen.eu',
+};
+
 export const WithHint: Story<FInputProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'success' },
 };
 WithHint.args = {
   placeholder: 'Email address',
+  name: 'test-input',
+  hint: 'You can use your personal or professional email',
+};
+
+export const Full: Story<FInputProps> = Template.bind({});
+Full.parameters = {
+  backgrounds: { default: 'success' },
+};
+Full.args = {
+  label: 'Email address',
+  placeholder: 'contact@&fifteen.eu',
   hint: 'You can use your personal or professional email',
 };
 

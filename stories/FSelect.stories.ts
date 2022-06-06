@@ -26,11 +26,40 @@ Default.args = {
   ],
 };
 
+export const WithLabel: Story<FSelectProps> = Template.bind({});
+WithLabel.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+WithLabel.args = {
+  label: 'Pick a topic',
+  placeholder: 'All topics',
+  options: [
+    { label: 'Acquisition', value: 'acquisition' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Data', value: 'data' },
+  ],
+};
+
 export const WithHint: Story<FSelectProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'neutral' },
 };
 WithHint.args = {
+  placeholder: 'All topics',
+  options: [
+    { label: 'Acquisition', value: 'acquisition' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Data', value: 'data' },
+  ],
+  hint: 'Pick a contact motivation',
+};
+
+export const Full: Story<FSelectProps> = Template.bind({});
+Full.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+Full.args = {
+  label: 'Pick a topic',
   placeholder: 'All topics',
   options: [
     { label: 'Acquisition', value: 'acquisition' },

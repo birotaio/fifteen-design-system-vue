@@ -3,6 +3,11 @@
   :style="style"
   :class="classes"
 )
+  FFieldLabel(
+    :name="_name"
+    :label="label"
+    :text-color="labelTextColor"
+  )
   Popper(:show="!disabled && isMenuOpen")
     .FSelect__select(
       tabindex="0"
@@ -204,6 +209,7 @@
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
+import FFieldLabel from '@/components/FFieldLabel.vue';
 import Popper from 'vue3-popper/dist/popper.esm';
 
 import { ref, computed } from 'vue';
@@ -212,6 +218,7 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { useElementBounding } from '@vueuse/core';
+import { genId } from '@/utils/genId';
 
 export interface FSelectOption {
   label: string;
@@ -223,6 +230,10 @@ export interface FSelectProps {
    * Current option of the select
    */
   modelValue?: string | number | null;
+  /**
+   * Label, placed on top of select
+   */
+  label?: string;
   /**
    * Placeholder text
    */
@@ -251,6 +262,10 @@ export interface FSelectProps {
    * Text color of the select
    */
   textColor?: Color;
+  /**
+   * Text color of the label
+   */
+  labelTextColor?: Color;
   /**
    * Color of the outline
    */
@@ -340,6 +355,8 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   color: 'primary',
   optionsMenuColor: 'primary',
   textColor: 'neutral--light-5',
+  label: '',
+  labelTextColor: 'neutral--dark-4',
   optionTextColor: 'neutral--light-5',
   outlineColor: 'neutral--light-3',
   type: 'text',
@@ -366,6 +383,8 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   validateOnMount: false,
   disableSelection: false,
 });
+
+const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;

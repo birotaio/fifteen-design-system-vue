@@ -3,6 +3,11 @@
   :style="style"
   :class="classes"
 )
+  FFieldLabel(
+    :name="_name"
+    :label="label"
+    :text-color="labelTextColor"
+  )
   textarea.FTextarea__textarea(
     ref="textareaRef"
     v-bind="attrs"
@@ -89,6 +94,7 @@
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
+import FFieldLabel from '@/components/FFieldLabel.vue';
 
 import type CSS from 'csstype';
 import type { TextareaHTMLAttributes } from 'vue';
@@ -98,12 +104,17 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { useElementBounding } from '@vueuse/core';
+import { genId } from '@/utils/genId';
 
 export interface FTextareaProps {
   /**
    * Text area value
    */
   modelValue?: string | null;
+  /**
+   * Label, placed on top of select
+   */
+  label?: string;
   /**
    * Disable the attribute
    */
@@ -138,6 +149,10 @@ export interface FTextareaProps {
    * Text color of the textarea
    */
   textColor?: Color;
+  /**
+   * Text color of the label
+   */
+  labelTextColor?: Color;
   /**
    * Color of the outline
    */
@@ -196,6 +211,8 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
   modelValue: null,
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
+  label: '',
+  labelTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   placeholderTextColor: 'neutral--dark-3',
   focusColor: 'neutral--light-5',
@@ -215,6 +232,8 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
   attrs: () => ({}),
   errorMessage: '',
 });
+
+const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;

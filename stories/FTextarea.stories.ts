@@ -27,13 +27,33 @@ Default.args = {
   placeholder: 'Email address',
 };
 
+export const WithLabel: Story<FTextareaProps> = Template.bind({});
+WithLabel.parameters = {
+  backgrounds: { default: 'success' },
+};
+WithLabel.args = {
+  label: 'Contact motivation',
+  placeholder: 'I contact you today because...',
+};
+
 export const WithHint: Story<FTextareaProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'success' },
 };
 WithHint.args = {
-  placeholder: 'Email address',
-  hint: 'You can use your personal or professional email',
+  placeholder: 'I contact you today because...',
+  hint: 'Feel free to write anything',
+};
+
+export const Full: Story<FTextareaProps> = Template.bind({});
+Full.parameters = {
+  backgrounds: { default: 'success' },
+};
+Full.args = {
+  label: 'Contact motivation',
+
+  placeholder: 'I contact you today because...',
+  hint: 'Feel free to write anything',
 };
 
 export const Error: Story<FTextareaProps> = Template.bind({});

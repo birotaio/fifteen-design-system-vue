@@ -1,10 +1,14 @@
 <template lang="pug">
-.FFieldLabel(:for="name")
-  label {{ label }}
+component.FFieldLabel(
+  :is="type"
+  :for="type === 'label' ? name : null"
+) {{ label }}
 </template>
 
 <style lang="stylus">
 .FFieldLabel
+  margin 0
+  padding 0
   margin-bottom rem(8)
 </style>
 
@@ -14,6 +18,10 @@ export interface FFieldLabelProps {
    * Label text
    */
   label: string;
+  /**
+   * Type of the label. Use `legend` in `fieldset` context
+   */
+  type?: 'label' | 'legend';
   /**
    * Label field reference
    */
@@ -26,5 +34,6 @@ export interface FFieldLabelProps {
 
 withDefaults(defineProps<FFieldLabelProps>(), {
   textColor: 'neutral--dark-4',
+  type: 'label',
 });
 </script>

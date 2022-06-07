@@ -4,11 +4,6 @@ import FRadio, { FRadioProps } from '@/components/FRadio.vue';
 export default {
   title: 'Components/FRadio',
   component: FRadio,
-  argTypes: {
-    modelValue: {
-      type: 'boolean',
-    },
-  },
 };
 
 const Template = (args: FRadioProps) => ({
@@ -20,6 +15,7 @@ const Template = (args: FRadioProps) => ({
 export const Default: Story<FRadioProps> = Template.bind({});
 Default.args = {
   label: 'Check me',
+  value: 'check-me',
 };
 
 export const Disabled: Story<FRadioProps> = Template.bind({});
@@ -33,6 +29,7 @@ WithHint.args = {
   modelValue: false,
   label: 'Receive our monthly newsletter',
   hint: 'Check this if you want to receive our amazing newsletter.',
+  value: 'newsletter',
 };
 
 export const Error: Story<FRadioProps> = Template.bind({});

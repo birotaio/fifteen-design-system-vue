@@ -6,10 +6,12 @@
   label.FRadio__label
     .FRadio__wrapper
       input.FRadio__radio(
+        :name="name"
         type="radio"
-        v-model="checked"
-        :checked="checked"
-        @keypress.enter="checked = !checked ? true : checked"
+        v-model="fieldValue"
+        :value="value"
+        :checked="fieldValue === value"
+        @keypress.enter="fieldValue = value"
         :disabled="disabled"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -90,8 +92,8 @@
   .FRadio__radio
     cursor default
 
-    &::before
-      background var(--color--neutral--light-3)
+    &:checked::before
+      background var(--color--neutral--light-2)
 
     &,
     &:hover,
@@ -100,7 +102,7 @@
       background var(--color--neutral--light-4)
 
       &:checked
-        border 2px solid var(--color--neutral--light-3)
+        border 2px solid var(--color--neutral--light-2)
         background var(--color--neutral--light-5)
 
   .FRadio__label,
@@ -124,7 +126,11 @@ export interface FRadioProps {
   /**
    * Radio v-model value
    */
-  modelValue?: boolean | null;
+  modelValue?: string | boolean | null;
+  /**
+   * Value of the radio
+   */
+  value?: string | boolean | null;
   /**
    * Label of the radio
    */
@@ -201,6 +207,7 @@ export interface FRadioProps {
 
 const props = withDefaults(defineProps<FRadioProps>(), {
   label: '',
+  value: null,
   color: 'neutral--light-4',
   textColor: 'neutral--dark-3',
   borderColor: 'neutral--dark-1',
@@ -222,7 +229,7 @@ const props = withDefaults(defineProps<FRadioProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: boolean | null): void;
+  (name: 'update:modelValue', value: string | boolean | null): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
 }>();
@@ -238,15 +245,6 @@ const { handleBlur, handleFocus } = useInputEventBindings(
   props.validationTrigger,
   emit
 );
-
-const checked = computed({
-  get: () => Boolean(fieldValue.value),
-  set: newValue => {
-    fieldValue.value = fieldValue.value === null ? true : newValue;
-  },
-});
-console.log(props);
-
 const style = computed(
   (): Style => ({
     '--fradio--color': getCssColor(props.color),

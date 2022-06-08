@@ -2,7 +2,7 @@
 .FDigitsInput
   FFieldLabel(
     :name="_name"
-    :label="value"
+    :label="label"
     :text-color="labelTextColor"
   )
   .FDigitsInput__input
@@ -17,6 +17,7 @@
       hide-hint
       :validate-on-mount="true"
       hide-error-icon
+      :disabled="disabled"
     )
   FFieldHint(
     :text="hint"

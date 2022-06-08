@@ -37,11 +37,6 @@ export const Error: Story<FDigitsInputProps> = Template.bind({});
 Error.args = {
   hint: 'Check your SMS',
   digits: 5,
-  inputRules: [
-    value => {
-      return /[0-9]{1}/.test(value as string);
-    },
-  ],
   rules: [
     value => {
       return /[0-9]{5}/.test(value as string);
@@ -49,4 +44,11 @@ Error.args = {
   ],
   errorMessage: 'Your confirmation code in incorrect',
   validateOnMount: true,
+};
+
+export const Disabled: Story<FDigitsInputProps> = Template.bind({});
+Disabled.args = {
+  label: 'Enter validation code',
+  disabled: true,
+  hint: 'Check your SMS',
 };

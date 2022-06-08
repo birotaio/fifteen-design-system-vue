@@ -250,7 +250,13 @@ const emit = defineEmits<{
 
 const inputRef = ref<HTMLInputElement>();
 
-defineExpose<{ ref: Ref<HTMLInputElement | undefined> }>({ ref: inputRef });
+defineExpose<{
+  ref: Ref<HTMLInputElement | undefined>;
+  forceValidation: () => void;
+}>({
+  ref: inputRef,
+  forceValidation,
+});
 
 const { isValid, hint, value, handleValidation } = useFieldWithValidation(
   props,
@@ -285,4 +291,11 @@ const hintTextColor = computed(() =>
     ? props.hintTextColor
     : props.errorColor
 );
+
+/**
+ * Force validation from parent component, eg. in case of rules change
+ */
+function forceValidation() {
+  handleValidation(value.value);
+}
 </script>

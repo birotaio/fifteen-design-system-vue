@@ -15,7 +15,8 @@
       @input="setDigitValue($event, index)"
       @focus="handleFocus(index)"
       hide-hint
-      :validate-on-mount="true"
+      :rules="[() => isValid]"
+      :validate-on-mount="validateOnMount"
       hide-error-icon
       :disabled="disabled"
     )
@@ -53,7 +54,7 @@ import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { genId } from '@/utils/genId';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 export interface FDigitsInputProps {
   /**
@@ -146,6 +147,14 @@ const hintTextColor = computed(() =>
     : props.errorColor
 );
 
+watch(isValid, () => {
+  forceDigitsValidation();
+});
+
+/**
+ * Select the previous digit of the digits input
+ * @param index - Index of currently selected index
+ */
 function selectPrevDigit(index: number) {
   if (index - 1 > -1) {
     digitRefs.value[index - 1].ref?.focus();
@@ -155,6 +164,10 @@ function selectPrevDigit(index: number) {
   }
 }
 
+/**
+ * Select the next digit of the digits input
+ * @param index - Index of currently selected index
+ */
 function selectNextDigit(index: number) {
   if (index + 1 < props.digits) {
     digitRefs.value[index + 1].ref?.focus();
@@ -166,6 +179,11 @@ function handleFocus(index: number) {
   digitRefs.value[index].ref?.select();
 }
 
+/**
+ * Register a digit value, and select the next one
+ * @param event - Keyboard event
+ * @param index - Digit index
+ */
 function setDigitValue(event: InputEvent, index: number) {
   event.preventDefault();
   const currentDigitValue = digitRefs.value[index].ref;
@@ -182,6 +200,11 @@ function setDigitValue(event: InputEvent, index: number) {
   }
 }
 
+/**
+ * Clear the current digit value, and select the previous one
+ * @param event - Keyboard event
+ * @param index - Digit index
+ */
 function clearDigitValue(event: KeyboardEvent, index: number) {
   event.preventDefault();
   const currentDigitValue = digitRefs.value[index].ref;
@@ -192,5 +215,12 @@ function clearDigitValue(event: KeyboardEvent, index: number) {
   handleValidation(digitsValue.value.join(''));
   selectPrevDigit(index);
   emit('digit-input', value.value);
+}
+
+/**
+ * Force validation for each field digit, to sync validation status with digits input
+ */
+function forceDigitsValidation() {
+  digitRefs.value.forEach(digitRef => digitRef?.forceValidation());
 }
 </script>

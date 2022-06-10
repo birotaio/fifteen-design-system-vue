@@ -393,7 +393,7 @@ function getValueLabel(value: string) {
  * @param event - Click event
  */
 function handleIconClick(event: Event) {
-  if (props.clearable && value.value) {
+  if (props.clearable && isMenuOpen.value && value.value) {
     event.stopPropagation();
 
     handleValidation(null);

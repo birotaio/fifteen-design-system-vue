@@ -52,7 +52,7 @@ Full.parameters = {
 };
 Full.args = {
   label: 'Email address',
-  placeholder: 'contact@&fifteen.eu',
+  placeholder: 'contact@fifteen.eu',
   hint: 'You can use your personal or professional email',
 };
 

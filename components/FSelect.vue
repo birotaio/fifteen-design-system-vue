@@ -23,7 +23,7 @@
     template(#activator="{ toggleMenu }")
       .FSelect__select(
         tabindex="0"
-        @click="toggleMenu"
+        @click="!disabled && toggleMenu()"
         @focus="handleFocus"
         @blur="handleBlur"
         role="listbox"
@@ -63,8 +63,9 @@
   flex-direction column
 
 .FSelect__select
-  z-index 10
   display flex
+  z-index 10
+  width var(--fselect--width)
   justify-content space-between
   align-items center
   color var(--fselect--text-color)
@@ -126,6 +127,8 @@
       caret-color var(--fselect--error-color)
 
 .FSelect--disabled .FSelect__select
+  cursor default
+
   .FSelect__placeholder
     color var(--color--neutral--light-1)
 
@@ -143,7 +146,7 @@ import FFieldHint from '@/components/FFieldHint.vue';
 import FFieldLabel from '@/components/FFieldLabel.vue';
 import FMenu from '@/components/FMenu.vue';
 
-import { ref, computed, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';

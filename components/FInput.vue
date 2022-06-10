@@ -8,19 +8,23 @@
     :label="label"
     :text-color="labelTextColor"
   )
-  input.FInput__input(
-    v-bind="attrs"
-    v-model="value"
-    :type="type"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    @change="handleChange"
-    @focus="handleFocus"
-    @blur="handleBlur"
-    @input="handleInput"
-    :name="_name"
-    ref="inputRef"
-  )
+  .FInput__input
+    .FInput__input__prefix
+      slot(name="prefix")
+    input(
+      v-bind="attrs"
+      v-model="value"
+      :type="type"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      @input="handleInput"
+      :name="_name"
+    )
+    .FInput__input__suffix
+      slot(name="suffix")
   FIcon.FInput__errorIcon(
     v-if="!isValid && !hideErrorIcon"
     name="exclamationCircle"
@@ -36,18 +40,17 @@
 
 <style lang="stylus">
 .FInput
+  display flex
+  flex-direction column
   position relative
 
 .FInput__input
-  width 100%
-  color var(--finput--text-color)
+  display flex
   background var(--finput--color)
-  border none
+  overflow hidden
   border-radius rem(24)
-  height rem(48)
-  font-size rem(16)
   transition background 200ms, box-shadow 200ms
-  user-select none
+  height rem(48)
   padding rem(12)
   outline none
   text-align var(--finput--text-align)
@@ -55,12 +58,28 @@
   &:hover
     box-shadow 0 0 0 2px var(--finput--border-color)
 
-  &::placeholder
-    color var(--finput--placeholder-text-color)
-
-  &:focus
+  &:focus-within
     background var(--finput--focus-color)
     box-shadow 0 0 0 2px var(--finput--focus-border-color), 0 0 0 6px 'rgba(%s, 0.8)' % var(--finput--outline-color)
+
+    input
+      background var(--finput--focus-color)
+
+  input
+    width 100%
+    border none
+    user-select none
+    outline none
+    color var(--finput--text-color)
+    background var(--finput--color)
+    font-size rem(16)
+    transition background 200ms, box-shadow 200ms
+
+    &:focus
+      background var(--finput--focus-color)
+
+    &::placeholder
+      color var(--finput--placeholder-text-color)
 
 .FInput__label
   color var(--finput--label)
@@ -75,7 +94,7 @@
       caret-color var(--finput--error-color)
 
 .FInput--disabled .FInput__input
-  &::placeholder
+  input::placeholder
     color var(--color--neutral--light-1)
 
   &,
@@ -99,6 +118,7 @@ import type CSS from 'csstype';
 import type { InputHTMLAttributes, Ref } from 'vue';
 
 import { ref } from 'vue';
+
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { genId } from '@/utils/genId';

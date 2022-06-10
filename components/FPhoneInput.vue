@@ -72,6 +72,12 @@
   background none
   border-radius rem(24)
   cursor pointer
+  margin-right rem(4)
+
+  &:focus
+    outline-offset rem(6)
+    outline solid rem(2) var(--color--neutral--dark-3)
+    transition $outline-transition
 
   &:hover
     border-radius rem(24)
@@ -117,7 +123,7 @@
     filter grayscale(1)
 
   .FPhoneInput__prefix
-    > p
+    > span
       color var(--color--neutral--light-2)
 
   .FPhoneInput__selectedValue

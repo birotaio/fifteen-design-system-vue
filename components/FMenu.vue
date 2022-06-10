@@ -44,15 +44,14 @@
 
   .popper
     width 100%
-    overflow hidden
 
   .inline-block
-    width var(--fmenu--width)
     position relative !important
     border none !important
     margin 0 !important
 
 .FMenu__optionsMenu
+  width var(--fmenu--width)
   background var(--fmenu--color)
   border-radius rem(16)
   padding rem(8)
@@ -176,7 +175,7 @@ const style = computed(
   })
 );
 
-const selectedOption = useVModelProxy(props);
+const selectedOption = useVModelProxy<string | number | boolean>(props);
 
 const optionRefs = ref<Element[]>([]);
 
@@ -225,7 +224,11 @@ function isSelected(index: number): boolean {
  * @param option - Option to select
  */
 function selectOption(option: FMenuOption | null): void {
-  selectedOption.value = option?.value ?? null;
+  emit('select-option', option?.value ?? null);
+
+  if (!props.disableSelection) {
+    selectedOption.value = option?.value ?? null;
+  }
   isOpen.value = false;
 }
 
@@ -292,8 +295,11 @@ function scrollOptionIntoView(index: number) {
  * Handle enter key down
  */
 function handleEnter(): void {
-  if (isOpen.value) {
-    selectedOption.value = props.options[preselectedOptionIndex.value].value;
+  const preselectedOption = props.options[preselectedOptionIndex.value];
+  emit('select-option', preselectedOption.value);
+
+  if (isOpen.value && !props.disableSelection) {
+    selectedOption.value = preselectedOption.value;
   }
   toggleMenu();
 }

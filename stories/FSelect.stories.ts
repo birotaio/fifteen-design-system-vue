@@ -190,3 +190,19 @@ ManyOptions.args = {
     value: `option-${index}`,
   })),
 };
+
+export const Unselectable: Story<FSelectProps> = Template.bind({});
+Unselectable.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+Unselectable.args = {
+  disableSelection: true,
+  color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
+  placeholder: 'All topics',
+  options: new Array(10).fill(null).map((_, index) => ({
+    label: `Option ${index}`,
+    value: `option-${index}`,
+  })),
+};

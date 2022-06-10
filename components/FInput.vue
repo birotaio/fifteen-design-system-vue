@@ -19,9 +19,10 @@
     @blur="handleBlur"
     @input="handleInput"
     :name="_name"
+    ref="inputRef"
   )
   FIcon.FInput__errorIcon(
-    v-if="!isValid"
+    v-if="!isValid && !hideErrorIcon"
     name="exclamationCircle"
     :color="errorColor"
     size="16"
@@ -49,6 +50,7 @@
   user-select none
   padding rem(12)
   outline none
+  text-align var(--finput--text-align)
 
   &:hover
     box-shadow 0 0 0 2px var(--finput--border-color)
@@ -93,8 +95,10 @@
 import FIcon from '@/components/FIcon.vue';
 import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
+import type CSS from 'csstype';
+import type { InputHTMLAttributes, Ref } from 'vue';
 
-import type { InputHTMLAttributes } from 'vue';
+import { ref } from 'vue';
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { genId } from '@/utils/genId';
@@ -111,7 +115,7 @@ export interface FInputProps {
    */
   label?: string;
   /**
-   * Disable the attribute
+   * Disable the field
    */
   disabled?: boolean;
   /**
@@ -166,6 +170,10 @@ export interface FInputProps {
    */
   errorColor?: Color;
   /**
+   * Hide error exclamation circle icon
+   */
+  hideErrorIcon?: boolean;
+  /**
    * Text color of the hint
    */
   hintTextColor?: Color;
@@ -197,6 +205,10 @@ export interface FInputProps {
    * Message to use as hint when validation fails
    */
   errorMessage?: string;
+  /**
+   * Input value alignment
+   */
+  textAlign?: CSS.Properties['textAlign'];
 }
 
 const props = withDefaults(defineProps<FInputProps>(), {
@@ -212,6 +224,7 @@ const props = withDefaults(defineProps<FInputProps>(), {
   borderColor: 'secondary',
   focusBorderColor: 'secondary',
   errorColor: 'danger',
+  hideErrorIcon: false,
   hint: '',
   hideHint: false,
   hintTextColor: 'neutral--dark-4',
@@ -222,6 +235,7 @@ const props = withDefaults(defineProps<FInputProps>(), {
   validationTrigger: 'blur',
   rules: () => [],
   errorMessage: '',
+  textAlign: 'left',
 });
 
 const _name = computed(() => props?.name || genId());
@@ -231,8 +245,18 @@ const emit = defineEmits<{
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'input', value: Event): void;
+  (name: 'input', value: InputEvent): void;
 }>();
+
+const inputRef = ref<HTMLInputElement>();
+
+defineExpose<{
+  ref: Ref<HTMLInputElement | undefined>;
+  forceValidation: () => void;
+}>({
+  ref: inputRef,
+  forceValidation,
+});
 
 const { isValid, hint, value, handleValidation } = useFieldWithValidation(
   props,
@@ -251,6 +275,7 @@ const style = computed(
     '--finput--focus-color': getCssColor(props.focusColor),
     '--finput--focus-border-color': getCssColor(props.focusBorderColor),
     '--finput--error-color': getCssColor(props.errorColor),
+    '--finput--text-align': props.textAlign,
   })
 );
 
@@ -266,4 +291,11 @@ const hintTextColor = computed(() =>
     ? props.hintTextColor
     : props.errorColor
 );
+
+/**
+ * Force validation from parent component, eg. in case of rules change
+ */
+function forceValidation() {
+  handleValidation(value.value);
+}
 </script>

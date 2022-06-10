@@ -7,3 +7,4 @@
 - [FTextarea] Add label prop with documentation (storybook)
 - [FRadio] Add radio component
 - [FRadioGroup] Add radio group component
+- [FDigitsInput] Add digits input component

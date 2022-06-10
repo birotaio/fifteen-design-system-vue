@@ -526,13 +526,13 @@ function mousePreselectOption(index: number) {
   preselectOption(index);
 }
 
-/**
- * Automatically scroll options menu when having used the keyboard to preselect a non visible option
- */
 const selectOptionsRef = ref();
 const { top: selectOptionsTop, bottom: selectOptionsBottom } =
   useElementBounding(selectOptionsRef);
 
+/**
+ * Automatically scroll options menu when having used the keyboard to preselect a non visible option
+ */
 function scrollOptionIntoView(index: number) {
   const el = optionRefs?.value[index];
   const { top, bottom, height } = el.getBoundingClientRect();

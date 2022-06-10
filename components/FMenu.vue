@@ -46,9 +46,8 @@
     width 100%
 
   .inline-block
-    position relative !important
-    border none !important
-    margin 0 !important
+    display block
+    position relative
 
 .FMenu__optionsMenu
   width var(--fmenu--width)

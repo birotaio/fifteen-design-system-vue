@@ -61,6 +61,7 @@
 .FSelect
   display flex
   flex-direction column
+  position relative
 
 .FSelect__select
   display flex

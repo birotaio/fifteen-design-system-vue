@@ -23,15 +23,16 @@
       @blur="handleBlur"
       @input="handleInput"
       :name="_name"
+      ref="inputRef"
     )
     .FInput__input__suffix
       slot(name="suffix")
-  FIcon.FInput__errorIcon(
-    v-if="!isValid && !hideErrorIcon"
-    name="exclamationCircle"
-    :color="errorColor"
-    size="16"
-  )
+    FIcon.FInput__errorIcon(
+      v-if="!isValid && !hideErrorIcon"
+      name="exclamationCircle"
+      :color="errorColor"
+      size="16"
+    )
   FFieldHint(
     :text="hint"
     :hidden="hideHint"
@@ -47,6 +48,7 @@
 
 .FInput__input
   display flex
+  position relative
   background var(--finput--color)
   overflow hidden
   border-radius rem(24)

@@ -31,6 +31,7 @@
 .FDigitsInput
   display flex
   flex-direction column
+  position relative
 
 .FDigitsInput__input
   display grid

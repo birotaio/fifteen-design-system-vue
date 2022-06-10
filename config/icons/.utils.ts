@@ -41,6 +41,7 @@ const iconList = [
   'checklist',
   'checkmark',
   'chevronDown',
+  'chevronUpSmall',
   'chevronUp',
   'circleSlash',
   'clock',

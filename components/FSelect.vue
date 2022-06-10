@@ -47,7 +47,8 @@
           v-if="!disabled"
           @click="handleIconClick($event)"
           :name="iconName"
-          :color="textColor"
+          color="transparent"
+          :stroke-color="textColor"
           :class="iconClasses"
         )
   FFieldHint(
@@ -374,11 +375,13 @@ const hintTextColor = computed(() =>
 
 const iconClasses = computed(() => ({
   'FSelect__icon--flipped':
-    isMenuOpen.value && iconName.value === 'chevronDown',
+    isMenuOpen.value && iconName.value === 'chevronUpSmall',
 }));
 
 const iconName = computed(() =>
-  props.clearable && isMenuOpen.value && value.value ? 'close' : 'chevronDown'
+  props.clearable && isMenuOpen.value && value.value
+    ? 'close'
+    : 'chevronUpSmall'
 );
 
 /**

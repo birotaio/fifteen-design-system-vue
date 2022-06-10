@@ -210,6 +210,15 @@ export const chevronDown: SVGAttributes[] = [
     d: 'M3.647 7.646a.5.5 0 01.637-.057l.07.058 7.644 7.65 7.65-7.65a.5.5 0 01.637-.058l.07.057a.5.5 0 01.057.638l-.058.07-8.002 8.004a.5.5 0 01-.638.058l-.07-.058-7.998-8.005a.5.5 0 010-.707z',
   },
 ];
+export const chevronUpSmall: SVGAttributes[] = [
+  {
+    d: 'm18 9-6 6-6-6',
+    stroke: '#546171',
+    'stroke-width': '2',
+    'stroke-linecap': 'round',
+    'stroke-linejoin': 'round',
+  },
+];
 export const chevronUp: SVGAttributes[] = [
   {
     d: 'M3.647 16.354a.5.5 0 00.637.057l.07-.058 7.644-7.65 7.65 7.65a.5.5 0 00.637.058l.07-.057a.5.5 0 00.057-.638l-.058-.07-8.002-8.004a.5.5 0 00-.638-.058l-.07.058-7.998 8.005a.5.5 0 000 .707z',

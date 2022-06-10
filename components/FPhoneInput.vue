@@ -24,8 +24,8 @@
         :validate-on-mount="validateOnMount"
         validation-trigger="change"
         :disabled="disabled"
-        :hide-hint="hideHint || isMenuOpen"
         :hint="hint"
+        :hide-hint="hideHint || isMenuOpen"
         :hint-text-color="hintTextColor"
         :mask="phoneNumberMask"
       )
@@ -37,8 +37,10 @@
             )
               FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
               FIcon.FPhoneInput__icon(
-                name="chevronDown"
+                name="chevronUpSmall"
                 :class="iconClasses"
+                color="transparent"
+                stroke-color="neutral--dark-3"
               )
             FDivider(
               vertical
@@ -55,6 +57,7 @@
 .FPhoneInput
   display flex
   flex-direction column
+  position relative
 
 .FPhoneInput__select
   display flex
@@ -68,17 +71,10 @@
   border none
   background none
   border-radius rem(24)
-  transition box-shadow 200ms, background 200ms
   cursor pointer
-  margin-right rem(4)
 
   &:hover
-    box-shadow 0 0 0 rem(8) var(--color--neutral--light-5)
-    background var(--color--neutral--light-5)
     border-radius rem(24)
-
-.FPhoneInput__selectedFlag
-  margin-right rem(4)
 
 .FPhoneInput__select__phonePrefix
   height 100%
@@ -110,6 +106,7 @@
   margin-right rem(8)
 
 .FPhoneInput__icon
+  margin-left rem(2)
   transition transform 300ms
 
   &--flipped
@@ -139,16 +136,13 @@ import FFlagIcon from '@/components/FFlagIcon.vue';
 import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
 import FFieldLabel from './FFieldLabel.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {
   isValidNumberForRegion,
-  validatePhoneNumberLength,
   getCountries,
   getCountryCallingCode,
   getExampleNumber,
-  AsYouType,
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';

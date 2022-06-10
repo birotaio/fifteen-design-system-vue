@@ -1,5 +1,8 @@
 <template lang="pug">
-.FMenu(:style="style")
+.FMenu(
+  :style="style"
+  @keydown="handlePreselectSearch"
+)
   Popper(:show="isOpen")
     .FMenu__activator(
       @keydown.enter="handleEnter"
@@ -58,7 +61,6 @@
   max-height rem(300)
   overflow auto
   overscroll-behavior contain
-  scroll-behavior smooth
   scroll-padding-top rem(0)
   scrollbar(var(--fmenu--border-color))
 
@@ -77,7 +79,7 @@
   cursor pointer
 
   &--preselected
-    background 'rgba(%s, 0.3)' % var(--color--neutral--light-2--rgb)
+    background 'rgba(%s, 0.5)' % var(--color--neutral--light-2--rgb)
 
   &--selected
     color var(--fmenu--selected-option-text-color)
@@ -293,7 +295,7 @@ function scrollOptionIntoView(index: number) {
 /**
  * Handle enter key down
  */
-function handleEnter(): void {
+function handleEnter(event: KeyboardEvent): void {
   const preselectedOption = props.options[preselectedOptionIndex.value];
   emit('select-option', preselectedOption.value);
 
@@ -301,5 +303,49 @@ function handleEnter(): void {
     selectedOption.value = preselectedOption.value;
   }
   toggleMenu();
+}
+
+const preselectSearchTerm = ref('');
+const timeout = ref<NodeJS.Timeout>();
+const DELAY_BETWEEN_KEYSTROKES_IN_MS = 600;
+
+/**
+ * Preselect an option based on input keys (search)
+ * @param event - Keyboard event
+ */
+function handlePreselectSearch(event: KeyboardEvent) {
+  isKeyboardInteracting.value = true;
+
+  event.stopPropagation();
+  preselectSearchTerm.value = preselectSearchTerm.value + event.key;
+
+  function matchResult(option: FMenuOption) {
+    const optionLabel = option.label.toLowerCase();
+    const optionValue = ('' + option.value).toLowerCase();
+
+    return (
+      optionLabel.startsWith(preselectSearchTerm.value) ||
+      optionValue.startsWith(preselectSearchTerm.value)
+    );
+  }
+
+  timeout.value = setTimeout(() => {
+    clearTimeout(timeout.value);
+    preselectSearchTerm.value = '';
+  }, DELAY_BETWEEN_KEYSTROKES_IN_MS);
+
+  const firstMatchingResult = props.options.findIndex(matchResult);
+  const matchingResults = props.options.filter(matchResult).length;
+
+  if (firstMatchingResult === -1) {
+    preselectSearchTerm.value = '';
+    return;
+  }
+
+  scrollOptionIntoView(firstMatchingResult);
+  preselectOption(firstMatchingResult);
+  if (matchingResults === 1) {
+    preselectSearchTerm.value = '';
+  }
 }
 </script>

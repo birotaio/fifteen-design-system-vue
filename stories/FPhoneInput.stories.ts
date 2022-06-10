@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FPhoneInput, { FPhoneInputProps } from '@/components/FPhoneInput.vue';
 
 export default {
-  title: 'Components/FPhoneInput',
+  title: 'Components/Form/FPhoneInput',
   component: FPhoneInput,
 };
 

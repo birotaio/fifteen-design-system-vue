@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FDigitsInput, { FDigitsInputProps } from '@/components/FDigitsInput.vue';
 
 export default {
-  title: 'Components/FDigitsInput',
+  title: 'Components/Form/FDigitsInput',
   component: FDigitsInput,
 };
 

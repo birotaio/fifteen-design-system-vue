@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FInput, { FInputProps } from '@/components/FInput.vue';
 
 export default {
-  title: 'Components/FInput',
+  title: 'Components/Form/FInput',
   component: FInput,
   argTypes: {
     onClick: { action: 'click' },

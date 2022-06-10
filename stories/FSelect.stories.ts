@@ -3,7 +3,7 @@ import FSelect, { FSelectProps } from '@/components/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 
 export default {
-  title: 'Components/FSelect',
+  title: 'Components/Form/FSelect',
   component: FSelect,
 };
 

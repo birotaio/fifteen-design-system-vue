@@ -1,5 +1,6 @@
 <template lang="pug">
 component.FFieldLabel(
+  v-if="label !== ''"
   :is="type"
   :for="type === 'label' ? name : null"
 ) {{ label }}

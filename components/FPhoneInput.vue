@@ -8,7 +8,7 @@
   FMenu(
     :options="countries"
     v-model:is-open="isMenuOpen"
-    v-model="selectedCountry"
+    v-model="countryCode"
     width="100"
     color="neutral--light-3"
     text-color="neutral--dark-3"
@@ -16,20 +16,26 @@
     template(#activator="{ toggleMenu }")
       FInput(
         v-bind="{ placeholder }"
-        v-model="phoneNumberValue"
-        hide-hint
+        v-model="phoneNumber"
         text-color="neutral--dark-4"
+        :error-message="errorMessage"
         placeholder-text-color="neutral--dark-2"
-        :rules="rules"
+        :rules="[() => isValidPhone]"
         :validate-on-mount="validateOnMount"
+        validation-trigger="change"
         :disabled="disabled"
+        :hide-hint="hideHint || isMenuOpen"
+        :hint="hint"
+        :hint-text-color="hintTextColor"
+        :mask="phoneNumberMask"
       )
         template(#prefix)
           .FPhoneInput__prefix
-            .FPhoneInput__selectedValue(@click="!disabled && toggleMenu()")
-              FFlagIcon.FPhoneInput__selectedFlag(
-                :country-code="selectedCountry"
-              )
+            .FPhoneInput__selectedValue(
+              @click="!disabled && toggleMenu()"
+              tabindex="0"
+            )
+              FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
               FIcon.FPhoneInput__icon(
                 name="chevronDown"
                 :class="iconClasses"
@@ -40,12 +46,9 @@
             )
             span {{ phonePrefix }}
     template(#option-prefix="{ option }")
-      FFlagIcon.FPhoneInput__optionPrefix(:country-code="option.value")
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint || isMenuOpen"
-    :text-color="hintTextColor"
-  )
+      FFlagIcon.FPhoneInput__optionPrefix(
+        :country-code="getCountryCode(option)"
+      )
 </template>
 
 <style lang="stylus">
@@ -70,9 +73,12 @@
   margin-right rem(4)
 
   &:hover
-    box-shadow 0 0 0 rem(6) var(--color--neutral--light-5)
+    box-shadow 0 0 0 rem(8) var(--color--neutral--light-5)
     background var(--color--neutral--light-5)
     border-radius rem(24)
+
+.FPhoneInput__selectedFlag
+  margin-right rem(4)
 
 .FPhoneInput__select__phonePrefix
   height 100%
@@ -96,7 +102,7 @@
   display flex
   margin-right rem(4)
 
-  > p
+  > span
     font-size rem(16)
     color var(--color--neutral--dark-3)
 
@@ -137,13 +143,18 @@ import FFieldHint from '@/components/FFieldHint.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {
+  isValidNumberForRegion,
+  validatePhoneNumberLength,
   getCountries,
   getCountryCallingCode,
+  getExampleNumber,
   AsYouType,
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { genId } from '@/utils/genId';
+import type { FSelectOption } from './FSelect.vue';
+import examples from 'libphonenumber-js/mobile/examples';
 
 export interface FPhoneInputProps {
   /**
@@ -162,10 +173,6 @@ export interface FPhoneInputProps {
    * Field name. Used in a form context
    */
   name?: string;
-  /**
-   * Input placeholder
-   */
-  placeholder?: string;
   /**
    * Validate the number on mount
    */
@@ -205,7 +212,6 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   label: '',
   labelTextColor: 'neutral--dark-4',
   name: '',
-  placeholder: '',
   validateOnMount: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
@@ -226,18 +232,23 @@ const { isValid, hint, value, handleValidation } = useFieldWithValidation<
   validateOnMount: props?.validateOnMount,
 });
 
-const selectedCountry = ref<CountryCode>('FR');
+const placeholder = computed(() =>
+  getExampleNumber(countryCode.value, examples)
+    ?.format('INTERNATIONAL')
+    .replace('+' + getCountryCallingCode(countryCode.value) + ' ', '')
+);
+const countryCode = ref<CountryCode>('FR');
 const phonePrefix = computed(
-  () => '+' + getCountryCallingCode(selectedCountry.value)
+  () => '+' + getCountryCallingCode(countryCode.value)
 );
 
-const phoneNumberValue = ref<string>('');
+const phoneNumber = ref<string>('');
 
-watch([phonePrefix, phoneNumberValue], () => {
-  handleValidation(phonePrefix.value + phoneNumberValue.value);
+watch([phonePrefix, phoneNumber], () => {
+  handleValidation(phonePrefix.value + phoneNumber.value);
 });
 
-const countries = getCountries().map((country: string) => ({
+const countries = getCountries().map((country: CountryCode) => ({
   label: country,
   value: country,
 }));
@@ -246,10 +257,24 @@ const iconClasses = computed(() => ({
   'FPhoneInput__icon--flipped': isMenuOpen.value,
 }));
 
-function formatInput(value: string) {
-  const formatted = new AsYouType(selectedCountry.value);
-  return formatted.input(value);
-}
+const phoneNumberMask = computed(() => {
+  const number = getExampleNumber(countryCode.value, examples);
+  const nationalFormat =
+    number
+      ?.format('NATIONAL', { nationalPrefix: false })
+      ?.replace(/[0-9]/g, '#') ?? '';
+  const internationalFormatWithoutCountryCallingCode =
+    number
+      ?.format('INTERNATIONAL')
+      .replace(`+${getCountryCallingCode(countryCode.value)} `, '')
+      .replace(/[0-9]/g, '#') ?? '';
+
+  return [nationalFormat, internationalFormatWithoutCountryCallingCode];
+});
+
+const isValidPhone = computed(() =>
+  isValidNumberForRegion(phoneNumber.value, countryCode.value)
+);
 
 const isMenuOpen = ref(false);
 
@@ -260,4 +285,8 @@ const hintTextColor = computed(() =>
     ? props.hintTextColor
     : props.errorColor
 );
+
+function getCountryCode(option: FSelectOption) {
+  return option.value as CountryCode;
+}
 </script>

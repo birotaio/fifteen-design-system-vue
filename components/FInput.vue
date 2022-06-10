@@ -14,6 +14,7 @@
     input(
       v-bind="attrs"
       v-model="value"
+      v-maska="mask"
       :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
@@ -118,6 +119,7 @@ import type CSS from 'csstype';
 import type { InputHTMLAttributes, Ref } from 'vue';
 
 import { ref } from 'vue';
+import { maska as vMaska } from 'maska';
 
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
@@ -229,6 +231,10 @@ export interface FInputProps {
    * Input value alignment
    */
   textAlign?: CSS.Properties['textAlign'];
+  /**
+   * Restrict input value to a specific mask
+   */
+  mask?: string | string[];
 }
 
 const props = withDefaults(defineProps<FInputProps>(), {
@@ -256,6 +262,7 @@ const props = withDefaults(defineProps<FInputProps>(), {
   rules: () => [],
   errorMessage: '',
   textAlign: 'left',
+  mask: '',
 });
 
 const _name = computed(() => props?.name || genId());

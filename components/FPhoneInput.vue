@@ -1,5 +1,8 @@
 <template lang="pug">
-.FPhoneInput(:class="classes")
+.FPhoneInput(
+  :class="classes"
+  :style="style"
+)
   FFieldLabel(
     :name="_name"
     :label="label"
@@ -10,16 +13,16 @@
     v-model:is-open="isMenuOpen"
     v-model="countryCode"
     width="100"
-    color="neutral--light-3"
-    text-color="neutral--dark-3"
+    :color="optionsMenuColor"
+    :text-color="optionTextColor"
   )
     template(#activator="{ toggleMenu }")
       FInput(
         v-bind="{ placeholder }"
         v-model="phoneNumber"
-        text-color="neutral--dark-4"
+        :text-color="textColor"
         :error-message="errorMessage"
-        placeholder-text-color="neutral--dark-2"
+        :placeholder-text-color="placeholderTextColor"
         :rules="[() => isValidPhone]"
         :validate-on-mount="validateOnMount"
         validation-trigger="change"
@@ -40,7 +43,7 @@
                 name="chevronUpSmall"
                 :class="iconClasses"
                 color="transparent"
-                stroke-color="neutral--dark-3"
+                :stroke-color="textColor"
               )
             FDivider(
               vertical
@@ -76,7 +79,7 @@
 
   &:focus
     outline-offset rem(6)
-    outline solid rem(2) var(--color--neutral--dark-3)
+    outline solid rem(2) var(--fphoneinput--textColor)
     transition $outline-transition
 
   &:hover
@@ -106,7 +109,7 @@
 
   > span
     font-size rem(16)
-    color var(--color--neutral--dark-3)
+    color var(--fphoneinput--textPhonePrefixColor)
 
 .FPhoneInput__optionPrefix
   margin-right rem(8)
@@ -155,6 +158,7 @@ import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { genId } from '@/utils/genId';
 import type { FSelectOption } from './FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
+import { getCssColor } from '@/utils/getCssColor';
 
 export interface FPhoneInputProps {
   /**
@@ -205,6 +209,26 @@ export interface FPhoneInputProps {
    * Disable interactions with the select
    */
   disabled?: boolean;
+  /**
+   * Text color of the input
+   */
+  textColor?: Color;
+  /**
+   * Text color of the phone prefix
+   */
+  textPhonePrefixColor?: Color;
+  /**
+   * Color of the placeholder text
+   */
+  placeholderTextColor?: Color;
+  /**
+   * Background color of the options menu
+   */
+  optionsMenuColor?: Color;
+  /**
+   * Text color of option item
+   */
+  optionTextColor?: Color;
 }
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
@@ -218,6 +242,11 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   rules: () => [],
   errorMessage: '',
   errorColor: 'danger',
+  textColor: 'neutral--dark-4',
+  textPhonePrefixColor: 'neutral--dark-3',
+  placeholderTextColor: 'neutral--dark-2',
+  optionsMenuColor: 'neutral--light-3',
+  optionTextColor: 'neutral--dark-3',
 });
 
 const _name = computed(() => props?.name || genId());
@@ -226,7 +255,16 @@ const classes = computed(() => ({
   'FPhoneInput--disabled': props.disabled,
 }));
 
-const { isValid, hint, value, handleValidation } = useFieldWithValidation<
+const style = computed(
+  (): Style => ({
+    '--fphoneinput--textColor': getCssColor(props.textColor),
+    '--fphoneinput--textPhonePrefixColor': getCssColor(
+      props.textPhonePrefixColor
+    ),
+  })
+);
+
+const { isValid, hint, handleValidation } = useFieldWithValidation<
   string | number
 >(props, {
   validateOnMount: props?.validateOnMount,
@@ -235,11 +273,11 @@ const { isValid, hint, value, handleValidation } = useFieldWithValidation<
 const placeholder = computed(() =>
   getExampleNumber(countryCode.value, examples)
     ?.format('INTERNATIONAL')
-    .replace('+' + getCountryCallingCode(countryCode.value) + ' ', '')
+    .replace(`+${getCountryCallingCode(countryCode.value)} `, '')
 );
 const countryCode = ref<CountryCode>('FR');
 const phonePrefix = computed(
-  () => '+' + getCountryCallingCode(countryCode.value)
+  () => `+${getCountryCallingCode(countryCode.value)}`
 );
 
 const phoneNumber = ref<string>('');

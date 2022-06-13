@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FRadioGroup, { FRadioGroupProps } from '@/components/FRadioGroup.vue';
 
 export default {
-  title: 'Components/FRadioGroup',
+  title: 'Components/Form/FRadioGroup',
   component: FRadioGroup,
   argTypes: {
     displayMode: {

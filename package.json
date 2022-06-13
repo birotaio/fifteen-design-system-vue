@@ -89,11 +89,13 @@
   },
   "dependencies": {
     "@vueuse/core": "^8.5.0",
-    "vee-validate": "^4.5.11",
-    "vue": "^3.2.36",
+    "csstype": "^3.1.0",
+    "libphonenumber-js": "^1.10.6",
+    "maska": "^1.5.0",
     "unplugin-auto-import": "^0.8.7",
     "unplugin-vue-components": "^0.19.6",
-    "csstype": "^3.1.0",
+    "vee-validate": "^4.5.11",
+    "vue": "^3.2.36",
     "vue3-popper": "^1.5.0"
   }
 }

@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FRadio, { FRadioProps } from '@/components/FRadio.vue';
 
 export default {
-  title: 'Components/FRadio',
+  title: 'Components/Form/FRadio',
   component: FRadio,
 };
 

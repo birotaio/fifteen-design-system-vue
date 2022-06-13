@@ -3,7 +3,7 @@ import FSelect, { FSelectProps } from '@/components/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 
 export default {
-  title: 'Components/FSelect',
+  title: 'Components/Form/FSelect',
   component: FSelect,
 };
 
@@ -114,6 +114,8 @@ Error.parameters = {
 };
 Error.args = {
   color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
   rules: [() => false],
   errorMessage: 'Error sample',
   validateOnMount: true,
@@ -135,6 +137,8 @@ NoOption.parameters = {
 NoOption.args = {
   emptyText: 'No option here',
   color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
   clearable: true,
   placeholder: 'All topics',
   options: [],
@@ -158,6 +162,8 @@ LongOptionsLabel.parameters = {
 };
 LongOptionsLabel.args = {
   color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
   placeholder: 'All topics',
   options: [
     {
@@ -176,6 +182,24 @@ ManyOptions.parameters = {
 };
 ManyOptions.args = {
   color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
+  placeholder: 'All topics',
+  options: new Array(10).fill(null).map((_, index) => ({
+    label: `Option ${index}`,
+    value: `option-${index}`,
+  })),
+};
+
+export const Unselectable: Story<FSelectProps> = Template.bind({});
+Unselectable.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+Unselectable.args = {
+  disableSelection: true,
+  color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
   placeholder: 'All topics',
   options: new Array(10).fill(null).map((_, index) => ({
     label: `Option ${index}`,

@@ -8,89 +8,66 @@
     :label="label"
     :text-color="labelTextColor"
   )
-  Popper(:show="!disabled && isMenuOpen")
-    .FSelect__select(
-      tabindex="0"
-      @keydown.up.prevent="keyboardPreselectPrevOption"
-      @keydown.down.prevent="keyboardPreselectNextOption"
-      @keydown.enter="handleEnter"
-      @click="isMenuOpen = !isMenuOpen"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      role="listbox"
-    )
-      .FSelect__select__selectionStart
-        FIcon.FSelect__select__errorIcon(
-          v-if="!isValid"
-          name="exclamationCircle"
-          :color="errorColor"
-          size="16"
-        )
-        .FSelect__selectValue
-          slot(
-            name="selected-value"
-            v-bind="{ value, label: getValueLabel(value) }"
-            v-if="value"
-          )
-            .FSelect__text {{ getValueLabel(value) }}
-          .FSelect__placeholder(v-else) {{ placeholder }}
-      FIcon.FSelect__icon(
-        v-if="!disabled"
-        @click="handleIconClick($event)"
-        :name="iconName"
-        :color="textColor"
-        :class="iconClasses"
+  FMenu(
+    v-model="value"
+    v-model:is-open="isMenuOpen"
+    :options="options"
+    :width="width"
+    :empty-text="emptyText"
+    :color="optionsMenuColor || color"
+    :text-color="optionTextColor"
+    :selected-option-color="selectedOptionColor"
+    :selected-option-text-color="selectedOptionTextColor"
+    :disable-selection="disableSelection"
+  )
+    template(#activator="{ toggleMenu }")
+      .FSelect__select(
+        tabindex="0"
+        @click="!disabled && toggleMenu()"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        role="listbox"
       )
-    template(#content)
-      .FSelect__optionsMenu(
-        v-if="options.length"
-        ref="selectOptionsRef"
-      )
-        .FSelect__option(
-          role="option"
-          @click="selectOption(option)"
-          @mouseenter="mousePreselectOption(index)"
-          @mousemove="isKeyboardInteracting = false"
-          v-for="(option, index) in options"
-          :key="option.value"
-          :class="selectOptionClasses(index)"
-          ref="optionRefs"
+        .FSelect__select__selectionStart
+          FIcon.FSelect__select__errorIcon(
+            v-if="!isValid"
+            name="exclamationCircle"
+            :color="errorColor"
+            size="16"
+          )
+          .FSelect__selectValue
+            slot(
+              name="selected-value"
+              v-bind="{ value, label: getValueLabel(value) }"
+              v-if="value"
+            )
+              .FSelect__text {{ getValueLabel(value) }}
+            .FSelect__placeholder(v-else) {{ placeholder }}
+        FIcon.FSelect__icon(
+          v-if="!disabled"
+          @click="handleIconClick($event)"
+          :name="iconName"
+          color="transparent"
+          :stroke-color="textColor"
+          :class="iconClasses"
         )
-          slot(
-            name="option-prefix"
-            v-bind="{ option, index, isSelected: isSelected(index) }"
-          )
-          slot(
-            name="option"
-            v-bind="{ option, index, isSelected: isSelected(index) }"
-          )
-            span {{ option.label }}
-        .FSelect__noOption(v-if="options.length === 0")
-        span {{ emptyText }}
   FFieldHint(
     :text="hint"
-    :hidden="hideHint"
+    :hidden="hideHint || isMenuOpen"
     :text-color="hintTextColor"
   )
 </template>
 
 <style lang="stylus">
 .FSelect
-  --popper-theme-border-radius rem(16)
-
-  .popper
-    width 100%
-    overflow hidden
-
-  .inline-block
-    width var(--fselect--width)
-    position relative !important
-    border none !important
-    margin 0 !important
+  display flex
+  flex-direction column
+  position relative
 
 .FSelect__select
-  z-index 10
   display flex
+  z-index 10
+  width var(--fselect--width)
   justify-content space-between
   align-items center
   color var(--fselect--text-color)
@@ -128,49 +105,6 @@
   &--flipped
     transform rotateX(-180deg)
 
-.FSelect__optionsMenu
-  background var(--fselect--options-menu-color)
-  border-radius rem(16)
-  padding rem(8)
-  elevation(2)
-  max-height rem(300)
-  overflow auto
-  overscroll-behavior contain
-  scroll-behavior smooth
-  scroll-padding-top rem(0)
-  scrollbar(var(--fselect--border-color))
-
-  > * + *
-    margin-top rem(4)
-
-.FSelect__noOption
-  display flex
-  justify-content center
-  background var(--fselect--color)
-  border-radius rem(16)
-  elevation(2)
-  color var(--fselect--text-color)
-  padding rem(8)
-
-.FSelect__option
-  display flex
-  align-items center
-  border-radius rem(16)
-  min-height rem(24)
-  padding rem(12) rem(8)
-  color var(--fselect--option-text-color)
-  font-size rem(14)
-  transition background 300ms, color 300ms
-  cursor pointer
-
-  &--preselected
-    background 'rgba(%s, 0.3)' % var(--color--neutral--light-2--rgb)
-
-  &--selected
-    color var(--fselect--selected-option-text-color)
-    background var(--fselect--selected-option-color)
-    font-weight 700
-
 .FSelect__select__selectionStart
   display flex
   align-items center
@@ -195,6 +129,8 @@
       caret-color var(--fselect--error-color)
 
 .FSelect--disabled .FSelect__select
+  cursor default
+
   .FSelect__placeholder
     color var(--color--neutral--light-1)
 
@@ -210,14 +146,13 @@
 import FIcon from '@/components/FIcon.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 import FFieldLabel from '@/components/FFieldLabel.vue';
-import Popper from 'vue3-popper/dist/popper.esm';
+import FMenu from '@/components/FMenu.vue';
 
 import { ref, computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { useElementBounding } from '@vueuse/core';
 import { genId } from '@/utils/genId';
 
 export interface FSelectOption {
@@ -235,13 +170,13 @@ export interface FSelectProps {
    */
   label?: string;
   /**
-   * Placeholder text
-   */
-  placeholder?: string;
-  /**
    * Array of options
    */
   options: FSelectOption[];
+  /**
+   * Placeholder text
+   */
+  placeholder?: string;
   /**
    * Background color of the select
    */
@@ -254,6 +189,14 @@ export interface FSelectProps {
    * Text color of option item
    */
   optionTextColor?: Color;
+  /**
+   * Background color of the selected option
+   */
+  selectedOptionColor?: Color;
+  /**
+   * Text color of the selected option
+   */
+  selectedOptionTextColor?: Color;
   /**
    * Color of the border
    */
@@ -286,14 +229,6 @@ export interface FSelectProps {
    * Text, hint and caret error color
    */
   errorColor?: Color;
-  /**
-   * Background color of the selected option
-   */
-  selectedOptionColor?: Color;
-  /**
-   * Text color of the selected option
-   */
-  selectedOptionTextColor?: Color;
   /**
    * Text color of the hint
    */
@@ -388,7 +323,6 @@ const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;
-  (name: 'select-option', value: string | number | null): void;
   (name: 'focus'): void;
   (name: 'blur'): void;
   (name: 'clear'): void;
@@ -408,15 +342,10 @@ const { handleFocus } = useInputEventBindings(
 const preselectedOptionIndex = ref(0);
 const isMenuOpen = ref(false);
 
-const optionRefs = ref<Element[]>([]);
-
 const style = computed(
   (): Style => ({
     '--fselect--width': genSize(props.width),
     '--fselect--color': getCssColor(props.color),
-    '--fselect--options-menu-color': getCssColor(
-      props.optionsMenuColor || props.color
-    ),
     // Background color of the selected option, using a rgb color format
     '--fselect--option-color': getCssColor(`${props.color}--rgb`),
     '--fselect--text-color': getCssColor(props.textColor),
@@ -428,11 +357,6 @@ const style = computed(
     '--fselect--focus-color': getCssColor(props.focusColor),
     '--fselect--focus-border-color': getCssColor(props.focusBorderColor),
     '--fselect--error-color': getCssColor(props.errorColor),
-    '--fselect--option-text-color': getCssColor(props.optionTextColor),
-    '--fselect--selected-option-color': getCssColor(props.selectedOptionColor),
-    '--fselect--selected-option-text-color': getCssColor(
-      props.selectedOptionTextColor
-    ),
   })
 );
 
@@ -451,22 +375,13 @@ const hintTextColor = computed(() =>
 
 const iconClasses = computed(() => ({
   'FSelect__icon--flipped':
-    isMenuOpen.value && !value.value && iconName.value === 'chevronDown',
+    isMenuOpen.value && iconName.value === 'chevronUpSmall',
 }));
 
-/**
- * Select an option as select value
- * @param option - Option to select
- */
-function selectOption(option: FSelectOption): void {
-  if (!props.disableSelection) {
-    handleValidation(option.value);
-  }
-  emit('select-option', option.value);
-}
-
 const iconName = computed(() =>
-  props.clearable && value.value ? 'close' : 'chevronDown'
+  props.clearable && isMenuOpen.value && value.value
+    ? 'close'
+    : 'chevronUpSmall'
 );
 
 /**
@@ -482,7 +397,7 @@ function getValueLabel(value: string) {
  * @param event - Click event
  */
 function handleIconClick(event: Event) {
-  if (props.clearable && value.value) {
+  if (props.clearable && isMenuOpen.value && value.value) {
     event.stopPropagation();
 
     handleValidation(null);
@@ -491,110 +406,13 @@ function handleIconClick(event: Event) {
 }
 
 /**
- * Classes to apply to select option
- * @param index - Index of the option
- */
-function selectOptionClasses(index: number) {
-  return {
-    'FSelect__option--preselected': preselectedOptionIndex.value === index,
-    'FSelect__option--selected': isSelected(index),
-  };
-}
-
-/**
- * Returns the selection status of an option based on index
- * @param index - Index of the option
- */
-function isSelected(index: number): boolean {
-  return (
-    props.options.findIndex(option => option.value === value.value) === index
-  );
-}
-/**
- * Preselect an option
- * @param index - Index of option to preselect
- */
-function preselectOption(index: number) {
-  preselectedOptionIndex.value = index;
-}
-
-/**
- * Preselect an option from a mouse interaction
- */
-function mousePreselectOption(index: number) {
-  if (isKeyboardInteracting.value) return;
-  preselectOption(index);
-}
-
-const selectOptionsRef = ref();
-const { top: selectOptionsTop, bottom: selectOptionsBottom } =
-  useElementBounding(selectOptionsRef);
-
-/**
- * Automatically scroll options menu when having used the keyboard to preselect a non visible option
- */
-function scrollOptionIntoView(index: number) {
-  const el = optionRefs?.value[index];
-  const { top, bottom, height } = el.getBoundingClientRect();
-  const isVisible =
-    top >= selectOptionsTop.value && bottom <= selectOptionsBottom.value;
-  if (!isVisible) {
-    selectOptionsRef.value.scrollTo(
-      0,
-      selectOptionsRef.value.scrollTop -
-        (preselectedOptionIndex.value - index) * (height + 4)
-    );
-  }
-}
-
-const isKeyboardInteracting = ref(false);
-
-/**
- * Preselect the previous option. If the first is already selected, select the last
- */
-function keyboardPreselectPrevOption(): void {
-  isKeyboardInteracting.value = true;
-  const preselectedIndex =
-    preselectedOptionIndex.value - 1 < 0
-      ? props.options.length - 1
-      : preselectedOptionIndex.value - 1;
-  scrollOptionIntoView(preselectedIndex);
-  preselectOption(preselectedIndex);
-}
-
-/**
- * Preselect the next option. If the last is already selected, select the first
- */
-function keyboardPreselectNextOption(): void {
-  isKeyboardInteracting.value = true;
-  const preselectedIndex =
-    preselectedOptionIndex.value + 1 > props.options.length - 1
-      ? 0
-      : preselectedOptionIndex.value + 1;
-  scrollOptionIntoView(preselectedIndex);
-  preselectOption(preselectedIndex);
-}
-
-/**
  * Handle select blur
  */
 function handleBlur(): void {
-  isMenuOpen.value = false;
   // Preselect the current value on blur
   preselectedOptionIndex.value = props.options.findIndex(
     option => option.value === value.value
   );
   emit('blur');
-}
-
-/**
- * Handle enter key down
- */
-function handleEnter(): void {
-  if (isMenuOpen.value) {
-    const selectedOption = props.options[preselectedOptionIndex.value];
-    handleValidation(selectedOption.value);
-  }
-  isMenuOpen.value = !isMenuOpen.value;
 }
 </script>

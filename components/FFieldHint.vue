@@ -7,6 +7,8 @@
 
 <style lang="stylus">
 .FFieldHint
+  position absolute
+  top 100%
   margin-top rem(8)
   use-font('caption')
   min-height rem(16)

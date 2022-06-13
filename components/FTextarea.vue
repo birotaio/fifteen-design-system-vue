@@ -34,6 +34,8 @@
 
 <style lang="stylus">
 .FTextarea
+  display flex
+  flex-direction column
   position relative
   max-width 100%
   width 100%

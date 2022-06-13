@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FCheckbox, { FCheckboxProps } from '@/components/FCheckbox.vue';
 
 export default {
-  title: 'Components/FCheckbox',
+  title: 'Components/Form/FCheckbox',
   component: FCheckbox,
 };
 

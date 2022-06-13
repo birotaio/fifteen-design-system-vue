@@ -35,6 +35,9 @@
 </template>
 
 <style lang="stylus">
+.FCheckbox
+  position relative
+
 .FCheckbox__label
   position relative
   display flex

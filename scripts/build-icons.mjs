@@ -3,7 +3,7 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { readFileSync } from 'fs';
 import { parse } from 'node-html-parser';
-import camelCalse from 'camelcase';
+import camelCase from 'camelcase';
 
 const OUTPUT_UTILS_FILE = 'config/icons/.utils.ts';
 const OUTPUT_LIST_FILE = 'config/icons/.icons.ts';
@@ -12,11 +12,12 @@ const iconUrls = await globby('assets/icons');
 
 const icons = iconUrls.map(url => {
   const name = path.basename(url, '.svg');
+  const subFolder = url.match(/assets\/icons\/(.*)\/.*\./)?.[1] ?? '';
   const data = readFileSync(url, 'utf-8');
   const parsedSvg = parse(data);
   const paths = parsedSvg.querySelectorAll('path');
   return {
-    name: camelCalse(name),
+    name: camelCase(subFolder + name),
     paths: paths.map(path => path.attributes),
   };
 });

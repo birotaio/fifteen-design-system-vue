@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FInput, { FInputProps } from '@/components/FInput.vue';
 
 export default {
-  title: 'Components/FInput',
+  title: 'Components/Form/FInput',
   component: FInput,
   argTypes: {
     onClick: { action: 'click' },
@@ -52,7 +52,7 @@ Full.parameters = {
 };
 Full.args = {
   label: 'Email address',
-  placeholder: 'contact@&fifteen.eu',
+  placeholder: 'contact@fifteen.eu',
   hint: 'You can use your personal or professional email',
 };
 

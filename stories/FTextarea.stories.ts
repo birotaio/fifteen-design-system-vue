@@ -2,7 +2,7 @@ import { Story } from '@storybook/vue3';
 import FTextarea, { FTextareaProps } from '@/components/FTextarea.vue';
 
 export default {
-  title: 'Components/FTextarea',
+  title: 'Components/Form/FTextarea',
   component: FTextarea,
   argTypes: {
     onClick: { action: 'click' },

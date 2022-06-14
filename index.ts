@@ -28,6 +28,12 @@ export { default as FSelect } from '@/components/FSelect.vue';
 export { default as FSkeleton } from '@/components/FSkeleton.vue';
 export { default as FSvgImage } from '@/components/FSvgImage.vue';
 export { default as FTextarea } from '@/components/FTextarea.vue';
+export { default as FPhoneInput } from '@/components/FPhoneInput.vue';
+export { default as FDigitsInput } from '@/components/FDigitsInput.vue';
+export { default as FRadio } from '@/components/FRadio.vue';
+export { default as FRadioGroup } from '@/components/FRadioGroup.vue';
+export { default as FFlagIcon } from '@/components/FFlagIcon.vue';
+
 /**
  * Components props interfaces
  */
@@ -65,6 +71,12 @@ export type { FSelectProps, FSelectOption } from '@/components/FSelect.vue';
 export type { FSkeletonProps } from '@/components/FSkeleton.vue';
 export type { FSvgImageProps } from '@/components/FSvgImage.vue';
 export type { FTextareaProps } from '@/components/FTextarea.vue';
+export type { FPhoneInputProps } from '@/components/FPhoneInput.vue';
+export type { FDigitsInputProps } from '@/components/FDigitsInput.vue';
+export type { FRadioProps } from '@/components/FRadio.vue';
+export type { FRadioGroupProps } from '@/components/FRadioGroup.vue';
+export type { FFlagIconProps } from '@/components/FFlagIcon.vue';
+
 /**
  * Composables
  */
@@ -74,11 +86,13 @@ export { useIcon } from '@/composables/useIcon';
 export { useInputEventBindings } from '@/composables/useInputEventBindings';
 export { useLazyImage } from '@/composables/useLazyImage';
 export { useVModelProxy } from '@/composables/useVModelProxy';
+
 /**
  * Utils
  */
 export { genSize } from '@/utils/genSize';
 export { getCssColor } from '@/utils/getCssColor';
+
 /**
  * Config constants
  */
@@ -86,6 +100,7 @@ export { breakpointsValues } from '@/config/breakpoints';
 export { baseColorDesignTokens, colorDesignTokens } from '@/config/colors';
 export { columns, spanValues } from '@/config/grid';
 export { typographies } from '@/config/typography';
+
 /**
  * Types
  */

@@ -16,6 +16,7 @@ export default {
   },
   args: {
     size: 44,
+    strokeWidth: 0,
   },
 };
 

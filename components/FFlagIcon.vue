@@ -2,7 +2,9 @@
 .FFlagIcon
   .FFlagIcon__flagWrapper
     FSvgImage(
-      :src="`../assets/icons/country-flags/${countryCode.toUpperCase()}.svg`"
+      :markup="flagFiles[currentFlagPath]"
+      fill-color="none"
+      use-svg-colors
     )
 </template>
 
@@ -22,12 +24,28 @@
 <script setup lang="ts">
 import FSvgImage from './FSvgImage.vue';
 import type { CountryCode } from 'libphonenumber-js';
+import { computed } from 'vue';
 
 export interface FFlagIconProps {
   countryCode: CountryCode;
 }
 
-withDefaults(defineProps<FFlagIconProps>(), {
+const props = withDefaults(defineProps<FFlagIconProps>(), {
   countryCode: 'FR',
 });
+
+const flagFiles: Record<string, string> = import.meta.globEager(
+  '@/assets/icons/country-flags/*.svg',
+  {
+    as: 'raw',
+  }
+);
+const flagPaths = Object.keys(flagFiles);
+
+const currentFlagPath = computed(
+  () =>
+    flagPaths.find(path =>
+      new RegExp(`/${props.countryCode}.svg`).test(path)
+    ) ?? flagPaths[0]
+);
 </script>

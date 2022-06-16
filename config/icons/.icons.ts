@@ -207,7 +207,6 @@ export const checkmark: SVGAttributes[] = [
 ];
 export const chevronDown: SVGAttributes[] = [
   {
-    'stroke-width': '4',
     d: 'M3.647 7.646a.5.5 0 01.637-.057l.07.058 7.644 7.65 7.65-7.65a.5.5 0 01.637-.058l.07.057a.5.5 0 01.057.638l-.058.07-8.002 8.004a.5.5 0 01-.638.058l-.07-.058-7.998-8.005a.5.5 0 010-.707z',
   },
 ];

@@ -3,7 +3,10 @@
   :style="style"
   @keydown="handlePreselectSearch"
 )
-  Popper(:show="isOpen")
+  Popper(
+    :show="isOpen"
+    placement="bottom-start"
+  )
     .FMenu__activator(
       @keydown.enter="handleEnter"
       @keydown.up.prevent="keyboardPreselectPrevOption"
@@ -46,11 +49,14 @@
   --popper-theme-border-radius rem(16)
 
   .popper
-    width 100%
+    left 0
 
   .inline-block
-    display block
+    display block !important
     position relative
+    border none !important
+    margin 0 !important
+    width 100%
 
 .FMenu__optionsMenu
   width var(--fmenu--width)

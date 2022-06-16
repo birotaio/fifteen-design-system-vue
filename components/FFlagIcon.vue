@@ -14,8 +14,6 @@
   height rem(24)
 
 .FFlagIcon__flagWrapper
-  margin-top rem(4)
-
   > *
     border-radius rem(4)
     overflow hidden

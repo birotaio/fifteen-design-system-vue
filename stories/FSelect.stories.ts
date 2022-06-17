@@ -114,6 +114,9 @@ Error.parameters = {
 };
 Error.args = {
   color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   rules: [() => false],
@@ -162,6 +165,7 @@ LongOptionsLabel.parameters = {
 };
 LongOptionsLabel.args = {
   color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   placeholder: 'All topics',
@@ -182,6 +186,9 @@ ManyOptions.parameters = {
 };
 ManyOptions.args = {
   color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   placeholder: 'All topics',
@@ -198,6 +205,9 @@ Unselectable.parameters = {
 Unselectable.args = {
   disableSelection: true,
   color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   placeholder: 'All topics',
@@ -212,9 +222,11 @@ SmallWidth.parameters = {
   backgrounds: { default: 'neutral' },
 };
 SmallWidth.args = {
-  width: 160,
-  disableSelection: true,
+  menuWidth: 300,
   color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   placeholder: 'All topics',

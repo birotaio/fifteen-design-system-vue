@@ -55,7 +55,7 @@
         )
   FFieldHint(
     :text="hint"
-    :hidden="hideHint || isMenuOpen"
+    :hidden="hideHint"
     :text-color="hintTextColor"
   )
 </template>

@@ -2,6 +2,7 @@
 .FMenu(
   :style="style"
   @keydown="handlePreselectSearch"
+  ref="menu"
 )
   Popper(
     :show="isOpen"
@@ -105,7 +106,7 @@
 <script setup lang="ts">
 import Popper from 'vue3-popper/dist/popper.esm';
 import { computed, ref } from 'vue';
-import { useElementBounding } from '@vueuse/core';
+import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { genSize } from '@/utils/genSize';
@@ -354,4 +355,9 @@ function handlePreselectSearch(event: KeyboardEvent) {
     preselectSearchTerm.value = '';
   }
 }
+
+const menu = ref();
+onClickOutside(menu, () => {
+  isOpen.value = false;
+});
 </script>

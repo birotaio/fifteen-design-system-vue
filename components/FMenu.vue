@@ -50,6 +50,7 @@
 
   .popper
     left 0
+    min-width var(--fmenu--width)
 
   .inline-block
     display block !important
@@ -59,7 +60,6 @@
     width 100%
 
 .FMenu__optionsMenu
-  width var(--fmenu--width)
   background var(--fmenu--color)
   border-radius rem(16)
   padding rem(8)

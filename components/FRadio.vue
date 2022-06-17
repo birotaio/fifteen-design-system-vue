@@ -126,11 +126,11 @@ export interface FRadioProps {
   /**
    * Radio v-model value
    */
-  modelValue?: string | boolean | null;
+  modelValue?: string | boolean | number | null;
   /**
    * Value of the radio
    */
-  value?: string | boolean | null;
+  value?: string | boolean | number | null;
   /**
    * Label of the radio
    */
@@ -229,7 +229,7 @@ const props = withDefaults(defineProps<FRadioProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: string | boolean | null): void;
+  (name: 'update:modelValue', value: string | boolean | number | null): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
 }>();

@@ -2,7 +2,6 @@
 .FPhoneInput(
   :class="classes"
   :style="style"
-  ref="phoneInput"
 )
   FFieldLabel(
     :name="_name"
@@ -30,7 +29,7 @@
         validation-trigger="change"
         :disabled="disabled"
         :hint="hint"
-        :hide-hint="hideHint || isMenuOpen"
+        :hide-hint="hideHint"
         :hint-text-color="hintTextColor"
         :mask="phoneNumberMask"
       )
@@ -174,7 +173,6 @@ import { genId } from '@/utils/genId';
 import type { FSelectOption } from './FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
-import { onClickOutside } from '@vueuse/core';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 
 export interface FPhoneInputProps {
@@ -279,8 +277,8 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
 const _name = computed(() => props?.name || genId());
 
 defineEmits<{
-  (name: 'update:modelValue', value: string | number | null): void;
-  (name: 'update:phoneNumber', value: string | number | null): void;
+  (name: 'update:modelValue', value: string | null): void;
+  (name: 'update:phoneNumber', value: string | null): void;
 }>();
 
 const { isValid, hint, handleValidation } = useFieldWithValidation<
@@ -311,7 +309,6 @@ const countryCode = ref<CountryCode>('FR');
 const phonePrefix = computed(
   () => `+${getCountryCallingCode(countryCode.value)}`
 );
-
 const phoneNumber = useVModelProxy<string>(props, 'phoneNumber');
 
 watch([phonePrefix, phoneNumber], () => {
@@ -359,9 +356,4 @@ const hintTextColor = computed(() =>
 function getCountryCode(option: FSelectOption) {
   return option.value as CountryCode;
 }
-
-const phoneInput = ref();
-onClickOutside(phoneInput, () => {
-  isMenuOpen.value = false;
-});
 </script>

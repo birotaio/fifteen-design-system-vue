@@ -51,7 +51,7 @@ import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 export interface FRadioGroupOption {
   label: string;
-  value: string | number;
+  value: string | number | boolean;
 }
 
 export interface FRadioGroupProps {

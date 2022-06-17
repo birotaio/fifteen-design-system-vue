@@ -37,6 +37,7 @@
 <style lang="stylus">
 .FCheckbox
   position relative
+  margin-bottom var(--fcheckbox--margin-bottom)
 
 .FCheckbox__label
   position relative
@@ -139,6 +140,7 @@ import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
+import { genSize } from '@/utils/genSize';
 
 export interface FCheckboxProps {
   /**
@@ -282,6 +284,7 @@ const style = computed(
     '--fcheckbox--checked-color': getCssColor(props.checkedColor),
     '--fcheckbox--checked-border-color': getCssColor(props.checkedBorderColor),
     '--fcheckbox--error-color': getCssColor(props.errorColor),
+    '--fcheckbox--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

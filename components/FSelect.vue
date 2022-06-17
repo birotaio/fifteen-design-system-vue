@@ -12,7 +12,7 @@
     v-model="value"
     v-model:is-open="isMenuOpen"
     :options="options"
-    :width="width"
+    :width="menuWidth"
     :empty-text="emptyText"
     :color="optionsMenuColor || color"
     :text-color="optionTextColor"
@@ -55,7 +55,7 @@
         )
   FFieldHint(
     :text="hint"
-    :hidden="hideHint || isMenuOpen"
+    :hidden="hideHint"
     :text-color="hintTextColor"
   )
 </template>
@@ -65,11 +65,11 @@
   display flex
   flex-direction column
   position relative
+  margin-bottom var(--fselect--margin-bottom)
 
 .FSelect__select
   display flex
   z-index 10
-  width var(--fselect--width)
   justify-content space-between
   align-items center
   color var(--fselect--text-color)
@@ -244,9 +244,9 @@ export interface FSelectProps {
    */
   hint?: string;
   /**
-   * Width of the select
+   * Width of the options menu
    */
-  width?: string | number;
+  menuWidth?: string | number;
   /**
    * Can clear the current value
    */
@@ -289,17 +289,17 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   modelValue: null,
   value: null,
   options: () => [],
-  color: 'primary',
-  optionsMenuColor: 'primary',
-  textColor: 'neutral--light-5',
+  color: 'neutral--light-3',
+  optionsMenuColor: 'neutral--light-3',
+  textColor: 'neutral--dark-4',
   label: '',
   labelTextColor: 'neutral--dark-4',
-  optionTextColor: 'neutral--light-5',
+  optionTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   type: 'text',
-  placeholderTextColor: 'neutral--light-5',
+  placeholderTextColor: 'neutral--dark-3',
   borderColor: 'secondary',
-  focusColor: 'primary',
+  focusColor: 'neutral--light-5',
   focusBorderColor: 'secondary',
   errorColor: 'danger',
   selectedOptionColor: 'primary--light-2',
@@ -310,7 +310,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   hint: '',
   hintTextColor: 'neutral--dark-4',
   attrs: () => ({}),
-  width: 300,
+  menuWidth: 300,
   clearable: false,
   emptyText: '',
   validationTrigger: null,
@@ -346,10 +346,7 @@ const isMenuOpen = ref(false);
 
 const style = computed(
   (): Style => ({
-    '--fselect--width': genSize(props.width),
     '--fselect--color': getCssColor(props.color),
-    // Background color of the selected option, using a rgb color format
-    '--fselect--option-color': getCssColor(`${props.color}--rgb`),
     '--fselect--text-color': getCssColor(props.textColor),
     '--fselect--placeholder-text-color': getCssColor(
       props.placeholderTextColor
@@ -359,6 +356,7 @@ const style = computed(
     '--fselect--focus-color': getCssColor(props.focusColor),
     '--fselect--focus-border-color': getCssColor(props.focusBorderColor),
     '--fselect--error-color': getCssColor(props.errorColor),
+    '--fselect--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

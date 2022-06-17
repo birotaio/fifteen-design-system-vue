@@ -45,6 +45,7 @@
   display flex
   flex-direction column
   position relative
+  margin-bottom var(--finput--margin-bottom)
 
 .FInput__input
   display flex
@@ -128,6 +129,7 @@ import { getCssColor } from '@/utils/getCssColor';
 import { genId } from '@/utils/genId';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
+import { genSize } from '@/utils/genSize';
 
 export interface FInputProps {
   /**
@@ -305,6 +307,7 @@ const style = computed(
     '--finput--focus-border-color': getCssColor(props.focusBorderColor),
     '--finput--error-color': getCssColor(props.errorColor),
     '--finput--text-align': props.textAlign,
+    '--finput--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

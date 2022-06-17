@@ -1,6 +1,7 @@
-import type { Ref, ComputedRef } from 'vue';
+import { Ref, ComputedRef, ref } from 'vue';
 import { computed, watch, toRef, getCurrentInstance } from 'vue';
 import { useField } from 'vee-validate';
+import { useVModelProxy } from './useVModelProxy';
 
 type BaseProps<Value> = {
   modelValue: Value | null;
@@ -26,7 +27,10 @@ interface UseFieldWithValidationReturns {
   /**
    * Function which handles field update, with validation or not
    */
-  handleValidation: (e: unknown, shouldValidate?: boolean | undefined) => void;
+  handleValidation: (
+    e: Event | string | number | boolean | null,
+    shouldValidate?: boolean | undefined
+  ) => void;
   /**
    * Input field ref value
    */
@@ -34,11 +38,11 @@ interface UseFieldWithValidationReturns {
   /**
    * Input hint, coming from props.hint, or props.errorMessage if the validation fails
    */
-  hint: ComputedRef<string>;
+  hint: Ref<string> | ComputedRef<string>;
   /**
    * Field validation status
    */
-  isValid: ComputedRef<boolean>;
+  isValid: Ref<boolean> | ComputedRef<boolean>;
 }
 
 /**
@@ -57,8 +61,27 @@ export function useFieldWithValidation<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   emit?: (name: Name, ...args: any[]) => void
 ): UseFieldWithValidationReturns {
+  const fieldName = toRef<Props, 'name'>(props, 'name');
+
+  // Prevent validation if the input has no props.name
+  if (!fieldName.value) {
+    const fieldValue = useVModelProxy(props);
+    return {
+      handleValidation: eventOrValue => {
+        const newValue =
+          eventOrValue instanceof Event
+            ? (eventOrValue.target as HTMLInputElement).value
+            : eventOrValue;
+        fieldValue.value = newValue;
+      },
+      value: ref(null),
+      hint: ref(props?.hint ?? ''),
+      isValid: ref(true),
+    };
+  }
+
   const { errors, value, handleChange } = useField<Value>(
-    toRef<Props, 'name'>(props, 'name'),
+    fieldName,
     props?.rules,
     {
       initialValue: props?.modelValue ?? undefined,

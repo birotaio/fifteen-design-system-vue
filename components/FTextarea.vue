@@ -39,6 +39,7 @@
   position relative
   max-width 100%
   width 100%
+  margin-bottom var(--ftextarea--margin-bottom)
 
 .FTextarea__textarea
   max-width 100%
@@ -272,6 +273,7 @@ const style = computed(
     '--ftextarea--error-color': getCssColor(props.errorColor),
     '--ftextarea--resize': !props.disabled ? props.resize : 'none',
     '--ftextarea--width': genSize(width.value),
+    '--ftextarea--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

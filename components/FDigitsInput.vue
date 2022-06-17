@@ -1,5 +1,5 @@
 <template lang="pug">
-.FDigitsInput
+.FDigitsInput(:style="style")
   FFieldLabel(
     :name="_name"
     :label="label"
@@ -32,6 +32,7 @@
   display flex
   flex-direction column
   position relative
+  margin-bottom var(--fdigitsinput--margin-bottom)
 
 .FDigitsInput__input
   display grid
@@ -56,6 +57,7 @@ import FFieldHint from '@/components/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { genId } from '@/utils/genId';
 import { computed, ref, watch } from 'vue';
+import { genSize } from '@/utils/genSize';
 
 export interface FDigitsInputProps {
   /**
@@ -132,6 +134,12 @@ const emit = defineEmits<{
   (name: 'digit-input', value: string): void;
 }>();
 
+const style = computed(
+  (): Style => ({
+    '--fdigitsinput--margin-bottom': genSize(props.hideHint ? 0 : 16),
+  })
+);
+
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
 const digitsValue = ref<string[]>([]);
 
@@ -190,7 +198,7 @@ function setDigitValue(event: InputEvent, index: number) {
   const currentDigitValue = digitRefs.value[index].ref;
 
   const isInputValid = /[0-9]/.test(event.data ?? '');
-  if (currentDigitValue) {
+  if (currentDigitValue?.value) {
     currentDigitValue.value = isInputValid ? event.data ?? '' : '';
     if (isInputValid) {
       digitsValue.value[index] = currentDigitValue.value;

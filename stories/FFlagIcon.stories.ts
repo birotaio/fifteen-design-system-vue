@@ -14,5 +14,5 @@ const Template = (args: FFlagIconProps) => ({
 
 export const Default: Story<FFlagIconProps> = Template.bind({});
 Default.args = {
-  // Put args (props + slots values) here
+  countryCode: 'FR',
 };

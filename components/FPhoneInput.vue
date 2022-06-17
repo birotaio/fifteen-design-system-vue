@@ -2,6 +2,7 @@
 .FPhoneInput(
   :class="classes"
   :style="style"
+  ref="phoneInput"
 )
   FFieldLabel(
     :name="_name"
@@ -20,6 +21,7 @@
       FInput(
         v-bind="{ placeholder }"
         v-model="phoneNumber"
+        :color="color"
         :text-color="textColor"
         :error-message="errorMessage"
         :placeholder-text-color="placeholderTextColor"
@@ -40,16 +42,20 @@
             )
               FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
               FIcon.FPhoneInput__icon(
-                name="chevronUpSmall"
+                name="chevronDown"
                 :class="iconClasses"
                 color="transparent"
-                :stroke-color="textColor"
+                :size="12"
+                :stroke-color="textPhonePrefixColor"
+                :stroke-width="2"
               )
             FDivider(
               vertical
               height="24"
+              :margins="false"
+              color="neutral--light-5"
             )
-            span {{ phonePrefix }}
+            span.FPhoneInput__phonePrefix {{ phonePrefix }}
     template(#option-prefix="{ option }")
       FFlagIcon.FPhoneInput__optionPrefix(
         :country-code="getCountryCode(option)"
@@ -61,6 +67,7 @@
   display flex
   flex-direction column
   position relative
+  background none
 
 .FPhoneInput__select
   display flex
@@ -80,6 +87,7 @@
   &:focus
     outline-offset rem(6)
     outline solid rem(2) var(--fphoneinput--textColor)
+    z-index 1
     transition $outline-transition
 
   &:hover
@@ -131,11 +139,18 @@
 
   .FPhoneInput__selectedValue
     cursor default
+    outline none
 
     &:hover
       box-shadow none
       background transparent
       border-radius rem(24)
+
+  .FInput__input input
+    background var(--color--neutral--light-3)
+
+.FPhoneInput__phonePrefix
+  margin-left rem(8)
 </style>
 
 <script setup lang="ts">
@@ -159,12 +174,18 @@ import { genId } from '@/utils/genId';
 import type { FSelectOption } from './FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
+import { onClickOutside } from '@vueuse/core';
+import { useVModelProxy } from '@/composables/useVModelProxy';
 
 export interface FPhoneInputProps {
   /**
-   * Current option of the select
+   * Full phone number value
    */
-  modelValue?: string | number | null;
+  modelValue?: string | null;
+  /**
+   * Phone number without prefix. Value of the input field
+   */
+  phoneNumber?: string;
   /**
    * Label, placed on top of select
    */
@@ -210,6 +231,10 @@ export interface FPhoneInputProps {
    */
   disabled?: boolean;
   /**
+   * Background color of the input
+   */
+  color?: Color;
+  /**
    * Text color of the input
    */
   textColor?: Color;
@@ -233,6 +258,7 @@ export interface FPhoneInputProps {
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
   modelValue: '',
+  phoneNumber: '',
   label: '',
   labelTextColor: 'neutral--dark-4',
   name: '',
@@ -242,6 +268,7 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   rules: () => [],
   errorMessage: '',
   errorColor: 'danger',
+  color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
   textPhonePrefixColor: 'neutral--dark-3',
   placeholderTextColor: 'neutral--dark-2',
@@ -250,6 +277,17 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
 });
 
 const _name = computed(() => props?.name || genId());
+
+defineEmits<{
+  (name: 'update:modelValue', value: string | number | null): void;
+  (name: 'update:phoneNumber', value: string | number | null): void;
+}>();
+
+const { isValid, hint, handleValidation } = useFieldWithValidation<
+  string | number
+>(props, {
+  validateOnMount: props?.validateOnMount,
+});
 
 const classes = computed(() => ({
   'FPhoneInput--disabled': props.disabled,
@@ -264,12 +302,6 @@ const style = computed(
   })
 );
 
-const { isValid, hint, handleValidation } = useFieldWithValidation<
-  string | number
->(props, {
-  validateOnMount: props?.validateOnMount,
-});
-
 const placeholder = computed(() =>
   getExampleNumber(countryCode.value, examples)
     ?.format('INTERNATIONAL')
@@ -280,7 +312,7 @@ const phonePrefix = computed(
   () => `+${getCountryCallingCode(countryCode.value)}`
 );
 
-const phoneNumber = ref<string>('');
+const phoneNumber = useVModelProxy<string>(props, 'phoneNumber');
 
 watch([phonePrefix, phoneNumber], () => {
   handleValidation(phonePrefix.value + phoneNumber.value);
@@ -311,7 +343,7 @@ const phoneNumberMask = computed(() => {
 });
 
 const isValidPhone = computed(() =>
-  isValidNumberForRegion(phoneNumber.value, countryCode.value)
+  isValidNumberForRegion(phoneNumber.value ?? '', countryCode.value)
 );
 
 const isMenuOpen = ref(false);
@@ -327,4 +359,9 @@ const hintTextColor = computed(() =>
 function getCountryCode(option: FSelectOption) {
   return option.value as CountryCode;
 }
+
+const phoneInput = ref();
+onClickOutside(phoneInput, () => {
+  isMenuOpen.value = false;
+});
 </script>

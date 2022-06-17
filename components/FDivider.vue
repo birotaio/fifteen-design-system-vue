@@ -26,7 +26,6 @@
 
   &.FDivider--vertical
     width 1px
-    margin 0 rem(8)
 </style>
 
 <script setup lang="ts">

@@ -6,6 +6,8 @@
       :size="size"
       :color="color"
       :name="icon"
+      :stroke-width="strokeWidth"
+      :stroke-color="color"
     )
     span {{ icon }}
 </template>
@@ -46,11 +48,16 @@ export interface FsIconGridProps {
    * Color of each icon
    */
   color?: Color;
+  /**
+   * Stroke width
+   */
+  strokeWidth?: number;
 }
 
 withDefaults(defineProps<FsIconGridProps>(), {
   size: '24px',
   color: 'secondary',
+  strokeWidth: 1,
 });
 
 const icons = ref(getIconList());

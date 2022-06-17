@@ -21,6 +21,7 @@
       path(
         v-for="path in iconPaths"
         v-bind="path"
+        :stroke-width="strokeWidth"
       )
     img(
       v-else-if="src"
@@ -76,9 +77,13 @@ export interface FIconProps {
    */
   color?: Color;
   /**
-   * Stroe color of the icon
+   * Stroke color of the icon
    */
   strokeColor?: Color;
+  /**
+   * Stroke width
+   */
+  strokeWidth?: number;
   /**
    * Source of the icon
    */
@@ -102,6 +107,7 @@ const props = withDefaults(defineProps<FIconProps>(), {
   src: '',
   alt: '',
   markup: '',
+  strokeWidth: 1,
 });
 
 const altText = computed(() => {

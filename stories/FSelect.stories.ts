@@ -206,3 +206,20 @@ Unselectable.args = {
     value: `option-${index}`,
   })),
 };
+
+export const SmallWidth: Story<FSelectProps> = Template.bind({});
+SmallWidth.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+SmallWidth.args = {
+  width: 160,
+  disableSelection: true,
+  color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
+  placeholder: 'All topics',
+  options: new Array(10).fill(null).map((_, index) => ({
+    label: `Option with a long label ${index}`,
+    value: `option-${index}`,
+  })),
+};

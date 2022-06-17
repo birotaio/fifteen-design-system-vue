@@ -8,7 +8,7 @@ import camelCase from 'camelcase';
 const OUTPUT_UTILS_FILE = 'config/icons/.utils.ts';
 const OUTPUT_LIST_FILE = 'config/icons/.icons.ts';
 
-const iconUrls = await globby('assets/icons');
+const iconUrls = await globby('assets/icons/*');
 
 const icons = iconUrls.map(url => {
   const name = path.basename(url, '.svg');

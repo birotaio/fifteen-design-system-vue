@@ -29,7 +29,7 @@
         validation-trigger="change"
         :disabled="disabled"
         :hint="hint"
-        :hide-hint="hideHint || isMenuOpen"
+        :hide-hint="hideHint"
         :hint-text-color="hintTextColor"
         :mask="phoneNumberMask"
       )
@@ -277,8 +277,8 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
 const _name = computed(() => props?.name || genId());
 
 defineEmits<{
-  (name: 'update:modelValue', value: string | number | null): void;
-  (name: 'update:phoneNumber', value: string | number | null): void;
+  (name: 'update:modelValue', value: string | null): void;
+  (name: 'update:phoneNumber', value: string | null): void;
 }>();
 
 const { isValid, hint, handleValidation } = useFieldWithValidation<
@@ -309,7 +309,6 @@ const countryCode = ref<CountryCode>('FR');
 const phonePrefix = computed(
   () => `+${getCountryCallingCode(countryCode.value)}`
 );
-
 const phoneNumber = useVModelProxy<string>(props, 'phoneNumber');
 
 watch([phonePrefix, phoneNumber], () => {

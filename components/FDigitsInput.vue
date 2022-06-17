@@ -198,7 +198,7 @@ function setDigitValue(event: InputEvent, index: number) {
   const currentDigitValue = digitRefs.value[index].ref;
 
   const isInputValid = /[0-9]/.test(event.data ?? '');
-  if (currentDigitValue) {
+  if (currentDigitValue?.value) {
     currentDigitValue.value = isInputValid ? event.data ?? '' : '';
     if (isInputValid) {
       digitsValue.value[index] = currentDigitValue.value;

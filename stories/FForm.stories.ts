@@ -72,7 +72,7 @@ Default.args = {
     FInput: 'Default value',
     FCheckbox: true,
     FDigitsInput: '1234',
-    FPhoneInput: '712345678',
+    FPhoneInput: '',
     FRadioGroup: 'b',
     FSelect: 'c',
     FTextarea: 'Default value',

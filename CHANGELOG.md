@@ -1,3 +1,21 @@
+## 0.1.4 (June 17, 2022)
+
+### Features
+
+- [FForm] Add documentation story
+
+### Changes
+
+- [FSelect] Harmonize default theme with other input components
+- [FPhoneInput] Add rounded flags 
+
+### Fixes 
+
+- [FPhoneInput] Fix broken form integration
+- [FDigitsInput] Fix broken form integration
+- [FDivider] Fix margins prop not working
+- [utils] Make genId function compatible with SSR 
+
 ## 0.1.3 (June 14, 2022)
 
 ### Features

@@ -2,7 +2,6 @@
 .FPhoneInput(
   :class="classes"
   :style="style"
-  ref="phoneInput"
 )
   FFieldLabel(
     :name="_name"
@@ -174,7 +173,6 @@ import { genId } from '@/utils/genId';
 import type { FSelectOption } from './FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
-import { onClickOutside } from '@vueuse/core';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 
 export interface FPhoneInputProps {
@@ -359,9 +357,4 @@ const hintTextColor = computed(() =>
 function getCountryCode(option: FSelectOption) {
   return option.value as CountryCode;
 }
-
-const phoneInput = ref();
-onClickOutside(phoneInput, () => {
-  isMenuOpen.value = false;
-});
 </script>

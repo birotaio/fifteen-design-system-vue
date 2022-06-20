@@ -1,3 +1,8 @@
+## 0.1.6 (June 20, 2022)
+
+### Features
+
+- [FDigitsInput] Add `complete` event
 ## 0.1.5 (June 17, 2022)
 
 ### Features

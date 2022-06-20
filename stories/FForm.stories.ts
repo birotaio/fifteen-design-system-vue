@@ -39,7 +39,7 @@ const Template = (args: FFormProps) => ({
 <FForm v-bind="args" v-slot="{ submit }">
   <FGrid gap="24">
     <FGridItem span="12">
-      <FCheckbox label="FCheckbox" name="FCheckbox" hint="FCheckbox" />
+      <FCheckbox label="FCheckbox" name="FCheckbox" hint="Hint for FCheckbox" />
     </FGridItem>
     <FGridItem span="12">
       <FDigitsInput label="FDigitsInput" name="FDigitsInput" hint="Hint for FDigitsInput" />

@@ -11,10 +11,13 @@
       ref="digitRefs"
       text-align="center"
       :attrs="{ maxlength: 1 }"
-      @keydown.delete="clearDigitValue($event, index)"
-      @input="setDigitValue($event, index)"
-      @focus="handleFocus(index)"
+      v-model="digitsValue[index]"
+      validation-trigger="input"
+      @input="selectNextDigit($event, index)"
+      @keydown.delete="selectPrevDigit(index)"
+      @focus="handleFocus($event, index)"
       hide-hint
+      mask="#"
       :rules="[() => isValid]"
       :validate-on-mount="validateOnMount"
       hide-error-icon
@@ -56,7 +59,7 @@ import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { genId } from '@/utils/genId';
-import { computed, ref, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FDigitsInputProps {
@@ -132,6 +135,7 @@ const _name = computed(() => props?.name || genId());
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;
   (name: 'digit-input', value: string): void;
+  (name: 'complete'): void;
 }>();
 
 const style = computed(
@@ -141,12 +145,11 @@ const style = computed(
 );
 
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
-const digitsValue = ref<string[]>([]);
+const digitsValue = reactive<string[]>([]);
 
-const { isValid, hint, handleValidation, value } = useFieldWithValidation(
-  props,
-  { validateOnMount: props.validateOnMount }
-);
+const { isValid, hint, handleValidation } = useFieldWithValidation(props, {
+  validateOnMount: props.validateOnMount,
+});
 
 const hintTextColor = computed(() =>
   props.disabled
@@ -160,70 +163,56 @@ watch(isValid, () => {
   forceDigitsValidation();
 });
 
+watch(digitsValue, () => {
+  handleValidation(digitsValue.join(''));
+
+  if (
+    digitsValue.length === props.digits &&
+    !digitsValue.some(value => value === '')
+  ) {
+    emit('complete');
+  }
+});
+
 /**
- * Select the previous digit of the digits input
+ * Select the prevous digit of the digits input
  * @param index - Index of currently selected index
  */
 function selectPrevDigit(index: number) {
-  if (index - 1 > -1) {
-    digitRefs.value[index - 1].ref?.focus();
-    digitRefs.value[index - 1].ref?.select();
-  } else {
-    digitRefs.value[index].ref?.blur();
-  }
+  // Trick to clear the current field value before select the previous one
+  setTimeout(() => {
+    if (index - 1 > -1) {
+      digitRefs.value[index - 1].ref?.focus();
+      digitRefs.value[index - 1].ref?.select();
+    } else {
+      digitRefs.value[index].ref?.blur();
+    }
+  }, 0);
 }
 
 /**
  * Select the next digit of the digits input
  * @param index - Index of currently selected index
  */
-function selectNextDigit(index: number) {
+function selectNextDigit(event: InputEvent, index: number) {
+  if (!event.data || !/[0-9]/.test(event.data ?? '')) {
+    return;
+  }
+
   if (index + 1 < props.digits) {
     digitRefs.value[index + 1].ref?.focus();
     digitRefs.value[index + 1].ref?.select();
+  } else {
+    digitRefs.value[index].ref?.blur();
   }
 }
 
-function handleFocus(index: number) {
+/**
+ * Select the current input field on focus
+ * @param index - Index of focused field
+ */
+function handleFocus(_: Event, index: number) {
   digitRefs.value[index].ref?.select();
-}
-
-/**
- * Register a digit value, and select the next one
- * @param event - Keyboard event
- * @param index - Digit index
- */
-function setDigitValue(event: InputEvent, index: number) {
-  event.preventDefault();
-  const currentDigitValue = digitRefs.value[index].ref;
-
-  const isInputValid = /[0-9]/.test(event.data ?? '');
-  if (currentDigitValue?.value) {
-    currentDigitValue.value = isInputValid ? event.data ?? '' : '';
-    if (isInputValid) {
-      digitsValue.value[index] = currentDigitValue.value;
-      selectNextDigit(index);
-      handleValidation(digitsValue.value.join(''));
-      emit('digit-input', value.value);
-    }
-  }
-}
-
-/**
- * Clear the current digit value, and select the previous one
- * @param event - Keyboard event
- * @param index - Digit index
- */
-function clearDigitValue(event: KeyboardEvent, index: number) {
-  event.preventDefault();
-  const currentDigitValue = digitRefs.value[index].ref;
-  if (currentDigitValue) {
-    currentDigitValue.value = '';
-    digitsValue.value[index] = '';
-  }
-  handleValidation(digitsValue.value.join(''));
-  selectPrevDigit(index);
-  emit('digit-input', value.value);
 }
 
 /**

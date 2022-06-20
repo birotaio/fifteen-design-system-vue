@@ -56,7 +56,7 @@ import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { genId } from '@/utils/genId';
-import { computed, ref, watch } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FDigitsInputProps {
@@ -132,6 +132,7 @@ const _name = computed(() => props?.name || genId());
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;
   (name: 'digit-input', value: string): void;
+  (name: 'complete'): void;
 }>();
 
 const style = computed(
@@ -141,7 +142,7 @@ const style = computed(
 );
 
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
-const digitsValue = ref<string[]>([]);
+const digitsValue = reactive<string[]>([]);
 
 const { isValid, hint, handleValidation, value } = useFieldWithValidation(
   props,
@@ -158,6 +159,15 @@ const hintTextColor = computed(() =>
 
 watch(isValid, () => {
   forceDigitsValidation();
+});
+
+watch(digitsValue, () => {
+  if (
+    digitsValue.length === props.digits &&
+    !digitsValue.some(value => value === '')
+  ) {
+    emit('complete');
+  }
 });
 
 /**
@@ -201,10 +211,10 @@ function setDigitValue(event: InputEvent, index: number) {
   if (currentDigitValue?.value) {
     currentDigitValue.value = isInputValid ? event.data ?? '' : '';
     if (isInputValid) {
-      digitsValue.value[index] = currentDigitValue.value;
+      digitsValue[index] = currentDigitValue.value;
       selectNextDigit(index);
-      handleValidation(digitsValue.value.join(''));
-      emit('digit-input', value.value);
+      handleValidation(digitsValue.join(''));
+      emit('digit-input', currentDigitValue.value);
     }
   }
 }
@@ -219,9 +229,9 @@ function clearDigitValue(event: KeyboardEvent, index: number) {
   const currentDigitValue = digitRefs.value[index].ref;
   if (currentDigitValue) {
     currentDigitValue.value = '';
-    digitsValue.value[index] = '';
+    digitsValue[index] = '';
   }
-  handleValidation(digitsValue.value.join(''));
+  handleValidation(digitsValue.join(''));
   selectPrevDigit(index);
   emit('digit-input', value.value);
 }

@@ -6,7 +6,9 @@ import { tokens } from 'maska';
  * @param mask - Mask used to test the value
  * @returns True if valid, false otherwise
  */
-export function mask(value: string, mask: string): boolean {
+export function mask(value: unknown, mask: string): boolean {
+  if (typeof value !== 'string') return false;
+
   const maskAsRegex = mask
     .split('')
     .map(maskChar => {

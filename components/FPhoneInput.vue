@@ -4,7 +4,7 @@
   :style="style"
 )
   FFieldLabel(
-    :name="_name"
+    :name="name"
     :label="label"
     :text-color="labelTextColor"
   )
@@ -169,7 +169,6 @@ import {
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { genId } from '@/utils/genId';
 import type { FSelectOption } from './FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
@@ -273,8 +272,6 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-3',
 });
-
-const _name = computed(() => props?.name || genId());
 
 defineEmits<{
   (name: 'update:modelValue', value: string | null): void;

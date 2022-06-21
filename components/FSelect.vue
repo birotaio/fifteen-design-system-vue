@@ -4,7 +4,7 @@
   :class="classes"
 )
   FFieldLabel(
-    :name="_name"
+    :name="name"
     :label="label"
     :text-color="labelTextColor"
   )
@@ -155,7 +155,6 @@ import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genId } from '@/utils/genId';
 
 export interface FSelectOption {
   label: string;
@@ -320,8 +319,6 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   validateOnMount: false,
   disableSelection: false,
 });
-
-const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;

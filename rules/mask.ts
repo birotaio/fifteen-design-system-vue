@@ -1,4 +1,4 @@
-import { mask as maska, tokens } from 'maska';
+import { tokens } from 'maska';
 
 /**
  * Validate a value based on mask
@@ -6,6 +6,16 @@ import { mask as maska, tokens } from 'maska';
  * @param mask - Mask used to test the value
  * @returns True if valid, false otherwise
  */
-export function mask(value: unknown, mask: string): boolean {
-  return maska(value, mask, tokens) === value;
+export function mask(value: string, mask: string): boolean {
+  const maskAsRegex = mask
+    .split('')
+    .map(maskChar => {
+      return (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        tokens[maskChar]?.pattern.toString().replace(/\//g, '') ?? maskChar
+      );
+    })
+    .join('');
+  return new RegExp(maskAsRegex).test(value);
 }

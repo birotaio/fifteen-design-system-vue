@@ -48,7 +48,7 @@
     "test-dev": "vitest",
     "test-related": "vitest related",
     "coverage": "vitest run --coverage",
-    "postinstall": "husky install",
+    "husky": "husky install",
     "prepush": "yarn husky:pre-commit"
   },
   "devDependencies": {

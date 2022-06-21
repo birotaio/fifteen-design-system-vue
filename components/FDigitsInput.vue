@@ -58,7 +58,7 @@ import FInput from '@/components/FInput.vue';
 import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, reactive } from 'vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FDigitsInputProps {

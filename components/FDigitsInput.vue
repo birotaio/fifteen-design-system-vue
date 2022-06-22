@@ -10,7 +10,6 @@
       v-for="(_, index) in digits"
       ref="digitRefs"
       text-align="center"
-      :attrs="{ maxlength: 1 }"
       v-model="digitsValue[index]"
       validation-trigger="input"
       @input="selectNextDigit(index)"
@@ -114,19 +113,24 @@ export interface FDigitsInputProps {
    * Text and caret error color
    */
   errorColor?: Color;
+  /**
+   * Event that triggers validation
+   */
+  validationTrigger?: 'focus' | 'input' | 'change' | 'blur';
 }
 
 const props = withDefaults(defineProps<FDigitsInputProps>(), {
-  modelValue: '',
   digits: 4,
-  name: '',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
+  errorColor: 'danger',
+  errorMessage: '',
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  label: '',
+  labelTextColor: 'neutral--dark-4',
+  modelValue: '',
+  name: '',
   rules: () => [],
-  errorMessage: '',
-  errorColor: 'danger',
+  validationTrigger: 'change',
 });
 
 const emit = defineEmits<{
@@ -161,8 +165,6 @@ watch(isValid, () => {
 });
 
 watch(digitsValue, () => {
-  handleValidation(digitsValue.join(''));
-
   if (
     digitsValue.length === props.digits &&
     !digitsValue.some(value => value === '')
@@ -217,5 +219,9 @@ function handleFocus(index: number) {
  */
 function forceDigitsValidation() {
   digitRefs.value.forEach(digitRef => digitRef?.forceValidation());
+}
+
+function handleDigitChange() {
+  handleValidation(digitsValue.join(''));
 }
 </script>

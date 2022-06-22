@@ -13,6 +13,7 @@
         :class="checkboxClasses"
         @focus="handleFocus"
         @blur="handleBlur"
+        @change="handleChange"
       )
       FIcon.FCheckbox__checkedIcon(
         name="checkmark"
@@ -226,26 +227,26 @@ export interface FCheckboxProps {
 }
 
 const props = withDefaults(defineProps<FCheckboxProps>(), {
-  label: '',
-  color: 'neutral--light-4',
-  textColor: 'neutral--dark-3',
   borderColor: 'neutral--dark-1',
-  hoverBorderColor: 'secondary',
-  focusColor: 'neutral--light-2',
-  focusBorderColor: 'neutral--dark-2',
-  checkedColor: 'secondary',
   checkedBorderColor: 'secondary',
+  checkedColor: 'secondary',
+  color: 'neutral--light-4',
   disabled: false,
-  modelValue: false,
   errorColor: 'danger',
-  hint: '',
-  hideHint: false,
-  hintTextColor: 'neutral--dark-4',
-  name: '',
-  validationTrigger: null,
-  validateOnMount: false,
-  rules: () => [],
   errorMessage: '',
+  focusBorderColor: 'neutral--dark-2',
+  focusColor: 'neutral--light-2',
+  hideHint: false,
+  hint: '',
+  hintTextColor: 'neutral--dark-4',
+  hoverBorderColor: 'secondary',
+  label: '',
+  modelValue: false,
+  name: '',
+  rules: () => [],
+  textColor: 'neutral--dark-3',
+  validateOnMount: false,
+  validationTrigger: 'change',
 });
 
 const emit = defineEmits<{
@@ -260,7 +261,7 @@ const {
   value: fieldValue,
   handleValidation,
 } = useFieldWithValidation(props, { validateOnMount: props.validateOnMount });
-const { handleBlur, handleFocus } = useInputEventBindings(
+const { handleBlur, handleFocus, handleChange } = useInputEventBindings(
   handleValidation,
   props.validationTrigger,
   emit
@@ -275,16 +276,16 @@ const checked = computed({
 
 const style = computed(
   (): Style => ({
-    '--fcheckbox--color': getCssColor(props.color),
-    '--fcheckbox--text-color': getCssColor(props.textColor),
     '--fcheckbox--border-color': getCssColor(props.borderColor),
-    '--fcheckbox--hover-border-color': getCssColor(props.hoverBorderColor),
-    '--fcheckbox--focus-color': getCssColor(props.focusColor),
-    '--fcheckbox--focus-border-color': getCssColor(props.focusBorderColor),
-    '--fcheckbox--checked-color': getCssColor(props.checkedColor),
     '--fcheckbox--checked-border-color': getCssColor(props.checkedBorderColor),
+    '--fcheckbox--checked-color': getCssColor(props.checkedColor),
+    '--fcheckbox--color': getCssColor(props.color),
     '--fcheckbox--error-color': getCssColor(props.errorColor),
+    '--fcheckbox--focus-border-color': getCssColor(props.focusBorderColor),
+    '--fcheckbox--focus-color': getCssColor(props.focusColor),
+    '--fcheckbox--hover-border-color': getCssColor(props.hoverBorderColor),
     '--fcheckbox--margin-bottom': genSize(props.hideHint ? 0 : 16),
+    '--fcheckbox--text-color': getCssColor(props.textColor),
   })
 );
 

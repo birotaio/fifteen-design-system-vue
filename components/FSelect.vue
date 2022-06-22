@@ -153,7 +153,7 @@ import FFieldHint from '@/components/FFieldHint.vue';
 import FFieldLabel from '@/components/FFieldLabel.vue';
 import FMenu from '@/components/FMenu.vue';
 
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
@@ -291,35 +291,33 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   modelValue: null,
   options: () => [],
   color: 'neutral--light-3',
-  optionsMenuColor: 'neutral--light-3',
-  textColor: 'neutral--dark-4',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
-  optionTextColor: 'neutral--dark-4',
-  outlineColor: 'neutral--light-3',
-  type: 'text',
-  placeholderTextColor: 'neutral--dark-3',
-  borderColor: 'secondary',
-  focusColor: 'neutral--light-5',
-  focusBorderColor: 'secondary',
-  errorColor: 'danger',
-  selectedOptionColor: 'primary--light-2',
-  selectedOptionTextColor: 'primary--dark-2',
-  placeholder: '',
   disabled: false,
+  disableSelection: false,
+  emptyText: '',
+  errorColor: 'danger',
+  errorMessage: '',
+  focusBorderColor: 'secondary',
+  focusColor: 'neutral--light-5',
   hideHint: false,
   hint: '',
-  hintTextColor: 'neutral--dark-4',
-  attrs: () => ({}),
+  hintTextColor: 'neputral--dark-4',
+  label: '',
+  labelTextColor: 'neutral--dark-4',
   menuWidth: 300,
-  clearable: false,
-  emptyText: '',
-  validationTrigger: null,
-  rules: () => [],
   name: '',
-  errorMessage: '',
+  optionsMenuColor: 'neutral--light-3',
+  optionTextColor: 'neutral--dark-4',
+  outlineColor: 'neutral--light-3',
+  placeholder: '',
+  placeholderTextColor: 'neutral--dark-3',
+  rules: () => [],
+  selectedOptionColor: 'primary--light-2',
+  selectedOptionTextColor: 'primary--dark-2',
+  textColor: 'neutral--dark-4',
+  type: 'text',
   validateOnMount: false,
-  disableSelection: false,
+  validationTrigger: 'change',
+  value: null,
 });
 
 const emit = defineEmits<{
@@ -337,7 +335,7 @@ const {
 } = useFieldWithValidation<string | number>(props, {
   validateOnMount: props?.validateOnMount,
 });
-const { handleFocus } = useInputEventBindings(
+const { handleFocus, handleChange } = useInputEventBindings(
   handleValidation,
   props.validationTrigger,
   emit
@@ -348,17 +346,17 @@ const isMenuOpen = ref(false);
 
 const style = computed(
   (): Style => ({
+    '--fselect--border-color': getCssColor(props.borderColor),
     '--fselect--color': getCssColor(props.color),
-    '--fselect--text-color': getCssColor(props.textColor),
+    '--fselect--error-color': getCssColor(props.errorColor),
+    '--fselect--focus-border-color': getCssColor(props.focusBorderColor),
+    '--fselect--focus-color': getCssColor(props.focusColor),
+    '--fselect--margin-bottom': genSize(props.hideHint ? 0 : 16),
+    '--fselect--outline-color': getCssColor(`${props.outlineColor}--rgb`),
     '--fselect--placeholder-text-color': getCssColor(
       props.placeholderTextColor
     ),
-    '--fselect--border-color': getCssColor(props.borderColor),
-    '--fselect--outline-color': getCssColor(`${props.outlineColor}--rgb`),
-    '--fselect--focus-color': getCssColor(props.focusColor),
-    '--fselect--focus-border-color': getCssColor(props.focusBorderColor),
-    '--fselect--error-color': getCssColor(props.errorColor),
-    '--fselect--margin-bottom': genSize(props.hideHint ? 0 : 16),
+    '--fselect--text-color': getCssColor(props.textColor),
   })
 );
 
@@ -385,6 +383,8 @@ const iconName = computed(() =>
     ? 'close'
     : 'chevronDown'
 );
+
+watch(value, newValue => handleChange(newValue));
 
 /**
  * Get the label of the selected option

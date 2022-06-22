@@ -16,8 +16,9 @@ fieldset.FRadioGroup(
       :value="option.value"
       :label="option.label"
       v-model="value"
-      hide-hint
       :disabled="disabled"
+      @change="handleChange"
+      hide-hint
     )
   FFieldHint(
     :text="hint"
@@ -125,16 +126,16 @@ export interface FRadioGroupProps {
    * Text and caret error color
    */
 const props = withDefaults(defineProps<FRadioGroupProps>(), {
-  modelValue: '',
-  name: '',
-  label: '',
-  validationTrigger: 'change',
   displayMode: 'vertical',
+  errorColor: 'danger',
+  errorMessage: '',
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  label: '',
+  modelValue: '',
+  name: '',
   rules: () => [],
-  errorMessage: '',
-  errorColor: 'danger',
+  validationTrigger: 'change',
 });
 
 const emit = defineEmits<{
@@ -148,7 +149,11 @@ const { value, isValid, hint, handleValidation } = useFieldWithValidation(
     validateOnMount: props.validateOnMount,
   }
 );
-useInputEventBindings(handleValidation, props.validationTrigger, emit);
+const { handleChange } = useInputEventBindings(
+  handleValidation,
+  props.validationTrigger,
+  emit
+);
 
 const style = computed(
   (): Style => ({

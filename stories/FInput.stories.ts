@@ -62,10 +62,9 @@ Error.parameters = {
 };
 Error.args = {
   placeholder: 'Fifteen',
-  label: 'Fifteen input',
   labelTextColor: 'neutral--light-5',
   rules: [value => value === 'Fifteen'],
-  errorMessage: 'Please type Fifteen',
+  errorMessage: 'Type "Fifteen" to dismiss the input',
   validateOnMount: true,
 };
 

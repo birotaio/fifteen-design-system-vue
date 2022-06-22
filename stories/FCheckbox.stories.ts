@@ -32,13 +32,13 @@ Disabled.args = {
 export const WithHint: Story<FCheckboxProps> = Template.bind({});
 WithHint.args = {
   label: 'Receive our monthly newsletter',
-  hint: 'Check this if you want to receive our amazing newsletter.',
+  hint: 'Check this if you want to receive our amazing newsletter',
 };
 
 export const Error: Story<FCheckboxProps> = Template.bind({});
 Error.args = {
   label: 'I agree with the privacy policy',
-  errorMessage: 'You must accept the privacy policy.',
+  errorMessage: 'Check the checkbox to dismiss the error',
   rules: [value => value === true],
   validateOnMount: true,
 };

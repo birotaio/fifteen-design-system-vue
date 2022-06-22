@@ -43,7 +43,7 @@ Error.args = {
   label: 'Enter you phone number',
   rules: [value => value !== ''],
   validateOnMount: true,
-  errorMessage: 'Please input a number',
+  errorMessage: 'Enter any number to dismiss the error',
 };
 
 export const Disabled: Story<FPhoneInputProps> = Template.bind({});

@@ -39,7 +39,7 @@ export const Error: Story<FDigitsInputProps> = Template.bind({});
 Error.args = {
   digits: 5,
   rules: [value => value === '12345'],
-  errorMessage: 'Please type 12345',
+  errorMessage: 'Type "12345" to dismiss the error',
   validateOnMount: true,
 };
 

@@ -78,6 +78,6 @@ Error.args = {
     { label: 'Kiwi', value: 'kiwi' },
   ],
   modelValue: 'apple',
-  errorMessage: 'Please select the kiwi',
+  errorMessage: 'Select "kiwi" to dismiss the error',
   validateOnMount: true,
 };

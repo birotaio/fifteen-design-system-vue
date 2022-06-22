@@ -75,7 +75,7 @@ ErrorWithHint.args = {
   placeholder: 'Augmented Bike Networks',
   rules: [value => value === 'Augmented Bike Networks'],
   validateOnMount: true,
-  errorMessage: `Please type "Augmented Bike Networks"`,
+  errorMessage: `Type "Augmented Bike Networks" to dismiss the error`,
 };
 
 export const Disabled: Story<FTextareaProps> = Template.bind({});

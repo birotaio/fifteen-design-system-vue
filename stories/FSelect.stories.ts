@@ -120,7 +120,7 @@ Error.args = {
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   rules: [value => value === 'data'],
-  errorMessage: 'Select "data" to dismiss this error',
+  errorMessage: 'Select "data" to dismiss the error',
   validationTrigger: 'change',
   validateOnMount: true,
   clearable: true,

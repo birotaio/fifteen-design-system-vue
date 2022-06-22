@@ -35,7 +35,7 @@ export const Error: Story<FRadioProps> = Template.bind({});
 Error.args = {
   label: 'I agree with the privacy policy',
   value: 'privacy-policy',
-  errorMessage: 'You must tick the radio button',
+  errorMessage: 'Select the radio button to dismiss the error',
   rules: [value => value === 'privacy-policy'],
   validateOnMount: true,
 };

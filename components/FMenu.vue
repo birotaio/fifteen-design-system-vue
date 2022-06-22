@@ -331,8 +331,8 @@ function handlePreselectSearch(event: KeyboardEvent) {
     const optionValue = ('' + option.value).toLowerCase();
 
     return (
-      optionLabel.startsWith(preselectSearchTerm.value) ||
-      optionValue.startsWith(preselectSearchTerm.value)
+      optionLabel.startsWith(preselectSearchTerm.value.toLowerCase()) ||
+      optionValue.startsWith(preselectSearchTerm.value.toLowerCase())
     );
   }
 

@@ -4,7 +4,7 @@
   :class="classes"
 )
   FFieldLabel(
-    :name="_name"
+    :name="name"
     :label="label"
     :text-color="labelTextColor"
   )
@@ -107,7 +107,6 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { useElementBounding } from '@vueuse/core';
-import { genId } from '@/utils/genId';
 
 export interface FTextareaProps {
   /**
@@ -235,8 +234,6 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
   attrs: () => ({}),
   errorMessage: '',
 });
-
-const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;

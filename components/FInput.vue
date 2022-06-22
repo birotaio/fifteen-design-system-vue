@@ -4,7 +4,7 @@
   :class="classes"
 )
   FFieldLabel(
-    :name="_name"
+    :name="name"
     :label="label"
     :text-color="labelTextColor"
   )
@@ -22,7 +22,7 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @input="handleInput"
-      :name="_name"
+      :name="name"
       ref="inputRef"
     )
     .FInput__input__suffix
@@ -126,7 +126,6 @@ import { maska as vMaska } from 'maska';
 
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { genId } from '@/utils/genId';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { genSize } from '@/utils/genSize';
@@ -268,8 +267,6 @@ const props = withDefaults(defineProps<FInputProps>(), {
   textAlign: 'left',
   mask: '',
 });
-
-const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;

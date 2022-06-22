@@ -1,7 +1,7 @@
 <template lang="pug">
 .FDigitsInput(:style="style")
   FFieldLabel(
-    :name="_name"
+    :name="name"
     :label="label"
     :text-color="labelTextColor"
   )
@@ -58,8 +58,7 @@ import FInput from '@/components/FInput.vue';
 import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { genId } from '@/utils/genId';
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, ref, watch, reactive } from 'vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FDigitsInputProps {
@@ -129,8 +128,6 @@ const props = withDefaults(defineProps<FDigitsInputProps>(), {
   errorMessage: '',
   errorColor: 'danger',
 });
-
-const _name = computed(() => props?.name || genId());
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;

@@ -88,6 +88,7 @@
     "zx": "^6.1.0"
   },
   "dependencies": {
+    "@vee-validate/rules": "^4.5.11",
     "@vueuse/core": "^8.5.0",
     "csstype": "^3.1.0",
     "libphonenumber-js": "^1.10.6",

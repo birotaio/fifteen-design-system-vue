@@ -28,7 +28,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // externalize deps that shouldn't be bundled into the library
-      external: ['vue', '@vueuse/core', 'vee-validate'],
+      external: ['vue', '@vueuse/core', 'vee-validate', '@vee-validate/rules'],
     },
   },
 });

@@ -39,10 +39,9 @@ Full.args = {
 export const Error: Story<FPhoneInputProps> = Template.bind({});
 Error.args = {
   label: 'Enter you phone number',
-  hint: `Don't forget to pick the right prefix`,
-  rules: [() => false],
+  rules: [value => value !== ''],
   validateOnMount: true,
-  errorMessage: 'The phone number does not match the expected format',
+  errorMessage: 'Please input a number',
 };
 
 export const Disabled: Story<FPhoneInputProps> = Template.bind({});

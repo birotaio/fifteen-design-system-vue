@@ -72,11 +72,10 @@ ErrorWithHint.parameters = {
   backgrounds: { default: 'secondary' },
 };
 ErrorWithHint.args = {
-  placeholder: 'Email address',
-  rules: [() => false],
+  placeholder: 'Augmented Bike Networks',
+  rules: [value => value === 'Augmented Bike Networks'],
   validateOnMount: true,
-  errorMessage: 'This field as an error',
-  hint: 'You can use your personal or professional email',
+  errorMessage: `Please type "Augmented Bike Networks"`,
 };
 
 export const Disabled: Story<FTextareaProps> = Template.bind({});

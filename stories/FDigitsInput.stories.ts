@@ -35,14 +35,9 @@ Full.args = {
 
 export const Error: Story<FDigitsInputProps> = Template.bind({});
 Error.args = {
-  hint: 'Check your SMS',
   digits: 5,
-  rules: [
-    value => {
-      return /[0-9]{5}/.test(value as string);
-    },
-  ],
-  errorMessage: 'Your confirmation code in incorrect',
+  rules: [value => value === '12345'],
+  errorMessage: 'Please type 12345',
   validateOnMount: true,
 };
 

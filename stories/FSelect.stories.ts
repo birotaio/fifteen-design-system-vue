@@ -119,8 +119,9 @@ Error.args = {
   textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
-  rules: [() => false],
-  errorMessage: 'Error sample',
+  rules: [value => value === 'data'],
+  errorMessage: 'Select "data" to dismiss this error',
+  validationTrigger: 'change',
   validateOnMount: true,
   clearable: true,
   placeholder: 'All topics',
@@ -130,7 +131,6 @@ Error.args = {
     { label: 'Benefits', value: 'benefits' },
     { label: 'Data', value: 'data' },
   ],
-  hint: 'Pick a contact motivation',
 };
 
 export const NoOption: Story<FSelectProps> = Template.bind({});

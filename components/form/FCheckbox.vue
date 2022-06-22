@@ -3,43 +3,35 @@
   :class="classes"
   :style="style"
 )
-  label.FCheckbox__label
-    .FCheckbox__wrapper
-      input.FCheckbox__checkbox(
-        type="checkbox"
-        v-model="checked"
-        @keypress.enter="checked = !checked"
-        :disabled="disabled"
-        :class="checkboxClasses"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @change="handleChange"
-      )
-      FIcon.FCheckbox__checkedIcon(
-        name="checkmark"
-        color="neutral--light-5"
-        size="10"
-        :class="iconClasses"
-      )
-      FIcon.FCheckbox__indeterminateIcon(
-        v-if="fieldValue === null"
-        name="checkboxIndeterminate"
-        color="neutral--light-5"
-        size="10"
-      )
-    span.FCheckbox__labelText {{ label }}
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
+  FField(v-bind="{ name, hint, hideHint, hintTextColor }")
+    label.FCheckbox__label
+      .FCheckbox__wrapper
+        input.FCheckbox__checkbox(
+          type="checkbox"
+          v-model="checked"
+          @keypress.enter="checked = !checked"
+          :disabled="disabled"
+          :class="checkboxClasses"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
+        )
+        FIcon.FCheckbox__checkedIcon(
+          name="checkmark"
+          color="neutral--light-5"
+          size="10"
+          :class="iconClasses"
+        )
+        FIcon.FCheckbox__indeterminateIcon(
+          v-if="fieldValue === null"
+          name="checkboxIndeterminate"
+          color="neutral--light-5"
+          size="10"
+        )
+      span.FCheckbox__labelText {{ label }}
 </template>
 
 <style lang="stylus">
-.FCheckbox
-  position relative
-  margin-bottom var(--fcheckbox--margin-bottom)
-
 .FCheckbox__label
   position relative
   display flex
@@ -135,13 +127,12 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldHint from '@/components/form/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genSize } from '@/utils/genSize';
 
 export interface FCheckboxProps {
   /**
@@ -284,7 +275,6 @@ const style = computed(
     '--fcheckbox--focus-border-color': getCssColor(props.focusBorderColor),
     '--fcheckbox--focus-color': getCssColor(props.focusColor),
     '--fcheckbox--hover-border-color': getCssColor(props.hoverBorderColor),
-    '--fcheckbox--margin-bottom': genSize(props.hideHint ? 0 : 16),
     '--fcheckbox--text-color': getCssColor(props.textColor),
   })
 );

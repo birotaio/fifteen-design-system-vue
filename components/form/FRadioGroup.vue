@@ -1,30 +1,22 @@
 <template lang="pug">
 fieldset.FRadioGroup(
-  :style="style"
   :class="classes"
   :disabled="disabled"
 )
-  FFieldLabel(
-    :label="label"
-    :name="name"
-    type="legend"
+  FField(
+    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
   )
-  .FRadioGroup__options
-    FRadio(
-      v-for="option in options"
-      :name="name"
-      :value="option.value"
-      :label="option.label"
-      v-model="value"
-      :disabled="disabled"
-      @change="handleChange"
-      hide-hint
-    )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
+    .FRadioGroup__options
+      FRadio(
+        v-for="option in options"
+        :name="name"
+        :value="option.value"
+        :label="option.label"
+        v-model="value"
+        :disabled="disabled"
+        @change="handleChange"
+        hide-hint
+      )
 </template>
 
 <style lang="stylus">
@@ -54,12 +46,10 @@ fieldset.FRadioGroup(
 
 <script setup lang="ts">
 import { computed, watch } from 'vue';
-import FFieldLabel from '@/components/form/FFieldLabel.vue';
-import FFieldHint from '@/components/form/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 import FRadio from '@/components/form/FRadio.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genSize } from '@/utils/genSize';
 
 export interface FRadioGroupOption {
   label: string;
@@ -79,6 +69,10 @@ export interface FRadioGroupProps {
    * Label, placed on top of radio group
    */
   label?: string;
+  /**
+   * Text color of the label
+   */
+  labelTextColor?: Color;
   /**
    * Display mode of the radio group
    */
@@ -136,6 +130,7 @@ const props = withDefaults(defineProps<FRadioGroupProps>(), {
   name: '',
   rules: () => [],
   validationTrigger: 'change',
+  labelTextColor: 'neutral--dark-4',
 });
 
 const emit = defineEmits<{
@@ -153,12 +148,6 @@ const { handleChange } = useInputEventBindings(
   handleValidation,
   props.validationTrigger,
   emit
-);
-
-const style = computed(
-  (): Style => ({
-    '--fradiogroup--margin-bottom': genSize(props.hideHint ? 0 : 16),
-  })
 );
 
 watch(value, () => {

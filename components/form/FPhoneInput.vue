@@ -3,69 +3,66 @@
   :class="classes"
   :style="style"
 )
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
+  FField(
+    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
   )
-  FMenu(
-    :options="countries"
-    v-model:is-open="isMenuOpen"
-    v-model="countryCode"
-    width="100"
-    :color="optionsMenuColor"
-    :text-color="optionTextColor"
-  )
-    template(#activator="{ toggleMenu }")
-      FInput(
-        v-bind="{ placeholder }"
-        v-model="phoneNumber"
-        :color="color"
-        :text-color="textColor"
-        :error-message="errorMessage"
-        :placeholder-text-color="placeholderTextColor"
-        :rules="[() => isValidPhone]"
-        :validate-on-mount="validateOnMount"
-        validation-trigger="change"
-        :disabled="disabled"
-        :hint="hint"
-        :hide-hint="hideHint"
-        :hint-text-color="hintTextColor"
-        :mask="phoneNumberMask"
-      )
-        template(#prefix)
-          .FPhoneInput__prefix
-            .FPhoneInput__selectedValue(
-              @click="!disabled && toggleMenu()"
-              tabindex="0"
-            )
-              FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
-              FIcon.FPhoneInput__icon(
-                name="chevronDown"
-                :class="iconClasses"
-                color="transparent"
-                :size="12"
-                :stroke-color="textPhonePrefixColor"
-                :stroke-width="2"
+    FMenu(
+      :options="countries"
+      v-model:is-open="isMenuOpen"
+      v-model="countryCode"
+      width="100"
+      :color="optionsMenuColor"
+      :text-color="optionTextColor"
+    )
+      template(#activator="{ toggleMenu }")
+        FInput(
+          v-bind="{ placeholder }"
+          v-model="phoneNumber"
+          :color="color"
+          :text-color="textColor"
+          :error-message="errorMessage"
+          :placeholder-text-color="placeholderTextColor"
+          :rules="[() => isValidPhone]"
+          :validate-on-mount="validateOnMount"
+          validation-trigger="change"
+          :disabled="disabled"
+          :hint="hint"
+          :hide-hint="hideHint"
+          :hint-text-color="hintTextColor"
+          :mask="phoneNumberMask"
+        )
+          template(#prefix)
+            .FPhoneInput__prefix
+              .FPhoneInput__selectedValue(
+                @click="!disabled && toggleMenu()"
+                tabindex="0"
               )
-            FDivider(
-              vertical
-              height="24"
-              :margins="false"
-              color="neutral--light-5"
-            )
-            span.FPhoneInput__phonePrefix {{ phonePrefix }}
-    template(#option-prefix="{ option }")
-      FFlagIcon.FPhoneInput__optionPrefix(
-        :country-code="getCountryCode(option)"
-      )
+                FFlagIcon.FPhoneInput__selectedFlag(
+                  :country-code="countryCode"
+                )
+                FIcon.FPhoneInput__icon(
+                  name="chevronDown"
+                  :class="iconClasses"
+                  color="transparent"
+                  :size="12"
+                  :stroke-color="textPhonePrefixColor"
+                  :stroke-width="2"
+                )
+              FDivider(
+                vertical
+                height="24"
+                :margins="false"
+                color="neutral--light-5"
+              )
+              span.FPhoneInput__phonePrefix {{ phonePrefix }}
+      template(#option-prefix="{ option }")
+        FFlagIcon.FPhoneInput__optionPrefix(
+          :country-code="getCountryCode(option)"
+        )
 </template>
 
 <style lang="stylus">
 .FPhoneInput
-  display flex
-  flex-direction column
-  position relative
   background none
 
 .FPhoneInput__select
@@ -140,7 +137,7 @@ import FDivider from '@/components/FDivider.vue';
 import FFlagIcon from '@/components/FFlagIcon.vue';
 import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
-import FFieldLabel from '@/components/form/FFieldLabel.vue';
+import FField from '@/components/form/FField.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {

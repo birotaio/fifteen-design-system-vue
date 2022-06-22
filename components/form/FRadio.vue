@@ -3,34 +3,25 @@
   :class="classes"
   :style="style"
 )
-  label.FRadio__label
-    .FRadio__wrapper
-      input.FRadio__radio(
-        :name="name"
-        type="radio"
-        v-model="fieldValue"
-        :value="value"
-        :checked="fieldValue === value"
-        @keypress.enter="fieldValue = value"
-        :disabled="disabled"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @change="handleChange"
-      )
-    span.FRadio__labelText {{ label }}
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
+  FField(v-bind="{ name, hint, hideHint, hintTextColor }")
+    label.FRadio__label
+      .FRadio__wrapper
+        input.FRadio__radio(
+          :name="name"
+          type="radio"
+          v-model="fieldValue"
+          :value="value"
+          :checked="fieldValue === value"
+          @keypress.enter="fieldValue = value"
+          :disabled="disabled"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
+        )
+      span.FRadio__labelText {{ label }}
 </template>
 
 <style lang="stylus">
-.FRadio
-  display flex
-  position relative
-  margin-bottom var(--fradio--margin-bottom)
-
 .FRadio__label
   position relative
   display flex
@@ -121,7 +112,7 @@
 </style>
 
 <script setup lang="ts">
-import FFieldHint from '@/components/form/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
@@ -260,7 +251,6 @@ const style = computed(
     '--fradio--color': getCssColor(props.color),
     '--fradio--error-color': getCssColor(props.errorColor),
     '--fradio--hover-border-color': getCssColor(props.hoverBorderColor),
-    '--fradio--margin-bottom': genSize(props.hideHint ? 0 : 16),
     '--fradio--outline-color': getCssColor(`${props.outlineColor}--rgb`),
     '--fradio--text-color': getCssColor(props.textColor),
   })

@@ -3,33 +3,26 @@
   :style="style"
   :class="classes"
 )
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
+  FField(
+    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
   )
-  textarea.FTextarea__textarea(
-    ref="textareaRef"
-    v-bind="attrs"
-    v-model="value"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :rows="rows"
-    @change="handleChange"
-    @focus="handleFocus"
-    @blur="handleBlur"
-  )
-  FIcon.FTextarea__errorIcon(
-    v-if="!isValid"
-    name="exclamationCircle"
-    :color="errorColor"
-    size="16"
-  )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
+    textarea.FTextarea__textarea(
+      ref="textareaRef"
+      v-bind="attrs"
+      v-model="value"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :rows="rows"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+    )
+    FIcon.FTextarea__errorIcon(
+      v-if="!isValid"
+      name="exclamationCircle"
+      :color="errorColor"
+      size="16"
+    )
 </template>
 
 <style lang="stylus">
@@ -96,8 +89,7 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldHint from '@/components/form/FFieldHint.vue';
-import FFieldLabel from '@/components/form/FFieldLabel.vue';
+import FField from '@/components/form/FField.vue';
 
 import type CSS from 'csstype';
 import type { TextareaHTMLAttributes } from 'vue';
@@ -270,7 +262,6 @@ const style = computed(
     '--ftextarea--error-color': getCssColor(props.errorColor),
     '--ftextarea--resize': !props.disabled ? props.resize : 'none',
     '--ftextarea--width': genSize(width.value),
-    '--ftextarea--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

@@ -3,10 +3,8 @@
   :style="style"
   :class="classes"
 )
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
+  FField(
+    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
   )
   FMenu(
     v-model="fieldValue"
@@ -53,20 +51,34 @@
           :stroke-width="2"
           :class="iconClasses"
         )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
+          .FSelect__select__selectionStart
+            FIcon.FSelect__select__errorIcon(
+              v-if="!isValid"
+              name="exclamationCircle"
+              :color="errorColor"
+              size="16"
+            )
+            .FSelect__selectValue
+              slot(
+                name="selected-value"
+                v-bind="{ value, label: getValueLabel(value) }"
+                v-if="value"
+              )
+                .FSelect__text {{ getValueLabel(value) }}
+              .FSelect__placeholder(v-else) {{ placeholder }}
+          FIcon.FSelect__icon(
+            v-if="!disabled"
+            @click="handleIconClick($event)"
+            :name="iconName"
+            :size="16"
+            color="transparent"
+            :stroke-color="textColor"
+            :stroke-width="2"
+            :class="iconClasses"
+          )
 </template>
 
 <style lang="stylus">
-.FSelect
-  display flex
-  flex-direction column
-  position relative
-  margin-bottom var(--fselect--margin-bottom)
-
 .FSelect__select
   display flex
   z-index 10
@@ -149,8 +161,7 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldHint from '@/components/form/FFieldHint.vue';
-import FFieldLabel from '@/components/form/FFieldLabel.vue';
+import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 
 import { ref, computed, watch } from 'vue';
@@ -351,7 +362,6 @@ const style = computed(
     '--fselect--error-color': getCssColor(props.errorColor),
     '--fselect--focus-border-color': getCssColor(props.focusBorderColor),
     '--fselect--focus-color': getCssColor(props.focusColor),
-    '--fselect--margin-bottom': genSize(props.hideHint ? 0 : 16),
     '--fselect--outline-color': getCssColor(`${props.outlineColor}--rgb`),
     '--fselect--placeholder-text-color': getCssColor(
       props.placeholderTextColor

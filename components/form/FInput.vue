@@ -3,50 +3,37 @@
   :style="style"
   :class="classes"
 )
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
+  FField(
+    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
   )
-  .FInput__input
-    .FInput__input__prefix
-      slot(name="prefix")
-    input(
-      v-bind="attrs"
-      v-model="value"
-      v-maska="mask"
-      :type="type"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      @input="handleInput"
-      :name="name"
-      ref="inputRef"
-    )
-    .FInput__input__suffix
-      slot(name="suffix")
-    FIcon.FInput__errorIcon(
-      v-if="!isValid && !hideErrorIcon"
-      name="exclamationCircle"
-      :color="errorColor"
-      size="16"
-    )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
+    .FInput__input
+      .FInput__input__prefix
+        slot(name="prefix")
+      input(
+        v-bind="attrs"
+        v-model="value"
+        v-maska="mask"
+        :type="type"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @input="handleInput"
+        :name="name"
+        ref="inputRef"
+      )
+      .FInput__input__suffix
+        slot(name="suffix")
+      FIcon.FInput__errorIcon(
+        v-if="!isValid && !hideErrorIcon"
+        name="exclamationCircle"
+        :color="errorColor"
+        size="16"
+      )
 </template>
 
 <style lang="stylus">
-.FInput
-  display flex
-  flex-direction column
-  position relative
-  margin-bottom var(--finput--margin-bottom)
-
 .FInput__input
   display flex
   position relative
@@ -116,8 +103,7 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldLabel from '@/components/form/FFieldLabel.vue';
-import FFieldHint from '@/components/form/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 import type CSS from 'csstype';
 import type { InputHTMLAttributes, Ref } from 'vue';
 
@@ -304,7 +290,6 @@ const style = computed(
     '--finput--focus-border-color': getCssColor(props.focusBorderColor),
     '--finput--error-color': getCssColor(props.errorColor),
     '--finput--text-align': props.textAlign,
-    '--finput--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

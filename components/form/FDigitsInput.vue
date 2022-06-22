@@ -1,41 +1,29 @@
 <template lang="pug">
-.FDigitsInput(:style="style")
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
+.FDigitsInput
+  FField(
+    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
   )
-  .FDigitsInput__input
-    FInput(
-      v-for="(_, index) in digits"
-      ref="digitRefs"
-      text-align="center"
-      v-model="digitsValue[index]"
-      validation-trigger="input"
-      @input="selectNextDigit(index)"
-      @keydown.delete="selectPrevDigit(index)"
-      @focus="handleFocus(index)"
-      hide-hint
-      mask="#"
-      :rules="[() => isValid]"
-      :validate-on-mount="validateOnMount"
-      hide-error-icon
-      :disabled="disabled"
-    )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
+    .FDigitsInput__input
+      FInput(
+        v-for="(_, index) in digits"
+        ref="digitRefs"
+        text-align="center"
+        v-model="digitsValue[index]"
+        validation-trigger="input"
+        @input="selectNextDigit(index)"
+        @keydown.delete="selectPrevDigit(index)"
+        @focus="handleFocus(index)"
+        @change="handleDigitChange"
+        hide-hint
+        mask="#"
+        :rules="[() => isValid]"
+        :validate-on-mount="validateOnMount"
+        hide-error-icon
+        :disabled="disabled"
+      )
 </template>
 
 <style lang="stylus">
-.FDigitsInput
-  display flex
-  flex-direction column
-  position relative
-  margin-bottom var(--fdigitsinput--margin-bottom)
-
 .FDigitsInput__input
   display grid
   grid-template-columns 'repeat(auto-fill, minmax(%s, 1fr))' % rem(40)
@@ -54,11 +42,9 @@
 
 <script setup lang="ts">
 import FInput from '@/components/form/FInput.vue';
-import FFieldLabel from '@/components/form/FFieldLabel.vue';
-import FFieldHint from '@/components/form/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { computed, ref, watch, reactive, nextTick } from 'vue';
-import { genSize } from '@/utils/genSize';
+import { computed, reactive, ref, watch, nextTick } from 'vue';
 
 export interface FDigitsInputProps {
   /**
@@ -138,12 +124,6 @@ const emit = defineEmits<{
   (name: 'digit-input', value: string): void;
   (name: 'complete'): void;
 }>();
-
-const style = computed(
-  (): Style => ({
-    '--fdigitsinput--margin-bottom': genSize(props.hideHint ? 0 : 16),
-  })
-);
 
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
 const digitsValue = reactive<string[]>([]);

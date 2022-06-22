@@ -1,5 +1,7 @@
 import { Story } from '@storybook/vue3';
-import FDigitsInput, { FDigitsInputProps } from '@/components/FDigitsInput.vue';
+import FDigitsInput, {
+  FDigitsInputProps,
+} from '@/components/form/FDigitsInput.vue';
 
 export default {
   title: 'Components/Form/FDigitsInput',

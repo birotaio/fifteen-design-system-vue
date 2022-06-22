@@ -1,5 +1,5 @@
 import { Story } from '@storybook/vue3';
-import FInput, { FInputProps } from '@/components/FInput.vue';
+import FInput, { FInputProps } from '@/components/form/FInput.vue';
 import { mask, required } from '@/rules';
 
 export default {

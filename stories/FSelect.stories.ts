@@ -1,5 +1,5 @@
 import { Story } from '@storybook/vue3';
-import FSelect, { FSelectProps } from '@/components/FSelect.vue';
+import FSelect, { FSelectProps } from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 
 export default {

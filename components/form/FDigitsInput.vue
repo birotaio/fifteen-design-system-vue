@@ -53,9 +53,9 @@
 </style>
 
 <script setup lang="ts">
-import FInput from '@/components/FInput.vue';
-import FFieldLabel from '@/components/FFieldLabel.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
+import FInput from '@/components/form/FInput.vue';
+import FFieldLabel from '@/components/form/FFieldLabel.vue';
+import FFieldHint from '@/components/form/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { computed, ref, watch, reactive, nextTick } from 'vue';
 import { genSize } from '@/utils/genSize';

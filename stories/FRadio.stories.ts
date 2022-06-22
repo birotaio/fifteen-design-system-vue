@@ -1,5 +1,5 @@
 import { Story } from '@storybook/vue3';
-import FRadio, { FRadioProps } from '@/components/FRadio.vue';
+import FRadio, { FRadioProps } from '@/components/form/FRadio.vue';
 
 export default {
   title: 'Components/Form/FRadio',

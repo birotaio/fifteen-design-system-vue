@@ -135,12 +135,12 @@
 </style>
 
 <script setup lang="ts">
-import FInput from '@/components/FInput.vue';
+import FInput from '@/components/form/FInput.vue';
 import FDivider from '@/components/FDivider.vue';
 import FFlagIcon from '@/components/FFlagIcon.vue';
 import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
-import FFieldLabel from './FFieldLabel.vue';
+import FFieldLabel from '@/components/form/FFieldLabel.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {
@@ -151,7 +151,7 @@ import {
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import type { FSelectOption } from '@/components/FSelect.vue';
+import type { FSelectOption } from '@/components/form/FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';

@@ -135,7 +135,7 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
+import FFieldHint from '@/components/form/FFieldHint.vue';
 
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';

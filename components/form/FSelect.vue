@@ -149,8 +149,8 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
-import FFieldLabel from '@/components/FFieldLabel.vue';
+import FFieldHint from '@/components/form/FFieldHint.vue';
+import FFieldLabel from '@/components/form/FFieldLabel.vue';
 import FMenu from '@/components/FMenu.vue';
 
 import { ref, computed, watch } from 'vue';

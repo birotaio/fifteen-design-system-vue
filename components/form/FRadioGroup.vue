@@ -54,9 +54,9 @@ fieldset.FRadioGroup(
 
 <script setup lang="ts">
 import { computed, watch } from 'vue';
-import FFieldLabel from '@/components/FFieldLabel.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
-import FRadio from '@/components/FRadio.vue';
+import FFieldLabel from '@/components/form/FFieldLabel.vue';
+import FFieldHint from '@/components/form/FFieldHint.vue';
+import FRadio from '@/components/form/FRadio.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { genSize } from '@/utils/genSize';

@@ -32,6 +32,7 @@
   "scripts": {
     "dev": "yarn sb",
     "sb": "start-storybook -p 3003",
+    "dev:build": "DEV_BUILD=1 yarn build",
     "build:sb": "build-storybook",
     "build:lib": "vite build",
     "build:types": "vue-tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",

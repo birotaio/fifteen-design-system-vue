@@ -2,6 +2,7 @@ import * as path from 'path';
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import ViteSvgLoader from 'vite-svg-loader';
+import Visualizer from 'rollup-plugin-visualizer';
 
 export default defineConfig({
   root: '.',
@@ -10,7 +11,17 @@ export default defineConfig({
       '@': __dirname,
     },
   },
-  plugins: [Vue(), ViteSvgLoader()],
+  plugins: [
+    Vue(),
+    ViteSvgLoader(),
+    Visualizer({
+      filename: path.resolve(__dirname, 'report/treemap.html'),
+      title: 'Bundle Visualizer',
+      gzipSize: true,
+      brotliSize: true,
+      template: 'treemap',
+    }),
+  ],
   css: {
     preprocessorOptions: {
       stylus: {

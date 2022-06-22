@@ -3,17 +3,22 @@ component.FFieldLabel(
   v-if="label !== ''"
   :is="type"
   :for="type === 'label' ? name : null"
+  :style="style"
 ) {{ label }}
 </template>
 
 <style lang="stylus">
 .FFieldLabel
+  color var(--ffieldlabel--text-color)
   margin 0
   padding 0
   margin-bottom rem(8)
 </style>
 
 <script setup lang="ts">
+import { getCssColor } from '@/utils/getCssColor';
+import { computed } from 'vue';
+
 export interface FFieldLabelProps {
   /**
    * Label text
@@ -33,8 +38,14 @@ export interface FFieldLabelProps {
   textColor?: Color;
 }
 
-withDefaults(defineProps<FFieldLabelProps>(), {
+const props = withDefaults(defineProps<FFieldLabelProps>(), {
   textColor: 'neutral--dark-4',
   type: 'label',
 });
+
+const style = computed(
+  (): Style => ({
+    '--ffieldlabel--text-color': getCssColor(props.textColor),
+  })
+);
 </script>

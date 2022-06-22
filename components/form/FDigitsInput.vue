@@ -102,7 +102,7 @@ export interface FDigitsInputProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | 'blur';
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
 }
 
 const props = withDefaults(defineProps<FDigitsInputProps>(), {

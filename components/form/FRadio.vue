@@ -118,7 +118,6 @@ import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genSize } from '@/utils/genSize';
 
 export interface FRadioProps {
   /**
@@ -188,7 +187,7 @@ export interface FRadioProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'input' | 'change' | 'blur' | null;
+  validationTrigger?: 'change' | 'focus' | 'blur';
   /**
    * Rules form validation
    */

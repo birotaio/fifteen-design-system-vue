@@ -4,7 +4,7 @@
   :style="style"
 )
   FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+    v-bind="{ name, label, labelTextColor, hint, hideHint: true, hintTextColor }"
   )
     FMenu(
       :options="countries"
@@ -24,7 +24,7 @@
           :placeholder-text-color="placeholderTextColor"
           :rules="[() => isValidPhone]"
           :validate-on-mount="validateOnMount"
-          validation-trigger="change"
+          :validation-trigger="validationTrigger"
           :disabled="disabled"
           :hint="hint"
           :hide-hint="hideHint"
@@ -230,6 +230,10 @@ export interface FPhoneInputProps {
    * Text color of option item
    */
   optionTextColor?: Color;
+  /**
+   * Event that triggers validation
+   */
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
 }
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
@@ -250,6 +254,7 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   placeholderTextColor: 'neutral--dark-2',
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-3',
+  validationTrigger: 'change',
 });
 
 defineEmits<{

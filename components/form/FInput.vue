@@ -114,7 +114,6 @@ import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genSize } from '@/utils/genSize';
 
 export interface FInputProps {
   /**
@@ -203,7 +202,7 @@ export interface FInputProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | 'blur';
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
   /**
    * Whether the input should be validated on mount
    */

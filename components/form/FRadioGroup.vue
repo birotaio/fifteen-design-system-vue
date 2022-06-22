@@ -15,6 +15,8 @@ fieldset.FRadioGroup(
         v-model="value"
         :disabled="disabled"
         @change="handleChange"
+        @focus="handleFocus"
+        @blur="handleBlur"
         hide-hint
       )
 </template>
@@ -92,7 +94,7 @@ export interface FRadioGroupProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | null;
+  validationTrigger?: 'change' | 'focus' | 'blur';
   /**
    * Disable interactions with the radio group
    */
@@ -144,7 +146,7 @@ const { value, isValid, hint, handleValidation } = useFieldWithValidation(
     validateOnMount: props.validateOnMount,
   }
 );
-const { handleChange } = useInputEventBindings(
+const { handleChange, handleFocus, handleBlur } = useInputEventBindings(
   handleValidation,
   props.validationTrigger,
   emit

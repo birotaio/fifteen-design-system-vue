@@ -186,7 +186,7 @@ export interface FTextareaProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | 'blur';
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
   /**
    * Whether the input should be validated on mount
    */

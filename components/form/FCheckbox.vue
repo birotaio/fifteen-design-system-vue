@@ -202,7 +202,7 @@ export interface FCheckboxProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'input' | 'change' | 'blur' | null;
+  validationTrigger?: 'change' | 'focus' | 'blur';
   /**
    * Rules form validation
    */

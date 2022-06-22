@@ -165,7 +165,6 @@ import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 
 import { ref, computed, watch } from 'vue';
-import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
@@ -279,7 +278,7 @@ export interface FSelectProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | null;
+  validationTrigger?: 'change' | 'focus' | 'blur';
   /**
    * Whether the input should be validated on mount
    */

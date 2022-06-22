@@ -46,7 +46,7 @@ interface UseFieldWithValidationReturns {
 }
 
 /**
- * Get a computed hint value, determined by props, and validation status (error)
+ * Get a computed hint value, determined by props and validation status (error)
  * @param props - Props of the component
  * @param errors - Validation errors
  */
@@ -102,7 +102,6 @@ export function useFieldWithValidation<
     return {
       handleValidation: async eventOrValue => {
         // Value is only used when validation in manual (eg. for custom inputs like FPhoneInput or FDigitsInput)
-
         const value =
           eventOrValue instanceof Event
             ? (eventOrValue.target as HTMLInputElement).type === 'checkbox'

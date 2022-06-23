@@ -255,10 +255,10 @@ const props = withDefaults(defineProps<FInputProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;
+  (name: 'input', value: InputEvent): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'input', value: InputEvent): void;
 }>();
 
 const inputRef = ref<HTMLInputElement>();

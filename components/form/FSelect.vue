@@ -332,6 +332,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;
+  (name: 'change'): void;
   (name: 'focus'): void;
   (name: 'blur'): void;
   (name: 'clear'): void;

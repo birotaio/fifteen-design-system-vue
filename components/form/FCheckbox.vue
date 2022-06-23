@@ -242,6 +242,7 @@ const props = withDefaults(defineProps<FCheckboxProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: boolean | null): void;
+  (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
 }>();

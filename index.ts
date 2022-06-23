@@ -37,7 +37,7 @@ export { default as FCheckbox } from '@/components/form/FCheckbox.vue';
 export { default as FRadio } from '@/components/form/FRadio.vue';
 export { default as FRadioGroup } from '@/components/form/FRadioGroup.vue';
 export { default as FDigitsInput } from '@/components/form/FDigitsInput.vue';
-export { default as FPhoneInput } from '@/coxmponents/form/FPhoneInput.vue';
+export { default as FPhoneInput } from '@/components/form/FPhoneInput.vue';
 
 /**
  * Components props interfaces

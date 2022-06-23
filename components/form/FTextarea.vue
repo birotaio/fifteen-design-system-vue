@@ -229,6 +229,7 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;
+  (name: 'input', value: Event): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;

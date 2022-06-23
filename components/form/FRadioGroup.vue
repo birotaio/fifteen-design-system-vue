@@ -138,6 +138,9 @@ const props = withDefaults(defineProps<FRadioGroupProps>(), {
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;
   (name: 'select-radio', value: string | number | null): void;
+  (name: 'change', value: Event): void;
+  (name: 'focus', value: Event): void;
+  (name: 'blur', value: Event): void;
 }>();
 
 const { value, isValid, hint, handleValidation } = useFieldWithValidation(

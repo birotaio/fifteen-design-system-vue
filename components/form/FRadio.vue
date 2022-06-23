@@ -227,6 +227,7 @@ const props = withDefaults(defineProps<FRadioProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | boolean | number | null): void;
+  (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
 }>();

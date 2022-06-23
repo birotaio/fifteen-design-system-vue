@@ -44,7 +44,6 @@
   min-height rem(48)
   font-size rem(16)
   transition background 200ms, box-shadow 200ms
-  user-select none
   padding rem(12)
   outline none
   resize var(--ftextarea--resize)

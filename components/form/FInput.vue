@@ -59,7 +59,6 @@
   input
     width 100%
     border none
-    user-select none
     outline none
     color var(--finput--text-color)
     background var(--finput--color)

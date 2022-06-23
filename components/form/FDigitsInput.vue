@@ -153,6 +153,7 @@ watch(digitsValue, () => {
     digitsValue.length === props.digits &&
     !digitsValue.some(value => value === '')
   ) {
+    handleValidation(digitsValue.join(''));
     emit('complete');
   }
 });

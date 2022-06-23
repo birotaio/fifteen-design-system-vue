@@ -12,6 +12,7 @@
     :text="hint"
     :hidden="hideHint"
     :text-color="hintTextColor"
+    :icon="hintIcon"
   )
 </template>
 
@@ -59,6 +60,10 @@ export interface FFieldProps {
    * Hide or not the hint / error message
    */
   hideHint?: boolean;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
 }
 
 const props = withDefaults(defineProps<FFieldProps>(), {
@@ -69,6 +74,7 @@ const props = withDefaults(defineProps<FFieldProps>(), {
   hint: '',
   hideHint: false,
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
 });
 
 const style = computed(

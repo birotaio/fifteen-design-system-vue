@@ -4,7 +4,7 @@
   :class="classes"
 )
   FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
   )
     .FInput__input
       .FInput__input__prefix
@@ -195,6 +195,10 @@ export interface FInputProps {
    */
   hint?: string;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Field name. Used in a form context
    */
   name?: string;
@@ -240,6 +244,7 @@ const props = withDefaults(defineProps<FInputProps>(), {
   hideErrorIcon: false,
   hint: '',
   hideHint: false,
+  hintIcon: null,
   hintTextColor: 'neutral--dark-4',
   placeholder: '',
   disabled: false,

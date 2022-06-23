@@ -1,5 +1,5 @@
 <template lang="pug">
-form.FForm(@submit="submit")
+form.FForm(@submit.prevent="submit")
   // @slot Form content
   slot(:submit="submit")
 </template>

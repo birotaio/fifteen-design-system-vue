@@ -21,7 +21,7 @@
     "url": "https://github.com/birotaio/fifteen-design-system-vue/issues"
   },
   "homepage": "https://fifteen.eu",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
     "types",
@@ -42,7 +42,7 @@
     "dev:build": "DEV_BUILD=1 yarn build",
     "build:sb": "build-storybook",
     "build:lib": "vite build",
-    "build:types": "vue-tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",
+    "build:types": "vue-tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp assets/fonts/* dist/assets/fonts",
     "build:icons": "zx scripts/build-icons.mjs",
     "build": "yarn build:icons && yarn build:lib && yarn build:types && yarn build:theme",

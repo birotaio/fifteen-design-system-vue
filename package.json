@@ -39,6 +39,14 @@
       "import": "./dist/es/resolvers/index.js",
       "require": "./dist/cjs/resolvers/index.js"
     },
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    },
+    "./theme.css": {
+      "import": "./dist/theme.css",
+      "require": "./dist/theme.css"
+    }
   },
   "scripts": {
     "dev": "yarn sb",

@@ -35,6 +35,10 @@
       "import": "./dist/es/index.js",
       "require": "./dist/cjs/index.js"
     },
+    "./resolvers": {
+      "import": "./dist/es/resolvers/index.js",
+      "require": "./dist/cjs/resolvers/index.js"
+    },
   },
   "scripts": {
     "dev": "yarn sb",
@@ -45,7 +49,8 @@
     "build:types": "vue-tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp assets/fonts/* dist/assets/fonts",
     "build:icons": "zx scripts/build-icons.mjs",
-    "build": "yarn build:icons && yarn build:lib && yarn build:types && yarn build:theme",
+    "build:resolvers": "tsc -p tsconfig.resolvers.json --outDir dist/es && tsc -p tsconfig.resolvers.json --module commonjs --target es5 --outDir dist/cjs",
+    "build": "yarn build:icons && yarn build:lib && yarn build:resolvers && yarn build:types && yarn build:theme",
     "release": "make release",
     "lint-staged": "lint-staged",
     "eslint": "eslint --ext .ts,.vue .",

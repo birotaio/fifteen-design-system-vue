@@ -7,6 +7,7 @@ FField.FCheckbox(
   label.FCheckbox__label
     .FCheckbox__wrapper
       input.FCheckbox__checkbox(
+        :name="name"
         type="checkbox"
         v-model="checked"
         @keypress.enter="checked = !checked"
@@ -253,7 +254,7 @@ const {
   value: fieldValue,
   handleValidation,
 } = useFieldWithValidation(props, { validateOnMount: props.validateOnMount });
-const { handleBlur, handleFocus, handleChange } = useInputEventBindings(
+const { handleBlur, handleFocus } = useInputEventBindings(
   handleValidation,
   props.validationTrigger,
   emit
@@ -262,10 +263,7 @@ const { handleBlur, handleFocus, handleChange } = useInputEventBindings(
 const checked = computed({
   get: () => Boolean(fieldValue.value),
   set: newValue => {
-    console.log('neww value', newValue);
     fieldValue.value = fieldValue.value === null ? true : newValue;
-    console.log(fieldValue.value);
-    handleChange(fieldValue.value);
   },
 });
 
@@ -303,4 +301,11 @@ const classes = computed(() => ({
 const checkboxClasses = computed(() => ({
   'FCheckbox__checkbox--indeterminate': fieldValue.value === null,
 }));
+
+/**
+ * Custom handle change function because native onChange emits a "on" value when true
+ */
+function handleChange() {
+  handleValidation(fieldValue.value, props.validationTrigger === 'change');
+}
 </script>

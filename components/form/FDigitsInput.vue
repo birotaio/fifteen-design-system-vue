@@ -1,26 +1,25 @@
 <template lang="pug">
-.FDigitsInput
-  FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
-  )
-    .FDigitsInput__input
-      FInput(
-        v-for="(_, index) in digits"
-        ref="digitRefs"
-        text-align="center"
-        v-model="digitsValue[index]"
-        validation-trigger="input"
-        @input="selectNextDigit(index)"
-        @keydown.delete="selectPrevDigit(index)"
-        @focus="handleFocus(index)"
-        @change="handleDigitChange"
-        hide-hint
-        mask="#"
-        :rules="[() => isValid]"
-        :validate-on-mount="validateOnMount"
-        hide-error-icon
-        :disabled="disabled"
-      )
+FField.FDigitsInput(
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+)
+  .FDigitsInput__input
+    FInput(
+      v-for="(_, index) in digits"
+      ref="digitRefs"
+      text-align="center"
+      v-model="digitsValue[index]"
+      validation-trigger="input"
+      @input="selectNextDigit($event, index)"
+      @keydown.delete="selectPrevDigit(index)"
+      @focus="handleFocus($event, index)"
+      @change="handleDigitChange"
+      hide-hint
+      mask="#"
+      :rules="[() => isValid]"
+      :validate-on-mount="validateOnMount"
+      hide-error-icon
+      :disabled="disabled"
+    )
 </template>
 
 <style lang="stylus">

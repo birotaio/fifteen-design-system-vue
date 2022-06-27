@@ -1,36 +1,34 @@
 <template lang="pug">
-.FInput(
+FField.FInput(
   :style="style"
   :class="classes"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
-  FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
-  )
-    .FInput__input
-      .FInput__input__prefix
-        slot(name="prefix")
-      input(
-        v-bind="attrs"
-        v-model="value"
-        v-maska="mask"
-        :type="type"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        @change="handleChange"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @input="handleInput"
-        :name="name"
-        ref="inputRef"
-      )
-      .FInput__input__suffix
-        slot(name="suffix")
-      FIcon.FInput__errorIcon(
-        v-if="!isValid && !hideErrorIcon"
-        name="exclamationCircle"
-        :color="errorColor"
-        size="16"
-      )
+  .FInput__input
+    .FInput__input__prefix
+      slot(name="prefix")
+    input(
+      v-bind="attrs"
+      v-model="value"
+      v-maska="mask"
+      :type="type"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      @input="handleInput"
+      :name="name"
+      ref="inputRef"
+    )
+    .FInput__input__suffix
+      slot(name="suffix")
+    FIcon.FInput__errorIcon(
+      v-if="!isValid && !hideErrorIcon"
+      name="exclamationCircle"
+      :color="errorColor"
+      size="16"
+    )
 </template>
 
 <style lang="stylus">

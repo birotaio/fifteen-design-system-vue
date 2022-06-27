@@ -1,34 +1,34 @@
 <template lang="pug">
-.FCheckbox(
+FField.FCheckbox(
   :class="classes"
   :style="style"
+  v-bind="{ name, hint, hideHint, hintTextColor }"
 )
-  FField(v-bind="{ name, hint, hideHint, hintTextColor }")
-    label.FCheckbox__label
-      .FCheckbox__wrapper
-        input.FCheckbox__checkbox(
-          type="checkbox"
-          v-model="checked"
-          @keypress.enter="checked = !checked"
-          :disabled="disabled"
-          :class="checkboxClasses"
-          @focus="handleFocus"
-          @blur="handleBlur"
-          @change="handleChange"
-        )
-        FIcon.FCheckbox__checkedIcon(
-          name="checkmark"
-          color="neutral--light-5"
-          size="10"
-          :class="iconClasses"
-        )
-        FIcon.FCheckbox__indeterminateIcon(
-          v-if="fieldValue === null"
-          name="checkboxIndeterminate"
-          color="neutral--light-5"
-          size="10"
-        )
-      span.FCheckbox__labelText {{ label }}
+  label.FCheckbox__label
+    .FCheckbox__wrapper
+      input.FCheckbox__checkbox(
+        type="checkbox"
+        v-model="checked"
+        @keypress.enter="checked = !checked"
+        :disabled="disabled"
+        :class="checkboxClasses"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @change="handleChange"
+      )
+      FIcon.FCheckbox__checkedIcon(
+        name="checkmark"
+        color="neutral--light-5"
+        size="10"
+        :class="iconClasses"
+      )
+      FIcon.FCheckbox__indeterminateIcon(
+        v-if="fieldValue === null"
+        name="checkboxIndeterminate"
+        color="neutral--light-5"
+        size="10"
+      )
+    span.FCheckbox__labelText {{ label }}
 </template>
 
 <style lang="stylus">
@@ -262,7 +262,10 @@ const { handleBlur, handleFocus, handleChange } = useInputEventBindings(
 const checked = computed({
   get: () => Boolean(fieldValue.value),
   set: newValue => {
+    console.log('neww value', newValue);
     fieldValue.value = fieldValue.value === null ? true : newValue;
+    console.log(fieldValue.value);
+    handleChange(fieldValue.value);
   },
 });
 

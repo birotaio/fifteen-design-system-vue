@@ -1,28 +1,26 @@
 <template lang="pug">
-.FTextarea(
+FField.FTextarea(
   :style="style"
   :class="classes"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
 )
-  FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  textarea.FTextarea__textarea(
+    ref="textareaRef"
+    v-bind="attrs"
+    v-model="value"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    :rows="rows"
+    @change="handleChange"
+    @focus="handleFocus"
+    @blur="handleBlur"
   )
-    textarea.FTextarea__textarea(
-      ref="textareaRef"
-      v-bind="attrs"
-      v-model="value"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      :rows="rows"
-      @change="handleChange"
-      @focus="handleFocus"
-      @blur="handleBlur"
-    )
-    FIcon.FTextarea__errorIcon(
-      v-if="!isValid"
-      name="exclamationCircle"
-      :color="errorColor"
-      size="16"
-    )
+  FIcon.FTextarea__errorIcon(
+    v-if="!isValid"
+    name="exclamationCircle"
+    :color="errorColor"
+    size="16"
+  )
 </template>
 
 <style lang="stylus">

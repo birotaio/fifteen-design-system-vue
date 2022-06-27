@@ -1,11 +1,9 @@
 <template lang="pug">
-.FSelect(
+FField.FSelect(
   :style="style"
   :class="classes"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
 )
-  FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
-  )
   FMenu(
     v-model="fieldValue"
     v-model:is-open="isMenuOpen"
@@ -51,31 +49,6 @@
           :stroke-width="2"
           :class="iconClasses"
         )
-          .FSelect__select__selectionStart
-            FIcon.FSelect__select__errorIcon(
-              v-if="!isValid"
-              name="exclamationCircle"
-              :color="errorColor"
-              size="16"
-            )
-            .FSelect__selectValue
-              slot(
-                name="selected-value"
-                v-bind="{ value, label: getValueLabel(value) }"
-                v-if="value"
-              )
-                .FSelect__text {{ getValueLabel(value) }}
-              .FSelect__placeholder(v-else) {{ placeholder }}
-          FIcon.FSelect__icon(
-            v-if="!disabled"
-            @click="handleIconClick($event)"
-            :name="iconName"
-            :size="16"
-            color="transparent"
-            :stroke-color="textColor"
-            :stroke-width="2"
-            :class="iconClasses"
-          )
 </template>
 
 <style lang="stylus">
@@ -306,6 +279,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   emptyText: '',
   errorColor: 'danger',
   errorMessage: '',
+  borderColor: 'neutral--dark-1',
   focusBorderColor: 'secondary',
   focusColor: 'neutral--light-5',
   hideHint: false,
@@ -394,7 +368,7 @@ const iconName = computed(() =>
     : 'chevronDown'
 );
 
-watch(value, newValue => handleChange(newValue));
+watch(fieldValue, newValue => handleChange(newValue));
 
 /**
  * Get the label of the selected option

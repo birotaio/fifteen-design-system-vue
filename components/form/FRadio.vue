@@ -1,24 +1,24 @@
 <template lang="pug">
-.FRadio(
+FField.FRadio(
   :class="classes"
   :style="style"
+  v-bind="{ name, hint, hideHint, hintTextColor }"
 )
-  FField(v-bind="{ name, hint, hideHint, hintTextColor }")
-    label.FRadio__label
-      .FRadio__wrapper
-        input.FRadio__radio(
-          :name="name"
-          type="radio"
-          v-model="fieldValue"
-          :value="value"
-          :checked="fieldValue === value"
-          @keypress.enter="fieldValue = value"
-          :disabled="disabled"
-          @focus="handleFocus"
-          @blur="handleBlur"
-          @change="handleChange"
-        )
-      span.FRadio__labelText {{ label }}
+  label.FRadio__label
+    .FRadio__wrapper
+      input.FRadio__radio(
+        :name="name"
+        type="radio"
+        v-model="fieldValue"
+        :value="value"
+        :checked="fieldValue === value"
+        @keypress.enter="fieldValue = value"
+        :disabled="disabled"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @change="handleChange"
+      )
+    span.FRadio__labelText {{ label }}
 </template>
 
 <style lang="stylus">

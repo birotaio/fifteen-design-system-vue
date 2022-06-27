@@ -1,64 +1,60 @@
 <template lang="pug">
-.FPhoneInput(
+FField.FPhoneInput(
   :class="classes"
   :style="style"
+  v-bind="{ name, label, labelTextColor, hint, hideHint: true, hintTextColor }"
 )
-  FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint: true, hintTextColor }"
+  FMenu(
+    :options="countries"
+    v-model:is-open="isMenuOpen"
+    v-model="countryCode"
+    width="100"
+    :color="optionsMenuColor"
+    :text-color="optionTextColor"
   )
-    FMenu(
-      :options="countries"
-      v-model:is-open="isMenuOpen"
-      v-model="countryCode"
-      width="100"
-      :color="optionsMenuColor"
-      :text-color="optionTextColor"
-    )
-      template(#activator="{ toggleMenu }")
-        FInput(
-          v-bind="{ placeholder }"
-          v-model="phoneNumber"
-          :color="color"
-          :text-color="textColor"
-          :error-message="errorMessage"
-          :placeholder-text-color="placeholderTextColor"
-          :rules="[() => isValidPhone]"
-          :validate-on-mount="validateOnMount"
-          :validation-trigger="validationTrigger"
-          :disabled="disabled"
-          :hint="hint"
-          :hide-hint="hideHint"
-          :hint-text-color="hintTextColor"
-          :mask="phoneNumberMask"
-        )
-          template(#prefix)
-            .FPhoneInput__prefix
-              .FPhoneInput__selectedValue(
-                @click="!disabled && toggleMenu()"
-                tabindex="0"
+    template(#activator="{ toggleMenu }")
+      FInput(
+        v-bind="{ placeholder }"
+        v-model="phoneNumber"
+        :color="color"
+        :text-color="textColor"
+        :error-message="errorMessage"
+        :placeholder-text-color="placeholderTextColor"
+        :rules="[() => isValidPhone]"
+        :validate-on-mount="validateOnMount"
+        :validation-trigger="validationTrigger"
+        :disabled="disabled"
+        :hint="hint"
+        :hide-hint="hideHint"
+        :hint-text-color="hintTextColor"
+        :mask="phoneNumberMask"
+      )
+        template(#prefix)
+          .FPhoneInput__prefix
+            .FPhoneInput__selectedValue(
+              @click="!disabled && toggleMenu()"
+              tabindex="0"
+            )
+              FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
+              FIcon.FPhoneInput__icon(
+                name="chevronDown"
+                :class="iconClasses"
+                color="transparent"
+                :size="12"
+                :stroke-color="textPhonePrefixColor"
+                :stroke-width="2"
               )
-                FFlagIcon.FPhoneInput__selectedFlag(
-                  :country-code="countryCode"
-                )
-                FIcon.FPhoneInput__icon(
-                  name="chevronDown"
-                  :class="iconClasses"
-                  color="transparent"
-                  :size="12"
-                  :stroke-color="textPhonePrefixColor"
-                  :stroke-width="2"
-                )
-              FDivider(
-                vertical
-                height="24"
-                :margins="false"
-                color="neutral--light-5"
-              )
-              span.FPhoneInput__phonePrefix {{ phonePrefix }}
-      template(#option-prefix="{ option }")
-        FFlagIcon.FPhoneInput__optionPrefix(
-          :country-code="getCountryCode(option)"
-        )
+            FDivider(
+              vertical
+              height="24"
+              :margins="false"
+              color="neutral--light-5"
+            )
+            span.FPhoneInput__phonePrefix {{ phonePrefix }}
+    template(#option-prefix="{ option }")
+      FFlagIcon.FPhoneInput__optionPrefix(
+        :country-code="getCountryCode(option)"
+      )
 </template>
 
 <style lang="stylus">

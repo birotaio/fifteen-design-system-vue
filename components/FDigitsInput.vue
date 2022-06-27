@@ -13,9 +13,9 @@
       :attrs="{ maxlength: 1 }"
       v-model="digitsValue[index]"
       validation-trigger="input"
-      @input="selectNextDigit($event, index)"
+      @input="selectNextDigit(index)"
       @keydown.delete="selectPrevDigit(index)"
-      @focus="handleFocus($event, index)"
+      @focus="handleFocus(index)"
       hide-hint
       mask="#"
       :rules="[() => isValid]"
@@ -58,7 +58,7 @@ import FInput from '@/components/FInput.vue';
 import FFieldLabel from '@/components/FFieldLabel.vue';
 import FFieldHint from '@/components/FFieldHint.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { computed, ref, watch, reactive } from 'vue';
+import { computed, ref, watch, reactive, nextTick } from 'vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FDigitsInputProps {
@@ -178,7 +178,7 @@ watch(digitsValue, () => {
 function selectPrevDigit(index: number) {
   // Trick to clear the current field value before select the previous one
   setTimeout(() => {
-    if (index - 1 > -1) {
+    if (index > 0) {
       digitRefs.value[index - 1].ref?.focus();
       digitRefs.value[index - 1].ref?.select();
     } else {
@@ -187,12 +187,12 @@ function selectPrevDigit(index: number) {
   }, 0);
 }
 
-/**
- * Select the next digit of the digits input
+/** Select the next digit of the digits input
  * @param index - Index of currently selected index
  */
-function selectNextDigit(event: InputEvent, index: number) {
-  if (!event.data || !/[0-9]/.test(event.data ?? '')) {
+async function selectNextDigit(index: number) {
+  await nextTick();
+  if (!/[0-9]/.test(digitsValue[index])) {
     return;
   }
 
@@ -208,7 +208,7 @@ function selectNextDigit(event: InputEvent, index: number) {
  * Select the current input field on focus
  * @param index - Index of focused field
  */
-function handleFocus(_: Event, index: number) {
+function handleFocus(index: number) {
   digitRefs.value[index].ref?.select();
 }
 

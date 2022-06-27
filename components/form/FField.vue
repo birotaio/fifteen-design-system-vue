@@ -1,11 +1,14 @@
 <template lang="pug">
-.FField(:style="style")
+component.FField(
+  :style="style"
+  :is="fieldset ? 'fieldset' : 'div'"
+)
   FFieldLabel(
     v-if="label"
     :name="name"
     :label="label"
     :text-color="labelTextColor"
-    :type="labelType"
+    :type="fieldset ? 'legend' : 'label'"
   )
   slot 
   FFieldHint(
@@ -22,16 +25,23 @@
   flex-direction column
   position relative
   margin-bottom var(--ffield--margin-bottom)
+
+fieldset.FField
+  border none
+  padding 0
 </style>
 
 <script setup lang="ts">
 import FFieldLabel from '@/components/form/FFieldLabel.vue';
-import type { FFieldLabelProps } from '@/components/form/FFieldLabel.vue';
 import FFieldHint from '@/components/form/FFieldHint.vue';
 import { computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FFieldProps {
+  /**
+   * Render the field as fieldset. Default to false
+   */
+  fieldset?: boolean;
   /**
    * Field name. Used in a form context
    */
@@ -44,10 +54,6 @@ export interface FFieldProps {
    * Text color of the label
    */
   labelTextColor?: Color;
-  /**
-   * Semantic type of the label
-   */
-  labelType?: FFieldLabelProps['type'];
   /**
    * A hint to display under the input
    */
@@ -70,11 +76,11 @@ const props = withDefaults(defineProps<FFieldProps>(), {
   name: '',
   label: '',
   labelTextColor: 'neutral--dark-4',
-  labelType: 'label',
   hint: '',
   hideHint: false,
   hintTextColor: 'neutral--dark-4',
   hintIcon: null,
+  fieldset: false,
 });
 
 const style = computed(

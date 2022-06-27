@@ -1,24 +1,23 @@
 <template lang="pug">
-fieldset.FRadioGroup(
+FField.FRadioGroup(
+  fieldset
   :class="classes"
   :disabled="disabled"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
 )
-  FField(
-    v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
-  )
-    .FRadioGroup__options
-      FRadio(
-        v-for="option in options"
-        :name="name"
-        :value="option.value"
-        :label="option.label"
-        v-model="value"
-        :disabled="disabled"
-        @change="handleChange"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        hide-hint
-      )
+  .FRadioGroup__options
+    FRadio(
+      v-for="option in options"
+      :name="name"
+      :value="option.value"
+      :label="option.label"
+      v-model="value"
+      :disabled="disabled"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      hide-hint
+    )
 </template>
 
 <style lang="stylus">

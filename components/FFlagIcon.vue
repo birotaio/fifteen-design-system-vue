@@ -34,6 +34,7 @@ const props = withDefaults(defineProps<FFlagIconProps>(), {
   countryCode: 'FR',
 });
 
+// TODO: dynamic import to reduce bundle size
 const flagFiles: Record<string, string> = import.meta.globEager(
   '@/assets/icons/country-flags/*.svg',
   {

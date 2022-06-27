@@ -2,7 +2,7 @@
 .FMenu(
   :style="style"
   @keydown="handlePreselectSearch"
-  ref="menu"
+  ref="menuRef"
 )
   Popper(
     :show="isOpen"
@@ -130,15 +130,15 @@ export interface FMenuProps {
    */
   options: FMenuOption[];
   /**
-   * Disable item selection
+   * Prevent item selection
    */
-  disableSelection?: boolean;
+  preventSelection?: boolean;
   /**
    * Text to display when no option is provided
    */
   emptyText?: string;
   /**
-   * Width of the select
+   * Width of the menu
    */
   width?: string | number;
   /**
@@ -161,7 +161,7 @@ export interface FMenuProps {
 
 const props = withDefaults(defineProps<FMenuProps>(), {
   modelValue: null,
-  disableSelection: false,
+  preventSelection: false,
   emptyText: '',
   options: () => [],
   width: 300,
@@ -209,9 +209,6 @@ function preselectOption(index: number) {
   preselectedOptionIndex.value = index;
 }
 
-/**
- * Automatically scroll options menu when having used the keyboard to preselect a non visible option
- */
 const menuOptionsRef = ref();
 const { top: menuOptionsTop, bottom: menuOptionsBottom } =
   useElementBounding(menuOptionsRef);
@@ -234,7 +231,7 @@ function isSelected(index: number): boolean {
 function selectOption(option: FMenuOption | null): void {
   emit('select-option', option?.value ?? null);
 
-  if (!props.disableSelection) {
+  if (!props.preventSelection) {
     selectedOption.value = option?.value ?? null;
   }
   isOpen.value = false;
@@ -253,6 +250,7 @@ function selectOptionClasses(index: number) {
 
 /**
  * Preselect an option from a mouse interaction
+ * @param index - Index of the option
  */
 function mousePreselectOption(index: number) {
   if (isKeyboardInteracting.value) return;
@@ -285,6 +283,10 @@ function keyboardPreselectNextOption(): void {
   preselectOption(preselectedIndex);
 }
 
+/**
+ * Scroll to the selected option
+ * @param index - Index of the option to scroll into view
+ */
 function scrollOptionIntoView(index: number) {
   const el = optionRefs?.value[index];
   const { top, bottom, height } = el.getBoundingClientRect();
@@ -306,7 +308,7 @@ function handleEnter(event: KeyboardEvent): void {
   const preselectedOption = props.options[preselectedOptionIndex.value];
   emit('select-option', preselectedOption.value);
 
-  if (isOpen.value && !props.disableSelection) {
+  if (isOpen.value && !props.preventSelection) {
     selectedOption.value = preselectedOption.value;
   }
   toggleMenu();
@@ -356,8 +358,8 @@ function handlePreselectSearch(event: KeyboardEvent) {
   }
 }
 
-const menu = ref();
-onClickOutside(menu, () => {
+const menuRef = ref();
+onClickOutside(menuRef, () => {
   isOpen.value = false;
 });
 </script>

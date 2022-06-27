@@ -83,7 +83,7 @@ export interface FRadioGroupProps {
    */
   displayMode?: 'horizontal' | 'vertical';
   /**
-   * Whether the input should be validated on mount
+   * Whether the radio group should be validated on mount
    */
   validateOnMount?: boolean;
   /**
@@ -111,7 +111,7 @@ export interface FRadioGroupProps {
    */
   hideHint?: boolean;
   /**
-   * A hint to display under the input
+   * A hint to display under the radio group
    */
   hint?: string;
   /**
@@ -119,7 +119,7 @@ export interface FRadioGroupProps {
    */
   errorMessage?: string;
   /**
-   * Text and caret error color
+   * Text error color
    */
   errorColor?: Color;
 }

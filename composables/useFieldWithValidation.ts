@@ -29,7 +29,7 @@ interface UseFieldWithValidationReturns {
    */
   handleValidation: (
     e: Event | string | number | boolean | null,
-    shouldValidate?: boolean | undefined
+    shouldValidate?: boolean
   ) => void;
   /**
    * Input field ref value

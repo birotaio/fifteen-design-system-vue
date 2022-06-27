@@ -92,24 +92,6 @@
   &:hover
     border-radius rem(24)
 
-.FPhoneInput__select__phonePrefix
-  height 100%
-  display flex
-  position relative
-
-.FPhoneInput__select__optionPrefix
-  display flex
-  justify-content center
-  padding-right rem(8)
-  padding-top rem(6)
-
-.FPhoneInput__flagInput
-  margin-right rem(8)
-
-  img
-    border-radius rem(4)
-    overflow hidden
-
 .FPhoneInput__prefix
   display flex
   margin-right rem(4)
@@ -169,7 +151,7 @@ import {
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import type { FSelectOption } from './FSelect.vue';
+import type { FSelectOption } from '@/components/FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';

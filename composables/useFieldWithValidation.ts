@@ -103,11 +103,7 @@ export function useFieldWithValidation<
       handleValidation: async eventOrValue => {
         // Value is only used when validation in manual (eg. for custom inputs like FPhoneInput or FDigitsInput)
         const value =
-          eventOrValue instanceof Event
-            ? (eventOrValue.target as HTMLInputElement).type === 'checkbox'
-              ? (eventOrValue.target as HTMLInputElement).checked
-              : (eventOrValue.target as HTMLInputElement).value
-            : eventOrValue;
+          eventOrValue instanceof Event ? fieldValue.value : eventOrValue;
 
         const result = await validate(value ?? fieldValue.value, props?.rules);
         errors.value = result.errors;

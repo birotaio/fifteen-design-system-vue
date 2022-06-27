@@ -24,14 +24,6 @@ FField.FTextarea(
 </template>
 
 <style lang="stylus">
-.FTextarea
-  display flex
-  flex-direction column
-  position relative
-  max-width 100%
-  width 100%
-  margin-bottom var(--ftextarea--margin-bottom)
-
 .FTextarea__textarea
   max-width 100%
   width 100%

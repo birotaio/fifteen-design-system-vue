@@ -21,7 +21,6 @@
       path(
         v-for="path in iconPaths"
         v-bind="path"
-        :stroke-width="strokeWidth"
       )
     img(
       v-else-if="src"
@@ -48,6 +47,7 @@
   path
     fill currentColor
     stroke var(--ficon--stroke-color)
+    stroke-width var(--ficon--stroke-width)
     transition fill 0.12s var(--transition--ease-out)
 
   @media (prefers-reduced-motion )
@@ -107,7 +107,7 @@ const props = withDefaults(defineProps<FIconProps>(), {
   src: '',
   alt: '',
   markup: '',
-  strokeWidth: 1,
+  strokeWidth: 0,
 });
 
 const altText = computed(() => {
@@ -128,6 +128,7 @@ const style = computed(
     '--ficon--size': genSize(props.size),
     '--ficon--color': getCssColor(props.color),
     '--ficon--stroke-color': getCssColor(props.strokeColor),
+    '--ficon--stroke-width': genSize(props.strokeWidth),
   })
 );
 </script>

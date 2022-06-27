@@ -57,7 +57,7 @@ export interface FsIconGridProps {
 withDefaults(defineProps<FsIconGridProps>(), {
   size: '24px',
   color: 'secondary',
-  strokeWidth: 1,
+  strokeWidth: 0,
 });
 
 const icons = ref(getIconList());

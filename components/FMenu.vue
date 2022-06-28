@@ -314,8 +314,8 @@ function handleEnter(event: KeyboardEvent): void {
   toggleMenu();
 }
 
-const preselectSearchTerm = ref('');
-const timeout = ref<NodeJS.Timeout>();
+let preselectSearchTerm = '';
+let timeout: NodeJS.Timeout;
 const DELAY_BETWEEN_KEYSTROKES_IN_MS = 600;
 
 /**
@@ -326,35 +326,35 @@ function handlePreselectSearch(event: KeyboardEvent) {
   isKeyboardInteracting.value = true;
 
   event.stopPropagation();
-  preselectSearchTerm.value = preselectSearchTerm.value + event.key;
+  preselectSearchTerm = preselectSearchTerm + event.key;
 
   function matchResult(option: FMenuOption) {
     const optionLabel = option.label.toLowerCase();
     const optionValue = ('' + option.value).toLowerCase();
 
     return (
-      optionLabel.startsWith(preselectSearchTerm.value.toLowerCase()) ||
-      optionValue.startsWith(preselectSearchTerm.value.toLowerCase())
+      optionLabel.startsWith(preselectSearchTerm.toLowerCase()) ||
+      optionValue.startsWith(preselectSearchTerm.toLowerCase())
     );
   }
 
-  timeout.value = setTimeout(() => {
-    clearTimeout(timeout.value);
-    preselectSearchTerm.value = '';
+  timeout = setTimeout(() => {
+    clearTimeout(timeout);
+    preselectSearchTerm = '';
   }, DELAY_BETWEEN_KEYSTROKES_IN_MS);
 
   const firstMatchingResult = props.options.findIndex(matchResult);
   const matchingResults = props.options.filter(matchResult).length;
 
   if (firstMatchingResult === -1) {
-    preselectSearchTerm.value = '';
+    preselectSearchTerm = '';
     return;
   }
 
   scrollOptionIntoView(firstMatchingResult);
   preselectOption(firstMatchingResult);
   if (matchingResults === 1) {
-    preselectSearchTerm.value = '';
+    preselectSearchTerm = '';
   }
 }
 

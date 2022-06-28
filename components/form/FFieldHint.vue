@@ -20,9 +20,6 @@
     margin-left rem(4)
 
 .FFieldHint
-  position absolute
-  top 100%
-  margin-top rem(8)
   min-height rem(16)
   color var(--ffieldhint--text-color)
   transition opacity 200ms, transform 200ms

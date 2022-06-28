@@ -11,7 +11,7 @@ component.FField(
     :type="fieldset ? 'legend' : 'label'"
   )
   slot 
-  FFieldHint(
+  FFieldHint.FField__hint(
     :text="hint"
     :hidden="hideHint"
     :text-color="hintTextColor"
@@ -29,6 +29,11 @@ component.FField(
 fieldset.FField
   border none
   padding 0
+
+.FField__hint
+  position absolute
+  top 100%
+  margin-top rem(8)
 </style>
 
 <script setup lang="ts">

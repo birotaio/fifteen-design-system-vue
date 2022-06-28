@@ -107,11 +107,11 @@ export interface FRadioGroupProps {
    */
   errorMessage?: string;
   /**
-<<<<<<< HEAD
-   * Text error color
-=======
-   * Text and caret error color
+   * Hint error color
    */
+  errorColor?: Color;
+}
+
 const props = withDefaults(defineProps<FRadioGroupProps>(), {
   displayMode: 'vertical',
   errorColor: 'danger',

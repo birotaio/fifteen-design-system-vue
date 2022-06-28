@@ -55,20 +55,20 @@ FForm(
 </template>
 
 <script setup lang="ts">
-import FForm from '@/components/FForm.vue';
+import FForm from '@/components/form/FForm.vue';
 import FGrid from '@/components/FGrid.vue';
 import FGridItem from '@/components/FGridItem.vue';
 import FButton from '@/components/FButton.vue';
 
-import FInput from '@/components/FInput.vue';
-import FCheckbox from '@/components/FCheckbox.vue';
-import FDigitsInput from '@/components/FDigitsInput.vue';
-import FPhoneInput from '@/components/FPhoneInput.vue';
-import FRadioGroup from '@/components/FRadioGroup.vue';
-import FSelect from '@/components/FSelect.vue';
-import FTextarea from '@/components/FTextarea.vue';
+import FInput from '@/components/form/FInput.vue';
+import FCheckbox from '@/components//form/FCheckbox.vue';
+import FDigitsInput from '@/components/form/FDigitsInput.vue';
+import FPhoneInput from '@/components/form/FPhoneInput.vue';
+import FRadioGroup from '@/components/form/FRadioGroup.vue';
+import FSelect from '@/components/form/FSelect.vue';
+import FTextarea from '@/components/form/FTextarea.vue';
 
-import type { FFormProps } from '@/components/FForm.vue';
+import type { FFormProps } from '@/components/form/FForm.vue';
 
 export interface FsFormProps {
   initialValues: FFormProps['initialValues'];

@@ -9,9 +9,9 @@ FField.FDigitsInput(
       text-align="center"
       v-model="digitsValue[index]"
       validation-trigger="input"
-      @input="selectNextDigit($event, index)"
+      @input="selectNextDigit(index)"
       @keydown.delete="selectPrevDigit(index)"
-      @focus="handleFocus($event, index)"
+      @focus="handleFocus(index)"
       @change="handleDigitChange"
       hide-hint
       mask="#"

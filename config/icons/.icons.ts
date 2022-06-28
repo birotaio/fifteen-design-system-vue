@@ -1,5 +1,5 @@
 // This file is generated automatically. Do not edit manually.
-// To update it, run `yarn icongen`.
+// To update it, run `yarn build:icons`.
 
 import type { SVGAttributes } from 'vue';
 

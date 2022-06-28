@@ -17,16 +17,15 @@ $border = lightgay
 
 .FsIconGrid
   display grid
-  grid-template-columns repeat(auto-fill, 11rem)
-  grid-gap rem(4)
+  justify-content center
+  grid-template-columns repeat(auto-fill, 6rem)
+  gap rem(48)
 
 .FsIconGrid__item
   display flex
-  height rem(100)
   flex-direction column
   align-items center
   justify-content center
-  padding rem(2)
   font-size rem(12)
 
   * + *
@@ -36,7 +35,7 @@ $border = lightgay
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
 
-import { withDefaults, ref } from 'vue';
+import { withDefaults } from 'vue';
 import { getIconList } from '../../config/icons/.utils';
 
 export interface FsIconGridProps {
@@ -60,5 +59,5 @@ withDefaults(defineProps<FsIconGridProps>(), {
   strokeWidth: 0,
 });
 
-const icons = ref(getIconList());
+const icons = getIconList();
 </script>

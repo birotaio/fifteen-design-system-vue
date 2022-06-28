@@ -1,18 +1,18 @@
 import { Story } from '@storybook/vue3';
-import FFlagIcon, { FFlagIconProps } from '@/components/FFlagIcon.vue';
+import FsFlagGrid, { FsFlagGridProps } from './components/FsFlagGrid.vue';
 
 export default {
   title: 'Components/FFlagIcon',
-  component: FFlagIcon,
+  component: FsFlagGrid,
 };
 
-const Template = (args: FFlagIconProps) => ({
-  components: { FFlagIcon },
+const Template = (args: FsFlagGridProps) => ({
+  components: { FsFlagGrid },
   setup: () => ({ args }),
-  template: '<FFlagIcon v-bind="args" />',
+  template: '<FsFlagGrid v-bind="args" />',
 });
 
-export const Default: Story<FFlagIconProps> = Template.bind({});
+export const Default: Story<FsFlagGridProps> = Template.bind({});
 Default.args = {
-  countryCode: 'FR',
+  size: 32,
 };

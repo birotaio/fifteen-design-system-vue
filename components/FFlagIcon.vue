@@ -1,24 +1,20 @@
 <template lang="pug">
 .FFlagIcon
-  .FFlagIcon__flagWrapper
-    FSvgImage(
-      :markup="flagFiles[currentFlagPath]"
-      fill-color="none"
-      use-svg-colors
-    )
+  FSvgImage(
+    :markup="flagFiles[currentFlagPath]"
+    fill-color="none"
+    use-svg-colors
+    :height="size"
+    :width="size"
+  )
 </template>
 
 <style lang="stylus">
 .FFlagIcon
   position relative
   overflow hidden
-  width rem(24)
-  height rem(24)
-
-.FFlagIcon__flagWrapper
-  > *
-    border-radius rem(4)
-    overflow hidden
+  width var(--fflagicon--size)
+  height var(--fflagicon--size)
 </style>
 
 <script setup lang="ts">
@@ -27,11 +23,19 @@ import type { CountryCode } from 'libphonenumber-js';
 import { computed } from 'vue';
 
 export interface FFlagIconProps {
+  /**
+   * Code of the country, following the ISO 3166 standard
+   */
   countryCode: CountryCode;
+  /**
+   * Size of the flag icon
+   */
+  size?: string | number;
 }
 
 const props = withDefaults(defineProps<FFlagIconProps>(), {
   countryCode: 'FR',
+  size: 24,
 });
 
 // TODO: dynamic import to reduce bundle size

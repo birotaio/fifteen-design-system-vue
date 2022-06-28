@@ -69,10 +69,6 @@ FField.FInput(
     &::placeholder
       color var(--finput--placeholder-text-color)
 
-.FInput__label
-  color var(--finput--label)
-  margin-bottom rem(8)
-
 .FInput--error
   .FInput__input
     &,

@@ -21,14 +21,6 @@ FField.FRadioGroup(
 </template>
 
 <style lang="stylus">
-.FRadioGroup
-  display flex
-  flex-direction column
-  position relative
-  border none
-  padding 0
-  margin-bottom var(--fradiogroup--margin-bottom)
-
 .FRadioGroup__options
   display flex
   flex-direction column

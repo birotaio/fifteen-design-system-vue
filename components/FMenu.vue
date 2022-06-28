@@ -110,6 +110,7 @@ import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { genSize } from '@/utils/genSize';
+import { removeDiacritics } from '@/utils/text';
 
 export interface FMenuOption {
   label: string;
@@ -304,7 +305,7 @@ function scrollOptionIntoView(index: number) {
 /**
  * Handle enter key down
  */
-function handleEnter(event: KeyboardEvent): void {
+function handleEnter(): void {
   const preselectedOption = props.options[preselectedOptionIndex.value];
   emit('select-option', preselectedOption.value);
 
@@ -326,15 +327,17 @@ function handlePreselectSearch(event: KeyboardEvent) {
   isKeyboardInteracting.value = true;
 
   event.stopPropagation();
-  preselectSearchTerm = preselectSearchTerm + event.key;
+  preselectSearchTerm = removeDiacritics(
+    preselectSearchTerm + event.key
+  ).toLocaleLowerCase();
 
   function matchResult(option: FMenuOption) {
-    const optionLabel = option.label.toLowerCase();
-    const optionValue = ('' + option.value).toLowerCase();
+    const optionLabel = removeDiacritics(option.label.toLowerCase());
+    const optionValue = removeDiacritics(('' + option.value).toLowerCase());
 
     return (
-      optionLabel.startsWith(preselectSearchTerm.toLowerCase()) ||
-      optionValue.startsWith(preselectSearchTerm.toLowerCase())
+      optionLabel.startsWith(preselectSearchTerm) ||
+      optionValue.startsWith(preselectSearchTerm)
     );
   }
 

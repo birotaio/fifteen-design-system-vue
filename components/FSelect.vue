@@ -9,7 +9,7 @@
     :text-color="labelTextColor"
   )
   FMenu(
-    v-model="value"
+    v-model="fieldValue"
     v-model:is-open="isMenuOpen"
     :options="options"
     :width="menuWidth"
@@ -38,14 +38,14 @@
           .FSelect__selectValue
             slot(
               name="selected-value"
-              v-bind="{ value, label: getValueLabel(value) }"
-              v-if="value"
+              v-bind="{ value: fieldValue, label: getValueLabel(fieldValue) }"
+              v-if="fieldValue"
             )
-              .FSelect__text {{ getValueLabel(value) }}
+              .FSelect__text {{ getValueLabel(fieldValue) }}
             .FSelect__placeholder(v-else) {{ placeholder }}
         FIcon.FSelect__icon(
           v-if="!disabled"
-          @click="handleIconClick($event)"
+          @click="handleIconClick"
           :name="iconName"
           :size="16"
           color="transparent"
@@ -81,6 +81,7 @@
   transition background 200ms, box-shadow 200ms
   user-select none
   padding rem(16)
+  padding-right rem(8)
   outline none
   cursor pointer
 
@@ -103,6 +104,8 @@
 .FSelect__icon
   cursor pointer
   transition transform 300ms
+  border-radius rem(24)
+  padding rem(8)
 
   &--flipped
     transform rotateX(-180deg)
@@ -286,7 +289,6 @@ export interface FSelectProps {
 
 const props = withDefaults(defineProps<FSelectProps>(), {
   modelValue: null,
-  value: null,
   options: () => [],
   color: 'neutral--light-3',
   optionsMenuColor: 'neutral--light-3',
@@ -327,9 +329,12 @@ const emit = defineEmits<{
   (name: 'clear'): void;
 }>();
 
-const { isValid, hint, value, handleValidation } = useFieldWithValidation<
-  string | number
->(props, {
+const {
+  isValid,
+  hint,
+  value: fieldValue,
+  handleValidation,
+} = useFieldWithValidation<string | number>(props, {
   validateOnMount: props?.validateOnMount,
 });
 const { handleFocus } = useInputEventBindings(
@@ -376,7 +381,9 @@ const iconClasses = computed(() => ({
 }));
 
 const iconName = computed(() =>
-  props.clearable && isMenuOpen.value && value.value ? 'close' : 'chevronDown'
+  props.clearable && isMenuOpen.value && fieldValue.value
+    ? 'close'
+    : 'chevronDown'
 );
 
 /**
@@ -392,10 +399,9 @@ function getValueLabel(value: string) {
  * @param event - Click event
  */
 function handleIconClick(event: Event) {
-  if (props.clearable && isMenuOpen.value && value.value) {
+  if (props.clearable && isMenuOpen.value && fieldValue.value) {
     event.stopPropagation();
-
-    handleValidation(null);
+    fieldValue.value = null;
     emit('clear');
   }
 }
@@ -406,7 +412,7 @@ function handleIconClick(event: Event) {
 function handleBlur(): void {
   // Preselect the current value on blur
   preselectedOptionIndex.value = props.options.findIndex(
-    option => option.value === value.value
+    option => option.value === fieldValue.value
   );
   emit('blur');
 }

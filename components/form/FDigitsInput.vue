@@ -1,21 +1,18 @@
 <template lang="pug">
-.FDigitsInput(:style="style")
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
-  )
+FField.FDigitsInput(
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+)
   .FDigitsInput__input
     FInput(
       v-for="(_, index) in digits"
       ref="digitRefs"
       text-align="center"
-      :attrs="{ maxlength: 1 }"
       v-model="digitsValue[index]"
       validation-trigger="input"
       @input="selectNextDigit(index)"
       @keydown.delete="selectPrevDigit(index)"
       @focus="handleFocus(index)"
+      @change="handleDigitChange"
       hide-hint
       mask="#"
       :rules="[() => isValid]"
@@ -23,20 +20,9 @@
       hide-error-icon
       :disabled="disabled"
     )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
 </template>
 
 <style lang="stylus">
-.FDigitsInput
-  display flex
-  flex-direction column
-  position relative
-  margin-bottom var(--fdigitsinput--margin-bottom)
-
 .FDigitsInput__input
   display grid
   grid-template-columns 'repeat(auto-fill, minmax(%s, 1fr))' % rem(40)
@@ -54,12 +40,10 @@
 </style>
 
 <script setup lang="ts">
-import FInput from '@/components/FInput.vue';
-import FFieldLabel from '@/components/FFieldLabel.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
+import FInput from '@/components/form/FInput.vue';
+import FField from '@/components/form/FField.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { computed, ref, watch, reactive, nextTick } from 'vue';
-import { genSize } from '@/utils/genSize';
+import { computed, reactive, ref, watch, nextTick } from 'vue';
 
 export interface FDigitsInputProps {
   /**
@@ -114,32 +98,35 @@ export interface FDigitsInputProps {
    * Text and caret error color
    */
   errorColor?: Color;
+  /**
+   * Event that triggers validation
+   */
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
 }
 
 const props = withDefaults(defineProps<FDigitsInputProps>(), {
-  modelValue: '',
   digits: 4,
-  name: '',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
+  errorColor: 'danger',
+  errorMessage: '',
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  label: '',
+  labelTextColor: 'neutral--dark-4',
+  modelValue: '',
+  name: '',
   rules: () => [],
-  errorMessage: '',
-  errorColor: 'danger',
+  validationTrigger: 'change',
 });
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;
+  (name: 'input', value: Event): void;
+  (name: 'change', value: Event): void;
+  (name: 'focus', value: Event): void;
+  (name: 'blur', value: Event): void;
   (name: 'digit-input', value: string): void;
   (name: 'complete'): void;
 }>();
-
-const style = computed(
-  (): Style => ({
-    '--fdigitsinput--margin-bottom': genSize(props.hideHint ? 0 : 16),
-  })
-);
 
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
 const digitsValue = reactive<string[]>([]);
@@ -161,12 +148,11 @@ watch(isValid, () => {
 });
 
 watch(digitsValue, () => {
-  handleValidation(digitsValue.join(''));
-
   if (
     digitsValue.length === props.digits &&
     !digitsValue.some(value => value === '')
   ) {
+    handleValidation(digitsValue.join(''));
     emit('complete');
   }
 });
@@ -217,5 +203,9 @@ function handleFocus(index: number) {
  */
 function forceDigitsValidation() {
   digitRefs.value.forEach(digitRef => digitRef?.forceValidation());
+}
+
+function handleDigitChange() {
+  handleValidation(digitsValue.join(''));
 }
 </script>

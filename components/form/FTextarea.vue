@@ -1,13 +1,9 @@
 <template lang="pug">
-.FTextarea(
+FField.FTextarea(
   :style="style"
   :class="classes"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
 )
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
-  )
   textarea.FTextarea__textarea(
     ref="textareaRef"
     v-bind="attrs"
@@ -25,22 +21,9 @@
     :color="errorColor"
     size="16"
   )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
 </template>
 
 <style lang="stylus">
-.FTextarea
-  display flex
-  flex-direction column
-  position relative
-  max-width 100%
-  width 100%
-  margin-bottom var(--ftextarea--margin-bottom)
-
 .FTextarea__textarea
   max-width 100%
   width 100%
@@ -51,7 +34,6 @@
   min-height rem(48)
   font-size rem(16)
   transition background 200ms, box-shadow 200ms
-  user-select none
   padding rem(12)
   outline none
   resize var(--ftextarea--resize)
@@ -96,8 +78,7 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
-import FFieldLabel from '@/components/FFieldLabel.vue';
+import FField from '@/components/form/FField.vue';
 
 import type CSS from 'csstype';
 import type { TextareaHTMLAttributes } from 'vue';
@@ -194,7 +175,7 @@ export interface FTextareaProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | 'blur';
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
   /**
    * Whether the input should be validated on mount
    */
@@ -237,6 +218,7 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;
+  (name: 'input', value: Event): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
@@ -270,7 +252,6 @@ const style = computed(
     '--ftextarea--error-color': getCssColor(props.errorColor),
     '--ftextarea--resize': !props.disabled ? props.resize : 'none',
     '--ftextarea--width': genSize(width.value),
-    '--ftextarea--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

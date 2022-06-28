@@ -1,7 +1,8 @@
 <template lang="pug">
-.FRadio(
+FField.FRadio(
   :class="classes"
   :style="style"
+  v-bind="{ name, hint, hideHint, hintTextColor }"
 )
   label.FRadio__label
     .FRadio__wrapper
@@ -15,13 +16,9 @@
         :disabled="disabled"
         @focus="handleFocus"
         @blur="handleBlur"
+        @change="handleChange"
       )
     span.FRadio__labelText {{ label }}
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
 </template>
 
 <style lang="stylus">
@@ -115,7 +112,7 @@
 </style>
 
 <script setup lang="ts">
-import FFieldHint from '@/components/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
@@ -190,7 +187,7 @@ export interface FRadioProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'input' | 'change' | 'blur' | null;
+  validationTrigger?: 'change' | 'focus' | 'blur';
   /**
    * Rules form validation
    */
@@ -206,30 +203,31 @@ export interface FRadioProps {
 }
 
 const props = withDefaults(defineProps<FRadioProps>(), {
-  label: '',
-  value: null,
-  color: 'neutral--light-4',
-  textColor: 'neutral--dark-3',
   borderColor: 'neutral--dark-1',
-  hoverBorderColor: 'secondary',
-  outlineColor: 'neutral--light-2',
-  checkedColor: 'neutral--light-5',
   checkedBorderColor: 'secondary',
+  checkedColor: 'neutral--light-5',
+  color: 'neutral--light-4',
   disabled: false,
-  modelValue: false,
   errorColor: 'danger',
-  hint: '',
-  hideHint: false,
-  hintTextColor: 'neutral--dark-4',
-  name: '',
-  validationTrigger: null,
-  validateOnMount: false,
-  rules: () => [],
   errorMessage: '',
+  hideHint: false,
+  hint: '',
+  hintTextColor: 'neutral--dark-4',
+  hoverBorderColor: 'secondary',
+  label: '',
+  modelValue: false,
+  name: '',
+  outlineColor: 'neutral--light-2',
+  rules: () => [],
+  textColor: 'neutral--dark-3',
+  validateOnMount: false,
+  validationTrigger: 'change',
+  value: null,
 });
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | boolean | number | null): void;
+  (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
 }>();
@@ -240,21 +238,21 @@ const {
   value: fieldValue,
   handleValidation,
 } = useFieldWithValidation(props, { validateOnMount: props.validateOnMount });
-const { handleBlur, handleFocus } = useInputEventBindings(
+const { handleBlur, handleFocus, handleChange } = useInputEventBindings(
   handleValidation,
   props.validationTrigger,
   emit
 );
 const style = computed(
   (): Style => ({
-    '--fradio--color': getCssColor(props.color),
-    '--fradio--text-color': getCssColor(props.textColor),
     '--fradio--border-color': getCssColor(props.borderColor),
-    '--fradio--hover-border-color': getCssColor(props.hoverBorderColor),
-    '--fradio--checked-color': getCssColor(props.checkedColor),
     '--fradio--checked-border-color': getCssColor(props.checkedBorderColor),
-    '--fradio--outline-color': getCssColor(`${props.outlineColor}--rgb`),
+    '--fradio--checked-color': getCssColor(props.checkedColor),
+    '--fradio--color': getCssColor(props.color),
     '--fradio--error-color': getCssColor(props.errorColor),
+    '--fradio--hover-border-color': getCssColor(props.hoverBorderColor),
+    '--fradio--outline-color': getCssColor(`${props.outlineColor}--rgb`),
+    '--fradio--text-color': getCssColor(props.textColor),
   })
 );
 

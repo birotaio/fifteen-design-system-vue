@@ -1,11 +1,13 @@
 <template lang="pug">
-.FCheckbox(
+FField.FCheckbox(
   :class="classes"
   :style="style"
+  v-bind="{ name, hint, hideHint, hintTextColor }"
 )
   label.FCheckbox__label
     .FCheckbox__wrapper
       input.FCheckbox__checkbox(
+        :name="name"
         type="checkbox"
         v-model="checked"
         @keypress.enter="checked = !checked"
@@ -13,6 +15,7 @@
         :class="checkboxClasses"
         @focus="handleFocus"
         @blur="handleBlur"
+        @change="handleChange"
       )
       FIcon.FCheckbox__checkedIcon(
         name="checkmark"
@@ -27,18 +30,9 @@
         size="10"
       )
     span.FCheckbox__labelText {{ label }}
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
 </template>
 
 <style lang="stylus">
-.FCheckbox
-  position relative
-  margin-bottom var(--fcheckbox--margin-bottom)
-
 .FCheckbox__label
   position relative
   display flex
@@ -134,13 +128,12 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 
 import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genSize } from '@/utils/genSize';
 
 export interface FCheckboxProps {
   /**
@@ -210,7 +203,7 @@ export interface FCheckboxProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'input' | 'change' | 'blur' | null;
+  validationTrigger?: 'change' | 'focus' | 'blur';
   /**
    * Rules form validation
    */
@@ -226,30 +219,31 @@ export interface FCheckboxProps {
 }
 
 const props = withDefaults(defineProps<FCheckboxProps>(), {
-  label: '',
-  color: 'neutral--light-4',
-  textColor: 'neutral--dark-3',
   borderColor: 'neutral--dark-1',
-  hoverBorderColor: 'secondary',
-  focusColor: 'neutral--light-2',
-  focusBorderColor: 'neutral--dark-2',
-  checkedColor: 'secondary',
   checkedBorderColor: 'secondary',
+  checkedColor: 'secondary',
+  color: 'neutral--light-4',
   disabled: false,
-  modelValue: false,
   errorColor: 'danger',
-  hint: '',
-  hideHint: false,
-  hintTextColor: 'neutral--dark-4',
-  name: '',
-  validationTrigger: null,
-  validateOnMount: false,
-  rules: () => [],
   errorMessage: '',
+  focusBorderColor: 'neutral--dark-2',
+  focusColor: 'neutral--light-2',
+  hideHint: false,
+  hint: '',
+  hintTextColor: 'neutral--dark-4',
+  hoverBorderColor: 'secondary',
+  label: '',
+  modelValue: false,
+  name: '',
+  rules: () => [],
+  textColor: 'neutral--dark-3',
+  validateOnMount: false,
+  validationTrigger: 'change',
 });
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: boolean | null): void;
+  (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
 }>();
@@ -275,16 +269,15 @@ const checked = computed({
 
 const style = computed(
   (): Style => ({
-    '--fcheckbox--color': getCssColor(props.color),
-    '--fcheckbox--text-color': getCssColor(props.textColor),
     '--fcheckbox--border-color': getCssColor(props.borderColor),
-    '--fcheckbox--hover-border-color': getCssColor(props.hoverBorderColor),
-    '--fcheckbox--focus-color': getCssColor(props.focusColor),
-    '--fcheckbox--focus-border-color': getCssColor(props.focusBorderColor),
-    '--fcheckbox--checked-color': getCssColor(props.checkedColor),
     '--fcheckbox--checked-border-color': getCssColor(props.checkedBorderColor),
+    '--fcheckbox--checked-color': getCssColor(props.checkedColor),
+    '--fcheckbox--color': getCssColor(props.color),
     '--fcheckbox--error-color': getCssColor(props.errorColor),
-    '--fcheckbox--margin-bottom': genSize(props.hideHint ? 0 : 16),
+    '--fcheckbox--focus-border-color': getCssColor(props.focusBorderColor),
+    '--fcheckbox--focus-color': getCssColor(props.focusColor),
+    '--fcheckbox--hover-border-color': getCssColor(props.hoverBorderColor),
+    '--fcheckbox--text-color': getCssColor(props.textColor),
   })
 );
 
@@ -308,4 +301,11 @@ const classes = computed(() => ({
 const checkboxClasses = computed(() => ({
   'FCheckbox__checkbox--indeterminate': fieldValue.value === null,
 }));
+
+/**
+ * Custom handle change function because native onChange emits a "on" value when true
+ */
+function handleChange() {
+  handleValidation(fieldValue.value, props.validationTrigger === 'change');
+}
 </script>

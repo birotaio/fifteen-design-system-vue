@@ -1,5 +1,6 @@
 import { Story } from '@storybook/vue3';
-import FInput, { FInputProps } from '@/components/FInput.vue';
+import FInput, { FInputProps } from '@/components/form/FInput.vue';
+import { mask, required } from '@/rules';
 
 export default {
   title: 'Components/Form/FInput',
@@ -42,7 +43,6 @@ WithHint.parameters = {
 };
 WithHint.args = {
   placeholder: 'Email address',
-  name: 'test-input',
   hint: 'You can use your personal or professional email',
 };
 
@@ -61,9 +61,10 @@ Error.parameters = {
   backgrounds: { default: 'secondary' },
 };
 Error.args = {
-  placeholder: 'Email address',
-  rules: [() => false],
-  errorMessage: 'This field has an error',
+  placeholder: 'Fifteen',
+  labelTextColor: 'neutral--light-5',
+  rules: [value => value === 'Fifteen'],
+  errorMessage: 'Type "Fifteen" to dismiss the input',
   validateOnMount: true,
 };
 
@@ -73,4 +74,14 @@ Disabled.args = {
   placeholder: 'Email address',
   errorColor: 'danger',
   hint: 'You can use your personal or professional email',
+};
+
+export const Mask: Story<FInputProps> = Template.bind({});
+Mask.args = {
+  label: 'Birth date',
+  placeholder: 'DD/MM/YYYY',
+  mask: '##/##/####',
+  errorColor: 'danger',
+  errorMessage: 'Birth date is not valid',
+  rules: [required, value => mask(value, '##/##/####')],
 };

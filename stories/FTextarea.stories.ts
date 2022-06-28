@@ -1,5 +1,5 @@
 import { Story } from '@storybook/vue3';
-import FTextarea, { FTextareaProps } from '@/components/FTextarea.vue';
+import FTextarea, { FTextareaProps } from '@/components/form/FTextarea.vue';
 
 export default {
   title: 'Components/Form/FTextarea',
@@ -72,11 +72,10 @@ ErrorWithHint.parameters = {
   backgrounds: { default: 'secondary' },
 };
 ErrorWithHint.args = {
-  placeholder: 'Email address',
-  rules: [() => false],
+  placeholder: 'Augmented Bike Networks',
+  rules: [value => value === 'Augmented Bike Networks'],
   validateOnMount: true,
-  errorMessage: 'This field as an error',
-  hint: 'You can use your personal or professional email',
+  errorMessage: `Type "Augmented Bike Networks" to dismiss the error`,
 };
 
 export const Disabled: Story<FTextareaProps> = Template.bind({});

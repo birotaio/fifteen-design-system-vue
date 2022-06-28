@@ -1,5 +1,7 @@
 import { Story } from '@storybook/vue3';
-import FDigitsInput, { FDigitsInputProps } from '@/components/FDigitsInput.vue';
+import FDigitsInput, {
+  FDigitsInputProps,
+} from '@/components/form/FDigitsInput.vue';
 
 export default {
   title: 'Components/Form/FDigitsInput',
@@ -35,14 +37,9 @@ Full.args = {
 
 export const Error: Story<FDigitsInputProps> = Template.bind({});
 Error.args = {
-  hint: 'Check your SMS',
   digits: 5,
-  rules: [
-    value => {
-      return /[0-9]{5}/.test(value as string);
-    },
-  ],
-  errorMessage: 'Your confirmation code in incorrect',
+  rules: [value => value === '12345'],
+  errorMessage: 'Type "12345" to dismiss the error',
   validateOnMount: true,
 };
 

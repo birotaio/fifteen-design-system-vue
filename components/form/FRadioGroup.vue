@@ -1,14 +1,10 @@
 <template lang="pug">
-fieldset.FRadioGroup(
-  :style="style"
+FField.FRadioGroup(
+  fieldset
   :class="classes"
   :disabled="disabled"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
 )
-  FFieldLabel(
-    :label="label"
-    :name="name"
-    type="legend"
-  )
   .FRadioGroup__options
     FRadio(
       v-for="option in options"
@@ -16,25 +12,15 @@ fieldset.FRadioGroup(
       :value="option.value"
       :label="option.label"
       v-model="value"
-      hide-hint
       :disabled="disabled"
+      @change="handleChange"
+      @focus="handleFocus"
+      @blur="handleBlur"
+      hide-hint
     )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
 </template>
 
 <style lang="stylus">
-.FRadioGroup
-  display flex
-  flex-direction column
-  position relative
-  border none
-  padding 0
-  margin-bottom var(--fradiogroup--margin-bottom)
-
 .FRadioGroup__options
   display flex
   flex-direction column
@@ -53,12 +39,10 @@ fieldset.FRadioGroup(
 
 <script setup lang="ts">
 import { computed, watch } from 'vue';
-import FFieldLabel from '@/components/FFieldLabel.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
-import FRadio from '@/components/FRadio.vue';
+import FField from '@/components/form/FField.vue';
+import FRadio from '@/components/form/FRadio.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genSize } from '@/utils/genSize';
 
 export interface FRadioGroupOption {
   label: string;
@@ -79,6 +63,10 @@ export interface FRadioGroupProps {
    */
   label?: string;
   /**
+   * Text color of the label
+   */
+  labelTextColor?: Color;
+  /**
    * Display mode of the radio group
    */
   displayMode?: 'horizontal' | 'vertical';
@@ -97,7 +85,7 @@ export interface FRadioGroupProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | null;
+  validationTrigger?: 'change' | 'focus' | 'blur';
   /**
    * Disable interactions with the radio group
    */
@@ -119,27 +107,31 @@ export interface FRadioGroupProps {
    */
   errorMessage?: string;
   /**
-   * Text error color
+   * Hint error color
    */
   errorColor?: Color;
 }
 
 const props = withDefaults(defineProps<FRadioGroupProps>(), {
-  modelValue: '',
-  name: '',
-  label: '',
-  validationTrigger: 'change',
   displayMode: 'vertical',
+  errorColor: 'danger',
+  errorMessage: '',
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  label: '',
+  modelValue: '',
+  name: '',
   rules: () => [],
-  errorMessage: '',
-  errorColor: 'danger',
+  validationTrigger: 'change',
+  labelTextColor: 'neutral--dark-4',
 });
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;
   (name: 'select-radio', value: string | number | null): void;
+  (name: 'change', value: Event): void;
+  (name: 'focus', value: Event): void;
+  (name: 'blur', value: Event): void;
 }>();
 
 const { value, isValid, hint, handleValidation } = useFieldWithValidation(
@@ -148,12 +140,10 @@ const { value, isValid, hint, handleValidation } = useFieldWithValidation(
     validateOnMount: props.validateOnMount,
   }
 );
-useInputEventBindings(handleValidation, props.validationTrigger, emit);
-
-const style = computed(
-  (): Style => ({
-    '--fradiogroup--margin-bottom': genSize(props.hideHint ? 0 : 16),
-  })
+const { handleChange, handleFocus, handleBlur } = useInputEventBindings(
+  handleValidation,
+  props.validationTrigger,
+  emit
 );
 
 watch(value, () => {

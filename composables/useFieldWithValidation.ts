@@ -1,6 +1,6 @@
 import { Ref, ComputedRef, ref } from 'vue';
 import { computed, watch, toRef, getCurrentInstance } from 'vue';
-import { useField } from 'vee-validate';
+import { useField, validate } from 'vee-validate';
 import { useVModelProxy } from './useVModelProxy';
 
 type BaseProps<Value> = {
@@ -46,6 +46,19 @@ interface UseFieldWithValidationReturns {
 }
 
 /**
+ * Get a computed hint value, determined by props and validation status (error)
+ * @param props - Props of the component
+ * @param errors - Validation errors
+ */
+function getHint<Value>(props: BaseProps<Value>, errors: Ref<string[]>) {
+  return computed(() =>
+    errors.value?.length > 0
+      ? props?.errorMessage || errors.value?.[0]
+      : props.hint ?? ''
+  );
+}
+
+/**
  * Form related operations management: validation, hint value
  * @param props - Form field component props
  * @param options - Options to override prop names that are looked up by default
@@ -63,24 +76,46 @@ export function useFieldWithValidation<
 ): UseFieldWithValidationReturns {
   const fieldName = toRef<Props, 'name'>(props, 'name');
 
-  // Prevent validation if the input has no props.name
+  // Bypass form binding if the input has no props.name
   if (!fieldName.value) {
     const fieldValue = useVModelProxy(props);
-    return {
-      handleValidation: eventOrValue => {
-        const newValue =
-          eventOrValue instanceof Event
-            ? (eventOrValue.target as HTMLInputElement).value
-            : eventOrValue;
-        fieldValue.value = newValue;
+
+    const isValid = ref(true);
+    const errors = ref<string[]>([]);
+    let onMountValided = false;
+    watch(
+      fieldValue,
+      async () => {
+        if (
+          (options?.validateOnMount && !onMountValided) ||
+          options?.validateOnModelValueUpdate
+        ) {
+          const result = await validate(fieldValue.value, props?.rules);
+          errors.value = result.errors;
+          isValid.value = result.valid;
+          onMountValided = true;
+        }
       },
-      value: ref(null),
-      hint: ref(props?.hint ?? ''),
-      isValid: ref(true),
+      { immediate: options?.validateOnMount }
+    );
+
+    return {
+      handleValidation: async eventOrValue => {
+        // Value is only used when validation in manual (eg. for custom inputs like FPhoneInput or FDigitsInput)
+        const value =
+          eventOrValue instanceof Event ? fieldValue.value : eventOrValue;
+
+        const result = await validate(value ?? fieldValue.value, props?.rules);
+        errors.value = result.errors;
+        isValid.value = result.valid;
+      },
+      value: fieldValue,
+      hint: getHint(props, errors),
+      isValid,
     };
   }
 
-  const { errors, value, handleChange } = useField<Value>(
+  const { value, handleChange, errors } = useField<Value>(
     fieldName,
     props?.rules,
     {
@@ -104,17 +139,12 @@ export function useFieldWithValidation<
     }
   );
 
-  const hint = computed<string>(() =>
-    errors.value.length > 0
-      ? props?.errorMessage || errors.value?.[0]
-      : props?.hint || ''
-  );
   const isValid = computed(() => errors.value.length === 0);
 
   return {
     handleValidation: handleChange,
     value,
-    hint,
+    hint: getHint(props, errors),
     isValid,
   };
 }

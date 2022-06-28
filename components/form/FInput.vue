@@ -1,13 +1,9 @@
 <template lang="pug">
-.FInput(
+FField.FInput(
   :style="style"
   :class="classes"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
-  )
   .FInput__input
     .FInput__input__prefix
       slot(name="prefix")
@@ -33,20 +29,9 @@
       :color="errorColor"
       size="16"
     )
-  FFieldHint(
-    :text="hint"
-    :hidden="hideHint"
-    :text-color="hintTextColor"
-  )
 </template>
 
 <style lang="stylus">
-.FInput
-  display flex
-  flex-direction column
-  position relative
-  margin-bottom var(--finput--margin-bottom)
-
 .FInput__input
   display flex
   position relative
@@ -72,7 +57,6 @@
   input
     width 100%
     border none
-    user-select none
     outline none
     color var(--finput--text-color)
     background var(--finput--color)
@@ -84,10 +68,6 @@
 
     &::placeholder
       color var(--finput--placeholder-text-color)
-
-.FInput__label
-  color var(--finput--label)
-  margin-bottom rem(8)
 
 .FInput--error
   .FInput__input
@@ -116,8 +96,7 @@
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
-import FFieldLabel from '@/components/FFieldLabel.vue';
-import FFieldHint from '@/components/FFieldHint.vue';
+import FField from '@/components/form/FField.vue';
 import type CSS from 'csstype';
 import type { InputHTMLAttributes, Ref } from 'vue';
 
@@ -128,7 +107,6 @@ import { computed } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { genSize } from '@/utils/genSize';
 
 export interface FInputProps {
   /**
@@ -211,13 +189,17 @@ export interface FInputProps {
    */
   hint?: string;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Field name. Used in a form context
    */
   name?: string;
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'focus' | 'input' | 'change' | 'blur';
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
   /**
    * Whether the input should be validated on mount
    */
@@ -256,6 +238,7 @@ const props = withDefaults(defineProps<FInputProps>(), {
   hideErrorIcon: false,
   hint: '',
   hideHint: false,
+  hintIcon: null,
   hintTextColor: 'neutral--dark-4',
   placeholder: '',
   disabled: false,
@@ -270,10 +253,10 @@ const props = withDefaults(defineProps<FInputProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string): void;
+  (name: 'input', value: InputEvent): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'input', value: InputEvent): void;
 }>();
 
 const inputRef = ref<HTMLInputElement>();
@@ -304,7 +287,6 @@ const style = computed(
     '--finput--focus-border-color': getCssColor(props.focusBorderColor),
     '--finput--error-color': getCssColor(props.errorColor),
     '--finput--text-align': props.textAlign,
-    '--finput--margin-bottom': genSize(props.hideHint ? 0 : 16),
   })
 );
 

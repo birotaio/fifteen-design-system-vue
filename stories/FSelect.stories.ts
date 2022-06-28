@@ -1,5 +1,5 @@
 import { Story } from '@storybook/vue3';
-import FSelect, { FSelectProps } from '@/components/FSelect.vue';
+import FSelect, { FSelectProps } from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 
 export default {
@@ -119,8 +119,9 @@ Error.args = {
   textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
-  rules: [() => false],
-  errorMessage: 'Error sample',
+  rules: [value => value === 'data'],
+  errorMessage: 'Select "data" to dismiss the error',
+  validationTrigger: 'change',
   validateOnMount: true,
   clearable: true,
   placeholder: 'All topics',
@@ -130,7 +131,6 @@ Error.args = {
     { label: 'Benefits', value: 'benefits' },
     { label: 'Data', value: 'data' },
   ],
-  hint: 'Pick a contact motivation',
 };
 
 export const NoOption: Story<FSelectProps> = Template.bind({});
@@ -139,6 +139,9 @@ NoOption.parameters = {
 };
 NoOption.args = {
   emptyText: 'No option here',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   color: 'secondary',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',

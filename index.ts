@@ -10,72 +10,81 @@ export { default as FAvatar } from '@/components/FAvatar.vue';
 export { default as FBackgroundImage } from '@/components/FBackgroundImage.vue';
 export { default as FBreadcrumbs } from '@/components/FBreadcrumbs.vue';
 export { default as FButton } from '@/components/FButton.vue';
-export { default as FCheckbox } from '@/components/FCheckbox.vue';
 export { default as FDivider } from '@/components/FDivider.vue';
 export { default as FExpandable } from '@/components/FExpandable.vue';
-export { default as FFieldHint } from '@/components/FFieldHint.vue';
-export { default as FForm } from '@/components/FForm.vue';
+export { default as FFieldHint } from '@/components/form/FFieldHint.vue';
+export { default as FFieldLabel } from '@/components/form/FFieldLabel.vue';
+export { default as FForm } from '@/components/form/FForm.vue';
 export { default as FGrid } from '@/components/FGrid.vue';
 export { default as FGridItem } from '@/components/FGridItem.vue';
 export { default as FIcon } from '@/components/FIcon.vue';
 export { default as FImage } from '@/components/FImage.vue';
-export { default as FInput } from '@/components/FInput.vue';
 export { default as FLink } from '@/components/FLink.vue';
 export { default as FLogo } from '@/components/FLogo.vue';
 export { default as FLogoAnimatable } from '@/components/FLogoAnimatable.vue';
 export { default as FProgressBar } from '@/components/FProgressBar.vue';
-export { default as FSelect } from '@/components/FSelect.vue';
 export { default as FSkeleton } from '@/components/FSkeleton.vue';
 export { default as FSvgImage } from '@/components/FSvgImage.vue';
-export { default as FTextarea } from '@/components/FTextarea.vue';
-export { default as FPhoneInput } from '@/components/FPhoneInput.vue';
-export { default as FDigitsInput } from '@/components/FDigitsInput.vue';
-export { default as FRadio } from '@/components/FRadio.vue';
-export { default as FRadioGroup } from '@/components/FRadioGroup.vue';
 export { default as FFlagIcon } from '@/components/FFlagIcon.vue';
+
+/**
+ * Forms components
+ */
+export { default as FCheckbox } from '@/components/form/FCheckbox.vue';
+export { default as FDigitsInput } from '@/components/form/FDigitsInput.vue';
+export { default as FInput } from '@/components/form/FInput.vue';
+export { default as FPhoneInput } from '@/components/form/FPhoneInput.vue';
+export { default as FRadio } from '@/components/form/FRadio.vue';
+export { default as FRadioGroup } from '@/components/form/FRadioGroup.vue';
+export { default as FSelect } from '@/components/form/FSelect.vue';
+export { default as FTextarea } from '@/components/form/FTextarea.vue';
 
 /**
  * Components props interfaces
  */
-export type { FCardProps } from '@/components/FCard.vue';
 export type { FAvatarProps } from '@/components/FAvatar.vue';
 export type { FBackgroundImageProps } from '@/components/FBackgroundImage.vue';
-export type {
-  FBreadcrumbsProps,
-  FBreadcrumbLink,
-} from '@/components/FBreadcrumbs.vue';
 export type {
   FButtonProps,
   FButtonAnchorPoint,
   FButtonSize,
 } from '@/components/FButton.vue';
-export type { FCheckboxProps } from '@/components/FCheckbox.vue';
+export type {
+  FBreadcrumbsProps,
+  FBreadcrumbLink,
+} from '@/components/FBreadcrumbs.vue';
+export type { FCardProps } from '@/components/FCard.vue';
+export type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
+export type { FDigitsInputProps } from '@/components/form/FDigitsInput.vue';
 export type { FDividerProps } from '@/components/FDivider.vue';
 export type { FExpandableProps } from '@/components/FExpandable.vue';
-export type { FFieldHintProps } from '@/components/FFieldHint.vue';
-export type { FFormProps } from '@/components/FForm.vue';
-export type { FGridProps } from '@/components/FGrid.vue';
+export type { FFieldHintProps } from '@/components/form/FFieldHint.vue';
+export type { FFieldLabelProps } from '@/components/form/FFieldLabel.vue';
+export type { FFlagIconProps } from '@/components/FFlagIcon.vue';
+export type { FFormProps } from '@/components/form/FForm.vue';
 export type { FGridItemProps } from '@/components/FGridItem.vue';
+export type { FGridProps } from '@/components/FGrid.vue';
 export type { FIconProps } from '@/components/FIcon.vue';
 export type { FImageProps } from '@/components/FImage.vue';
-export type { FInputProps } from '@/components/FInput.vue';
+export type { FInputProps } from '@/components/form/FInput.vue';
 export type { FLinkProps } from '@/components/FLink.vue';
-export type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
 export type {
   FLogoAnimatableProps,
   FLogoLineDelta,
   FLogoLineNumber,
 } from '@/components/FLogoAnimatable.vue';
+export type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
+export type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
 export type { FProgressBarProps } from '@/components/FProgressBar.vue';
-export type { FSelectProps, FSelectOption } from '@/components/FSelect.vue';
+export type {
+  FSelectProps,
+  FSelectOption,
+} from '@/components/form/FSelect.vue';
+export type { FRadioGroupProps } from '@/components/form/FRadioGroup.vue';
+export type { FRadioProps } from '@/components/form/FRadio.vue';
 export type { FSkeletonProps } from '@/components/FSkeleton.vue';
 export type { FSvgImageProps } from '@/components/FSvgImage.vue';
-export type { FTextareaProps } from '@/components/FTextarea.vue';
-export type { FPhoneInputProps } from '@/components/FPhoneInput.vue';
-export type { FDigitsInputProps } from '@/components/FDigitsInput.vue';
-export type { FRadioProps } from '@/components/FRadio.vue';
-export type { FRadioGroupProps } from '@/components/FRadioGroup.vue';
-export type { FFlagIconProps } from '@/components/FFlagIcon.vue';
+export type { FTextareaProps } from '@/components/form/FTextarea.vue';
 
 /**
  * Composables

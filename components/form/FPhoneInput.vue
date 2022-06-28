@@ -1,13 +1,9 @@
 <template lang="pug">
-.FPhoneInput(
+FField.FPhoneInput(
   :class="classes"
   :style="style"
+  v-bind="{ name, label, labelTextColor, hint, hideHint: true, hintTextColor }"
 )
-  FFieldLabel(
-    :name="name"
-    :label="label"
-    :text-color="labelTextColor"
-  )
   FMenu(
     :options="countries"
     v-model:is-open="isMenuOpen"
@@ -26,7 +22,7 @@
         :placeholder-text-color="placeholderTextColor"
         :rules="[() => isValidPhone]"
         :validate-on-mount="validateOnMount"
-        validation-trigger="change"
+        :validation-trigger="validationTrigger"
         :disabled="disabled"
         :hint="hint"
         :hide-hint="hideHint"
@@ -63,9 +59,6 @@
 
 <style lang="stylus">
 .FPhoneInput
-  display flex
-  flex-direction column
-  position relative
   background none
 
 .FPhoneInput__select
@@ -135,12 +128,12 @@
 </style>
 
 <script setup lang="ts">
-import FInput from '@/components/FInput.vue';
+import FInput from '@/components/form/FInput.vue';
 import FDivider from '@/components/FDivider.vue';
 import FFlagIcon from '@/components/FFlagIcon.vue';
 import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
-import FFieldLabel from './FFieldLabel.vue';
+import FField from '@/components/form/FField.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {
@@ -151,7 +144,7 @@ import {
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import type { FSelectOption } from '@/components/FSelect.vue';
+import type { FSelectOption } from '@/components/form/FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
@@ -233,6 +226,10 @@ export interface FPhoneInputProps {
    * Text color of option item
    */
   optionTextColor?: Color;
+  /**
+   * Event that triggers validation
+   */
+  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
 }
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
@@ -253,6 +250,7 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   placeholderTextColor: 'neutral--dark-2',
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-3',
+  validationTrigger: 'change',
 });
 
 defineEmits<{

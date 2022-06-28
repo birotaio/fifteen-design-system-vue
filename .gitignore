@@ -9,3 +9,4 @@ auto-imports.d.ts
 coverage
 dist
 resolvers/dist
+report

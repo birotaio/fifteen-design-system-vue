@@ -75,6 +75,10 @@ a.FLink(
     &:hover
       color var(--flink--hover-color)
 
+.FLink__content
+  display flex
+  align-items center
+
 .FLink__arrow
   width rem(48)
   height rem(48)

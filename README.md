@@ -142,6 +142,12 @@ If you want to develop the library, you can clone the repository and install the
 yarn install
 ```
 
+Install also the husky hooks by running:
+
+```
+yarn husky
+```
+
 Then you run `yarn sb` (or `yarn dev` which is an alias) and Storybook will launch with the components stories on port 3003.
 
 ### Authoring

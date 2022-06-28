@@ -139,6 +139,9 @@ NoOption.parameters = {
 };
 NoOption.args = {
   emptyText: 'No option here',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   color: 'secondary',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',

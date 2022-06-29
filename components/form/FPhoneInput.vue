@@ -2,7 +2,7 @@
 FField.FPhoneInput(
   :class="classes"
   :style="style"
-  v-bind="{ name, label, labelTextColor, hint, hideHint: true, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
 )
   FMenu(
     :options="countries"
@@ -14,20 +14,21 @@ FField.FPhoneInput(
   )
     template(#activator="{ toggleMenu }")
       FInput(
-        v-bind="{ placeholder }"
         v-model="phoneNumber"
         :color="color"
         :text-color="textColor"
         :error-message="errorMessage"
+        :placeholder="placeholder"
         :placeholder-text-color="placeholderTextColor"
-        :rules="[() => isValidPhone]"
         :validate-on-mount="validateOnMount"
         :validation-trigger="validationTrigger"
         :disabled="disabled"
-        :hint="hint"
-        :hide-hint="hideHint"
-        :hint-text-color="hintTextColor"
+        hide-hint
         :mask="phoneNumberMask"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @change="handleChange"
+        @input="handleInput"
       )
         template(#prefix)
           .FPhoneInput__prefix
@@ -137,7 +138,7 @@ import FField from '@/components/form/FField.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {
-  isValidNumberForRegion,
+  isValidNumber,
   getCountries,
   getCountryCallingCode,
   getExampleNumber,
@@ -148,6 +149,7 @@ import type { FSelectOption } from '@/components/form/FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
+import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 export interface FPhoneInputProps {
   /**
@@ -253,16 +255,27 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   validationTrigger: 'change',
 });
 
-defineEmits<{
+const emit = defineEmits<{
   (name: 'update:modelValue', value: string | null): void;
   (name: 'update:phoneNumber', value: string | null): void;
+  (name: 'input', value: InputEvent): void;
+  (name: 'change', value: Event): void;
+  (name: 'focus', value: Event): void;
+  (name: 'blur', value: Event): void;
 }>();
 
 const { isValid, hint, handleValidation } = useFieldWithValidation<
   string | number
 >(props, {
   validateOnMount: props?.validateOnMount,
+  rules: [isValidPhone],
 });
+const { handleBlur, handleChange, handleFocus, handleInput } =
+  useInputEventBindings(
+    () => handleValidation(phonePrefix.value + phoneNumber.value),
+    props.validationTrigger,
+    emit
+  );
 
 const classes = computed(() => ({
   'FPhoneInput--disabled': props.disabled,
@@ -288,8 +301,9 @@ const phonePrefix = computed(
 );
 const phoneNumber = useVModelProxy<string>(props, 'phoneNumber');
 
+// Handle value update only. Validation is performed with 'validation-trigger' event
 watch([phonePrefix, phoneNumber], () => {
-  handleValidation(phonePrefix.value + phoneNumber.value);
+  handleValidation(phonePrefix.value + phoneNumber.value, false);
 });
 
 const countries = getCountries().map((country: CountryCode) => ({
@@ -316,9 +330,11 @@ const phoneNumberMask = computed(() => {
   return [nationalFormat, internationalFormatWithoutCountryCallingCode];
 });
 
-const isValidPhone = computed(() =>
-  isValidNumberForRegion(phoneNumber.value ?? '', countryCode.value)
-);
+// Internal validation rule, always applied
+function isValidPhone(value: unknown) {
+  if (typeof value !== 'string') return true;
+  return isValidNumber(value);
+}
 
 const isMenuOpen = ref(false);
 

@@ -41,9 +41,8 @@ Full.args = {
 export const Error: Story<FPhoneInputProps> = Template.bind({});
 Error.args = {
   label: 'Enter you phone number',
-  rules: [value => value !== ''],
   validateOnMount: true,
-  errorMessage: 'Enter any number to dismiss the error',
+  errorMessage: 'Enter any valid number to dismiss the error',
 };
 
 export const Disabled: Story<FPhoneInputProps> = Template.bind({});

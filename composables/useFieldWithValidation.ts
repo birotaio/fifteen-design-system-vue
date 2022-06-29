@@ -21,6 +21,10 @@ interface UseFieldWithValidationOptions {
    * Validate the input when model value is updated
    */
   validateOnModelValueUpdate?: boolean;
+  /**
+   * Internal component rules
+   */
+  rules?: ValidationRule | ValidationRule[];
 }
 
 interface UseFieldWithValidationReturns {
@@ -76,6 +80,11 @@ export function useFieldWithValidation<
 ): UseFieldWithValidationReturns {
   const fieldName = toRef<Props, 'name'>(props, 'name');
 
+  const rules = [
+    ...(props?.rules ? [props.rules] : []),
+    ...(options?.rules ? [options.rules] : []),
+  ].flat(1);
+
   // Bypass form binding if the input has no props.name
   if (!fieldName.value) {
     const fieldValue = useVModelProxy(props);
@@ -90,7 +99,7 @@ export function useFieldWithValidation<
           (options?.validateOnMount && !onMountValided) ||
           options?.validateOnModelValueUpdate
         ) {
-          const result = await validate(fieldValue.value, props?.rules);
+          const result = await validate(fieldValue.value, rules);
           errors.value = result.errors;
           isValid.value = result.valid;
           onMountValided = true;
@@ -100,14 +109,16 @@ export function useFieldWithValidation<
     );
 
     return {
-      handleValidation: async eventOrValue => {
+      handleValidation: async (eventOrValue, validateField = true) => {
         // Value is only used when validation in manual (eg. for custom inputs like FPhoneInput or FDigitsInput)
         const value =
           eventOrValue instanceof Event ? fieldValue.value : eventOrValue;
 
-        const result = await validate(value ?? fieldValue.value, props?.rules);
-        errors.value = result.errors;
-        isValid.value = result.valid;
+        if (validateField) {
+          const result = await validate(value ?? fieldValue.value, rules);
+          errors.value = result.errors;
+          isValid.value = result.valid;
+        }
       },
       value: fieldValue,
       hint: getHint(props, errors),
@@ -115,15 +126,11 @@ export function useFieldWithValidation<
     };
   }
 
-  const { value, handleChange, errors } = useField<Value>(
-    fieldName,
-    props?.rules,
-    {
-      initialValue: props?.modelValue ?? undefined,
-      validateOnValueUpdate: false,
-      validateOnMount: options?.validateOnMount,
-    }
-  );
+  const { value, handleChange, errors } = useField<Value>(fieldName, rules, {
+    initialValue: props?.modelValue ?? undefined,
+    validateOnValueUpdate: false,
+    validateOnMount: options?.validateOnMount,
+  });
 
   const vm = getCurrentInstance();
   const _emit = emit || vm?.emit;

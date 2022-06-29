@@ -28,9 +28,6 @@ const { values, validate } = useForm({
 
 async function submit() {
   const result = await validate();
-
-  if (result.valid) {
-    emit('valid', values);
-  }
+  result.valid && emit('valid', values);
 }
 </script>

@@ -3,7 +3,7 @@
 ### Fixes
 
 - [a11y] Add alt (aria-label) with the country code to FFlagIcon component
-- [FSelect] Forward FMenu options slots properly
+- [FSelect] Forward FMenu options slots, preventSelection prop and `select-option` event properly
 
 ## 0.2.0 (June 30, 2022)
 

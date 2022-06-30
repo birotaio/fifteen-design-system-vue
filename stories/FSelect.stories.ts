@@ -206,7 +206,7 @@ Unselectable.parameters = {
   backgrounds: { default: 'neutral' },
 };
 Unselectable.args = {
-  disableSelection: true,
+  preventSelection: true,
   color: 'secondary',
   placeholderTextColor: 'neutral--light-3',
   optionTextColor: 'neutral--light-3',

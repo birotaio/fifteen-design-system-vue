@@ -14,7 +14,8 @@ FField.FSelect(
     :text-color="optionTextColor"
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
-    :disable-selection="disableSelection"
+    :prevent-selection="preventSelection"
+    @select-option="emit('select-option', $event)"
   )
     template(#option-prefix)
       slot(name="option-prefix")
@@ -271,9 +272,9 @@ export interface FSelectProps {
    */
   errorMessage?: string;
   /**
-   * Disable item selection
+   * Prevent item selection
    */
-  disableSelection?: boolean;
+  preventSelection?: boolean;
 }
 
 const props = withDefaults(defineProps<FSelectProps>(), {
@@ -281,7 +282,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   options: () => [],
   color: 'neutral--light-3',
   disabled: false,
-  disableSelection: false,
+  preventSelection: false,
   emptyText: '',
   errorColor: 'danger',
   errorMessage: '',
@@ -316,6 +317,7 @@ const emit = defineEmits<{
   (name: 'focus'): void;
   (name: 'blur'): void;
   (name: 'clear'): void;
+  (name: 'select-option', value: string | number | null): void;
 }>();
 
 const {

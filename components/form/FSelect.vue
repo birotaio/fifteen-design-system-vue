@@ -16,6 +16,12 @@ FField.FSelect(
     :selected-option-text-color="selectedOptionTextColor"
     :disable-selection="disableSelection"
   )
+    template(#option-prefix)
+      slot(name="option-prefix")
+
+    template(#option)
+      slot(name="option")
+
     template(#activator="{ toggleMenu }")
       .FSelect__select(
         tabindex="0"

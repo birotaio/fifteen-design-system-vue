@@ -4,6 +4,7 @@
     :markup="flagFiles[currentFlagPath]"
     fill-color="none"
     use-svg-colors
+    :alt="countryCode"
     :height="size"
     :width="size"
   )

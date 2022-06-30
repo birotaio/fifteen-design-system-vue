@@ -17,11 +17,17 @@ FField.FSelect(
     :prevent-selection="preventSelection"
     @select-option="emit('select-option', $event)"
   )
-    template(#option-prefix)
-      slot(name="option-prefix")
+    template(#option-prefix="scope")
+      slot(
+        name="option-prefix"
+        v-bind="scope"
+      )
 
-    template(#option)
-      slot(name="option")
+    template(#option="scope")
+      slot(
+        name="option"
+        v-bind="scope"
+      )
 
     template(#activator="{ toggleMenu }")
       .FSelect__select(

@@ -18,10 +18,7 @@ module.exports = {
           '@': path.resolve(__dirname, '..'),
         },
       },
-      plugins: [
-        ...config.plugins,
-        ViteSvgLoader(),
-      ],
+      plugins: [...config.plugins, ViteSvgLoader()],
       css: {
         preprocessorOptions: {
           stylus: {

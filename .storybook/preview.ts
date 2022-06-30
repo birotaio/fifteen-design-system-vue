@@ -2,7 +2,7 @@ import '@/styles/elements.styl';
 import '@/styles/theme.styl';
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
       date: /Date$/,
@@ -33,7 +33,7 @@ export const parameters = {
       },
     ],
   },
-}
+};
 
 export const decorators = [
   story => ({

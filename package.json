@@ -1,6 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "private": false,
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
@@ -21,24 +21,44 @@
     "url": "https://github.com/birotaio/fifteen-design-system-vue/issues"
   },
   "homepage": "https://fifteen.eu",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist",
     "types",
     "resolvers",
     "styles"
   ],
-  "main": "./dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./resolvers": {
+      "import": "./dist/es/resolvers/index.js",
+      "require": "./dist/cjs/resolvers/index.js"
+    },
+    "./style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    },
+    "./theme.css": {
+      "import": "./dist/theme.css",
+      "require": "./dist/theme.css"
+    }
+  },
   "scripts": {
     "dev": "yarn sb",
     "sb": "start-storybook -p 3003",
     "dev:build": "DEV_BUILD=1 yarn build",
     "build:sb": "build-storybook",
     "build:lib": "vite build",
-    "build:types": "vue-tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",
+    "build:types": "vue-tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp assets/fonts/* dist/assets/fonts",
     "build:icons": "zx scripts/build-icons.mjs",
-    "build": "yarn build:icons && yarn build:lib && yarn build:types && yarn build:theme",
+    "build:resolvers": "tsc -p tsconfig.resolvers.json --outDir dist/es && tsc -p tsconfig.resolvers.json --module commonjs --target es5 --outDir dist/cjs",
+    "build": "yarn build:icons && yarn build:lib && yarn build:resolvers && yarn build:types && yarn build:theme",
     "release": "make release",
     "lint-staged": "lint-staged",
     "eslint": "eslint --ext .ts,.vue .",

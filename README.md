@@ -29,16 +29,16 @@ import { FButton, FButtonProps, useFBreakpoints, colorDesignTokens, Color } from
 You also need to add the lib CSS to your project.
 
 ```
-import '@fifteen/design-system-vue/dist/style.css';
+import '@fifteen/design-system-vue/style.css';
 ```
 
 If you want to use the library with Fifteen’s style, you also need to import the built-in theme CSS:
 
 ```
-import '@fifteen/design-system-vue/dist/theme.css';
+import '@fifteen/design-system-vue/theme.css';
 ```
 
-Alternatively, if you want to customize the theme, you can look for all the CSS variables that are exposed in `@fifteen/design-system-vue/dist/theme.css` and declare yours.
+Alternatively, if you want to customize the theme, you can look for all the CSS variables that are exposed in `@fifteen/design-system-vue/theme.css` and declare yours.
 
 ### Auto imports with Vite
 

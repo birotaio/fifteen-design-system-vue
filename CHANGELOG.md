@@ -1,3 +1,10 @@
+## 0.2.1 (June 30, 2022)
+
+### Fixes
+
+- [a11y] Add alt (aria-label) with the country code to FFlagIcon component
+- [FSelect] Forward FMenu options slots properly
+
 ## 0.2.0 (June 30, 2022)
 
 ### Features

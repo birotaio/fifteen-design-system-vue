@@ -1,3 +1,20 @@
+## 0.2.0 (June 30, 2022)
+
+### Features
+
+- [FFlagIcon] Add `size` prop
+- [FMenu] remove diacritics from preselect search
+- [Build] Properly build lib in CJS and ESM, alongside /resolvers
+- [Rules] Expose vee-validate + custom validation rules under `/rules` subfolder
+- [FRadioGroup] Add `hint` prop
+- [useFieldWithValidation] Allow v-model usage outside of form context
+- [form] Add missing trigger validation events
+
+### Fixes
+
+- [FDigitsInput] Ensure all digits are registered when emit complete
+- [FSelect] Fix value not correctly cleared on icon click
+
 ## 0.1.7 (June 20, 2022)
 
 ### Fixes
@@ -19,14 +36,14 @@
 ### Changes
 
 - [FSelect] Harmonize default theme with other input components
-- [FPhoneInput] Add rounded flags 
+- [FPhoneInput] Add rounded flags
 
-### Fixes 
+### Fixes
 
 - [FPhoneInput] Fix broken form integration
 - [FDigitsInput] Fix broken form integration
 - [FDivider] Fix margins prop not working
-- [utils] Make genId function compatible with SSR 
+- [utils] Make genId function compatible with SSR
 
 ## 0.1.3 (June 14, 2022)
 

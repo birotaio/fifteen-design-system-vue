@@ -1,3 +1,10 @@
+## 0.2.2 (June 30, 2022)
+
+### Fixes
+
+- [build] Expose /rules to npm package
+- [FSelect] Forward FMenu options slot scopes
+
 ## 0.2.1 (June 30, 2022)
 
 ### Fixes

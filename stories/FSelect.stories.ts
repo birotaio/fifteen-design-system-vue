@@ -1,9 +1,9 @@
 import { Story } from '@storybook/vue3';
-import FSelect, { FSelectProps } from '@/components/FSelect.vue';
+import FSelect, { FSelectProps } from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 
 export default {
-  title: 'Components/FSelect',
+  title: 'Components/Form/FSelect',
   component: FSelect,
 };
 
@@ -26,11 +26,40 @@ Default.args = {
   ],
 };
 
+export const WithLabel: Story<FSelectProps> = Template.bind({});
+WithLabel.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+WithLabel.args = {
+  label: 'Pick a topic',
+  placeholder: 'All topics',
+  options: [
+    { label: 'Acquisition', value: 'acquisition' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Data', value: 'data' },
+  ],
+};
+
 export const WithHint: Story<FSelectProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'neutral' },
 };
 WithHint.args = {
+  placeholder: 'All topics',
+  options: [
+    { label: 'Acquisition', value: 'acquisition' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Data', value: 'data' },
+  ],
+  hint: 'Pick a contact motivation',
+};
+
+export const Full: Story<FSelectProps> = Template.bind({});
+Full.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+Full.args = {
+  label: 'Pick a topic',
   placeholder: 'All topics',
   options: [
     { label: 'Acquisition', value: 'acquisition' },
@@ -85,8 +114,14 @@ Error.parameters = {
 };
 Error.args = {
   color: 'secondary',
-  rules: [() => false],
-  errorMessage: 'Error sample',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
+  rules: [value => value === 'data'],
+  errorMessage: 'Select "data" to dismiss the error',
+  validationTrigger: 'change',
   validateOnMount: true,
   clearable: true,
   placeholder: 'All topics',
@@ -96,7 +131,6 @@ Error.args = {
     { label: 'Benefits', value: 'benefits' },
     { label: 'Data', value: 'data' },
   ],
-  hint: 'Pick a contact motivation',
 };
 
 export const NoOption: Story<FSelectProps> = Template.bind({});
@@ -105,7 +139,12 @@ NoOption.parameters = {
 };
 NoOption.args = {
   emptyText: 'No option here',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   color: 'secondary',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
   clearable: true,
   placeholder: 'All topics',
   options: [],
@@ -129,6 +168,9 @@ LongOptionsLabel.parameters = {
 };
 LongOptionsLabel.args = {
   color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
   placeholder: 'All topics',
   options: [
     {
@@ -147,9 +189,52 @@ ManyOptions.parameters = {
 };
 ManyOptions.args = {
   color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
   placeholder: 'All topics',
   options: new Array(10).fill(null).map((_, index) => ({
     label: `Option ${index}`,
+    value: `option-${index}`,
+  })),
+};
+
+export const Unselectable: Story<FSelectProps> = Template.bind({});
+Unselectable.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+Unselectable.args = {
+  disableSelection: true,
+  color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
+  placeholder: 'All topics',
+  options: new Array(10).fill(null).map((_, index) => ({
+    label: `Option ${index}`,
+    value: `option-${index}`,
+  })),
+};
+
+export const SmallWidth: Story<FSelectProps> = Template.bind({});
+SmallWidth.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+SmallWidth.args = {
+  menuWidth: 300,
+  color: 'secondary',
+  placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
+  focusColor: 'secondary',
+  optionsMenuColor: 'secondary',
+  placeholder: 'All topics',
+  options: new Array(10).fill(null).map((_, index) => ({
+    label: `Option with a long label ${index}`,
     value: `option-${index}`,
   })),
 };

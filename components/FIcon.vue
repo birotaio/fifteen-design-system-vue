@@ -46,6 +46,8 @@
 
   path
     fill currentColor
+    stroke var(--ficon--stroke-color)
+    stroke-width var(--ficon--stroke-width)
     transition fill 0.12s var(--transition--ease-out)
 
   @media (prefers-reduced-motion )
@@ -75,11 +77,19 @@ export interface FIconProps {
    */
   color?: Color;
   /**
+   * Stroke color of the icon
+   */
+  strokeColor?: Color;
+  /**
+   * Stroke width
+   */
+  strokeWidth?: number;
+  /**
    * Source of the icon
    */
   src?: string;
   /**
-   * An optional alternate text for the icon,
+   * Optional alternate text for the icon,
    * will override the auto-generated one based on the icon name
    */
   alt?: string;
@@ -93,9 +103,11 @@ const props = withDefaults(defineProps<FIconProps>(), {
   name: null,
   size: '24',
   color: '',
+  strokeColor: '',
   src: '',
   alt: '',
   markup: '',
+  strokeWidth: 0,
 });
 
 const altText = computed(() => {
@@ -115,6 +127,8 @@ const style = computed(
   (): Style => ({
     '--ficon--size': genSize(props.size),
     '--ficon--color': getCssColor(props.color),
+    '--ficon--stroke-color': getCssColor(props.strokeColor),
+    '--ficon--stroke-width': genSize(props.strokeWidth),
   })
 );
 </script>

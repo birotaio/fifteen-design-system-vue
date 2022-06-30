@@ -42,7 +42,7 @@ export default defineConfig({
       external: [
         'vue',
         '@vueuse/core',
-        ...(process.env.DEV_BUILD ? [] : ['vee-validate']),
+        ...(process.env.DEV_BUILD ? [] : ['vee-validate', '@vee-validate/rules']),
       ],
     },
   },

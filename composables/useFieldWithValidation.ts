@@ -1,6 +1,7 @@
-import type { Ref, ComputedRef } from 'vue';
+import { Ref, ComputedRef, ref } from 'vue';
 import { computed, watch, toRef, getCurrentInstance } from 'vue';
-import { useField } from 'vee-validate';
+import { useField, validate } from 'vee-validate';
+import { useVModelProxy } from './useVModelProxy';
 
 type BaseProps<Value> = {
   modelValue: Value | null;
@@ -20,13 +21,20 @@ interface UseFieldWithValidationOptions {
    * Validate the input when model value is updated
    */
   validateOnModelValueUpdate?: boolean;
+  /**
+   * Internal component rules
+   */
+  rules?: ValidationRule | ValidationRule[];
 }
 
 interface UseFieldWithValidationReturns {
   /**
    * Function which handles field update, with validation or not
    */
-  handleValidation: (e: unknown, shouldValidate?: boolean | undefined) => void;
+  handleValidation: (
+    e: Event | string | number | boolean | null,
+    shouldValidate?: boolean
+  ) => void;
   /**
    * Input field ref value
    */
@@ -34,11 +42,24 @@ interface UseFieldWithValidationReturns {
   /**
    * Input hint, coming from props.hint, or props.errorMessage if the validation fails
    */
-  hint: ComputedRef<string>;
+  hint: Ref<string> | ComputedRef<string>;
   /**
    * Field validation status
    */
-  isValid: ComputedRef<boolean>;
+  isValid: Ref<boolean> | ComputedRef<boolean>;
+}
+
+/**
+ * Get a computed hint value, determined by props and validation status (error)
+ * @param props - Props of the component
+ * @param errors - Validation errors
+ */
+function getHint<Value>(props: BaseProps<Value>, errors: Ref<string[]>) {
+  return computed(() =>
+    errors.value?.length > 0
+      ? props?.errorMessage || errors.value?.[0]
+      : props.hint ?? ''
+  );
 }
 
 /**
@@ -57,15 +78,59 @@ export function useFieldWithValidation<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   emit?: (name: Name, ...args: any[]) => void
 ): UseFieldWithValidationReturns {
-  const { errors, value, handleChange } = useField<Value>(
-    toRef<Props, 'name'>(props, 'name'),
-    props?.rules,
-    {
-      initialValue: props?.modelValue ?? undefined,
-      validateOnValueUpdate: false,
-      validateOnMount: options?.validateOnMount,
-    }
-  );
+  const fieldName = toRef<Props, 'name'>(props, 'name');
+
+  const rules = [
+    ...(props?.rules ? [props.rules] : []),
+    ...(options?.rules ? [options.rules] : []),
+  ].flat(1);
+
+  // Bypass form binding if the input has no props.name
+  if (!fieldName.value) {
+    const fieldValue = useVModelProxy(props);
+
+    const isValid = ref(true);
+    const errors = ref<string[]>([]);
+    let onMountValided = false;
+    watch(
+      fieldValue,
+      async () => {
+        if (
+          (options?.validateOnMount && !onMountValided) ||
+          options?.validateOnModelValueUpdate
+        ) {
+          const result = await validate(fieldValue.value, rules);
+          errors.value = result.errors;
+          isValid.value = result.valid;
+          onMountValided = true;
+        }
+      },
+      { immediate: options?.validateOnMount }
+    );
+
+    return {
+      handleValidation: async (eventOrValue, validateField = true) => {
+        // Value is only used when validation in manual (eg. for custom inputs like FPhoneInput or FDigitsInput)
+        const value =
+          eventOrValue instanceof Event ? fieldValue.value : eventOrValue;
+
+        if (validateField) {
+          const result = await validate(value ?? fieldValue.value, rules);
+          errors.value = result.errors;
+          isValid.value = result.valid;
+        }
+      },
+      value: fieldValue,
+      hint: getHint(props, errors),
+      isValid,
+    };
+  }
+
+  const { value, handleChange, errors } = useField<Value>(fieldName, rules, {
+    initialValue: props?.modelValue ?? undefined,
+    validateOnValueUpdate: false,
+    validateOnMount: options?.validateOnMount,
+  });
 
   const vm = getCurrentInstance();
   const _emit = emit || vm?.emit;
@@ -81,17 +146,12 @@ export function useFieldWithValidation<
     }
   );
 
-  const hint = computed<string>(() =>
-    errors.value.length > 0
-      ? props?.errorMessage || errors.value?.[0]
-      : props?.hint || ''
-  );
   const isValid = computed(() => errors.value.length === 0);
 
   return {
     handleValidation: handleChange,
     value,
-    hint,
+    hint: getHint(props, errors),
     isValid,
   };
 }

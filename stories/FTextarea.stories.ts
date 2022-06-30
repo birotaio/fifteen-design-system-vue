@@ -1,8 +1,8 @@
 import { Story } from '@storybook/vue3';
-import FTextarea, { FTextareaProps } from '@/components/FTextarea.vue';
+import FTextarea, { FTextareaProps } from '@/components/form/FTextarea.vue';
 
 export default {
-  title: 'Components/FTextarea',
+  title: 'Components/Form/FTextarea',
   component: FTextarea,
   argTypes: {
     onClick: { action: 'click' },
@@ -27,13 +27,33 @@ Default.args = {
   placeholder: 'Email address',
 };
 
+export const WithLabel: Story<FTextareaProps> = Template.bind({});
+WithLabel.parameters = {
+  backgrounds: { default: 'success' },
+};
+WithLabel.args = {
+  label: 'Contact motivation',
+  placeholder: 'I contact you today because...',
+};
+
 export const WithHint: Story<FTextareaProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'success' },
 };
 WithHint.args = {
-  placeholder: 'Email address',
-  hint: 'You can use your personal or professional email',
+  placeholder: 'I contact you today because...',
+  hint: 'Feel free to write anything',
+};
+
+export const Full: Story<FTextareaProps> = Template.bind({});
+Full.parameters = {
+  backgrounds: { default: 'success' },
+};
+Full.args = {
+  label: 'Contact motivation',
+
+  placeholder: 'I contact you today because...',
+  hint: 'Feel free to write anything',
 };
 
 export const Error: Story<FTextareaProps> = Template.bind({});
@@ -52,11 +72,10 @@ ErrorWithHint.parameters = {
   backgrounds: { default: 'secondary' },
 };
 ErrorWithHint.args = {
-  placeholder: 'Email address',
-  rules: [() => false],
+  placeholder: 'Augmented Bike Networks',
+  rules: [value => value === 'Augmented Bike Networks'],
   validateOnMount: true,
-  errorMessage: 'This field as an error',
-  hint: 'You can use your personal or professional email',
+  errorMessage: `Type "Augmented Bike Networks" to dismiss the error`,
 };
 
 export const Disabled: Story<FTextareaProps> = Template.bind({});

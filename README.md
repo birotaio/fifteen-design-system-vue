@@ -85,51 +85,69 @@ export default {
 
 Available helpers are:
 **Sizes:**
-  - `rem(value)` converts a value in pixel into rem (`value` can be unitless)
+
+- `rem(value)` converts a value in pixel into rem (`value` can be unitless)
 
 **Fonts:**
-  - `use-font(name)` applies font style from its name. `name` can be `bigger-(1|2|3|4) | heading-(1|2|3|4|5|6) | subtitle-(1|2) | body-(1|2) | button | caption | overline`
-  - `clamped-fluid-size(xmin, ymin, xmax, ymax)` returns a clamped size, interpolated between two breakpoints `xmin` and `xmax` (must be unitless pixel values or CSS vars).
+
+- `use-font(name)` applies font style from its name. `name` can be `bigger-(1|2|3|4) | heading-(1|2|3|4|5|6) | subtitle-(1|2) | body-(1|2) | button | caption | overline`
+- `clamped-fluid-size(xmin, ymin, xmax, ymax)` returns a clamped size, interpolated between two breakpoints `xmin` and `xmax` (must be unitless pixel values or CSS vars).
 
 **Colors:**
-  - `bg-color-transition()` applies a transition to the background color
-  - `bg-color(name)` applies a background color based on a color name
-  - `text-color-transition()` applies a transition to the text color
-  - `text-color(name)` applies a text color based on a color name (also sets child svg `path` fill property)
+
+- `bg-color-transition()` applies a transition to the background color
+- `bg-color(name)` applies a background color based on a color name
+- `text-color-transition()` applies a transition to the text color
+- `text-color(name)` applies a text color based on a color name (also sets child svg `path` fill property)
   Color `name` can be all the ones defined in lib’s `colorDesignTokens` array.
 
 **Elevations:**
-  - `elevation-transition()` applies a transition to the elevation (box-shadow and background color)
-  - `elevation(value)` applies an elevation where `value` can be `1` to `6`.
-  - `elevation-light(value)` applies a light elevation where `value` can be `1` to `6`.
+
+- `elevation-transition()` applies a transition to the elevation (box-shadow and background color)
+- `elevation(value)` applies an elevation where `value` can be `1` to `6`.
+- `elevation-light(value)` applies a light elevation where `value` can be `1` to `6`.
 
 **Media queries:**
-  - `media-down(breakpoint)`
-  - `media-up(breakpoint)`
-  - `media-between(breakpoint)`
+
+- `media-down(breakpoint)`
+- `media-up(breakpoint)`
+- `media-between(breakpoint)`
   which takes a breakpoint name as argument: `'xxs' | 'xs' | 'sm' | 'md' | 'lg'`.
   These mixins must be called with `+` prefix, _e.g._:
+
 ```
 +media-down('xs')
   // style for screens smaller than xs
 ```
 
 **Others:**
-  - `scrollbars(thumbColor, trackColor)` to add custom scrollbar style
-  - `merge-transition` and `merge-will-change` to apply several transitions on the same element
+
+- `scrollbars(thumbColor, trackColor)` to add custom scrollbar style
+- `merge-transition` and `merge-will-change` to apply several transitions on the same element
+
+### Validation rules
+
+The lib exposes some validation rules under `@fifteen/design-system-vue/rules` folder, which are mainly picked from the `@vee-validate/rules` library. In addition, some validation rules are included:
+
+- `phone`: validates a phone number
+- `mask`: validates a string regarding to a mask passed as parameter
 
 ## Development
 
 ### Setup
 
 If you want to develop the library, you can clone the repository and install the dependencies using yarn:
+
 ```
 yarn install
 ```
+
 Install also the husky hooks by running:
+
 ```
 yarn husky
 ```
+
 Then you run `yarn sb` (or `yarn dev` which is an alias) and Storybook will launch with the components stories on port 3003.
 
 ### Authoring

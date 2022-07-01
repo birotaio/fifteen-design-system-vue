@@ -14,7 +14,7 @@
     "baseUrl": "./",
     "rootDir": "./",
     "outDir": "dist",
-    "declaration": true
+    "declaration": false
   },
   "include": ["rules/index.ts"]
 }

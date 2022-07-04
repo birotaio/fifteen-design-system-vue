@@ -1,3 +1,10 @@
+## 0.2.3 (July 1, 2022)
+
+### Fixes
+
+- [build] Build and expose validation rules
+- [package] Expose resolvers and rules types properly
+
 ## 0.2.2 (June 30, 2022)
 
 ### Fixes

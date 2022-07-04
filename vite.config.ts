@@ -35,14 +35,17 @@ export default defineConfig({
       formats: ['es', 'cjs'],
       entry: path.resolve(__dirname, 'index.ts'),
       name: 'fifteen-design-system-vue',
-      fileName: format =>  `${format}/index.js`,
+      fileName: format => `${format}/index.js`,
     },
     rollupOptions: {
       // externalize deps that shouldn't be bundled into the library
       external: [
         'vue',
         '@vueuse/core',
-        ...(process.env.DEV_BUILD ? [] : ['vee-validate', '@vee-validate/rules']),
+        'libphonenumber-js',
+        ...(process.env.DEV_BUILD
+          ? []
+          : ['vee-validate', '@vee-validate/rules']),
       ],
     },
   },

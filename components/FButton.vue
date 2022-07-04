@@ -373,7 +373,7 @@ export interface FButtonProps {
    */
   size?: FButtonSize;
   /**
-   * Spread or not click event
+   * Emit or not click event
    */
   preventClick?: boolean;
   /**

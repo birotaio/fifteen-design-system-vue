@@ -1,3 +1,10 @@
+## 0.2.4 (July 4, 2022)
+
+### Improvements
+
+- [build] Treat `libphonenumber-js` as an external dep
+- [doc] Fix a prop comment
+
 ## 0.2.3 (July 1, 2022)
 
 ### Fixes

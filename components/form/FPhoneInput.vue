@@ -142,6 +142,7 @@ import {
   getCountries,
   getCountryCallingCode,
   getExampleNumber,
+  parsePhoneNumber,
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
@@ -272,7 +273,7 @@ const { isValid, hint, handleValidation } = useFieldWithValidation<
 });
 const { handleBlur, handleChange, handleFocus, handleInput } =
   useInputEventBindings(
-    () => handleValidation(phonePrefix.value + phoneNumber.value),
+    () => handleValidation(fullPhone.value),
     props.validationTrigger,
     emit
   );
@@ -301,9 +302,15 @@ const phonePrefix = computed(
 );
 const phoneNumber = useVModelProxy<string>(props, 'phoneNumber');
 
+const fullPhone = computed(() => {
+  return isValidPhone(phonePrefix.value + phoneNumber.value)
+    ? parsePhoneNumber(phonePrefix.value + phoneNumber.value).number
+    : phonePrefix.value + phoneNumber.value;
+});
+
 // Handle value update only. Validation is performed with 'validation-trigger' event
 watch([phonePrefix, phoneNumber], () => {
-  handleValidation(phonePrefix.value + phoneNumber.value, false);
+  handleValidation(fullPhone.value, false);
 });
 
 const countries = getCountries().map((country: CountryCode) => ({

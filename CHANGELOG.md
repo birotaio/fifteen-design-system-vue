@@ -1,3 +1,9 @@
+## 0.2.5 (July 4, 2022
+
+### Fixes
+
+- [FPhoneInput] Emit phone number in international format
+
 ## 0.2.4 (July 4, 2022)
 
 ### Improvements

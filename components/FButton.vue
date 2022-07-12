@@ -37,6 +37,7 @@ square($size)
   user-select none
   position relative
   overflow hidden
+  flex-shrink 0
   rounded-lr(40)
   box-sizing border-box
   background-image none

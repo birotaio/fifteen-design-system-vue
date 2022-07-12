@@ -1,3 +1,7 @@
+## 0.2.6 (July 12, 2022)
+
+- [FButton] Add flex-shrink 0 to FButton
+
 ## 0.2.5 (July 4, 2022
 
 ### Fixes

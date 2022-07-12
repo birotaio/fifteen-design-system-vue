@@ -2,7 +2,7 @@
 
 ### Fixes
 
-- [FButton] Add flex-shrink 0 to FButton
+- [FButton] Avoid padding breaks when FButton is in a flex container
 
 ## 0.2.5 (July 4, 2022
 

@@ -6,9 +6,20 @@ import { useBreakpoints } from '@vueuse/core';
  */
 export function useFBreakpoints() {
   const breakpoints = useBreakpoints(breakpointsValues);
+  const isXxsAndDown = breakpoints.smaller('xxs');
   const isXsAndDown = breakpoints.smaller('xs');
   const isSmAndDown = breakpoints.smaller('sm');
   const isMdAndDown = breakpoints.smaller('md');
+  const isLgAndDown = breakpoints.smaller('lg');
+
+  /**
+   *
+   * @param value - Value to return if the screen is xxs and down
+   * @param fallback - Value to return otherwise
+   */
+  function xxsAndDown<T extends string | number>(value: T, fallback: T): T {
+    return isXxsAndDown.value ? value : fallback;
+  }
 
   /**
    *
@@ -37,12 +48,25 @@ export function useFBreakpoints() {
     return isMdAndDown.value ? value : fallback;
   }
 
+  /**
+   *
+   * @param value - Value to return if the screen is lg and down
+   * @param fallback - Value to return otherwise
+   */
+  function lgAndDown<T extends string | number>(value: T, fallback: T): T {
+    return isLgAndDown.value ? value : fallback;
+  }
+
   return {
+    isXxsAndDown,
     isXsAndDown,
     isSmAndDown,
     isMdAndDown,
+    isLgAndDown,
+    xxsAndDown,
     xsAndDown,
     smAndDown,
     mdAndDown,
+    lgAndDown,
   };
 }

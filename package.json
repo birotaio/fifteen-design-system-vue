@@ -1,6 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": false,
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
@@ -62,8 +62,8 @@
     "build:types": "yarn build:types:lib && yarn build:types:resolvers && yarn build:types:rules",
     "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp assets/fonts/* dist/assets/fonts",
     "build:icons": "zx scripts/build-icons.mjs",
-    "build:resolvers": "tsc -p tsconfig.resolvers.json --outDir dist/es && tsc -p tsconfig.resolvers.json --module commonjs --target es5 --outDir dist/cjs",
-    "build:rules": "tsc -p tsconfig.rules.json --outDir dist/es && tsc -p tsconfig.rules.json --module commonjs --target es5 --outDir dist/cjs",
+    "build:resolvers": "vite build --config vite.config.resolvers.ts",
+    "build:rules": "vite build --config vite.config.rules.ts",
     "build": "yarn build:icons && yarn build:lib && yarn build:resolvers && yarn build:rules && yarn build:types && yarn build:theme",
     "postinstall": "if [ ! -d .git ]; then mv dist/types/resolvers resolvers && mv dist/types/rules rules; fi",
     "release": "make release",

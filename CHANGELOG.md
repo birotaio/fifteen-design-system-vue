@@ -1,3 +1,9 @@
+## 0.2.8 (July 13, 2022)
+
+### Fixes
+
+- [build] Build resolvers and rules with vite for proper bundle generation
+
 ## 0.2.7 (July 13, 2022)
 
 ### Fixes

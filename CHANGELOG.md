@@ -1,3 +1,9 @@
+## 0.2.7 (July 13, 2022)
+
+### Fixes
+
+- [useFBreakpoints] Handle all screen sizes in composable
+
 ## 0.2.6 (July 12, 2022)
 
 ### Fixes

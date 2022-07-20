@@ -306,7 +306,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   optionTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   placeholder: '',
-  placeholderTextColor: 'neutral--dark-3',
+  placeholderTextColor: 'neutral--dark-2',
   rules: () => [],
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',

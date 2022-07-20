@@ -1,7 +1,7 @@
 <template lang="pug">
-FForm(
+FForm.FForm(
   :initial-values="initialValues"
-  v-slot="{ submit }"
+  v-slot="{ submit, resetForm }"
 )
   FGrid(gap="24")
     FGridItem(span="12")
@@ -48,11 +48,17 @@ FForm(
         name="FTextarea"
         hint="Hint for FTextarea"
       )
-    FGridItem(span="12")
+    FGridItem.FForm__actions(span="12")
       FButton(@click="submit") Submit
-
+      FButton(@click="resetForm") Reset
   FGrid
 </template>
+
+<style lang="stylus">
+.FForm__actions
+  > * + *
+    margin-left rem(24)
+</style>
 
 <script setup lang="ts">
 import FForm from '@/components/form/FForm.vue';

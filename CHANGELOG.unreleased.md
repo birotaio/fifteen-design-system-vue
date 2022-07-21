@@ -3,6 +3,7 @@
 ### Features
 
 - [FForm] Expose resetForm in slot and in defineExpose
+- [FCreditCardInput] Add credit card component
 
 ### Fixes
 

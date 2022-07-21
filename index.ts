@@ -29,7 +29,7 @@ export { default as FFlagIcon } from '@/components/FFlagIcon.vue';
 export { default as FCreditCardIcon } from '@/components/FCreditCardIcon.vue';
 
 /**
- * Forms components
+ * Form components
  */
 export { default as FCheckbox } from '@/components/form/FCheckbox.vue';
 export { default as FCreditCardInput } from '@/components/form/FCreditCardInput.vue';

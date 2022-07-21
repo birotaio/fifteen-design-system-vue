@@ -29,6 +29,12 @@ FForm.FForm(
         hint="Hint for FPhoneInput"
       )
     FGridItem(span="12")
+      FCreditCardInput(
+        label="FCreditCardInput"
+        name="FCreditCardInput"
+        hint="Hint for FCreditCardInput"
+      )
+    FGridItem(span="12")
       FRadioGroup(
         label="FRadioGroup"
         name="FRadioGroup"
@@ -75,6 +81,7 @@ import FSelect from '@/components/form/FSelect.vue';
 import FTextarea from '@/components/form/FTextarea.vue';
 
 import type { FFormProps } from '@/components/form/FForm.vue';
+import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 
 export interface FsFormProps {
   initialValues: FFormProps['initialValues'];

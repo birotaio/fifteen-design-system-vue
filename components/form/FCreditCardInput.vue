@@ -22,7 +22,10 @@ FField.FCreditCardInput(
   )
     template(#suffix)
       .FCreditCardInput__suffix
-        span.FCreditCardInput__cardIcon LOGO
+        FCreditCardIcon(
+          :card-type="creditCardType"
+          size="32"
+        )
 </template>
 
 <style lang="stylus">
@@ -47,10 +50,13 @@ FField.FCreditCardInput(
 <script setup lang="ts">
 import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
+import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
 
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
+import getCardType from 'credit-card-type';
+import { CreditCardTypeCardBrandId } from 'credit-card-type/dist/types';
 
 export interface FCreditCardInputProps {
   /**
@@ -173,7 +179,6 @@ const classes = computed(() => ({
 }));
 
 function luhnCheck(cardNumber: string) {
-  console.log(cardNumber);
   const cardNumbers = cardNumber
     .replace(/\s/g, '')
     .split('')
@@ -190,11 +195,22 @@ function luhnCheck(cardNumber: string) {
   return sum % 10 === 0;
 }
 
+const creditCardType = ref<CreditCardTypeCardBrandId | null>(null);
+
+watch(
+  () => props.modelValue,
+  () => {
+    creditCardType.value =
+      props.modelValue.length > 0
+        ? (getCardType(props.modelValue)?.[0]
+            ?.type as CreditCardTypeCardBrandId)
+        : null;
+  }
+);
+
 // Internal validation rule, always applied
 function isValidCreditCard(value: unknown): boolean {
-  console.log(value);
   if (typeof value !== 'string') return false;
-  console.log('value', value);
   return luhnCheck(value);
 }
 

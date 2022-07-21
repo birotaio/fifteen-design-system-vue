@@ -26,11 +26,13 @@ export { default as FProgressBar } from '@/components/FProgressBar.vue';
 export { default as FSkeleton } from '@/components/FSkeleton.vue';
 export { default as FSvgImage } from '@/components/FSvgImage.vue';
 export { default as FFlagIcon } from '@/components/FFlagIcon.vue';
+export { default as FCreditCardIcon } from '@/components/FCreditCardIcon.vue';
 
 /**
  * Forms components
  */
 export { default as FCheckbox } from '@/components/form/FCheckbox.vue';
+export { default as FCreditCardInput } from '@/components/form/FCreditCardInput.vue';
 export { default as FDigitsInput } from '@/components/form/FDigitsInput.vue';
 export { default as FInput } from '@/components/form/FInput.vue';
 export { default as FPhoneInput } from '@/components/form/FPhoneInput.vue';
@@ -55,11 +57,13 @@ export type {
 } from '@/components/FBreadcrumbs.vue';
 export type { FCardProps } from '@/components/FCard.vue';
 export type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
+export type { FCreditCardInputProps } from '@/components/form/FCreditCardInput.vue';
 export type { FDigitsInputProps } from '@/components/form/FDigitsInput.vue';
 export type { FDividerProps } from '@/components/FDivider.vue';
 export type { FExpandableProps } from '@/components/FExpandable.vue';
 export type { FFieldHintProps } from '@/components/form/FFieldHint.vue';
 export type { FFieldLabelProps } from '@/components/form/FFieldLabel.vue';
+export type { FCreditCardIconProps } from '@/components/FCreditCardIcon.vue';
 export type { FFlagIconProps } from '@/components/FFlagIcon.vue';
 export type { FFormProps } from '@/components/form/FForm.vue';
 export type { FGridItemProps } from '@/components/FGridItem.vue';

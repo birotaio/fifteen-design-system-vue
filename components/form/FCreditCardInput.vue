@@ -4,7 +4,7 @@ FField.FCreditCardInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
 )
   FInput(
-    v-model="modelValue"
+    v-model="value"
     :color="color"
     :text-color="textColor"
     :error-message="errorMessage"
@@ -165,7 +165,7 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
-const { isValid, hint, handleValidation } = useFieldWithValidation<
+const { isValid, hint, value, handleValidation } = useFieldWithValidation<
   string | number
 >(props, {
   validateOnMount: props?.validateOnMount,
@@ -197,16 +197,12 @@ function luhnCheck(cardNumber: string) {
 
 const creditCardType = ref<CreditCardTypeCardBrandId | null>(null);
 
-watch(
-  () => props.modelValue,
-  () => {
-    creditCardType.value =
-      props.modelValue.length > 0
-        ? (getCardType(props.modelValue)?.[0]
-            ?.type as CreditCardTypeCardBrandId)
-        : null;
-  }
-);
+watch(value, newValue => {
+  creditCardType.value =
+    newValue.length > 0
+      ? (getCardType(newValue)?.[0]?.type as CreditCardTypeCardBrandId)
+      : null;
+});
 
 // Internal validation rule, always applied
 function isValidCreditCard(value: unknown): boolean {

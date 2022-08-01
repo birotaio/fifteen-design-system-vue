@@ -8,7 +8,7 @@ import camelCase from 'camelcase';
 const OUTPUT_UTILS_FILE = 'config/icons/.utils.ts';
 const OUTPUT_LIST_FILE = 'config/icons/.icons.ts';
 
-function getIconsInfos(icons) {
+function getIconsInfos(icons, nameTocamelCase = true) {
   return icons.map(url => {
     const name = path.basename(url, '.svg');
 
@@ -17,7 +17,7 @@ function getIconsInfos(icons) {
     const parsedSvg = parse(data);
     const paths = parsedSvg.querySelectorAll('path');
     return {
-      name: camelCase(name),
+      name: nameTocamelCase ? camelCase(name) : name,
       paths: paths.map(path => path.attributes),
     };
   });
@@ -26,8 +26,11 @@ function getIconsInfos(icons) {
 const iconUrls = await globby('assets/icons/*');
 const icons = getIconsInfos(iconUrls);
 
-const flagIconURls = await globby('assets/icons/country-flags/*');
-const flagIcons = getIconsInfos(flagIconURls);
+const flagIconURLs = await globby('assets/icons/country-flags/*');
+const flagIcons = getIconsInfos(flagIconURLs);
+
+const creditCardIconsURLs = await globby('assets/icons/credit-cards/*');
+const creditCardIcons = getIconsInfos(creditCardIconsURLs, false);
 
 const preamble = `
 // This file is generated automatically. Do not edit manually.
@@ -36,7 +39,8 @@ const preamble = `
 
 const utilsFileContents = [
   preamble,
-  `import type { CountryCode } from 'libphonenumber-js';\n`,
+  `import type { CountryCode } from 'libphonenumber-js';`,
+  `import { CreditCardTypeCardBrandId } from 'credit-card-type/dist/types';\n`,
   `const iconList = ${JSON.stringify(
     icons.map(icon => icon.name)
   )} as const;\n`,
@@ -47,7 +51,12 @@ const utilsFileContents = [
   `const flagIconList = ${JSON.stringify(
     flagIcons.map(icon => icon.name.toUpperCase())
   )} as const;\n`,
-  `export const getFlagIconList = (): CountryCode[] => flagIconList.map(name => name as CountryCode)`,
+  `export const getFlagIconList = (): CountryCode[] => flagIconList.map(name => name as CountryCode)\n`,
+
+  `const creditCardIconList = ${JSON.stringify(
+    creditCardIcons.map(icon => icon.name)
+  )} as const;\n`,
+  `export const getCreditCardIcons = (): CreditCardTypeCardBrandId[] => creditCardIconList.map(name => name as CreditCardTypeCardBrandId)`,
   ,
 ];
 

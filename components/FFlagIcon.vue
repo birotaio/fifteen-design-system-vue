@@ -14,8 +14,6 @@
 .FFlagIcon
   position relative
   overflow hidden
-  width var(--fflagicon--size)
-  height var(--fflagicon--size)
 </style>
 
 <script setup lang="ts">

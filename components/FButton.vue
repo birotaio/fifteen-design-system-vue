@@ -272,6 +272,11 @@ square($size)
     pointer-events none
     cursor none
 
+  &--loading
+    opacity 0.7
+    pointer-events none
+    cursor none
+
   .FButton__container
     z-index 1
     position relative
@@ -491,10 +496,9 @@ const backgroundHoverColor = computed<string>(() => {
     if (shadeRE.test(props.color)) {
       // Return the base color
       return props.color.replace(shadeRE, '');
-    } else {
-      // Return the lightest shade variant
-      return props.color + '--light-2';
     }
+    // Return the lightest shade variant
+    return props.color + '--light-2';
   }
   // Otherwise return the computed baseColor
   return baseColor.value;
@@ -516,6 +520,7 @@ const classes = computed(() => ({
   ['FButton--' + props.size]: true,
   'FButton--icon': props.icon,
   'FButton--disabled': props.disabled,
+  'FButton--loading': props.loading,
   'FButton--ghost': props.ghost,
   'FButton--outlined': props.outlined,
   'FButton--circle': props.circle,

@@ -1,3 +1,16 @@
+## 0.2.9 (Julu 21, 2022)
+
+### Features
+
+- [FForm] Expose resetForm in slot and in defineExpose
+- [FCreditCardInput] Add credit card component
+
+### Fixes
+
+- [lib] Expose all form components in resolver
+- [forms] Fix placeholder text color
+- [FMenu] Prevent menu toggling on Enter keypress
+
 ## 0.2.8 (July 13, 2022)
 
 ### Fixes

@@ -38,7 +38,6 @@ const props = withDefaults(defineProps<FCreditCardIconProps>(), {
   size: 24,
 });
 
-// TODO: dynamic import to reduce bundle size
 const creditCardFiles: Record<string, string> = import.meta.globEager(
   '@/assets/icons/credit-cards/*.svg',
   {

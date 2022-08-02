@@ -31,7 +31,9 @@ FField.FPhoneInput(
         @input="handleInput"
       )
         template(#prefix)
-          .FPhoneInput__prefix
+          .FPhoneInput__prefix(
+            @keydown.enter.prevent="!disabled && toggleMenu()"
+          )
             .FPhoneInput__selectedValue(
               @click="!disabled && toggleMenu()"
               tabindex="0"

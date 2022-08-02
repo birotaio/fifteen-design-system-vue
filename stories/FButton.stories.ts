@@ -62,6 +62,12 @@ Default.args = {
   ghost: false,
 };
 
+export const Disabled: Story<FButtonArgs> = Template.bind({});
+Disabled.args = {
+  text: 'Click me',
+  color: 'info',
+  disabled: true,
+};
 export const AnyColor: Story<FButtonArgs> = Template.bind({});
 AnyColor.args = {
   text: 'Click me',

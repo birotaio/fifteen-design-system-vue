@@ -1,7 +1,7 @@
 <template lang="pug">
 FForm(
   :initial-values="initialValues"
-  v-slot="{ submit }"
+  v-slot="{ submit, reset }"
 )
   FGrid(gap="24")
     FGridItem(span="12")
@@ -29,6 +29,12 @@ FForm(
         hint="Hint for FPhoneInput"
       )
     FGridItem(span="12")
+      FCreditCardInput(
+        label="FCreditCardInput"
+        name="FCreditCardInput"
+        hint="Hint for FCreditCardInput"
+      )
+    FGridItem(span="12")
       FRadioGroup(
         label="FRadioGroup"
         name="FRadioGroup"
@@ -48,11 +54,17 @@ FForm(
         name="FTextarea"
         hint="Hint for FTextarea"
       )
-    FGridItem(span="12")
+    FGridItem.FsForm__actions(span="12")
       FButton(@click="submit") Submit
-
+      FButton(@click="() => reset()") Reset
   FGrid
 </template>
+
+<style lang="stylus">
+.FsForm__actions
+  > * + *
+    margin-left rem(24)
+</style>
 
 <script setup lang="ts">
 import FForm from '@/components/form/FForm.vue';
@@ -69,6 +81,7 @@ import FSelect from '@/components/form/FSelect.vue';
 import FTextarea from '@/components/form/FTextarea.vue';
 
 import type { FFormProps } from '@/components/form/FForm.vue';
+import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 
 export interface FsFormProps {
   initialValues: FFormProps['initialValues'];

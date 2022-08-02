@@ -230,7 +230,7 @@ const props = withDefaults(defineProps<FInputProps>(), {
   labelTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   type: 'text',
-  placeholderTextColor: 'neutral--dark-3',
+  placeholderTextColor: 'neutral--dark-2',
   focusColor: 'neutral--light-5',
   borderColor: 'secondary',
   focusBorderColor: 'secondary',

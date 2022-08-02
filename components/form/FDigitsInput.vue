@@ -128,12 +128,17 @@ const emit = defineEmits<{
   (name: 'complete'): void;
 }>();
 
-const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
-const digitsValue = reactive<string[]>([]);
-
-const { isValid, hint, handleValidation } = useFieldWithValidation(props, {
+const {
+  isValid,
+  hint,
+  value: fieldValue,
+  handleValidation,
+} = useFieldWithValidation(props, {
   validateOnMount: props.validateOnMount,
 });
+
+const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
+const digitsValue = computed<string[]>(() => fieldValue.value.split(''));
 
 const hintTextColor = computed(() =>
   props.disabled
@@ -149,10 +154,10 @@ watch(isValid, () => {
 
 watch(digitsValue, () => {
   if (
-    digitsValue.length === props.digits &&
-    !digitsValue.some(value => value === '')
+    digitsValue.value.length === props.digits &&
+    !digitsValue.value.some(value => value === '')
   ) {
-    handleValidation(digitsValue.join(''));
+    handleValidation(digitsValue.value.join(''));
     emit('complete');
   }
 });
@@ -178,7 +183,7 @@ function selectPrevDigit(index: number) {
  */
 async function selectNextDigit(index: number) {
   await nextTick();
-  if (!/[0-9]/.test(digitsValue[index])) {
+  if (!/[0-9]/.test(digitsValue.value[index])) {
     return;
   }
 
@@ -206,6 +211,6 @@ function forceDigitsValidation() {
 }
 
 function handleDigitChange() {
-  handleValidation(digitsValue.join(''));
+  handleValidation(digitsValue.value.join(''));
 }
 </script>

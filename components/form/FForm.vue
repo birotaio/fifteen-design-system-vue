@@ -1,7 +1,10 @@
 <template lang="pug">
 form.FForm(@submit.prevent="submit")
   // @slot Form content
-  slot(:submit="submit")
+  slot(
+    :submit="submit"
+    :reset="reset"
+  )
 </template>
 
 <style lang="stylus"></style>
@@ -19,10 +22,14 @@ export interface FFormProps {
 const props = defineProps<FFormProps>();
 
 const emit = defineEmits<{
-  (name: 'valid', values: Record<string, unknown>): void;
+  (name: 'valid', values: any): void | Promise<void>;
 }>();
 
-const { values, validate } = useForm({
+const {
+  values,
+  validate,
+  resetForm: reset,
+} = useForm({
   initialValues: props.initialValues,
 });
 
@@ -30,4 +37,9 @@ async function submit() {
   const result = await validate();
   result.valid && emit('valid', values);
 }
+
+defineExpose({
+  reset,
+  submit,
+});
 </script>

@@ -312,7 +312,6 @@ function handleEnter(): void {
   if (isOpen.value && !props.preventSelection) {
     selectedOption.value = preselectedOption.value;
   }
-  toggleMenu();
 }
 
 let preselectSearchTerm = '';

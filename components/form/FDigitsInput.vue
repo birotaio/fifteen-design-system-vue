@@ -19,6 +19,14 @@ FField.FDigitsInput(
       :validate-on-mount="validateOnMount"
       hide-error-icon
       :disabled="disabled"
+      :color="color"
+      :text-color="textColor"
+      :outline-color="outlineColor"
+      :placeholder-text-color="placeholderTextColor"
+      :focus-color="focusColor"
+      :border-color="borderColor"
+      :focus-border-color="focusBorderColor"
+      :error-color="errorColor"
     )
 </template>
 
@@ -43,7 +51,7 @@ FField.FDigitsInput(
 import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { computed, reactive, ref, watch, nextTick } from 'vue';
+import { computed, ref, watch, nextTick } from 'vue';
 
 export interface FDigitsInputProps {
   /**
@@ -54,6 +62,34 @@ export interface FDigitsInputProps {
    * Digits input value
    */
   modelValue?: string;
+  /**
+   * Background color of the digits
+   */
+  color?: Color;
+  /**
+   * Color of the digits border
+   */
+  borderColor?: Color;
+  /**
+   * Text color of the digits
+   */
+  textColor?: Color;
+  /**
+   * Color of the digits outline
+   */
+  outlineColor?: Color;
+  /**
+   * Text color of the digits placeholder
+   */
+  placeholderTextColor?: Color;
+  /**
+   * Background focus color
+   */
+  focusColor?: Color;
+  /**
+   * Border focus color
+   */
+  focusBorderColor?: Color;
   /**
    * Label, placed on top of digit input
    */
@@ -116,6 +152,13 @@ const props = withDefaults(defineProps<FDigitsInputProps>(), {
   name: '',
   rules: () => [],
   validationTrigger: 'change',
+  color: 'neutral--light-3',
+  textColor: 'neutral--dark-4',
+  outlineColor: 'neutral--light-3',
+  placeholderTextColor: 'neutral--dark-2',
+  focusColor: 'neutral--light-5',
+  borderColor: 'secondary',
+  focusBorderColor: 'secondary',
 });
 
 const emit = defineEmits<{
@@ -147,10 +190,6 @@ const hintTextColor = computed(() =>
     ? props.hintTextColor
     : props.errorColor
 );
-
-watch(isValid, () => {
-  forceDigitsValidation();
-});
 
 watch(digitsValue, () => {
   if (
@@ -209,6 +248,7 @@ function handleFocus(index: number) {
 function forceDigitsValidation() {
   digitRefs.value.forEach(digitRef => digitRef?.forceValidation());
 }
+watch(isValid, forceDigitsValidation);
 
 function handleDigitChange() {
   handleValidation(digitsValue.value.join(''));

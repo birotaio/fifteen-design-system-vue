@@ -7,3 +7,7 @@
 ### Changes
 
 - [FForm] Expose `reset` instead of `resetForm`
+
+### Fixes
+
+- [FDigitsInput] Add full theming of digits input

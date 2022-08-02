@@ -3,6 +3,7 @@
 ### Features
 
 - [FButton] Prevent button from being selected when loading
+- [FLink] Make FLink a `span` tag if no `href` was provided
 
 ### Changes
 

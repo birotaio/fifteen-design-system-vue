@@ -5,14 +5,22 @@ FField.FCreditCardInput(
 )
   FInput(
     v-model="value"
+    ref="inputRef"
     :color="color"
+    :border-color="borderColor"
     :text-color="textColor"
     :error-message="errorMessage"
     :placeholder="placeholder"
     :placeholder-text-color="placeholderTextColor"
+    :outline-color="outlineColor"
+    :focus-color="focusColor"
+    :focus-border-color="focusBorderColor"
+    :error-color="errorColor"
     :validate-on-mount="validateOnMount"
     :validation-trigger="validationTrigger"
     :disabled="disabled"
+    :rules="[() => isValid]"
+    hide-error-icon
     hide-hint
     mask="#### #### #### ####"
     @focus="handleFocus"
@@ -116,13 +124,29 @@ export interface FCreditCardInputProps {
    */
   color?: Color;
   /**
+   * Color of the border
+   */
+  borderColor?: Color;
+  /**
    * Text color of the input
    */
   textColor?: Color;
   /**
+   * Color of the digits outline
+   */
+  outlineColor?: Color;
+  /**
    * Color of the placeholder text
    */
   placeholderTextColor?: Color;
+  /**
+   * Background focus color
+   */
+  focusColor?: Color;
+  /**
+   * Border focus color
+   */
+  focusBorderColor?: Color;
   /**
    * Background color of the options menu
    */
@@ -150,11 +174,15 @@ const props = withDefaults(defineProps<FCreditCardInputProps>(), {
   errorMessage: '',
   errorColor: 'danger',
   color: 'neutral--light-3',
+  borderColor: 'secondary',
   textColor: 'neutral--dark-4',
   placeholderTextColor: 'neutral--dark-2',
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-3',
   validationTrigger: 'change',
+  outlineColor: 'neutral--light-3',
+  focusColor: 'neutral--light-5',
+  focusBorderColor: 'secondary',
 });
 
 const emit = defineEmits<{
@@ -204,7 +232,9 @@ watch(value, newValue => {
       : null;
 });
 
-// Internal validation rule, always applied
+/**
+ * Internal validation rule, always applied
+ */
 function isValidCreditCard(value: unknown): boolean {
   if (typeof value !== 'string') return false;
   return luhnCheck(value);
@@ -217,4 +247,13 @@ const hintTextColor = computed(() =>
     ? props.hintTextColor
     : props.errorColor
 );
+
+const inputRef = ref();
+/**
+ * Force validation to sync FCreditCardInputValidation status with underlying FInput
+ */
+function forceValidation() {
+  inputRef.value.forceValidation();
+}
+watch(isValid, forceValidation);
 </script>

@@ -34,19 +34,13 @@ import { getCreditCardIcons } from '@/config/icons/.utils';
 
 export interface FsCreditCardIconGridProps {
   /**
-   * Size of each credit card
+   * Size of each credit card icon
    */
   size?: string | number;
-  /**
-   * Stroke width
-   */
-  strokeWidth?: number;
 }
 
 withDefaults(defineProps<FsCreditCardIconGridProps>(), {
   size: '24px',
-  color: 'secondary',
-  strokeWidth: 0,
 });
 const cardTypes = getCreditCardIcons();
 </script>

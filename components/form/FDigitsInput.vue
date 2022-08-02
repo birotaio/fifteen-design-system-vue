@@ -138,7 +138,7 @@ const {
 });
 
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
-const digitsValue = ref<string[]>(fieldValue.value.split(''));
+const digitsValue = computed<string[]>(() => fieldValue.value.split(''));
 
 const hintTextColor = computed(() =>
   props.disabled
@@ -160,10 +160,6 @@ watch(digitsValue, () => {
     handleValidation(digitsValue.value.join(''));
     emit('complete');
   }
-});
-
-watch(fieldValue, value => {
-  digitsValue.value = value.split('');
 });
 
 /**

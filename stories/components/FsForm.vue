@@ -1,7 +1,7 @@
 <template lang="pug">
-FForm.FForm(
+FForm(
   :initial-values="initialValues"
-  v-slot="{ submit, resetForm }"
+  v-slot="{ submit, reset }"
 )
   FGrid(gap="24")
     FGridItem(span="12")
@@ -54,14 +54,14 @@ FForm.FForm(
         name="FTextarea"
         hint="Hint for FTextarea"
       )
-    FGridItem.FForm__actions(span="12")
+    FGridItem.FsForm__actions(span="12")
       FButton(@click="submit") Submit
-      FButton(@click="resetForm") Reset
+      FButton(@click="() => reset()") Reset
   FGrid
 </template>
 
 <style lang="stylus">
-.FForm__actions
+.FsForm__actions
   > * + *
     margin-left rem(24)
 </style>

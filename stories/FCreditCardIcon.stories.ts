@@ -4,7 +4,7 @@ import FsCreditCardIconsGrid, {
 } from './components/FsCreditCardIconsGrid.vue';
 
 export default {
-  title: 'Components/FsCreditCardIcon',
+  title: 'Components/FCreditCardIcon',
   component: FsCreditCardIconsGrid,
 };
 

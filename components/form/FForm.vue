@@ -3,7 +3,7 @@ form.FForm(@submit.prevent="submit")
   // @slot Form content
   slot(
     :submit="submit"
-    :reset-form="resetForm"
+    :reset="reset"
   )
 </template>
 
@@ -22,10 +22,14 @@ export interface FFormProps {
 const props = defineProps<FFormProps>();
 
 const emit = defineEmits<{
-  (name: 'valid', values: Record<string, unknown>): void;
+  (name: 'valid', values: any): void | Promise<void>;
 }>();
 
-const { values, validate, resetForm } = useForm({
+const {
+  values,
+  validate,
+  resetForm: reset,
+} = useForm({
   initialValues: props.initialValues,
 });
 
@@ -35,6 +39,7 @@ async function submit() {
 }
 
 defineExpose({
-  resetForm,
+  reset,
+  submit,
 });
 </script>

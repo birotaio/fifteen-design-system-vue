@@ -388,7 +388,7 @@ function getCountryCode(option: FSelectOption) {
 
 const inputRef = ref();
 /**
- * Force validation to sync FCreditCardInputValidation status with underlying FInput
+ * Force validation to sync FPhoneInput validation status with underlying FInput
  */
 function forceValidation() {
   inputRef.value.forceValidation();

@@ -250,7 +250,7 @@ const hintTextColor = computed(() =>
 
 const inputRef = ref();
 /**
- * Force validation to sync FCreditCardInputValidation status with underlying FInput
+ * Force validation to sync FCreditCardInput validation status with underlying FInput
  */
 function forceValidation() {
   inputRef.value.forceValidation();

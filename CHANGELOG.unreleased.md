@@ -10,4 +10,6 @@
 
 ### Fixes
 
-- [FDigitsInput] Add full theming of digits input
+- [FDigitsInput] Add full theming
+- [FCreditCardInput] Add error outline display and full theming
+- [FPhoneInput] Add error outline display and full theming

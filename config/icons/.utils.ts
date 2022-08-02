@@ -451,9 +451,9 @@ const flagIconList = [
 export const getFlagIconList = (): CountryCode[] =>
   flagIconList.map(name => name as CountryCode);
 
-const creditCardIconList = [
+const creditCardIconList: CreditCardTypeCardBrandId[] = [
   'american-express',
-  'dinners-club',
+  'diners-club',
   'discover',
   'elo',
   'jcb',
@@ -461,7 +461,6 @@ const creditCardIconList = [
   'mastercard',
   'unionpay',
   'visa',
-] as const;
+];
 
-export const getCreditCardIcons = (): CreditCardTypeCardBrandId[] =>
-  creditCardIconList.map(name => name as CreditCardTypeCardBrandId);
+export const getCreditCardIcons = () => creditCardIconList;

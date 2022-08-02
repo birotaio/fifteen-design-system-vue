@@ -53,10 +53,10 @@ const utilsFileContents = [
   )} as const;\n`,
   `export const getFlagIconList = (): CountryCode[] => flagIconList.map(name => name as CountryCode)\n`,
 
-  `const creditCardIconList = ${JSON.stringify(
+  `const creditCardIconList: CreditCardTypeCardBrandId[] = ${JSON.stringify(
     creditCardIcons.map(icon => icon.name)
-  )} as const;\n`,
-  `export const getCreditCardIcons = (): CreditCardTypeCardBrandId[] => creditCardIconList.map(name => name as CreditCardTypeCardBrandId)`,
+  )};\n`,
+  `export const getCreditCardIcons = () => creditCardIconList`,
   ,
 ];
 

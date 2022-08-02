@@ -15,6 +15,7 @@ FField.FPhoneInput(
     template(#activator="{ toggleMenu }")
       FInput(
         v-model="phoneNumber"
+        ref="inputRef"
         :color="color"
         :text-color="textColor"
         :error-message="errorMessage"
@@ -23,6 +24,12 @@ FField.FPhoneInput(
         :validate-on-mount="validateOnMount"
         :validation-trigger="validationTrigger"
         :disabled="disabled"
+        :rules="[() => isValid]"
+        :outline-color="outlineColor"
+        :focus-color="focusColor"
+        :border-color="borderColor"
+        :focus-border-color="focusBorderColor"
+        :error-color="errorColor"
         hide-hint
         :mask="phoneNumberMask"
         @focus="handleFocus"
@@ -212,9 +219,17 @@ export interface FPhoneInputProps {
    */
   color?: Color;
   /**
+   * Color of the digits border
+   */
+  borderColor?: Color;
+  /**
    * Text color of the input
    */
   textColor?: Color;
+  /**
+   * Color of the digits outline
+   */
+  outlineColor?: Color;
   /**
    * Text color of the phone prefix
    */
@@ -223,6 +238,14 @@ export interface FPhoneInputProps {
    * Color of the placeholder text
    */
   placeholderTextColor?: Color;
+  /**
+   * Background focus color
+   */
+  focusColor?: Color;
+  /**
+   * Border focus color
+   */
+  focusBorderColor?: Color;
   /**
    * Background color of the options menu
    */
@@ -256,6 +279,10 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-3',
   validationTrigger: 'change',
+  outlineColor: 'neutral--light-3',
+  focusColor: 'neutral--light-5',
+  borderColor: 'secondary',
+  focusBorderColor: 'secondary',
 });
 
 const emit = defineEmits<{
@@ -358,4 +385,13 @@ const hintTextColor = computed(() =>
 function getCountryCode(option: FSelectOption) {
   return option.value as CountryCode;
 }
+
+const inputRef = ref();
+/**
+ * Force validation to sync FCreditCardInputValidation status with underlying FInput
+ */
+function forceValidation() {
+  inputRef.value.forceValidation();
+}
+watch(isValid, forceValidation);
 </script>

@@ -1,5 +1,6 @@
 <template lang="pug">
-a.FLink(
+component.FLink(
+  :is="href ? 'a' : 'span'"
   :style="style"
   :class="classes"
   :href="href"

@@ -43,6 +43,7 @@ Error.args = {
   label: 'Enter you credit card',
   validateOnMount: true,
   errorMessage: 'Enter any valid number to dismiss the error',
+  rules: value => value !== '',
 };
 
 export const Disabled: Story<FCreditCardInputProps> = Template.bind({});

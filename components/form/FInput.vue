@@ -5,7 +5,7 @@ FField.FInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   .FInput__input
-    .FInput__input__prefix
+    .FInput__input__prefix(v-if="$slots['prefix']")
       slot(name="prefix")
     input(
       v-bind="attrs"
@@ -21,7 +21,7 @@ FField.FInput(
       :name="name"
       ref="inputRef"
     )
-    .FInput__input__suffix
+    .FInput__input__suffix(v-if="$slots['suffix']")
       slot(name="suffix")
     FIcon.FInput__errorIcon(
       v-if="!isValid && !hideErrorIcon"

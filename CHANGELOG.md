@@ -1,3 +1,20 @@
+## 0.2.10 (August 4, 2022)
+
+### Features
+
+- [FButton] Prevent button from being selected when loading
+- [FLink] Make FLink a `span` tag if no `href` was provided
+
+### Changes
+
+- [FForm] Expose `reset` instead of `resetForm`
+
+### Fixes
+
+- [FDigitsInput] Add full theming
+- [FCreditCardInput] Add error outline display and full theming
+- [FPhoneInput] Add error outline display and full theming
+
 ## 0.2.9 (July 21, 2022)
 
 ### Features

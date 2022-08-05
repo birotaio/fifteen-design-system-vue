@@ -20,6 +20,7 @@ export { default as FGridItem } from '@/components/FGridItem.vue';
 export { default as FIcon } from '@/components/FIcon.vue';
 export { default as FImage } from '@/components/FImage.vue';
 export { default as FLink } from '@/components/FLink.vue';
+export { default as FLoader } from '@/components/FLoader.vue';
 export { default as FLogo } from '@/components/FLogo.vue';
 export { default as FLogoAnimatable } from '@/components/FLogoAnimatable.vue';
 export { default as FProgressBar } from '@/components/FProgressBar.vue';
@@ -72,6 +73,7 @@ export type { FIconProps } from '@/components/FIcon.vue';
 export type { FImageProps } from '@/components/FImage.vue';
 export type { FInputProps } from '@/components/form/FInput.vue';
 export type { FLinkProps } from '@/components/FLink.vue';
+export type { FLoaderProps } from '@/components/FLoader.vue';
 export type {
   FLogoAnimatableProps,
   FLogoLineDelta,

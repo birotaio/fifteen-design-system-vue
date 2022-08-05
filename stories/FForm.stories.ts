@@ -30,3 +30,17 @@ Default.args = {
     FTextarea: 'Default value',
   },
 };
+
+export const Loading: Story<FsFormProps> = Template.bind({});
+Loading.args = {
+  loading: true,
+  initialValues: {
+    FInput: 'Default value',
+    FCheckbox: true,
+    FDigitsInput: '1234',
+    FPhoneInput: '',
+    FRadioGroup: 'b',
+    FSelect: 'c',
+    FTextarea: 'Default value',
+  },
+};

@@ -70,10 +70,18 @@ Error.args = {
 
 export const Disabled: Story<FInputProps> = Template.bind({});
 Disabled.args = {
-  disabled: true,
   placeholder: 'Email address',
   errorColor: 'danger',
   hint: 'You can use your personal or professional email',
+  disabled: true,
+};
+
+export const Loading: Story<FInputProps> = Template.bind({});
+Loading.args = {
+  placeholder: 'Email address',
+  errorColor: 'danger',
+  hint: 'You can use your personal or professional email',
+  loading: true,
 };
 
 export const Mask: Story<FInputProps> = Template.bind({});

@@ -53,7 +53,7 @@ FField.FSelect(
               .FSelect__text {{ getValueLabel(fieldValue) }}
             .FSelect__placeholder(v-else) {{ placeholder }}
         FIcon.FSelect__icon(
-          v-if="!disabled"
+          v-if="!disabled && !loading"
           @click="handleIconClick"
           :name="iconName"
           :size="16"
@@ -61,6 +61,11 @@ FField.FSelect(
           :stroke-color="textColor"
           :stroke-width="2"
           :class="iconClasses"
+        )
+        FLoader.FSelect__loader(
+          v-if="loading"
+          height="24"
+          :color="placeholderTextColor"
         )
 </template>
 
@@ -143,12 +148,21 @@ FField.FSelect(
     color var(--color--neutral--light-1)
     background var(--color--neutral--light-3)
     box-shadow none
+
+.FSelect--loading
+  .FSelect__select
+    pointer-events none
+    opacity 0.7
+
+.FSelect__loader
+  margin rem(4)
 </style>
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
+import FLoader from '@/components/FLoader.vue';
 
 import { ref, computed, watch } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
@@ -281,6 +295,10 @@ export interface FSelectProps {
    * Prevent item selection
    */
   preventSelection?: boolean;
+  /**
+   * Loading state of the select
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FSelectProps>(), {
@@ -361,6 +379,7 @@ const style = computed(
 const classes = computed(() => ({
   'FSelect--error': !isValid.value,
   'FSelect--disabled': props.disabled,
+  'FSelect--loading': props.loading,
 }));
 
 const hintTextColor = computed(() =>

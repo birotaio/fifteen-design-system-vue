@@ -36,6 +36,7 @@ FField.FPhoneInput(
         @blur="handleBlur"
         @change="handleChange"
         @input="handleInput"
+        :loading="loading"
       )
         template(#prefix)
           .FPhoneInput__prefix(
@@ -135,6 +136,11 @@ FField.FPhoneInput(
 
 .FPhoneInput__phonePrefix
   margin-left rem(8)
+
+.FPhoneInput--loading
+  .FPhoneInput
+    pointer-events none
+    opacity 0.7
 </style>
 
 <script setup lang="ts">
@@ -144,6 +150,7 @@ import FFlagIcon from '@/components/FFlagIcon.vue';
 import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
+import FLoader from '@/components/FLoader.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {
@@ -258,6 +265,10 @@ export interface FPhoneInputProps {
    * Event that triggers validation
    */
   validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
+  /**
+   * Loading state of the input
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
@@ -309,6 +320,7 @@ const { handleBlur, handleChange, handleFocus, handleInput } =
 
 const classes = computed(() => ({
   'FPhoneInput--disabled': props.disabled,
+  'FPhoneInput--loading': props.loading,
 }));
 
 const style = computed(

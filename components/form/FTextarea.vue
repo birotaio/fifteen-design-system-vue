@@ -78,7 +78,7 @@ FField.FTextarea(
 .FTextarea__errorIcon,
 .FTextarea__loader
   position absolute
-  right 'calc(100% - var(--ftextarea--width) + %s)' % rem(12x)
+  right 'calc(100% - var(--ftextarea--width) + %s)' % rem(12)
   top rem(16)
 
 .FTextarea__loader

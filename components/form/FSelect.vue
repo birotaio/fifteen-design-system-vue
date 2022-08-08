@@ -36,6 +36,7 @@ FField.FSelect(
         @focus="handleFocus"
         @blur="handleBlur"
         role="listbox"
+        ref="selectRef"
       )
         .FSelect__select__selectionStart
           FIcon.FSelect__select__errorIcon(
@@ -326,6 +327,12 @@ const emit = defineEmits<{
   (name: 'select-option', value: string | number | null): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const {
   isValid,
   hint,
@@ -413,5 +420,14 @@ function handleBlur(): void {
     option => option.value === fieldValue.value
   );
   emit('blur');
+}
+
+const selectRef = ref<HTMLElement>();
+
+/**
+ * Focus the input
+ */
+function focus() {
+  selectRef.value?.focus();
 }
 </script>

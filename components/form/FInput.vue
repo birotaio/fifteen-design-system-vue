@@ -264,9 +264,11 @@ const inputRef = ref<HTMLInputElement>();
 defineExpose<{
   ref: Ref<HTMLInputElement | undefined>;
   forceValidation: () => void;
+  focus: () => void;
 }>({
   ref: inputRef,
   forceValidation,
+  focus,
 });
 
 const { isValid, hint, value, handleValidation } = useFieldWithValidation(
@@ -308,5 +310,12 @@ const hintTextColor = computed(() =>
  */
 function forceValidation() {
   handleValidation(value.value);
+}
+
+/**
+ * Focus the input
+ */
+function focus() {
+  inputRef.value?.focus();
 }
 </script>

@@ -17,6 +17,7 @@ FField.FRadio(
         @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
+        ref="radioRef"
       )
     span.FRadio__labelText {{ label }}
 </template>
@@ -114,7 +115,7 @@ FField.FRadio(
 <script setup lang="ts">
 import FField from '@/components/form/FField.vue';
 
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
@@ -232,6 +233,12 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const {
   isValid,
   hint,
@@ -268,4 +275,13 @@ const classes = computed(() => ({
   'FRadio--error': !isValid.value,
   'FRadio--disabled': props.disabled,
 }));
+
+const radioRef = ref<HTMLElement>();
+
+/**
+ * Focus the radio
+ */
+function focus() {
+  radioRef.value?.focus();
+}
 </script>

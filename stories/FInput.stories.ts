@@ -1,6 +1,8 @@
 import { Story } from '@storybook/vue3';
 import FInput, { FInputProps } from '@/components/form/FInput.vue';
+import FButton from '@/components/FButton.vue';
 import { mask, required } from '@/rules';
+import { onMounted, ref } from 'vue';
 
 export default {
   title: 'Components/Form/FInput',
@@ -85,3 +87,22 @@ Mask.args = {
   errorMessage: 'Birth date is not valid',
   rules: [required, value => mask(value, '##/##/####')],
 };
+
+const FocusTemplate = (args: FInputProps) => ({
+  components: { FInput, FButton },
+  setup: () => {
+    const inputRef = ref();
+
+    function focus() {
+      inputRef.value?.focus();
+    }
+
+    return { args, focus, inputRef };
+  },
+  template: `
+<div>
+  <FInput ref="inputRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FInputProps> = FocusTemplate.bind({});

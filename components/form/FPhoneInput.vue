@@ -294,6 +294,12 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const { isValid, hint, handleValidation } = useFieldWithValidation<
   string | number
 >(props, {
@@ -386,12 +392,19 @@ function getCountryCode(option: FSelectOption) {
   return option.value as CountryCode;
 }
 
-const inputRef = ref();
+const inputRef = ref<InstanceType<typeof FInput>>();
 /**
  * Force validation to sync FPhoneInput validation status with underlying FInput
  */
 function forceValidation() {
-  inputRef.value.forceValidation();
+  inputRef.value?.forceValidation();
 }
 watch(isValid, forceValidation);
+
+/**
+ * Focus the input
+ */
+function focus() {
+  inputRef.value?.ref?.focus();
+}
 </script>

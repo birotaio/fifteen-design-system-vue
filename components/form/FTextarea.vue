@@ -224,6 +224,12 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const textareaRef = ref();
 
 const { isValid, hint, value, handleValidation } =
@@ -267,4 +273,11 @@ const classes = computed(() => ({
   'FTextarea--error': !isValid.value,
   'FTextarea--disabled': props.disabled,
 }));
+
+/**
+ * Focus the input
+ */
+function focus() {
+  textareaRef.value?.focus();
+}
 </script>

@@ -1,5 +1,7 @@
 import { Story } from '@storybook/vue3';
 import FRadio, { FRadioProps } from '@/components/form/FRadio.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FRadio',
@@ -38,4 +40,24 @@ Error.args = {
   errorMessage: 'Select the radio button to dismiss the error',
   rules: [value => value === 'privacy-policy'],
   validateOnMount: true,
+};
+
+const FocusTemplate = (args: FRadioProps) => ({
+  components: { FRadio, FButton },
+  setup() {
+    const radioRef = ref();
+    function focus() {
+      radioRef.value?.focus();
+    }
+    return { args, focus, radioRef };
+  },
+  template: `
+<div>
+  <FRadio ref="radioRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FRadioProps> = FocusTemplate.bind({});
+FocusProgrammatically.args = {
+  label: 'Focus my by clicking on the button',
 };

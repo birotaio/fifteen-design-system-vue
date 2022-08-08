@@ -171,6 +171,12 @@ const emit = defineEmits<{
   (name: 'complete'): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const {
   isValid,
   hint,
@@ -252,5 +258,12 @@ watch(isValid, forceDigitsValidation);
 
 function handleDigitChange() {
   handleValidation(digitsValue.value.join(''));
+}
+
+/**
+ * Focus the first digit
+ */
+function focus() {
+  digitRefs.value[0]?.ref?.focus();
 }
 </script>

@@ -1,5 +1,7 @@
 import { Story } from '@storybook/vue3';
 import FCheckbox, { FCheckboxProps } from '@/components/form/FCheckbox.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FCheckbox',
@@ -41,4 +43,26 @@ Error.args = {
   errorMessage: 'Check the checkbox to dismiss the error',
   rules: [value => value === true],
   validateOnMount: true,
+};
+
+const FocusTemplate = (args: FCheckboxProps) => ({
+  components: { FCheckbox, FButton },
+  setup() {
+    const checkboxRef = ref();
+    function focus() {
+      checkboxRef.value?.focus();
+    }
+    return { args, focus, checkboxRef };
+  },
+  template: `
+<div>
+  <FCheckbox ref="checkboxRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FCheckboxProps> = FocusTemplate.bind(
+  {}
+);
+FocusProgrammatically.args = {
+  label: 'Focus me by clicking on the button',
 };

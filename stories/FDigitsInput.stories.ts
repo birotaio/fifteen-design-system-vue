@@ -2,6 +2,8 @@ import { Story } from '@storybook/vue3';
 import FDigitsInput, {
   FDigitsInputProps,
 } from '@/components/form/FDigitsInput.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FDigitsInput',
@@ -49,3 +51,21 @@ Disabled.args = {
   disabled: true,
   hint: 'Check your SMS',
 };
+
+const FocusTemplate = (args: FDigitsInputProps) => ({
+  components: { FDigitsInput, FButton },
+  setup() {
+    const digitsInputRef = ref();
+    function focus() {
+      digitsInputRef.value?.focus();
+    }
+    return { args, focus, digitsInputRef };
+  },
+  template: `
+<div>
+  <FDigitsInput ref="digitsInputRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FDigitsInputProps> =
+  FocusTemplate.bind({});

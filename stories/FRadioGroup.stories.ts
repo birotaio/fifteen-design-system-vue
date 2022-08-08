@@ -2,6 +2,8 @@ import { Story } from '@storybook/vue3';
 import FRadioGroup, {
   FRadioGroupProps,
 } from '@/components/form/FRadioGroup.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FRadioGroup',
@@ -80,4 +82,29 @@ Error.args = {
   modelValue: 'apple',
   errorMessage: 'Select "kiwi" to dismiss the error',
   validateOnMount: true,
+};
+
+const FocusTemplate = (args: FRadioGroupProps) => ({
+  components: { FRadioGroup, FButton },
+  setup() {
+    const radioGroupRef = ref();
+    function focus() {
+      radioGroupRef.value?.focus();
+    }
+    return { args, focus, radioGroupRef };
+  },
+  template: `
+<div>
+  <FRadioGroup ref="radioGroupRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FRadioGroupProps> =
+  FocusTemplate.bind({});
+FocusProgrammatically.args = {
+  options: [
+    { label: 'Option A', value: 'a' },
+    { label: 'Option B', value: 'b' },
+    { label: 'Option C', value: 'c' },
+  ],
 };

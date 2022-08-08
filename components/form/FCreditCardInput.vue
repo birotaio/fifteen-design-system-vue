@@ -193,6 +193,12 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const { isValid, hint, value, handleValidation } = useFieldWithValidation<
   string | number
 >(props, {
@@ -256,4 +262,11 @@ function forceValidation() {
   inputRef.value.forceValidation();
 }
 watch(isValid, forceValidation);
+
+/**
+ * Focus the input
+ */
+function focus() {
+  inputRef.value?.ref?.focus();
+}
 </script>

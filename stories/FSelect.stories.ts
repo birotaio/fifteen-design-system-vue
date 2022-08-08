@@ -171,6 +171,8 @@ LongOptionsLabel.parameters = {
 LongOptionsLabel.args = {
   color: 'secondary',
   placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   placeholder: 'All topics',

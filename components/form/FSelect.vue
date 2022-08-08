@@ -32,6 +32,7 @@ FField.FSelect(
     template(#activator="{ toggleMenu }")
       .FSelect__select(
         tabindex="0"
+        @keypress.enter="toggleMenu"
         @click="!disabled && toggleMenu()"
         @focus="handleFocus"
         @blur="handleBlur"

@@ -9,7 +9,7 @@
     placement="bottom-start"
   )
     .FMenu__activator(
-      @keydown.enter="handleEnter"
+      @keydown.esc="handleEsc"
       @keydown.up.prevent="keyboardPreselectPrevOption"
       @keydown.down.prevent="keyboardPreselectNextOption"
     )
@@ -199,6 +199,7 @@ const isKeyboardInteracting = ref(false);
 const preselectedOptionIndex = ref(0);
 
 function toggleMenu() {
+  handleToggleMenu();
   isOpen.value = !isOpen.value;
 }
 
@@ -303,15 +304,24 @@ function scrollOptionIntoView(index: number) {
 }
 
 /**
- * Handle enter key down
+ * Handle toggle menu
  */
-function handleEnter(): void {
+function handleToggleMenu(): void {
+  if (!props.options.length || !isOpen.value) return;
+
   const preselectedOption = props.options[preselectedOptionIndex.value];
   emit('select-option', preselectedOption.value);
 
-  if (isOpen.value && !props.preventSelection) {
+  if (!props.preventSelection) {
     selectedOption.value = preselectedOption.value;
   }
+}
+
+/**
+ * Handle escape key down
+ */
+function handleEsc(): void {
+  isOpen.value = false;
 }
 
 let preselectSearchTerm = '';

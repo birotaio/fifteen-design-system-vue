@@ -9,7 +9,7 @@ FLogo.FLoader(
 
 <style lang="stylus">
 .FLoader
-  animation 1800ms rotate infinite forwards cubic-bezier(0.6, 0.52, 0.3, 0.85)
+  animation 2600ms rotate infinite forwards cubic-bezier(0.2, 0.2, 0.15, 0.8)
 
 @keyframes rotate
   0%

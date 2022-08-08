@@ -1,6 +1,7 @@
 <template lang="pug">
 FField.FDigitsInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  :class="classes"
 )
   .FDigitsInput__input
     FInput(
@@ -28,12 +29,18 @@ FField.FDigitsInput(
       :focus-border-color="focusBorderColor"
       :error-color="errorColor"
     )
+    FLoader(
+      v-if="loading"
+      :color="placeholderTextColor"
+      height="32"
+    )
 </template>
 
 <style lang="stylus">
 .FDigitsInput__input
   display grid
   grid-template-columns 'repeat(auto-fill, minmax(%s, 1fr))' % rem(40)
+  align-items center
   gap rem(32)
 
   > *
@@ -45,11 +52,17 @@ FField.FDigitsInput(
     &:hover,
     &:focus
       box-shadow 0 0 0 2px var(--fdigitsinput--error-color)
+
+.FDigitsInput--loading
+  .FDigitsInput__input
+    pointer-events none
+    opacity 0.7
 </style>
 
 <script setup lang="ts">
 import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
+import FLoader from '@/components/FLoader.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { computed, ref, watch, nextTick } from 'vue';
 
@@ -138,6 +151,10 @@ export interface FDigitsInputProps {
    * Event that triggers validation
    */
   validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
+  /**
+   * Loading state of the input
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FDigitsInputProps>(), {
@@ -170,6 +187,10 @@ const emit = defineEmits<{
   (name: 'digit-input', value: string): void;
   (name: 'complete'): void;
 }>();
+
+const classes = computed(() => ({
+  'FDigitsInput--loading': props.loading,
+}));
 
 const {
   isValid,

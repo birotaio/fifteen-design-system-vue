@@ -49,7 +49,6 @@ export interface FLogoProps {
 
 const props = withDefaults(defineProps<FLogoProps>(), {
   color: 'primary',
-  size: 2,
   variant: 'horizontal',
   width: 'auto',
   height: 'auto',

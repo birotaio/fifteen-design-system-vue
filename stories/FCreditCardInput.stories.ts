@@ -52,3 +52,10 @@ Disabled.args = {
   hint: `All credit cards operations are crypted`,
   disabled: true,
 };
+
+export const Loading: Story<FCreditCardInputProps> = Template.bind({});
+Loading.args = {
+  label: 'Enter you credit card',
+  hint: `All credit cards operations are crypted`,
+  loading: true,
+};

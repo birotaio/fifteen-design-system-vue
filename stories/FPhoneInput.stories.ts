@@ -51,3 +51,10 @@ Disabled.args = {
   hint: `Don't forget to pick the right prefix`,
   disabled: true,
 };
+
+export const Loading: Story<FPhoneInputProps> = Template.bind({});
+Loading.args = {
+  label: 'Enter you phone number',
+  hint: `Don't forget to pick the right prefix`,
+  loading: true,
+};

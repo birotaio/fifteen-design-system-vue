@@ -12,9 +12,10 @@ component.FButton(
 )
   .FButton__container
     slot
-    FLogo.FButton__loadingIcon(
+    FLoader.FButton__loader(
+      height="100%"
+      width="100%"
       v-if="loading"
-      variant="image-only"
       :color="baseColor"
     )
 </template>
@@ -106,6 +107,9 @@ square($size)
   .FIcon__content
     square(24)
 
+  .FButton__loader
+    margin-top rem(-2)
+
   &.FButton--icon
     width rem(40)
     height rem(40)
@@ -134,7 +138,7 @@ square($size)
     &::after
       border-radius rem(72)
 
-  .FButton__loadingIcon
+  .FButton__loader
     square(20)
     margin-left rem(12)
 
@@ -171,7 +175,7 @@ square($size)
           margin-right -1 * rem(8)
           margin-left rem(10)
 
-    .FButton__loadingIcon
+    .FButton__loader
       square(28)
       margin-left rem(16)
 
@@ -200,7 +204,7 @@ square($size)
       .FIcon
         margin-top rem(-4)
 
-    .FButton__loadingIcon
+    .FButton__loader
       square(24)
       margin-left rem(16)
 
@@ -232,7 +236,7 @@ square($size)
           margin-right -1 * rem(2)
           margin-left rem(6)
 
-    .FButton__loadingIcon
+    .FButton__loader
       square(16)
       margin-left rem(8)
 
@@ -264,7 +268,7 @@ square($size)
           margin-right -1 * rem(2)
           margin-left rem(4)
 
-    .FButton__loadingIcon
+    .FButton__loader
       square(12)
       margin-left rem(6)
 
@@ -320,22 +324,11 @@ square($size)
 
     &::after
       background-image linear-gradient(hsla(0, 0, 50.2%, 0.14), hsla(0, 0, 50.2%, 0.14))
-
-.FButton__loadingIcon
-  margin-top rem(-2)
-  animation 8000ms rotate infinite forwards linear
-
-@keyframes rotate
-  0%
-    transform rotate(0)
-
-  100%
-    transform rotate(360deg)
 </style>
 
 <script setup lang="ts">
-import FLogo from '@/components/FLogo.vue';
 import FLink from '@/components/FLink.vue';
+import FLoader from '@/components/FLoader.vue';
 
 import { ref, computed } from 'vue';
 import { colorDesignTokens } from '@/config/colors';

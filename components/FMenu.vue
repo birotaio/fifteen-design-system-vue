@@ -12,7 +12,7 @@
     .FMenu__activator(
       @keydown.up="keyboardPreselectPrevOption"
       @keydown.down="keyboardPreselectNextOption"
-      @keydown.enter="handleEnterKeydown"
+      @keydown.enter="selectOption()"
     )
       slot(
         name="activator"
@@ -205,7 +205,7 @@ const menuClasses = computed(() => ({
 
 const isOpen = ref(false);
 const isKeyboardInteracting = ref(false);
-const preselectedOptionIndex = ref(0);
+const preselectedOptionIndex = ref(-1);
 
 /**
  * Toggle the menu
@@ -231,7 +231,13 @@ function closeMenu() {
   isOpen.value = false;
 }
 
-watch(isOpen, newValue => emit('toggle', newValue), { immediate: true });
+watch(isOpen, newValue => {
+  emit('toggle', newValue);
+
+  if (!newValue) {
+    preselectOption(-1);
+  }
+});
 
 /**
  * Preselect an option
@@ -324,19 +330,23 @@ function scrollOptionIntoView(index: number) {
   }
 }
 
-function handleEnterKeydown() {
-  // If this function is called while menu is opened, it means that the enter keydown event triggered is opening the menu.
-  // So we do nothing here
-  if (isOpen.value) return;
-
-  selectOption();
-}
-
 /**
  * Handle value selection
  */
 function selectOption(option?: FMenuOption | null): void {
-  if (!props.options.length || isOpen.value || props.disabled) return;
+  if (!props.options.length || props.disabled) return;
+
+  if (!option && preselectedOptionIndex.value === -1) {
+    // Use current selected option as preselected option
+    if (selectedOption.value) {
+      const selectedOptionIndex = props.options.findIndex(
+        option => option.value === selectedOption.value
+      );
+      preselectOption(selectedOptionIndex);
+      scrollOptionIntoView(selectedOptionIndex);
+    }
+    return;
+  }
 
   const preselectedOption =
     option ?? props.options[preselectedOptionIndex.value];

@@ -27,12 +27,19 @@ FField.FCreditCardInput(
     @blur="handleBlur"
     @change="handleChange"
     @input="handleInput"
+    :loading="loading"
   )
     template(#suffix)
       .FCreditCardInput__suffix
         FCreditCardIcon(
+          v-if="!loading"
           :card-type="creditCardType"
           size="32"
+        )
+        FLoader(
+          v-else
+          :color="placeholderTextColor"
+          height="24"
         )
 </template>
 
@@ -58,6 +65,7 @@ FField.FCreditCardInput(
 <script setup lang="ts">
 import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
+import FLoader from '@/components/FLoader.vue';
 import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
 
 import { computed, ref, watch } from 'vue';
@@ -159,6 +167,10 @@ export interface FCreditCardInputProps {
    * Event that triggers validation
    */
   validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
+  /**
+   * Loading state of the input
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FCreditCardInputProps>(), {

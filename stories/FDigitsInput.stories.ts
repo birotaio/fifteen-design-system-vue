@@ -48,8 +48,15 @@ Error.args = {
 export const Disabled: Story<FDigitsInputProps> = Template.bind({});
 Disabled.args = {
   label: 'Enter validation code',
-  disabled: true,
   hint: 'Check your SMS',
+  disabled: true,
+};
+
+export const Loading: Story<FDigitsInputProps> = Template.bind({});
+Loading.args = {
+  label: 'Enter validation code',
+  hint: 'Check your SMS',
+  loading: true,
 };
 
 const FocusTemplate = (args: FDigitsInputProps) => ({

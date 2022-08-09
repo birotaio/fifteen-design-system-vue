@@ -18,6 +18,7 @@ const components = [
   'FImage',
   'FInput',
   'FLink',
+  'FLoader',
   'FLogo',
   'FLogoAnimatable',
   'FPhoneInput',

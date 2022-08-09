@@ -15,24 +15,28 @@ FForm(
         label="FDigitsInput"
         name="FDigitsInput"
         hint="Hint for FDigitsInput"
+        :loading="loading"
       )
     FGridItem(span="12")
       FInput(
         label="FInput"
         name="FInput"
         hint="Hint for FInput"
+        :loading="loading"
       )
     FGridItem(span="12")
       FPhoneInput(
         label="FPhoneInput"
         name="FPhoneInput"
         hint="Hint for FPhoneInput"
+        :loading="loading"
       )
     FGridItem(span="12")
       FCreditCardInput(
         label="FCreditCardInput"
         name="FCreditCardInput"
         hint="Hint for FCreditCardInput"
+        :loading="loading"
       )
     FGridItem(span="12")
       FRadioGroup(
@@ -47,15 +51,20 @@ FForm(
         name="FSelect"
         hint="Hint for FSelect"
         :options="selectOptions"
+        :loading="loading"
       )
     FGridItem(span="12")
       FTextarea(
         label="FTextarea"
         name="FTextarea"
         hint="Hint for FTextarea"
+        :loading="loading"
       )
     FGridItem.FsForm__actions(span="12")
-      FButton(@click="submit") Submit
+      FButton(
+        @click="submit"
+        :loading="loading"
+      ) Submit
       FButton(@click="() => reset()") Reset
   FGrid
 </template>
@@ -84,7 +93,14 @@ import type { FFormProps } from '@/components/form/FForm.vue';
 import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 
 export interface FsFormProps {
+  /**
+   * Initial values of the form
+   */
   initialValues: FFormProps['initialValues'];
+  /**
+   * Loading state of the form items
+   */
+  loading?: boolean;
 }
 
 defineProps<FsFormProps>();

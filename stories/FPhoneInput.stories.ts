@@ -71,3 +71,10 @@ const FocusTemplate = (args: FPhoneInputProps) => ({
 });
 export const FocusProgrammatically: Story<FPhoneInputProps> =
   FocusTemplate.bind({});
+
+export const Loading: Story<FPhoneInputProps> = Template.bind({});
+Loading.args = {
+  label: 'Enter you phone number',
+  hint: `Don't forget to pick the right prefix`,
+  loading: true,
+};

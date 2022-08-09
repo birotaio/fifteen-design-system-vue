@@ -82,10 +82,18 @@ ErrorWithHint.args = {
 
 export const Disabled: Story<FTextareaProps> = Template.bind({});
 Disabled.args = {
-  disabled: true,
   placeholder: 'Email address',
   errorColor: 'danger',
   hint: 'You can use your personal or professional email',
+  disabled: true,
+};
+
+export const Loading: Story<FTextareaProps> = Template.bind({});
+Loading.args = {
+  placeholder: 'Email address',
+  errorColor: 'danger',
+  hint: 'You can use your personal or professional email',
+  loading: true,
 };
 
 const FocusTemplate = (args: FTextareaProps) => ({

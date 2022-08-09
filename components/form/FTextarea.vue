@@ -16,10 +16,15 @@ FField.FTextarea(
     @blur="handleBlur"
   )
   FIcon.FTextarea__errorIcon(
-    v-if="!isValid"
+    v-if="!isValid && !loading"
     name="exclamationCircle"
     :color="errorColor"
     size="16"
+  )
+  FLoader.FTextarea__loader(
+    v-else-if="loading"
+    :color="placeholderTextColor"
+    height="24"
   )
 </template>
 
@@ -70,15 +75,26 @@ FField.FTextarea(
     background var(--color--neutral--light-3)
     box-shadow none
 
-.FTextarea__errorIcon
+.FTextarea__errorIcon,
+.FTextarea__loader
   position absolute
-  right 'calc(100% - var(--ftextarea--width) + %s)' % rem(16)
+  right 'calc(100% - var(--ftextarea--width) + %s)' % rem(12)
   top rem(16)
+
+.FTextarea__loader
+  top rem(12)
+
+.FTextarea--loading
+  .FTextarea__textarea
+    pointer-events none
+    opacity 0.7
+    resize none
 </style>
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
+import FLoader from '@/components/FLoader.vue';
 
 import type CSS from 'csstype';
 import type { TextareaHTMLAttributes } from 'vue';
@@ -188,6 +204,10 @@ export interface FTextareaProps {
    * Message to use as hint when validation fails
    */
   errorMessage?: string;
+  /**
+   * Loading state of the input
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FTextareaProps>(), {
@@ -272,6 +292,7 @@ const hintTextColor = computed(() =>
 const classes = computed(() => ({
   'FTextarea--error': !isValid.value,
   'FTextarea--disabled': props.disabled,
+  'FTextarea--loading': props.loading,
 }));
 
 /**

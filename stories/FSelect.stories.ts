@@ -164,6 +164,14 @@ Disabled.args = {
   disabled: true,
 };
 
+export const Loading: Story<FSelectProps> = Template.bind({});
+Loading.args = {
+  color: 'secondary',
+  placeholder: 'All topics',
+  options: [],
+  loading: true,
+};
+
 export const LongOptionsLabel: Story<FSelectProps> = Template.bind({});
 LongOptionsLabel.parameters = {
   backgrounds: { default: 'neutral' },
@@ -224,12 +232,12 @@ Unselectable.args = {
   })),
 };
 
-export const SmallWidth: Story<FSelectProps> = Template.bind({});
-SmallWidth.parameters = {
+export const SmallWidthMenu: Story<FSelectProps> = Template.bind({});
+SmallWidthMenu.parameters = {
   backgrounds: { default: 'neutral' },
 };
-SmallWidth.args = {
-  menuWidth: 300,
+SmallWidthMenu.args = {
+  menuWidth: 200,
   color: 'secondary',
   placeholderTextColor: 'neutral--light-3',
   optionTextColor: 'neutral--light-3',

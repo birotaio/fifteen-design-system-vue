@@ -21,10 +21,15 @@ FField.FInput(
       :name="name"
       ref="inputRef"
     )
-    .FInput__input__suffix(v-if="$slots['suffix']")
+    .FInput__input__suffix(v-if="$slots['suffix'] || loading")
       slot(name="suffix")
+        FLoader(
+          v-if="loading"
+          :color="placeholderTextColor"
+          height="24"
+        )
     FIcon.FInput__errorIcon(
-      v-if="!isValid && !hideErrorIcon"
+      v-if="!isValid && !hideErrorIcon && !loading"
       name="exclamationCircle"
       :color="errorColor"
       size="16"
@@ -92,11 +97,18 @@ FField.FInput(
   position absolute
   right rem(16)
   top rem(16)
+
+.FInput--loading
+  .FInput__input
+    pointer-events none
+    opacity 0.7
 </style>
 
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
+import FLoader from '@/components/FLoader.vue';
+
 import type CSS from 'csstype';
 import type { InputHTMLAttributes, Ref } from 'vue';
 
@@ -220,6 +232,10 @@ export interface FInputProps {
    * Restrict input value to a specific mask
    */
   mask?: string | string[];
+  /**
+   * Loading state of the input
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FInputProps>(), {
@@ -295,6 +311,7 @@ const style = computed(
 const classes = computed(() => ({
   'FInput--error': !isValid.value,
   'FInput--disabled': props.disabled,
+  'FInput--loading': props.loading,
 }));
 
 const hintTextColor = computed(() =>

@@ -1,18 +1,18 @@
 <template lang="pug">
 .FMenu(
   :style="style"
-  @keydown="handlePreselectSearch"
   ref="menuRef"
   :class="menuClasses"
+  @keydown="handlePreselectSearch"
 )
   Popper(
     :show="isOpen"
     placement="bottom-start"
   )
     .FMenu__activator(
-      @keydown.up="keyboardPreselectPrevOption"
       @keydown.down="keyboardPreselectNextOption"
       @keydown.enter="selectOption()"
+      @keydown.up="keyboardPreselectPrevOption"
     )
       slot(
         name="activator"
@@ -25,13 +25,13 @@
       )
         .FMenu__option(
           role="option"
-          @click="selectOption(option)"
-          @mouseenter="mousePreselectOption(index)"
-          @mousemove="isKeyboardInteracting = false"
           v-for="(option, index) in options"
           :key="option.value"
           :class="selectOptionClasses(index)"
           ref="optionRefs"
+          @click="selectOption(option)"
+          @mouseenter="mousePreselectOption(index)"
+          @mousemove="isKeyboardInteracting = false"
         )
           slot(
             name="option-prefix"

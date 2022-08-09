@@ -14,10 +14,10 @@ FField.FRadioGroup(
       :label="option.label"
       v-model="value"
       :disabled="disabled"
+      hide-hint
+      @blur="handleBlur"
       @change="handleChange"
       @focus="handleFocus"
-      @blur="handleBlur"
-      hide-hint
     )
 </template>
 

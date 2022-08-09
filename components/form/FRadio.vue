@@ -7,17 +7,17 @@ FField.FRadio(
   label.FRadio__label
     .FRadio__wrapper
       input.FRadio__radio(
+        ref="radioRef"
         :name="name"
         type="radio"
         v-model="fieldValue"
         :value="value"
         :checked="fieldValue === value"
-        @keypress.enter="fieldValue = value"
         :disabled="disabled"
-        @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
-        ref="radioRef"
+        @focus="handleFocus"
+        @keypress.enter="fieldValue = value"
       )
     span.FRadio__labelText {{ label }}
 </template>

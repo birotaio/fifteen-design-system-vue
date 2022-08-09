@@ -6,12 +6,12 @@ FField.FPhoneInput(
 )
   FMenu(
     :options="countries"
-    @toggle="value => (isMenuOpen = value)"
     v-model="countryCode"
     width="100"
     :color="optionsMenuColor"
     :text-color="optionTextColor"
     :disabled="disabled"
+    @toggle="value => (isMenuOpen = value)"
   )
     template(#activator="{ toggleMenu, openMenu, closeMenu }")
       FInput(
@@ -33,11 +33,11 @@ FField.FPhoneInput(
         :error-color="errorColor"
         hide-hint
         :mask="phoneNumberMask"
+        :loading="loading"
         @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
         @input="handleInput"
-        :loading="loading"
       )
         template(#prefix)
           .FPhoneInput__prefix(

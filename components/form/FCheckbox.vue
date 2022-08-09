@@ -7,16 +7,16 @@ FField.FCheckbox(
   label.FCheckbox__label
     .FCheckbox__wrapper
       input.FCheckbox__checkbox(
+        ref="checkboxRef"
         :name="name"
         type="checkbox"
         v-model="checked"
-        @keypress.enter="checked = !checked"
         :disabled="disabled"
         :class="checkboxClasses"
-        @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
-        ref="checkboxRef"
+        @focus="handleFocus"
+        @keypress.enter="checked = !checked"
       )
       FIcon.FCheckbox__checkedIcon(
         name="checkmark"

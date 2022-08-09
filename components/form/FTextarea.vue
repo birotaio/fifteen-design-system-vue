@@ -11,9 +11,9 @@ FField.FTextarea(
     :placeholder="placeholder"
     :disabled="disabled"
     :rows="rows"
+    @blur="handleBlur"
     @change="handleChange"
     @focus="handleFocus"
-    @blur="handleBlur"
   )
   FIcon.FTextarea__errorIcon(
     v-if="!isValid && !loading"

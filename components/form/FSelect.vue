@@ -6,7 +6,6 @@ FField.FSelect(
 )
   FMenu(
     v-model="fieldValue"
-    @toggle="value => (isMenuOpen = value)"
     :options="options"
     :width="menuWidth"
     :empty-text="emptyText"
@@ -15,8 +14,9 @@ FField.FSelect(
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
-    @select-option="emit('select-option', $event)"
     :disabled="disabled"
+    @select-option="emit('select-option', $event)"
+    @toggle="value => (isMenuOpen = value)"
   )
     template(#option-prefix="scope")
       slot(
@@ -33,13 +33,13 @@ FField.FSelect(
     template(#activator="{ toggleMenu, openMenu, closeMenu }")
       .FSelect__select(
         tabindex="0"
-        @keydown.esc="closeMenu"
-        @click="toggleMenu"
-        @keydown.enter="openMenu"
-        @focus="handleFocus"
-        @blur="handleBlur"
         role="listbox"
         ref="selectRef"
+        @blur="handleBlur"
+        @click="toggleMenu"
+        @focus="handleFocus"
+        @keydown.enter="openMenu"
+        @keydown.esc="closeMenu"
       )
         .FSelect__select__selectionStart
           FIcon.FSelect__select__errorIcon(
@@ -58,13 +58,13 @@ FField.FSelect(
             .FSelect__placeholder(v-else) {{ placeholder }}
         FIcon.FSelect__icon(
           v-if="!disabled && !loading"
-          @click="handleIconClick"
           :name="iconName"
           :size="16"
           color="transparent"
           :stroke-color="textColor"
           :stroke-width="2"
           :class="iconClasses"
+          @click="handleIconClick"
         )
         FLoader.FSelect__loader(
           v-if="loading"

@@ -23,11 +23,11 @@ FField.FCreditCardInput(
     hide-error-icon
     hide-hint
     mask="#### #### #### ####"
-    @focus="handleFocus"
+    :loading="loading"
     @blur="handleBlur"
     @change="handleChange"
+    @focus="handleFocus"
     @input="handleInput"
-    :loading="loading"
   )
     template(#suffix)
       .FCreditCardInput__suffix

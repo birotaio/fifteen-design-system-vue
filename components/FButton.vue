@@ -5,10 +5,10 @@ component.FButton(
   :style="style"
   :class="classes"
   v-bind="specificProps"
-  @focus.stop="emit('focus')"
   @blur.stop="emit('blur')"
-  @keydown.enter.space.stop="onClick($event, false)"
   @click.stop="onClick($event, true)"
+  @focus.stop="emit('focus')"
+  @keydown.enter.space.stop="onClick($event, false)"
 )
   .FButton__container
     slot

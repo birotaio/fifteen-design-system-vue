@@ -10,10 +10,6 @@ FField.FDigitsInput(
       text-align="center"
       v-model="digitsValue[index]"
       validation-trigger="input"
-      @input="selectNextDigit(index)"
-      @keydown.delete="selectPrevDigit(index)"
-      @focus="handleFocus(index)"
-      @change="handleDigitChange"
       hide-hint
       mask="#"
       :rules="[() => isValid]"
@@ -28,6 +24,10 @@ FField.FDigitsInput(
       :border-color="borderColor"
       :focus-border-color="focusBorderColor"
       :error-color="errorColor"
+      @change="handleDigitChange"
+      @focus="handleFocus(index)"
+      @input="selectNextDigit(index)"
+      @keydown.delete="selectPrevDigit(index)"
     )
     FLoader(
       v-if="loading"

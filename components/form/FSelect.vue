@@ -6,7 +6,7 @@ FField.FSelect(
 )
   FMenu(
     v-model="fieldValue"
-    v-model:is-open="isMenuOpen"
+    @toggle="newValue => (isMenuOpen = newValue)"
     :options="options"
     :width="menuWidth"
     :empty-text="emptyText"
@@ -16,6 +16,7 @@ FField.FSelect(
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
     @select-option="emit('select-option', $event)"
+    :disabled="disabled"
   )
     template(#option-prefix="scope")
       slot(
@@ -29,11 +30,12 @@ FField.FSelect(
         v-bind="scope"
       )
 
-    template(#activator="{ toggleMenu }")
+    template(#activator="{ toggleMenu, closeMenu }")
       .FSelect__select(
         tabindex="0"
-        @keypress.enter="toggleMenu"
-        @click="!disabled && toggleMenu()"
+        @keydown.esc="closeMenu"
+        @click="toggleMenu"
+        @keydown.enter="toggleMenu"
         @focus="handleFocus"
         @blur="handleBlur"
         role="listbox"

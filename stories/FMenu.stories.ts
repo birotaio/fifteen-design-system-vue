@@ -26,3 +26,13 @@ Default.args = {
     { label: 'Data', value: 'data' },
   ],
 };
+
+export const Disabled: Story<FMenuProps> = Template.bind({});
+Disabled.args = {
+  options: [
+    { label: 'Acquisition', value: 'acquisition' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Data', value: 'data' },
+  ],
+  disabled: true,
+};

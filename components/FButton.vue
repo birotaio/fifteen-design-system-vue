@@ -360,7 +360,7 @@ export interface FButtonProps {
    */
   outlined?: boolean;
   /**
-   * Disable or not the the button
+   * Disable or not the button
    */
   disabled?: boolean;
   /**

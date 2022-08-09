@@ -3,19 +3,20 @@
   :style="style"
   @keydown="handlePreselectSearch"
   ref="menuRef"
+  :class="menuClasses"
 )
   Popper(
     :show="isOpen"
     placement="bottom-start"
   )
     .FMenu__activator(
-      @keydown.esc="handleEsc"
-      @keydown.up.prevent="keyboardPreselectPrevOption"
-      @keydown.down.prevent="keyboardPreselectNextOption"
+      @keydown.up="keyboardPreselectPrevOption"
+      @keydown.down="keyboardPreselectNextOption"
+      @keydown.enter="handleEnterKeydown"
     )
       slot(
         name="activator"
-        v-bind="{ toggleMenu }"
+        v-bind="{ toggleMenu, openMenu, closeMenu }"
       )
     template(#content)
       .FMenu__optionsMenu(
@@ -101,11 +102,15 @@
   elevation(2)
   color var(--fmenu--text-color)
   padding rem(8)
+
+.FMenu--disabled
+  pointer-events none
+  opacity 0.7
 </style>
 
 <script setup lang="ts">
 import Popper from 'vue3-popper/dist/popper.esm';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
@@ -122,10 +127,6 @@ export interface FMenuProps {
    * Selected value of the menu
    */
   modelValue?: string | number | null;
-  /**
-   * If the menu is opened or not
-   */
-  isOpen?: boolean;
   /**
    * Array of options
    */
@@ -158,6 +159,10 @@ export interface FMenuProps {
    * Text color of the selected option
    */
   selectedOptionTextColor?: Color;
+  /**
+   * Disable the menu
+   */
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -190,18 +195,43 @@ const optionRefs = ref<Element[]>([]);
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;
-  (name: 'update:isOpen', value: boolean): void;
   (name: 'select-option', value: string | number | null): void;
+  (name: 'toggle', value: boolean): void;
 }>();
 
-const isOpen = useVModelProxy(props, 'isOpen', emit);
+const menuClasses = computed(() => ({
+  'FMenu--disabled': props.disabled,
+}));
+
+const isOpen = ref(false);
 const isKeyboardInteracting = ref(false);
 const preselectedOptionIndex = ref(0);
 
+/**
+ * Toggle the menu
+ */
 function toggleMenu() {
-  handleToggleMenu();
+  if (props.disabled) return;
   isOpen.value = !isOpen.value;
 }
+
+/**
+ * Open the menu
+ */
+function openMenu() {
+  if (props.disabled) return;
+  isOpen.value = true;
+}
+
+/**
+ * Close the menu
+ */
+function closeMenu() {
+  if (props.disabled) return;
+  isOpen.value = false;
+}
+
+watch(isOpen, newValue => emit('toggle', newValue), { immediate: true });
 
 /**
  * Preselect an option
@@ -227,19 +257,6 @@ function isSelected(index: number): boolean {
 }
 
 /**
- * Select an option as select value
- * @param option - Option to select
- */
-function selectOption(option: FMenuOption | null): void {
-  emit('select-option', option?.value ?? null);
-
-  if (!props.preventSelection) {
-    selectedOption.value = option?.value ?? null;
-  }
-  isOpen.value = false;
-}
-
-/**
  * Classes to apply to select option
  * @param index - Index of the option
  */
@@ -260,9 +277,11 @@ function mousePreselectOption(index: number) {
 }
 
 /**
- * Preselect the previous option. If the first is already selected, select the last
+ * Preselect the previous option or the last if the first is selected
  */
 function keyboardPreselectPrevOption(): void {
+  if (!isOpen.value) return;
+
   isKeyboardInteracting.value = true;
   const preselectedIndex =
     preselectedOptionIndex.value - 1 < 0
@@ -273,9 +292,11 @@ function keyboardPreselectPrevOption(): void {
 }
 
 /**
- * Preselect the next option. If the last is already selected, select the first
+ * Preselect the next option or the first if the last is already selected
  */
 function keyboardPreselectNextOption(): void {
+  if (!isOpen.value) return;
+
   isKeyboardInteracting.value = true;
   const preselectedIndex =
     preselectedOptionIndex.value + 1 > props.options.length - 1
@@ -303,25 +324,28 @@ function scrollOptionIntoView(index: number) {
   }
 }
 
-/**
- * Handle toggle menu
- */
-function handleToggleMenu(): void {
-  if (!props.options.length || !isOpen.value) return;
+function handleEnterKeydown() {
+  // If this function is called while menu is opened, it means that the enter keydown event triggered is opening the menu.
+  // So we do nothing here
+  if (isOpen.value) return;
 
-  const preselectedOption = props.options[preselectedOptionIndex.value];
-  emit('select-option', preselectedOption.value);
-
-  if (!props.preventSelection) {
-    selectedOption.value = preselectedOption.value;
-  }
+  selectOption();
 }
 
 /**
- * Handle escape key down
+ * Handle value selection
  */
-function handleEsc(): void {
-  isOpen.value = false;
+function selectOption(option?: FMenuOption | null): void {
+  if (!props.options.length || isOpen.value || props.disabled) return;
+
+  const preselectedOption =
+    option ?? props.options[preselectedOptionIndex.value];
+
+  emit('select-option', preselectedOption.value);
+  if (props.preventSelection) return;
+
+  selectedOption.value = preselectedOption.value;
+  closeMenu();
 }
 
 let preselectSearchTerm = '';
@@ -333,9 +357,11 @@ const DELAY_BETWEEN_KEYSTROKES_IN_MS = 600;
  * @param event - Keyboard event
  */
 function handlePreselectSearch(event: KeyboardEvent) {
+  event.stopPropagation();
+  if (!isOpen.value) return;
+
   isKeyboardInteracting.value = true;
 
-  event.stopPropagation();
   preselectSearchTerm = removeDiacritics(
     preselectSearchTerm + event.key
   ).toLocaleLowerCase();

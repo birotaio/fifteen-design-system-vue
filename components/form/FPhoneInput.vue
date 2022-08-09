@@ -6,13 +6,14 @@ FField.FPhoneInput(
 )
   FMenu(
     :options="countries"
-    v-model:is-open="isMenuOpen"
+    @toggle="newValue => (isMenuOpen = newValue)"
     v-model="countryCode"
     width="100"
     :color="optionsMenuColor"
     :text-color="optionTextColor"
+    :disabled="disabled"
   )
-    template(#activator="{ toggleMenu }")
+    template(#activator="{ toggleMenu, closeMenu }")
       FInput(
         v-model="phoneNumber"
         ref="inputRef"
@@ -40,11 +41,13 @@ FField.FPhoneInput(
       )
         template(#prefix)
           .FPhoneInput__prefix(
-            @keydown.enter.prevent="!disabled && toggleMenu()"
+            @keydown.esc="closeMenu"
+            @keydown.enter="toggleMenu"
+            @click="toggleMenu"
           )
             .FPhoneInput__selectedValue(
-              @click="!disabled && toggleMenu()"
               tabindex="0"
+              @blur="closeMenu"
             )
               FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
               FIcon.FPhoneInput__icon(
@@ -116,7 +119,7 @@ FField.FPhoneInput(
 
 .FPhoneInput--disabled
   .FPhoneInput__selectedFlag
-    filter grayscale(1)
+    opacity 0.7
 
   .FPhoneInput__prefix
     > span
@@ -150,7 +153,6 @@ import FFlagIcon from '@/components/FFlagIcon.vue';
 import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {

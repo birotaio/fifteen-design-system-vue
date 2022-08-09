@@ -191,7 +191,7 @@ const style = computed(
 
 const selectedOption = useVModelProxy<string | number | boolean>(props);
 
-const optionRefs = ref<Element[]>([]);
+const optionRefs = ref<HTMLElement[]>([]);
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;
@@ -246,10 +246,6 @@ watch(isOpen, newValue => {
 function preselectOption(index: number) {
   preselectedOptionIndex.value = index;
 }
-
-const menuOptionsRef = ref();
-const { top: menuOptionsTop, bottom: menuOptionsBottom } =
-  useElementBounding(menuOptionsRef);
 
 /**
  * Returns the selection status of an option based on index
@@ -312,20 +308,35 @@ function keyboardPreselectNextOption(): void {
   preselectOption(preselectedIndex);
 }
 
+const menuOptionsRef = ref();
+const {
+  top: menuOptionsTop,
+  bottom: menuOptionsBottom,
+  height: menuOptionsHeight,
+} = useElementBounding(menuOptionsRef);
+
 /**
  * Scroll to the selected option
  * @param index - Index of the option to scroll into view
  */
 function scrollOptionIntoView(index: number) {
   const el = optionRefs?.value[index];
-  const { top, bottom, height } = el.getBoundingClientRect();
-  const isVisible =
-    top >= menuOptionsTop.value && bottom <= menuOptionsBottom.value;
-  if (!isVisible) {
-    menuOptionsRef.value.scrollTo(
+  const {
+    top: itemTop,
+    bottom: itemBottom,
+    height,
+  } = el.getBoundingClientRect();
+
+  // If item overflow to the bottom
+  if (itemTop < menuOptionsTop.value) {
+    return menuOptionsRef.value.scrollTo(0, index * (height + 4));
+  }
+
+  // If item overflow to the top
+  if (itemBottom > menuOptionsBottom.value) {
+    return menuOptionsRef.value.scrollTo(
       0,
-      menuOptionsRef.value.scrollTop -
-        (preselectedOptionIndex.value - index) * (height + 4)
+      (index + 1) * (height + 4) - menuOptionsHeight.value + 12
     );
   }
 }
@@ -360,7 +371,7 @@ function selectOption(option?: FMenuOption | null): void {
 
 let preselectSearchTerm = '';
 let timeout: NodeJS.Timeout;
-const DELAY_BETWEEN_KEYSTROKES_IN_MS = 600;
+const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
 
 /**
  * Preselect an option based on input keys (search)

@@ -22,7 +22,7 @@ FField.FCreditCardInput(
     :rules="[() => isValid]"
     hide-error-icon
     hide-hint
-    mask="#### #### #### ####"
+    :mask="creditCard?.mask"
     :loading="loading"
     @blur="handleBlur"
     @change="handleChange"
@@ -33,7 +33,7 @@ FField.FCreditCardInput(
       .FCreditCardInput__suffix
         FCreditCardIcon(
           v-if="!loading"
-          :card-type="creditCardType"
+          :card-type="creditCard?.type"
           size="32"
         )
         FLoader(
@@ -71,8 +71,8 @@ import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import getCardType from 'credit-card-type';
-import { CreditCardTypeCardBrandId } from 'credit-card-type/dist/types';
+import type { CreditCardInformation } from '@/modules/credit-card-types';
+import { getCardInformation } from '@/modules/credit-card-types';
 
 export interface FCreditCardInputProps {
   /**
@@ -203,6 +203,7 @@ const emit = defineEmits<{
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
+  (name: 'credit-card', value: CreditCardInformation | null): void;
 }>();
 
 defineExpose<{
@@ -241,21 +242,31 @@ function luhnCheck(cardNumber: string) {
   return sum % 10 === 0;
 }
 
-const creditCardType = ref<CreditCardTypeCardBrandId | null>(null);
+const creditCard = ref<CreditCardInformation | null>(null);
 
 watch(value, newValue => {
-  creditCardType.value =
-    newValue.length > 0
-      ? (getCardType(newValue)?.[0]?.type as CreditCardTypeCardBrandId)
-      : null;
+  const spacelessValue = newValue.replace(/\s/g, '');
+  const newCreditCard = getCardInformation(spacelessValue);
+
+  let lengthExceeded = newCreditCard?.lengths.every(
+    length => spacelessValue.length > length
+  );
+  if (lengthExceeded) return;
+
+  creditCard.value = newCreditCard;
+  emit('credit-card', newCreditCard);
 });
 
 /**
  * Internal validation rule, always applied
  */
 function isValidCreditCard(value: unknown): boolean {
-  if (typeof value !== 'string') return false;
-  return luhnCheck(value);
+  if (typeof value !== 'string' || !creditCard.value) return false;
+
+  const spacelessValue = value.replace(/\s/g, '');
+  return (
+    luhnCheck(value) && creditCard.value.lengths.includes(spacelessValue.length)
+  );
 }
 
 const hintTextColor = computed(() =>

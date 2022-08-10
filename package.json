@@ -124,7 +124,6 @@
   "dependencies": {
     "@vee-validate/rules": "^4.5.11",
     "@vueuse/core": "^8.5.0",
-    "credit-card-type": "^9.1.0",
     "libphonenumber-js": "^1.10.6",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.36"

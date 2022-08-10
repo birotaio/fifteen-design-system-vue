@@ -71,8 +71,8 @@ import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import type { CreditCardInformation } from '@/modules/credit-card-types';
-import { getCardInformation } from '@/modules/credit-card-types';
+import type { CreditCardInfo } from '@/modules/credit-card-types';
+import { getCardInfo } from '@/modules/credit-card-types';
 
 export interface FCreditCardInputProps {
   /**
@@ -203,7 +203,7 @@ const emit = defineEmits<{
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'credit-card', value: CreditCardInformation | null): void;
+  (name: 'credit-card', value: CreditCardInfo | null): void;
 }>();
 
 defineExpose<{
@@ -227,7 +227,6 @@ const classes = computed(() => ({
 
 function luhnCheck(cardNumber: string) {
   const cardNumbers = cardNumber
-    .replace(/\s/g, '')
     .split('')
     .reverse()
     .map(x => parseInt(x));
@@ -242,11 +241,11 @@ function luhnCheck(cardNumber: string) {
   return sum % 10 === 0;
 }
 
-const creditCard = ref<CreditCardInformation | null>(null);
+const creditCard = ref<CreditCardInfo | null>(null);
 
 watch(value, newValue => {
   const spacelessValue = newValue.replace(/\s/g, '');
-  const newCreditCard = getCardInformation(spacelessValue);
+  const newCreditCard = getCardInfo(spacelessValue);
 
   let lengthExceeded = newCreditCard?.lengths.every(
     length => spacelessValue.length > length
@@ -265,7 +264,8 @@ function isValidCreditCard(value: unknown): boolean {
 
   const spacelessValue = value.replace(/\s/g, '');
   return (
-    luhnCheck(value) && creditCard.value.lengths.includes(spacelessValue.length)
+    luhnCheck(spacelessValue) &&
+    creditCard.value.lengths.includes(spacelessValue.length)
   );
 }
 

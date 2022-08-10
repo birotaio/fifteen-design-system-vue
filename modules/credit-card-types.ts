@@ -19,8 +19,8 @@ declare type CreditCardBrandName =
 declare type CreditCardSecurityCodeLabel = 'CVV' | 'CVC' | 'CID' | 'CVN';
 declare type Range = [number, number];
 declare type CreditCardPattern = number | Range;
-export declare type CreditCardInformation = {
-  niceType: CreditCardBrandName;
+export declare type CreditCardInfo = {
+  name: CreditCardBrandName;
   type: CreditCardBrandId;
   patterns: CreditCardPattern[];
   lengths: number[];
@@ -34,9 +34,9 @@ export declare type CreditCardInformation = {
 // Card types supported by Stripe and therefore need to be supported by FCreditCardInput
 // More information on Stripe credit card support :
 // https://stripe.com/docs/payments/cards/supported-card-brands
-const cardTypes: CreditCardInformation[] = [
+export const cardTypes: CreditCardInfo[] = [
   {
-    niceType: 'Visa',
+    name: 'Visa',
     type: 'visa',
     patterns: [4],
     lengths: [16],
@@ -47,7 +47,7 @@ const cardTypes: CreditCardInformation[] = [
     mask: '#### #### #### ####',
   },
   {
-    niceType: 'Mastercard',
+    name: 'Mastercard',
     type: 'mastercard',
     patterns: [[51, 55], [22, 26], [270, 271], 2720],
     lengths: [16],
@@ -58,7 +58,7 @@ const cardTypes: CreditCardInformation[] = [
     mask: '#### #### #### ####',
   },
   {
-    niceType: 'American Express',
+    name: 'American Express',
     type: 'american-express',
     patterns: [34, 37],
     lengths: [15],
@@ -69,7 +69,7 @@ const cardTypes: CreditCardInformation[] = [
     mask: '#### ###### #####',
   },
   {
-    niceType: 'Diners Club',
+    name: 'Diners Club',
     type: 'diners-club',
     patterns: [[300, 305], 36, 38, 39],
     lengths: [14, 16],
@@ -80,7 +80,7 @@ const cardTypes: CreditCardInformation[] = [
     mask: ['#### ###### ####', '#### #### #### ####'],
   },
   {
-    niceType: 'Discover',
+    name: 'Discover',
     type: 'discover',
     patterns: [6011, [644, 649], 65],
     lengths: [16],
@@ -91,7 +91,7 @@ const cardTypes: CreditCardInformation[] = [
     mask: '#### #### #### ####',
   },
   {
-    niceType: 'JCB',
+    name: 'JCB',
     type: 'jcb',
     patterns: [2131, 1800, [3528, 3589]],
     lengths: [16],
@@ -102,7 +102,7 @@ const cardTypes: CreditCardInformation[] = [
     mask: '#### #### #### ####',
   },
   {
-    niceType: 'UnionPay',
+    name: 'UnionPay',
     type: 'unionpay',
     patterns: [
       62,
@@ -142,31 +142,50 @@ const cardTypes: CreditCardInformation[] = [
   },
 ];
 
-function matches(value: string, pattern: CreditCardPattern): boolean {
+/**
+ * Checks if a card number matches with a provided pattern.
+ * @param cardNumber - The card number to check for a match.
+ * @param pattern - The pattern used for comparison.
+ * @returns {boolean}
+ */
+function matchCardNumberByPattern(
+  cardNumber: string,
+  pattern: CreditCardPattern
+): boolean {
   if (Array.isArray(pattern)) {
     const [min, max] = pattern;
-    const digitsLength = min.toString().length;
-    const valueAsInteger = parseInt(value.substring(0, digitsLength));
-    return valueAsInteger >= min && valueAsInteger <= max;
+    const firstDigitsLength = min.toString().length;
+    const cardNumberFirstDigitsAsInteger = parseInt(
+      cardNumber.substring(0, firstDigitsLength)
+    );
+    return (
+      cardNumberFirstDigitsAsInteger >= min &&
+      cardNumberFirstDigitsAsInteger <= max
+    );
   } else {
     const patternString = pattern.toString();
     return (
-      patternString.substring(0, value.length) ===
-      value.substring(0, patternString.length)
+      patternString.substring(0, cardNumber.length) ===
+      cardNumber.substring(0, patternString.length)
     );
   }
 }
 
-function getCardInformation(value: string): CreditCardInformation | null {
+/**
+ * Returns credit card information based on a value that is usually coming from an input.
+ * @param value - The input value.
+ * @returns {CreditCardInfo|null} If value is empty or couldn't find any card match, null is returned
+ */
+export function getCardInfo(value: string): CreditCardInfo | null {
   if (!value) return null;
   // Filter array of cards types
-  const cardTypeArray = cardTypes.filter(card => {
-    // Keep in array only those where at least one pattern match the current input value
-    return card.patterns.some(pattern => matches(value, pattern));
+  const matchedCardTypes = cardTypes.filter(card => {
+    // Keep in array only those where at least one pattern matches the current input value
+    return card.patterns.some(pattern =>
+      matchCardNumberByPattern(value, pattern)
+    );
   });
 
   // If multiple cards match the current value, show the most commonly used credit card
-  return cardTypeArray[0] ?? null;
+  return matchedCardTypes[0] ?? null;
 }
-
-export { cardTypes, getCardInformation };

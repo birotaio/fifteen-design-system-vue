@@ -20,13 +20,13 @@
 <script setup lang="ts">
 import FSvgImage from './FSvgImage.vue';
 import { computed } from 'vue';
-import { CreditCardTypeCardBrandId } from 'credit-card-type/dist/types';
+import { CreditCardBrandId } from '@/modules/credit-card-types';
 
 export interface FCreditCardIconProps {
   /**
    * Code of the country, following the ISO 3166 standard
    */
-  cardType: CreditCardTypeCardBrandId | null;
+  cardType: CreditCardBrandId | null;
   /**
    * Size of the credit card icon
    */

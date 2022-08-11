@@ -1,21 +1,22 @@
 <template lang="pug">
 .FMenu(
   :style="style"
-  @keydown="handlePreselectSearch"
   ref="menuRef"
+  :class="menuClasses"
+  @keydown="handlePreselectSearch"
 )
   Popper(
     :show="isOpen"
     placement="bottom-start"
   )
     .FMenu__activator(
-      @keydown.enter="handleEnter"
-      @keydown.up.prevent="keyboardPreselectPrevOption"
-      @keydown.down.prevent="keyboardPreselectNextOption"
+      @keydown.down="keyboardPreselectNextOption"
+      @keydown.enter="selectOption()"
+      @keydown.up="keyboardPreselectPrevOption"
     )
       slot(
         name="activator"
-        v-bind="{ toggleMenu }"
+        v-bind="{ toggleMenu, openMenu, closeMenu }"
       )
     template(#content)
       .FMenu__optionsMenu(
@@ -24,13 +25,13 @@
       )
         .FMenu__option(
           role="option"
-          @click="selectOption(option)"
-          @mouseenter="mousePreselectOption(index)"
-          @mousemove="isKeyboardInteracting = false"
           v-for="(option, index) in options"
           :key="option.value"
           :class="selectOptionClasses(index)"
           ref="optionRefs"
+          @click="selectOption(option)"
+          @mouseenter="mousePreselectOption(index)"
+          @mousemove="isKeyboardInteracting = false"
         )
           slot(
             name="option-prefix"
@@ -101,11 +102,15 @@
   elevation(2)
   color var(--fmenu--text-color)
   padding rem(8)
+
+.FMenu--disabled
+  pointer-events none
+  opacity 0.7
 </style>
 
 <script setup lang="ts">
 import Popper from 'vue3-popper/dist/popper.esm';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
@@ -122,10 +127,6 @@ export interface FMenuProps {
    * Selected value of the menu
    */
   modelValue?: string | number | null;
-  /**
-   * If the menu is opened or not
-   */
-  isOpen?: boolean;
   /**
    * Array of options
    */
@@ -158,6 +159,10 @@ export interface FMenuProps {
    * Text color of the selected option
    */
   selectedOptionTextColor?: Color;
+  /**
+   * Disable the menu
+   */
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -186,21 +191,53 @@ const style = computed(
 
 const selectedOption = useVModelProxy<string | number | boolean>(props);
 
-const optionRefs = ref<Element[]>([]);
+const optionRefs = ref<HTMLElement[]>([]);
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: string | number | null): void;
-  (name: 'update:isOpen', value: boolean): void;
   (name: 'select-option', value: string | number | null): void;
+  (name: 'toggle', value: boolean): void;
 }>();
 
-const isOpen = useVModelProxy(props, 'isOpen', emit);
-const isKeyboardInteracting = ref(false);
-const preselectedOptionIndex = ref(0);
+const menuClasses = computed(() => ({
+  'FMenu--disabled': props.disabled,
+}));
 
+const isOpen = ref(false);
+const isKeyboardInteracting = ref(false);
+const preselectedOptionIndex = ref(-1);
+
+/**
+ * Toggle the menu
+ */
 function toggleMenu() {
+  if (props.disabled) return;
   isOpen.value = !isOpen.value;
 }
+
+/**
+ * Open the menu
+ */
+function openMenu() {
+  if (props.disabled) return;
+  isOpen.value = true;
+}
+
+/**
+ * Close the menu
+ */
+function closeMenu() {
+  if (props.disabled) return;
+  isOpen.value = false;
+}
+
+watch(isOpen, newValue => {
+  emit('toggle', newValue);
+
+  if (!newValue) {
+    preselectOption(-1);
+  }
+});
 
 /**
  * Preselect an option
@@ -209,10 +246,6 @@ function toggleMenu() {
 function preselectOption(index: number) {
   preselectedOptionIndex.value = index;
 }
-
-const menuOptionsRef = ref();
-const { top: menuOptionsTop, bottom: menuOptionsBottom } =
-  useElementBounding(menuOptionsRef);
 
 /**
  * Returns the selection status of an option based on index
@@ -223,19 +256,6 @@ function isSelected(index: number): boolean {
     props.options.findIndex(option => option.value === selectedOption.value) ===
     index
   );
-}
-
-/**
- * Select an option as select value
- * @param option - Option to select
- */
-function selectOption(option: FMenuOption | null): void {
-  emit('select-option', option?.value ?? null);
-
-  if (!props.preventSelection) {
-    selectedOption.value = option?.value ?? null;
-  }
-  isOpen.value = false;
 }
 
 /**
@@ -259,9 +279,11 @@ function mousePreselectOption(index: number) {
 }
 
 /**
- * Preselect the previous option. If the first is already selected, select the last
+ * Preselect the previous option or the last if the first is selected
  */
 function keyboardPreselectPrevOption(): void {
+  if (!isOpen.value) return;
+
   isKeyboardInteracting.value = true;
   const preselectedIndex =
     preselectedOptionIndex.value - 1 < 0
@@ -272,9 +294,11 @@ function keyboardPreselectPrevOption(): void {
 }
 
 /**
- * Preselect the next option. If the last is already selected, select the first
+ * Preselect the next option or the first if the last is already selected
  */
 function keyboardPreselectNextOption(): void {
+  if (!isOpen.value) return;
+
   isKeyboardInteracting.value = true;
   const preselectedIndex =
     preselectedOptionIndex.value + 1 > props.options.length - 1
@@ -284,48 +308,81 @@ function keyboardPreselectNextOption(): void {
   preselectOption(preselectedIndex);
 }
 
+const menuOptionsRef = ref();
+const {
+  top: menuOptionsTop,
+  bottom: menuOptionsBottom,
+  height: menuOptionsHeight,
+} = useElementBounding(menuOptionsRef);
+
 /**
  * Scroll to the selected option
  * @param index - Index of the option to scroll into view
  */
 function scrollOptionIntoView(index: number) {
   const el = optionRefs?.value[index];
-  const { top, bottom, height } = el.getBoundingClientRect();
-  const isVisible =
-    top >= menuOptionsTop.value && bottom <= menuOptionsBottom.value;
-  if (!isVisible) {
-    menuOptionsRef.value.scrollTo(
+  const {
+    top: itemTop,
+    bottom: itemBottom,
+    height,
+  } = el.getBoundingClientRect();
+
+  // If item overflow to the bottom
+  if (itemTop < menuOptionsTop.value) {
+    return menuOptionsRef.value.scrollTo(0, index * (height + 4));
+  }
+
+  // If item overflow to the top
+  if (itemBottom > menuOptionsBottom.value) {
+    return menuOptionsRef.value.scrollTo(
       0,
-      menuOptionsRef.value.scrollTop -
-        (preselectedOptionIndex.value - index) * (height + 4)
+      (index + 1) * (height + 4) - menuOptionsHeight.value + 12
     );
   }
 }
 
 /**
- * Handle enter key down
+ * Handle value selection
  */
-function handleEnter(): void {
-  const preselectedOption = props.options[preselectedOptionIndex.value];
-  emit('select-option', preselectedOption.value);
+function selectOption(option?: FMenuOption | null): void {
+  if (!props.options.length || props.disabled) return;
 
-  if (isOpen.value && !props.preventSelection) {
-    selectedOption.value = preselectedOption.value;
+  if (!option && preselectedOptionIndex.value === -1) {
+    // Use current selected option as preselected option
+    if (selectedOption.value) {
+      const selectedOptionIndex = props.options.findIndex(
+        option => option.value === selectedOption.value
+      );
+      preselectOption(selectedOptionIndex);
+      scrollOptionIntoView(selectedOptionIndex);
+    }
+    return;
   }
+
+  const preselectedOption =
+    option ?? props.options[preselectedOptionIndex.value];
+
+  emit('select-option', preselectedOption.value);
+  if (props.preventSelection) return;
+
+  selectedOption.value = preselectedOption.value;
+  closeMenu();
 }
 
 let preselectSearchTerm = '';
 let timeout: NodeJS.Timeout;
-const DELAY_BETWEEN_KEYSTROKES_IN_MS = 600;
+const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
 
 /**
  * Preselect an option based on input keys (search)
  * @param event - Keyboard event
  */
 function handlePreselectSearch(event: KeyboardEvent) {
+  event.stopPropagation();
+  if (!isOpen.value) return;
+
   isKeyboardInteracting.value = true;
 
-  event.stopPropagation();
   preselectSearchTerm = removeDiacritics(
     preselectSearchTerm + event.key
   ).toLocaleLowerCase();

@@ -11,9 +11,9 @@ FField.FTextarea(
     :placeholder="placeholder"
     :disabled="disabled"
     :rows="rows"
+    @blur="handleBlur"
     @change="handleChange"
     @focus="handleFocus"
-    @blur="handleBlur"
   )
   FIcon.FTextarea__errorIcon(
     v-if="!isValid && !loading"
@@ -244,6 +244,12 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const textareaRef = ref();
 
 const { isValid, hint, value, handleValidation } =
@@ -288,4 +294,11 @@ const classes = computed(() => ({
   'FTextarea--disabled': props.disabled,
   'FTextarea--loading': props.loading,
 }));
+
+/**
+ * Focus the input
+ */
+function focus() {
+  textareaRef.value?.focus();
+}
 </script>

@@ -1,5 +1,7 @@
 import { Story } from '@storybook/vue3';
 import FTextarea, { FTextareaProps } from '@/components/form/FTextarea.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FTextarea',
@@ -93,3 +95,22 @@ Loading.args = {
   hint: 'You can use your personal or professional email',
   loading: true,
 };
+
+const FocusTemplate = (args: FTextareaProps) => ({
+  components: { FTextarea, FButton },
+  setup() {
+    const textareaRef = ref();
+    function focus() {
+      textareaRef.value?.focus();
+    }
+    return { args, focus, textareaRef };
+  },
+  template: `
+<div>
+  <FTextarea ref="textareaRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FTextareaProps> = FocusTemplate.bind(
+  {}
+);

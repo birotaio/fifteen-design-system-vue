@@ -129,7 +129,7 @@ export interface FLinkProps {
    */
   prevent?: boolean;
   /**
-   * Disable or not the the link
+   * Disable or not the link
    */
   disabled?: boolean;
   /**

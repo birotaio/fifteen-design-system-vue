@@ -2,6 +2,8 @@ import { Story } from '@storybook/vue3';
 import FCreditCardInput, {
   FCreditCardInputProps,
 } from '@/components/form/FCreditCardInput.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FCreditCardInput',
@@ -52,6 +54,24 @@ Disabled.args = {
   hint: `All credit cards operations are crypted`,
   disabled: true,
 };
+
+const FocusTemplate = (args: FCreditCardInputProps) => ({
+  components: { FCreditCardInput, FButton },
+  setup() {
+    const creditCardInputRef = ref();
+    function focus() {
+      creditCardInputRef.value?.focus();
+    }
+    return { args, focus, creditCardInputRef };
+  },
+  template: `
+<div>
+  <FCreditCardInput ref="creditCardInputRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FCreditCardInputProps> =
+  FocusTemplate.bind({});
 
 export const Loading: Story<FCreditCardInputProps> = Template.bind({});
 Loading.args = {

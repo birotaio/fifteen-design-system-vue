@@ -8,15 +8,16 @@ FField.FRadioGroup(
   .FRadioGroup__options
     FRadio(
       v-for="option in options"
+      ref="radioRefs"
       :name="name"
       :value="option.value"
       :label="option.label"
       v-model="value"
       :disabled="disabled"
+      hide-hint
+      @blur="handleBlur"
       @change="handleChange"
       @focus="handleFocus"
-      @blur="handleBlur"
-      hide-hint
     )
 </template>
 
@@ -38,7 +39,7 @@ FField.FRadioGroup(
 </style>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import FField from '@/components/form/FField.vue';
 import FRadio from '@/components/form/FRadio.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
@@ -134,6 +135,12 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const { value, isValid, hint, handleValidation } = useFieldWithValidation(
   props,
   {
@@ -161,4 +168,13 @@ const hintTextColor = computed(() =>
     ? props.hintTextColor
     : props.errorColor
 );
+
+const radioRefs = ref();
+
+/**
+ * Focus the first radio
+ */
+function focus() {
+  radioRefs.value[0]?.focus();
+}
 </script>

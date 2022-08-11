@@ -6,7 +6,6 @@ FField.FSelect(
 )
   FMenu(
     v-model="fieldValue"
-    v-model:is-open="isMenuOpen"
     :options="options"
     :width="menuWidth"
     :empty-text="emptyText"
@@ -15,7 +14,9 @@ FField.FSelect(
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
+    :disabled="disabled"
     @select-option="emit('select-option', $event)"
+    @toggle="value => (isMenuOpen = value)"
   )
     template(#option-prefix="scope")
       slot(
@@ -29,13 +30,16 @@ FField.FSelect(
         v-bind="scope"
       )
 
-    template(#activator="{ toggleMenu }")
+    template(#activator="{ toggleMenu, openMenu, closeMenu }")
       .FSelect__select(
         tabindex="0"
-        @click="!disabled && toggleMenu()"
-        @focus="handleFocus"
-        @blur="handleBlur"
         role="listbox"
+        ref="selectRef"
+        @blur="handleBlur"
+        @click="toggleMenu"
+        @focus="handleFocus"
+        @keydown.enter="openMenu"
+        @keydown.esc="closeMenu"
       )
         .FSelect__select__selectionStart
           FIcon.FSelect__select__errorIcon(
@@ -54,13 +58,13 @@ FField.FSelect(
             .FSelect__placeholder(v-else) {{ placeholder }}
         FIcon.FSelect__icon(
           v-if="!disabled && !loading"
-          @click="handleIconClick"
           :name="iconName"
           :size="16"
           color="transparent"
           :stroke-color="textColor"
           :stroke-width="2"
           :class="iconClasses"
+          @click="handleIconClick"
         )
         FLoader.FSelect__loader(
           v-if="loading"
@@ -344,6 +348,12 @@ const emit = defineEmits<{
   (name: 'select-option', value: string | number | null): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const {
   isValid,
   hint,
@@ -432,5 +442,14 @@ function handleBlur(): void {
     option => option.value === fieldValue.value
   );
   emit('blur');
+}
+
+const selectRef = ref<HTMLElement>();
+
+/**
+ * Focus the input
+ */
+function focus() {
+  selectRef.value?.focus();
 }
 </script>

@@ -1,6 +1,8 @@
 import { Story } from '@storybook/vue3';
 import FSelect, { FSelectProps } from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FSelect',
@@ -177,6 +179,8 @@ LongOptionsLabel.parameters = {
 LongOptionsLabel.args = {
   color: 'secondary',
   placeholderTextColor: 'neutral--light-3',
+  optionTextColor: 'neutral--light-3',
+  textColor: 'neutral--light-5',
   focusColor: 'secondary',
   optionsMenuColor: 'secondary',
   placeholder: 'All topics',
@@ -245,4 +249,30 @@ SmallWidthMenu.args = {
     label: `Option with a long label ${index}`,
     value: `option-${index}`,
   })),
+};
+
+const FocusTemplate = (args: FSelectProps) => ({
+  components: { FSelect, FButton },
+  setup() {
+    const selectRef = ref();
+    function focus() {
+      selectRef.value?.focus();
+    }
+    return { args, focus, selectRef };
+  },
+  template: `
+<div>
+  <FSelect ref="selectRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FSelectProps> = FocusTemplate.bind(
+  {}
+);
+FocusProgrammatically.args = {
+  options: [
+    { label: 'Option A', value: 'a' },
+    { label: 'Option B', value: 'b' },
+    { label: 'Option C', value: 'c' },
+  ],
 };

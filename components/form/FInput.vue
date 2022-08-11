@@ -8,18 +8,18 @@ FField.FInput(
     .FInput__input__prefix(v-if="$slots['prefix']")
       slot(name="prefix")
     input(
+      ref="inputRef"
       v-bind="attrs"
       v-model="value"
       v-maska="mask"
+      :name="name"
       :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
+      @blur="handleBlur"
       @change="handleChange"
       @focus="handleFocus"
-      @blur="handleBlur"
       @input="handleInput"
-      :name="name"
-      ref="inputRef"
     )
     .FInput__input__suffix(v-if="$slots['suffix'] || loading")
       slot(name="suffix")
@@ -280,9 +280,11 @@ const inputRef = ref<HTMLInputElement>();
 defineExpose<{
   ref: Ref<HTMLInputElement | undefined>;
   forceValidation: () => void;
+  focus: () => void;
 }>({
   ref: inputRef,
   forceValidation,
+  focus,
 });
 
 const { isValid, hint, value, handleValidation } = useFieldWithValidation(
@@ -325,5 +327,12 @@ const hintTextColor = computed(() =>
  */
 function forceValidation() {
   handleValidation(value.value);
+}
+
+/**
+ * Focus the input
+ */
+function focus() {
+  inputRef.value?.focus();
 }
 </script>

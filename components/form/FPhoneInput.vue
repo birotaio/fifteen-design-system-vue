@@ -6,13 +6,14 @@ FField.FPhoneInput(
 )
   FMenu(
     :options="countries"
-    v-model:is-open="isMenuOpen"
     v-model="countryCode"
     width="100"
     :color="optionsMenuColor"
     :text-color="optionTextColor"
+    :disabled="disabled"
+    @toggle="value => (isMenuOpen = value)"
   )
-    template(#activator="{ toggleMenu }")
+    template(#activator="{ toggleMenu, openMenu, closeMenu }")
       FInput(
         v-model="phoneNumber"
         ref="inputRef"
@@ -32,19 +33,21 @@ FField.FPhoneInput(
         :error-color="errorColor"
         hide-hint
         :mask="phoneNumberMask"
+        :loading="loading"
         @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
         @input="handleInput"
-        :loading="loading"
       )
         template(#prefix)
           .FPhoneInput__prefix(
-            @keydown.enter.prevent="!disabled && toggleMenu()"
+            @keydown.esc="closeMenu"
+            @keydown.enter="openMenu"
+            @click="toggleMenu"
           )
             .FPhoneInput__selectedValue(
-              @click="!disabled && toggleMenu()"
               tabindex="0"
+              @blur="closeMenu"
             )
               FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
               FIcon.FPhoneInput__icon(
@@ -116,7 +119,7 @@ FField.FPhoneInput(
 
 .FPhoneInput--disabled
   .FPhoneInput__selectedFlag
-    filter grayscale(1)
+    opacity 0.7
 
   .FPhoneInput__prefix
     > span
@@ -150,7 +153,6 @@ import FFlagIcon from '@/components/FFlagIcon.vue';
 import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
 
 import type { CountryCode } from 'libphonenumber-js';
 import {
@@ -305,6 +307,12 @@ const emit = defineEmits<{
   (name: 'blur', value: Event): void;
 }>();
 
+defineExpose<{
+  focus: () => void;
+}>({
+  focus,
+});
+
 const { isValid, hint, handleValidation } = useFieldWithValidation<
   string | number
 >(props, {
@@ -398,12 +406,19 @@ function getCountryCode(option: FSelectOption) {
   return option.value as CountryCode;
 }
 
-const inputRef = ref();
+const inputRef = ref<InstanceType<typeof FInput>>();
 /**
  * Force validation to sync FPhoneInput validation status with underlying FInput
  */
 function forceValidation() {
-  inputRef.value.forceValidation();
+  inputRef.value?.forceValidation();
 }
 watch(isValid, forceValidation);
+
+/**
+ * Focus the input
+ */
+function focus() {
+  inputRef.value?.ref?.focus();
+}
 </script>

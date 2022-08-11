@@ -2,6 +2,8 @@ import { Story } from '@storybook/vue3';
 import FPhoneInput, {
   FPhoneInputProps,
 } from '@/components/form/FPhoneInput.vue';
+import FButton from '@/components/FButton.vue';
+import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FPhoneInput',
@@ -51,6 +53,24 @@ Disabled.args = {
   hint: `Don't forget to pick the right prefix`,
   disabled: true,
 };
+
+const FocusTemplate = (args: FPhoneInputProps) => ({
+  components: { FPhoneInput, FButton },
+  setup() {
+    const phoneInputRef = ref();
+    function focus() {
+      phoneInputRef.value?.focus();
+    }
+    return { args, focus, phoneInputRef };
+  },
+  template: `
+<div>
+  <FPhoneInput ref="phoneInputRef" v-bind="args" />
+  <FButton @click="focus">Focus the input</FButton>
+</div>`,
+});
+export const FocusProgrammatically: Story<FPhoneInputProps> =
+  FocusTemplate.bind({});
 
 export const Loading: Story<FPhoneInputProps> = Template.bind({});
 Loading.args = {

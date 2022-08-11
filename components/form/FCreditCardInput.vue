@@ -22,18 +22,19 @@ FField.FCreditCardInput(
     :rules="[() => isValid]"
     hide-error-icon
     hide-hint
-    :mask="creditCard?.mask"
-    :loading="loading"
+    :mask="creditCard?.mask || '#### #### #### ####'"
+    @focus="customHandleFocus"
     @blur="handleBlur"
     @change="handleChange"
-    @focus="handleFocus"
     @input="handleInput"
+    :loading="loading"
   )
     template(#suffix)
       .FCreditCardInput__suffix
         FCreditCardIcon(
           v-if="!loading"
           :card-type="creditCard?.type"
+          :isValid="isValidCreditCard(value)"
           size="32"
         )
         FLoader(
@@ -212,7 +213,7 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, value, handleValidation } = useFieldWithValidation<
+const { isValid, hint, value, handleValidation, handleReset } = useFieldWithValidation<
   string | number
 >(props, {
   validateOnMount: props?.validateOnMount,
@@ -252,6 +253,19 @@ watch(value, newValue => {
   );
   if (lengthExceeded) return;
 
+  if (
+    (newCreditCard && newCreditCard.lengths.includes(spacelessValue.length)) ||
+    (!newCreditCard && spacelessValue.length === 16)
+  ) {
+    // Manually trigger validation if :
+    // - matched credit card length meets the input value
+    // -  or if no credit card was found and input value length is 16
+    handleValidation(newValue);
+  } else {
+    // Else trigger reset to remove eventual errors while user is entering his credit card number
+    handleReset();
+  }
+
   creditCard.value = newCreditCard;
   emit('credit-card', newCreditCard);
 });
@@ -263,12 +277,16 @@ function isValidCreditCard(value: unknown): boolean {
   if (typeof value !== 'string' || !creditCard.value) return false;
 
   const spacelessValue = value.replace(/\s/g, '');
+
   return (
     luhnCheck(spacelessValue) &&
     creditCard.value.lengths.includes(spacelessValue.length)
   );
 }
-
+function customHandleFocus(e: Event) {
+  handleReset();
+  handleFocus(e);
+}
 const hintTextColor = computed(() =>
   props.disabled
     ? 'neutral--dark-1'

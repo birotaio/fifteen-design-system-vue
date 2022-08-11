@@ -146,7 +146,6 @@ export const cardTypes: CreditCardInfo[] = [
  * Checks if a card number matches with a provided pattern.
  * @param cardNumber - The card number to check for a match.
  * @param pattern - The pattern used for comparison.
- * @returns {boolean}
  */
 function matchCardNumberByPattern(
   cardNumber: string,
@@ -162,19 +161,17 @@ function matchCardNumberByPattern(
       cardNumberFirstDigitsAsInteger >= min &&
       cardNumberFirstDigitsAsInteger <= max
     );
-  } else {
-    const patternString = pattern.toString();
-    return (
-      patternString.substring(0, cardNumber.length) ===
-      cardNumber.substring(0, patternString.length)
-    );
   }
+  const patternString = pattern.toString();
+  return (
+    patternString.substring(0, cardNumber.length) ===
+    cardNumber.substring(0, patternString.length)
+  );
 }
 
 /**
  * Returns credit card information based on a value that is usually coming from an input.
  * @param value - The input value.
- * @returns {CreditCardInfo|null} If value is empty or couldn't find any card match, null is returned
  */
 export function getCardInfo(value: string): CreditCardInfo | null {
   if (!value) return null;

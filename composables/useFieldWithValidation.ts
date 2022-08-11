@@ -38,7 +38,7 @@ interface UseFieldWithValidationReturns {
   /**
    * Function which resets field validation
    */
-  handleReset?: () => void;
+  handleReset: () => void;
   /**
    * Input field ref value
    */
@@ -158,6 +158,9 @@ export function useFieldWithValidation<
 
   return {
     handleValidation: handleChange,
+    handleReset: () => {
+      errors.value = [];
+    },
     value,
     hint: getHint(props, errors),
     isValid,

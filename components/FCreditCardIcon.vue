@@ -14,7 +14,6 @@
 .FCreditCardIcon
   position relative
   width var(--FCreditCardIcon--size)
-  transition transform 0.3s ease
 </style>
 
 <script setup lang="ts">

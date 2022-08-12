@@ -23,7 +23,7 @@ FField.FCreditCardInput(
     hide-error-icon
     hide-hint
     :mask="creditCard?.mask ?? defaultMask"
-    @focus="handleFocusAndReset"
+    @focus="handleFocusAndResetValidation"
     @blur="handleBlur"
     @change="handleChange"
     @input="handleInput"
@@ -31,7 +31,7 @@ FField.FCreditCardInput(
   )
     template(#suffix)
       .FCreditCardInput__suffix(
-        :class="isValidCreditCard(value) ? 'FCreditCardInput__suffix--valid' : ''"
+        :class="{ 'FCreditCardInput__suffix--valid': isValidCreditCard(value) }"
       )
         FIcon(
           name="checkmark"
@@ -40,7 +40,6 @@ FField.FCreditCardInput(
         )
         FCreditCardIcon(
           v-if="!loading"
-          :class="{ 'FCreditCardIcon--slide': isValidCreditCard(value) }"
           :card-type="creditCard?.type"
           size="32"
         )
@@ -313,7 +312,7 @@ function isValidCreditCard(value: unknown): boolean {
   return valid;
 }
 
-function handleFocusAndReset(e: Event) {
+function handleFocusAndResetValidation(e: Event) {
   handleResetValidation();
   handleFocus(e);
 }

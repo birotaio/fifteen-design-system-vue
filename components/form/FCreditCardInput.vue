@@ -287,7 +287,7 @@ watch(value, newValue => {
   ) {
     // Manually trigger validation if :
     // - Input value length matches one of the lengths of the matched credit card
-    // - No credit card was found but input value length reached 16 digits
+    // - No credit card was found but input value length reached the number of digits of default mask
     handleValidation(newValue);
   } else {
     // Else trigger field validation reset to remove eventual errors while user is interacting with input

@@ -1,5 +1,5 @@
 <template lang="pug">
-.FCreditCardIcon
+.FCreditCardIcon(:style="style")
   FSvgImage(
     :markup="creditCardFiles[currentCreditCardPath]"
     fill-color="none"
@@ -13,20 +13,20 @@
 <style lang="stylus">
 .FCreditCardIcon
   position relative
-  overflow hidden
   width var(--FCreditCardIcon--size)
 </style>
 
 <script setup lang="ts">
 import FSvgImage from './FSvgImage.vue';
 import { computed } from 'vue';
-import { CreditCardTypeCardBrandId } from 'credit-card-type/dist/types';
+import type { CreditCardBrandId } from '@/modules/credit-card-types';
+import { genSize } from '@/utils/genSize';
 
 export interface FCreditCardIconProps {
   /**
    * Code of the country, following the ISO 3166 standard
    */
-  cardType: CreditCardTypeCardBrandId | null;
+  cardType: CreditCardBrandId | null;
   /**
    * Size of the credit card icon
    */
@@ -51,5 +51,11 @@ const currentCreditCardPath = computed(
     creditCardPaths.find(path =>
       new RegExp(`/${props.cardType}.svg`).test(path)
     ) ?? ''
+);
+
+const style = computed(
+  (): Style => ({
+    '--FCreditCardIcon--size': genSize(props.size),
+  })
 );
 </script>

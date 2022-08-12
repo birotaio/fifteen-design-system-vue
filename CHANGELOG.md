@@ -1,3 +1,9 @@
+## 0.3.1 (August 12, 2022)
+
+### Features
+
+- [FCreditCardInput] Handle all Stripe credit cards, improve field validation
+
 ## 0.3.0 (August 11, 2022)
 
 ### Features

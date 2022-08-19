@@ -123,6 +123,7 @@ const props = withDefaults(defineProps<FRadioGroupProps>(), {
   errorMessage: '',
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   label: '',
   modelValue: '',
   name: '',

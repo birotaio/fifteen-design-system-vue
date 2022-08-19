@@ -214,6 +214,7 @@ const props = withDefaults(defineProps<FCreditCardInputProps>(), {
   validateOnMount: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   placeholder: '4000 1234 5678 9012',
   rules: () => [],
   errorMessage: '',

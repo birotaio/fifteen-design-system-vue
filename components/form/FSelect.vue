@@ -324,6 +324,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   hideHint: false,
   hint: '',
   hintTextColor: 'neputral--dark-4',
+  hintIcon: null,
   label: '',
   labelTextColor: 'neutral--dark-4',
   menuWidth: 300,

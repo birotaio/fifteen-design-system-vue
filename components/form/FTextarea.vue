@@ -231,6 +231,7 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
   hint: '',
   hideHint: false,
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   rows: 3,
   resize: 'vertical',
   rules: () => [],

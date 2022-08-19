@@ -286,6 +286,7 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
   validateOnMount: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   rules: () => [],
   errorMessage: '',
   errorColor: 'danger',

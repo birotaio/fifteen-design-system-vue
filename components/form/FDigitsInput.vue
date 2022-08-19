@@ -167,6 +167,7 @@ const props = withDefaults(defineProps<FDigitsInputProps>(), {
   errorMessage: '',
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   label: '',
   labelTextColor: 'neutral--dark-4',
   modelValue: '',

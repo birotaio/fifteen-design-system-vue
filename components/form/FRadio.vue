@@ -218,6 +218,7 @@ const props = withDefaults(defineProps<FRadioProps>(), {
   hideHint: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   hoverBorderColor: 'secondary',
   label: '',
   modelValue: false,

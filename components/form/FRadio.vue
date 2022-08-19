@@ -2,7 +2,7 @@
 FField.FRadio(
   :class="classes"
   :style="style"
-  v-bind="{ name, hint, hideHint, hintTextColor }"
+  v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
   label.FRadio__label
     .FRadio__wrapper
@@ -145,6 +145,10 @@ export interface FRadioProps {
    * A hint to display under the radio
    */
   hint?: string;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Text color of the hint
    */

@@ -1,7 +1,7 @@
 <template lang="pug">
 FField.FCreditCardInput(
   :class="classes"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FInput(
     v-model="value"
@@ -140,6 +140,10 @@ export interface FCreditCardInputProps {
    * A hint to display under the select
    */
   hint?: string;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Rules form validation
    */

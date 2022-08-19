@@ -2,7 +2,7 @@
 FField.FCheckbox(
   :class="classes"
   :style="style"
-  v-bind="{ name, hint, hideHint, hintTextColor }"
+  v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
   label.FCheckbox__label
     .FCheckbox__wrapper
@@ -157,6 +157,10 @@ export interface FCheckboxProps {
    * A hint to display under the checkbox
    */
   hint?: string;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Text color of the hint
    */

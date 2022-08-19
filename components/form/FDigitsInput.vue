@@ -1,6 +1,6 @@
 <template lang="pug">
 FField.FDigitsInput(
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
   :class="classes"
 )
   .FDigitsInput__input
@@ -127,6 +127,10 @@ export interface FDigitsInputProps {
    * A hint to display under the digits input
    */
   hint?: string;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Text color of the hint
    */

@@ -2,7 +2,7 @@
 FField.FSelect(
   :style="style"
   :class="classes"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
     v-model="fieldValue"
@@ -259,6 +259,10 @@ export interface FSelectProps {
    * A hint to display under the select
    */
   hint?: string;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Width of the options menu
    */

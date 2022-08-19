@@ -2,7 +2,7 @@
 FField.FPhoneInput(
   :class="classes"
   :style="style"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
     :options="countries"
@@ -211,6 +211,10 @@ export interface FPhoneInputProps {
    * A hint to display under the select
    */
   hint?: string;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Rules form validation
    */

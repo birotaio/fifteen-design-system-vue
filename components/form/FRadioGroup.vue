@@ -3,7 +3,7 @@ FField.FRadioGroup(
   fieldset
   :class="classes"
   :disabled="disabled"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   .FRadioGroup__options
     FRadio(
@@ -103,6 +103,10 @@ export interface FRadioGroupProps {
    * A hint to display under the radio group
    */
   hint?: string;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Message to use as hint when validation fails
    */

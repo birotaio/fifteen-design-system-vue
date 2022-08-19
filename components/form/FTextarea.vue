@@ -2,7 +2,7 @@
 FField.FTextarea(
   :style="style"
   :class="classes"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   textarea.FTextarea__textarea(
     ref="textareaRef"
@@ -184,6 +184,10 @@ export interface FTextareaProps {
    * Text color of the hint
    */
   hintTextColor?: Color;
+  /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
   /**
    * Field name. Used in a form context
    */

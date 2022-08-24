@@ -2,7 +2,7 @@
 FField.FCheckbox(
   :class="classes"
   :style="style"
-  v-bind="{ name, hint, hideHint, hintTextColor }"
+  v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
   label.FCheckbox__label
     .FCheckbox__wrapper
@@ -158,6 +158,10 @@ export interface FCheckboxProps {
    */
   hint?: string;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Text color of the hint
    */
   hintTextColor?: Color;
@@ -232,6 +236,7 @@ const props = withDefaults(defineProps<FCheckboxProps>(), {
   hideHint: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   hoverBorderColor: 'secondary',
   label: '',
   modelValue: false,

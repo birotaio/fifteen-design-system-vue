@@ -1,7 +1,7 @@
 <template lang="pug">
 FField.FCreditCardInput(
   :class="classes"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FInput(
     v-model="value"
@@ -141,6 +141,10 @@ export interface FCreditCardInputProps {
    */
   hint?: string;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Rules form validation
    */
   rules?: ValidationRule | ValidationRule[];
@@ -210,6 +214,7 @@ const props = withDefaults(defineProps<FCreditCardInputProps>(), {
   validateOnMount: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   placeholder: '4000 1234 5678 9012',
   rules: () => [],
   errorMessage: '',

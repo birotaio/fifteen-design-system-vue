@@ -2,7 +2,7 @@
 FField.FSelect(
   :style="style"
   :class="classes"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
     v-model="fieldValue"
@@ -260,6 +260,10 @@ export interface FSelectProps {
    */
   hint?: string;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Width of the options menu
    */
   menuWidth?: string | number;
@@ -320,6 +324,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   hideHint: false,
   hint: '',
   hintTextColor: 'neputral--dark-4',
+  hintIcon: null,
   label: '',
   labelTextColor: 'neutral--dark-4',
   menuWidth: 300,

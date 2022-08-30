@@ -30,3 +30,11 @@ Default.args = {
   color: 'info',
   text: `“Choisir Fifteen, c’est choisir la fiabilité, la sécurité et la technologie. Pour nous c’était un choix facile.”`,
 };
+
+export const CustomElevation: Story<FCardArgs> = Template.bind({});
+CustomElevation.args = {
+  width: '800px',
+  color: 'info',
+  text: `“Choisir Fifteen, c’est choisir la fiabilité, la sécurité et la technologie. Pour nous c’était un choix facile.”`,
+  elevation: 4
+};

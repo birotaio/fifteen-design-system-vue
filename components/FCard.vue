@@ -1,5 +1,8 @@
 <template lang="pug">
-.FCard(:style="style")
+.FCard(
+  :style="style"
+  :class="classes"
+)
   // @slot The card content
   slot
 </template>
@@ -11,6 +14,10 @@
   width var(--fcard--width)
   border-radius rem(16px)
   background-color var(--fcard--color)
+
+for $z in 'inset' 1 2 3 4 5 6
+  .FCard--elevation--{$z}
+    elevation-light($z)
 </style>
 
 <script setup lang="ts">
@@ -31,12 +38,17 @@ export interface FCardProps {
    * Width of the card
    */
   width?: string | number;
+  /**
+   * Elevation of the card
+   */
+  elevation?: string | number;
 }
 
 const props = withDefaults(defineProps<FCardProps>(), {
   color: 'primary',
   textColor: 'neutral--light-5',
   width: '',
+  elevation: 0,
 });
 
 const style = computed(
@@ -46,4 +58,8 @@ const style = computed(
     '--fcard--text-color': getCssColor(props.textColor),
   })
 );
+
+const classes = computed(() => ({
+  [`FCard--elevation--${props.elevation}`]: !!props.elevation,
+}));
 </script>

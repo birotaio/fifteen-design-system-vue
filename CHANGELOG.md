@@ -1,3 +1,9 @@
+## 0.3.3 (August 30, 2022)
+
+### Features
+
+- [FCard] Add `elevation` prop to `FCard` to handle its `box-shadow`
+
 ## 0.3.2 (August 24, 2022)
 
 ### Fixes

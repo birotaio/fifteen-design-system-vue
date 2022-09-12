@@ -36,6 +36,10 @@ interface UseFieldWithValidationReturns {
     shouldValidate?: boolean
   ) => void;
   /**
+   * Function which resets field validation
+   */
+  handleResetValidation: () => void;
+  /**
    * Input field ref value
    */
   value: Ref;
@@ -120,6 +124,10 @@ export function useFieldWithValidation<
           isValid.value = result.valid;
         }
       },
+      handleResetValidation: () => {
+        errors.value = [];
+        isValid.value = true;
+      },
       value: fieldValue,
       hint: getHint(props, errors),
       isValid,
@@ -150,6 +158,9 @@ export function useFieldWithValidation<
 
   return {
     handleValidation: handleChange,
+    handleResetValidation: () => {
+      errors.value = [];
+    },
     value,
     hint: getHint(props, errors),
     isValid,

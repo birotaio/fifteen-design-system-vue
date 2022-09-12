@@ -2,7 +2,7 @@
 FField.FTextarea(
   :style="style"
   :class="classes"
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   textarea.FTextarea__textarea(
     ref="textareaRef"
@@ -185,6 +185,10 @@ export interface FTextareaProps {
    */
   hintTextColor?: Color;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Field name. Used in a form context
    */
   name?: string;
@@ -227,6 +231,7 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
   hint: '',
   hideHint: false,
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   rows: 3,
   resize: 'vertical',
   rules: () => [],

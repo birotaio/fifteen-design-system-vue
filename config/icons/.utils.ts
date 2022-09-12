@@ -2,7 +2,7 @@
 // To update it, run `yarn build:icons`.
 
 import type { CountryCode } from 'libphonenumber-js';
-import { CreditCardTypeCardBrandId } from 'credit-card-type/dist/types';
+import type { CreditCardBrandId } from '@/modules/credit-card-types';
 
 const iconList = [
   'archive',
@@ -452,13 +452,11 @@ const flagIconList = [
 export const getFlagIconList = (): CountryCode[] =>
   flagIconList.map(name => name as CountryCode);
 
-const creditCardIconList: CreditCardTypeCardBrandId[] = [
+const creditCardIconList: CreditCardBrandId[] = [
   'american-express',
   'diners-club',
   'discover',
-  'elo',
   'jcb',
-  'maestro',
   'mastercard',
   'unionpay',
   'visa',

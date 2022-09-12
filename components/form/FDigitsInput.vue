@@ -1,6 +1,6 @@
 <template lang="pug">
 FField.FDigitsInput(
-  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor }"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
   :class="classes"
 )
   .FDigitsInput__input
@@ -128,6 +128,10 @@ export interface FDigitsInputProps {
    */
   hint?: string;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Text color of the hint
    */
   hintTextColor?: Color;
@@ -163,6 +167,7 @@ const props = withDefaults(defineProps<FDigitsInputProps>(), {
   errorMessage: '',
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   label: '',
   labelTextColor: 'neutral--dark-4',
   modelValue: '',

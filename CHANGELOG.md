@@ -4,6 +4,18 @@
 
 - [icons] Add `youtube` icon
 
+## 0.3.2 (August 24, 2022)
+
+### Fixes
+
+- [forms] Add missing props to some input components
+
+## 0.3.1 (August 12, 2022)
+
+### Features
+
+- [FCreditCardInput] Handle all Stripe credit cards, improve field validation
+
 ## 0.3.0 (August 11, 2022)
 
 ### Features

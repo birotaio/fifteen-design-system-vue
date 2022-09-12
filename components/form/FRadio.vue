@@ -2,7 +2,7 @@
 FField.FRadio(
   :class="classes"
   :style="style"
-  v-bind="{ name, hint, hideHint, hintTextColor }"
+  v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
   label.FRadio__label
     .FRadio__wrapper
@@ -146,6 +146,10 @@ export interface FRadioProps {
    */
   hint?: string;
   /**
+   * Icon, displayed before the hint
+   */
+  hintIcon?: Icon | null;
+  /**
    * Text color of the hint
    */
   hintTextColor?: Color;
@@ -214,6 +218,7 @@ const props = withDefaults(defineProps<FRadioProps>(), {
   hideHint: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   hoverBorderColor: 'secondary',
   label: '',
   modelValue: false,

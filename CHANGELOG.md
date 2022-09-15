@@ -1,3 +1,9 @@
+## 0.4.0 (Septemeber 12, 2022)
+
+### Features
+
+- [icons] Add `youtube` icon
+
 ## 0.3.2 (August 24, 2022)
 
 ### Fixes

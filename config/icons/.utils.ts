@@ -184,6 +184,7 @@ const iconList = [
   'wallet',
   'webdesign',
   'wifi',
+  'youtube',
   'zoneForbidden',
   'zoovBasket',
   'zoovBikeAlt',

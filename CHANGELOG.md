@@ -1,3 +1,9 @@
+## 0.5.0 (September 15, 2922)
+
+### Features
+
+- [utils] Allow getCssColor to return css custom property name only
+ 
 ## 0.4.0 (Septemeber 12, 2022)
 
 ### Features

@@ -10,10 +10,10 @@ component.FLink(
   :tabindex="tabindex"
   @click="handleClick"
 )
-  .FLink__content
+  span.FLink__content
     // @slot Default content slot
     slot
-  .FLink__arrow(v-if="!hideArrow")
+  span.FLink__arrow(v-if="!hideArrow")
     svg(
       width="6.3"
       height="10"

@@ -1,4 +1,10 @@
-## 0.5.0 (September 15, 2922)
+## 0.5.1 (September 27, 2022)
+
+### Fixes
+
+- [FLink] Change internal div tags to span to avoid issue when link is used in p
+
+## 0.5.0 (September 15, 2022)
 
 ### Features
 

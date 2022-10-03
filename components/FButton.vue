@@ -334,6 +334,7 @@ import { ref, computed } from 'vue';
 import { colorDesignTokens } from '@/config/colors';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFBreakpoints } from '@/composables/useFBreakpoints';
+import type { Ref } from 'vue';
 
 export type FButtonAnchorPoint = 'left' | 'right' | 'center';
 export type FButtonSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
@@ -451,6 +452,16 @@ const emit = defineEmits<{
   (name: 'blur'): void;
 }>();
 
+const buttonRef = ref<HTMLButtonElement>();
+
+defineExpose<{
+  ref: Ref<HTMLButtonElement | undefined>;
+  focus: () => void;
+}>({
+  ref: buttonRef,
+  focus,
+});
+
 const { isXsAndDown } = useFBreakpoints();
 
 const multipleColors = computed<boolean>(
@@ -552,7 +563,6 @@ const style = computed(
   })
 );
 
-const buttonRef = ref<HTMLElement>();
 
 function onClick(e: MouseEvent | KeyboardEvent, blur: boolean): void {
   if (blur && !props.preventBlurOnClick && !isLink.value) {

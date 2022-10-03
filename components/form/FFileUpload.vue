@@ -43,7 +43,6 @@ FField.FFileUpload(
 .FFileUpload--disabled
   label
     color var(--color--neutral--dark-1)
-    cursor auto
 
 .FFileUpload__content
   display flex
@@ -72,7 +71,6 @@ import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { mimes, size as sizeRule } from '@vee-validate/rules';
 import type { Icon } from '@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
-import type { Ref } from 'vue';
 
 export interface FFileUploadProps {
   /**
@@ -224,7 +222,7 @@ function isValidFile(value: unknown): boolean {
   return validFile;
 }
 
-const { handleChange, handleFocus } = useInputEventBindings(
+const { handleChange } = useInputEventBindings(
   handleValidation,
   props.validationTrigger,
   emit

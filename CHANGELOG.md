@@ -1,3 +1,10 @@
+## 0.6.0 (October 3, 2022)
+
+### Features
+
+- [FFileUpload] Add `FFileUpload` component
+- [icons] Add `upload` icon
+
 ## 0.5.1 (September 27, 2022)
 
 ### Fixes

@@ -2,8 +2,6 @@ import { Story } from '@storybook/vue3';
 import FFileUpload, {
   FFileUploadProps,
 } from '@/components/form/FFileUpload.vue';
-import FButton from '@/components/FButton.vue';
-import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FFileUpload',
@@ -75,28 +73,4 @@ Loading.args = {
   buttonText: 'Import a file',
   errorMessage: 'Invalid file',
   loading: true,
-};
-
-const FocusTemplate = (args: FFileUploadProps) => ({
-  components: { FFileUpload, FButton },
-  setup() {
-    const fileUploadButtonRef = ref();
-    function focus() {
-      fileUploadButtonRef.value.focus()
-    }
-    return { args, focus, fileUploadButtonRef };
-  },
-  template: `
-<div>
-  <FFileUpload ref="fileUploadButtonRef" v-bind="args" />
-  <FButton @click="focus">Focus the input</FButton>
-</div>`,
-});
-export const FocusProgrammatically: Story<FFileUploadProps> =
-  FocusTemplate.bind({});
-  
-FocusProgrammatically.args = {
-  label: 'Your student card',
-  buttonText: 'Import a file',
-  errorMessage: 'Invalid file',
 };

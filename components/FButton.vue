@@ -454,14 +454,6 @@ const emit = defineEmits<{
 
 const buttonRef = ref<HTMLButtonElement>();
 
-defineExpose<{
-  ref: Ref<HTMLButtonElement | undefined>;
-  focus: () => void;
-}>({
-  ref: buttonRef,
-  focus,
-});
-
 const { isXsAndDown } = useFBreakpoints();
 
 const multipleColors = computed<boolean>(
@@ -562,7 +554,6 @@ const style = computed(
     '--fbutton--anchor-point': props.anchorPoint,
   })
 );
-
 
 function onClick(e: MouseEvent | KeyboardEvent, blur: boolean): void {
   if (blur && !props.preventBlurOnClick && !isLink.value) {

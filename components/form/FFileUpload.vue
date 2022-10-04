@@ -5,13 +5,13 @@ FField.FFileUpload(
 )
   .FFileUpload__content
     input(
+      ref="underlyingFileInputRef"
       :id="name"
       :name="name"
       :multiple="multiple"
       :disabled="disabled"
       :accept="allowedMimeTypes?.join(',')"
       type="file"
-      ref="underlyingFileInputRef"
       @change="handleChange"
     )
 
@@ -21,7 +21,6 @@ FField.FFileUpload(
       :background="color"
       :color="textColor"
       :loading="loading"
-      ref="fileUploadButtonRef"
       static
       @click="underlyingFileInputRef?.click()"
     )
@@ -68,7 +67,7 @@ import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { mimes, size as sizeRule } from '@vee-validate/rules';
+import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
 import type { Icon } from '@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
 
@@ -193,7 +192,6 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
 });
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
-const fileUploadButtonRef = ref<InstanceType<typeof FButton>>();
 
 const { isValid, hint, value, handleValidation } = useFieldWithValidation(
   props,
@@ -206,20 +204,19 @@ const { isValid, hint, value, handleValidation } = useFieldWithValidation(
 const emit = defineEmits<{
   (name: 'update:modelValue', value: File[] | null | undefined): void;
   (name: 'change', value: Event): void;
-  (name: 'focus'): void;
   (name: 'files', value: File[]): void;
 }>();
 
 function isValidFile(value: unknown): boolean {
-  const isValidFormat = mimes(value, props.allowedMimeTypes);
+  const isValidFormat = mimesRule(value, props.allowedMimeTypes);
   const isValidSize = sizeRule(value, { size: props.maximumSize });
 
-  const validFile = isValidFormat && isValidSize;
-  if (validFile) {
+  const isValidFormatAndSize = isValidFormat && isValidSize;
+  if (isValidFormatAndSize) {
     emit('files', value as File[]);
   }
 
-  return validFile;
+  return isValidFormatAndSize;
 }
 
 const { handleChange } = useInputEventBindings(
@@ -239,19 +236,6 @@ const hintTextColor = computed(() =>
 const iconColor = computed(() =>
   props.disabled ? 'neutral--dark-1' : props.textColor
 );
-
-defineExpose<{
-  focus: () => void;
-}>({
-  focus,
-});
-
-/**
- * Focus the input
- */
-function focus() {
-  fileUploadButtonRef?.value?.ref?.focus();
-}
 
 const classes = computed(() => ({
   'FFileUpload--disabled': props.disabled,

@@ -173,6 +173,7 @@ const iconList = [
   'unlimited',
   'unlock',
   'updater',
+  'upload',
   'userGroup',
   'userStudent',
   'user',

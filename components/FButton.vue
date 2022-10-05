@@ -451,6 +451,8 @@ const emit = defineEmits<{
   (name: 'blur'): void;
 }>();
 
+const buttonRef = ref<HTMLButtonElement>();
+
 const { isXsAndDown } = useFBreakpoints();
 
 const multipleColors = computed<boolean>(
@@ -551,8 +553,6 @@ const style = computed(
     '--fbutton--anchor-point': props.anchorPoint,
   })
 );
-
-const buttonRef = ref<HTMLElement>();
 
 function onClick(e: MouseEvent | KeyboardEvent, blur: boolean): void {
   if (blur && !props.preventBlurOnClick && !isLink.value) {

@@ -334,7 +334,6 @@ import { ref, computed } from 'vue';
 import { colorDesignTokens } from '@/config/colors';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFBreakpoints } from '@/composables/useFBreakpoints';
-import type { Ref } from 'vue';
 
 export type FButtonAnchorPoint = 'left' | 'right' | 'center';
 export type FButtonSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';

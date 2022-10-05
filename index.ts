@@ -41,6 +41,7 @@ export { default as FRadio } from '@/components/form/FRadio.vue';
 export { default as FRadioGroup } from '@/components/form/FRadioGroup.vue';
 export { default as FSelect } from '@/components/form/FSelect.vue';
 export { default as FTextarea } from '@/components/form/FTextarea.vue';
+export { default as FFileUpload } from '@/components/form/FFileUpload.vue';
 
 /**
  * Components props interfaces
@@ -91,6 +92,7 @@ export type { FRadioProps } from '@/components/form/FRadio.vue';
 export type { FSkeletonProps } from '@/components/FSkeleton.vue';
 export type { FSvgImageProps } from '@/components/FSvgImage.vue';
 export type { FTextareaProps } from '@/components/form/FTextarea.vue';
+export type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
 
 /**
  * Composables

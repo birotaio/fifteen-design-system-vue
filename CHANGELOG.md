@@ -1,3 +1,9 @@
+## 0.6.1 (October 5, 2022)
+
+### Fixes
+
+- [FFileUpload] Export `FFileUpload`, `FFileUploadProps`
+
 ## 0.6.0 (October 3, 2022)
 
 ### Features

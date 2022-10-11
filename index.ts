@@ -28,10 +28,11 @@ export { default as FSkeleton } from '@/components/FSkeleton.vue';
 export { default as FSvgImage } from '@/components/FSvgImage.vue';
 export { default as FFlagIcon } from '@/components/FFlagIcon.vue';
 export { default as FCreditCardIcon } from '@/components/FCreditCardIcon.vue';
-
+export { default as FMenu } from '@/components/FMenu.vue';
 /**
  * Form components
  */
+export { default as FField } from '@/components/form/FField.vue';
 export { default as FCheckbox } from '@/components/form/FCheckbox.vue';
 export { default as FCreditCardInput } from '@/components/form/FCreditCardInput.vue';
 export { default as FDigitsInput } from '@/components/form/FDigitsInput.vue';
@@ -83,6 +84,8 @@ export type {
 export type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
 export type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
 export type { FProgressBarProps } from '@/components/FProgressBar.vue';
+export type { FMenuProps } from '@/components/FMenu.vue';
+export type { FFieldProps } from '@/components/form/FField.vue';
 export type {
   FSelectProps,
   FSelectOption,

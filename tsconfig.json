@@ -20,6 +20,9 @@
     "outDir": "dist",
     "declaration": true
   },
+  "vueCompilerOptions": {
+    "plugins": ["@volar/vue-language-plugin-pug"]
+  },
   "exclude": ["./dist/**/*"],
   "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.vue"],
   "references": [{ "path": "./tsconfig.node.json" }]

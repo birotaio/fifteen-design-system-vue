@@ -28,6 +28,14 @@ const components = [
   'FSkeleton',
   'FSvgImage',
   'FTextarea',
+  'FFieldHint',
+  'FFieldLabel',
+  'FFlagIcon',
+  'FCreditCardIcon',
+  'FMenu',
+  'FField',
+  'FRadio',
+  'FFileUpload',
 ];
 
 export function FifteenComponentsResolver(): ComponentResolver {

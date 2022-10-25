@@ -48,6 +48,11 @@ FField.FDigitsInput(
   > *
     width rem(40)
 
+  // In this specific case, we want the content of the input
+  // to be centered, so we directly override it here
+  input
+    text-align center
+
 .FDigitsInput--error
   .FDigitsInput__input
     &,

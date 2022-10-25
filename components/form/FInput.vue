@@ -4,7 +4,7 @@ FField.FInput(
   :class="classes"
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
-  .FInput__input
+  .FInput__input(@click="focus")
     .FInput__input__prefix(v-if="$slots['prefix']")
       slot(name="prefix")
     input(
@@ -47,6 +47,7 @@ FField.FInput(
   height rem(48)
   padding rem(12)
   outline none
+  cursor text
   text-align var(--finput--text-align)
 
   &:hover

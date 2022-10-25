@@ -11,7 +11,7 @@ FField.FInput(
       ref="inputRef"
       v-bind="resolvedAttrs"
       v-model="value"
-      v-maska="resolvedMask"
+      v-maska="mask"
       :name="name"
       :type="type"
       :placeholder="placeholder"
@@ -343,11 +343,4 @@ const resolvedAttrs = computed(() => ({
   ...props.attrs,
   ...(props.type === 'number' ? { pattern: '[0-9]*' } : {}),
 }));
-// Also use a default mask in case of a number input to prevent unwanted letter inputs in desktop
-const resolvedMask = computed(() => {
-  if (props.type === 'number') {
-    Array.isArray(props.mask) ? ['#*', ...props.mask] : ['#*', props.mask];
-  }
-  return Array.isArray(props.mask) ? [...props.mask] : props.mask;
-});
 </script>

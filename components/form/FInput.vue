@@ -9,7 +9,7 @@ FField.FInput(
       slot(name="prefix")
     input(
       ref="inputRef"
-      v-bind="attrs"
+      v-bind="resolvedAttrs"
       v-model="value"
       v-maska="mask"
       :name="name"
@@ -335,4 +335,11 @@ function forceValidation() {
 function focus() {
   inputRef.value?.focus();
 }
+
+// When the prop `type="number"` is given, we add a `pattern="[0-9]*` attribute
+// to handle the Safari iOS case, see https://stackoverflow.com/a/14447832/1471747
+const resolvedAttrs = computed(() => ({
+  ...props.attrs,
+  ...(props.type === 'number' ? { pattern: '[0-9]*' } : {}),
+}));
 </script>

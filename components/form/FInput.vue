@@ -4,12 +4,12 @@ FField.FInput(
   :class="classes"
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
-  .FInput__input
+  .FInput__input(@click="focus")
     .FInput__input__prefix(v-if="$slots['prefix']")
       slot(name="prefix")
     input(
       ref="inputRef"
-      v-bind="attrs"
+      v-bind="resolvedAttrs"
       v-model="value"
       v-maska="mask"
       :name="name"
@@ -47,6 +47,7 @@ FField.FInput(
   height rem(48)
   padding rem(12)
   outline none
+  cursor text
   text-align var(--finput--text-align)
 
   &:hover
@@ -335,4 +336,11 @@ function forceValidation() {
 function focus() {
   inputRef.value?.focus();
 }
+
+// When the prop `type="number"` is given, we add a `pattern="[0-9]*` attribute
+// to handle the Safari iOS case, see https://stackoverflow.com/a/14447832/1471747
+const resolvedAttrs = computed(() => ({
+  ...props.attrs,
+  ...(props.type === 'number' ? { pattern: '[0-9]*' } : {}),
+}));
 </script>

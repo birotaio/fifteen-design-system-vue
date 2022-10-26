@@ -96,6 +96,12 @@ Mask.args = {
   rules: [required, value => mask(value, '##/##/####')],
 };
 
+export const TypeNumber: Story<FInputProps> = Template.bind({});
+TypeNumber.args = {
+  placeholder: 'Number',
+  type: 'number',
+};
+
 const FocusTemplate = (args: FInputProps) => ({
   components: { FInput, FButton },
   setup: () => {

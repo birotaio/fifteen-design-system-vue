@@ -12,6 +12,8 @@ FField.FDigitsInput(
       validation-trigger="input"
       hide-hint
       mask="#"
+      type="text"
+      :attrs="inputAttrs"
       :rules="[() => isValid]"
       :validate-on-mount="validateOnMount"
       hide-error-icon
@@ -45,6 +47,11 @@ FField.FDigitsInput(
 
   > *
     width rem(40)
+
+  // In this specific case, we want the content of the input
+  // to be centered, so we directly override it here
+  input
+    text-align center
 
 .FDigitsInput--error
   .FDigitsInput__input
@@ -292,4 +299,9 @@ function handleDigitChange() {
 function focus() {
   digitRefs.value[0]?.ref?.focus();
 }
+
+// In the specific case of the digit input, we want to hide the browsers "spin box"
+// so we do not use `type="number"` but `type="text"` alongside these following attibutes,
+// (see https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box)
+const inputAttrs = { inputmode: 'numeric', pattern: '[0-9]*' };
 </script>

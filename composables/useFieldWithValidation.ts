@@ -31,14 +31,14 @@ interface UseFieldWithValidationReturns {
   /**
    * Function which handles field update, with validation or not
    */
-  handleValidation: (
+  validate: (
     e: Event | string | number | boolean | null,
     shouldValidate?: boolean
   ) => void;
   /**
    * Function which resets field validation
    */
-  handleResetValidation: () => void;
+  resetValidation: () => void;
   /**
    * Input field ref value
    */
@@ -113,7 +113,7 @@ export function useFieldWithValidation<
     );
 
     return {
-      handleValidation: async (eventOrValue, validateField = true) => {
+      validate: async (eventOrValue, validateField = true) => {
         // Value is only used when validation in manual (eg. for custom inputs like FPhoneInput or FDigitsInput)
         const value =
           eventOrValue instanceof Event ? fieldValue.value : eventOrValue;
@@ -124,7 +124,7 @@ export function useFieldWithValidation<
           isValid.value = result.valid;
         }
       },
-      handleResetValidation: () => {
+      resetValidation: () => {
         errors.value = [];
         isValid.value = true;
       },
@@ -157,8 +157,8 @@ export function useFieldWithValidation<
   const isValid = computed(() => errors.value.length === 0);
 
   return {
-    handleValidation: handleChange,
-    handleResetValidation: () => {
+    validate: handleChange,
+    resetValidation: () => {
       errors.value = [];
     },
     value,

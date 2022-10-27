@@ -61,7 +61,7 @@ FField.FFileUpload(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import FButton from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
@@ -193,13 +193,10 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
 
-const { isValid, hint, value, handleValidation } = useFieldWithValidation(
-  props,
-  {
-    validateOnMount: props?.validateOnMount,
-    rules: [isValidFile],
-  }
-);
+const { isValid, hint, value, validate } = useFieldWithValidation(props, {
+  validateOnMount: props?.validateOnMount,
+  rules: [isValidFile],
+});
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: File[] | null | undefined): void;
@@ -212,15 +209,18 @@ function isValidFile(value: unknown): boolean {
   const isValidSize = sizeRule(value, { size: props.maximumSize });
 
   const isValidFormatAndSize = isValidFormat && isValidSize;
-  if (isValidFormatAndSize) {
-    emit('files', value as File[]);
-  }
 
   return isValidFormatAndSize;
 }
 
+watch(value, newValue => {
+  if (!!newValue?.length && isValidFile(newValue)) {
+    emit('files', newValue as File[]);
+  }
+});
+
 const { handleChange } = useInputEventBindings(
-  handleValidation,
+  validate,
   props.validationTrigger,
   emit
 );

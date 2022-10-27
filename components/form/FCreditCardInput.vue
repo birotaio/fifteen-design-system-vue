@@ -247,13 +247,13 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, value, handleValidation, handleResetValidation } =
+const { isValid, hint, value, validate, resetValidation } =
   useFieldWithValidation<string | number>(props, {
     validateOnMount: props?.validateOnMount,
     rules: [isValidCreditCard],
   });
 const { handleBlur, handleChange, handleFocus, handleInput } =
-  useInputEventBindings(handleValidation, props.validationTrigger, emit);
+  useInputEventBindings(validate, props.validationTrigger, emit);
 
 const classes = computed(() => ({
   'FCreditCardInput--disabled': props.disabled,
@@ -295,14 +295,18 @@ watch(value, newValue => {
     // Manually trigger validation if :
     // - Input value length matches one of the lengths of the matched credit card
     // - No credit card was found but input value length reached the number of digits of default mask
-    handleValidation(newValue);
+    validate(newValue);
   } else {
     // Else trigger field validation reset to remove eventual errors while user is interacting with input
-    handleResetValidation();
+    resetValidation();
   }
 
   creditCard.value = newCreditCard;
   emit('credit-card', newCreditCard);
+
+  if (isValidCreditCard(newValue)) {
+    emit('complete');
+  }
 });
 
 /**
@@ -315,13 +319,11 @@ function isValidCreditCard(value: unknown): boolean {
   const valid =
     luhnCheck(spacelessValue) &&
     creditCard.value.lengths.includes(spacelessValue.length);
-
-  if (valid) emit('complete');
   return valid;
 }
 
 function handleFocusAndResetValidation(e: Event) {
-  handleResetValidation();
+  resetValidation();
   handleFocus(e);
 }
 

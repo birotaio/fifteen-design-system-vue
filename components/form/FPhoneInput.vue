@@ -318,7 +318,7 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, handleValidation } = useFieldWithValidation<
+const { isValid, hint, validate } = useFieldWithValidation<
   string | number
 >(props, {
   validateOnMount: props?.validateOnMount,
@@ -326,7 +326,7 @@ const { isValid, hint, handleValidation } = useFieldWithValidation<
 });
 const { handleBlur, handleChange, handleFocus, handleInput } =
   useInputEventBindings(
-    () => handleValidation(fullPhone.value),
+    () => validate(fullPhone.value),
     props.validationTrigger,
     emit
   );
@@ -364,7 +364,7 @@ const fullPhone = computed(() => {
 
 // Handle value update only. Validation is performed with 'validation-trigger' event
 watch([phonePrefix, phoneNumber], () => {
-  handleValidation(fullPhone.value, false);
+  validate(fullPhone.value, false);
 });
 
 const countries = getCountries().map((country: CountryCode) => ({

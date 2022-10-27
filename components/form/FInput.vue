@@ -288,12 +288,12 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, value, handleValidation } = useFieldWithValidation(
+const { isValid, hint, value, validate } = useFieldWithValidation(
   props,
   { validateOnMount: props.validateOnMount }
 );
 const { handleBlur, handleChange, handleInput, handleFocus } =
-  useInputEventBindings(handleValidation, props.validationTrigger, emit);
+  useInputEventBindings(validate, props.validationTrigger, emit);
 
 const style = computed(
   (): Style => ({
@@ -327,7 +327,7 @@ const hintTextColor = computed(() =>
  * Force validation from parent component, eg. in case of rules change
  */
 function forceValidation() {
-  handleValidation(value.value);
+  validate(value.value);
 }
 
 /**

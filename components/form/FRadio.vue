@@ -248,10 +248,10 @@ const {
   isValid,
   hint,
   value: fieldValue,
-  handleValidation,
+  validate,
 } = useFieldWithValidation(props, { validateOnMount: props.validateOnMount });
 const { handleBlur, handleFocus, handleChange } = useInputEventBindings(
-  handleValidation,
+  validate,
   props.validationTrigger,
   emit
 );

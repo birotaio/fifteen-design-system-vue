@@ -193,13 +193,10 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
 
-const { isValid, hint, value, validate } = useFieldWithValidation(
-  props,
-  {
-    validateOnMount: props?.validateOnMount,
-    rules: [isValidFile],
-  }
-);
+const { isValid, hint, value, validate } = useFieldWithValidation(props, {
+  validateOnMount: props?.validateOnMount,
+  rules: [isValidFile],
+});
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: File[] | null | undefined): void;
@@ -218,6 +215,12 @@ function isValidFile(value: unknown): boolean {
 
   return isValidFormatAndSize;
 }
+
+watch(value, newValue => {
+  if (!!newValue?.length && isValidFile(newValue)) {
+    emit('files', newValue as File[]);
+  }
+});
 
 const { handleChange } = useInputEventBindings(
   validate,

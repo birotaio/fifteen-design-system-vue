@@ -303,6 +303,10 @@ watch(value, newValue => {
 
   creditCard.value = newCreditCard;
   emit('credit-card', newCreditCard);
+
+  if (isValidCreditCard(newValue)) {
+    emit('complete');
+  }
 });
 
 /**
@@ -315,8 +319,6 @@ function isValidCreditCard(value: unknown): boolean {
   const valid =
     luhnCheck(spacelessValue) &&
     creditCard.value.lengths.includes(spacelessValue.length);
-
-  if (valid) emit('complete');
   return valid;
 }
 

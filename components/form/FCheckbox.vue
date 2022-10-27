@@ -266,10 +266,10 @@ const {
   isValid,
   hint,
   value: fieldValue,
-  handleValidation,
+  validate,
 } = useFieldWithValidation(props, { validateOnMount: props.validateOnMount });
 const { handleBlur, handleFocus } = useInputEventBindings(
-  handleValidation,
+  validate,
   props.validationTrigger,
   emit
 );
@@ -320,7 +320,7 @@ const checkboxClasses = computed(() => ({
  * Custom handle change function because native onChange emits a "on" value when true
  */
 function handleChange() {
-  handleValidation(fieldValue.value, props.validationTrigger === 'change');
+  validate(fieldValue.value, props.validationTrigger === 'change');
 }
 
 /**

@@ -61,7 +61,7 @@ FField.FFileUpload(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import FButton from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
@@ -193,7 +193,7 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
 
-const { isValid, hint, value, handleValidation } = useFieldWithValidation(
+const { isValid, hint, value, validate } = useFieldWithValidation(
   props,
   {
     validateOnMount: props?.validateOnMount,
@@ -220,7 +220,7 @@ function isValidFile(value: unknown): boolean {
 }
 
 const { handleChange } = useInputEventBindings(
-  handleValidation,
+  validate,
   props.validationTrigger,
   emit
 );

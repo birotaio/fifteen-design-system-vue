@@ -214,7 +214,7 @@ const {
   isValid,
   hint,
   value: fieldValue,
-  handleValidation,
+  validate,
 } = useFieldWithValidation(props, {
   validateOnMount: props.validateOnMount,
 });
@@ -235,7 +235,7 @@ watch(digitsValue, () => {
     digitsValue.value.length === props.digits &&
     !digitsValue.value.some(value => value === '')
   ) {
-    handleValidation(digitsValue.value.join(''));
+    validate(digitsValue.value.join(''));
     emit('complete');
   }
 });
@@ -290,7 +290,7 @@ function forceDigitsValidation() {
 watch(isValid, forceDigitsValidation);
 
 function handleDigitChange() {
-  handleValidation(digitsValue.value.join(''));
+  validate(digitsValue.value.join(''));
 }
 
 /**

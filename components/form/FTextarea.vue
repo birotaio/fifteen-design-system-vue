@@ -257,12 +257,12 @@ defineExpose<{
 
 const textareaRef = ref();
 
-const { isValid, hint, value, handleValidation } =
+const { isValid, hint, value, validate } =
   useFieldWithValidation<string>(props, {
     validateOnMount: props.validateOnMount,
   });
 const { handleChange, handleFocus, handleBlur } = useInputEventBindings(
-  handleValidation,
+  validate,
   props.validationTrigger,
   emit
 );

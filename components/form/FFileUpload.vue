@@ -209,9 +209,6 @@ function isValidFile(value: unknown): boolean {
   const isValidSize = sizeRule(value, { size: props.maximumSize });
 
   const isValidFormatAndSize = isValidFormat && isValidSize;
-  if (isValidFormatAndSize) {
-    emit('files', value as File[]);
-  }
 
   return isValidFormatAndSize;
 }

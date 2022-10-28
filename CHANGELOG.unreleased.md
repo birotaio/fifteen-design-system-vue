@@ -6,6 +6,7 @@
 - [FInput] Improve `type="number` for iOS Safari (opens a numeric keyboard)
 - [FDigitsInput] Display input type as number with numeric keyboard, while hiding browser spin box
 - [forms] Rename functions `handleValidation` to `validate`, `handleResetValidation` to `resetValidation`
+- [FImage] Change Fifteen logo to `landscape` icon
 
 ### Fixes
 

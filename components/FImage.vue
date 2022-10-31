@@ -20,7 +20,7 @@ picture.FImage(
     :alt="alt"
   )
   .FImage__fallback(v-if="!src")
-    FLogo(color="secondary")
+    FIcon(name="landscape" color="secondary" size="100%")
 </template>
 
 <style lang="stylus">
@@ -52,10 +52,13 @@ picture.FImage(
   align-items center
   justify-content center
   background var(--color--neutral--light-3)
+
+  .FIcon
+    width rem(160)
 </style>
 
 <script setup lang="ts">
-import FLogo from '@/components/FLogo.vue';
+import FIcon from '@/components/FIcon.vue';
 
 import type CSS from 'csstype';
 import { ref, computed } from 'vue';

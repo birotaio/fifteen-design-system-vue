@@ -23,7 +23,7 @@ Default.args = {
 
 export const WithLabel: Story<FPhoneInputProps> = Template.bind({});
 WithLabel.args = {
-  label: 'Enter you phone number',
+  label: 'Enter your phone number',
   errorMessage: 'The phone number does not match the expected format',
 };
 
@@ -35,21 +35,21 @@ WithHint.args = {
 
 export const Full: Story<FPhoneInputProps> = Template.bind({});
 Full.args = {
-  label: 'Enter you phone number',
+  label: 'Enter your phone number',
   hint: `Don't forget to pick the right prefix`,
   errorMessage: 'The phone number does not match the expected format',
 };
 
 export const Error: Story<FPhoneInputProps> = Template.bind({});
 Error.args = {
-  label: 'Enter you phone number',
+  label: 'Enter your phone number',
   validateOnMount: true,
   errorMessage: 'Enter any valid number to dismiss the error',
 };
 
 export const Disabled: Story<FPhoneInputProps> = Template.bind({});
 Disabled.args = {
-  label: 'Enter you phone number',
+  label: 'Enter your phone number',
   hint: `Don't forget to pick the right prefix`,
   disabled: true,
 };

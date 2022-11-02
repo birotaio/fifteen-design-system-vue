@@ -42,7 +42,12 @@
             v-bind="{ option, index, isSelected: isSelected(index) }"
           )
             span {{ option.label }}
+          span.FMenu__option__description(v-if="option.description") {{ option.description }}
       .FMenu__noOption(v-if="options.length === 0")
+        FLoader.FMenu__loader(
+          v-if="loading"
+          height="24"
+        )
         span {{ emptyText }}
 </template>
 
@@ -78,6 +83,7 @@
 .FMenu__option
   display flex
   align-items center
+  flex-wrap wrap
   border-radius rem(16)
   min-height rem(24)
   padding rem(12) rem(8)
@@ -94,6 +100,9 @@
     background var(--fmenu--selected-option-color)
     font-weight 700
 
+    .FMenu__option__description
+      color var(--fmenu--selected-option-description-color)
+
 .FMenu__noOption
   display flex
   justify-content center
@@ -106,9 +115,19 @@
 .FMenu--disabled
   pointer-events none
   opacity 0.7
+
+.FMenu__loader
+  margin-right rem(8)
+
+.FMenu__option__description
+  use-font('caption')
+  color var(--fmenu--description-color)
+  flex-basis 100% // Force line break
 </style>
 
 <script setup lang="ts">
+import FLoader from '@/components/FLoader.vue';
+
 import Popper from 'vue3-popper/dist/popper.esm';
 import { computed, ref, watch } from 'vue';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
@@ -120,6 +139,7 @@ import { removeDiacritics } from '@/utils/text';
 export interface FMenuOption {
   label: string;
   value: string | number;
+  description?: string;
 }
 
 export interface FMenuProps {
@@ -152,6 +172,10 @@ export interface FMenuProps {
    */
   textColor?: Color;
   /**
+   * Text color of the description of option
+   */
+  descriptionColor?: Color;
+  /**
    * Background color of the selected option
    */
   selectedOptionColor?: Color;
@@ -160,9 +184,17 @@ export interface FMenuProps {
    */
   selectedOptionTextColor?: Color;
   /**
+   * Text color of the description of the selected option
+   */
+  selectedOptionDescriptionColor?: Color;
+  /**
    * Disable the menu
    */
   disabled?: boolean;
+  /**
+   * Loading state of the menu
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -173,8 +205,11 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   width: 300,
   color: 'primary',
   textColor: 'neutral--light-5',
+  descriptionColor: 'neutral--dark-2',
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
+  selectedOptionDescriptionColor: 'neutral--dark-2',
+  loading: false,
 });
 
 const style = computed(
@@ -182,9 +217,13 @@ const style = computed(
     '--fmenu--width': genSize(props.width),
     '--fmenu--color': getCssColor(props.color),
     '--fmenu--text-color': getCssColor(props.textColor),
+    '--fmenu--description-color': getCssColor(props.descriptionColor),
     '--fmenu--selected-option-color': getCssColor(props.selectedOptionColor),
     '--fmenu--selected-option-text-color': getCssColor(
       props.selectedOptionTextColor
+    ),
+    '--fmenu--selected-option-description-color': getCssColor(
+      props.selectedOptionDescriptionColor
     ),
   })
 );
@@ -238,6 +277,14 @@ watch(isOpen, newValue => {
     preselectOption(-1);
   }
 });
+
+watch(
+  () => props.options,
+  () => {
+    // Preselect the first option if options prop is dynamic
+    preselectOption(0);
+  }
+);
 
 /**
  * Preselect an option

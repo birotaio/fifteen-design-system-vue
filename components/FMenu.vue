@@ -100,9 +100,6 @@
     background var(--fmenu--selected-option-color)
     font-weight 700
 
-    .FMenu__option__description
-      color var(--fmenu--selected-option-description-color)
-
 .FMenu__noOption
   display flex
   justify-content center
@@ -121,7 +118,7 @@
 
 .FMenu__option__description
   use-font('caption')
-  color var(--fmenu--description-color)
+  opacity .75
   flex-basis 100% // Force line break
 </style>
 
@@ -172,10 +169,6 @@ export interface FMenuProps {
    */
   textColor?: Color;
   /**
-   * Text color of the description of option
-   */
-  descriptionColor?: Color;
-  /**
    * Background color of the selected option
    */
   selectedOptionColor?: Color;
@@ -183,10 +176,6 @@ export interface FMenuProps {
    * Text color of the selected option
    */
   selectedOptionTextColor?: Color;
-  /**
-   * Text color of the description of the selected option
-   */
-  selectedOptionDescriptionColor?: Color;
   /**
    * Disable the menu
    */
@@ -205,10 +194,8 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   width: 300,
   color: 'primary',
   textColor: 'neutral--light-5',
-  descriptionColor: 'neutral--dark-2',
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
-  selectedOptionDescriptionColor: 'neutral--dark-2',
   loading: false,
 });
 
@@ -217,13 +204,9 @@ const style = computed(
     '--fmenu--width': genSize(props.width),
     '--fmenu--color': getCssColor(props.color),
     '--fmenu--text-color': getCssColor(props.textColor),
-    '--fmenu--description-color': getCssColor(props.descriptionColor),
     '--fmenu--selected-option-color': getCssColor(props.selectedOptionColor),
     '--fmenu--selected-option-text-color': getCssColor(
       props.selectedOptionTextColor
-    ),
-    '--fmenu--selected-option-description-color': getCssColor(
-      props.selectedOptionDescriptionColor
     ),
   })
 );

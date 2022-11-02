@@ -1,7 +1,6 @@
 <template lang="pug">
 FField.FAutocompleteInput(
   :class="classes"
-  :style="style"
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
@@ -10,10 +9,8 @@ FField.FAutocompleteInput(
     :empty-text="loading ? loadingText : fieldValue ? noMatchText : emptyText"
     :color="optionsMenuColor || color"
     :text-color="optionTextColor"
-    :description-color="optionDescriptionColor"
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
-    :selected-option-description-color="selectedOptionDescriptionColor"
     :prevent-selection="preventSelection"
     :disabled="disabled"
     @select-option="handleSelectOption"
@@ -54,10 +51,19 @@ FField.FAutocompleteInput(
 </template>
 <style lang="stylus">
 .FAutocompleteInput__option--match
-  background var(--fautocomplete--match--color)
-  display inline-block
-  border-radius rem(4)
   padding 0 rem(1)
+  position relative
+
+  &::before
+    content ''
+    position absolute
+    top 0  
+    left 0
+    right 0
+    bottom 0
+    border-radius rem(4)
+    background currentColor
+    opacity .15
 </style>
 
 <script setup lang="ts">
@@ -68,7 +74,6 @@ import FMenu from '@/components/FMenu.vue';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { getCssColor } from '@/utils/getCssColor';
 import { escapeRegex } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
@@ -171,14 +176,6 @@ export interface FAutocompleteInputProps {
    */
   optionTextColor?: Color;
   /**
-   * Text color of the description of option
-   */
-  optionDescriptionColor?: Color;
-  /**
-   * Text color of the matching part of option
-   */
-  optionMatchColor?: Color;
-  /**
    * Background color of the selected option
    */
   selectedOptionColor?: Color;
@@ -186,10 +183,6 @@ export interface FAutocompleteInputProps {
    * Text color of the selected option
    */
   selectedOptionTextColor?: Color;
-  /**
-   * Text color of the description of the selected option
-   */
-  selectedOptionDescriptionColor?: Color;
   /**
    * Event that triggers validation
    */
@@ -245,11 +238,8 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
   placeholderTextColor: 'neutral--dark-2',
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-3',
-  optionDescriptionColor: 'neutral--dark-2',
-  optionMatchColor: 'warning--light-1',
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
-  selectedOptionDescriptionColor: 'neutral--dark-2',
   validationTrigger: 'change',
   menuWidth: 300,
   outlineColor: 'neutral--light-3',
@@ -354,12 +344,6 @@ function handleSelectOption(optionValue: string | number | null) {
 }
 
 const classes = computed(() => ({}));
-
-const style = computed(
-  (): Style => ({
-    '--fautocomplete--match--color': getCssColor(props.optionMatchColor),
-  })
-);
 
 const hintTextColor = computed(() =>
   props.disabled

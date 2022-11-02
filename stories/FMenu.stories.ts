@@ -42,8 +42,6 @@ WithDescriptions.args = {
     },
     { label: 'Data', value: 'data' },
   ],
-  descriptionColor: 'primary--light-2',
-  selectedOptionDescriptionColor: 'neutral--dark-4',
 };
 
 export const Disabled: Story<FMenuProps> = Template.bind({});

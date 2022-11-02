@@ -13,8 +13,8 @@ FField.FAutocompleteInput(
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
     :disabled="disabled"
-    @select-option="handleSelectOption"
     :loading="loading"
+    @select-option="handleSelectOption"
   )
     template(#option="scope")
       slot.FAutocompleteInput__option(

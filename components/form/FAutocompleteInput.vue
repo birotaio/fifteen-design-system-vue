@@ -245,9 +245,9 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
   outlineColor: 'neutral--light-3',
   focusColor: 'neutral--light-5',
   focusBorderColor: 'secondary',
-  emptyText: 'Empty text',
-  noMatchText: 'No Match text',
-  loadingText: 'Loading text',
+  emptyText: 'Type something to begin the search',
+  noMatchText: 'No match found for the current input.',
+  loadingText: 'Loading...',
   clearable: false,
 });
 

@@ -21,7 +21,7 @@ FField.FAutocompleteInput(
         name="option"
         v-bind="scope"
       )
-        div(v-html="getSplittedOption(scope.option)")
+        div(v-html="formatOption(scope.option)")
     template(#activator="{ openMenu }")
       FInput(
         v-model="formattedFieldValue"
@@ -74,7 +74,7 @@ import FMenu from '@/components/FMenu.vue';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { escapeRegex } from '@/utils/text';
+import { composeSearchRegex } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
 
@@ -257,7 +257,7 @@ const emit = defineEmits<{
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'new-value', value: string | null): void;
+  (name: 'value-change', value: string | null): void;
 }>();
 
 defineExpose<{
@@ -283,17 +283,17 @@ const formattedFieldValue = computed({
 const inputIsActive = ref(false);
 
 const filterRegex = computed(
-  () => new RegExp(`(${escapeRegex(fieldValue.value)})`, 'ig')
+  () => new RegExp(composeSearchRegex(fieldValue.value), 'ig')
 );
 
 const matchingOptions = computed(() => {
   if (!fieldValue.value || !!currentOptionMatched.value) return props.options;
-  return props.options.filter(option => option.label.match(filterRegex.value));
+  return props.options.filter(option => (option.label).match(filterRegex.value));
 });
 
-const currentOptionMatched = ref<FMenuOption>();
+const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption, until new user input
 
-function getSplittedOption(option: FMenuOption) {
+function formatOption(option: FMenuOption) {
   if (!fieldValue.value || !props.options.length) return option.label;
   return option.label.replace(
     filterRegex.value,
@@ -314,18 +314,18 @@ const {
 const {
   handleBlur,
   handleChange,
-  handleFocus: veeHandleFocus,
+  handleFocus: _handleFocus,
   handleInput,
 } = useInputEventBindings(validate, props.validationTrigger, emit);
 
 function handleFocus(e: Event, openMenu: () => void) {
   openMenu();
-  veeHandleFocus(e);
+  _handleFocus(e);
 }
 
 watch(fieldValue, newValue => {
   // Fire an event whenever field value change to handle eventual API calls
-  emit('new-value', newValue);
+  emit('value-change', newValue);
 });
 
 function isValidMatch() {

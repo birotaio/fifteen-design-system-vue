@@ -3,7 +3,6 @@
 ### Features
 
 - [FAutocompleteInput] Add `FAutocompleteInput` component
-- [@fifteen/shared-lib] Add `@fifteen/shared-lib` dependency
 
 ### Changes
 

@@ -1,6 +1,11 @@
 # Changelog Unreleased
 
-## Changes
+### Features
+
+- [FAutocompleteInput] Add `FAutocompleteInput` component
+- [@fifteen/shared-lib] Add `@fifteen/shared-lib` dependency
+
+### Changes
 
 - [FInput] Update story to show `type="number"` in action
 - [FInput] Improve `type="number` for iOS Safari (opens a numeric keyboard)

@@ -46,7 +46,7 @@
       .FMenu__noOption(v-if="options.length === 0")
         FLoader.FMenu__loader(
           v-if="loading"
-          height="24"
+          height="20"
         )
         span {{ emptyText }}
 </template>

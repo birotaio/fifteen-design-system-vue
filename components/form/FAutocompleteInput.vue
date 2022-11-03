@@ -288,7 +288,7 @@ const filterRegex = computed(
 
 const matchingOptions = computed(() => {
   if (!fieldValue.value || !!currentOptionMatched.value) return props.options;
-  return props.options.filter(option => (option.label).match(filterRegex.value));
+  return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
 const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption, until new user input

@@ -27,6 +27,23 @@ Default.args = {
   ],
 };
 
+export const WithDescriptions: Story<FMenuProps> = Template.bind({});
+WithDescriptions.args = {
+  options: [
+    {
+      label: 'Acquisition',
+      description: 'A description about acquisition',
+      value: 'acquisition',
+    },
+    {
+      label: 'Benefits',
+      description: 'A description about benefits',
+      value: 'benefits',
+    },
+    { label: 'Data', value: 'data' },
+  ],
+};
+
 export const Disabled: Story<FMenuProps> = Template.bind({});
 Disabled.args = {
   options: [

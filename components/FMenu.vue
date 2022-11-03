@@ -42,7 +42,12 @@
             v-bind="{ option, index, isSelected: isSelected(index) }"
           )
             span {{ option.label }}
+          span.FMenu__option__description(v-if="option.description") {{ option.description }}
       .FMenu__noOption(v-if="options.length === 0")
+        FLoader.FMenu__loader(
+          v-if="loading"
+          height="20"
+        )
         span {{ emptyText }}
 </template>
 
@@ -78,6 +83,7 @@
 .FMenu__option
   display flex
   align-items center
+  flex-wrap wrap
   border-radius rem(16)
   min-height rem(24)
   padding rem(12) rem(8)
@@ -106,9 +112,19 @@
 .FMenu--disabled
   pointer-events none
   opacity 0.7
+
+.FMenu__loader
+  margin-right rem(8)
+
+.FMenu__option__description
+  use-font('caption')
+  opacity .75
+  flex-basis 100% // Force line break
 </style>
 
 <script setup lang="ts">
+import FLoader from '@/components/FLoader.vue';
+
 import Popper from 'vue3-popper/dist/popper.esm';
 import { computed, ref, watch } from 'vue';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
@@ -120,6 +136,7 @@ import { removeDiacritics } from '@/utils/text';
 export interface FMenuOption {
   label: string;
   value: string | number;
+  description?: string;
 }
 
 export interface FMenuProps {
@@ -163,6 +180,10 @@ export interface FMenuProps {
    * Disable the menu
    */
   disabled?: boolean;
+  /**
+   * Loading state of the menu
+   */
+  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -175,6 +196,7 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   textColor: 'neutral--light-5',
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
+  loading: false,
 });
 
 const style = computed(
@@ -238,6 +260,14 @@ watch(isOpen, newValue => {
     preselectOption(-1);
   }
 });
+
+watch(
+  () => props.options,
+  () => {
+    // Preselect the first option if options prop is dynamic
+    preselectOption(0);
+  }
+);
 
 /**
  * Preselect an option

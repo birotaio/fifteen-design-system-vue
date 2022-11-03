@@ -86,6 +86,14 @@ Loading.args = {
   loading: true,
 };
 
+export const Clearable: Story<FInputProps> = Template.bind({});
+Clearable.args = {
+  placeholder: 'Email address',
+  errorColor: 'danger',
+  hint: 'Clear the input clicking on the cross icon',
+  clearable: true,
+};
+
 export const Mask: Story<FInputProps> = Template.bind({});
 Mask.args = {
   label: 'Birth date',

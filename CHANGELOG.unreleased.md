@@ -1,6 +1,10 @@
 # Changelog Unreleased
 
-## Changes
+### Features
+
+- [FAutocompleteInput] Add `FAutocompleteInput` component
+
+### Changes
 
 - [FInput] Update story to show `type="number"` in action
 - [FInput] Improve `type="number` for iOS Safari (opens a numeric keyboard)

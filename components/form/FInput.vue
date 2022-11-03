@@ -21,8 +21,15 @@ FField.FInput(
       @focus="handleFocus"
       @input="handleInput"
     )
-    .FInput__input__suffix(v-if="$slots['suffix'] || loading")
+    .FInput__input__suffix(v-if="$slots['suffix'] || loading || clearable")
       slot(name="suffix")
+        FIcon.FInput__input__suffix__clearableIcon(
+          v-if="clearable"
+          name="close"
+          :size="24"
+          :color="textColor"
+          @click="handleClear"
+        )
         FLoader(
           v-if="loading"
           :color="placeholderTextColor"
@@ -103,6 +110,9 @@ FField.FInput(
   .FInput__input
     pointer-events none
     opacity 0.7
+
+.FInput__input__suffix__clearableIcon
+  cursor pointer
 </style>
 
 <script setup lang="ts">
@@ -237,6 +247,10 @@ export interface FInputProps {
    * Loading state of the input
    */
   loading?: boolean;
+  /**
+   * Can clear the current value
+   */
+  clearable?: boolean;
 }
 
 const props = withDefaults(defineProps<FInputProps>(), {
@@ -266,6 +280,7 @@ const props = withDefaults(defineProps<FInputProps>(), {
   errorMessage: '',
   textAlign: 'left',
   mask: '',
+  clearable: false,
 });
 
 const emit = defineEmits<{
@@ -274,6 +289,7 @@ const emit = defineEmits<{
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
+  (name: 'clear'): void;
 }>();
 
 const inputRef = ref<HTMLInputElement>();
@@ -288,10 +304,9 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, value, validate } = useFieldWithValidation(
-  props,
-  { validateOnMount: props.validateOnMount }
-);
+const { isValid, hint, value, validate } = useFieldWithValidation(props, {
+  validateOnMount: props.validateOnMount,
+});
 const { handleBlur, handleChange, handleInput, handleFocus } =
   useInputEventBindings(validate, props.validationTrigger, emit);
 
@@ -323,6 +338,10 @@ const hintTextColor = computed(() =>
     : props.errorColor
 );
 
+function handleClear() {
+  value.value = undefined;
+  emit('clear');
+}
 /**
  * Force validation from parent component, eg. in case of rules change
  */

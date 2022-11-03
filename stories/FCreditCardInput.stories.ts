@@ -36,7 +36,7 @@ WithHint.args = {
 
 export const Full: Story<FCreditCardInputProps> = Template.bind({});
 Full.args = {
-  label: 'Enter you credit card',
+  label: 'Enter your credit card',
   hint: `All credit cards operations are crypted`,
   hintIcon: 'lock',
   errorMessage: 'The credit card format is not a valid format',
@@ -44,7 +44,7 @@ Full.args = {
 
 export const Error: Story<FCreditCardInputProps> = Template.bind({});
 Error.args = {
-  label: 'Enter you credit card',
+  label: 'Enter your credit card',
   validateOnMount: true,
   errorMessage: 'Enter any valid number to dismiss the error',
   rules: value => value !== '',
@@ -52,7 +52,7 @@ Error.args = {
 
 export const Disabled: Story<FCreditCardInputProps> = Template.bind({});
 Disabled.args = {
-  label: 'Enter you credit card',
+  label: 'Enter your credit card',
   hint: `All credit cards operations are crypted`,
   hintIcon: 'lock',
   disabled: true,
@@ -78,7 +78,7 @@ export const FocusProgrammatically: Story<FCreditCardInputProps> =
 
 export const Loading: Story<FCreditCardInputProps> = Template.bind({});
 Loading.args = {
-  label: 'Enter you credit card',
+  label: 'Enter your credit card',
   hint: `All credit cards operations are crypted`,
   loading: true,
 };

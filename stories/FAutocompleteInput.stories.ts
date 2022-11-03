@@ -121,7 +121,7 @@ Clearable.args = {
 };
 
 
-const APITemplate = (args: FAutocompleteInputProps) => ({
+const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
   components: { FAutocompleteInput },
   setup() {
     let timeoutId: NodeJS.Timeout | undefined;
@@ -151,7 +151,7 @@ const APITemplate = (args: FAutocompleteInputProps) => ({
 });
 
 export const WithAsyncOptions: Story<FAutocompleteInputProps> =
-  APITemplate.bind({});
+  WithAsyncOptionsTemplate.bind({});
 
 WithAsyncOptions.args = {
   placeholder: 'Search capitals...',

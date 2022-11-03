@@ -114,6 +114,7 @@ export { useVModelProxy } from '@/composables/useVModelProxy';
  */
 export { genSize } from '@/utils/genSize';
 export { getCssColor } from '@/utils/getCssColor';
+export { removeDiacritics } from '@/utils/text';
 
 /**
  * Config constants

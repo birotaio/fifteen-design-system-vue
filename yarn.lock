@@ -1161,28 +1161,6 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fifteen/design-system-vue@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@fifteen/design-system-vue/-/design-system-vue-0.5.1.tgz#5231414fe59224e0d4cd9187edc5ada44ca77560"
-  integrity sha512-aRAJk7OmCXZgyj6mIVYrDxSOuVXPfMm5qj4nbzeNPLAVW0C51msuiOCaxeplcwRrsKOjPJgYkKQS4xIwt3QyMg==
-  dependencies:
-    "@vee-validate/rules" "^4.5.11"
-    "@vueuse/core" "^8.5.0"
-    libphonenumber-js "^1.10.6"
-    vee-validate "^4.5.11"
-    vue "^3.2.36"
-
-"@fifteen/shared-lib@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@fifteen/shared-lib/-/shared-lib-0.2.0.tgz#103adcd5ff6f61417fa770453125f1924083906f"
-  integrity sha512-z19i+oq5Lr5NVMHOO3rRkzMVBdq5G+lCH7Gj/q6Rcuqyxs+kSrFaxi7VPV+9vZ41FhgFWQ+n06fcqztwxT5Cxw==
-  dependencies:
-    "@fifteen/design-system-vue" "^0.5.1"
-    "@vueuse/core" "^8.5.0"
-    vue "^3.2.36"
-    vue-router "^4.1.3"
-    xss "^1.0.14"
-
 "@gar/promisify@^1.0.1":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
@@ -2843,11 +2821,6 @@
   resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.1.4.tgz#b4aec2f4b4599e11ba774a50c67fa378c9824e53"
   integrity sha512-IiA0SvDrJEgXvVxjNkHPFfDx6SXw0b/TUkqMcDZWNg9fnCAHbTpoo59YfJ9QLFkwa3raau5vSlRVzMSLDnfdtQ==
 
-"@vue/devtools-api@^6.4.5":
-  version "6.4.5"
-  resolved "https://registry.yarnpkg.com/@vue/devtools-api/-/devtools-api-6.4.5.tgz#d54e844c1adbb1e677c81c665ecef1a2b4bb8380"
-  integrity sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==
-
 "@vue/reactivity-transform@3.2.36":
   version "3.2.36"
   resolved "https://registry.yarnpkg.com/@vue/reactivity-transform/-/reactivity-transform-3.2.36.tgz#8426a941b0b09d1b94fc162d4642758183b5d133"
@@ -4484,7 +4457,7 @@ comma-separated-tokens@^1.0.0:
   resolved "https://registry.yarnpkg.com/comma-separated-tokens/-/comma-separated-tokens-1.0.8.tgz#632b80b6117867a158f1080ad498b2fbe7e3f5ea"
   integrity sha512-GHuDRO12Sypu2cV70d1dkA2EUmXHgntrzbpvOB+Qy+49ypNfGgFQIC2fhhXbnyrJRynDCAARsT7Ou0M6hirpfw==
 
-commander@^2.19.0, commander@^2.20.0, commander@^2.20.3:
+commander@^2.19.0, commander@^2.20.0:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -4829,11 +4802,6 @@ cssesc@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
-
-cssfilter@0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/cssfilter/-/cssfilter-0.0.10.tgz#c6d2672632a2e5c83e013e6864a42ce8defd20ae"
-  integrity sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==
 
 csso@^4.2.0:
   version "4.2.0"
@@ -11825,13 +11793,6 @@ vue-loader@^16.4.1, vue-loader@^16.8.3:
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
 
-vue-router@^4.1.3:
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-4.1.6.tgz#b70303737e12b4814578d21d68d21618469375a1"
-  integrity sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==
-  dependencies:
-    "@vue/devtools-api" "^6.4.5"
-
 vue-template-compiler@^2.7.10:
   version "2.7.10"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.7.10.tgz#9e20f35b2fdccacacf732dd7dedb49bf65f4556b"
@@ -12192,14 +12153,6 @@ xml-name-validator@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-4.0.0.tgz#79a006e2e63149a8600f15430f0a4725d1524835"
   integrity sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==
-
-xss@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/xss/-/xss-1.0.14.tgz#4f3efbde75ad0d82e9921cc3c95e6590dd336694"
-  integrity sha512-og7TEJhXvn1a7kzZGQ7ETjdQVS2UfZyTlsEdDOqvQF7GoxNfY+0YLCzBy1kPdsDDx4QuNAonQPddpsn6Xl/7sw==
-  dependencies:
-    commander "^2.20.3"
-    cssfilter "0.0.10"
 
 xtend@^4.0.0, xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.2"

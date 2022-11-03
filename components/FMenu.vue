@@ -46,7 +46,7 @@
       .FMenu__noOption(v-if="options.length === 0")
         FLoader.FMenu__loader(
           v-if="loading"
-          height="24"
+          height="20"
         )
         span {{ emptyText }}
 </template>
@@ -107,7 +107,8 @@
   border-radius rem(16)
   elevation(2)
   color var(--fmenu--text-color)
-  padding rem(8)
+  padding rem(16)
+  font-size rem(14)
 
 .FMenu--disabled
   pointer-events none
@@ -131,7 +132,7 @@ import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { genSize } from '@/utils/genSize';
-import { removeDiacritics } from '@/utils/text';
+import { removeDiacritics } from '@fifteen/shared-lib';
 
 export interface FMenuOption {
   label: string;

@@ -145,7 +145,7 @@ const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
   },
   template: `
   <div>
-    <FAutocompleteInput @focus="fetchCapitals" @input="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
+    <FAutocompleteInput @value-change="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
   </div>`,
 });
 
@@ -156,5 +156,5 @@ WithAsyncOptions.args = {
   placeholder: 'Search capitals...',
   errorMessage: 'Select a value in the list to validate',
   loadingText: 'Fetching capitals...',
-  hint: 'Capitals are fetched asynchronously on focus and input',
+  hint: 'Capitals are fetched asynchronously on input',
 };

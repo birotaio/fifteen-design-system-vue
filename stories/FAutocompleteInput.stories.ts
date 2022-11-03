@@ -69,7 +69,6 @@ Error.args = {
   label: 'Choose a capital',
   validateOnMount: true,
   errorMessage: 'Choose an option to dismiss the error',
-  rules: value => value !== '',
 };
 
 export const Disabled: Story<FAutocompleteInputProps> = Template.bind({});

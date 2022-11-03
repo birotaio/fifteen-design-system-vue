@@ -9,7 +9,7 @@ const composables = [
   'useVModelProxy',
 ];
 
-const utils = ['getCssColor', 'genSize', 'removeDiacritics'];
+const utils = ['getCssColor', 'genSize'];
 
 export function FifteenAutoImportsResolver(): Resolver {
   return {

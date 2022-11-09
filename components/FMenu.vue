@@ -127,6 +127,7 @@
 import FLoader from '@/components/FLoader.vue';
 
 import Popper from 'vue3-popper/dist/popper.esm';
+import equal from 'fast-deep-equal/es6';
 import { computed, ref, watch } from 'vue';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
@@ -300,8 +301,8 @@ function preselectOption(index: number) {
  */
 function isSelected(index: number): boolean {
   return (
-    props.options.findIndex(
-      option => stringify(option.value) === stringify(selectedOption.value)
+    props.options.findIndex(option =>
+      equal(option.value, selectedOption.value)
     ) === index
   );
 }
@@ -398,8 +399,8 @@ function selectOption(option?: FMenuOption | null): void {
   if (!option && preselectedOptionIndex.value === -1) {
     // Use current selected option as preselected option
     if (selectedOption.value) {
-      const selectedOptionIndex = props.options.findIndex(
-        option => stringify(option.value) === stringify(selectedOption.value)
+      const selectedOptionIndex = props.options.findIndex(option =>
+        equal(option.value, selectedOption.value)
       );
       preselectOption(selectedOptionIndex);
       scrollOptionIntoView(selectedOptionIndex);

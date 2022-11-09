@@ -74,9 +74,10 @@ import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 
+import equal from 'fast-deep-equal/es6';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { composeSearchRegex, stringify } from '@/utils/text';
+import { composeSearchRegex } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
 
@@ -342,9 +343,9 @@ function isValidMatch() {
 }
 
 function handleSelectOption(optionValue: unknown) {
-  fieldValue.value = optionValue
-  currentOptionMatched.value = props.options.find(
-    option => stringify(optionValue) === stringify(option.value)
+  fieldValue.value = optionValue;
+  currentOptionMatched.value = props.options.find(option =>
+    equal(optionValue, option.value)
   );
 
   inputValue.value = (currentOptionMatched.value as FMenuOption).label;
@@ -373,14 +374,14 @@ function forceValidation() {
 
 watch(isValid, forceValidation);
 
-const FMenuRef = ref()
+const FMenuRef = ref();
 
 onMounted(() => {
-  const matchingOption = props.options.find(
-    option => stringify(props.modelValue) === stringify(option.value)
+  const matchingOption = props.options.find(option =>
+    equal(props.modelValue, option.value)
   );
-  FMenuRef.value.selectOption(matchingOption ?? null)
-})
+  FMenuRef.value.selectOption(matchingOption ?? null);
+});
 
 /**
  * Focus the input

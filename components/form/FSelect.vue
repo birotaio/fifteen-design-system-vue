@@ -168,11 +168,11 @@ import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 import FLoader from '@/components/FLoader.vue';
 
+import equal from 'fast-deep-equal/es6';
 import { ref, computed, watch } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { stringify } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
 
@@ -441,8 +441,8 @@ function handleIconClick(event: Event) {
  */
 function handleBlur(): void {
   // Preselect the current value on blur
-  preselectedOptionIndex.value = props.options.findIndex(
-    option => stringify(option.value) === stringify(fieldValue.value)
+  preselectedOptionIndex.value = props.options.findIndex(option =>
+    equal(option.value, fieldValue.value)
   );
   emit('blur');
 }

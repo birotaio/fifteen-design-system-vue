@@ -119,6 +119,16 @@ Clearable.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
+export const PreventFiltering: Story<FAutocompleteInputProps> = Template.bind({});
+PreventFiltering.args = {
+  placeholder: 'Search capitals...',
+  options: capitals,
+  hint: `Autocomplete propositions are not filtered based on input value.`,
+  preventFiltering: true,
+  hintIcon: 'infoCircle',
+  errorMessage: 'Select a value in the list to validate',
+};
+
 export const WithInitialValue: Story<FAutocompleteInputProps> = Template.bind({});
 WithInitialValue.args = {
   modelValue: 'berlin',

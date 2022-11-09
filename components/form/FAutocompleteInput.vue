@@ -46,9 +46,9 @@ FField.FAutocompleteInput(
         :rules="[() => isValid]"
         hide-error-icon
         hide-hint
-        @focus="e => handleFocus(e, openMenu)"
-        @blur="e => handleBlur(e, closeMenu)"
-        @change="e => emit('change', e)"
+        @focus="openMenu(); handleFocus($event)"
+        @blur="closeMenu(); handleBlur($event)"
+        @change="handleChange"
         @input="handleInput"
       )
 </template>
@@ -274,7 +274,7 @@ defineExpose<{
   focus,
 });
 
-const inputValue = ref('');
+const inputValue = ref<string>();
 
 const filterRegex = computed(
   () => new RegExp(composeSearchRegex(inputValue.value), 'ig')
@@ -285,8 +285,9 @@ const matchingOptions = computed(() => {
     !inputValue.value ||
     !!currentOptionMatched.value ||
     props.preventFiltering
-  )
+  ) {
     return props.options;
+  }
   return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
@@ -310,8 +311,7 @@ const {
   rules: [isValidMatch],
 });
 
-function handleBlur(e: Event, closeMenu: () => void) {
-  closeMenu();
+function handleBlur(e: Event) {
   emit('blur', e);
 
   // Wait for the menu to fade out before clearing the input to avoid seeing options change
@@ -323,8 +323,11 @@ function handleBlur(e: Event, closeMenu: () => void) {
   }, 300);
 }
 
-function handleFocus(e: Event, openMenu: () => void) {
-  openMenu();
+function handleFocus(e: Event) {
+  emit('focus', e);
+}
+
+function handleChange(e: Event) {
   emit('focus', e);
 }
 
@@ -348,7 +351,7 @@ function handleSelectOption(optionValue: unknown) {
     equal(optionValue, option.value)
   );
 
-  inputValue.value = (currentOptionMatched.value as FMenuOption).label;
+  inputValue.value = currentOptionMatched.value?.label;
 
   validate(fieldValue.value);
 }
@@ -374,7 +377,7 @@ function forceValidation() {
 
 watch(isValid, forceValidation);
 
-const menuRef = ref<InstanceType<typeof FMenu>>()
+const menuRef = ref<InstanceType<typeof FMenu>>();
 
 onMounted(() => {
   const matchingOption = props.options.find(option =>

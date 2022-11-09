@@ -439,7 +439,7 @@ function handlePreselectSearch(event: KeyboardEvent) {
   function matchResult(option: FMenuOption) {
     const optionLabel = removeDiacritics(option.label.toLowerCase());
     const optionValue = removeDiacritics(
-      ('' + stringify(option.value)).toLowerCase()
+      stringify(option.value).toLowerCase()
     );
 
     return (

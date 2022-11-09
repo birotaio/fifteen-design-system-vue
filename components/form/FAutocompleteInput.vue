@@ -12,7 +12,7 @@ FField.FAutocompleteInput(
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
-    prevent-keyboard-search
+    prevent-search
     persistent
     :disabled="disabled"
     :loading="loading"

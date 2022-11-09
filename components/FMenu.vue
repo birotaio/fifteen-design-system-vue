@@ -157,7 +157,7 @@ export interface FMenuProps {
   /**
    * Prevent keyboard search
    */
-  preventKeyboardSearch?: boolean;
+  preventSearch?: boolean;
   /**
    * If true, clicking outside the menu won't close it
    */
@@ -199,7 +199,7 @@ export interface FMenuProps {
 const props = withDefaults(defineProps<FMenuProps>(), {
   modelValue: undefined,
   preventSelection: false,
-  preventKeyboardSearch: false,
+  preventSearch: false,
   persistent: false,
   emptyText: '',
   options: () => [],
@@ -217,6 +217,12 @@ defineExpose<{
   selectOption,
 });
 
+const emit = defineEmits<{
+  (name: 'update:modelValue', value: unknown): void;
+  (name: 'select-option', value: unknown): void;
+  (name: 'toggle', value: boolean): void;
+}>();
+
 const style = computed(
   (): Style => ({
     '--fmenu--width': genSize(props.width),
@@ -232,12 +238,6 @@ const style = computed(
 const selectedOption = useVModelProxy<unknown>(props);
 
 const optionRefs = ref<HTMLElement[]>([]);
-
-const emit = defineEmits<{
-  (name: 'update:modelValue', value: unknown): void;
-  (name: 'select-option', value: unknown): void;
-  (name: 'toggle', value: boolean): void;
-}>();
 
 const menuClasses = computed(() => ({
   'FMenu--disabled': props.disabled,
@@ -428,7 +428,7 @@ const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
  */
 function handlePreselectSearch(event: KeyboardEvent) {
   event.stopPropagation();
-  if (!isOpen.value || props.preventKeyboardSearch) return;
+  if (!isOpen.value || props.preventSearch) return;
 
   isKeyboardInteracting.value = true;
 

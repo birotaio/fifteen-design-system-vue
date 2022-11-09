@@ -257,7 +257,7 @@ const emit = defineEmits<{
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'value-change', value: string | null): void;
+  (name: 'input-value', value: string | null): void;
 }>();
 
 defineExpose<{
@@ -325,7 +325,7 @@ function handleFocus(e: Event, openMenu: () => void) {
 
 watch(fieldValue, newValue => {
   // Fire an event whenever field value change to handle eventual API calls
-  emit('value-change', newValue);
+  emit('input-value', newValue);
 });
 
 function isValidMatch() {

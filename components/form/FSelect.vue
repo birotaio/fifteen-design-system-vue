@@ -286,7 +286,7 @@ export interface FSelectProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'change' | 'focus' | 'blur';
+  validationTrigger?: 'change' | 'focus';
   /**
    * Whether the input should be validated on mount
    */

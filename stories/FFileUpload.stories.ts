@@ -10,7 +10,7 @@ export default {
 
 const Template = (args: FFileUploadProps) => ({
   components: { FFileUpload },
-  setup: () => ({ args, console }),
+  setup: () => ({ args }),
   template: '<FFileUpload v-bind="args" />',
 });
 

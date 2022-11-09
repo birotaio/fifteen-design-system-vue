@@ -158,6 +158,10 @@ export interface FMenuProps {
    */
   preventKeyboardSearch?: boolean;
   /**
+   * If true, clicking outside the menu won't close it
+   */
+  persistent?: boolean;
+  /**
    * Text to display when no option is provided
    */
   emptyText?: string;
@@ -195,6 +199,7 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   modelValue: null,
   preventSelection: false,
   preventKeyboardSearch: false,
+  persistent: false,
   emptyText: '',
   options: () => [],
   width: 300,
@@ -455,6 +460,6 @@ function handlePreselectSearch(event: KeyboardEvent) {
 
 const menuRef = ref();
 onClickOutside(menuRef, () => {
-  isOpen.value = false;
+  if (!props.persistent) isOpen.value = false;
 });
 </script>

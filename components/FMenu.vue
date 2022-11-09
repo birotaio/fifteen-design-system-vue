@@ -137,7 +137,7 @@ import { removeDiacritics, stringify } from '@/utils/text';
 
 export interface FMenuOption {
   label: string;
-  value: unknown;
+  value: any;
   description?: string;
 }
 
@@ -145,7 +145,7 @@ export interface FMenuProps {
   /**
    * Selected value of the menu
    */
-  modelValue?: unknown;
+  modelValue?: any;
   /**
    * Array of options
    */
@@ -218,8 +218,8 @@ defineExpose<{
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: unknown): void;
-  (name: 'select-option', value: unknown): void;
+  (name: 'update:modelValue', value: any): void;
+  (name: 'select-option', value: any): void;
   (name: 'toggle', value: boolean): void;
 }>();
 
@@ -235,7 +235,7 @@ const style = computed(
   })
 );
 
-const selectedOption = useVModelProxy<unknown>(props);
+const selectedOption = useVModelProxy<any>(props);
 
 const optionRefs = ref<HTMLElement[]>([]);
 

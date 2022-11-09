@@ -85,7 +85,7 @@ export interface FAutocompleteInputProps {
   /**
    * Option value
    */
-  modelValue?: unknown;
+  modelValue?: any;
   /**
    * Propositions based on user input
    */
@@ -260,7 +260,7 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: unknown): void;
+  (name: 'update:modelValue', value: any): void;
   (name: 'input', value: InputEvent): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -306,7 +306,7 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation<unknown>(props, {
+} = useFieldWithValidation<any>(props, {
   validateOnMount: props?.validateOnMount,
   rules: [isValidMatch],
 });
@@ -345,7 +345,7 @@ function isValidMatch() {
   return !!currentOptionMatched.value;
 }
 
-function handleSelectOption(optionValue: unknown) {
+function handleSelectOption(optionValue: any) {
   fieldValue.value = optionValue;
   currentOptionMatched.value = props.options.find(option =>
     equal(optionValue, option.value)

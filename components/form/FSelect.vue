@@ -180,7 +180,7 @@ export interface FSelectProps {
   /**
    * Current option of the select
    */
-  modelValue?: unknown;
+  modelValue?: any;
   /**
    * Label, placed on top of select
    */
@@ -343,12 +343,12 @@ const props = withDefaults(defineProps<FSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: unknown): void;
+  (name: 'update:modelValue', value: any): void;
   (name: 'change'): void;
   (name: 'focus'): void;
   (name: 'blur'): void;
   (name: 'clear'): void;
-  (name: 'select-option', value: unknown): void;
+  (name: 'select-option', value: any): void;
 }>();
 
 defineExpose<{
@@ -362,7 +362,7 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation<unknown>(props, {
+} = useFieldWithValidation<any>(props, {
   validateOnMount: props?.validateOnMount,
 });
 const { handleFocus, handleChange } = useInputEventBindings(

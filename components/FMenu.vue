@@ -154,6 +154,10 @@ export interface FMenuProps {
    */
   preventSelection?: boolean;
   /**
+   * Prevent keyboard search
+   */
+  preventKeyboardSearch?: boolean;
+  /**
    * Text to display when no option is provided
    */
   emptyText?: string;
@@ -190,6 +194,7 @@ export interface FMenuProps {
 const props = withDefaults(defineProps<FMenuProps>(), {
   modelValue: null,
   preventSelection: false,
+  preventKeyboardSearch: false,
   emptyText: '',
   options: () => [],
   width: 300,
@@ -410,7 +415,7 @@ const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
  */
 function handlePreselectSearch(event: KeyboardEvent) {
   event.stopPropagation();
-  if (!isOpen.value) return;
+  if (!isOpen.value || props.preventKeyboardSearch) return;
 
   isKeyboardInteracting.value = true;
 

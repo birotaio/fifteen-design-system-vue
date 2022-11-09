@@ -210,6 +210,12 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   loading: false,
 });
 
+defineExpose<{
+  selectOption: (option?: FMenuOption | null) => void;
+}>({
+  selectOption,
+});
+
 const style = computed(
   (): Style => ({
     '--fmenu--width': genSize(props.width),

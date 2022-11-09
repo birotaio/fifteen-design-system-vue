@@ -17,6 +17,7 @@ FField.FAutocompleteInput(
     :disabled="disabled"
     :loading="loading"
     @select-option="handleSelectOption"
+    ref="FMenuRef"
   )
     template(#option="scope")
       slot.FAutocompleteInput__option(
@@ -73,7 +74,7 @@ import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { composeSearchRegex, stringify } from '@/utils/text';
 
@@ -341,6 +342,7 @@ function isValidMatch() {
 }
 
 function handleSelectOption(optionValue: unknown) {
+  fieldValue.value = optionValue
   currentOptionMatched.value = props.options.find(
     option => stringify(optionValue) === stringify(option.value)
   );
@@ -370,6 +372,15 @@ function forceValidation() {
 }
 
 watch(isValid, forceValidation);
+
+const FMenuRef = ref()
+
+onMounted(() => {
+  const matchingOption = props.options.find(
+    option => stringify(props.modelValue) === stringify(option.value)
+  );
+  FMenuRef.value.selectOption(matchingOption ?? null)
+})
 
 /**
  * Focus the input

@@ -119,6 +119,16 @@ Clearable.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
+export const WithInitialValue: Story<FAutocompleteInputProps> = Template.bind({});
+WithInitialValue.args = {
+  modelValue: 'berlin',
+  placeholder: 'Search capitals...',
+  options: capitals,
+  hint: `The initial value is set to Berlin.`,
+  hintIcon: 'infoCircle',
+  errorMessage: 'Select a value in the list to validate',
+};
+
 
 const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
   components: { FAutocompleteInput },

@@ -313,7 +313,7 @@ function handleBlur(e: Event, closeMenu: () => void) {
   closeMenu();
   emit('blur', e);
 
-  // Wait for the menu to be invisible to clear the input, to avoid seeing the item changes
+  // Wait for the menu to fade out before clearing the input to avoid seeing options change
   setTimeout(() => {
     if (!currentOptionMatched.value) {
       inputValue.value = '';

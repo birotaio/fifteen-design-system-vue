@@ -17,7 +17,7 @@ FField.FAutocompleteInput(
     :disabled="disabled"
     :loading="loading"
     @select-option="handleSelectOption"
-    ref="FMenuRef"
+    ref="menuRef"
   )
     template(#option="scope")
       slot.FAutocompleteInput__option(
@@ -374,13 +374,13 @@ function forceValidation() {
 
 watch(isValid, forceValidation);
 
-const FMenuRef = ref();
+const menuRef = ref<InstanceType<typeof FMenu>>()
 
 onMounted(() => {
   const matchingOption = props.options.find(option =>
     equal(props.modelValue, option.value)
   );
-  FMenuRef.value.selectOption(matchingOption ?? null);
+  menuRef.value?.selectOption(matchingOption ?? null);
 });
 
 /**

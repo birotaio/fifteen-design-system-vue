@@ -91,6 +91,5 @@ export function removeDiacritics(text: string): string {
  * @param value - Value to stringify
  */
 export function stringify(value: unknown) {
-  const t = typeof value === 'object' ? JSON.stringify(value) : String(value);
-  return t
+  return typeof value === 'object' ? JSON.stringify(value) : String(value);
 }

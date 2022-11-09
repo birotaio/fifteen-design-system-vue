@@ -26,7 +26,7 @@
         .FMenu__option(
           role="option"
           v-for="(option, index) in options"
-          :key="option.value"
+          :key="stringify(option.value)"
           :class="selectOptionClasses(index)"
           ref="optionRefs"
           @click="selectOption(option)"
@@ -119,7 +119,7 @@
 
 .FMenu__option__description
   use-font('caption')
-  opacity .75
+  opacity 0.75
   flex-basis 100% // Force line break
 </style>
 
@@ -132,11 +132,11 @@ import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { genSize } from '@/utils/genSize';
-import { removeDiacritics } from '@/utils/text';
+import { removeDiacritics, stringify } from '@/utils/text';
 
 export interface FMenuOption {
   label: string;
-  value: string | number;
+  value: unknown;
   description?: string;
 }
 
@@ -144,7 +144,7 @@ export interface FMenuProps {
   /**
    * Selected value of the menu
    */
-  modelValue?: string | number | null;
+  modelValue?: unknown;
   /**
    * Array of options
    */
@@ -196,7 +196,7 @@ export interface FMenuProps {
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
-  modelValue: null,
+  modelValue: undefined,
   preventSelection: false,
   preventKeyboardSearch: false,
   persistent: false,
@@ -222,13 +222,13 @@ const style = computed(
   })
 );
 
-const selectedOption = useVModelProxy<string | number | boolean>(props);
+const selectedOption = useVModelProxy<unknown>(props);
 
 const optionRefs = ref<HTMLElement[]>([]);
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: string | number | null): void;
-  (name: 'select-option', value: string | number | null): void;
+  (name: 'update:modelValue', value: unknown): void;
+  (name: 'select-option', value: unknown): void;
   (name: 'toggle', value: boolean): void;
 }>();
 
@@ -294,8 +294,9 @@ function preselectOption(index: number) {
  */
 function isSelected(index: number): boolean {
   return (
-    props.options.findIndex(option => option.value === selectedOption.value) ===
-    index
+    props.options.findIndex(
+      option => stringify(option.value) === stringify(selectedOption.value)
+    ) === index
   );
 }
 
@@ -392,7 +393,7 @@ function selectOption(option?: FMenuOption | null): void {
     // Use current selected option as preselected option
     if (selectedOption.value) {
       const selectedOptionIndex = props.options.findIndex(
-        option => option.value === selectedOption.value
+        option => stringify(option.value) === stringify(selectedOption.value)
       );
       preselectOption(selectedOptionIndex);
       scrollOptionIntoView(selectedOptionIndex);
@@ -430,7 +431,9 @@ function handlePreselectSearch(event: KeyboardEvent) {
 
   function matchResult(option: FMenuOption) {
     const optionLabel = removeDiacritics(option.label.toLowerCase());
-    const optionValue = removeDiacritics(('' + option.value).toLowerCase());
+    const optionValue = removeDiacritics(
+      ('' + stringify(option.value)).toLowerCase()
+    );
 
     return (
       optionLabel.startsWith(preselectSearchTerm) ||

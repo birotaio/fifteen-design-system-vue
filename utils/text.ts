@@ -85,3 +85,12 @@ export function removeDiacritics(text: string): string {
       char => specialCharMap[char as keyof typeof specialCharMap]
     );
 }
+
+/**
+ * Returns a stringified version of an unknown value
+ * @param value - Value to stringify
+ */
+export function stringify(value: unknown) {
+  const t = typeof value === 'object' ? JSON.stringify(value) : String(value);
+  return t
+}

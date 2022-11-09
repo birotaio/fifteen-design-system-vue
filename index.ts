@@ -85,11 +85,10 @@ export type {
 export type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
 export type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
 export type { FProgressBarProps } from '@/components/FProgressBar.vue';
-export type { FMenuProps } from '@/components/FMenu.vue';
+export type { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
 export type { FFieldProps } from '@/components/form/FField.vue';
 export type {
-  FSelectProps,
-  FSelectOption,
+  FSelectProps
 } from '@/components/form/FSelect.vue';
 export type { FRadioGroupProps } from '@/components/form/FRadioGroup.vue';
 export type { FRadioProps } from '@/components/form/FRadio.vue';

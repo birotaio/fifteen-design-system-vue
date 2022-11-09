@@ -52,7 +52,7 @@ FField.FAutocompleteInput(
       )
 </template>
 <style lang="stylus">
-.FAutocompleteInput__option--match
+.FAutocompleteInput__option__match
   padding 0 rem(1)
   position relative
 
@@ -75,15 +75,15 @@ import FMenu from '@/components/FMenu.vue';
 
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { composeSearchRegex } from '@/utils/text';
+import { composeSearchRegex, stringify } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
 
 export interface FAutocompleteInputProps {
   /**
-   * Input value
+   * Option value
    */
-  modelValue?: string;
+  modelValue?: unknown;
   /**
    * Propositions based on user input
    */
@@ -223,7 +223,7 @@ export interface FAutocompleteInputProps {
 }
 
 const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
-  modelValue: '',
+  modelValue: undefined,
   options: () => [],
   label: '',
   labelTextColor: 'neutral--dark-4',
@@ -236,7 +236,7 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
   rules: () => [],
   errorMessage: '',
   preventSelection: false,
-  preventFiltering: true,
+  preventFiltering: false,
   errorColor: 'danger',
   color: 'neutral--light-3',
   borderColor: 'secondary',
@@ -258,7 +258,7 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: string | null): void;
+  (name: 'update:modelValue', value: unknown): void;
   (name: 'input', value: InputEvent): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -279,7 +279,12 @@ const filterRegex = computed(
 );
 
 const matchingOptions = computed(() => {
-  if (!inputValue.value || !!currentOptionMatched.value || props.preventFiltering) return props.options;
+  if (
+    !inputValue.value ||
+    !!currentOptionMatched.value ||
+    props.preventFiltering
+  )
+    return props.options;
   return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
@@ -289,7 +294,7 @@ function formatOption(option: FMenuOption) {
   if (!inputValue.value || !props.options.length) return option.label;
   return option.label.replace(
     filterRegex.value,
-    '<span class="FAutocompleteInput__option--match">$1</span>'
+    '<span class="FAutocompleteInput__option__match">$1</span>'
   );
 }
 
@@ -298,7 +303,7 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation<string | number>(props, {
+} = useFieldWithValidation<unknown>(props, {
   validateOnMount: props?.validateOnMount,
   rules: [isValidMatch],
 });
@@ -309,7 +314,10 @@ function handleBlur(e: Event, closeMenu: () => void) {
 
   // Wait for the menu to be invisible to clear the input, to avoid seeing the item changes
   setTimeout(() => {
-    if (!currentOptionMatched.value) inputValue.value = '';
+    if (!currentOptionMatched.value) {
+      inputValue.value = '';
+      fieldValue.value = undefined;
+    }
   }, 300);
 }
 
@@ -332,10 +340,9 @@ function isValidMatch() {
   return !!currentOptionMatched.value;
 }
 
-function handleSelectOption(optionValue: string | number | null) {
-  fieldValue.value = optionValue;
+function handleSelectOption(optionValue: unknown) {
   currentOptionMatched.value = props.options.find(
-    option => fieldValue.value === option.value
+    option => stringify(optionValue) === stringify(option.value)
   );
 
   inputValue.value = (currentOptionMatched.value as FMenuOption).label;

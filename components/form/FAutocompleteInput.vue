@@ -6,12 +6,14 @@ FField.FAutocompleteInput(
   FMenu(
     :options="matchingOptions"
     :width="menuWidth"
-    :empty-text="loading ? loadingText : fieldValue ? noMatchText : emptyText"
+    :empty-text="loading ? loadingText : inputValue ? noMatchText : emptyText"
     :color="optionsMenuColor || color"
     :text-color="optionTextColor"
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
+    prevent-keyboard-search
+    persistent
     :disabled="disabled"
     :loading="loading"
     @select-option="handleSelectOption"
@@ -22,9 +24,9 @@ FField.FAutocompleteInput(
         v-bind="scope"
       )
         div(v-html="formatOption(scope.option)")
-    template(#activator="{ openMenu }")
+    template(#activator="{ closeMenu, openMenu }")
       FInput(
-        v-model="formattedFieldValue"
+        v-model="inputValue"
         ref="inputRef"
         :color="color"
         :border-color="borderColor"
@@ -44,8 +46,8 @@ FField.FAutocompleteInput(
         hide-error-icon
         hide-hint
         @focus="e => handleFocus(e, openMenu)"
-        @blur="handleBlur"
-        @change="handleChange"
+        @blur="e => handleBlur(e, closeMenu)"
+        @change="e => emit('change', e)"
         @input="handleInput"
       )
 </template>
@@ -57,13 +59,13 @@ FField.FAutocompleteInput(
   &::before
     content ''
     position absolute
-    top 0  
+    top 0
     left 0
     right 0
     bottom 0
     border-radius rem(4)
     background currentColor
-    opacity .15
+    opacity 0.15
 </style>
 
 <script setup lang="ts">
@@ -73,7 +75,6 @@ import FMenu from '@/components/FMenu.vue';
 
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { composeSearchRegex } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
@@ -200,6 +201,10 @@ export interface FAutocompleteInputProps {
    */
   preventSelection?: boolean;
   /**
+   * Prevent item filtering
+   */
+  preventFiltering?: boolean;
+  /**
    * Text displayed in menu when input is empty
    */
   emptyText?: string;
@@ -231,6 +236,7 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
   rules: () => [],
   errorMessage: '',
   preventSelection: false,
+  preventFiltering: true,
   errorColor: 'danger',
   color: 'neutral--light-3',
   borderColor: 'secondary',
@@ -257,7 +263,7 @@ const emit = defineEmits<{
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'input-value', value: string | null): void;
+  (name: 'input-value', value: string | undefined): void;
 }>();
 
 defineExpose<{
@@ -266,35 +272,21 @@ defineExpose<{
   focus,
 });
 
-const formattedFieldValue = computed({
-  get(): string {
-    if (!inputIsActive.value && !!currentOptionMatched.value) {
-      return currentOptionMatched.value.label;
-    }
-    return fieldValue.value;
-  },
-  set(inputValue: string) {
-    fieldValue.value = inputValue;
-    inputIsActive.value = true;
-    currentOptionMatched.value = undefined;
-  },
-});
-
-const inputIsActive = ref(false);
+const inputValue = ref('');
 
 const filterRegex = computed(
-  () => new RegExp(composeSearchRegex(fieldValue.value), 'ig')
+  () => new RegExp(composeSearchRegex(inputValue.value), 'ig')
 );
 
 const matchingOptions = computed(() => {
-  if (!fieldValue.value || !!currentOptionMatched.value) return props.options;
+  if (!inputValue.value || !!currentOptionMatched.value || props.preventFiltering) return props.options;
   return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
 const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption, until new user input
 
 function formatOption(option: FMenuOption) {
-  if (!fieldValue.value || !props.options.length) return option.label;
+  if (!inputValue.value || !props.options.length) return option.label;
   return option.label.replace(
     filterRegex.value,
     '<span class="FAutocompleteInput__option--match">$1</span>'
@@ -311,20 +303,28 @@ const {
   rules: [isValidMatch],
 });
 
-const {
-  handleBlur,
-  handleChange,
-  handleFocus: _handleFocus,
-  handleInput,
-} = useInputEventBindings(validate, props.validationTrigger, emit);
+function handleBlur(e: Event, closeMenu: () => void) {
+  closeMenu();
+  emit('blur', e);
+
+  // Wait for the menu to be invisible to clear the input, to avoid seeing the item changes
+  setTimeout(() => {
+    if (!currentOptionMatched.value) inputValue.value = '';
+  }, 300);
+}
 
 function handleFocus(e: Event, openMenu: () => void) {
   openMenu();
-  _handleFocus(e);
+  emit('focus', e);
 }
 
-watch(fieldValue, newValue => {
-  // Fire an event whenever field value change to handle eventual API calls
+function handleInput(e: InputEvent) {
+  emit('input', e);
+  currentOptionMatched.value = undefined;
+}
+
+watch(inputValue, newValue => {
+  // Fire an event whenever input value change to handle eventual API calls
   emit('input-value', newValue);
 });
 
@@ -333,12 +333,12 @@ function isValidMatch() {
 }
 
 function handleSelectOption(optionValue: string | number | null) {
-  inputIsActive.value = false;
-
   fieldValue.value = optionValue;
   currentOptionMatched.value = props.options.find(
     option => fieldValue.value === option.value
   );
+
+  inputValue.value = (currentOptionMatched.value as FMenuOption).label;
 
   validate(fieldValue.value);
 }

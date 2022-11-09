@@ -107,7 +107,8 @@
   border-radius rem(16)
   elevation(2)
   color var(--fmenu--text-color)
-  padding rem(8)
+  padding rem(16)
+  font-size rem(14)
 
 .FMenu--disabled
   pointer-events none

@@ -154,7 +154,6 @@ import FMenu from '@/components/FMenu.vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 
-import type { CountryCode } from 'libphonenumber-js';
 import {
   isValidNumber,
   getCountries,
@@ -164,11 +163,13 @@ import {
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import type { FSelectOption } from '@/components/form/FSelect.vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
+
+import type { CountryCode } from 'libphonenumber-js';
+import type { FMenuOption } from '@/components/FMenu.vue';
 
 export interface FPhoneInputProps {
   /**
@@ -318,12 +319,13 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, validate } = useFieldWithValidation<
-  string | number
->(props, {
-  validateOnMount: props?.validateOnMount,
-  rules: [isValidPhone],
-});
+const { isValid, hint, validate } = useFieldWithValidation<string | number>(
+  props,
+  {
+    validateOnMount: props?.validateOnMount,
+    rules: [isValidPhone],
+  }
+);
 const { handleBlur, handleChange, handleFocus, handleInput } =
   useInputEventBindings(
     () => validate(fullPhone.value),
@@ -407,7 +409,7 @@ const hintTextColor = computed(() =>
     : props.errorColor
 );
 
-function getCountryCode(option: FSelectOption) {
+function getCountryCode(option: FMenuOption) {
   return option.value as CountryCode;
 }
 

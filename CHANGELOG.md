@@ -1,3 +1,9 @@
+## 0.7.1 (November 14, 2022)
+
+### Changes
+
+- [FAutocompleteInput] Fixes and enhancements for component `FAutocompleteInput`
+
 ## 0.7.0 (November 3, 2022)
 
 ### Features

@@ -73,6 +73,8 @@ import FLoader from '@/components/FLoader.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { computed, ref, watch, nextTick } from 'vue';
 
+import type { InputHTMLAttributes } from 'vue';
+
 export interface FDigitsInputProps {
   /**
    * Number of digits
@@ -303,5 +305,8 @@ function focus() {
 // In the specific case of the digit input, we want to hide the browsers "spin box"
 // so we do not use `type="number"` but `type="text"` alongside these following attibutes,
 // (see https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box)
-const inputAttrs = { inputmode: 'numeric', pattern: '[0-9]*' };
+const inputAttrs: InputHTMLAttributes = {
+  inputmode: 'numeric',
+  pattern: '[0-9]*',
+};
 </script>

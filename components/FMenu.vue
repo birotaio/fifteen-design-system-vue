@@ -26,7 +26,7 @@
         .FMenu__option(
           role="option"
           v-for="(option, index) in options"
-          :key="option.value"
+          :key="stringify(option.value)"
           :class="selectOptionClasses(index)"
           ref="optionRefs"
           @click="selectOption(option)"
@@ -107,7 +107,8 @@
   border-radius rem(16)
   elevation(2)
   color var(--fmenu--text-color)
-  padding rem(8)
+  padding rem(16)
+  font-size rem(14)
 
 .FMenu--disabled
   pointer-events none
@@ -118,7 +119,7 @@
 
 .FMenu__option__description
   use-font('caption')
-  opacity .75
+  opacity 0.75
   flex-basis 100% // Force line break
 </style>
 
@@ -126,16 +127,17 @@
 import FLoader from '@/components/FLoader.vue';
 
 import Popper from 'vue3-popper/dist/popper.esm';
+import equal from 'fast-deep-equal/es6';
 import { computed, ref, watch } from 'vue';
 import { onClickOutside, useElementBounding } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { genSize } from '@/utils/genSize';
-import { removeDiacritics } from '@/utils/text';
+import { removeDiacritics, stringify } from '@/utils/text';
 
 export interface FMenuOption {
   label: string;
-  value: string | number;
+  value: any;
   description?: string;
 }
 
@@ -143,7 +145,7 @@ export interface FMenuProps {
   /**
    * Selected value of the menu
    */
-  modelValue?: string | number | null;
+  modelValue?: any;
   /**
    * Array of options
    */
@@ -152,6 +154,14 @@ export interface FMenuProps {
    * Prevent item selection
    */
   preventSelection?: boolean;
+  /**
+   * Prevent keyboard search
+   */
+  preventSearch?: boolean;
+  /**
+   * If true, clicking outside the menu won't close it
+   */
+  persistent?: boolean;
   /**
    * Text to display when no option is provided
    */
@@ -187,8 +197,10 @@ export interface FMenuProps {
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
-  modelValue: null,
+  modelValue: undefined,
   preventSelection: false,
+  preventSearch: false,
+  persistent: false,
   emptyText: '',
   options: () => [],
   width: 300,
@@ -198,6 +210,18 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   selectedOptionTextColor: 'primary--dark-2',
   loading: false,
 });
+
+defineExpose<{
+  selectOption: (option?: FMenuOption | null) => void;
+}>({
+  selectOption,
+});
+
+const emit = defineEmits<{
+  (name: 'update:modelValue', value: any): void;
+  (name: 'select-option', value: any): void;
+  (name: 'toggle', value: boolean): void;
+}>();
 
 const style = computed(
   (): Style => ({
@@ -211,15 +235,9 @@ const style = computed(
   })
 );
 
-const selectedOption = useVModelProxy<string | number | boolean>(props);
+const selectedOption = useVModelProxy<any>(props);
 
 const optionRefs = ref<HTMLElement[]>([]);
-
-const emit = defineEmits<{
-  (name: 'update:modelValue', value: string | number | null): void;
-  (name: 'select-option', value: string | number | null): void;
-  (name: 'toggle', value: boolean): void;
-}>();
 
 const menuClasses = computed(() => ({
   'FMenu--disabled': props.disabled,
@@ -283,8 +301,9 @@ function preselectOption(index: number) {
  */
 function isSelected(index: number): boolean {
   return (
-    props.options.findIndex(option => option.value === selectedOption.value) ===
-    index
+    props.options.findIndex(option =>
+      equal(option.value, selectedOption.value)
+    ) === index
   );
 }
 
@@ -380,8 +399,8 @@ function selectOption(option?: FMenuOption | null): void {
   if (!option && preselectedOptionIndex.value === -1) {
     // Use current selected option as preselected option
     if (selectedOption.value) {
-      const selectedOptionIndex = props.options.findIndex(
-        option => option.value === selectedOption.value
+      const selectedOptionIndex = props.options.findIndex(option =>
+        equal(option.value, selectedOption.value)
       );
       preselectOption(selectedOptionIndex);
       scrollOptionIntoView(selectedOptionIndex);
@@ -409,7 +428,7 @@ const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
  */
 function handlePreselectSearch(event: KeyboardEvent) {
   event.stopPropagation();
-  if (!isOpen.value) return;
+  if (!isOpen.value || props.preventSearch) return;
 
   isKeyboardInteracting.value = true;
 
@@ -419,7 +438,9 @@ function handlePreselectSearch(event: KeyboardEvent) {
 
   function matchResult(option: FMenuOption) {
     const optionLabel = removeDiacritics(option.label.toLowerCase());
-    const optionValue = removeDiacritics(('' + option.value).toLowerCase());
+    const optionValue = removeDiacritics(
+      stringify(option.value).toLowerCase()
+    );
 
     return (
       optionLabel.startsWith(preselectSearchTerm) ||
@@ -449,6 +470,6 @@ function handlePreselectSearch(event: KeyboardEvent) {
 
 const menuRef = ref();
 onClickOutside(menuRef, () => {
-  isOpen.value = false;
+  if (!props.persistent) isOpen.value = false;
 });
 </script>

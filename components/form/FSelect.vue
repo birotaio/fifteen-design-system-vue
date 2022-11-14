@@ -168,21 +168,19 @@ import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 import FLoader from '@/components/FLoader.vue';
 
+import equal from 'fast-deep-equal/es6';
 import { ref, computed, watch } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
-export interface FSelectOption {
-  label: string;
-  value: string | number;
-}
+import type { FMenuOption } from '@/components/FMenu.vue';
 
 export interface FSelectProps {
   /**
    * Current option of the select
    */
-  modelValue?: string | number | null;
+  modelValue?: any;
   /**
    * Label, placed on top of select
    */
@@ -190,7 +188,7 @@ export interface FSelectProps {
   /**
    * Array of options
    */
-  options: FSelectOption[];
+  options: FMenuOption[];
   /**
    * Placeholder text
    */
@@ -286,7 +284,7 @@ export interface FSelectProps {
   /**
    * Event that triggers validation
    */
-  validationTrigger?: 'change' | 'focus' | 'blur';
+  validationTrigger?: 'change' | 'focus';
   /**
    * Whether the input should be validated on mount
    */
@@ -310,7 +308,7 @@ export interface FSelectProps {
 }
 
 const props = withDefaults(defineProps<FSelectProps>(), {
-  modelValue: null,
+  modelValue: undefined,
   options: () => [],
   color: 'neutral--light-3',
   disabled: false,
@@ -345,12 +343,12 @@ const props = withDefaults(defineProps<FSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: string | number | null): void;
+  (name: 'update:modelValue', value: any): void;
   (name: 'change'): void;
   (name: 'focus'): void;
   (name: 'blur'): void;
   (name: 'clear'): void;
-  (name: 'select-option', value: string | number | null): void;
+  (name: 'select-option', value: any): void;
 }>();
 
 defineExpose<{
@@ -364,7 +362,7 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation<string | number>(props, {
+} = useFieldWithValidation<any>(props, {
   validateOnMount: props?.validateOnMount,
 });
 const { handleFocus, handleChange } = useInputEventBindings(
@@ -443,8 +441,8 @@ function handleIconClick(event: Event) {
  */
 function handleBlur(): void {
   // Preselect the current value on blur
-  preselectedOptionIndex.value = props.options.findIndex(
-    option => option.value === fieldValue.value
+  preselectedOptionIndex.value = props.options.findIndex(option =>
+    equal(option.value, fieldValue.value)
   );
   emit('blur');
 }

@@ -1,4 +1,10 @@
-## 0.7.2 (Novemebr 14, 2022)
+## 0.7.3 (November 15, 2022)
+
+### Fixes
+
+- [FPhoneInput] Stop propagation on click that toggles the menu
+
+## 0.7.2 (November 14, 2022)
 
 ### Changes
 

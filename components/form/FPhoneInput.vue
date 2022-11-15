@@ -43,7 +43,7 @@ FField.FPhoneInput(
           .FPhoneInput__prefix(
             @keydown.esc="closeMenu"
             @keydown.enter="openMenu"
-            @click="toggleMenu"
+            @click.stop="toggleMenu"
           )
             .FPhoneInput__selectedValue(
               tabindex="0"

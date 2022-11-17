@@ -8,7 +8,7 @@
 
 ### Changes
 
-- [Core] Update Vue version
+- [Chore] Update Vue version
 
 ## 0.7.1 (November 14, 2022)
 

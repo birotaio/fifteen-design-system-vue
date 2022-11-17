@@ -9,6 +9,7 @@ module.exports = {
     builder: '@storybook/builder-vite',
   },
   viteFinal(config) {
+    config.base = './';
     return {
       ...config,
       resolve: {

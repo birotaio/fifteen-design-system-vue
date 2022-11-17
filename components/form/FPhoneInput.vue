@@ -319,11 +319,16 @@ defineExpose<{
   focus,
 });
 
+const countryCode = ref<CountryCode>('FR');
+
 const { isValid, hint, validate } = useFieldWithValidation<string | number>(
   props,
   {
     validateOnMount: props?.validateOnMount,
-    rules: [isValidPhone],
+    rules: [
+      value => isEmptyPhone(value) || isValidPhone(value),
+      ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
+    ],
   }
 );
 const { handleBlur, handleChange, handleFocus, handleInput } =
@@ -352,16 +357,18 @@ const placeholder = computed(() =>
     ?.format('INTERNATIONAL')
     .replace(`+${getCountryCallingCode(countryCode.value)} `, '')
 );
-const countryCode = ref<CountryCode>('FR');
 const phonePrefix = computed(
   () => `+${getCountryCallingCode(countryCode.value)}`
 );
 const phoneNumber = useVModelProxy<string>(props, 'phoneNumber');
 
 const fullPhone = computed(() => {
-  return isValidPhone(phonePrefix.value + phoneNumber.value)
-    ? parsePhoneNumber(phonePrefix.value + phoneNumber.value).number
-    : phonePrefix.value + phoneNumber.value;
+  const phoneValue =
+    phoneNumber.value !== '' ? phonePrefix.value + phoneNumber.value : '';
+
+  return !isEmptyPhone(phoneValue) && isValidPhone(phoneValue)
+    ? parsePhoneNumber(phoneValue).number
+    : phoneValue;
 });
 
 // Handle value update only. Validation is performed with 'validation-trigger' event
@@ -393,9 +400,17 @@ const phoneNumberMask = computed(() => {
   return [nationalFormat, internationalFormatWithoutCountryCallingCode];
 });
 
+// Internal validation rule that checks is phone input is empty
+function isEmptyPhone(value: unknown): boolean {
+  if (typeof value !== 'string') return false;
+
+  const countryCallingCode = `+${getCountryCallingCode(countryCode.value)}`;
+  return value === '' || value === countryCallingCode;
+}
+
 // Internal validation rule, always applied
 function isValidPhone(value: unknown) {
-  if (typeof value !== 'string') return true;
+  if (typeof value !== 'string') return false;
   return isValidNumber(value);
 }
 

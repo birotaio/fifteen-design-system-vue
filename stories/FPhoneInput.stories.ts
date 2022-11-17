@@ -4,6 +4,7 @@ import FPhoneInput, {
 } from '@/components/form/FPhoneInput.vue';
 import FButton from '@/components/FButton.vue';
 import { ref } from 'vue';
+import { required } from '@vee-validate/rules';
 
 export default {
   title: 'Components/Form/FPhoneInput',
@@ -19,6 +20,7 @@ const Template = (args: FPhoneInputProps) => ({
 export const Default: Story<FPhoneInputProps> = Template.bind({});
 Default.args = {
   errorMessage: 'The phone number does not match the expected format',
+  rules: [required],
 };
 
 export const WithLabel: Story<FPhoneInputProps> = Template.bind({});
@@ -44,7 +46,9 @@ export const Error: Story<FPhoneInputProps> = Template.bind({});
 Error.args = {
   label: 'Enter your phone number',
   validateOnMount: true,
-  errorMessage: 'Enter any valid number to dismiss the error',
+  errorMessage:
+    'A phone number is required. Enter any valid number to dismiss the error',
+  rules: [required],
 };
 
 export const Disabled: Story<FPhoneInputProps> = Template.bind({});

@@ -54,7 +54,7 @@
     "dev": "yarn sb",
     "sb": "start-storybook -p 3003",
     "dev:build": "DEV_BUILD=1 yarn build",
-    "build:sb": "build-storybook",
+    "build:sb": "zx scripts/build-sb.mjs",
     "build:lib": "vite build",
     "build:types:lib": "vue-tsc -p tsconfig.types.json && tsc-alias -p tsconfig.types.json",
     "build:types:resolvers": "tsc -p tsconfig.resolvers.json --declaration --emitDeclarationOnly --outDir dist/types",

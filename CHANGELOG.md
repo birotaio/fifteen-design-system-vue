@@ -1,3 +1,15 @@
+## 0.7.4 (November 21, 2022)
+
+### Changes
+
+- [Chore] Upgrade @vueuse/core to 9.5.0
+
+### Fixes
+
+- [FPhoneInput] Consider empty input value as a valid value
+- [FPhoneInput] Allow field to be reset
+- [CI] Makes Storybook static build working with Github pages
+
 ## 0.7.3 (November 15, 2022)
 
 ### Fixes
@@ -62,7 +74,7 @@
 ### Features
 
 - [utils] Allow getCssColor to return css custom property name only
- 
+
 ## 0.4.0 (Septemeber 12, 2022)
 
 ### Features

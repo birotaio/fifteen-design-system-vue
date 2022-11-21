@@ -261,11 +261,10 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: any): void;
-  (name: 'input', value: InputEvent): void;
+  (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'input-value', value: string | undefined): void;
 }>();
 
 defineExpose<{
@@ -332,14 +331,9 @@ function handleChange(e: Event) {
 }
 
 function handleInput(e: InputEvent) {
-  emit('input', e);
+  emit('input', e, inputValue.value ?? '');
   currentOptionMatched.value = undefined;
 }
-
-watch(inputValue, newValue => {
-  // Fire an event whenever input value change to handle eventual API calls
-  emit('input-value', newValue);
-});
 
 function isValidMatch() {
   return !!currentOptionMatched.value;

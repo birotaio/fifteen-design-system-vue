@@ -447,8 +447,8 @@ function focus() {
 }
 
 watch(rawValue, newValue => {
-  // If different, the raw value (from useFieldWithValidation and so vee-validate) is the source of truth
-  // Actually, it means that the form has been reset
+  // The raw value (from useFieldWithValidation and so vee-validate) is the source of truth.
+  // So if it is different than the local fullPhone value, actually, it means that the form has been reset
   if (newValue !== fullPhone.value) {
     phoneNumber.value = '';
   }

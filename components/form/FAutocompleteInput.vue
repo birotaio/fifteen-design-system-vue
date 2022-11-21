@@ -391,12 +391,16 @@ watch(isValid, forceValidation);
 
 const menuRef = ref<InstanceType<typeof FMenu>>();
 
-onMounted(() => {
+onMounted(() => matchModelValue(props.modelValue));
+
+watch(() => props.modelValue, matchModelValue);
+
+function matchModelValue(modelValue: any) {
   const matchingOption = props.options.find(option =>
-    equal(props.modelValue, option.value)
+    equal(modelValue, option.value)
   );
   menuRef.value?.selectOption(matchingOption ?? null);
-});
+}
 
 /**
  * Focus the input

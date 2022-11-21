@@ -165,7 +165,7 @@ const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
   },
   template: `
   <div>
-    <FAutocompleteInput @input-value="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
+    <FAutocompleteInput @input="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
   </div>`,
 });
 

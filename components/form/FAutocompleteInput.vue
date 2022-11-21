@@ -13,10 +13,11 @@ FField.FAutocompleteInput(
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
     prevent-search
-    persistent
+    static
     :disabled="disabled"
     :loading="loading"
     @select-option="handleSelectOption"
+    @toggle="matchInputWithSelectedOption"
     ref="menuRef"
   )
     template(#option="scope")
@@ -47,7 +48,7 @@ FField.FAutocompleteInput(
         hide-error-icon
         hide-hint
         @focus="openMenu(); handleFocus($event)"
-        @blur="closeMenu(); handleBlur($event)"
+        @blur="handleBlur"
         @change="handleChange"
         @input="handleInput"
       )
@@ -282,7 +283,7 @@ const filterRegex = computed(
 const matchingOptions = computed(() => {
   if (
     !inputValue.value ||
-    !!currentOptionMatched.value ||
+    currentOptionMatched.value?.label === inputValue.value ||
     props.preventFiltering
   ) {
     return props.options;
@@ -290,7 +291,7 @@ const matchingOptions = computed(() => {
   return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
-const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption, until new user input
+const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption
 
 function formatOption(option: FMenuOption) {
   if (!inputValue.value || !props.options.length) return option.label;
@@ -298,6 +299,12 @@ function formatOption(option: FMenuOption) {
     filterRegex.value,
     '<span class="FAutocompleteInput__option__match">$1</span>'
   );
+}
+
+function matchInputWithSelectedOption() {
+  setTimeout(() => {
+    inputValue.value = currentOptionMatched.value?.label ?? '';
+  }, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks
 }
 
 const {
@@ -312,14 +319,6 @@ const {
 
 function handleBlur(e: Event) {
   emit('blur', e);
-
-  // Wait for the menu to fade out before clearing the input to avoid seeing options change
-  setTimeout(() => {
-    if (!currentOptionMatched.value) {
-      inputValue.value = '';
-      fieldValue.value = undefined;
-    }
-  }, 300);
 }
 
 function handleFocus(e: Event) {
@@ -332,7 +331,6 @@ function handleChange(e: Event) {
 
 function handleInput(e: InputEvent) {
   emit('input', e, inputValue.value ?? '');
-  currentOptionMatched.value = undefined;
 }
 
 function isValidMatch() {
@@ -345,7 +343,7 @@ function handleSelectOption(optionValue: any) {
     equal(optionValue, option.value)
   );
 
-  inputValue.value = currentOptionMatched.value?.label;
+  inputValue.value = currentOptionMatched.value?.label ?? '';
 
   validate(fieldValue.value);
 }

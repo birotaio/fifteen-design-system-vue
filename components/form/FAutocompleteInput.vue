@@ -17,7 +17,7 @@ FField.FAutocompleteInput(
     :disabled="disabled"
     :loading="loading"
     @select-option="handleSelectOption"
-    @toggle="matchInputWithSelectedOption"
+    @toggle="handleMenuToggle"
     ref="menuRef"
   )
     template(#option="scope")
@@ -205,6 +205,7 @@ export interface FAutocompleteInputProps {
   preventSelection?: boolean;
   /**
    * Prevent item filtering
+   * Note : this prop has no effect if a formatInputFn is provided, as formatting the input value requires to prevent filtering.
    */
   preventFiltering?: boolean;
   /**
@@ -223,6 +224,10 @@ export interface FAutocompleteInputProps {
    * Can clear the current value
    */
   clearable?: boolean;
+  /**
+   * Custom function to format the input value based on current option selected
+   */
+  formatInputFn?: ((label: string, description: string) => string) | null;
 }
 
 const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
@@ -258,6 +263,7 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
   noMatchText: 'No match found for the current input.',
   loadingText: 'Loading...',
   clearable: false,
+  formatInputFn: null,
 });
 
 const emit = defineEmits<{
@@ -284,7 +290,8 @@ const matchingOptions = computed(() => {
   if (
     !inputValue.value ||
     currentOptionMatched.value?.label === inputValue.value ||
-    props.preventFiltering
+    props.preventFiltering ||
+    props.formatInputFn
   ) {
     return props.options;
   }
@@ -301,10 +308,23 @@ function formatOption(option: FMenuOption) {
   );
 }
 
+function handleMenuToggle(toggleValue: boolean) {
+  if (toggleValue) {
+    // When opening the menu
+    matchInputWithSelectedOption();
+  } else {
+    // When closing the menu
+    setTimeout(matchInputWithSelectedOption, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks due to menu items changing
+  }
+}
+
 function matchInputWithSelectedOption() {
-  setTimeout(() => {
-    inputValue.value = currentOptionMatched.value?.label ?? '';
-  }, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks
+  inputValue.value = props.formatInputFn
+    ? props.formatInputFn(
+        currentOptionMatched.value?.label ?? '',
+        currentOptionMatched.value?.description ?? ''
+      )
+    : currentOptionMatched.value?.label ?? '';
 }
 
 const {
@@ -343,7 +363,7 @@ function handleSelectOption(optionValue: any) {
     equal(optionValue, option.value)
   );
 
-  inputValue.value = currentOptionMatched.value?.label ?? '';
+  matchInputWithSelectedOption();
 
   validate(fieldValue.value);
 }

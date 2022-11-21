@@ -321,16 +321,18 @@ defineExpose<{
 
 const countryCode = ref<CountryCode>('FR');
 
-const { isValid, hint, validate } = useFieldWithValidation<string | number>(
-  props,
-  {
-    validateOnMount: props?.validateOnMount,
-    rules: [
-      value => isEmptyPhone(value) || isValidPhone(value),
-      ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
-    ],
-  }
-);
+const {
+  isValid,
+  hint,
+  validate,
+  value: rawValue,
+} = useFieldWithValidation<string | number>(props, {
+  validateOnMount: props?.validateOnMount,
+  rules: [
+    value => isEmptyPhone(value) || isValidPhone(value),
+    ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
+  ],
+});
 const { handleBlur, handleChange, handleFocus, handleInput } =
   useInputEventBindings(
     () => validate(fullPhone.value),
@@ -443,4 +445,12 @@ watch(isValid, forceValidation);
 function focus() {
   inputRef.value?.ref?.focus();
 }
+
+watch(rawValue, newValue => {
+  // The raw value (from useFieldWithValidation and so vee-validate) is the source of truth.
+  // So if it is different than the local fullPhone value, actually, it means that the form has been reset
+  if (newValue !== fullPhone.value) {
+    phoneNumber.value = '';
+  }
+});
 </script>

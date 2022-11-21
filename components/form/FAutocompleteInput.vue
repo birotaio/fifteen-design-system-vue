@@ -327,7 +327,7 @@ function handleFocus(e: Event) {
 }
 
 function handleChange(e: Event) {
-  emit('focus', e);
+  emit('change', e);
 }
 
 function handleInput(e: InputEvent) {

@@ -1,3 +1,13 @@
+## 0.7.5 (November 22, 2022)
+
+### Changes
+
+- [FAutocompleteInput] Add more fixes, improve component logic
+
+### Fixes
+
+- [FPhoneInput] Handle initial value
+
 ## 0.7.4 (November 21, 2022)
 
 ### Changes

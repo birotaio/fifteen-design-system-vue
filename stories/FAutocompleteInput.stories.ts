@@ -17,13 +17,21 @@ const Template = (args: FAutocompleteInputProps) => ({
 });
 
 const capitals = [
-  { label: 'Amsterdam', description: 'Capital of Netherlands', value: 'amsterdam' },
+  {
+    label: 'Amsterdam',
+    description: 'Capital of Netherlands',
+    value: 'amsterdam',
+  },
   { label: 'Berlin', description: 'Capital of Germany', value: 'berlin' },
   { label: 'Madrid', description: 'Capital of Spain', value: 'madrid' },
   { label: 'Rome', value: 'rome' },
   { label: 'London', value: 'london' },
   { label: 'Paris', description: 'Capital of France', value: 'paris' },
-  { label: 'Prague', description: 'Capital of Czech Republic', value: 'prague' },
+  {
+    label: 'Prague',
+    description: 'Capital of Czech Republic',
+    value: 'prague',
+  },
   { label: 'Stockholm', description: 'Capital of Sweden', value: 'stockholm' },
   { label: 'Vienna', value: 'vienna' },
 ];
@@ -119,7 +127,9 @@ Clearable.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const PreventFiltering: Story<FAutocompleteInputProps> = Template.bind({});
+export const PreventFiltering: Story<FAutocompleteInputProps> = Template.bind(
+  {}
+);
 PreventFiltering.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -129,7 +139,23 @@ PreventFiltering.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const WithInitialValue: Story<FAutocompleteInputProps> = Template.bind({});
+export const WithFormattedInputValue: Story<FAutocompleteInputProps> =
+  Template.bind({});
+WithFormattedInputValue.args = {
+  placeholder: 'Search capitals...',
+  options: capitals,
+  hint: `The description of the input will show after its label.`,
+  formatInputFn(label, description) {
+    return label + (description ? `, ${description}` : description);
+  },
+  hintIcon: 'infoCircle',
+  errorMessage: 'Select a value in the list to validate',
+};
+
+export const WithInitialValue: Story<FAutocompleteInputProps> = Template.bind(
+  {}
+);
+
 WithInitialValue.args = {
   modelValue: 'berlin',
   placeholder: 'Search capitals...',
@@ -138,7 +164,6 @@ WithInitialValue.args = {
   hintIcon: 'infoCircle',
   errorMessage: 'Select a value in the list to validate',
 };
-
 
 const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
   components: { FAutocompleteInput },
@@ -165,7 +190,7 @@ const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
   },
   template: `
   <div>
-    <FAutocompleteInput @input-value="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
+    <FAutocompleteInput @input="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
   </div>`,
 });
 

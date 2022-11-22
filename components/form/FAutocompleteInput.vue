@@ -13,10 +13,11 @@ FField.FAutocompleteInput(
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
     prevent-search
-    persistent
+    inanimated
     :disabled="disabled"
     :loading="loading"
     @select-option="handleSelectOption"
+    @toggle="handleMenuToggle"
     ref="menuRef"
   )
     template(#option="scope")
@@ -47,7 +48,7 @@ FField.FAutocompleteInput(
         hide-error-icon
         hide-hint
         @focus="openMenu(); handleFocus($event)"
-        @blur="closeMenu(); handleBlur($event)"
+        @blur="handleBlur"
         @change="handleChange"
         @input="handleInput"
       )
@@ -204,6 +205,7 @@ export interface FAutocompleteInputProps {
   preventSelection?: boolean;
   /**
    * Prevent item filtering
+   * Note : this prop has no effect if a formatInputFn is provided, as formatting the input value requires to prevent filtering.
    */
   preventFiltering?: boolean;
   /**
@@ -222,6 +224,10 @@ export interface FAutocompleteInputProps {
    * Can clear the current value
    */
   clearable?: boolean;
+  /**
+   * Custom function to format the input value based on current option selected
+   */
+  formatInputFn?: ((label: string, description: string) => string) | null;
 }
 
 const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
@@ -257,15 +263,15 @@ const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
   noMatchText: 'No match found for the current input.',
   loadingText: 'Loading...',
   clearable: false,
+  formatInputFn: null,
 });
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: any): void;
-  (name: 'input', value: InputEvent): void;
+  (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
-  (name: 'input-value', value: string | undefined): void;
 }>();
 
 defineExpose<{
@@ -283,15 +289,16 @@ const filterRegex = computed(
 const matchingOptions = computed(() => {
   if (
     !inputValue.value ||
-    !!currentOptionMatched.value ||
-    props.preventFiltering
+    currentOptionMatched.value?.label === inputValue.value ||
+    props.preventFiltering ||
+    props.formatInputFn
   ) {
     return props.options;
   }
   return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
-const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption, until new user input
+const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption
 
 function formatOption(option: FMenuOption) {
   if (!inputValue.value || !props.options.length) return option.label;
@@ -299,6 +306,25 @@ function formatOption(option: FMenuOption) {
     filterRegex.value,
     '<span class="FAutocompleteInput__option__match">$1</span>'
   );
+}
+
+function handleMenuToggle(isOpen: boolean) {
+  if (isOpen) {
+    // When opening the menu
+    formatInputValue();
+  } else {
+    // When closing the menu
+    setTimeout(formatInputValue, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks due to menu items changing
+  }
+}
+
+function formatInputValue() {
+  inputValue.value = props.formatInputFn
+    ? props.formatInputFn(
+        currentOptionMatched.value?.label ?? '',
+        currentOptionMatched.value?.description ?? ''
+      )
+    : currentOptionMatched.value?.label ?? '';
 }
 
 const {
@@ -313,14 +339,6 @@ const {
 
 function handleBlur(e: Event) {
   emit('blur', e);
-
-  // Wait for the menu to fade out before clearing the input to avoid seeing options change
-  setTimeout(() => {
-    if (!currentOptionMatched.value) {
-      inputValue.value = '';
-      fieldValue.value = undefined;
-    }
-  }, 300);
 }
 
 function handleFocus(e: Event) {
@@ -328,18 +346,12 @@ function handleFocus(e: Event) {
 }
 
 function handleChange(e: Event) {
-  emit('focus', e);
+  emit('change', e);
 }
 
 function handleInput(e: InputEvent) {
-  emit('input', e);
-  currentOptionMatched.value = undefined;
+  emit('input', e, inputValue.value ?? '');
 }
-
-watch(inputValue, newValue => {
-  // Fire an event whenever input value change to handle eventual API calls
-  emit('input-value', newValue);
-});
 
 function isValidMatch() {
   return !!currentOptionMatched.value;
@@ -351,7 +363,7 @@ function handleSelectOption(optionValue: any) {
     equal(optionValue, option.value)
   );
 
-  inputValue.value = currentOptionMatched.value?.label;
+  formatInputValue();
 
   validate(fieldValue.value);
 }
@@ -379,12 +391,14 @@ watch(isValid, forceValidation);
 
 const menuRef = ref<InstanceType<typeof FMenu>>();
 
-onMounted(() => {
+watch(() => props.modelValue, matchModelValue, { immediate: true });
+
+function matchModelValue(modelValue: FAutocompleteInputProps['modelValue']) {
   const matchingOption = props.options.find(option =>
-    equal(props.modelValue, option.value)
+    equal(modelValue, option.value)
   );
   menuRef.value?.selectOption(matchingOption ?? null);
-});
+}
 
 /**
  * Focus the input

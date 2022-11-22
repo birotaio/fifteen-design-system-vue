@@ -59,7 +59,7 @@
     left 0
     min-width var(--fmenu--width)
 
-  &--static .popper
+  &--inanimated .popper
     transition none // Unfortunately, this is the only way to remove the Popper transition with the lib vue3-popper
 
   .inline-block
@@ -196,7 +196,7 @@ export interface FMenuProps {
   /**
    * Disable fade transitions
    */
-  static?: boolean;
+  inanimated?: boolean;
   /**
    * Loading state of the menu
    */
@@ -216,7 +216,7 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
   disabled: false,
-  static: false,
+  inanimated: false,
   loading: false,
 });
 
@@ -250,7 +250,7 @@ const optionRefs = ref<HTMLElement[]>([]);
 
 const menuClasses = computed(() => ({
   'FMenu--disabled': props.disabled,
-  'FMenu--static': props.static,
+  'FMenu--inanimated': props.inanimated,
 }));
 
 const isOpen = ref(false);

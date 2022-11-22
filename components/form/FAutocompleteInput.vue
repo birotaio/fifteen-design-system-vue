@@ -391,11 +391,9 @@ watch(isValid, forceValidation);
 
 const menuRef = ref<InstanceType<typeof FMenu>>();
 
-onMounted(() => matchModelValue(props.modelValue));
+watch(() => props.modelValue, matchModelValue, { immediate: true });
 
-watch(() => props.modelValue, matchModelValue);
-
-function matchModelValue(modelValue: any) {
+function matchModelValue(modelValue: FAutocompleteInputProps['modelValue']) {
   const matchingOption = props.options.find(option =>
     equal(modelValue, option.value)
   );

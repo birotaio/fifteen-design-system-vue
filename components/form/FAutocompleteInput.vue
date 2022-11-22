@@ -311,14 +311,14 @@ function formatOption(option: FMenuOption) {
 function handleMenuToggle(isOpen: boolean) {
   if (isOpen) {
     // When opening the menu
-    matchInputWithSelectedOption();
+    formatInputValue();
   } else {
     // When closing the menu
-    setTimeout(matchInputWithSelectedOption, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks due to menu items changing
+    setTimeout(formatInputValue, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks due to menu items changing
   }
 }
 
-function matchInputWithSelectedOption() {
+function formatInputValue() {
   inputValue.value = props.formatInputFn
     ? props.formatInputFn(
         currentOptionMatched.value?.label ?? '',
@@ -363,7 +363,7 @@ function handleSelectOption(optionValue: any) {
     equal(optionValue, option.value)
   );
 
-  matchInputWithSelectedOption();
+  formatInputValue();
 
   validate(fieldValue.value);
 }

@@ -416,6 +416,18 @@ function isValidPhone(value: unknown) {
   return isValidNumber(value);
 }
 
+watch(
+  () => props.modelValue,
+  newModelValue => {
+    if (!newModelValue) return;
+
+    const parsedNumber = parsePhoneNumber(newModelValue);
+    phoneNumber.value = parsedNumber.nationalNumber;
+    if (parsedNumber.country) countryCode.value = parsedNumber.country;
+  },
+  { immediate: true }
+);
+
 const isMenuOpen = ref(false);
 
 const hintTextColor = computed(() =>

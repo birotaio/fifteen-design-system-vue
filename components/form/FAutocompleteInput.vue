@@ -308,8 +308,8 @@ function formatOption(option: FMenuOption) {
   );
 }
 
-function handleMenuToggle(toggleValue: boolean) {
-  if (toggleValue) {
+function handleMenuToggle(isOpen: boolean) {
+  if (isOpen) {
     // When opening the menu
     matchInputWithSelectedOption();
   } else {

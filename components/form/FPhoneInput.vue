@@ -155,7 +155,7 @@ import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 
 import {
-  isValidNumber,
+  isValidPhoneNumber,
   getCountries,
   getCountryCallingCode,
   getExampleNumber,
@@ -413,14 +413,14 @@ function isEmptyPhone(value: unknown): boolean {
 // Internal validation rule, always applied
 function isValidPhone(value: unknown) {
   if (typeof value !== 'string') return false;
-  return isValidNumber(value);
+  return isValidPhoneNumber(value);
 }
 
 watch(
   () => props.modelValue,
   newModelValue => {
     if (!newModelValue) return;
-
+    if (!isValidPhoneNumber(newModelValue)) return;
     const parsedNumber = parsePhoneNumber(newModelValue);
     phoneNumber.value = parsedNumber.nationalNumber;
     if (parsedNumber.country) countryCode.value = parsedNumber.country;

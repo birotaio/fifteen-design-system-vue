@@ -354,7 +354,7 @@ function handleInput(e: InputEvent) {
 }
 
 function isValidMatch() {
-  return !!currentOptionMatched.value;
+  return !inputValue.value || !!currentOptionMatched.value;
 }
 
 function handleSelectOption(optionValue: any) {

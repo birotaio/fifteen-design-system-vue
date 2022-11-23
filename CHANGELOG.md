@@ -1,3 +1,10 @@
+## 0.7.6 (November 23, 2022)
+
+### Fixes
+
+- [FAutocompleteInput] Allow empty input to be a valid state
+- [FPhoneInput] Prevent potential crash on parsing modelValue
+
 ## 0.7.5 (November 22, 2022)
 
 ### Changes

@@ -4,6 +4,7 @@ import FAutocompleteInput, {
 } from '@/components/form/FAutocompleteInput.vue';
 import FButton from '@/components/FButton.vue';
 import { ref } from 'vue';
+import { required } from '@vee-validate/rules';
 
 export default {
   title: 'Components/Form/FAutocompleteInput',
@@ -76,6 +77,7 @@ Error.args = {
   options: capitals,
   label: 'Choose a capital',
   validateOnMount: true,
+  rules: [required],
   errorMessage: 'Choose an option to dismiss the error',
 };
 

@@ -1,6 +1,5 @@
 <template lang="pug">
 FField.FAutocompleteInput(
-  :class="classes"
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
@@ -76,7 +75,7 @@ import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 
 import equal from 'fast-deep-equal/es6';
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { composeSearchRegex } from '@/utils/text';
 
@@ -367,8 +366,6 @@ function handleSelectOption(optionValue: any) {
 
   validate(fieldValue.value);
 }
-
-const classes = computed(() => ({}));
 
 const hintTextColor = computed(() =>
   props.disabled

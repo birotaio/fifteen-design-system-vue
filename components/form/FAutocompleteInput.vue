@@ -328,7 +328,6 @@ const {
   isValid,
   hint,
   value: fieldValue,
-  validate,
 } = useFieldWithValidation<any>(props, {
   validateOnMount: props?.validateOnMount,
   rules: [isValidMatch],

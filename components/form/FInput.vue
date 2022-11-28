@@ -28,7 +28,7 @@ FField.FInput(
           name="close"
           :size="24"
           :color="textColor"
-          @click="handleClear"
+          @click.stop="handleClear"
         )
         FLoader(
           v-if="loading"

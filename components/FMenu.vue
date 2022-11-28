@@ -19,36 +19,37 @@
         v-bind="{ toggleMenu, openMenu, closeMenu }"
       )
     template(#content)
-      .FMenu__optionsMenu(
-        v-if="options.length"
-        ref="menuOptionsRef"
-      )
-        .FMenu__option(
-          role="option"
-          v-for="(option, index) in options"
-          :key="stringify(option.value)"
-          :class="selectOptionClasses(index)"
-          ref="optionRefs"
-          @click="selectOption(option)"
-          @mouseenter="mousePreselectOption(index)"
-          @mousemove="isKeyboardInteracting = false"
+      .FMenu__content(ref="contentRef")
+        .FMenu__optionsMenu(
+          v-if="options.length"
+          ref="menuOptionsRef"
         )
-          slot(
-            name="option-prefix"
-            v-bind="{ option, index, isSelected: isSelected(index) }"
+          .FMenu__option(
+            role="option"
+            v-for="(option, index) in options"
+            :key="stringify(option.value)"
+            :class="selectOptionClasses(index)"
+            ref="optionRefs"
+            @click="selectOption(option)"
+            @mouseenter="mousePreselectOption(index)"
+            @mousemove="isKeyboardInteracting = false"
           )
-          slot(
-            name="option"
-            v-bind="{ option, index, isSelected: isSelected(index) }"
+            slot(
+              name="option-prefix"
+              v-bind="{ option, index, isSelected: isSelected(index) }"
+            )
+            slot(
+              name="option"
+              v-bind="{ option, index, isSelected: isSelected(index) }"
+            )
+              span {{ option.label }}
+            span.FMenu__option__description(v-if="option.description") {{ option.description }}
+        .FMenu__noOption(v-if="options.length === 0")
+          FLoader.FMenu__loader(
+            v-if="loading"
+            height="20"
           )
-            span {{ option.label }}
-          span.FMenu__option__description(v-if="option.description") {{ option.description }}
-      .FMenu__noOption(v-if="options.length === 0")
-        FLoader.FMenu__loader(
-          v-if="loading"
-          height="20"
-        )
-        span {{ emptyText }}
+          span {{ emptyText }}
 </template>
 
 <style lang="stylus">
@@ -131,8 +132,12 @@ import FLoader from '@/components/FLoader.vue';
 
 import Popper from 'vue3-popper/dist/popper.esm';
 import equal from 'fast-deep-equal/es6';
-import { computed, ref, watch } from 'vue';
-import { onClickOutside, useElementBounding } from '@vueuse/core';
+import { computed, nextTick, onMounted, ref, watch } from 'vue';
+import {
+  onClickOutside,
+  useElementBounding,
+  useMutationObserver,
+} from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { genSize } from '@/utils/genSize';
@@ -448,9 +453,7 @@ function handlePreselectSearch(event: KeyboardEvent) {
 
   function matchResult(option: FMenuOption) {
     const optionLabel = removeDiacritics(option.label.toLowerCase());
-    const optionValue = removeDiacritics(
-      stringify(option.value).toLowerCase()
-    );
+    const optionValue = removeDiacritics(stringify(option.value).toLowerCase());
 
     return (
       optionLabel.startsWith(preselectSearchTerm) ||
@@ -481,5 +484,18 @@ function handlePreselectSearch(event: KeyboardEvent) {
 const menuRef = ref();
 onClickOutside(menuRef, () => {
   if (!props.persistent) isOpen.value = false;
+});
+
+// Use mutation observer on contentRef in order to watch changes and retrigger menu position,
+// as it appears that poppers does not do it natively.
+// The cleanest way is to dispatch a fake resize event on window
+const contentRef = ref<HTMLDivElement>();
+// Wrap vueuse’s useMutationObserver in onMounted to make sure we are in a browser context (prevent SSR errors)
+onMounted(() => {
+  useMutationObserver(
+    contentRef,
+    () => nextTick(() => window.dispatchEvent(new Event('resize'))),
+    { childList: true }
+  );
 });
 </script>

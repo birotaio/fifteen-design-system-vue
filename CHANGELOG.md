@@ -1,3 +1,11 @@
+## 0.7.7 (November 28, 2022)
+
+### Fixes
+
+- [FMenu] Watch mutation updates on menu content to trigger popper update
+- [FAutocompleteInput] Fix clear of input
+- [FTextarea] Fix icon and loader positions
+
 ## 0.7.6 (November 23, 2022)
 
 ### Fixes

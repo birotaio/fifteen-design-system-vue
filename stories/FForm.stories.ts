@@ -3,7 +3,7 @@ import FsForm from './components/FsForm.vue';
 import type { FsFormProps } from './components/FsForm.vue';
 
 export default {
-  title: 'Components/FForm',
+  title: 'Components/Form/FForm',
   component: FsForm,
   argTypes: {
     onValid: { action: 'valid' },
@@ -28,6 +28,7 @@ Default.args = {
     FRadioGroup: 'b',
     FSelect: 'c',
     FTextarea: 'Default value',
+    FAutocompleteInput: 'a',
   },
 };
 
@@ -42,5 +43,6 @@ Loading.args = {
     FRadioGroup: 'b',
     FSelect: 'c',
     FTextarea: 'Default value',
+    FAutocompleteInput: 'a',
   },
 };

@@ -389,6 +389,11 @@ function matchModelValue(modelValue: FAutocompleteInputProps['modelValue']) {
   menuRef.value?.selectOption(matchingOption ?? null);
 }
 
+// Clearing the input clears the field value
+watch(inputValue, newInputValue => {
+  if (!newInputValue) fieldValue.value = null;
+});
+
 /**
  * Focus the input
  */

@@ -4,31 +4,35 @@ FField.FTextarea(
   :class="classes"
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
-  textarea.FTextarea__textarea(
-    ref="textareaRef"
-    v-bind="attrs"
-    v-model="value"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :rows="rows"
-    @blur="handleBlur"
-    @change="handleChange"
-    @focus="handleFocus"
-  )
-  FIcon.FTextarea__errorIcon(
-    v-if="!isValid && !loading"
-    name="exclamationCircle"
-    :color="errorColor"
-    size="16"
-  )
-  FLoader.FTextarea__loader(
-    v-else-if="loading"
-    :color="placeholderTextColor"
-    height="24"
-  )
+  .FTextarea__content
+    textarea.FTextarea__textarea(
+      ref="textareaRef"
+      v-bind="attrs"
+      v-model="value"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :rows="rows"
+      @blur="handleBlur"
+      @change="handleChange"
+      @focus="handleFocus"
+    )
+    FIcon.FTextarea__errorIcon(
+      v-if="!isValid && !loading"
+      name="exclamationCircle"
+      :color="errorColor"
+      size="16"
+    )
+    FLoader.FTextarea__loader(
+      v-else-if="loading"
+      :color="placeholderTextColor"
+      height="24"
+    )
 </template>
 
 <style lang="stylus">
+.FTextarea__content
+  position relative
+
 .FTextarea__textarea
   max-width 100%
   width 100%
@@ -257,10 +261,12 @@ defineExpose<{
 
 const textareaRef = ref();
 
-const { isValid, hint, value, validate } =
-  useFieldWithValidation<string>(props, {
+const { isValid, hint, value, validate } = useFieldWithValidation<string>(
+  props,
+  {
     validateOnMount: props.validateOnMount,
-  });
+  }
+);
 const { handleChange, handleFocus, handleBlur } = useInputEventBindings(
   validate,
   props.validationTrigger,

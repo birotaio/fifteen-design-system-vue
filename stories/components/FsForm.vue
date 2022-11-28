@@ -60,6 +60,14 @@ FForm(
         hint="Hint for FTextarea"
         :loading="loading"
       )
+    FGridItem(span="12")
+      FAutocompleteInput(
+        label="FAutocompleteInput"
+        name="FAutocompleteInput"
+        hint="Hint for FAutocompleteInput"
+        :options="autocompleteOptions"
+        :loading="loading"
+      )
     FGridItem.FsForm__actions(span="12")
       FButton(
         @click="submit"
@@ -88,6 +96,7 @@ import FPhoneInput from '@/components/form/FPhoneInput.vue';
 import FRadioGroup from '@/components/form/FRadioGroup.vue';
 import FSelect from '@/components/form/FSelect.vue';
 import FTextarea from '@/components/form/FTextarea.vue';
+import FAutocompleteInput from '@/components/form/FAutocompleteInput.vue';
 
 import type { FFormProps } from '@/components/form/FForm.vue';
 import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
@@ -112,6 +121,12 @@ const radioGroupOptions = [
 ];
 
 const selectOptions = [
+  { label: 'Option A', value: 'a' },
+  { label: 'Option B', value: 'b' },
+  { label: 'Option C', value: 'c' },
+];
+
+const autocompleteOptions = [
   { label: 'Option A', value: 'a' },
   { label: 'Option B', value: 'b' },
   { label: 'Option C', value: 'c' },

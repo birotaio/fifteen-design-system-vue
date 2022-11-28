@@ -44,7 +44,7 @@ FField.FAutocompleteInput(
         :disabled="disabled"
         :clearable="clearable"
         :rules="[() => isValid]"
-        hide-error-icon
+        :loading="loading"
         hide-hint
         @focus="openMenu(); handleFocus($event)"
         @blur="handleBlur"

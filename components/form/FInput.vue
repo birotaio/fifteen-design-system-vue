@@ -24,7 +24,7 @@ FField.FInput(
     .FInput__input__suffix(v-if="$slots['suffix'] || loading || clearable")
       slot(name="suffix")
         FIcon.FInput__input__suffix__clearableIcon(
-          v-if="clearable"
+          v-if="clearable && value"
           name="close"
           :size="24"
           :color="textColor"

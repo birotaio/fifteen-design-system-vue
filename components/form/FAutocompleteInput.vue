@@ -3,6 +3,7 @@ FField.FAutocompleteInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
+    v-model="fieldValue"
     :options="matchingOptions"
     :width="menuWidth"
     :empty-text="loading ? loadingText : inputValue ? noMatchText : emptyText"
@@ -15,7 +16,6 @@ FField.FAutocompleteInput(
     inanimated
     :disabled="disabled"
     :loading="loading"
-    @select-option="handleSelectOption"
     @toggle="handleMenuToggle"
     ref="menuRef"
   )
@@ -297,8 +297,6 @@ const matchingOptions = computed(() => {
   return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
-const currentOptionMatched = ref<FMenuOption>(); // the selected FMenuOption
-
 function formatOption(option: FMenuOption) {
   if (!inputValue.value || !props.options.length) return option.label;
   return option.label.replace(
@@ -356,16 +354,10 @@ function isValidMatch() {
   return !inputValue.value || !!currentOptionMatched.value;
 }
 
-function handleSelectOption(optionValue: any) {
-  fieldValue.value = optionValue;
-  currentOptionMatched.value = props.options.find(option =>
-    equal(optionValue, option.value)
-  );
-
-  formatInputValue();
-
-  validate(fieldValue.value);
-}
+const currentOptionMatched = computed<FMenuOption | undefined>(() =>
+  props.options.find(option => equal(fieldValue.value, option.value))
+);
+watch(fieldValue, formatInputValue, { immediate: true });
 
 const hintTextColor = computed(() =>
   props.disabled

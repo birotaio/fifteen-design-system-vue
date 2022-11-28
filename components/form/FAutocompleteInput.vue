@@ -330,6 +330,7 @@ const {
   value: fieldValue,
 } = useFieldWithValidation<any>(props, {
   validateOnMount: props?.validateOnMount,
+  validateOnModelValueUpdate: true,
   rules: [isValidMatch],
 });
 

@@ -354,7 +354,7 @@ function isValidMatch() {
   return !inputValue.value || !!currentOptionMatched.value;
 }
 
-const currentOptionMatched = computed<FMenuOption | undefined>(() =>
+const currentOptionMatched = computed((): FMenuOption | undefined =>
   props.options.find(option => equal(fieldValue.value, option.value))
 );
 watch(fieldValue, formatInputValue, { immediate: true });

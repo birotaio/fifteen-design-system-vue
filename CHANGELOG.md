@@ -1,3 +1,9 @@
+## 0.7.8 (December 1, 2022)
+
+### Fixes
+
+- [Build] Fix postinstall command
+
 ## 0.7.7 (November 28, 2022)
 
 ### Fixes

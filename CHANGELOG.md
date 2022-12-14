@@ -1,3 +1,9 @@
+## 0.8.0 (December 14, 2022)
+
+### Features
+
+- [FLogo] Add "product" variant to create logos variations with sub-texts for our different products
+
 ## 0.7.8 (December 1, 2022)
 
 ### Fixes

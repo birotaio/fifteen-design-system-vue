@@ -1,18 +1,37 @@
 <template lang="pug">
-FSvgImage.FLogo(
-  :component="logoComponent"
-  :width="width"
-  :height="height"
-  :fill-color="color"
-)
+.FLogo
+  FSvgImage(
+    :component="logoComponent"
+    :width="width"
+    :height="height"
+    :fill-color="color"
+  )
+  .FLogo__productName(
+    v-if="variant === 'product'"
+    :style="productNameStyle"
+  ) {{ productName }}
 </template>
 
-<style lang="stylus"></style>
+<style lang="stylus">
+.FLogo
+  width fit-content
+
+.FLogo__productName
+  font-family $font-family-heading
+  text-align right
+  color var(--FLogo--productNameColor)
+  font-size var(--FLogo--productNameFontSize)
+  letter-spacing 0
+  font-weight 700
+  transform translate(0.4%, -10%)
+</style>
 
 <script setup lang="ts">
 import FSvgImage from '@/components/FSvgImage.vue';
 
 import { computed } from 'vue';
+import { getCssColor } from '@/utils/getCssColor';
+import { genSize } from '@/utils/genSize';
 import type { FunctionalComponent, SVGAttributes } from 'vue';
 
 import logoHorizontal from '@/assets/logos/fifteen_horizontal.svg?component';
@@ -26,7 +45,8 @@ export type FLogoVariant =
   | 'vertical'
   | 'image-only'
   | 'half-image-only'
-  | 'text-only';
+  | 'text-only'
+  | 'product';
 
 export interface FLogoProps {
   /**
@@ -45,6 +65,14 @@ export interface FLogoProps {
    * Height of the logo
    */
   height?: string | number;
+  /**
+   * Sub-text, representing the product name, displayed in case of 'product' variant
+   */
+  productName?: string;
+  /**
+   * Sub-text color, defaults to the logo color if absent
+   */
+  productNameColor?: Color;
 }
 
 const props = withDefaults(defineProps<FLogoProps>(), {
@@ -52,6 +80,8 @@ const props = withDefaults(defineProps<FLogoProps>(), {
   variant: 'horizontal',
   width: 'auto',
   height: 'auto',
+  productName: '',
+  productNameColor: undefined,
 });
 
 const logoComponents: Record<
@@ -63,7 +93,17 @@ const logoComponents: Record<
   'image-only': logoImageOnly,
   'half-image-only': logoHalfImageOnly,
   'text-only': logoTextOnly,
+  product: logoTextOnly,
 };
 
 const logoComponent = computed(() => logoComponents[props.variant]);
+
+const productNameStyle = computed(
+  (): Style => ({
+    '--FLogo--productNameColor': getCssColor(
+      props.productNameColor ?? props.color
+    ),
+    '--FLogo--productNameFontSize': genSize(props.width, 0.104),
+  })
+);
 </script>

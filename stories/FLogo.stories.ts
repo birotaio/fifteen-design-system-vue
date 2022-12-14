@@ -55,3 +55,12 @@ TextOnly.args = {
   variant: 'text-only',
   color: 'info',
 };
+
+export const Product: Story<FLogoProps> = Template.bind({});
+Product.args = {
+  width: '200px',
+  variant: 'product',
+  color: 'success',
+  productName: 'analytics',
+  productNameColor: 'success--dark-1',
+};

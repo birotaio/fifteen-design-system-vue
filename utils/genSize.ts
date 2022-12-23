@@ -50,7 +50,7 @@ export function genSize(
     if (!cssUnits.includes(unit) || unit === 'px') {
       return (parseFloat(value) * factorValue) / 16 + 'rem';
     }
-    // Otherwize multiply the value with the factor and keep the input unit
+    // Otherwise multiply the value by the factor and keep the input unit
     return parseFloat(value) * factorValue + unit;
   }
   return sizeValue;

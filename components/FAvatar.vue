@@ -1,28 +1,48 @@
 <template lang="pug">
-FImage.FAvatar(
-  :src="src"
-  :placeholder="placeholder"
-  :alt="alt"
-  :width="size"
-  :height="size"
-  :loading="loading"
-  corners="circular"
-)
+.FAvatar(:style="style")
+  FImage(
+    :src="src"
+    :placeholder="placeholder"
+    :alt="alt"
+    :width="size"
+    :height="size"
+    :loading="loading"
+    :background-color="color"
+    corners="circular"
+  )
+  .FAvatar__initialLetter(v-if="resolvedInitialLetter") {{ resolvedInitialLetter }}
 </template>
 
 <style lang="stylus">
 .FAvatar
   position relative
+  width var(--FAvatar--size)
+  height var(--FAvatar--size)
+
+.FAvatar__initialLetter
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  color var(--FAvatar--textColor)
+  line-height var(--FAvatar--size)
+  font-size calc((14 / 24) * var(--FAvatar--size))
+  text-align center
+  weight 700
 </style>
 
 <script setup lang="ts">
 import FImage from '@/components/FImage.vue';
+import { genSize } from '@/utils/genSize';
+import { getCssColor } from '@/utils/getCssColor';
+import { computed } from 'vue';
 
 export interface FAvatarProps {
   /**
    * Source of the avatar
    */
-  src: string;
+  src?: string;
   /**
    * Alt text for the avatar
    */
@@ -39,13 +59,39 @@ export interface FAvatarProps {
    * Loading mode of the avatar. Default to lazy
    */
   loading?: 'lazy' | 'eager';
+  /**
+   * Display initial letter. It will be displayed if no src is given or as a placeholder if no placehoder
+   * given in lazy mode. As typescript canot restrict the length of a string, any string is valid but the
+   * component will display only the first letter in uppercase anyway.
+   */
+  initialLetter?: string;
+  /**
+   * Avatar color, defaults to transparent
+   */
+  color?: Color;
+  /**
+   * Avatar text color, when initials are displayed, defaults to secondary
+   */
+  textColor?: Color;
 }
 
-withDefaults(defineProps<FAvatarProps>(), {
+const props = withDefaults(defineProps<FAvatarProps>(), {
   src: '',
   alt: '',
   loading: 'lazy',
   placeholder: '',
   size: '80',
+  initialLetter: '',
+  color: 'transparent',
+  textColor: 'secondary',
 });
+
+const resolvedInitialLetter = computed(() => {
+  return (props.initialLetter[0] ?? '').toUpperCase();
+});
+
+const style = computed<Style>(() => ({
+  '--FAvatar--size': genSize(props.size),
+  '--FAvatar--textColor': getCssColor(props.textColor),
+}));
 </script>

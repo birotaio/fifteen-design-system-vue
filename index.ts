@@ -87,9 +87,7 @@ export type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
 export type { FProgressBarProps } from '@/components/FProgressBar.vue';
 export type { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
 export type { FFieldProps } from '@/components/form/FField.vue';
-export type {
-  FSelectProps
-} from '@/components/form/FSelect.vue';
+export type { FSelectProps } from '@/components/form/FSelect.vue';
 export type { FRadioGroupProps } from '@/components/form/FRadioGroup.vue';
 export type { FRadioProps } from '@/components/form/FRadio.vue';
 export type { FSkeletonProps } from '@/components/FSkeleton.vue';
@@ -133,7 +131,7 @@ export type {
   BaseColorDesignToken,
   ColorDesignToken,
 } from '@/types/colors';
-export type { FontFamily } from '@/types/font-family';
+export type { FontFamily } from '@/types/font';
 export type { ValidationRule } from '@/types/forms';
 export type { Span } from '@/types/grid';
 export type { Icon } from '@/types/icons';

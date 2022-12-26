@@ -109,7 +109,7 @@ export interface FImageProps {
    */
   corners?: 'sharp' | 'rounded' | 'circular';
   /**
-   * Background color, default is transparent
+   * Background color, default is transparent if an image is provided, 'neutral--light-3' otherwise
    */
   backgroundColor?: Color;
 }

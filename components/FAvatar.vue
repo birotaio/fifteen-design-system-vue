@@ -61,7 +61,7 @@ export interface FAvatarProps {
   loading?: 'lazy' | 'eager';
   /**
    * Display initial letter. It will be displayed if no src is given or as a placeholder if no placehoder
-   * given in lazy mode. As typescript canot restrict the length of a string, any string is valid but the
+   * given in lazy mode. As typescript cannot restrict the length of a string, any string is valid but the
    * component will display only the first letter in uppercase anyway.
    */
   initialLetter?: string;

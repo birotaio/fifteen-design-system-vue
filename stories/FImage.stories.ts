@@ -53,3 +53,21 @@ NoSource.args = {
   src: '',
   alt: '',
 };
+
+export const Background: Story<FImageProps> = Template.bind({});
+Background.args = {
+  width: '100%',
+  height: '400px',
+  src: 'https://picsum.photos/seed/picsum/1200/1200',
+  alt: '',
+  backgroundColor: 'secondary',
+};
+
+export const NoSourceBackground: Story<FImageProps> = Template.bind({});
+NoSourceBackground.args = {
+  width: '200px',
+  height: '200px',
+  src: '',
+  alt: '',
+  backgroundColor: 'primary',
+};

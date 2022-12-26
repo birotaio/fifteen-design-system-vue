@@ -20,7 +20,11 @@ picture.FImage(
     :alt="alt"
   )
   .FImage__fallback(v-if="!src")
-    FIcon(name="landscape" color="secondary" size="100%")
+    FIcon(
+      name="landscape"
+      color="secondary"
+      size="100%"
+    )
 </template>
 
 <style lang="stylus">
@@ -30,6 +34,7 @@ picture.FImage(
   width var(--fimage--width)
   border-radius var(--fimage--border-radius)
   overflow hidden
+  background-color var(--fimage--background-color, transparent)
 
   &--placeholder
     filter blur(4px)
@@ -51,7 +56,7 @@ picture.FImage(
   display flex
   align-items center
   justify-content center
-  background var(--color--neutral--light-3)
+  background var(--fimage--fallback-background-color)
 
   .FIcon
     width rem(160)
@@ -64,6 +69,7 @@ import type CSS from 'csstype';
 import { ref, computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 import { useLazyImage } from '@/composables/useLazyImage';
+import { getCssColor } from '@/utils/getCssColor';
 
 export interface FImageProps {
   /**
@@ -102,6 +108,10 @@ export interface FImageProps {
    * If image angles should be sharped or not
    */
   corners?: 'sharp' | 'rounded' | 'circular';
+  /**
+   * Background color, default is transparent if an image is provided, 'neutral--light-3' otherwise
+   */
+  backgroundColor?: Color;
 }
 
 const props = withDefaults(defineProps<FImageProps>(), {
@@ -113,6 +123,7 @@ const props = withDefaults(defineProps<FImageProps>(), {
   placeholder: '',
   squared: false,
   corners: 'rounded',
+  backgroundColor: '',
 });
 
 const imageRef = ref();
@@ -142,6 +153,10 @@ const style = computed(
     '--fimage--object-fit': props.fit,
     '--fimage--object-position': String(props.position),
     '--fimage--border-radius': borderRadius.value,
+    '--fimage--background-color': getCssColor(props.backgroundColor),
+    '--fimage--fallback-background-color': getCssColor(
+      props.backgroundColor || 'neutral--light-3'
+    ),
   })
 );
 

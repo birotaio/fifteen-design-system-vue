@@ -1,3 +1,10 @@
+## 0.9.0 (December 26, 2022)
+
+### Features
+
+- [FImage] Expose a prop to define background color
+- [FAvatar] Expose props to display initial letter and define background and text color
+
 ## 0.8.0 (December 14, 2022)
 
 ### Features

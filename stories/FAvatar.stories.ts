@@ -17,23 +17,38 @@ const Template = (args: FAvatarProps) => ({
   template: '<FAvatar v-bind="args" />',
 });
 
+export const Tiny: Story<FAvatarProps> = Template.bind({});
+Tiny.args = {
+  src: 'https://i.pravatar.cc/48?img=12',
+  alt: 'Some random avatar',
+  size: 24,
+};
+
 export const Small: Story<FAvatarProps> = Template.bind({});
 Small.args = {
-  src: 'https://i.pravatar.cc/300?img=35',
+  src: 'https://i.pravatar.cc/160?img=35',
   alt: 'Some random avatar',
 };
 
 export const Large: Story<FAvatarProps> = Template.bind({});
 Large.args = {
-  src: 'https://i.pravatar.cc/300?img=7',
+  src: 'https://i.pravatar.cc/364?img=7',
   alt: 'Some random avatar',
   size: 192,
 };
 
 export const Lazy: Story<FAvatarProps> = Template.bind({});
 Lazy.args = {
-  src: 'https://i.pravatar.cc/300?img=9',
+  src: 'https://i.pravatar.cc/364?img=9',
   placeholder: 'https://i.pravatar.cc/10?img=9',
   alt: 'Some random avatar',
   size: 192,
+};
+
+export const Initials: Story<FAvatarProps> = Template.bind({});
+Initials.args = {
+  size: 48,
+  initialLetter: 'J',
+  color: 'secondary',
+  textColor: 'neutral--light-5',
 };

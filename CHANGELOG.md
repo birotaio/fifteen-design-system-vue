@@ -1,3 +1,9 @@
+## 0.10.0 (December 27, 2022)
+
+### Features
+
+- [FMenu] use `fixed` position strategy
+
 ## 0.9.0 (December 26, 2022)
 
 ### Features

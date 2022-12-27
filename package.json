@@ -65,7 +65,7 @@
     "build:resolvers": "vite build --config vite.config.resolvers.ts",
     "build:rules": "vite build --config vite.config.rules.ts",
     "build": "yarn build:icons && yarn build:lib && yarn build:resolvers && yarn build:rules && yarn build:types && yarn build:theme",
-    "postinstall": "if [ ! -d .git ]; then rm -rf resolvers && mv dist/types/resolvers resolvers && rm -rf rules && mv dist/types/rules rules; fi",
+    "postinstall": "sh scripts/postinstall.sh",
     "release": "make release",
     "lint-staged": "lint-staged",
     "eslint": "eslint --ext .ts,.vue .",

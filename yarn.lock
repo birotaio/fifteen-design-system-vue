@@ -11903,10 +11903,9 @@ vue-tsc@^1.0.9:
     "@volar/vue-language-core" "1.0.9"
     "@volar/vue-typescript" "1.0.9"
 
-vue3-popper@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/vue3-popper/-/vue3-popper-1.5.0.tgz#eeac767e1011942fe1737e8299a832b530c0a997"
-  integrity sha512-xaEnx90YBnlSg5G2yWqm2DHWHg+DB99UVRp4VsyTF0QLXyHrqSuE1Xo5+sG0AQq/lBcrGMlk5NU5xE2MDLKViw==
+"vue3-popper@https://github.com/qnp/vue3-popper":
+  version "1.4.2"
+  resolved "https://github.com/qnp/vue3-popper#f1b4c2f19f8b064154d7b10c5683347f85c50457"
   dependencies:
     "@popperjs/core" "^2.9.2"
     debounce "^1.2.1"

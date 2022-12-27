@@ -9,3 +9,10 @@ then
   rm -rf rules
   mv dist/types/rules rules
 fi
+
+# we also install the forked dependencies
+pushd ./node_modules/vue3-popper
+npm install --silent
+npm run build:es
+rm -rf node_modules
+popd

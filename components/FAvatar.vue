@@ -1,6 +1,8 @@
 <template lang="pug">
 .FAvatar(:style="style")
+  .FAvatar__initialLetter(v-if="!src && resolvedInitialLetter") {{ resolvedInitialLetter }}
   FImage(
+    v-else
     :src="src"
     :placeholder="placeholder"
     :alt="alt"
@@ -10,7 +12,6 @@
     :background-color="color"
     corners="circular"
   )
-  .FAvatar__initialLetter(v-if="resolvedInitialLetter") {{ resolvedInitialLetter }}
 </template>
 
 <style lang="stylus">
@@ -26,7 +27,9 @@
   right 0
   bottom 0
   color var(--FAvatar--textColor)
+  background-color var(--FAvatar--color)
   line-height var(--FAvatar--size)
+  border-radius calc((var(--FAvatar--size) / 2))
   font-size calc((14 / 24) * var(--FAvatar--size))
   text-align center
   weight 700
@@ -92,6 +95,7 @@ const resolvedInitialLetter = computed(() => {
 
 const style = computed<Style>(() => ({
   '--FAvatar--size': genSize(props.size),
+  '--FAvatar--color': getCssColor(props.color),
   '--FAvatar--textColor': getCssColor(props.textColor),
 }));
 </script>

@@ -8,6 +8,7 @@
   Popper(
     :show="isOpen"
     placement="bottom-start"
+    strategy="fixed"
   )
     .FMenu__activator(
       @keydown.down="keyboardPreselectNextOption"

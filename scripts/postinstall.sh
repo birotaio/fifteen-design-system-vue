@@ -11,8 +11,9 @@ then
 fi
 
 # we also install the forked dependencies
-pushd ./node_modules/vue3-popper
+current_dir=$(pwd)
+cd ./node_modules/vue3-popper
 npm install --silent
 npm run build:es
 rm -rf node_modules
-popd
+cd $current_dir

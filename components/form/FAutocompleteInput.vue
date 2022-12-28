@@ -16,8 +16,8 @@ FField.FAutocompleteInput(
     inanimated
     :disabled="disabled"
     :loading="loading"
-    @toggle="handleMenuToggle"
     ref="menuRef"
+    @update:is-open="handleMenuToggle"
   )
     template(#option="scope")
       slot.FAutocompleteInput__option(

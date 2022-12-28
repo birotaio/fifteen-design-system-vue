@@ -6,6 +6,7 @@ FField.FSelect(
 )
   FMenu(
     v-model="fieldValue"
+    v-model:is-open="isMenuOpen"
     :options="options"
     :width="menuWidth"
     :empty-text="emptyText"
@@ -16,7 +17,6 @@ FField.FSelect(
     :prevent-selection="preventSelection"
     :disabled="disabled"
     @select-option="emit('select-option', $event)"
-    @toggle="value => (isMenuOpen = value)"
   )
     template(#option-prefix="scope")
       slot(

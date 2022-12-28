@@ -151,6 +151,11 @@ export interface FMenuOption {
 
 export interface FMenuProps {
   /**
+   * Control menu visibility state from parent
+   * @model
+   */
+  isOpen?: boolean;
+  /**
    * Selected value of the menu
    */
   modelValue?: any;
@@ -254,7 +259,7 @@ defineExpose<{
 const emit = defineEmits<{
   (name: 'update:modelValue', value: any): void;
   (name: 'select-option', value: any): void;
-  (name: 'toggle', value: boolean): void;
+  (name: 'update:isOpen', value: boolean): void;
 }>();
 
 const style = computed(
@@ -288,8 +293,8 @@ const menuClasses = computed(() => ({
   'FMenu--inanimated': props.inanimated,
 }));
 
-const isOpen = ref(false);
-const isKeyboardInteracting = ref(false);
+const isOpen = useVModelProxy(props, 'isOpen', emit, false);
+
 const preselectedOptionIndex = ref(-1);
 
 /**
@@ -317,8 +322,6 @@ function closeMenu() {
 }
 
 watch(isOpen, newValue => {
-  emit('toggle', newValue);
-
   if (!newValue) {
     preselectOption(-1);
   }

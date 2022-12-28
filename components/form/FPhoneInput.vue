@@ -7,11 +7,11 @@ FField.FPhoneInput(
   FMenu(
     :options="countries"
     v-model="countryCode"
+    v-model:is-open="isMenuOpen"
     width="100"
     :color="optionsMenuColor"
     :text-color="optionTextColor"
     :disabled="disabled"
-    @toggle="value => (isMenuOpen = value)"
   )
     template(#activator="{ toggleMenu, openMenu, closeMenu }")
       FInput(

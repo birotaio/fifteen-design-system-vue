@@ -2,7 +2,8 @@
 
 ### Features
 
-- [FMenu] use `fixed` position strategy
+- [FMenu] Add `zIndex`, `offsetSkid` and `offsetDistance` props to manage popup spatial positioning
+- [FMenu] Use `fixed` position strategy, add `absolute` prop to override it
 
 ## 0.9.0 (December 26, 2022)
 

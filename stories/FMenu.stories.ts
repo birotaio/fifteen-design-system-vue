@@ -53,6 +53,13 @@ Disabled.args = {
   disabled: true,
 };
 
+export const Offsets: Story<FMenuProps> = Template.bind({});
+Offsets.args = {
+  options,
+  offsetSkid: 24,
+  offsetDistance: 48,
+};
+
 const AutoPlacementTemplate = () => ({
   components: { FMenu, FButton },
   setup: () => {

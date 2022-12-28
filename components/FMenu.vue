@@ -7,8 +7,7 @@
 )
   Popper(
     :show="isOpen"
-    placement="bottom-start"
-    strategy="fixed"
+    v-bind="resolvedPopperProps"
   )
     .FMenu__activator(
       @keydown.down="keyboardPreselectNextOption"
@@ -207,6 +206,22 @@ export interface FMenuProps {
    * Loading state of the menu
    */
   loading?: boolean;
+  /**
+   * Force the menu to be positioned as `absolute` instead of `fixed` by default
+   */
+  absolute?: boolean;
+  /**
+   * Set the z-index of the menu
+   */
+  zIndex?: number | string;
+  /**
+   * Offset in pixels along the activator element
+   */
+  offsetSkid?: number | string;
+  /**
+   * Offset in pixels away from the trigger element
+   */
+  offsetDistance?: number | string;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -224,6 +239,10 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   disabled: false,
   inanimated: false,
   loading: false,
+  absolute: false,
+  zIndex: 9999,
+  offsetSkid: 0,
+  offsetDistance: 16,
 });
 
 defineExpose<{
@@ -247,6 +266,16 @@ const style = computed(
     '--fmenu--selected-option-text-color': getCssColor(
       props.selectedOptionTextColor
     ),
+  })
+);
+
+const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
+  () => ({
+    placement: 'bottom-start',
+    strategy: props.absolute ? 'absolute' : 'fixed',
+    zIndex: props.zIndex,
+    offsetSkid: String(props.offsetSkid),
+    offsetDistance: String(props.offsetDistance),
   })
 );
 

@@ -32,7 +32,7 @@
             ref="optionRefs"
             @click="selectOption(option)"
             @mouseenter="mousePreselectOption(index)"
-            @mousemove="isKeyboardInteracting = false"
+            @mouseleave="mousePreselectOption(-1)"
           )
             slot(
               name="option-prefix"
@@ -368,7 +368,6 @@ function selectOptionClasses(index: number) {
  * @param index - Index of the option
  */
 function mousePreselectOption(index: number) {
-  if (isKeyboardInteracting.value) return;
   preselectOption(index);
 }
 
@@ -378,7 +377,6 @@ function mousePreselectOption(index: number) {
 function keyboardPreselectPrevOption(): void {
   if (!isOpen.value) return;
 
-  isKeyboardInteracting.value = true;
   const preselectedIndex =
     preselectedOptionIndex.value - 1 < 0
       ? props.options.length - 1
@@ -393,7 +391,6 @@ function keyboardPreselectPrevOption(): void {
 function keyboardPreselectNextOption(): void {
   if (!isOpen.value) return;
 
-  isKeyboardInteracting.value = true;
   const preselectedIndex =
     preselectedOptionIndex.value + 1 > props.options.length - 1
       ? 0
@@ -474,8 +471,6 @@ const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
 function handlePreselectSearch(event: KeyboardEvent) {
   event.stopPropagation();
   if (!isOpen.value || props.preventSearch) return;
-
-  isKeyboardInteracting.value = true;
 
   preselectSearchTerm = removeDiacritics(
     preselectSearchTerm + event.key

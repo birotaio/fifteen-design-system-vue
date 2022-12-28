@@ -1,6 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
-  "version": "0.10.0-beta.1",
+  "version": "0.10.0-beta.2",
   "private": false,
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
@@ -24,7 +24,8 @@
   "types": "dist/types/index.d.ts",
   "files": [
     "dist",
-    "styles"
+    "styles",
+    "postinstall.sh"
   ],
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
@@ -65,7 +66,7 @@
     "build:resolvers": "vite build --config vite.config.resolvers.ts",
     "build:rules": "vite build --config vite.config.rules.ts",
     "build": "yarn build:icons && yarn build:lib && yarn build:resolvers && yarn build:rules && yarn build:types && yarn build:theme",
-    "postinstall": "sh scripts/postinstall.sh",
+    "postinstall": "sh ./postinstall.sh",
     "release": "make release",
     "lint-staged": "lint-staged",
     "eslint": "eslint --ext .ts,.vue .",

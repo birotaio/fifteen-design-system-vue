@@ -32,7 +32,8 @@
   border-radius calc((var(--FAvatar--size) / 2))
   font-size calc((14 / 24) * var(--FAvatar--size))
   text-align center
-  weight 700
+  font-weight 700
+  letter-spacing 0
 </style>
 
 <script setup lang="ts">

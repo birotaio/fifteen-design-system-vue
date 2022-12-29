@@ -11,8 +11,11 @@
   )
     .FMenu__activator(
       @keydown.down="keyboardPreselectNextOption"
+      @keydown.down.prevent="keyboardPreselectOption('next')"
+      @keydown.up.prevent="keyboardPreselectOption('prev')"
+      @keydown.home.prevent="keyboardPreselectOption('first')"
+      @keydown.end.prevent="keyboardPreselectOption('last')"
       @keydown.enter="selectOption()"
-      @keydown.up="keyboardPreselectPrevOption"
     )
       slot(
         name="activator"
@@ -380,32 +383,41 @@ function mousePreselectOption(index: number) {
   preselectOption(index);
 }
 
-/**
- * Preselect the previous option or the last if the first is selected
- */
-function keyboardPreselectPrevOption(): void {
-  if (!isOpen.value) return;
+type PreselectionMode = 'first' | 'last' | 'prev' | 'next';
 
-  const preselectedIndex =
-    preselectedOptionIndex.value - 1 < 0
-      ? props.options.length - 1
-      : preselectedOptionIndex.value - 1;
-  scrollOptionIntoView(preselectedIndex);
-  preselectOption(preselectedIndex);
+/**
+ * get the option index to be preselected, based on mode
+ * @param mode - The preselection mode
+ */
+function getPreselectIndex(mode: PreselectionMode) {
+  switch (mode) {
+    case 'first':
+      return 0;
+    case 'last':
+      return props.options.length - 1;
+    case 'prev':
+      return preselectedOptionIndex.value - 1 < 0
+        ? props.options.length - 1
+        : preselectedOptionIndex.value - 1;
+    case 'next':
+      return preselectedOptionIndex.value + 1 > props.options.length - 1
+        ? 0
+        : preselectedOptionIndex.value + 1;
+  }
 }
 
 /**
- * Preselect the next option or the first if the last is already selected
+ * Preselect the previous option or the last if the first is selected
+ * @param mode - The preselection mode
  */
-function keyboardPreselectNextOption(): void {
+function keyboardPreselectOption(mode: PreselectionMode): void {
   if (!isOpen.value) return;
+  isKeyboardInteracting.value = true;
 
-  const preselectedIndex =
-    preselectedOptionIndex.value + 1 > props.options.length - 1
-      ? 0
-      : preselectedOptionIndex.value + 1;
-  scrollOptionIntoView(preselectedIndex);
-  preselectOption(preselectedIndex);
+  const preselectIndex = getPreselectIndex(mode);
+
+  scrollOptionIntoView(preselectIndex);
+  preselectOption(preselectIndex);
 }
 
 const menuOptionsRef = ref();

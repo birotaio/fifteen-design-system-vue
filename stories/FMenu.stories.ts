@@ -60,6 +60,12 @@ Offsets.args = {
   offsetDistance: 48,
 };
 
+export const OptionHeight: Story<FMenuProps> = Template.bind({});
+OptionHeight.args = {
+  options,
+  optionHeight: 32,
+};
+
 const AutoPlacementTemplate = () => ({
   components: { FMenu, FButton },
   setup: () => {

@@ -78,6 +78,7 @@ import { useElementSize } from '@vueuse/core';
 export interface FExpandableProps {
   /**
    * Value of the component
+   * @model
    */
   modelValue?: boolean;
   /**

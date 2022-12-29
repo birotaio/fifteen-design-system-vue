@@ -3,6 +3,7 @@ FField.FAutocompleteInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
+    ref="menuRef"
     v-model:selected-option="fieldValue"
     :options="matchingOptions"
     :width="menuWidth"
@@ -12,11 +13,10 @@ FField.FAutocompleteInput(
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
-    prevent-search
-    inanimated
     :disabled="disabled"
     :loading="loading"
-    ref="menuRef"
+    prevent-search
+    inanimated
     @update:is-open="handleMenuToggle"
   )
     template(#option="scope")
@@ -25,10 +25,10 @@ FField.FAutocompleteInput(
         v-bind="scope"
       )
         div(v-html="formatOption(scope.option)")
-    template(#activator="{ closeMenu, openMenu }")
+    template(#activator="{ openMenu }")
       FInput(
-        v-model="inputValue"
         ref="inputRef"
+        v-model="inputValue"
         :color="color"
         :border-color="borderColor"
         :text-color="textColor"
@@ -84,6 +84,7 @@ import type { FMenuOption } from '@/components/FMenu.vue';
 export interface FAutocompleteInputProps {
   /**
    * Option value
+   * @model
    */
   modelValue?: any;
   /**

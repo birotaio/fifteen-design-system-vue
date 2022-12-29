@@ -3,7 +3,7 @@ FField.FAutocompleteInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
-    v-model="fieldValue"
+    v-model:selected-option="fieldValue"
     :options="matchingOptions"
     :width="menuWidth"
     :empty-text="loading ? loadingText : inputValue ? noMatchText : emptyText"

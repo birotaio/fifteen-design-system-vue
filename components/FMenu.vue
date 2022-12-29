@@ -154,11 +154,12 @@ export interface FMenuProps {
    * Control menu visibility state from parent
    * @model
    */
-  isOpen?: boolean;
+  modelValue?: boolean;
   /**
    * Selected value of the menu
+   * @model
    */
-  modelValue?: any;
+  selectedOption?: any;
   /**
    * Array of options
    */
@@ -230,7 +231,8 @@ export interface FMenuProps {
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
-  modelValue: undefined,
+  modelValue: false,
+  selectedOption: undefined,
   preventSelection: false,
   preventSearch: false,
   persistent: false,
@@ -257,10 +259,10 @@ defineExpose<{
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: any): void;
   /** @deprecated Use v-model instead */
   (name: 'select-option', value: any): void;
-  (name: 'update:isOpen', value: boolean): void;
+  (name: 'update:modelValue', value: boolean): void;
+  (name: 'update:selectedOption', value: any): void;
 }>();
 
 const style = computed(
@@ -285,7 +287,8 @@ const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
   })
 );
 
-const selectedOption = useVModelProxy<any>(props);
+const isOpen = useVModelProxy<boolean>(props);
+const selectedOption = useVModelProxy<any>(props, 'selectedOption');
 
 const optionRefs = ref<HTMLElement[]>([]);
 
@@ -293,8 +296,6 @@ const menuClasses = computed(() => ({
   'FMenu--disabled': props.disabled,
   'FMenu--inanimated': props.inanimated,
 }));
-
-const isOpen = useVModelProxy(props, 'isOpen', emit, false);
 
 const preselectedOptionIndex = ref(-1);
 

@@ -5,9 +5,9 @@ FField.FPhoneInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
+    v-model="isMenuOpen"
+    v-model:selected-option="countryCode"
     :options="countries"
-    v-model="countryCode"
-    v-model:is-open="isMenuOpen"
     width="100"
     :color="optionsMenuColor"
     :text-color="optionTextColor"

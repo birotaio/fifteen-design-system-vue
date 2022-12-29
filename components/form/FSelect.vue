@@ -5,8 +5,8 @@ FField.FSelect(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
-    v-model="fieldValue"
-    v-model:is-open="isMenuOpen"
+    v-model="isMenuOpen"
+    v-model:selected-option="fieldValue"
     :options="options"
     :width="menuWidth"
     :empty-text="emptyText"

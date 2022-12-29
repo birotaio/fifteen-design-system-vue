@@ -1,7 +1,7 @@
 import { Story } from '@storybook/vue3';
 import FMenu, { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
 import FButton from '@/components/FButton.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 export default {
   title: 'Components/FMenu',
@@ -65,22 +65,23 @@ const AutoPlacementTemplate = () => ({
   setup: () => {
     let timeout: NodeJS.Timeout;
     const updatingOptions = ref<FMenuOption[]>([]);
-    function handleToggle(open: boolean) {
+    const isOpen = ref(false);
+    watch(isOpen, (value: boolean) => {
       if (timeout) clearTimeout(timeout);
-      if (open) {
+      if (value) {
         timeout = setTimeout(() => (updatingOptions.value = options), 1000);
       } else {
         timeout = setTimeout(() => (updatingOptions.value = []), 250);
       }
-    }
+    });
     return {
       updatingOptions,
-      handleToggle,
+      isOpen,
     };
   },
   template: `
 <div style="height: 300px"></div>
-<FMenu :options="updatingOptions" @toggle="handleToggle">
+<FMenu :options="updatingOptions" v-model="isOpen">
   <template #activator="{ toggleMenu }">
     <FButton @click="toggleMenu">Open Menu</FButton>
   </template>
@@ -89,3 +90,23 @@ const AutoPlacementTemplate = () => ({
 });
 
 export const AutoPlacement: Story<FMenuProps> = AutoPlacementTemplate.bind({});
+
+const ToggleTemplate = (args: FMenuProps) => ({
+  components: { FMenu, FButton },
+  setup: () => {
+    const isOpen = ref(false);
+    setInterval(() => (isOpen.value = !isOpen.value), 2000);
+    return { isOpen, args };
+  },
+  template: `
+<FMenu v-model="isOpen" v-bind="args">
+  <template #activator>
+    <div>Menu is {{ isOpen ? 'open' : 'closed' }}</div>
+  </template>
+</FMenu>`,
+});
+
+export const ToggleExternally: Story<FMenuProps> = ToggleTemplate.bind({});
+ToggleExternally.args = {
+  options,
+};

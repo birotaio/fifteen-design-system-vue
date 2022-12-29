@@ -16,7 +16,7 @@ export function useVModelProxy<T, Name extends string = 'update:modelValue'>(
   emit?: (name: Name, ...args: any[]) => void,
   defaultValue?: T,
   event?: string
-): WritableComputedRef<T | null> {
+): WritableComputedRef<T | undefined> {
   // Internal ref with initial value based on default or prop value
   const internal = ref<T>(defaultValue ?? (props[propName] as T));
 

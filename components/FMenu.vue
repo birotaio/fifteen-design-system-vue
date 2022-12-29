@@ -258,6 +258,7 @@ defineExpose<{
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: any): void;
+  /** @deprecated Use v-model instead */
   (name: 'select-option', value: any): void;
   (name: 'update:isOpen', value: boolean): void;
 }>();

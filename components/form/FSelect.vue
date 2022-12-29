@@ -16,7 +16,7 @@ FField.FSelect(
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
     :disabled="disabled"
-    @select-option="emit('select-option', $event)"
+    @before-select-option="onBeforeSelectOption"
   )
     template(#option-prefix="scope")
       slot(
@@ -349,7 +349,9 @@ const emit = defineEmits<{
   (name: 'focus'): void;
   (name: 'blur'): void;
   (name: 'clear'): void;
+  /** @deprecated Use before-select-option instead */
   (name: 'select-option', value: any): void;
+  (name: 'before-select-option', value: any): void;
 }>();
 
 defineExpose<{
@@ -455,5 +457,13 @@ const selectRef = ref<HTMLElement>();
  */
 function focus() {
   selectRef.value?.focus();
+}
+
+/**
+ * Handle before select option event
+ */
+function onBeforeSelectOption(value: any) {
+  emit('select-option', value);
+  emit('before-select-option', value);
 }
 </script>

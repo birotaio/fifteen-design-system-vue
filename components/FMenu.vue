@@ -259,10 +259,9 @@ defineExpose<{
 });
 
 const emit = defineEmits<{
-  /** @deprecated Use v-model instead */
-  (name: 'select-option', value: any): void;
   (name: 'update:modelValue', value: boolean): void;
   (name: 'update:selectedOption', value: any): void;
+  (name: 'before-select-option', value: any): void;
 }>();
 
 const style = computed(
@@ -458,7 +457,7 @@ function selectOption(option?: FMenuOption | null): void {
   const preselectedOption =
     option ?? props.options[preselectedOptionIndex.value];
 
-  emit('select-option', preselectedOption.value);
+  emit('before-select-option', preselectedOption.value);
   if (props.preventSelection) return;
 
   selectedOption.value = preselectedOption.value;

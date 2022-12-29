@@ -22,7 +22,10 @@
         v-bind="{ toggleMenu, openMenu, closeMenu }"
       )
     template(#content)
-      .FMenu__content(ref="contentRef")
+      .FMenu__content(
+        ref="contentRef"
+        @mousemove="isKeyboardInteracting = false"
+      )
         .FMenu__optionsMenu(
           v-if="options.length"
           ref="menuOptionsRef"
@@ -305,6 +308,7 @@ const menuClasses = computed(() => ({
 }));
 
 const preselectedOptionIndex = ref(-1);
+const isKeyboardInteracting = ref(false);
 
 /**
  * Toggle the menu
@@ -380,6 +384,7 @@ function selectOptionClasses(index: number) {
  * @param index - Index of the option
  */
 function mousePreselectOption(index: number) {
+  if (isKeyboardInteracting.value) return;
   preselectOption(index);
 }
 

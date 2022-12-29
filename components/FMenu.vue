@@ -10,7 +10,8 @@
     v-bind="resolvedPopperProps"
   )
     .FMenu__activator(
-      @keydown.down="keyboardPreselectNextOption"
+      ref="activatorRef"
+      tabindex="-1"
       @keydown.down.prevent="keyboardPreselectOption('next')"
       @keydown.up.prevent="keyboardPreselectOption('prev')"
       @keydown.home.prevent="keyboardPreselectOption('first')"
@@ -61,6 +62,7 @@
 <style lang="stylus">
 .FMenu
   --popper-theme-border-radius rem(16)
+  display inline-block
 
   .popper
     left 0
@@ -75,6 +77,9 @@
     border none !important
     margin 0 !important
     width 100%
+
+.FMenu__activator:focus
+  outline none
 
 .FMenu__optionsMenu
   background var(--fmenu--color)
@@ -301,6 +306,7 @@ const isOpen = useVModelProxy<boolean>(props);
 const selectedOption = useVModelProxy<any>(props, 'selectedOption');
 
 const optionRefs = ref<HTMLElement[]>([]);
+const activatorRef = ref<HTMLDivElement>();
 
 const menuClasses = computed(() => ({
   'FMenu--disabled': props.disabled,
@@ -313,9 +319,18 @@ const isKeyboardInteracting = ref(false);
 /**
  * Toggle the menu
  */
-function toggleMenu() {
+async function toggleMenu() {
   if (props.disabled) return;
   isOpen.value = !isOpen.value;
+  if (isOpen.value) {
+    const hasFocusableChild = Array.from(
+      activatorRef.value?.querySelectorAll(
+        'button:not(.FButton), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      ) ?? []
+    ).some(el => !el.hasAttribute('disabled'));
+    // If the activator does not have any focusable child, we must focus it manually to activate the keyboard event listeners
+    if (!hasFocusableChild) activatorRef.value?.focus();
+  }
 }
 
 /**

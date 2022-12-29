@@ -86,11 +86,11 @@
 
 .FMenu__option
   display flex
-  align-items center
-  flex-wrap wrap
+  flex-direction column
+  justify-content center
   border-radius rem(16)
-  min-height rem(24)
-  padding rem(12) rem(8)
+  height var(--fmenu-option-height)
+  padding 0 rem(8)
   color var(--fmenu--text-color)
   font-size rem(14)
   transition background 300ms, color 300ms
@@ -124,7 +124,6 @@
 .FMenu__option__description
   use-font('caption')
   opacity 0.75
-  flex-basis 100% // Force line break
 </style>
 
 <script setup lang="ts">
@@ -183,7 +182,7 @@ export interface FMenuProps {
   /**
    * Width of the menu
    */
-  width?: string | number;
+  width?: number | string;
   /**
    * Background color of the options menu
    */
@@ -228,6 +227,10 @@ export interface FMenuProps {
    * Offset in pixels away from the trigger element
    */
   offsetDistance?: number | string;
+  /**
+   * Height of the option div, defaults to 52px
+   */
+  optionHeight?: number | string;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -250,6 +253,7 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   zIndex: 9999,
   offsetSkid: 0,
   offsetDistance: 16,
+  optionHeight: 52,
 });
 
 defineExpose<{
@@ -273,6 +277,7 @@ const style = computed(
     '--fmenu--selected-option-text-color': getCssColor(
       props.selectedOptionTextColor
     ),
+    '--fmenu-option-height': genSize(props.optionHeight),
   })
 );
 

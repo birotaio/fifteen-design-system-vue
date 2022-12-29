@@ -139,6 +139,7 @@ import { useInputEventBindings } from '@/composables/useInputEventBindings';
 export interface FCheckboxProps {
   /**
    * Checkbox v-model value
+   * @model
    */
   modelValue?: boolean | null;
   /**

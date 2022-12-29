@@ -174,6 +174,7 @@ import type { FMenuOption } from '@/components/FMenu.vue';
 export interface FPhoneInputProps {
   /**
    * Full phone number value
+   * @model
    */
   modelValue?: string | null;
   /**

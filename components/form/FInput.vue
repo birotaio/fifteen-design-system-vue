@@ -134,6 +134,7 @@ import { useInputEventBindings } from '@/composables/useInputEventBindings';
 export interface FInputProps {
   /**
    * Input value
+   * @model
    */
   modelValue?: string;
   /**

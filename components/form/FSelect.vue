@@ -179,6 +179,7 @@ import type { FMenuOption } from '@/components/FMenu.vue';
 export interface FSelectProps {
   /**
    * Current option of the select
+   * @model
    */
   modelValue?: any;
   /**

@@ -82,6 +82,7 @@ export interface FDigitsInputProps {
   digits?: number;
   /**
    * Digits input value
+   * @model
    */
   modelValue?: string;
   /**

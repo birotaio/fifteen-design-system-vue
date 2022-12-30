@@ -30,16 +30,13 @@ FField.FSelect(
         v-bind="scope"
       )
 
-    template(#activator="{ toggleMenu, openMenu, closeMenu }")
+    template(#activator)
       .FSelect__select(
         tabindex="0"
         role="listbox"
         ref="selectRef"
         @blur="handleBlur"
-        @click="toggleMenu"
         @focus="handleFocus"
-        @keydown.enter="openMenu"
-        @keydown.esc="closeMenu"
       )
         .FSelect__select__selectionStart
           FIcon.FSelect__select__errorIcon(

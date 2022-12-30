@@ -4,6 +4,13 @@
 
 - [FMenu] Add `zIndex`, `offsetSkid` and `offsetDistance` props to manage popup spatial positioning
 - [FMenu] Use `fixed` position strategy, add `absolute` prop to override it
+- [FMenu] Improve keyboard navigation (a11y)
+- [FInput] Make clear icon focusable (a11y)
+- [FLink] Allow tabindex override by props (a11y)
+
+### Changed
+
+- [Chore] Use a forked version of vue3-popper with exposed `strategy` prop
 
 ## 0.9.0 (December 26, 2022)
 

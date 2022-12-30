@@ -4,6 +4,7 @@ FField.FAutocompleteInput(
 )
   FMenu(
     ref="menuRef"
+    v-model="isMenuOpen"
     v-model:selected-option="fieldValue"
     :options="matchingOptions"
     :width="menuWidth"
@@ -17,7 +18,6 @@ FField.FAutocompleteInput(
     :loading="loading"
     prevent-search
     inanimated
-    @update:is-open="handleMenuToggle"
   )
     template(#option="scope")
       slot.FAutocompleteInput__option(
@@ -306,15 +306,17 @@ function formatOption(option: FMenuOption) {
   );
 }
 
-function handleMenuToggle(isOpen: boolean) {
-  if (isOpen) {
+const isMenuOpen = ref(false);
+watch(isMenuOpen, value => {
+  if (value) {
     // When opening the menu
     formatInputValue();
   } else {
-    // When closing the menu
-    setTimeout(formatInputValue, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks due to menu items changing
+    // When closing the menu, wait for Popper to properly close the menu before changing input value,
+    // to avoid seeing menu content breaks due to menu items changing
+    setTimeout(formatInputValue, 15);
   }
-}
+});
 
 function formatInputValue() {
   inputValue.value = props.formatInputFn

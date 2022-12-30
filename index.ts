@@ -44,7 +44,7 @@ export { default as FSelect } from '@/components/form/FSelect.vue';
 export { default as FTextarea } from '@/components/form/FTextarea.vue';
 export { default as FFileUpload } from '@/components/form/FFileUpload.vue';
 /** @deprecated Use FAutocomplete instead */
-export { default as FAutocompleteInput } from '@/components/form/FAutocompleteInput.vue';
+export { default as FAutocompleteInput } from '@/components/form/FAutocomplete.vue';
 export { default as FAutocomplete } from '@/components/form/FAutocomplete.vue';
 
 /**

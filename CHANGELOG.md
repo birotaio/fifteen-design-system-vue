@@ -1,3 +1,9 @@
+## 0.10.1 (December 30, 2022)
+
+### Fixes
+
+- [FPhoneInput] Avoid input click to open menu
+
 ## 0.10.0 (December 27, 2022)
 
 ### Features

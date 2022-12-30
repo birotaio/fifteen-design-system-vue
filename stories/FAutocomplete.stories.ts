@@ -1,20 +1,20 @@
 import { Story } from '@storybook/vue3';
-import FAutocompleteInput, {
-  FAutocompleteInputProps,
-} from '@/components/form/FAutocompleteInput.vue';
+import FAutocomplete, {
+  FAutocompleteProps,
+} from '@/components/form/FAutocomplete.vue';
 import FButton from '@/components/FButton.vue';
 import { ref } from 'vue';
 import { required } from '@vee-validate/rules';
 
 export default {
-  title: 'Components/Form/FAutocompleteInput',
-  component: FAutocompleteInput,
+  title: 'Components/Form/FAutocomplete',
+  component: FAutocomplete,
 };
 
-const Template = (args: FAutocompleteInputProps) => ({
-  components: { FAutocompleteInput },
+const Template = (args: FAutocompleteProps) => ({
+  components: { FAutocomplete },
   setup: () => ({ args }),
-  template: '<FAutocompleteInput v-bind="args" />',
+  template: '<FAutocomplete v-bind="args" />',
 });
 
 const capitals = [
@@ -37,14 +37,14 @@ const capitals = [
   { label: 'Vienna', value: 'vienna' },
 ];
 
-export const Default: Story<FAutocompleteInputProps> = Template.bind({});
+export const Default: Story<FAutocompleteProps> = Template.bind({});
 Default.args = {
   placeholder: 'Search capitals...',
   options: capitals,
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const WithLabel: Story<FAutocompleteInputProps> = Template.bind({});
+export const WithLabel: Story<FAutocompleteProps> = Template.bind({});
 WithLabel.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -52,7 +52,7 @@ WithLabel.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const WithHint: Story<FAutocompleteInputProps> = Template.bind({});
+export const WithHint: Story<FAutocompleteProps> = Template.bind({});
 WithHint.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -61,7 +61,7 @@ WithHint.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const Full: Story<FAutocompleteInputProps> = Template.bind({});
+export const Full: Story<FAutocompleteProps> = Template.bind({});
 Full.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -71,7 +71,7 @@ Full.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const Error: Story<FAutocompleteInputProps> = Template.bind({});
+export const Error: Story<FAutocompleteProps> = Template.bind({});
 Error.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -81,7 +81,7 @@ Error.args = {
   errorMessage: 'Choose an option to dismiss the error',
 };
 
-export const Disabled: Story<FAutocompleteInputProps> = Template.bind({});
+export const Disabled: Story<FAutocompleteProps> = Template.bind({});
 Disabled.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -91,8 +91,8 @@ Disabled.args = {
   disabled: true,
 };
 
-const FocusTemplate = (args: FAutocompleteInputProps) => ({
-  components: { FAutocompleteInput, FButton },
+const FocusTemplate = (args: FAutocompleteProps) => ({
+  components: { FAutocomplete, FButton },
   setup() {
     const creditCardInputRef = ref();
     function focus() {
@@ -102,26 +102,26 @@ const FocusTemplate = (args: FAutocompleteInputProps) => ({
   },
   template: `
 <div>
-  <FAutocompleteInput ref="creditCardInputRef" v-bind="args" />
+  <FAutocomplete ref="creditCardInputRef" v-bind="args" />
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
 
-export const FocusProgrammatically: Story<FAutocompleteInputProps> =
+export const FocusProgrammatically: Story<FAutocompleteProps> =
   FocusTemplate.bind({});
 
 FocusProgrammatically.args = {
   options: capitals,
 };
 
-export const Loading: Story<FAutocompleteInputProps> = Template.bind({});
+export const Loading: Story<FAutocompleteProps> = Template.bind({});
 Loading.args = {
   placeholder: 'Search capitals...',
   loadingText: 'Loading...',
   loading: true,
 };
 
-export const Clearable: Story<FAutocompleteInputProps> = Template.bind({});
+export const Clearable: Story<FAutocompleteProps> = Template.bind({});
 Clearable.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -129,9 +129,7 @@ Clearable.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const PreventFiltering: Story<FAutocompleteInputProps> = Template.bind(
-  {}
-);
+export const PreventFiltering: Story<FAutocompleteProps> = Template.bind({});
 PreventFiltering.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -141,8 +139,9 @@ PreventFiltering.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const WithFormattedInputValue: Story<FAutocompleteInputProps> =
-  Template.bind({});
+export const WithFormattedInputValue: Story<FAutocompleteProps> = Template.bind(
+  {}
+);
 WithFormattedInputValue.args = {
   placeholder: 'Search capitals...',
   options: capitals,
@@ -154,9 +153,7 @@ WithFormattedInputValue.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-export const WithInitialValue: Story<FAutocompleteInputProps> = Template.bind(
-  {}
-);
+export const WithInitialValue: Story<FAutocompleteProps> = Template.bind({});
 
 WithInitialValue.args = {
   modelValue: 'berlin',
@@ -167,8 +164,8 @@ WithInitialValue.args = {
   errorMessage: 'Select a value in the list to validate',
 };
 
-const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
-  components: { FAutocompleteInput },
+const WithAsyncOptionsTemplate = (args: FAutocompleteProps) => ({
+  components: { FAutocomplete },
   setup() {
     let timeoutId: NodeJS.Timeout | undefined;
 
@@ -192,11 +189,11 @@ const WithAsyncOptionsTemplate = (args: FAutocompleteInputProps) => ({
   },
   template: `
   <div>
-    <FAutocompleteInput @input="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
+    <FAutocomplete @input="fetchCapitals" v-bind="args" :options="fetchedCapitals" :loading="loading" />
   </div>`,
 });
 
-export const WithAsyncOptions: Story<FAutocompleteInputProps> =
+export const WithAsyncOptions: Story<FAutocompleteProps> =
   WithAsyncOptionsTemplate.bind({});
 
 WithAsyncOptions.args = {

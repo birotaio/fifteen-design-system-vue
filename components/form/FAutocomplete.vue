@@ -1,5 +1,5 @@
 <template lang="pug">
-FField.FAutocompleteInput(
+FField.FAutocomplete(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
@@ -21,7 +21,7 @@ FField.FAutocompleteInput(
     inanimated
   )
     template(#option="scope")
-      slot.FAutocompleteInput__option(
+      slot.FAutocomplete__option(
         name="option"
         v-bind="scope"
       )
@@ -54,7 +54,7 @@ FField.FAutocompleteInput(
       )
 </template>
 <style lang="stylus">
-.FAutocompleteInput__option__match
+.FAutocomplete__option__match
   padding 0 rem(1)
   position relative
 
@@ -82,7 +82,7 @@ import { composeSearchRegex } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
 
-export interface FAutocompleteInputProps {
+export interface FAutocompleteProps {
   /**
    * Option value
    * @model
@@ -231,7 +231,7 @@ export interface FAutocompleteInputProps {
   formatInputFn?: ((label: string, description: string) => string) | null;
 }
 
-const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
+const props = withDefaults(defineProps<FAutocompleteProps>(), {
   modelValue: undefined,
   options: () => [],
   label: '',
@@ -303,7 +303,7 @@ function formatOption(option: FMenuOption) {
   if (!inputValue.value || !props.options.length) return option.label;
   return option.label.replace(
     filterRegex.value,
-    '<span class="FAutocompleteInput__option__match">$1</span>'
+    '<span class="FAutocomplete__option__match">$1</span>'
   );
 }
 
@@ -385,7 +385,7 @@ const menuRef = ref<InstanceType<typeof FMenu>>();
 
 watch(() => props.modelValue, matchModelValue, { immediate: true });
 
-function matchModelValue(modelValue: FAutocompleteInputProps['modelValue']) {
+function matchModelValue(modelValue: FAutocompleteProps['modelValue']) {
   const matchingOption = props.options.find(option =>
     equal(modelValue, option.value)
   );

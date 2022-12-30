@@ -36,7 +36,8 @@ const components = [
   'FField',
   'FRadio',
   'FFileUpload',
-  'FAutocompleteInput',
+  'FAutocompleteInput' /** @deprecated */,
+  'FAutocomplete',
 ];
 
 export function FifteenComponentsResolver(): ComponentResolver {

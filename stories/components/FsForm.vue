@@ -1,5 +1,5 @@
 <template lang="pug">
-FForm(
+FForm.FsForm(
   :initial-values="initialValues"
   v-slot="{ submit, reset }"
 )
@@ -61,10 +61,10 @@ FForm(
         :loading="loading"
       )
     FGridItem(span="12")
-      FAutocompleteInput(
-        label="FAutocompleteInput"
-        name="FAutocompleteInput"
-        hint="Hint for FAutocompleteInput"
+      FAutocomplete(
+        label="FAutocomplete"
+        name="FAutocomplete"
+        hint="Hint for FAutocomplete"
         :options="autocompleteOptions"
         :loading="loading"
       )
@@ -74,10 +74,12 @@ FForm(
         :loading="loading"
       ) Submit
       FButton(@click="() => reset()") Reset
-  FGrid
 </template>
 
 <style lang="stylus">
+.FsForm
+  padding-bottom rem(16)
+
 .FsForm__actions
   > * + *
     margin-left rem(24)
@@ -96,7 +98,7 @@ import FPhoneInput from '@/components/form/FPhoneInput.vue';
 import FRadioGroup from '@/components/form/FRadioGroup.vue';
 import FSelect from '@/components/form/FSelect.vue';
 import FTextarea from '@/components/form/FTextarea.vue';
-import FAutocompleteInput from '@/components/form/FAutocompleteInput.vue';
+import FAutocomplete from '@/components/form/FAutocomplete.vue';
 
 import type { FFormProps } from '@/components/form/FForm.vue';
 import FCreditCardInput from '@/components/form/FCreditCardInput.vue';

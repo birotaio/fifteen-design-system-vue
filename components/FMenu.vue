@@ -342,7 +342,6 @@ const isKeyboardInteracting = ref(false);
 async function toggleMenu() {
   if (props.disabled) return;
   isOpen.value = !isOpen.value;
-  focusActivator();
 }
 
 const anyFocusableElementSelector = [
@@ -383,7 +382,9 @@ function closeMenu() {
 }
 
 watch(isOpen, newValue => {
-  if (!newValue) {
+  if (newValue) {
+    focusActivator();
+  } else {
     preselectOption(-1);
   }
 });

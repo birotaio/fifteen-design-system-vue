@@ -106,6 +106,7 @@ import { getCardInfo } from '@/modules/credit-card-types';
 export interface FCreditCardInputProps {
   /**
    * Credit card value
+   * @model
    */
   modelValue?: string;
   /**

@@ -15,3 +15,10 @@ release:
 	yarn build
 	npm publish --access public
 	make tag
+
+beta:
+	@echo "\n\033[46m\033[30m BETA RELEASE \033[0m\033[0m version \033[36m$(PACKAGE_VERSION)\033[0m of \033[36m$(PACKAGE_NAME)\033[0m...\n"
+	yarn test
+	yarn build
+	npm publish --access public --tag beta
+	make tag

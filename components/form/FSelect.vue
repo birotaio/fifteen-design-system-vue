@@ -5,7 +5,8 @@ FField.FSelect(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
-    v-model="fieldValue"
+    v-model="isMenuOpen"
+    v-model:selected-option="fieldValue"
     :options="options"
     :width="menuWidth"
     :empty-text="emptyText"
@@ -15,8 +16,7 @@ FField.FSelect(
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
     :disabled="disabled"
-    @select-option="emit('select-option', $event)"
-    @toggle="value => (isMenuOpen = value)"
+    @before-select-option="onBeforeSelectOption"
   )
     template(#option-prefix="scope")
       slot(
@@ -30,16 +30,13 @@ FField.FSelect(
         v-bind="scope"
       )
 
-    template(#activator="{ toggleMenu, openMenu, closeMenu }")
+    template(#activator)
       .FSelect__select(
         tabindex="0"
         role="listbox"
         ref="selectRef"
         @blur="handleBlur"
-        @click="toggleMenu"
         @focus="handleFocus"
-        @keydown.enter="openMenu"
-        @keydown.esc="closeMenu"
       )
         .FSelect__select__selectionStart
           FIcon.FSelect__select__errorIcon(
@@ -179,6 +176,7 @@ import type { FMenuOption } from '@/components/FMenu.vue';
 export interface FSelectProps {
   /**
    * Current option of the select
+   * @model
    */
   modelValue?: any;
   /**
@@ -348,7 +346,9 @@ const emit = defineEmits<{
   (name: 'focus'): void;
   (name: 'blur'): void;
   (name: 'clear'): void;
+  /** @deprecated Use before-select-option instead */
   (name: 'select-option', value: any): void;
+  (name: 'before-select-option', value: any): void;
 }>();
 
 defineExpose<{
@@ -454,5 +454,13 @@ const selectRef = ref<HTMLElement>();
  */
 function focus() {
   selectRef.value?.focus();
+}
+
+/**
+ * Handle before select option event
+ */
+function onBeforeSelectOption(value: any) {
+  emit('select-option', value);
+  emit('before-select-option', value);
 }
 </script>

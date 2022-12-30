@@ -1,6 +1,8 @@
 <template lang="pug">
 .FAvatar(:style="style")
+  .FAvatar__letter(v-if="!src && resolvedLetter") {{ resolvedLetter }}
   FImage(
+    v-else
     :src="src"
     :placeholder="placeholder"
     :alt="alt"
@@ -10,7 +12,6 @@
     :background-color="color"
     corners="circular"
   )
-  .FAvatar__initialLetter(v-if="resolvedInitialLetter") {{ resolvedInitialLetter }}
 </template>
 
 <style lang="stylus">
@@ -19,17 +20,20 @@
   width var(--FAvatar--size)
   height var(--FAvatar--size)
 
-.FAvatar__initialLetter
+.FAvatar__letter
   position absolute
   top 0
   left 0
   right 0
   bottom 0
   color var(--FAvatar--textColor)
+  background-color var(--FAvatar--color)
   line-height var(--FAvatar--size)
+  border-radius calc((var(--FAvatar--size) / 2))
   font-size calc((14 / 24) * var(--FAvatar--size))
   text-align center
-  weight 700
+  font-weight 700
+  letter-spacing 0
 </style>
 
 <script setup lang="ts">
@@ -64,13 +68,13 @@ export interface FAvatarProps {
    * given in lazy mode. As typescript cannot restrict the length of a string, any string is valid but the
    * component will display only the first letter in uppercase anyway.
    */
-  initialLetter?: string;
+  letter?: string;
   /**
    * Avatar color, defaults to transparent
    */
   color?: Color;
   /**
-   * Avatar text color, when initials are displayed, defaults to secondary
+   * Avatar text color, when initial letter is displayed, defaults to secondary
    */
   textColor?: Color;
 }
@@ -81,17 +85,18 @@ const props = withDefaults(defineProps<FAvatarProps>(), {
   loading: 'lazy',
   placeholder: '',
   size: '80',
-  initialLetter: '',
+  letter: '',
   color: 'transparent',
   textColor: 'secondary',
 });
 
-const resolvedInitialLetter = computed(() => {
-  return (props.initialLetter[0] ?? '').toUpperCase();
+const resolvedLetter = computed(() => {
+  return (props.letter[0] ?? '').toUpperCase();
 });
 
 const style = computed<Style>(() => ({
   '--FAvatar--size': genSize(props.size),
+  '--FAvatar--color': getCssColor(props.color),
   '--FAvatar--textColor': getCssColor(props.textColor),
 }));
 </script>

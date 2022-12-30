@@ -43,7 +43,9 @@ export { default as FRadioGroup } from '@/components/form/FRadioGroup.vue';
 export { default as FSelect } from '@/components/form/FSelect.vue';
 export { default as FTextarea } from '@/components/form/FTextarea.vue';
 export { default as FFileUpload } from '@/components/form/FFileUpload.vue';
+/** @deprecated Use FAutocomplete instead */
 export { default as FAutocompleteInput } from '@/components/form/FAutocompleteInput.vue';
+export { default as FAutocomplete } from '@/components/form/FAutocomplete.vue';
 
 /**
  * Components props interfaces
@@ -94,7 +96,9 @@ export type { FSkeletonProps } from '@/components/FSkeleton.vue';
 export type { FSvgImageProps } from '@/components/FSvgImage.vue';
 export type { FTextareaProps } from '@/components/form/FTextarea.vue';
 export type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
-export type { FAutocompleteInputProps } from '@/components/form/FAutocompleteInput.vue';
+/** @deprecated Use FAutocompleteProps instead */
+export type { FAutocompleteProps as FAutocompleteInputProps } from '@/components/form/FAutocomplete.vue';
+export type { FAutocompleteProps } from '@/components/form/FAutocomplete.vue';
 
 /**
  * Composables

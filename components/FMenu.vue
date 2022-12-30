@@ -7,43 +7,58 @@
 )
   Popper(
     :show="isOpen"
-    placement="bottom-start"
+    v-bind="resolvedPopperProps"
   )
     .FMenu__activator(
-      @keydown.down="keyboardPreselectNextOption"
-      @keydown.enter="selectOption()"
-      @keydown.up="keyboardPreselectPrevOption"
+      ref="activatorRef"
+      tabindex="-1"
+      @keydown.down.prevent="keyboardPreselectOption('next')"
+      @keydown.up.prevent="keyboardPreselectOption('prev')"
+      @keydown.home.prevent="keyboardPreselectOption('first')"
+      @keydown.end.prevent="keyboardPreselectOption('last')"
+      @keydown.tab.exact="keyboardPreselectOption('next'); isOpen && $event.preventDefault()"
+      @keydown.shift.tab="keyboardPreselectOption('prev'); isOpen && $event.preventDefault()"
+      @keydown.enter.prevent="openMenu(); selectOption()"
+      @keydown.esc.prevent="closeMenu()"
+      @click="!preventClickActivation && toggleMenu()"
     )
       slot(
         name="activator"
         v-bind="{ toggleMenu, openMenu, closeMenu }"
       )
     template(#content)
-      .FMenu__content(ref="contentRef")
+      .FMenu__content(
+        ref="contentRef"
+        @click="focusActivator"
+        @mousemove="isKeyboardInteracting = false"
+      )
         .FMenu__optionsMenu(
           v-if="options.length"
           ref="menuOptionsRef"
         )
           .FMenu__option(
-            role="option"
             v-for="(option, index) in options"
+            ref="optionRefs"
+            role="option"
+            tabindex="-1"
             :key="stringify(option.value)"
             :class="selectOptionClasses(index)"
-            ref="optionRefs"
+            :aria-selected="isSelected(index)"
             @click="selectOption(option)"
             @mouseenter="mousePreselectOption(index)"
-            @mousemove="isKeyboardInteracting = false"
+            @mouseleave="mousePreselectOption(-1)"
           )
             slot(
               name="option-prefix"
               v-bind="{ option, index, isSelected: isSelected(index) }"
             )
-            slot(
-              name="option"
-              v-bind="{ option, index, isSelected: isSelected(index) }"
-            )
-              span {{ option.label }}
-            span.FMenu__option__description(v-if="option.description") {{ option.description }}
+            .FMenu__option__content
+              slot(
+                name="option"
+                v-bind="{ option, index, isSelected: isSelected(index) }"
+              )
+                span {{ option.label }}
+              span.FMenu__option__description(v-if="option.description") {{ option.description }}
         .FMenu__noOption(v-if="options.length === 0")
           FLoader.FMenu__loader(
             v-if="loading"
@@ -55,13 +70,16 @@
 <style lang="stylus">
 .FMenu
   --popper-theme-border-radius rem(16)
+  display inline-block
 
   .popper
     left 0
     min-width var(--fmenu--width)
 
+  // Unfortunately, this is the only way to dynamically remove
+  // the Popper transition with the lib vue3-popper
   &--inanimated .popper
-    transition none // Unfortunately, this is the only way to remove the Popper transition with the lib vue3-popper
+    transition none
 
   .inline-block
     display block !important
@@ -69,6 +87,9 @@
     border none !important
     margin 0 !important
     width 100%
+
+.FMenu__activator:focus
+  outline none
 
 .FMenu__optionsMenu
   background var(--fmenu--color)
@@ -86,11 +107,11 @@
 
 .FMenu__option
   display flex
-  align-items center
   flex-wrap wrap
+  align-items center
   border-radius rem(16)
-  min-height rem(24)
-  padding rem(12) rem(8)
+  height var(--fmenu-option-height)
+  padding 0 rem(8)
   color var(--fmenu--text-color)
   font-size rem(14)
   transition background 300ms, color 300ms
@@ -103,6 +124,11 @@
     color var(--fmenu--selected-option-text-color)
     background var(--fmenu--selected-option-color)
     font-weight 700
+
+.FMenu__option__content
+  display flex
+  flex-direction column
+  justify-content center
 
 .FMenu__noOption
   display flex
@@ -124,7 +150,6 @@
 .FMenu__option__description
   use-font('caption')
   opacity 0.75
-  flex-basis 100% // Force line break
 </style>
 
 <script setup lang="ts">
@@ -151,9 +176,15 @@ export interface FMenuOption {
 
 export interface FMenuProps {
   /**
-   * Selected value of the menu
+   * Control menu visibility state from parent
+   * @model
    */
-  modelValue?: any;
+  modelValue?: boolean;
+  /**
+   * Selected value of the menu
+   * @model
+   */
+  selectedOption?: any;
   /**
    * Array of options
    */
@@ -177,7 +208,7 @@ export interface FMenuProps {
   /**
    * Width of the menu
    */
-  width?: string | number;
+  width?: number | string;
   /**
    * Background color of the options menu
    */
@@ -206,10 +237,35 @@ export interface FMenuProps {
    * Loading state of the menu
    */
   loading?: boolean;
+  /**
+   * Force the menu to be positioned as `absolute` instead of `fixed` by default
+   */
+  absolute?: boolean;
+  /**
+   * Set the z-index of the menu
+   */
+  zIndex?: number | string;
+  /**
+   * Offset in pixels along the activator element
+   */
+  offsetSkid?: number | string;
+  /**
+   * Offset in pixels away from the trigger element
+   */
+  offsetDistance?: number | string;
+  /**
+   * Height of the option div, defaults to 52px
+   */
+  optionHeight?: number | string;
+  /**
+   * Prevent the activator to automatically toggle the menu on click
+   */
+  preventClickActivation?: boolean;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
-  modelValue: undefined,
+  modelValue: false,
+  selectedOption: undefined,
   preventSelection: false,
   preventSearch: false,
   persistent: false,
@@ -223,6 +279,12 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   disabled: false,
   inanimated: false,
   loading: false,
+  absolute: false,
+  zIndex: 9999,
+  offsetSkid: 0,
+  offsetDistance: 16,
+  optionHeight: 52,
+  preventClickActivation: false,
 });
 
 defineExpose<{
@@ -232,9 +294,9 @@ defineExpose<{
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: any): void;
-  (name: 'select-option', value: any): void;
-  (name: 'toggle', value: boolean): void;
+  (name: 'update:modelValue', value: boolean): void;
+  (name: 'update:selectedOption', value: any): void;
+  (name: 'before-select-option', value: any): void;
 }>();
 
 const style = computed(
@@ -246,28 +308,61 @@ const style = computed(
     '--fmenu--selected-option-text-color': getCssColor(
       props.selectedOptionTextColor
     ),
+    '--fmenu-option-height': genSize(props.optionHeight),
   })
 );
 
-const selectedOption = useVModelProxy<any>(props);
+const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
+  () => ({
+    placement: 'bottom-start',
+    strategy: props.absolute ? 'absolute' : 'fixed',
+    zIndex: props.zIndex,
+    offsetSkid: String(props.offsetSkid),
+    offsetDistance: String(props.offsetDistance),
+  })
+);
+
+const isOpen = useVModelProxy<boolean>(props);
+const selectedOption = useVModelProxy<any>(props, 'selectedOption');
 
 const optionRefs = ref<HTMLElement[]>([]);
+const activatorRef = ref<HTMLDivElement>();
 
 const menuClasses = computed(() => ({
   'FMenu--disabled': props.disabled,
   'FMenu--inanimated': props.inanimated,
 }));
 
-const isOpen = ref(false);
-const isKeyboardInteracting = ref(false);
 const preselectedOptionIndex = ref(-1);
+const isKeyboardInteracting = ref(false);
 
 /**
  * Toggle the menu
  */
-function toggleMenu() {
+async function toggleMenu() {
   if (props.disabled) return;
   isOpen.value = !isOpen.value;
+}
+
+const anyFocusableElementSelector = [
+  'button:not(.FButton)',
+  '[href]',
+  'input',
+  'select',
+  'textarea',
+  '[tabindex]:not([tabindex="-1"])',
+].join(', ');
+
+/**
+ * Focus the activator
+ */
+function focusActivator() {
+  if (!isOpen.value || props.disabled) return;
+  const hasFocusableChild = Array.from(
+    activatorRef.value?.querySelectorAll(anyFocusableElementSelector) ?? []
+  ).some(el => !el.hasAttribute('disabled'));
+  // If the activator does not have any focusable child, we must focus it manually to activate the keyboard event listeners
+  if (!hasFocusableChild) activatorRef.value?.focus();
 }
 
 /**
@@ -287,9 +382,9 @@ function closeMenu() {
 }
 
 watch(isOpen, newValue => {
-  emit('toggle', newValue);
-
-  if (!newValue) {
+  if (newValue) {
+    focusActivator();
+  } else {
     preselectOption(-1);
   }
 });
@@ -342,34 +437,41 @@ function mousePreselectOption(index: number) {
   preselectOption(index);
 }
 
-/**
- * Preselect the previous option or the last if the first is selected
- */
-function keyboardPreselectPrevOption(): void {
-  if (!isOpen.value) return;
+type PreselectionMode = 'first' | 'last' | 'prev' | 'next';
 
-  isKeyboardInteracting.value = true;
-  const preselectedIndex =
-    preselectedOptionIndex.value - 1 < 0
-      ? props.options.length - 1
-      : preselectedOptionIndex.value - 1;
-  scrollOptionIntoView(preselectedIndex);
-  preselectOption(preselectedIndex);
+/**
+ * get the option index to be preselected, based on mode
+ * @param mode - The preselection mode
+ */
+function getPreselectIndex(mode: PreselectionMode) {
+  switch (mode) {
+    case 'first':
+      return 0;
+    case 'last':
+      return props.options.length - 1;
+    case 'prev':
+      return preselectedOptionIndex.value - 1 < 0
+        ? props.options.length - 1
+        : preselectedOptionIndex.value - 1;
+    case 'next':
+      return preselectedOptionIndex.value + 1 > props.options.length - 1
+        ? 0
+        : preselectedOptionIndex.value + 1;
+  }
 }
 
 /**
- * Preselect the next option or the first if the last is already selected
+ * Preselect the previous option or the last if the first is selected
+ * @param mode - The preselection mode
  */
-function keyboardPreselectNextOption(): void {
-  if (!isOpen.value) return;
-
+function keyboardPreselectOption(mode: PreselectionMode): void {
+  if (!isOpen.value || !props.options.length) return;
   isKeyboardInteracting.value = true;
-  const preselectedIndex =
-    preselectedOptionIndex.value + 1 > props.options.length - 1
-      ? 0
-      : preselectedOptionIndex.value + 1;
-  scrollOptionIntoView(preselectedIndex);
-  preselectOption(preselectedIndex);
+
+  const preselectIndex = getPreselectIndex(mode);
+
+  scrollOptionIntoView(preselectIndex);
+  preselectOption(preselectIndex);
 }
 
 const menuOptionsRef = ref();
@@ -384,7 +486,7 @@ const {
  * @param index - Index of the option to scroll into view
  */
 function scrollOptionIntoView(index: number) {
-  const el = optionRefs?.value[index];
+  const el = optionRefs.value[index];
   const {
     top: itemTop,
     bottom: itemBottom,
@@ -426,7 +528,7 @@ function selectOption(option?: FMenuOption | null): void {
   const preselectedOption =
     option ?? props.options[preselectedOptionIndex.value];
 
-  emit('select-option', preselectedOption.value);
+  emit('before-select-option', preselectedOption.value);
   if (props.preventSelection) return;
 
   selectedOption.value = preselectedOption.value;
@@ -444,8 +546,6 @@ const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
 function handlePreselectSearch(event: KeyboardEvent) {
   event.stopPropagation();
   if (!isOpen.value || props.preventSearch) return;
-
-  isKeyboardInteracting.value = true;
 
   preselectSearchTerm = removeDiacritics(
     preselectSearchTerm + event.key

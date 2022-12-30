@@ -5,10 +5,10 @@ component.FButton(
   :style="style"
   :class="classes"
   v-bind="specificProps"
-  @blur.stop="emit('blur')"
-  @click.stop="onClick($event, true)"
-  @focus.stop="emit('focus')"
-  @keydown.enter.space.stop="onClick($event, false)"
+  @blur="emit('blur', $event)"
+  @click="handleClick($event, true)"
+  @focus="emit('focus', $event)"
+  @keydown.enter.space="handleClick($event, false)"
 )
   .FButton__container
     slot
@@ -447,8 +447,8 @@ const props = withDefaults(defineProps<FButtonProps>(), {
 
 const emit = defineEmits<{
   (name: 'click', e: MouseEvent | KeyboardEvent): void;
-  (name: 'focus'): void;
-  (name: 'blur'): void;
+  (name: 'focus', e: FocusEvent): void;
+  (name: 'blur', e: FocusEvent): void;
 }>();
 
 const buttonRef = ref<HTMLButtonElement>();
@@ -554,7 +554,7 @@ const style = computed(
   })
 );
 
-function onClick(e: MouseEvent | KeyboardEvent, blur: boolean): void {
+function handleClick(e: MouseEvent | KeyboardEvent, blur: boolean): void {
   if (blur && !props.preventBlurOnClick && !isLink.value) {
     buttonRef.value?.blur();
   }

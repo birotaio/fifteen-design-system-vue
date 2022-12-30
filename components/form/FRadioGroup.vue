@@ -53,6 +53,7 @@ export interface FRadioGroupOption {
 export interface FRadioGroupProps {
   /**
    * Selected value or values
+   * @model
    */
   modelValue?: string | number | null;
   /**
@@ -146,12 +147,9 @@ defineExpose<{
   focus,
 });
 
-const { value, isValid, hint, validate } = useFieldWithValidation(
-  props,
-  {
-    validateOnMount: props.validateOnMount,
-  }
-);
+const { value, isValid, hint, validate } = useFieldWithValidation(props, {
+  validateOnMount: props.validateOnMount,
+});
 const { handleChange, handleFocus, handleBlur } = useInputEventBindings(
   validate,
   props.validationTrigger,

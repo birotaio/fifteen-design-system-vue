@@ -123,6 +123,7 @@ import { useInputEventBindings } from '@/composables/useInputEventBindings';
 export interface FRadioProps {
   /**
    * Radio v-model value
+   * @model
    */
   modelValue?: string | boolean | number | null;
   /**

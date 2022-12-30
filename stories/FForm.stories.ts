@@ -28,7 +28,7 @@ Default.args = {
     FRadioGroup: 'b',
     FSelect: 'c',
     FTextarea: 'Default value',
-    FAutocompleteInput: 'a',
+    FAutocomplete: 'a',
   },
 };
 
@@ -43,6 +43,6 @@ Loading.args = {
     FRadioGroup: 'b',
     FSelect: 'c',
     FTextarea: 'Default value',
-    FAutocompleteInput: 'a',
+    FAutocomplete: 'a',
   },
 };

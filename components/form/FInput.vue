@@ -26,9 +26,11 @@ FField.FInput(
         FIcon.FInput__input__suffix__clearableIcon(
           v-if="clearable && value"
           name="close"
+          tabindex="0"
           :size="24"
           :color="textColor"
           @click.stop="handleClear"
+          @keydown.enter.space.stop="handleClear"
         )
         FLoader(
           v-if="loading"
@@ -113,6 +115,14 @@ FField.FInput(
 
 .FInput__input__suffix__clearableIcon
   cursor pointer
+
+  &:focus-visible
+    color var(--finput--focus-border-color)
+    border-radius rem(12)
+    outline-offset rem(4)
+    outline solid rem(2) var(--finput--focus-border-color)
+    transition $outline-transition
+    z-index 1
 </style>
 
 <script setup lang="ts">
@@ -134,6 +144,7 @@ import { useInputEventBindings } from '@/composables/useInputEventBindings';
 export interface FInputProps {
   /**
    * Input value
+   * @model
    */
   modelValue?: string;
   /**

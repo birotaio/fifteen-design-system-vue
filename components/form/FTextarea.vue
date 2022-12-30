@@ -112,6 +112,7 @@ import { useElementBounding } from '@vueuse/core';
 export interface FTextareaProps {
   /**
    * Text area value
+   * @model
    */
   modelValue?: string | null;
   /**

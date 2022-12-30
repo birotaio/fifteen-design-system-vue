@@ -1,9 +1,11 @@
 <template lang="pug">
-FField.FAutocompleteInput(
+FField.FAutocomplete(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
-    v-model="fieldValue"
+    ref="menuRef"
+    v-model="isMenuOpen"
+    v-model:selected-option="fieldValue"
     :options="matchingOptions"
     :width="menuWidth"
     :empty-text="loading ? loadingText : inputValue ? noMatchText : emptyText"
@@ -12,23 +14,22 @@ FField.FAutocompleteInput(
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
-    prevent-search
-    inanimated
     :disabled="disabled"
     :loading="loading"
-    @toggle="handleMenuToggle"
-    ref="menuRef"
+    prevent-click-activation
+    prevent-search
+    inanimated
   )
     template(#option="scope")
-      slot.FAutocompleteInput__option(
+      slot.FAutocomplete__option(
         name="option"
         v-bind="scope"
       )
         div(v-html="formatOption(scope.option)")
-    template(#activator="{ closeMenu, openMenu }")
+    template(#activator)
       FInput(
-        v-model="inputValue"
         ref="inputRef"
+        v-model="inputValue"
         :color="color"
         :border-color="borderColor"
         :text-color="textColor"
@@ -46,14 +47,14 @@ FField.FAutocompleteInput(
         :rules="[() => isValid]"
         :loading="loading"
         hide-hint
-        @focus="openMenu(); handleFocus($event)"
+        @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
         @input="handleInput"
       )
 </template>
 <style lang="stylus">
-.FAutocompleteInput__option__match
+.FAutocomplete__option__match
   padding 0 rem(1)
   position relative
 
@@ -81,9 +82,10 @@ import { composeSearchRegex } from '@/utils/text';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
 
-export interface FAutocompleteInputProps {
+export interface FAutocompleteProps {
   /**
    * Option value
+   * @model
    */
   modelValue?: any;
   /**
@@ -204,7 +206,7 @@ export interface FAutocompleteInputProps {
   preventSelection?: boolean;
   /**
    * Prevent item filtering
-   * Note : this prop has no effect if a formatInputFn is provided, as formatting the input value requires to prevent filtering.
+   * Note: this prop has no effect if a formatInputFn is provided, as formatting the input value requires to prevent filtering.
    */
   preventFiltering?: boolean;
   /**
@@ -229,7 +231,7 @@ export interface FAutocompleteInputProps {
   formatInputFn?: ((label: string, description: string) => string) | null;
 }
 
-const props = withDefaults(defineProps<FAutocompleteInputProps>(), {
+const props = withDefaults(defineProps<FAutocompleteProps>(), {
   modelValue: undefined,
   options: () => [],
   label: '',
@@ -301,19 +303,18 @@ function formatOption(option: FMenuOption) {
   if (!inputValue.value || !props.options.length) return option.label;
   return option.label.replace(
     filterRegex.value,
-    '<span class="FAutocompleteInput__option__match">$1</span>'
+    '<span class="FAutocomplete__option__match">$1</span>'
   );
 }
 
-function handleMenuToggle(isOpen: boolean) {
-  if (isOpen) {
-    // When opening the menu
-    formatInputValue();
-  } else {
-    // When closing the menu
-    setTimeout(formatInputValue, 15); // Wait for Popper to properly close the menu before changing input value, to avoid seeing menu content breaks due to menu items changing
+const isMenuOpen = ref(false);
+watch(isMenuOpen, value => {
+  if (!value) {
+    // When closing the menu, wait for Popper to properly close the menu before changing input value,
+    // to avoid seeing menu content breaks due to menu items changing
+    setTimeout(formatInputValue, 25);
   }
-}
+});
 
 function formatInputValue() {
   inputValue.value = props.formatInputFn
@@ -340,6 +341,7 @@ function handleBlur(e: Event) {
 
 function handleFocus(e: Event) {
   emit('focus', e);
+  isMenuOpen.value = true;
 }
 
 function handleChange(e: Event) {
@@ -348,6 +350,7 @@ function handleChange(e: Event) {
 
 function handleInput(e: InputEvent) {
   emit('input', e, inputValue.value ?? '');
+  isMenuOpen.value = true;
 }
 
 function isValidMatch() {
@@ -382,7 +385,7 @@ const menuRef = ref<InstanceType<typeof FMenu>>();
 
 watch(() => props.modelValue, matchModelValue, { immediate: true });
 
-function matchModelValue(modelValue: FAutocompleteInputProps['modelValue']) {
+function matchModelValue(modelValue: FAutocompleteProps['modelValue']) {
   const matchingOption = props.options.find(option =>
     equal(modelValue, option.value)
   );

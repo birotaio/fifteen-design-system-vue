@@ -74,6 +74,7 @@ import type { FButtonSize } from '@/components/FButton.vue';
 export interface FFileUploadProps {
   /**
    * Input value
+   * @model
    */
   modelValue?: File[] | null;
   /**

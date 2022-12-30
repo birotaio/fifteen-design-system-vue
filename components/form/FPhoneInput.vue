@@ -5,13 +5,14 @@ FField.FPhoneInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
+    v-model="isMenuOpen"
+    v-model:selected-option="countryCode"
     :options="countries"
-    v-model="countryCode"
-    width="100"
     :color="optionsMenuColor"
     :text-color="optionTextColor"
     :disabled="disabled"
-    @toggle="value => (isMenuOpen = value)"
+    width="100"
+    option-height="48"
   )
     template(#activator="{ toggleMenu, openMenu, closeMenu }")
       FInput(
@@ -41,7 +42,6 @@ FField.FPhoneInput(
       )
         template(#prefix)
           .FPhoneInput__prefix(
-            @keydown.esc="closeMenu"
             @keydown.enter="openMenu"
             @click.stop="toggleMenu"
           )
@@ -90,11 +90,12 @@ FField.FPhoneInput(
   cursor pointer
   margin-right rem(4)
 
-  &:focus
+  &:focus-visible
+    color var(--fphoneinput--textColor)
     outline-offset rem(6)
     outline solid rem(2) var(--fphoneinput--textColor)
-    z-index 1
     transition $outline-transition
+    z-index 1
 
   &:hover
     border-radius rem(24)
@@ -174,6 +175,7 @@ import type { FMenuOption } from '@/components/FMenu.vue';
 export interface FPhoneInputProps {
   /**
    * Full phone number value
+   * @model
    */
   modelValue?: string | null;
   /**

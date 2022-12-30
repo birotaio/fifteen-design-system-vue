@@ -1,5 +1,6 @@
 <template lang="pug">
 component.FLink(
+  ref="linkRef"
   :is="href ? 'a' : 'span'"
   :style="style"
   :class="classes"
@@ -8,7 +9,10 @@ component.FLink(
   :target="target"
   :role="role"
   :tabindex="tabindex"
-  @click="handleClick"
+  @blur="emit('blur', $event)"
+  @click="handleClick($event)"
+  @focus="emit('focus', $event)"
+  @keydown.enter.space="handleClick($event)"
 )
   span.FLink__content
     // @slot Default content slot
@@ -76,6 +80,14 @@ component.FLink(
     &:hover
       color var(--flink--hover-color)
 
+  &[tabindex]:not([tabindex="-1"]):focus-visible
+    outline-offset rem(4)
+    outline solid rem(3) currentColor
+    transition $outline-transition, color 0.25s
+
+    @media (prefers-reduced-motion)
+      transition none
+
 .FLink__content
   display flex
   align-items center
@@ -104,7 +116,7 @@ component.FLink(
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 
 export interface FLinkProps {
@@ -160,6 +172,10 @@ export interface FLinkProps {
    * Role "button" (aria attribute) for a11y purposes
    */
   role?: 'button';
+  /**
+   * Set tabindex independently of href (It is always set to -1 if disabled)
+   */
+  tabindex?: string | number;
 }
 
 const props = withDefaults(defineProps<FLinkProps>(), {
@@ -178,18 +194,22 @@ const props = withDefaults(defineProps<FLinkProps>(), {
   target: undefined,
   hreflang: undefined,
   role: undefined,
+  tabindex: undefined,
 });
 
 const emit = defineEmits<{
-  (name: 'click', e: MouseEvent): void;
+  (name: 'click', e: MouseEvent | KeyboardEvent): void;
+  (name: 'focus', e: FocusEvent): void;
+  (name: 'blur', e: FocusEvent): void;
 }>();
 
-function handleClick(e: MouseEvent): void {
-  if (props.prevent) e.preventDefault();
-  emit('click', e);
-}
-
-const tabindex = computed(() => (props.disabled ? '-1' : undefined));
+const tabindex = computed(() =>
+  props.disabled
+    ? '-1'
+    : props.tabindex !== undefined
+    ? String(props.tabindex)
+    : undefined
+);
 
 const classes = computed(() => ({
   'FLink--disabled': props.disabled,
@@ -205,4 +225,11 @@ const style = computed(
     '--flink--hover-color': getCssColor(props.hoverColor),
   })
 );
+
+const linkRef = ref<HTMLAnchorElement | HTMLSpanElement>();
+
+function handleClick(e: MouseEvent | KeyboardEvent): void {
+  if (props.prevent) e.preventDefault();
+  if (!props.disabled) emit('click', e);
+}
 </script>

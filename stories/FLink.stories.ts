@@ -89,3 +89,9 @@ ArrowHover.args = {
   hoverColor: 'neutral--light-5',
   arrowHoverColor: 'secondary',
 };
+
+export const NoLinkTabindex: Story<FLinkArgs> = Template.bind({});
+NoLinkTabindex.args = {
+  text: 'No link but a tabindex',
+  tabindex: 0,
+};

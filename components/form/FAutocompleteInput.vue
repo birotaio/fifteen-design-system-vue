@@ -26,7 +26,7 @@ FField.FAutocompleteInput(
         v-bind="scope"
       )
         div(v-html="formatOption(scope.option)")
-    template(#activator="{ openMenu }")
+    template(#activator)
       FInput(
         ref="inputRef"
         v-model="inputValue"
@@ -47,7 +47,7 @@ FField.FAutocompleteInput(
         :rules="[() => isValid]"
         :loading="loading"
         hide-hint
-        @focus="openMenu(); handleFocus($event)"
+        @focus="handleFocus"
         @blur="handleBlur"
         @change="handleChange"
         @input="handleInput"
@@ -309,10 +309,7 @@ function formatOption(option: FMenuOption) {
 
 const isMenuOpen = ref(false);
 watch(isMenuOpen, value => {
-  if (value) {
-    // When opening the menu
-    formatInputValue();
-  } else {
+  if (!value) {
     // When closing the menu, wait for Popper to properly close the menu before changing input value,
     // to avoid seeing menu content breaks due to menu items changing
     setTimeout(formatInputValue, 15);
@@ -344,6 +341,7 @@ function handleBlur(e: Event) {
 
 function handleFocus(e: Event) {
   emit('focus', e);
+  isMenuOpen.value = true;
 }
 
 function handleChange(e: Event) {
@@ -352,6 +350,7 @@ function handleChange(e: Event) {
 
 function handleInput(e: InputEvent) {
   emit('input', e, inputValue.value ?? '');
+  isMenuOpen.value = true;
 }
 
 function isValidMatch() {

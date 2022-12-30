@@ -1,6 +1,7 @@
 import { Story } from '@storybook/vue3';
 import FMenu, { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
 import FButton from '@/components/FButton.vue';
+import FLink from '@/components/FLink.vue';
 import { ref, watch } from 'vue';
 
 export default {
@@ -8,22 +9,22 @@ export default {
   component: FMenu,
 };
 
-const Template = (args: FMenuProps) => ({
-  components: { FMenu, FButton },
-  setup: () => ({ args }),
-  template: `
-<FMenu v-bind="args">
-  <template #activator="{ toggleMenu }">
-    <FButton @click="toggleMenu">Open Menu</FButton>
-  </template>
-</FMenu>`,
-});
-
 const options: FMenuOption[] = [
   { label: 'Acquisition', value: 'acquisition' },
   { label: 'Benefits', value: 'benefits' },
   { label: 'Data', value: 'data' },
 ];
+
+const Template = (args: FMenuProps) => ({
+  components: { FMenu, FButton },
+  setup: () => ({ args }),
+  template: `
+<FMenu v-bind="args">
+  <template #activator>
+    <FButton>Open Menu</FButton>
+  </template>
+</FMenu>`,
+});
 
 export const Default: Story<FMenuProps> = Template.bind({});
 Default.args = {
@@ -88,8 +89,8 @@ const AutoPlacementTemplate = () => ({
   template: `
 <div style="height: 300px"></div>
 <FMenu :options="updatingOptions" v-model="isOpen">
-  <template #activator="{ toggleMenu }">
-    <FButton @click="toggleMenu">Open Menu</FButton>
+  <template #activator>
+    <FButton>Open Menu</FButton>
   </template>
 </FMenu>
 `,
@@ -115,4 +116,32 @@ const ToggleTemplate = (args: FMenuProps) => ({
 export const ToggleExternally: Story<FMenuProps> = ToggleTemplate.bind({});
 ToggleExternally.args = {
   options,
+};
+
+const OptionSlotTemplate = (args: FMenuProps) => ({
+  components: { FMenu, FLink, FButton },
+  setup: () => ({ args }),
+  template: `
+<FMenu v-bind="args">
+  <template #activator>
+    <FLink tabindex="0">Open Menu</FLink>
+  </template>
+  <template #option="scope">
+    <div v-if="scope.option.value === 'benefits'">
+      <span>Conditionnally</span>
+      <a href="/">Click me I'm a link</a>
+    </div>
+    <template v-else>
+      <h6>I can render any option with scope:</h6>
+      <pre><caption>{{ scope }}</caption></pre>
+    </template>
+  </template>
+</FMenu>`,
+});
+
+export const OptionSlot: Story<FMenuProps> = OptionSlotTemplate.bind({});
+OptionSlot.args = {
+  options,
+  optionHeight: 180,
+  preventSelection: true,
 };

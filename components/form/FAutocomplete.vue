@@ -312,7 +312,7 @@ watch(isMenuOpen, value => {
   if (!value) {
     // When closing the menu, wait for Popper to properly close the menu before changing input value,
     // to avoid seeing menu content breaks due to menu items changing
-    setTimeout(formatInputValue, 15);
+    setTimeout(formatInputValue, 25);
   }
 });
 

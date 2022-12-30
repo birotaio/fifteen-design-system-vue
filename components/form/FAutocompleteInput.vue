@@ -16,6 +16,7 @@ FField.FAutocompleteInput(
     :prevent-selection="preventSelection"
     :disabled="disabled"
     :loading="loading"
+    prevent-click-activation
     prevent-search
     inanimated
   )
@@ -205,7 +206,7 @@ export interface FAutocompleteInputProps {
   preventSelection?: boolean;
   /**
    * Prevent item filtering
-   * Note : this prop has no effect if a formatInputFn is provided, as formatting the input value requires to prevent filtering.
+   * Note: this prop has no effect if a formatInputFn is provided, as formatting the input value requires to prevent filtering.
    */
   preventFiltering?: boolean;
   /**

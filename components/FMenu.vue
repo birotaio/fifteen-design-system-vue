@@ -16,7 +16,11 @@
       @keydown.up.prevent="keyboardPreselectOption('prev')"
       @keydown.home.prevent="keyboardPreselectOption('first')"
       @keydown.end.prevent="keyboardPreselectOption('last')"
-      @keydown.enter="selectOption()"
+      @keydown.tab.exact="keyboardPreselectOption('next'); isOpen && $event.preventDefault()"
+      @keydown.shift.tab="keyboardPreselectOption('prev'); isOpen && $event.preventDefault()"
+      @keydown.enter.prevent="openMenu(); selectOption()"
+      @keydown.esc.prevent="closeMenu()"
+      @click="!preventClickActivation && toggleMenu()"
     )
       slot(
         name="activator"
@@ -25,6 +29,7 @@
     template(#content)
       .FMenu__content(
         ref="contentRef"
+        @click="focusActivator"
         @mousemove="isKeyboardInteracting = false"
       )
         .FMenu__optionsMenu(
@@ -32,11 +37,13 @@
           ref="menuOptionsRef"
         )
           .FMenu__option(
-            role="option"
             v-for="(option, index) in options"
+            ref="optionRefs"
+            role="option"
+            tabindex="-1"
             :key="stringify(option.value)"
             :class="selectOptionClasses(index)"
-            ref="optionRefs"
+            :aria-selected="isSelected(index)"
             @click="selectOption(option)"
             @mouseenter="mousePreselectOption(index)"
             @mouseleave="mousePreselectOption(-1)"
@@ -45,12 +52,13 @@
               name="option-prefix"
               v-bind="{ option, index, isSelected: isSelected(index) }"
             )
-            slot(
-              name="option"
-              v-bind="{ option, index, isSelected: isSelected(index) }"
-            )
-              span {{ option.label }}
-            span.FMenu__option__description(v-if="option.description") {{ option.description }}
+            .FMenu__option__content
+              slot(
+                name="option"
+                v-bind="{ option, index, isSelected: isSelected(index) }"
+              )
+                span {{ option.label }}
+              span.FMenu__option__description(v-if="option.description") {{ option.description }}
         .FMenu__noOption(v-if="options.length === 0")
           FLoader.FMenu__loader(
             v-if="loading"
@@ -68,8 +76,10 @@
     left 0
     min-width var(--fmenu--width)
 
+  // Unfortunately, this is the only way to dynamically remove
+  // the Popper transition with the lib vue3-popper
   &--inanimated .popper
-    transition none // Unfortunately, this is the only way to remove the Popper transition with the lib vue3-popper
+    transition none
 
   .inline-block
     display block !important
@@ -97,8 +107,8 @@
 
 .FMenu__option
   display flex
-  flex-direction column
-  justify-content center
+  flex-wrap wrap
+  align-items center
   border-radius rem(16)
   height var(--fmenu-option-height)
   padding 0 rem(8)
@@ -114,6 +124,11 @@
     color var(--fmenu--selected-option-text-color)
     background var(--fmenu--selected-option-color)
     font-weight 700
+
+.FMenu__option__content
+  display flex
+  flex-direction column
+  justify-content center
 
 .FMenu__noOption
   display flex
@@ -242,6 +257,10 @@ export interface FMenuProps {
    * Height of the option div, defaults to 52px
    */
   optionHeight?: number | string;
+  /**
+   * Prevent the activator to automatically toggle the menu on click
+   */
+  preventClickActivation?: boolean;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -265,6 +284,7 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   offsetSkid: 0,
   offsetDistance: 16,
   optionHeight: 52,
+  preventClickActivation: false,
 });
 
 defineExpose<{
@@ -322,15 +342,28 @@ const isKeyboardInteracting = ref(false);
 async function toggleMenu() {
   if (props.disabled) return;
   isOpen.value = !isOpen.value;
-  if (isOpen.value) {
-    const hasFocusableChild = Array.from(
-      activatorRef.value?.querySelectorAll(
-        'button:not(.FButton), [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      ) ?? []
-    ).some(el => !el.hasAttribute('disabled'));
-    // If the activator does not have any focusable child, we must focus it manually to activate the keyboard event listeners
-    if (!hasFocusableChild) activatorRef.value?.focus();
-  }
+  focusActivator();
+}
+
+const anyFocusableElementSelector = [
+  'button:not(.FButton)',
+  '[href]',
+  'input',
+  'select',
+  'textarea',
+  '[tabindex]:not([tabindex="-1"])',
+].join(', ');
+
+/**
+ * Focus the activator
+ */
+function focusActivator() {
+  if (!isOpen.value || props.disabled) return;
+  const hasFocusableChild = Array.from(
+    activatorRef.value?.querySelectorAll(anyFocusableElementSelector) ?? []
+  ).some(el => !el.hasAttribute('disabled'));
+  // If the activator does not have any focusable child, we must focus it manually to activate the keyboard event listeners
+  if (!hasFocusableChild) activatorRef.value?.focus();
 }
 
 /**
@@ -431,7 +464,7 @@ function getPreselectIndex(mode: PreselectionMode) {
  * @param mode - The preselection mode
  */
 function keyboardPreselectOption(mode: PreselectionMode): void {
-  if (!isOpen.value) return;
+  if (!isOpen.value || !props.options.length) return;
   isKeyboardInteracting.value = true;
 
   const preselectIndex = getPreselectIndex(mode);
@@ -452,7 +485,7 @@ const {
  * @param index - Index of the option to scroll into view
  */
 function scrollOptionIntoView(index: number) {
-  const el = optionRefs?.value[index];
+  const el = optionRefs.value[index];
   const {
     top: itemTop,
     bottom: itemBottom,

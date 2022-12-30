@@ -1,6 +1,6 @@
 <template lang="pug">
 .FAvatar(:style="style")
-  .FAvatar__initialLetter(v-if="!src && resolvedInitialLetter") {{ resolvedInitialLetter }}
+  .FAvatar__letter(v-if="!src && resolvedLetter") {{ resolvedLetter }}
   FImage(
     v-else
     :src="src"
@@ -20,7 +20,7 @@
   width var(--FAvatar--size)
   height var(--FAvatar--size)
 
-.FAvatar__initialLetter
+.FAvatar__letter
   position absolute
   top 0
   left 0
@@ -68,13 +68,13 @@ export interface FAvatarProps {
    * given in lazy mode. As typescript cannot restrict the length of a string, any string is valid but the
    * component will display only the first letter in uppercase anyway.
    */
-  initialLetter?: string;
+  letter?: string;
   /**
    * Avatar color, defaults to transparent
    */
   color?: Color;
   /**
-   * Avatar text color, when initials are displayed, defaults to secondary
+   * Avatar text color, when initial letter is displayed, defaults to secondary
    */
   textColor?: Color;
 }
@@ -85,13 +85,13 @@ const props = withDefaults(defineProps<FAvatarProps>(), {
   loading: 'lazy',
   placeholder: '',
   size: '80',
-  initialLetter: '',
+  letter: '',
   color: 'transparent',
   textColor: 'secondary',
 });
 
-const resolvedInitialLetter = computed(() => {
-  return (props.initialLetter[0] ?? '').toUpperCase();
+const resolvedLetter = computed(() => {
+  return (props.letter[0] ?? '').toUpperCase();
 });
 
 const style = computed<Style>(() => ({

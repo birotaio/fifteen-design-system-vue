@@ -48,7 +48,7 @@ Lazy.args = {
 export const Initials: Story<FAvatarProps> = Template.bind({});
 Initials.args = {
   size: 48,
-  initialLetter: 'J',
+  letter: 'J',
   color: 'secondary',
   textColor: 'neutral--light-5',
 };

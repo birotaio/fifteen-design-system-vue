@@ -16,7 +16,7 @@ FField.FAutocomplete(
     :prevent-selection="preventSelection"
     :disabled="disabled"
     :loading="loading"
-    prevent-click-activation
+    prevent-activation
     prevent-search
     inanimated
   )

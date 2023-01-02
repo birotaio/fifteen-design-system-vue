@@ -29,7 +29,7 @@
   color var(--FAvatar--textColor)
   background-color var(--FAvatar--color)
   line-height var(--FAvatar--size)
-  border-radius calc((var(--FAvatar--size) / 2))
+  border-radius calc(var(--FAvatar--size) * 0.5)
   font-size calc((14 / 24) * var(--FAvatar--size))
   text-align center
   font-weight 700

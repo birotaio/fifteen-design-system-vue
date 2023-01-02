@@ -18,9 +18,9 @@
       @keydown.end.prevent="keyboardPreselectOption('last')"
       @keydown.tab.exact="keyboardPreselectOption('next'); isOpen && $event.preventDefault()"
       @keydown.shift.tab="keyboardPreselectOption('prev'); isOpen && $event.preventDefault()"
-      @keydown.enter.prevent="openMenu(); selectOption()"
+      @keydown.enter.space="handleKeydownEnter($event)"
       @keydown.esc.prevent="closeMenu()"
-      @click="!preventClickActivation && toggleMenu()"
+      @click="!preventActivation && toggleMenu()"
     )
       slot(
         name="activator"
@@ -258,9 +258,9 @@ export interface FMenuProps {
    */
   optionHeight?: number | string;
   /**
-   * Prevent the activator to automatically toggle the menu on click
+   * Prevent the activator to automatically toggle the menu on click, enter or space
    */
-  preventClickActivation?: boolean;
+  preventActivation?: boolean;
 }
 
 const props = withDefaults(defineProps<FMenuProps>(), {
@@ -284,7 +284,7 @@ const props = withDefaults(defineProps<FMenuProps>(), {
   offsetSkid: 0,
   offsetDistance: 16,
   optionHeight: 52,
-  preventClickActivation: false,
+  preventActivation: false,
 });
 
 defineExpose<{
@@ -579,6 +579,14 @@ function handlePreselectSearch(event: KeyboardEvent) {
   if (matchingResults === 1) {
     preselectSearchTerm = '';
   }
+}
+
+function handleKeydownEnter(event: KeyboardEvent) {
+  if (!props.preventActivation) {
+    openMenu();
+    event.preventDefault();
+  }
+  selectOption();
 }
 
 const menuRef = ref();

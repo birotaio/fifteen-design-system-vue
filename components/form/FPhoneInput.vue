@@ -13,7 +13,7 @@ FField.FPhoneInput(
     :disabled="disabled"
     width="100"
     option-height="48"
-    prevent-click-activation
+    prevent-activation
   )
     template(#activator="{ toggleMenu, openMenu, closeMenu }")
       FInput(

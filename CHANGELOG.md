@@ -3,6 +3,7 @@
 ### Fixes
 
 - [FAvatar] Avoid duplicate parenthesis being added by stylus-supremacy, causing incorrectly parsed CSS by Nuxt
+- [FPhoneInput] Prevent menu activation on enter key
 
 ## 0.10.1 (December 30, 2022)
 

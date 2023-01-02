@@ -1,3 +1,9 @@
+## 0.10.2 (January 2, 2023)
+
+### Fixes
+
+- [FAvatar] Avoid duplicate parenthesis being added by stylus-supremacy, causing incorrectly parsed CSS by Nuxt
+
 ## 0.10.1 (December 30, 2022)
 
 ### Fixes

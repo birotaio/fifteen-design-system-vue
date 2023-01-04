@@ -54,8 +54,7 @@ export const External: Story<FRouterLinkArgs> = Template.bind({});
 External.args = {
   text: 'External',
   color: 'warning',
-  location: 'https://google.com',
-  target: '_blank',
+  location: 'https://fifteen.eu',
 };
 
 export const AnchorLink: Story<FRouterLinkArgs> = Template.bind({});

@@ -17,6 +17,7 @@ template(v-else)
   FButton(
     v-bind="props"
     :href="hrefLocation"
+    :target="target ?? isExternal ? '_blank' : '_self'"
     @click="emit('click', $event)"
     @focus="emit('focus')"
   )
@@ -169,8 +170,6 @@ function handleClick(
   emit('click', e);
 }
 
-const router = useRouter();
-const hrefLocation = computed(() => router.resolve(props.location ?? '').href);
-
-const { isHref, getProps, getClasses } = useSmartLink(props);
+const { isHref, isExternal, getProps, getClasses } = useSmartLink(props);
+const hrefLocation = computed(() => props.location as string);
 </script>

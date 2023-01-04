@@ -26,17 +26,14 @@ template(v-else)
 <style lang="stylus"></style>
 
 <script setup lang="ts">
-import type {
-  RouteLocationRaw,
-  NavigationFailure,
-  RouterLink,
-} from 'vue-router';
-import { useRouter } from 'vue-router';
-import type { FButtonAnchorPoint, FButtonSize } from '@/components/FButton.vue';
+import { useRouter, RouterLink } from 'vue-router';
 import FButton from '@/components/FButton.vue';
 import { replace } from 'lodash';
 import { computed } from 'vue';
 import { useSmartLink } from '@/composables/useSmartLink';
+
+import type { RouteLocationRaw, NavigationFailure } from 'vue-router';
+import type { FButtonAnchorPoint, FButtonSize } from '@/components/FButton.vue';
 
 export interface FButtonLinkProps {
   /**
@@ -160,15 +157,15 @@ const props = withDefaults(defineProps<FButtonLinkProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'click', e: MouseEvent | KeyboardEvent): void;
+  (name: 'click', e: MouseEvent): void;
   (name: 'focus'): void;
 }>();
 
 function handleClick(
-  e: MouseEvent | KeyboardEvent,
+  e: MouseEvent,
   navigate: (e?: MouseEvent) => Promise<void | NavigationFailure>
 ) {
-  navigate(e as MouseEvent);
+  navigate(e);
   emit('click', e);
 }
 

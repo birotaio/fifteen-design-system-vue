@@ -27,11 +27,11 @@ template(v-else)
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, RouterLink } from 'vue-router';
 import FLink from '@/components/FLink.vue';
 import { useSmartLink } from '@/composables/useSmartLink';
 
-import type { RouteLocationRaw, RouterLink } from 'vue-router';
+import type { RouteLocationRaw } from 'vue-router';
 
 export interface FRouterLinkProps {
   /**

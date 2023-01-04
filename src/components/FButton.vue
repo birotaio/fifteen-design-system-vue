@@ -445,7 +445,7 @@ const props = withDefaults(defineProps<FButtonProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'click', e: MouseEvent | KeyboardEvent): void;
+  (name: 'click', e: PointerEvent): void;
   (name: 'focus', e: FocusEvent): void;
   (name: 'blur', e: FocusEvent): void;
 }>();
@@ -554,7 +554,6 @@ const style = computed(
 );
 
 function handleClick(e: PointerEvent, blur: boolean): void {
-  console.log(e);
   if (!e.pointerType) return;
 
   if (blur && !props.preventBlurOnClick && !isLink.value) {

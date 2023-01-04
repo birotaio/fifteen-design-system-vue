@@ -166,7 +166,7 @@ import {
 import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { genSize } from '@/utils/genSize';
-import { removeDiacritics, stringify } from '@/utils/text';
+import { removeDiacritics, stringify } from '@fifteen/shared-lib';
 
 export interface FMenuOption {
   label: string;

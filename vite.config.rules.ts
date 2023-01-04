@@ -7,7 +7,7 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       formats: ['es', 'cjs'],
-      entry: path.resolve(__dirname, 'rules/index.ts'),
+      entry: path.resolve(__dirname, 'src/rules/index.ts'),
       name: 'fifteen-design-system-vue/rules',
       fileName: format => `${format}/rules/index.js`,
     },

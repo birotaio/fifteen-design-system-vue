@@ -1,4 +1,4 @@
-import { breakpointsValues } from '@/config/breakpoints';
+import { breakpointsValues } from '@@/config/breakpoints';
 import { useBreakpoints } from '@vueuse/core';
 
 /**

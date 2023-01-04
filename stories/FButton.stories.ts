@@ -1,8 +1,8 @@
 import { Story } from '@storybook/vue3';
 import FButton, { FButtonProps } from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
-import { colorDesignTokens } from '@/config/colors';
-import { getIconList } from '@/config/icons/.utils';
+import { colorDesignTokens } from '@@/config/colors';
+import { getIconList } from '@@/config/icons/.utils';
 
 export default {
   title: 'Components/FButton',

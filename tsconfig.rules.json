@@ -16,5 +16,5 @@
     "outDir": "dist",
     "declaration": false
   },
-  "include": ["rules/index.ts"]
+  "include": ["src/rules/index.ts"]
 }

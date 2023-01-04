@@ -68,7 +68,7 @@ import FField from '@/components/form/FField.vue';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
-import type { Icon } from '@/types/icons';
+import type { Icon } from '@@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
 
 export interface FFileUploadProps {

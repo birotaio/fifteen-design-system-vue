@@ -1,7 +1,5 @@
 import { Story } from '@storybook/vue3';
-import FExpandable, {
-  FExpandableProps,
-} from '@/components/FExpandable.vue';
+import FExpandable, { FExpandableProps } from '@/components/FExpandable.vue';
 import FButton from '@/components/FButton.vue';
 
 export default {
@@ -15,7 +13,8 @@ interface FExpandableArgs extends FExpandableProps {
 }
 
 const title = 'Emissions de CO2';
-const text = 'En moyenne, un kilomètre parcouru sur un vélo électrique Fifteen économise Xg de CO2. Dans une ville comme Epinal avec 150 vélos électriques en libre-service, nous parlons de Xt de CO2 économisées par an.';
+const text =
+  'En moyenne, un kilomètre parcouru sur un vélo électrique Fifteen économise Xg de CO2. Dans une ville comme Epinal avec 150 vélos électriques en libre-service, nous parlons de Xt de CO2 économisées par an.';
 
 const Template = (args: FExpandableProps) => ({
   components: { FExpandable },

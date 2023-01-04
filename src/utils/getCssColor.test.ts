@@ -1,4 +1,4 @@
-import { colorDesignTokens } from '@/config/colors';
+import { colorDesignTokens } from '@@/config/colors';
 import { ref } from 'vue';
 import { getCssColor } from './getCssColor';
 import { describe, it, expect } from 'vitest';

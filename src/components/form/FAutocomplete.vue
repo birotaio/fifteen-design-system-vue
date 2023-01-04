@@ -78,7 +78,7 @@ import FMenu from '@/components/FMenu.vue';
 import equal from 'fast-deep-equal/es6';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { composeSearchRegex } from '@/utils/text';
+import { composeSearchRegex } from '@fifteen/shared-lib';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
 

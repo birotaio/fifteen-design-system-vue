@@ -1,8 +1,8 @@
 import FsIconGrid, {
   FsIconGridProps,
-} from '@/stories/components/FsIconGrid.vue';
+} from '@@/stories/components/FsIconGrid.vue';
 import { Story } from '@storybook/vue3';
-import { colorDesignTokens } from '@/config/colors';
+import { colorDesignTokens } from '@@/config/colors';
 
 export default {
   title: 'Components/FIcon',

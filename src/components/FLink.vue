@@ -12,7 +12,6 @@ component.FLink(
   @blur="emit('blur', $event)"
   @click="handleClick($event)"
   @focus="emit('focus', $event)"
-  @keydown.enter.space="handleClick($event)"
 )
   span.FLink__content
     // @slot Default content slot
@@ -33,7 +32,6 @@ component.FLink(
 <style lang="stylus">
 .FLink
   display inline-flex
-  cursor pointer
   position relative
   justify-content center
   align-items center
@@ -80,12 +78,12 @@ component.FLink(
     &:hover
       color var(--flink--hover-color)
 
-  &[tabindex]:not([tabindex="-1"]):focus-visible
+  &[tabindex]:not([tabindex='-1']):focus-visible
     outline-offset rem(4)
     outline solid rem(3) currentColor
     transition $outline-transition, color 0.25s
 
-    @media (prefers-reduced-motion)
+    @media (prefers-reduced-motion )
       transition none
 
 .FLink__content
@@ -198,7 +196,7 @@ const props = withDefaults(defineProps<FLinkProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'click', e: MouseEvent | KeyboardEvent): void;
+  (name: 'click', e: PointerEvent): void;
   (name: 'focus', e: FocusEvent): void;
   (name: 'blur', e: FocusEvent): void;
 }>();
@@ -228,7 +226,7 @@ const style = computed(
 
 const linkRef = ref<HTMLAnchorElement | HTMLSpanElement>();
 
-function handleClick(e: MouseEvent | KeyboardEvent): void {
+function handleClick(e: PointerEvent): void {
   if (props.prevent) e.preventDefault();
   if (!props.disabled) emit('click', e);
 }

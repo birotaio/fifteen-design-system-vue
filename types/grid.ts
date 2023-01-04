@@ -1,3 +1,3 @@
-import { spanValues } from '@/config/grid';
+import { spanValues } from '@@/config/grid';
 
 export type Span = typeof spanValues[number];

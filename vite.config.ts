@@ -8,7 +8,8 @@ export default defineConfig({
   root: '.',
   resolve: {
     alias: {
-      '@': __dirname,
+      '@': path.join(__dirname, 'src'),
+      '@@': __dirname,
     },
   },
   plugins: [
@@ -41,8 +42,10 @@ export default defineConfig({
       // externalize deps that shouldn't be bundled into the library
       external: [
         'vue',
+        'vue-router',
         '@vueuse/core',
         'libphonenumber-js',
+        'xss',
         ...(process.env.DEV_BUILD
           ? []
           : ['vee-validate', '@vee-validate/rules']),

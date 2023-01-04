@@ -8,7 +8,6 @@ component.FButton(
   @blur="emit('blur', $event)"
   @click="handleClick($event, true)"
   @focus="emit('focus', $event)"
-  @keydown.enter.space="handleClick($event, false)"
 )
   .FButton__container
     slot
@@ -331,7 +330,7 @@ import FLink from '@/components/FLink.vue';
 import FLoader from '@/components/FLoader.vue';
 
 import { ref, computed } from 'vue';
-import { colorDesignTokens } from '@/config/colors';
+import { colorDesignTokens } from '@@/config/colors';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFBreakpoints } from '@/composables/useFBreakpoints';
 
@@ -554,7 +553,10 @@ const style = computed(
   })
 );
 
-function handleClick(e: MouseEvent | KeyboardEvent, blur: boolean): void {
+function handleClick(e: PointerEvent, blur: boolean): void {
+  console.log(e);
+  if (!e.pointerType) return;
+
   if (blur && !props.preventBlurOnClick && !isLink.value) {
     buttonRef.value?.blur();
   }

@@ -100,8 +100,8 @@ import FIcon from '@/components/FIcon.vue';
 import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import type { CreditCardInfo } from '@/modules/credit-card-types';
-import { getCardInfo } from '@/modules/credit-card-types';
+import type { CreditCardInfo } from '@@/modules/credit-card-types';
+import { getCardInfo } from '@@/modules/credit-card-types';
 
 export interface FCreditCardInputProps {
   /**

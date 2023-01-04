@@ -7,6 +7,7 @@ const composables = [
   'useInputEventBindings',
   'useLazyImage',
   'useVModelProxy',
+  'useSmartLink',
 ];
 
 const utils = ['getCssColor', 'genSize', 'removeDiacritics'];

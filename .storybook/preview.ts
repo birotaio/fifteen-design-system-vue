@@ -1,5 +1,8 @@
-import '@/styles/elements.styl';
-import '@/styles/theme.styl';
+import '@@/styles/elements.styl';
+import '@@/styles/theme.styl';
+import { app } from '@storybook/vue3';
+
+import { createRouter, createWebHistory } from 'vue-router';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -41,3 +44,21 @@ export const decorators = [
     template: '<div class="Fifteen"><story /></div>',
   }),
 ];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: '/test',
+      name: 'test',
+      redirect: '/',
+    },
+    {
+      path: '/',
+      name: 'root',
+      component: null, // it's only a mock
+    },
+  ],
+});
+
+app.use(router);

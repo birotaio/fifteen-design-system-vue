@@ -3,6 +3,12 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: '.',
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, 'src'),
+      '@@': __dirname,
+    },
+  },
   build: {
     emptyOutDir: false,
     lib: {

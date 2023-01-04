@@ -14,7 +14,12 @@
     "baseUrl": "./",
     "rootDir": "./",
     "outDir": "dist",
-    "declaration": false
+    "declaration": false,
+    "paths": {
+      "@@/*": ["./*"],
+      "@/*": ["./src/*"],
+      "react": ["./stubs/types__react"]
+    }
   },
   "include": ["resolvers/index.ts"]
 }

@@ -2,8 +2,6 @@ const path = require('path');
 const ViteSvgLoader = require('vite-svg-loader');
 const AutoImport = require('unplugin-auto-import/vite');
 
-console.log(__dirname);
-
 module.exports = {
   stories: ['../stories/**/*.stories.ts'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],

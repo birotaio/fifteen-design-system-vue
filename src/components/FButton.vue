@@ -6,7 +6,7 @@ component.FButton(
   :class="classes"
   v-bind="specificProps"
   @blur="emit('blur', $event)"
-  @click="handleClick($event, true)"
+  @click="handleClick($event)"
   @focus="emit('focus', $event)"
 )
   .FButton__container
@@ -445,7 +445,7 @@ const props = withDefaults(defineProps<FButtonProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'click', e: PointerEvent): void;
+  (name: 'click', e: MouseEvent): void;
   (name: 'focus', e: FocusEvent): void;
   (name: 'blur', e: FocusEvent): void;
 }>();
@@ -553,15 +553,16 @@ const style = computed(
   })
 );
 
-function handleClick(e: PointerEvent, blur: boolean): void {
-  if (!e.pointerType) return;
-
-  if (blur && !props.preventBlurOnClick && !isLink.value) {
-    buttonRef.value?.blur();
-  }
+function handleClick(e: MouseEvent): void {
   if (!props.href && !props.submit) e.preventDefault();
   if (!props.loading && !props.disabled && !props.preventClick) {
     emit('click', e);
+  }
+
+  // The `detail` field from MouseEvent is a number incremented ou mouse click, but not at keydown
+  const isKeyboardClick = !e.detail;
+  if (!isKeyboardClick && !props.preventBlurOnClick && !isLink.value) {
+    buttonRef.value?.blur();
   }
 }
 </script>

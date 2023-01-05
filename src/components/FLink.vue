@@ -196,7 +196,7 @@ const props = withDefaults(defineProps<FLinkProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'click', e: PointerEvent): void;
+  (name: 'click', e: MouseEvent): void;
   (name: 'focus', e: FocusEvent): void;
   (name: 'blur', e: FocusEvent): void;
 }>();
@@ -226,7 +226,7 @@ const style = computed(
 
 const linkRef = ref<HTMLAnchorElement | HTMLSpanElement>();
 
-function handleClick(e: PointerEvent): void {
+function handleClick(e: MouseEvent): void {
   if (props.prevent) e.preventDefault();
   if (!props.disabled) emit('click', e);
 }

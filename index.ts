@@ -1,7 +1,7 @@
 /**
  * Shared style
  */
-import '@@/styles/elements.styl';
+import '@/styles/elements.styl';
 /**
  * Components
  */

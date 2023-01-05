@@ -2,7 +2,7 @@
 // To update it, run `yarn build:icons`.
 
 import type { CountryCode } from 'libphonenumber-js';
-import type { CreditCardBrandId } from '@@/modules/credit-card-types';
+import type { CreditCardBrandId } from '@/helpers/credit-cards';
 
 const iconList = [
   'archive',

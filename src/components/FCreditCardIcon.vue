@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import FSvgImage from './FSvgImage.vue';
 import { computed } from 'vue';
-import type { CreditCardBrandId } from '@@/modules/credit-card-types';
+import type { CreditCardBrandId } from '@/helpers/credit-cards';
 import { genSize } from '@/utils/genSize';
 
 export interface FCreditCardIconProps {

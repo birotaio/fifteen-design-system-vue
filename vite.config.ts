@@ -27,7 +27,7 @@ export default defineConfig({
     preprocessorOptions: {
       stylus: {
         // import this file so that is is available for each component
-        imports: [path.resolve(__dirname, 'styles/components.styl')],
+        imports: [path.resolve(__dirname, 'src/styles/components.styl')],
       },
     },
   },

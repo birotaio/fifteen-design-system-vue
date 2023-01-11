@@ -83,7 +83,7 @@ component.FLink(
     outline solid rem(3) currentColor
     transition $outline-transition, color 0.25s
 
-    @media (prefers-reduced-motion )
+    @media (prefers-reduced-motion)
       transition none
 
 .FLink__content

@@ -50,7 +50,7 @@
     stroke-width var(--ficon--stroke-width)
     transition fill 0.12s var(--transition--ease-out)
 
-  @media (prefers-reduced-motion )
+  @media (prefers-reduced-motion)
     transition none
 
     path

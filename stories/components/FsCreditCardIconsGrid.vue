@@ -30,7 +30,7 @@ $border = lightgay
 
 <script setup lang="ts">
 import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
-import { getCreditCardIcons } from '@/config/icons/.utils';
+import { getCreditCardIcons } from '@/constants/icons/.utils';
 
 export interface FsCreditCardIconGridProps {
   /**

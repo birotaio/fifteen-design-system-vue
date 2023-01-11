@@ -28,5 +28,5 @@
 </style>
 
 <script setup lang="ts">
-import { colorDesignTokens, baseColorDesignTokens } from '../../config/colors';
+import { colorDesignTokens, baseColorDesignTokens } from '@/constants/colors';
 </script>

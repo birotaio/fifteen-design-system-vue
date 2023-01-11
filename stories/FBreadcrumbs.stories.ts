@@ -1,5 +1,5 @@
 import { Story } from '@storybook/vue3';
-import { colorDesignTokens } from '@/config/colors';
+import { colorDesignTokens } from '@/constants/colors';
 import FBreadcrumbs, { FBreadcrumbsProps } from '@/components/FBreadcrumbs.vue';
 
 export default {

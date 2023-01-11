@@ -14,7 +14,8 @@
     "baseUrl": "./",
     "rootDir": "./",
     "paths": {
-      "@/*": ["./*"],
+      "@@/*": ["./*"],
+      "@/*": ["./src/*"],
       "react": ["./stubs/types__react"]
     },
     "outDir": "dist/types",
@@ -25,6 +26,6 @@
     "index.ts",
     "./components/*.vue",
     "./(composables|utils|config)/*.ts",
-    "./types/*.d.ts"
+    "./src/types/*.d.ts"
   ]
 }

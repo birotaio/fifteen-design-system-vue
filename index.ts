@@ -29,6 +29,7 @@ export { default as FSvgImage } from '@/components/FSvgImage.vue';
 export { default as FFlagIcon } from '@/components/FFlagIcon.vue';
 export { default as FCreditCardIcon } from '@/components/FCreditCardIcon.vue';
 export { default as FMenu } from '@/components/FMenu.vue';
+export { default as FTextContent } from '@/components/FTextContent.vue';
 /**
  * Form components
  */
@@ -109,21 +110,21 @@ export { useIcon } from '@/composables/useIcon';
 export { useInputEventBindings } from '@/composables/useInputEventBindings';
 export { useLazyImage } from '@/composables/useLazyImage';
 export { useVModelProxy } from '@/composables/useVModelProxy';
+export { useSmartLink } from '@/composables/useSmartLink';
 
 /**
  * Utils
  */
 export { genSize } from '@/utils/genSize';
 export { getCssColor } from '@/utils/getCssColor';
-export { removeDiacritics } from '@/utils/text';
 
 /**
  * Config constants
  */
-export { breakpointsValues } from '@/config/breakpoints';
-export { baseColorDesignTokens, colorDesignTokens } from '@/config/colors';
-export { columns, spanValues } from '@/config/grid';
-export { typographies } from '@/config/typography';
+export { breakpointsValues } from '@/constants/breakpoints';
+export { baseColorDesignTokens, colorDesignTokens } from '@/constants/colors';
+export { columns, spanValues } from '@/constants/grid';
+export { typographies } from '@/constants/typography';
 
 /**
  * Types

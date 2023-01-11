@@ -40,12 +40,17 @@ const components = [
   'FAutocomplete',
 ];
 
+const routerComponents = ['FRouterLink', 'FButtonLink'];
+
 export function FifteenComponentsResolver(): ComponentResolver {
   return {
     type: 'component',
     resolve: async (name: string) => {
       if (components.includes(name)) {
         return { name, from: '@fifteen/design-system-vue' };
+      }
+      if (routerComponents.includes(name)) {
+        return { name, from: '@fifteen/design-system-vue/router' };
       }
     },
   };

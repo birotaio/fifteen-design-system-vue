@@ -1,8 +1,6 @@
 import { Story } from '@storybook/vue3';
-import { colorDesignTokens } from '@/config/colors';
-import FProgressBar, {
-  FProgressBarProps,
-} from '@/components/FProgressBar.vue';
+import { colorDesignTokens } from '@/constants/colors';
+import FProgressBar, { FProgressBarProps } from '@/components/FProgressBar.vue';
 
 export default {
   title: 'Components/FProgressBar',

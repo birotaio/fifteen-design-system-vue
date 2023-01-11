@@ -7,11 +7,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:vue/vue3-recommended"
   ],
-  "ignorePatterns": [
-    "auto-imports.d.ts",
-    "components.d.ts",
-    "dist/**/*"
-  ],
+  "ignorePatterns": ["auto-imports.d.ts", "components.d.ts", "dist/**/*"],
   "parserOptions": {
     "ecmaVersion": "latest",
     "parser": "@typescript-eslint/parser",

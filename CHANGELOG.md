@@ -1,3 +1,14 @@
+## 0.11.0 (January 11, 2023)
+
+### Features
+
+- [Lib] Add `FRouterLink`, `FButtonLink` and `FTextContent` components from `@fifteen/shared-lib`
+
+### Changes
+
+- [Lib] Move text utilities to `@fifteen/shared-lib`
+- Code reorganization
+
 ## 0.10.2 (January 2, 2023)
 
 ### Fixes

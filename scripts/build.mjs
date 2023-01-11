@@ -6,7 +6,6 @@ await $`yarn build:lib`;
 await Promise.all([
   $`yarn build:icons`,
   $`yarn build:resolvers`,
-  $`yarn build:rules`,
   $`yarn build:types`,
   $`yarn build:theme`,
   $`yarn build:router`,

@@ -24,8 +24,9 @@
   "types": "dist/types/index.d.ts",
   "files": [
     "dist",
-    "styles",
-    "postinstall.sh"
+    "postinstall.sh",
+    "resolvers.d.ts",
+    "rules.d.ts"
   ],
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",
@@ -38,14 +39,6 @@
       "import": "./dist/es/resolvers/index.js",
       "require": "./dist/cjs/resolvers/index.js"
     },
-    "./style.css": {
-      "import": "./dist/style.css",
-      "require": "./dist/style.css"
-    },
-    "./theme.css": {
-      "import": "./dist/theme.css",
-      "require": "./dist/theme.css"
-    },
     "./rules": {
       "import": "./dist/es/rules/index.js",
       "require": "./dist/cjs/rules/index.js"
@@ -53,7 +46,10 @@
     "./router": {
       "import": "./dist/es/router/index.js",
       "require": "./dist/cjs/router/index.js"
-    }
+    },
+    "./styles/*.styl": "./dist/styles/*.styl",
+    "./style.css": "./dist/style.css",
+    "./theme.css": "./dist/theme.css"
   },
   "scripts": {
     "dev": "yarn sb",
@@ -65,7 +61,7 @@
     "build:types:resolvers": "tsc -p tsconfig.resolvers.json --declaration --emitDeclarationOnly --outDir dist/types",
     "build:types:rules": "tsc -p tsconfig.rules.json --declaration --emitDeclarationOnly --outDir dist/types",
     "build:types": "yarn build:types:lib && yarn build:types:resolvers && yarn build:types:rules",
-    "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp src/assets/fonts/* dist/assets/fonts",
+    "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp src/assets/fonts/* dist/assets/fonts && mkdir -p dist/styles && cp -r src/styles/* dist/styles",
     "build:icons": "zx scripts/build-icons.mjs",
     "build:resolvers": "vite build --config vite.config.resolvers.ts",
     "build:rules": "vite build --config vite.config.rules.ts",

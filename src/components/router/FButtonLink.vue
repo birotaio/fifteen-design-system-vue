@@ -27,9 +27,8 @@ template(v-else)
 <style lang="stylus"></style>
 
 <script setup lang="ts">
-import { useRouter, RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import FButton from '@/components/FButton.vue';
-import { replace } from 'lodash';
 import { computed } from 'vue';
 import { useSmartLink } from '@/composables/useSmartLink';
 

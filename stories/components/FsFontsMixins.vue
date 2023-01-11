@@ -13,5 +13,5 @@ for $key in $fonts
 </style>
 
 <script setup lang="ts">
-import { typographies } from '../../config/typography';
+import { typographies } from '@/constants/typography';
 </script>

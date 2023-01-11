@@ -1,5 +1,5 @@
 import type CSS from 'csstype';
-import { baseColorDesignTokens, colorDesignTokens } from '@@/config/colors';
+import { baseColorDesignTokens, colorDesignTokens } from '@/constants/colors';
 
 export type BaseColorDesignToken = typeof baseColorDesignTokens[number];
 export type ColorDesignToken = typeof colorDesignTokens[number];

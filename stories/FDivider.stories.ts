@@ -1,6 +1,6 @@
 import { Story } from '@storybook/vue3';
 import FDivider, { FDividerProps } from '@/components/FDivider.vue';
-import { colorDesignTokens } from '@@/config/colors';
+import { colorDesignTokens } from '@/constants/colors';
 
 export default {
   title: 'Components/FDivider',

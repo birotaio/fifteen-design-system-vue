@@ -5,8 +5,8 @@ import { readFileSync } from 'fs';
 import { parse } from 'node-html-parser';
 import camelCase from 'camelcase';
 
-const OUTPUT_UTILS_FILE = 'config/icons/.utils.ts';
-const OUTPUT_LIST_FILE = 'config/icons/.icons.ts';
+const OUTPUT_UTILS_FILE = 'src/constants/icons/.utils.ts';
+const OUTPUT_LIST_FILE = 'src/constants/icons/.icons.ts';
 
 function getIconsInfos(icons, nameTocamelCase = true) {
   return icons.map(url => {
@@ -23,13 +23,13 @@ function getIconsInfos(icons, nameTocamelCase = true) {
   });
 }
 
-const iconUrls = await globby('assets/icons/*');
+const iconUrls = await globby('src/assets/icons/*');
 const icons = getIconsInfos(iconUrls);
 
-const flagIconURLs = await globby('assets/icons/country-flags/*');
+const flagIconURLs = await globby('src/assets/icons/country-flags/*');
 const flagIcons = getIconsInfos(flagIconURLs);
 
-const creditCardIconsURLs = await globby('assets/icons/credit-cards/*');
+const creditCardIconsURLs = await globby('src/assets/icons/credit-cards/*');
 const creditCardIcons = getIconsInfos(creditCardIconsURLs, false);
 
 const preamble = `

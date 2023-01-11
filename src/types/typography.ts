@@ -1,3 +1,3 @@
-import { typographies } from '@@/config/typography';
+import { typographies } from '@/constants/typography';
 
 export type Typography = typeof typographies[number];

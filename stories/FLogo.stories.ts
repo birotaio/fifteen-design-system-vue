@@ -1,6 +1,6 @@
 import { Story } from '@storybook/vue3';
 import FLogo, { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
-import { colorDesignTokens } from '@@/config/colors';
+import { colorDesignTokens } from '@/constants/colors';
 
 const logoVariants: FLogoVariant[] = [
   'vertical',

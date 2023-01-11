@@ -2,7 +2,7 @@ import FsIconGrid, {
   FsIconGridProps,
 } from '@@/stories/components/FsIconGrid.vue';
 import { Story } from '@storybook/vue3';
-import { colorDesignTokens } from '@@/config/colors';
+import { colorDesignTokens } from '@/constants/colors';
 
 export default {
   title: 'Components/FIcon',

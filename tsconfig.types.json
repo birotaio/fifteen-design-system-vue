@@ -26,6 +26,6 @@
     "index.ts",
     "./components/*.vue",
     "./(composables|utils|config)/*.ts",
-    "./types/*.d.ts"
+    "./src/types/*.d.ts"
   ]
 }

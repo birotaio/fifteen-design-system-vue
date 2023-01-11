@@ -1,6 +1,6 @@
 import FSvgImage, { FSvgImageProps } from '@/components/FSvgImage.vue';
 import { Story } from '@storybook/vue3';
-import { colorDesignTokens } from '@@/config/colors';
+import { colorDesignTokens } from '@/constants/colors';
 
 import ponyLogoComponent from '@@/stories/assets/pony.svg?component';
 import ponyLogoMarkup from '@@/stories/assets/pony.svg?raw';

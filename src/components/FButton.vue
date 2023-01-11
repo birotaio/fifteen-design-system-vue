@@ -330,7 +330,7 @@ import FLink from '@/components/FLink.vue';
 import FLoader from '@/components/FLoader.vue';
 
 import { ref, computed } from 'vue';
-import { colorDesignTokens } from '@@/config/colors';
+import { colorDesignTokens } from '@/constants/colors';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFBreakpoints } from '@/composables/useFBreakpoints';
 

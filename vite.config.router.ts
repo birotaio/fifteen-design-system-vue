@@ -16,7 +16,7 @@ export default defineConfig({
     Vue(),
     ViteSvgLoader(),
     Visualizer({
-      filename: path.resolve(__dirname, 'report/treemap.html'),
+      filename: path.resolve(__dirname, 'report/router-treemap.html'),
       title: 'Bundle Visualizer',
       gzipSize: true,
       brotliSize: true,

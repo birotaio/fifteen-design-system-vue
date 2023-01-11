@@ -121,23 +121,23 @@ export { getCssColor } from '@/utils/getCssColor';
 /**
  * Config constants
  */
-export { breakpointsValues } from '@@/config/breakpoints';
-export { baseColorDesignTokens, colorDesignTokens } from '@@/config/colors';
-export { columns, spanValues } from '@@/config/grid';
-export { typographies } from '@@/config/typography';
+export { breakpointsValues } from '@/constants/breakpoints';
+export { baseColorDesignTokens, colorDesignTokens } from '@/constants/colors';
+export { columns, spanValues } from '@/constants/grid';
+export { typographies } from '@/constants/typography';
 
 /**
  * Types
  */
-export type { Breakpoint } from '@@/types/breakpoints';
-export type { Typography } from '@@/types/typography';
+export type { Breakpoint } from '@/types/breakpoints';
+export type { Typography } from '@/types/typography';
 export type {
   Color,
   BaseColorDesignToken,
   ColorDesignToken,
-} from '@@/types/colors';
-export type { FontFamily } from '@@/types/font';
-export type { ValidationRule } from '@@/types/forms';
-export type { Span } from '@@/types/grid';
-export type { Icon } from '@@/types/icons';
-export type { CSSVariable, Style } from '@@/types/styles';
+} from '@/types/colors';
+export type { FontFamily } from '@/types/font';
+export type { ValidationRule } from '@/types/forms';
+export type { Span } from '@/types/grid';
+export type { Icon } from '@/types/icons';
+export type { CSSVariable, Style } from '@/types/styles';

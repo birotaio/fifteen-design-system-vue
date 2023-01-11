@@ -14,7 +14,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { genSize } from '@/utils/genSize';
-import { columns } from '@@/config/grid';
+import { columns } from '@/constants/grid';
 
 export interface FGridProps {
   /**

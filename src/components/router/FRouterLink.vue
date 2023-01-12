@@ -28,7 +28,7 @@ template(v-else)
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useRouter, RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import FLink from '@/components/FLink.vue';
 import { useSmartLink } from '@/composables/useSmartLink';
 

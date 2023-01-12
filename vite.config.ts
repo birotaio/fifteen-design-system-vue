@@ -34,9 +34,9 @@ export default defineConfig({
   build: {
     lib: {
       formats: ['es', 'cjs'],
-      entry: path.resolve(__dirname, 'index.ts'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'fifteen-design-system-vue',
-      fileName: format => `${format}/index.js`,
+      fileName: format => `${format}/lib/index.js`,
     },
     rollupOptions: {
       // externalize deps that shouldn't be bundled into the library

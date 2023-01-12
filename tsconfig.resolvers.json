@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "rootDir": "./",
-    "outDir": "dist",
+    "outDir": "dist/types/resolvers",
     "declaration": false,
     "paths": {
       "@@/*": ["./*"],

@@ -12,7 +12,7 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "baseUrl": "./",
-    "rootDir": "./",
+    "rootDir": "./src/",
     "paths": {
       "@@/*": ["./*"],
       "@/*": ["./src/*"],

@@ -1,1 +1,1 @@
-export * from './dist/types/router/src/components/router';
+export * from './dist/types/router/components/router';

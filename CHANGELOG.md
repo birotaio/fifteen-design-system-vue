@@ -1,3 +1,9 @@
+## 0.11.1 (January 11, 2023)
+
+### Fixes
+
+- [Lib] Fix `rules` and `router` exports
+
 ## 0.11.0 (January 11, 2023)
 
 ### Features

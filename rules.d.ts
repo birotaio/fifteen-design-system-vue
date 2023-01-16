@@ -1,1 +1,1 @@
-export * from './dist/types/src/rules';
+export * from './dist/types/rules';

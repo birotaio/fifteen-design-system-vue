@@ -12,21 +12,19 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "baseUrl": "./",
-    "rootDir": "./",
+    "rootDir": "./src/",
     "paths": {
       "@@/*": ["./*"],
       "@/*": ["./src/*"],
       "react": ["./stubs/types__react"]
     },
-    "outDir": "dist/types",
+    "outDir": "dist/types/router",
     "declaration": true,
     "emitDeclarationOnly": true
   },
   "include": [
-    "./src/index.ts",
-    "./src/components/**/*.vue",
-    "./src/(composables|utils|config)/*.ts",
+    "./src/components/router/*.vue",
+    "./src/components/router/*.ts",
     "./src/types/*.d.ts"
-  ],
-  "exclude": ["./src/components/router/*"]
+  ]
 }

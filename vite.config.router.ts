@@ -33,7 +33,6 @@ export default defineConfig({
   },
   build: {
     emptyOutDir: false,
-    assetsDir: '/router-style',
     lib: {
       formats: ['es', 'cjs'],
       entry: path.resolve(__dirname, 'src/components/router/index.ts'),

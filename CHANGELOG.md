@@ -1,3 +1,9 @@
+## 0.11.2 (January 19, 2023)
+
+### Fixes
+
+- [Composables] Improve useFBreakpoint to be SSR-ready
+
 ## 0.11.1 (January 11, 2023)
 
 ### Fixes

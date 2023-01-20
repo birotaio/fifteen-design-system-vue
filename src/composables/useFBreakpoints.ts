@@ -1,16 +1,28 @@
+import { computed } from 'vue';
 import { breakpointsValues } from '@/constants/breakpoints';
-import { useBreakpoints } from '@vueuse/core';
+import { useBreakpoints, useMounted } from '@vueuse/core';
 
 /**
  * Returns breakpoints boolean values and utils breakpoints functions
  */
 export function useFBreakpoints() {
   const breakpoints = useBreakpoints(breakpointsValues);
-  const isXxsAndDown = breakpoints.smaller('xxs');
-  const isXsAndDown = breakpoints.smaller('xs');
-  const isSmAndDown = breakpoints.smaller('sm');
-  const isMdAndDown = breakpoints.smaller('md');
-  const isLgAndDown = breakpoints.smaller('lg');
+  const isMounted = useMounted();
+  const isXxsAndDown = computed(
+    () => isMounted.value && breakpoints.smaller('xxs').value
+  );
+  const isXsAndDown = computed(
+    () => isMounted.value && breakpoints.smaller('xs').value
+  );
+  const isSmAndDown = computed(
+    () => isMounted.value && breakpoints.smaller('sm').value
+  );
+  const isMdAndDown = computed(
+    () => isMounted.value && breakpoints.smaller('md').value
+  );
+  const isLgAndDown = computed(
+    () => isMounted.value && breakpoints.smaller('lg').value
+  );
 
   /**
    *

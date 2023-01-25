@@ -1,3 +1,9 @@
+## 0.12.0 (January 25, 2023)
+
+### Feature
+
+- [icons] Add `microphone`, `pause`, `rfid-card` and `zoov-bike-elect` icons
+
 ## 0.11.2 (January 19, 2023)
 
 ### Fixes

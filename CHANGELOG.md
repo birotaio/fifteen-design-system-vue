@@ -4,10 +4,6 @@
 
 - [FTextContent] Export `FTextContentProps` and expose `FTextContent` in resolver
 
-### Features
-
-- [icons] Add `microphone`, `pause`, `rfid-card` and `zoov-bike-elect` icons
-
 ## 0.12.0 (January 25, 2023)
 
 ### Features

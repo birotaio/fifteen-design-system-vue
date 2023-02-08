@@ -87,9 +87,6 @@
   small
     font-size 80%
 
-  u
-    text-decoration var(--color--danger) wavy underline
-
   ul
     list-style-type disc
     padding-left rem(16)

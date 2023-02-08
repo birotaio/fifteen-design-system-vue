@@ -28,6 +28,7 @@ const components = [
   'FSkeleton',
   'FSvgImage',
   'FTextarea',
+  'FTextContent',
   'FFieldHint',
   'FFieldLabel',
   'FFlagIcon',

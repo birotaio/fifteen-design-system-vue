@@ -100,6 +100,7 @@ export type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
 /** @deprecated Use FAutocompleteProps instead */
 export type { FAutocompleteProps as FAutocompleteInputProps } from '@/components/form/FAutocomplete.vue';
 export type { FAutocompleteProps } from '@/components/form/FAutocomplete.vue';
+export type { FTextContentProps } from '@/components/FTextContent.vue';
 
 /**
  * Composables

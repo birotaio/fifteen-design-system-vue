@@ -1,8 +1,9 @@
-## 0.12.1(February 8, 2023)
+## 0.12.1 (February 8, 2023)
 
 ### Fixes
 
 - [FTextContent] Export `FTextContentProps` and expose `FTextContent` in resolver
+- [FTextContent] Remove style on `u` tags
 
 ## 0.12.0 (January 25, 2023)
 

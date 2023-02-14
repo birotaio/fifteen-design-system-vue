@@ -1,3 +1,9 @@
+## 0.12.2 (February 14, 2023)
+
+### Changes
+
+- [Types] Update `Style` to be exactly Vue’s updated `CSSProperties` type
+
 ## 0.12.1 (February 8, 2023)
 
 ### Fixes

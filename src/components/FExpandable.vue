@@ -7,8 +7,10 @@
     tabindex="0"
     @click="handleToggle"
     @keyup.enter="handleToggle"
+    :class="classeHover"
   )
     slot(name="title")
+    .FExpandable__title__hover__hoverCover
   .FExpandable__container
     .FExpandable__content(ref="contentRef")
       // @slot FExpandable content
@@ -20,12 +22,13 @@
   position relative
   cursor pointer
   padding-right rem(48)
+  overflow hidden
 
-  &:before,
-  &:after
+  &::before,
+  &::after
     content ''
     position absolute
-    background var(--color--secondary)
+    background currentColor
     border-radius rem(2)
     width rem(20)
     height rem(4)
@@ -33,10 +36,10 @@
     top 50%
     transition transform 0.5s var(--transition--ease-out)
 
-  &:before
+  &::before
     transform scale(var(--fexpandable--icon-scale)) translateY(-50%)
 
-  &:after
+  &::after
     opacity 1
     transform scale(var(--fexpandable--icon-scale)) translateY(-50%) rotate(90deg)
 
@@ -48,11 +51,51 @@
 
 .FExpandable--toggled
   .FExpandable__title
-    &:before
+    &::before
       transform scale(var(--fexpandable--icon-scale)) translateY(-50%) rotate(180deg)
 
-    &:after
+    &::after
       transform scale(var(--fexpandable--icon-scale)) translateY(-50%) rotate(180deg)
+
+.FExpandable__title__hover
+  $animation-padding ?= 16px
+  transition all 0.3s var(--transition--ease-out)
+
+  > *
+    transition all 0.3s var(--transition--ease-out)
+
+  &__hoverCover
+    position absolute
+    width 100%
+    height 100%
+    left 0
+    background-color var(--FExpandable--hover-color)
+    transition transform 0.5s var(--transition--ease-out)
+    z-index -1
+
+  &:hover
+    color var(--FExpandable--text-hover-color)
+
+    .FExpandable__title__hover__hoverCover
+      transform translateY(-100%)
+
+    > *
+      transform translateX($animation-padding)
+
+    &:after
+      transform scale(var(--fexpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding) rotate(90deg)
+
+    &:before
+      transform scale(var(--fexpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding)
+
+    .FExpandable--toggled &,
+    .FExpandable__title
+      &:hover
+        &:before
+          transform scale(var(--fexpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
+
+        &:after
+          transform scale(var(--fexpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
 
 .FExpandable__container
   height 0
@@ -72,6 +115,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { genSize } from '@/utils/genSize';
+import { getCssColor } from '@/utils/getCSSColor';
 import { useVModelProxy } from '@/composables/useVModelProxy';
 import { useElementSize } from '@vueuse/core';
 
@@ -89,25 +133,48 @@ export interface FExpandableProps {
    * Scale the + / - icons, which base size is 20px
    */
   iconScale?: string | number;
+  /**
+   * Is animation on hover
+   */
+  isHoverAnimation?: boolean;
+  /**
+   * backgroundColor of the title component when hover
+   */
+  hoverColor?: Color;
+  /**
+   * Color of the text when hover
+   */
+  textHoverColor?: Color;
 }
 
 const props = withDefaults(defineProps<FExpandableProps>(), {
   gap: 24,
   modelValue: false,
   iconScale: 1,
+  isHoverAnimation: false,
+  hoverColor: 'primary',
+  textHoverColor: 'neutral--light-5',
 });
 
 const isToggled = useVModelProxy<boolean>(props);
 
 const contentRef = ref();
 const { height: contentHeight } = useElementSize(contentRef);
-const classes = computed(() => ({ 'FExpandable--toggled': isToggled.value }));
+const classes = computed(() => ({
+  'FExpandable--toggled': isToggled.value,
+}));
+
+const classeHover = computed(() => ({
+  FExpandable__title__hover: props.isHoverAnimation,
+}));
 
 const style = computed(
   (): Style => ({
     '--fexpandable--container-height': genSize(contentHeight.value),
     '--fexpandable--container-gap': genSize(props.gap),
     '--fexpandable--icon-scale': String(props.iconScale),
+    '--FExpandable--hover-color': getCssColor(props.hoverColor),
+    '--FExpandable--text-hover-color': getCssColor(props.textHoverColor),
   })
 );
 

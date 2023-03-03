@@ -66,3 +66,11 @@ Slots.args = {
   title,
   text,
 };
+
+export const WithHoverAnimation: Story<FExpandableArgs> = Template.bind({});
+
+WithHoverAnimation.args = {
+  title,
+  text,
+  withHoverAnimation: true,
+};

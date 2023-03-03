@@ -1,3 +1,9 @@
+## 0.13.0 (March 3, 2023)
+
+### Features
+
+- [FExpandables] Update FExpandable with hover animation
+
 ## 0.12.2 (February 14, 2023)
 
 ### Changes

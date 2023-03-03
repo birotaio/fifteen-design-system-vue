@@ -213,6 +213,7 @@ const flagIconList = [
   'AQ',
   'AR',
   'AS',
+  'AST',
   'AT',
   'AU',
   'AW',

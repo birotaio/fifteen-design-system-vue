@@ -10,7 +10,7 @@
     :class="titleClasses"
   )
     slot(name="title")
-    .FExpandable__title--withHover__hoverCover
+    .FExpandable__title__highlighter
   .FExpandable__container
     .FExpandable__content(ref="contentRef")
       // @slot FExpandable content
@@ -57,6 +57,15 @@
     &::after
       transform scale(var(--FExpandable--icon-scale)) translateY(-50%) rotate(180deg)
 
+.FExpandable__title__highlighter
+  position absolute
+  width 100%
+  height 100%
+  left 0
+  background-color var(--FExpandable--hover-color)
+  transition transform 0.5s var(--transition--ease-out)
+  z-index -1
+
 .FExpandable__title--withHover
   $animation-padding ?= 16px
   transition all 0.3s var(--transition--ease-out)
@@ -64,19 +73,10 @@
   > *
     transition all 0.3s var(--transition--ease-out)
 
-  &__hoverCover
-    position absolute
-    width 100%
-    height 100%
-    left 0
-    background-color var(--FExpandable--hover-color)
-    transition transform 0.5s var(--transition--ease-out)
-    z-index -1
-
   &:hover
     color var(--FExpandable--text-hover-color)
 
-    .FExpandable__title--withHover__hoverCover
+    .FExpandable__title__highlighter
       transform translateY(-100%)
 
     > *

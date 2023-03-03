@@ -32,7 +32,6 @@ export const Default: Story<FExpandableArgs> = Template.bind({});
 Default.args = {
   title,
   text,
-  withHoverAnimation: true,
 };
 
 export const ContentGap: Story<FExpandableArgs> = Template.bind({});
@@ -66,4 +65,12 @@ export const Slots: Story<FExpandableArgs> = TemplateSlots.bind({});
 Slots.args = {
   title,
   text,
+};
+
+export const WithHoverAnimation: Story<FExpandableArgs> = Template.bind({});
+
+WithHoverAnimation.args = {
+  title,
+  text,
+  withHoverAnimation: true,
 };

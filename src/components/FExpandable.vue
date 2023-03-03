@@ -7,10 +7,10 @@
     tabindex="0"
     @click="handleToggle"
     @keyup.enter="handleToggle"
-    :class="classeHover"
+    :class="titleClasses"
   )
     slot(name="title")
-    .FExpandable__title__hover__hoverCover
+    .FExpandable__title--withHover__hoverCover
   .FExpandable__container
     .FExpandable__content(ref="contentRef")
       // @slot FExpandable content
@@ -37,11 +37,11 @@
     transition transform 0.5s var(--transition--ease-out)
 
   &::before
-    transform scale(var(--fexpandable--icon-scale)) translateY(-50%)
+    transform scale(var(--FExpandable--icon-scale)) translateY(-50%)
 
   &::after
     opacity 1
-    transform scale(var(--fexpandable--icon-scale)) translateY(-50%) rotate(90deg)
+    transform scale(var(--FExpandable--icon-scale)) translateY(-50%) rotate(90deg)
 
   &:focus-visible
     border-radius rem(4)
@@ -52,12 +52,12 @@
 .FExpandable--toggled
   .FExpandable__title
     &::before
-      transform scale(var(--fexpandable--icon-scale)) translateY(-50%) rotate(180deg)
+      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) rotate(180deg)
 
     &::after
-      transform scale(var(--fexpandable--icon-scale)) translateY(-50%) rotate(180deg)
+      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) rotate(180deg)
 
-.FExpandable__title__hover
+.FExpandable__title--withHover
   $animation-padding ?= 16px
   transition all 0.3s var(--transition--ease-out)
 
@@ -76,26 +76,26 @@
   &:hover
     color var(--FExpandable--text-hover-color)
 
-    .FExpandable__title__hover__hoverCover
+    .FExpandable__title--withHover__hoverCover
       transform translateY(-100%)
 
     > *
       transform translateX($animation-padding)
 
     &:after
-      transform scale(var(--fexpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding) rotate(90deg)
+      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding) rotate(90deg)
 
     &:before
-      transform scale(var(--fexpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding)
+      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding)
 
     .FExpandable--toggled &,
     .FExpandable__title
       &:hover
         &:before
-          transform scale(var(--fexpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
+          transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
 
         &:after
-          transform scale(var(--fexpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
+          transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
 
 .FExpandable__container
   height 0
@@ -105,7 +105,7 @@
   transition height 0.75s var(--transition--ease-out)
 
 .FExpandable--toggled .FExpandable__container
-  height calc(var(--fexpandable--container-height) + var(--fexpandable--container-gap))
+  height calc(var(--FExpandable--container-height) + var(--FExpandable--container-gap))
 
 .FExpandable__content
   position absolute
@@ -134,9 +134,9 @@ export interface FExpandableProps {
    */
   iconScale?: string | number;
   /**
-   * Is animation on hover
+   * With animation on hover
    */
-  isHoverAnimation?: boolean;
+  withHoverAnimation?: boolean;
   /**
    * backgroundColor of the title component when hover
    */
@@ -151,7 +151,7 @@ const props = withDefaults(defineProps<FExpandableProps>(), {
   gap: 24,
   modelValue: false,
   iconScale: 1,
-  isHoverAnimation: false,
+  withHoverAnimation: false,
   hoverColor: 'primary',
   textHoverColor: 'neutral--light-5',
 });
@@ -164,15 +164,15 @@ const classes = computed(() => ({
   'FExpandable--toggled': isToggled.value,
 }));
 
-const classeHover = computed(() => ({
-  FExpandable__title__hover: props.isHoverAnimation,
+const titleClasses = computed(() => ({
+  'FExpandable__title--withHover': props.withHoverAnimation,
 }));
 
 const style = computed(
   (): Style => ({
-    '--fexpandable--container-height': genSize(contentHeight.value),
-    '--fexpandable--container-gap': genSize(props.gap),
-    '--fexpandable--icon-scale': String(props.iconScale),
+    '--FExpandable--container-height': genSize(contentHeight.value),
+    '--FExpandable--container-gap': genSize(props.gap),
+    '--FExpandable--icon-scale': String(props.iconScale),
     '--FExpandable--hover-color': getCssColor(props.hoverColor),
     '--FExpandable--text-hover-color': getCssColor(props.textHoverColor),
   })

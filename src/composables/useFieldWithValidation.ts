@@ -91,7 +91,7 @@ export function useFieldWithValidation<
 
   // Bypass form binding if the input has no props.name
   if (!fieldName.value) {
-    const fieldValue = useVModelProxy(props);
+    const fieldValue = useVModelProxy({ props });
 
     const isValid = ref(true);
     const errors = ref<string[]>([]);

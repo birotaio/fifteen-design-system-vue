@@ -161,7 +161,7 @@ const props = withDefaults(defineProps<FExpandableProps>(), {
   textHoverColor: 'neutral--light-5',
 });
 
-const isToggled = useVModelProxy<boolean>(props);
+const isToggled = useVModelProxy<boolean>({ props });
 
 const contentRef = ref();
 const { height: contentHeight } = useElementSize(contentRef);

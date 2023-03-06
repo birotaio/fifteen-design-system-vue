@@ -322,8 +322,11 @@ const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
   })
 );
 
-const isOpen = useVModelProxy<boolean>(props);
-const selectedOption = useVModelProxy<any>(props, 'selectedOption');
+const isOpen = useVModelProxy<boolean>({ props });
+const selectedOption = useVModelProxy<any>({
+  props,
+  propName: 'selectedOption',
+});
 
 const optionRefs = ref<HTMLElement[]>([]);
 const activatorRef = ref<HTMLDivElement>();

@@ -365,7 +365,7 @@ const placeholder = computed(() =>
 const phonePrefix = computed(
   () => `+${getCountryCallingCode(countryCode.value)}`
 );
-const phoneNumber = useVModelProxy<string>(props, 'phoneNumber');
+const phoneNumber = useVModelProxy<string>({ props, propName: 'phoneNumber' });
 
 const fullPhone = computed(() => {
   const phoneValue =

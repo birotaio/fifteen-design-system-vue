@@ -121,7 +121,7 @@
 import { ref, computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCSSColor';
-import { useVModelProxy } from '@/composables/useVModelProxy';
+import { useVModelProxy } from '@fifteen/shared-lib';
 import { useElementSize } from '@vueuse/core';
 
 export interface FExpandableProps {

@@ -110,7 +110,6 @@ export { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 export { useIcon } from '@/composables/useIcon';
 export { useInputEventBindings } from '@/composables/useInputEventBindings';
 export { useLazyImage } from '@/composables/useLazyImage';
-export { useVModelProxy } from '@/composables/useVModelProxy';
 export { useSmartLink } from '@/composables/useSmartLink';
 
 /**

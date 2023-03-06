@@ -1,3 +1,9 @@
+## 0.13.2 (March 6, 2023)
+
+### Features
+
+- [useVModelProxy] Replaced useVModelProxy composable to useVModelProxy in shared-lib
+
 ## 0.13.1 (March 6, 2023)
 
 ### Features

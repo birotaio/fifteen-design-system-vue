@@ -167,7 +167,7 @@ import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import examples from 'libphonenumber-js/mobile/examples';
 import { getCssColor } from '@/utils/getCssColor';
-import { useVModelProxy } from '@/composables/useVModelProxy';
+import { useVModelProxy } from '@fifteen/shared-lib';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { CountryCode } from 'libphonenumber-js';

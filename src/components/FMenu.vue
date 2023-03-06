@@ -164,7 +164,7 @@ import {
   useMutationObserver,
 } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
-import { useVModelProxy } from '@/composables/useVModelProxy';
+import { useVModelProxy } from '@fifteen/shared-lib';
 import { genSize } from '@/utils/genSize';
 import { removeDiacritics, stringify } from '@fifteen/shared-lib';
 

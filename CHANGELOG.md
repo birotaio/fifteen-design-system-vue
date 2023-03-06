@@ -1,8 +1,14 @@
+## 0.13.1 (March 6, 2023)
+
+### Features
+
+- [FExpandable] Fix FExpandable with hover animation, zIndex incorrect for highlighter
+
 ## 0.13.0 (March 3, 2023)
 
 ### Features
 
-- [FExpandables] Update FExpandable with hover animation
+- [FExpandable] Update FExpandable with hover animation
 
 ## 0.12.2 (February 14, 2023)
 

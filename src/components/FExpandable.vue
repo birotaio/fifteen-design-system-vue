@@ -24,6 +24,10 @@
   padding-right rem(48)
   overflow hidden
 
+  *:not(.FExpandable__title__highlighter)
+    position relative
+    z-index 2
+
   &::before,
   &::after
     content ''
@@ -35,6 +39,7 @@
     right 0
     top 50%
     transition transform 0.5s var(--transition--ease-out)
+    z-index 2
 
   &::before
     transform scale(var(--FExpandable--icon-scale)) translateY(-50%)
@@ -64,7 +69,7 @@
   left 0
   background-color var(--FExpandable--hover-color)
   transition transform 0.5s var(--transition--ease-out)
-  z-index -1
+  z-index 1
 
 .FExpandable__title--withHover
   $animation-padding ?= 16px

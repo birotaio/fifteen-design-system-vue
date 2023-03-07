@@ -306,30 +306,30 @@ export interface FSelectProps {
 }
 
 const props = withDefaults(defineProps<FSelectProps>(), {
-  modelValue: undefined,
-  options: () => [],
+  borderColor: 'neutral--dark-1',
   color: 'neutral--light-3',
   disabled: false,
-  preventSelection: false,
   emptyText: '',
   errorColor: 'danger',
   errorMessage: '',
-  borderColor: 'neutral--dark-1',
   focusBorderColor: 'secondary',
   focusColor: 'neutral--light-5',
   hideHint: false,
   hint: '',
-  hintTextColor: 'neputral--dark-4',
   hintIcon: null,
+  hintTextColor: 'neutral--dark-4',
   label: '',
   labelTextColor: 'neutral--dark-4',
   menuWidth: 300,
+  modelValue: undefined,
   name: '',
+  options: () => [],
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   placeholder: '',
   placeholderTextColor: 'neutral--dark-2',
+  preventSelection: false,
   rules: () => [],
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
@@ -342,9 +342,9 @@ const props = withDefaults(defineProps<FSelectProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: any): void;
-  (name: 'change'): void;
-  (name: 'focus'): void;
-  (name: 'blur'): void;
+  (name: 'change', value: Event): void;
+  (name: 'focus', value: Event): void;
+  (name: 'blur', value: Event): void;
   (name: 'clear'): void;
   /** @deprecated Use before-select-option instead */
   (name: 'select-option', value: any): void;
@@ -439,12 +439,12 @@ function handleIconClick(event: Event) {
 /**
  * Handle select blur
  */
-function handleBlur(): void {
+function handleBlur(event: Event): void {
   // Preselect the current value on blur
   preselectedOptionIndex.value = props.options.findIndex(option =>
     equal(option.value, fieldValue.value)
   );
-  emit('blur');
+  emit('blur', event);
 }
 
 const selectRef = ref<HTMLElement>();

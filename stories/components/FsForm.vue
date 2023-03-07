@@ -54,6 +54,14 @@ FForm.FsForm(
         :loading="loading"
       )
     FGridItem(span="12")
+      FLocaleSelect(
+        label="FLocaleSelect"
+        name="FLocaleSelect"
+        hint="Hint for FLocaleSelect"
+        :locales="['US', 'FR']"
+        :loading="loading"
+      )
+    FGridItem(span="12")
       FTextarea(
         label="FTextarea"
         name="FTextarea"
@@ -97,6 +105,7 @@ import FDigitsInput from '@/components/form/FDigitsInput.vue';
 import FPhoneInput from '@/components/form/FPhoneInput.vue';
 import FRadioGroup from '@/components/form/FRadioGroup.vue';
 import FSelect from '@/components/form/FSelect.vue';
+import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
 import FTextarea from '@/components/form/FTextarea.vue';
 import FAutocomplete from '@/components/form/FAutocomplete.vue';
 

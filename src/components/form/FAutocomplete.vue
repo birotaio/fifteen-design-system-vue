@@ -335,17 +335,17 @@ const {
   rules: [isValidMatch],
 });
 
-function handleBlur(e: Event) {
-  emit('blur', e);
+function handleBlur(event: Event) {
+  emit('blur', event);
 }
 
-function handleFocus(e: Event) {
-  emit('focus', e);
+function handleFocus(event: Event) {
+  emit('focus', event);
   isMenuOpen.value = true;
 }
 
-function handleChange(e: Event) {
-  emit('change', e);
+function handleChange(event: Event) {
+  emit('change', event);
 }
 
 function handleInput(e: InputEvent) {

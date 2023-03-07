@@ -164,7 +164,7 @@ import {
   useMutationObserver,
 } from '@vueuse/core';
 import { getCssColor } from '@/utils/getCssColor';
-import { useVModelProxy } from '@/composables/useVModelProxy';
+import { useVModelProxy } from '@fifteen/shared-lib';
 import { genSize } from '@/utils/genSize';
 import { removeDiacritics, stringify } from '@fifteen/shared-lib';
 
@@ -322,8 +322,11 @@ const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
   })
 );
 
-const isOpen = useVModelProxy<boolean>(props);
-const selectedOption = useVModelProxy<any>(props, 'selectedOption');
+const isOpen = useVModelProxy<boolean>({ props });
+const selectedOption = useVModelProxy<any>({
+  props,
+  propName: 'selectedOption',
+});
 
 const optionRefs = ref<HTMLElement[]>([]);
 const activatorRef = ref<HTMLDivElement>();

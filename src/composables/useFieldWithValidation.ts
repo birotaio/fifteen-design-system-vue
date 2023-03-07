@@ -1,7 +1,7 @@
 import { Ref, ComputedRef, ref } from 'vue';
 import { computed, watch, toRef, getCurrentInstance } from 'vue';
 import { useField, validate } from 'vee-validate';
-import { useVModelProxy } from './useVModelProxy';
+import { useVModelProxy } from '@fifteen/shared-lib';
 
 type BaseProps<Value> = {
   modelValue: Value | null;
@@ -91,7 +91,7 @@ export function useFieldWithValidation<
 
   // Bypass form binding if the input has no props.name
   if (!fieldName.value) {
-    const fieldValue = useVModelProxy(props);
+    const fieldValue = useVModelProxy({ props });
 
     const isValid = ref(true);
     const errors = ref<string[]>([]);

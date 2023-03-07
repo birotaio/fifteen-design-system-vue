@@ -6,7 +6,6 @@ const composables = [
   'useIcon',
   'useInputEventBindings',
   'useLazyImage',
-  'useVModelProxy',
   'useSmartLink',
 ];
 

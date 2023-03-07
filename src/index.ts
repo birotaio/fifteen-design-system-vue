@@ -42,6 +42,7 @@ export { default as FPhoneInput } from '@/components/form/FPhoneInput.vue';
 export { default as FRadio } from '@/components/form/FRadio.vue';
 export { default as FRadioGroup } from '@/components/form/FRadioGroup.vue';
 export { default as FSelect } from '@/components/form/FSelect.vue';
+export { default as FLocaleSelect } from '@/components/form/FLocaleSelect.vue';
 export { default as FTextarea } from '@/components/form/FTextarea.vue';
 export { default as FFileUpload } from '@/components/form/FFileUpload.vue';
 /** @deprecated Use FAutocomplete instead */
@@ -91,6 +92,7 @@ export type { FProgressBarProps } from '@/components/FProgressBar.vue';
 export type { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
 export type { FFieldProps } from '@/components/form/FField.vue';
 export type { FSelectProps } from '@/components/form/FSelect.vue';
+export type { FLocaleSelectProps } from '@/components/form/FLocaleSelect.vue';
 export type { FRadioGroupProps } from '@/components/form/FRadioGroup.vue';
 export type { FRadioProps } from '@/components/form/FRadio.vue';
 export type { FSkeletonProps } from '@/components/FSkeleton.vue';

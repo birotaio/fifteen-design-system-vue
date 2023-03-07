@@ -10,6 +10,7 @@ declare global {
   type Icon = import('./icons').Icon;
   type CSSVariable = import('./styles').CSSVariable;
   type Style = import('./styles').Style;
+  type CountryCode = import('./flags').CountryCode;
 }
 
 export {};

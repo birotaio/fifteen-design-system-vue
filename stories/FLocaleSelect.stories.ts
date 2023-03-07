@@ -23,6 +23,12 @@ Default.args = {
   modelValue: 'FR',
 };
 
+export const Small: Story<FLocaleSelectProps> = Template.bind({});
+Small.args = {
+  size: 'small',
+  modelValue: 'FR',
+};
+
 export const LimitedLocales: Story<FLocaleSelectProps> = Template.bind({});
 LimitedLocales.args = {
   modelValue: 'FR',

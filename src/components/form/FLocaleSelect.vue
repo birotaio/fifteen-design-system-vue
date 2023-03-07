@@ -1,5 +1,6 @@
 <template lang="pug">
 FSelect.FLocaleSelect(
+  :class="classes"
   v-model="locale"
   :label="label"
   :color="color"
@@ -24,6 +25,7 @@ FSelect.FLocaleSelect(
   :disabled="disabled"
   :loading="loading"
   :rules="rules"
+  :size="size"
   @focus="handleFocus"
   @blur="handleBlur"
   ref="localeSelectRef"
@@ -32,10 +34,16 @@ FSelect.FLocaleSelect(
 )
   template(#selected-value="{ value, label }")
     .FLocaleSelect__selectedValue
-      FFlagIcon.FLocaleSelect__option__img(:country-code="value")
+      FFlagIcon.FLocaleSelect__flag(
+        :country-code="value"
+        :size="flagIconSize"
+      )
       span {{ label }}
   template(#option-prefix="{ option }")
-    FFlagIcon.FLocaleSelect__option__img(:country-code="option.value")
+    FFlagIcon.FLocaleSelect__flag(
+      :country-code="option.value"
+      :size="flagIconSize"
+    )
   template(#option="{ option }")
     span {{ option.label }}
 </template>
@@ -44,9 +52,8 @@ FSelect.FLocaleSelect(
 .FLocaleSelect__selectedValue
   display flex
 
-.FLocaleSelect__option__img
+.FLocaleSelect__flag
   margin-right rem(12)
-  height rem(24)
 </style>
 
 <script setup lang="ts">
@@ -57,6 +64,8 @@ import { getFlagIconList } from '@/constants/icons/.utils';
 
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
+
+import type { FSelectSize } from '@/components/form/FSelect.vue';
 
 export interface FLocaleSelectProps {
   /**
@@ -172,6 +181,10 @@ export interface FLocaleSelectProps {
    */
   rules?: ValidationRule | ValidationRule[];
   /**
+   * Size of the select input
+   */
+  size?: FSelectSize;
+  /**
    * Event that triggers validation
    */
   validationTrigger?: 'change' | 'focus';
@@ -219,6 +232,7 @@ const props = withDefaults(defineProps<FLocaleSelectProps>(), {
   rules: () => [],
   selectedOptionColor: 'neutral--light-2',
   selectedOptionTextColor: 'primary--dark-2',
+  size: 'medium',
   textColor: 'neutral--dark-4',
   validationTrigger: 'change',
 });
@@ -232,7 +246,6 @@ const emit = defineEmits<{
 }>();
 
 const {
-  isValid,
   hint,
   value: locale,
   validate,
@@ -252,6 +265,12 @@ defineExpose<{
 });
 
 const localeSelectRef = ref<HTMLElement>();
+
+const classes = computed(() => ({
+  ['FLocaleSelect--' + props.size]: true,
+}));
+
+const flagIconSize = computed(() => (props.size === 'medium' ? 24 : 20));
 
 /**
  * Focus the input

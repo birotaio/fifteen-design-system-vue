@@ -15,7 +15,7 @@ FField.FSelect(
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     @before-select-option="onBeforeSelectOption"
   )
     template(#option-prefix="scope")

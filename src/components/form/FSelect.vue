@@ -16,6 +16,7 @@ FField.FSelect(
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
     :disabled="disabled || loading"
+    :option-height="optionHeight"
     @before-select-option="onBeforeSelectOption"
   )
     template(#option-prefix="scope")
@@ -157,6 +158,12 @@ FField.FSelect(
 
 .FSelect__loader
   margin rem(4)
+
+.FSelect--small
+  .FSelect__select
+    padding rem(12)
+    height rem(36)
+    font-size rem(14)
 </style>
 
 <script setup lang="ts">
@@ -172,6 +179,7 @@ import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
+export type FSelectSize = 'small' | 'medium';
 
 export interface FSelectProps {
   /**
@@ -276,6 +284,10 @@ export interface FSelectProps {
    */
   disabled?: boolean;
   /**
+   * Size of the select input
+   */
+  size?: FSelectSize;
+  /**
    * Rules form validation
    */
   rules?: ValidationRule | ValidationRule[];
@@ -333,6 +345,7 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   rules: () => [],
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
+  size: 'medium',
   textColor: 'neutral--dark-4',
   type: 'text',
   validateOnMount: false,
@@ -390,6 +403,7 @@ const style = computed(
 );
 
 const classes = computed(() => ({
+  ['FSelect--' + props.size]: true,
   'FSelect--error': !isValid.value,
   'FSelect--disabled': props.disabled,
   'FSelect--loading': props.loading,
@@ -413,6 +427,8 @@ const iconName = computed(() =>
     ? 'close'
     : 'chevronDown'
 );
+
+const optionHeight = computed(() => (props.size === 'medium' ? 52 : 44));
 
 watch(fieldValue, newValue => handleChange(newValue));
 

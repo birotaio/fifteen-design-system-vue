@@ -111,7 +111,7 @@
   align-items center
   border-radius rem(16)
   height var(--fmenu-option-height)
-  padding 0 rem(8)
+  padding rem(8)
   color var(--fmenu--text-color)
   font-size rem(14)
   transition background 300ms, color 300ms

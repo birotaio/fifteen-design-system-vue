@@ -25,6 +25,7 @@ const components = [
   'FProgressBar',
   'FRadioGroup',
   'FSelect',
+  'FLocaleSelect',
   'FSkeleton',
   'FSvgImage',
   'FTextarea',

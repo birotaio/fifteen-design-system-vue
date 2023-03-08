@@ -18,7 +18,6 @@
 
 <script setup lang="ts">
 import FSvgImage from './FSvgImage.vue';
-import type { CountryCode } from 'libphonenumber-js';
 import { computed } from 'vue';
 
 export interface FFlagIconProps {
@@ -38,10 +37,11 @@ const props = withDefaults(defineProps<FFlagIconProps>(), {
 });
 
 // TODO: dynamic import to reduce bundle size
-const flagFiles: Record<string, string> = import.meta.globEager(
+const flagFiles: Record<string, string> = import.meta.glob(
   '@/assets/icons/country-flags/*.svg',
   {
     as: 'raw',
+    eager: true,
   }
 );
 const flagPaths = Object.keys(flagFiles);

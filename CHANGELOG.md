@@ -1,3 +1,15 @@
+## 0.14.0-beta.1 (March 8, 2023)
+
+### Features 
+
+- [FLocaleSelect] Add locale select component
+- [FSelect] Add size prop, handling `medium` and `small` values
+- [FFlagIcon] Add asturian (`AST`) flag
+
+### Fixes
+
+- [FSelect] Prevent interactions when loading 
+
 ## 0.13.2 (March 6, 2023)
 
 ### Features

@@ -15,7 +15,8 @@ FField.FSelect(
     :selected-option-color="selectedOptionColor"
     :selected-option-text-color="selectedOptionTextColor"
     :prevent-selection="preventSelection"
-    :disabled="disabled"
+    :disabled="disabled || loading"
+    :option-height="optionHeight"
     @before-select-option="onBeforeSelectOption"
   )
     template(#option-prefix="scope")
@@ -157,6 +158,12 @@ FField.FSelect(
 
 .FSelect__loader
   margin rem(4)
+
+.FSelect--small
+  .FSelect__select
+    padding rem(12)
+    height rem(36)
+    font-size rem(14)
 </style>
 
 <script setup lang="ts">
@@ -172,6 +179,7 @@ import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
+export type FSelectSize = 'small' | 'medium';
 
 export interface FSelectProps {
   /**
@@ -276,6 +284,10 @@ export interface FSelectProps {
    */
   disabled?: boolean;
   /**
+   * Size of the select input
+   */
+  size?: FSelectSize;
+  /**
    * Rules form validation
    */
   rules?: ValidationRule | ValidationRule[];
@@ -306,33 +318,34 @@ export interface FSelectProps {
 }
 
 const props = withDefaults(defineProps<FSelectProps>(), {
-  modelValue: undefined,
-  options: () => [],
+  borderColor: 'neutral--dark-1',
   color: 'neutral--light-3',
   disabled: false,
-  preventSelection: false,
   emptyText: '',
   errorColor: 'danger',
   errorMessage: '',
-  borderColor: 'neutral--dark-1',
   focusBorderColor: 'secondary',
   focusColor: 'neutral--light-5',
   hideHint: false,
   hint: '',
-  hintTextColor: 'neputral--dark-4',
   hintIcon: null,
+  hintTextColor: 'neutral--dark-4',
   label: '',
   labelTextColor: 'neutral--dark-4',
   menuWidth: 300,
+  modelValue: undefined,
   name: '',
+  options: () => [],
   optionsMenuColor: 'neutral--light-3',
   optionTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   placeholder: '',
   placeholderTextColor: 'neutral--dark-2',
+  preventSelection: false,
   rules: () => [],
   selectedOptionColor: 'primary--light-2',
   selectedOptionTextColor: 'primary--dark-2',
+  size: 'medium',
   textColor: 'neutral--dark-4',
   type: 'text',
   validateOnMount: false,
@@ -342,9 +355,9 @@ const props = withDefaults(defineProps<FSelectProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: any): void;
-  (name: 'change'): void;
-  (name: 'focus'): void;
-  (name: 'blur'): void;
+  (name: 'change', value: Event): void;
+  (name: 'focus', value: Event): void;
+  (name: 'blur', value: Event): void;
   (name: 'clear'): void;
   /** @deprecated Use before-select-option instead */
   (name: 'select-option', value: any): void;
@@ -390,6 +403,7 @@ const style = computed(
 );
 
 const classes = computed(() => ({
+  ['FSelect--' + props.size]: true,
   'FSelect--error': !isValid.value,
   'FSelect--disabled': props.disabled,
   'FSelect--loading': props.loading,
@@ -413,6 +427,8 @@ const iconName = computed(() =>
     ? 'close'
     : 'chevronDown'
 );
+
+const optionHeight = computed(() => (props.size === 'medium' ? 52 : 44));
 
 watch(fieldValue, newValue => handleChange(newValue));
 
@@ -439,12 +455,12 @@ function handleIconClick(event: Event) {
 /**
  * Handle select blur
  */
-function handleBlur(): void {
+function handleBlur(event: Event): void {
   // Preselect the current value on blur
   preselectedOptionIndex.value = props.options.findIndex(option =>
     equal(option.value, fieldValue.value)
   );
-  emit('blur');
+  emit('blur', event);
 }
 
 const selectRef = ref<HTMLElement>();

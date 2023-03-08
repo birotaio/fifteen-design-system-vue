@@ -28,6 +28,20 @@ Default.args = {
   ],
 };
 
+export const Small: Story<FSelectProps> = Template.bind({});
+Small.parameters = {
+  backgrounds: { default: 'neutral' },
+};
+Small.args = {
+  size: 'small',
+  placeholder: 'All topics',
+  options: [
+    { label: 'Acquisition', value: 'acquisition' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Data', value: 'data' },
+  ],
+};
+
 export const WithLabel: Story<FSelectProps> = Template.bind({});
 WithLabel.parameters = {
   backgrounds: { default: 'neutral' },
@@ -185,6 +199,23 @@ LongOptionsLabel.args = {
   optionsMenuColor: 'secondary',
   placeholder: 'All topics',
   options: [
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Benefits', value: 'benefits' },
+    { label: 'Benefits', value: 'benefits' },
+    {
+      label:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      value: 'acquisition',
+    },
+    {
+      label:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      value: 'acquisition',
+    },
     {
       label:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit',

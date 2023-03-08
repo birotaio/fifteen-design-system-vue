@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FDivider, { FDividerProps } from '@/components/FDivider.vue';
 import { colorDesignTokens } from '@/constants/colors';
 

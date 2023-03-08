@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FLoader, { FLoaderProps } from '@/components/FLoader.vue';
 
 export default {

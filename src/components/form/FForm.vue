@@ -19,10 +19,13 @@ export interface FFormProps {
   initialValues: Record<string, unknown>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FormValues = any;
+
 const props = defineProps<FFormProps>();
 
 const emit = defineEmits<{
-  (name: 'valid', values: any): void | Promise<void>;
+  (name: 'valid', values: FormValues): void | Promise<void>;
 }>();
 
 const {
@@ -33,7 +36,7 @@ const {
   initialValues: props.initialValues,
 });
 
-async function submit() {
+async function submit(): Promise<void> {
   const result = await validate();
   result.valid && emit('valid', values);
 }

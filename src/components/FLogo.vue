@@ -27,18 +27,18 @@
 </style>
 
 <script setup lang="ts">
-import FSvgImage from '@/components/FSvgImage.vue';
-
 import { computed } from 'vue';
+
+import FSvgImage from '@/components/FSvgImage.vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { genSize } from '@/utils/genSize';
-import type { FunctionalComponent, SVGAttributes } from 'vue';
-
 import logoHorizontal from '@/assets/logos/fifteen_horizontal.svg?component';
 import logoVertical from '@/assets/logos/fifteen_vertical.svg?component';
 import logoTextOnly from '@/assets/logos/fifteen_text-only.svg?component';
 import logoImageOnly from '@/assets/logos/fifteen_image-only.svg?component';
 import logoHalfImageOnly from '@/assets/logos/fifteen_half-image-only.svg?component';
+
+import type { FunctionalComponent, SVGAttributes } from 'vue';
 
 export type FLogoVariant =
   | 'horizontal'

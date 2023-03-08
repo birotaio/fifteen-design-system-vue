@@ -5,9 +5,9 @@
 )
   .FExpandable__title(
     tabindex="0"
+    :class="titleClasses"
     @click="handleToggle"
     @keyup.enter="handleToggle"
-    :class="titleClasses"
   )
     slot(name="title")
     .FExpandable__title__highlighter
@@ -119,10 +119,11 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { genSize } from '@/utils/genSize';
-import { getCssColor } from '@/utils/getCSSColor';
 import { useVModelProxy } from '@fifteen/shared-lib';
 import { useElementSize } from '@vueuse/core';
+
+import { genSize } from '@/utils/genSize';
+import { getCssColor } from '@/utils/getCSSColor';
 
 export interface FExpandableProps {
   /**
@@ -183,7 +184,7 @@ const style = computed(
   })
 );
 
-function handleToggle() {
+function handleToggle(): void {
   isToggled.value = !isToggled.value;
 }
 </script>

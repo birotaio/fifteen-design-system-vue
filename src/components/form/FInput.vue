@@ -126,20 +126,18 @@ FField.FInput(
 </style>
 
 <script setup lang="ts">
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
-
-import type CSS from 'csstype';
-import type { InputHTMLAttributes, Ref } from 'vue';
-
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { maska as vMaska } from 'maska';
 
-import { computed } from 'vue';
+import FLoader from '@/components/FLoader.vue';
+import FField from '@/components/form/FField.vue';
+import FIcon from '@/components/FIcon.vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
+
+import type { InputHTMLAttributes, Ref } from 'vue';
+import type CSS from 'csstype';
 
 export interface FInputProps {
   /**
@@ -349,21 +347,21 @@ const hintTextColor = computed(() =>
     : props.errorColor
 );
 
-function handleClear() {
+function handleClear(): void {
   value.value = undefined;
   emit('clear');
 }
 /**
  * Force validation from parent component, eg. in case of rules change
  */
-function forceValidation() {
+function forceValidation(): void {
   validate(value.value);
 }
 
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   inputRef.value?.focus();
 }
 

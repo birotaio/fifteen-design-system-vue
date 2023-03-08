@@ -2,6 +2,13 @@ import { getCurrentInstance } from 'vue';
 
 type TriggerEvent = 'focus' | 'blur' | 'change' | 'input' | null;
 
+interface UseInputEventBindingsReturn {
+  handleBlur: (event: Event) => void;
+  handleFocus: (event: Event) => void;
+  handleInput: (event: Event) => void;
+  handleChange: (event: Event) => void;
+}
+
 /**
  * Wrap emits and call callbacks functions based on a trigger
  * @param callbackFn - Function to call when the validationTrigger event is triggered
@@ -14,23 +21,23 @@ export function useInputEventBindings<Name extends string>(
   triggerEvent: TriggerEvent,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   emit?: (name: Name, ...args: any[]) => void
-) {
+): UseInputEventBindingsReturn {
   const vm = getCurrentInstance();
   const _emit = emit || vm?.emit;
 
-  function handleBlur(event: Event) {
+  function handleBlur(event: Event): void {
     _emit?.('blur' as Name, event);
     triggerEvent === 'blur' && callbackFn(event);
   }
-  function handleFocus(event: Event) {
+  function handleFocus(event: Event): void {
     _emit?.('focus' as Name, event);
     triggerEvent === 'focus' && callbackFn(event);
   }
-  function handleInput(event: Event) {
+  function handleInput(event: Event): void {
     _emit?.('input' as Name, event);
     triggerEvent === 'input' && callbackFn(event);
   }
-  function handleChange(event: Event) {
+  function handleChange(event: Event): void {
     _emit?.('change' as Name, event);
     triggerEvent === 'change' && callbackFn(event);
   }

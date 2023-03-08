@@ -1,11 +1,25 @@
-import { computed } from 'vue';
-import { breakpointsValues } from '@/constants/breakpoints';
+import { computed, ComputedRef } from 'vue';
 import { useBreakpoints, useMounted } from '@vueuse/core';
 
+import { breakpointsValues } from '@/constants/breakpoints';
+
+interface UseFBreakpointsReturn {
+  isXxsAndDown: ComputedRef<boolean>;
+  isXsAndDown: ComputedRef<boolean>;
+  isSmAndDown: ComputedRef<boolean>;
+  isMdAndDown: ComputedRef<boolean>;
+  isLgAndDown: ComputedRef<boolean>;
+  xxsAndDown<T extends string | number>(value: T, fallback: T): T;
+  xsAndDown<T extends string | number>(value: T, fallback: T): T;
+  smAndDown<T extends string | number>(value: T, fallback: T): T;
+  mdAndDown<T extends string | number>(value: T, fallback: T): T;
+  lgAndDown<T extends string | number>(value: T, fallback: T): T;
+}
 /**
  * Returns breakpoints boolean values and utils breakpoints functions
  */
-export function useFBreakpoints() {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export function useFBreakpoints(): UseFBreakpointsReturn {
   const breakpoints = useBreakpoints(breakpointsValues);
   const isMounted = useMounted();
   const isXxsAndDown = computed(

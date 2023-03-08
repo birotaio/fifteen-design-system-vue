@@ -17,8 +17,8 @@ FField.FPhoneInput(
   )
     template(#activator="{ toggleMenu, openMenu, closeMenu }")
       FInput(
-        v-model="phoneNumber"
         ref="inputRef"
+        v-model="phoneNumber"
         :color="color"
         :text-color="textColor"
         :error-message="errorMessage"
@@ -149,13 +149,6 @@ FField.FPhoneInput(
 </style>
 
 <script setup lang="ts">
-import FInput from '@/components/form/FInput.vue';
-import FDivider from '@/components/FDivider.vue';
-import FFlagIcon from '@/components/FFlagIcon.vue';
-import FMenu from '@/components/FMenu.vue';
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-
 import {
   isValidPhoneNumber,
   getCountries,
@@ -164,10 +157,17 @@ import {
   parsePhoneNumber,
 } from 'libphonenumber-js';
 import { computed, ref, watch } from 'vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import examples from 'libphonenumber-js/mobile/examples';
-import { getCssColor } from '@/utils/getCssColor';
 import { useVModelProxy } from '@fifteen/shared-lib';
+
+import FInput from '@/components/form/FInput.vue';
+import FDivider from '@/components/FDivider.vue';
+import FFlagIcon from '@/components/FFlagIcon.vue';
+import FMenu from '@/components/FMenu.vue';
+import FIcon from '@/components/FIcon.vue';
+import FField from '@/components/form/FField.vue';
+import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
+import { getCssColor } from '@/utils/getCssColor';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { CountryCode } from 'libphonenumber-js';
@@ -414,7 +414,7 @@ function isEmptyPhone(value: unknown): boolean {
 }
 
 // Internal validation rule, always applied
-function isValidPhone(value: unknown) {
+function isValidPhone(value: unknown): boolean {
   if (typeof value !== 'string') return false;
   return isValidPhoneNumber(value);
 }
@@ -441,7 +441,7 @@ const hintTextColor = computed(() =>
     : props.errorColor
 );
 
-function getCountryCode(option: FMenuOption) {
+function getCountryCode(option: FMenuOption): CountryCode {
   return option.value as CountryCode;
 }
 
@@ -449,7 +449,7 @@ const inputRef = ref<InstanceType<typeof FInput>>();
 /**
  * Force validation to sync FPhoneInput validation status with underlying FInput
  */
-function forceValidation() {
+function forceValidation(): void {
   inputRef.value?.forceValidation();
 }
 watch(isValid, forceValidation);
@@ -457,7 +457,7 @@ watch(isValid, forceValidation);
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   inputRef.value?.ref?.focus();
 }
 

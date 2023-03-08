@@ -8,9 +8,9 @@ FField.FCheckbox(
     .FCheckbox__wrapper
       input.FCheckbox__checkbox(
         ref="checkboxRef"
+        v-model="checked"
         :name="name"
         type="checkbox"
-        v-model="checked"
         :disabled="disabled"
         :class="checkboxClasses"
         @blur="handleBlur"
@@ -128,10 +128,10 @@ FField.FCheckbox(
 </style>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue';
+
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
-
-import { computed, ref } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
@@ -320,14 +320,14 @@ const checkboxClasses = computed(() => ({
 /**
  * Custom handle change function because native onChange emits a "on" value when true
  */
-function handleChange() {
+function handleChange(): void {
   validate(fieldValue.value, props.validationTrigger === 'change');
 }
 
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   checkboxRef.value?.focus();
 }
 </script>

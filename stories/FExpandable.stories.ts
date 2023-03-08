@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FExpandable, { FExpandableProps } from '@/components/FExpandable.vue';
 import FButton from '@/components/FButton.vue';
 

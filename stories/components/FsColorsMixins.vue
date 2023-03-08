@@ -4,7 +4,10 @@
   hr
   span no transition
   .FsColorsMixins__container
-    template(v-for="color in colors")
+    template(
+      v-for="color in colors"
+      :key="color"
+    )
       .FsColorsMixins__item
         caption: code {{ `bg-color('${color}')` }}
         div(:class="`FsColorsMixins__bg-color--${color}`")
@@ -12,10 +15,16 @@
         caption: code {{ `text-color('${color}')` }}
         div(:class="`FsColorsMixins__text-color--${color}`") {{ color }}
 
-  template(v-for="pseudoClass in pseudoClasses")
+  template(
+    v-for="pseudoClass in pseudoClasses"
+    :key="pseudoClass"
+  )
     span with transition, on {{ pseudoClass }}
     .FsColorsMixins__container
-      template(v-for="color in colors")
+      template(
+        v-for="color in colors"
+        :key="color"
+      )
         .FsColorsMixins__item
           caption: code {{ `bg-color-transition()` }}
           caption: code :{{ pseudoClass }} <br/> {{ ` bg-color('${color}')` }}

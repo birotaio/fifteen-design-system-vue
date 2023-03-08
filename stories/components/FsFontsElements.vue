@@ -2,10 +2,13 @@
 .FsFontsElements
   caption Use the following html elements.
   hr
-  each i in [1, 2, 3, 4, 5, 6]
+  template(
+    v-for="index in 6"
+    :key="index"
+  )
     .FsFontsElements__element
-      #{'h'+i} Heading level #{ i }
-      code h#{ i }
+      component(:is="`h${index}`") Heading level {{ index }}
+      code h{{ index }}
   .FsFontsElements__element
     p Paragraph
     code p

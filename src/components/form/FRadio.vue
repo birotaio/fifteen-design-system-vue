@@ -8,9 +8,9 @@ FField.FRadio(
     .FRadio__wrapper
       input.FRadio__radio(
         ref="radioRef"
+        v-model="fieldValue"
         :name="name"
         type="radio"
-        v-model="fieldValue"
         :value="value"
         :checked="fieldValue === value"
         :disabled="disabled"
@@ -113,9 +113,9 @@ FField.FRadio(
 </style>
 
 <script setup lang="ts">
-import FField from '@/components/form/FField.vue';
-
 import { computed, ref } from 'vue';
+
+import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
@@ -287,7 +287,7 @@ const radioRef = ref<HTMLElement>();
 /**
  * Focus the radio
  */
-function focus() {
+function focus(): void {
   radioRef.value?.focus();
 }
 </script>

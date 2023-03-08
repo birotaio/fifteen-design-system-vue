@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FFileUpload, {
   FFileUploadProps,
 } from '@/components/form/FFileUpload.vue';

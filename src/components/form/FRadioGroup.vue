@@ -8,11 +8,12 @@ FField.FRadioGroup(
   .FRadioGroup__options
     FRadio(
       v-for="option in options"
+      :key="option.label"
       ref="radioRefs"
+      v-model="value"
       :name="name"
       :value="option.value"
       :label="option.label"
-      v-model="value"
       :disabled="disabled"
       hide-hint
       @blur="handleBlur"
@@ -40,6 +41,7 @@ FField.FRadioGroup(
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+
 import FField from '@/components/form/FField.vue';
 import FRadio from '@/components/form/FRadio.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
@@ -177,7 +179,7 @@ const radioRefs = ref();
 /**
  * Focus the first radio
  */
-function focus() {
+function focus(): void {
   radioRefs.value[0]?.focus();
 }
 </script>

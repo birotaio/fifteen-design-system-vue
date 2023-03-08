@@ -4,8 +4,8 @@ FField.FCreditCardInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FInput(
-    v-model="value"
     ref="inputRef"
+    v-model="value"
     :color="color"
     :border-color="borderColor"
     :text-color="textColor"
@@ -23,11 +23,11 @@ FField.FCreditCardInput(
     hide-error-icon
     hide-hint
     :mask="creditCard?.mask ?? defaultMask"
+    :loading="loading"
     @focus="handleFocusAndResetValidation"
     @blur="handleBlur"
     @change="handleChange"
     @input="handleInput"
-    :loading="loading"
   )
     template(#suffix)
       .FCreditCardInput__suffix(
@@ -91,17 +91,18 @@ FField.FCreditCardInput(
 </style>
 
 <script setup lang="ts">
+import { computed, ref, watch } from 'vue';
+
 import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
 import FLoader from '@/components/FLoader.vue';
 import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
 import FIcon from '@/components/FIcon.vue';
-
-import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import type { CreditCardInfo } from '@/helpers/credit-cards';
 import { getCardInfo } from '@/helpers/credit-cards';
+
+import type { CreditCardInfo } from '@/helpers/credit-cards';
 
 export interface FCreditCardInputProps {
   /**
@@ -260,7 +261,7 @@ const classes = computed(() => ({
   'FCreditCardInput--disabled': props.disabled,
 }));
 
-function luhnCheck(cardNumber: string) {
+function luhnCheck(cardNumber: string): boolean {
   const cardNumbers = cardNumber
     .split('')
     .reverse()
@@ -323,7 +324,7 @@ function isValidCreditCard(value: unknown): boolean {
   return valid;
 }
 
-function handleFocusAndResetValidation(e: Event) {
+function handleFocusAndResetValidation(e: Event): void {
   resetValidation();
   handleFocus(e);
 }
@@ -340,7 +341,7 @@ const inputRef = ref();
 /**
  * Force validation to sync FCreditCardInput validation status with underlying FInput
  */
-function forceValidation() {
+function forceValidation(): void {
   inputRef.value.forceValidation();
 }
 watch(isValid, forceValidation);
@@ -348,7 +349,7 @@ watch(isValid, forceValidation);
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   inputRef.value?.ref?.focus();
 }
 </script>

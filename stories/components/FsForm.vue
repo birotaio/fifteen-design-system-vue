@@ -1,7 +1,7 @@
 <template lang="pug">
 FForm.FsForm(
-  :initial-values="initialValues"
   v-slot="{ submit, reset }"
+  :initial-values="initialValues"
 )
   FGrid(gap="24")
     FGridItem(span="12")
@@ -78,8 +78,8 @@ FForm.FsForm(
       )
     FGridItem.FsForm__actions(span="12")
       FButton(
-        @click="submit"
         :loading="loading"
+        @click="submit"
       ) Submit
       FButton(@click="() => reset()") Reset
 </template>
@@ -98,7 +98,6 @@ import FForm from '@/components/form/FForm.vue';
 import FGrid from '@/components/FGrid.vue';
 import FGridItem from '@/components/FGridItem.vue';
 import FButton from '@/components/FButton.vue';
-
 import FInput from '@/components/form/FInput.vue';
 import FCheckbox from '@/components//form/FCheckbox.vue';
 import FDigitsInput from '@/components/form/FDigitsInput.vue';
@@ -108,9 +107,9 @@ import FSelect from '@/components/form/FSelect.vue';
 import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
 import FTextarea from '@/components/form/FTextarea.vue';
 import FAutocomplete from '@/components/form/FAutocomplete.vue';
+import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 
 import type { FFormProps } from '@/components/form/FForm.vue';
-import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 
 export interface FsFormProps {
   /**

@@ -1,10 +1,10 @@
 <template lang="pug">
 template(v-if="location && !isHref")
   RouterLink(
+    v-slot="{ navigate, href }"
     :to="location"
     :replace="replace"
     custom
-    v-slot="{ navigate, href }"
   )
     FLink(
       v-bind="{ ...$attrs, ...getProps(href) }"
@@ -29,6 +29,7 @@ template(v-else)
 <script setup lang="ts">
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
+
 import FLink from '@/components/FLink.vue';
 import { useSmartLink } from '@/composables/useSmartLink';
 

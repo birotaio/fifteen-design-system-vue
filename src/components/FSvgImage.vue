@@ -54,10 +54,12 @@
 </style>
 
 <script setup lang="ts">
-import type { FunctionalComponent, SVGAttributes } from 'vue';
 import { computed } from 'vue';
+
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
+
+import type { FunctionalComponent, SVGAttributes } from 'vue';
 
 export interface FSvgImageProps {
   /**

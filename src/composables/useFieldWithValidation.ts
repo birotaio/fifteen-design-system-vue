@@ -1,5 +1,12 @@
-import { Ref, ComputedRef, ref } from 'vue';
-import { computed, watch, toRef, getCurrentInstance } from 'vue';
+import {
+  Ref,
+  ComputedRef,
+  ref,
+  computed,
+  watch,
+  toRef,
+  getCurrentInstance,
+} from 'vue';
 import { useField, validate } from 'vee-validate';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
@@ -58,7 +65,10 @@ interface UseFieldWithValidationReturns {
  * @param props - Props of the component
  * @param errors - Validation errors
  */
-function getHint<Value>(props: BaseProps<Value>, errors: Ref<string[]>) {
+function getHint<Value>(
+  props: BaseProps<Value>,
+  errors: Ref<string[]>
+): ComputedRef<string> {
   return computed(() =>
     errors.value?.length > 0
       ? props?.errorMessage || errors.value?.[0]

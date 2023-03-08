@@ -1,6 +1,9 @@
 <template lang="pug">
 .FsFlagGrid
-  .FsFlagGrid__item(v-for="flag in flags")
+  .FsFlagGrid__item(
+    v-for="flag in flags"
+    :key="flag"
+  )
     FFlagIcon(
       :size="size"
       :country-code="flag"

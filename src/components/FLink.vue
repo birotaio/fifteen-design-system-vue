@@ -1,7 +1,7 @@
 <template lang="pug">
 component.FLink(
-  ref="linkRef"
   :is="href ? 'a' : 'span'"
+  ref="linkRef"
   :style="style"
   :class="classes"
   :href="href"
@@ -83,7 +83,7 @@ component.FLink(
     outline solid rem(3) currentColor
     transition $outline-transition, color 0.25s
 
-    @media (prefers-reduced-motion)
+    @media (prefers-reduced-motion )
       transition none
 
 .FLink__content
@@ -115,6 +115,7 @@ component.FLink(
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+
 import { getCssColor } from '@/utils/getCssColor';
 
 export interface FLinkProps {

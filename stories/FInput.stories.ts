@@ -1,8 +1,9 @@
 import { Story } from '@storybook/vue3';
+import { ref } from 'vue';
+
 import FInput, { FInputProps } from '@/components/form/FInput.vue';
 import FButton from '@/components/FButton.vue';
 import { mask, required } from '@/rules';
-import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FInput',

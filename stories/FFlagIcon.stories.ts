@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FsFlagGrid, { FsFlagGridProps } from './components/FsFlagGrid.vue';
 
 export default {

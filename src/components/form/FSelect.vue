@@ -33,9 +33,9 @@ FField.FSelect(
 
     template(#activator)
       .FSelect__select(
+        ref="selectRef"
         tabindex="0"
         role="listbox"
-        ref="selectRef"
         @blur="handleBlur"
         @focus="handleFocus"
       )
@@ -48,9 +48,9 @@ FField.FSelect(
           )
           .FSelect__selectValue
             slot(
+              v-if="fieldValue"
               name="selected-value"
               v-bind="{ value: fieldValue, label: getValueLabel(fieldValue) }"
-              v-if="fieldValue"
             )
               .FSelect__text {{ getValueLabel(fieldValue) }}
             .FSelect__placeholder(v-else) {{ placeholder }}
@@ -167,13 +167,13 @@ FField.FSelect(
 </style>
 
 <script setup lang="ts">
+import equal from 'fast-deep-equal/es6';
+import { ref, computed, watch } from 'vue';
+
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 import FLoader from '@/components/FLoader.vue';
-
-import equal from 'fast-deep-equal/es6';
-import { ref, computed, watch } from 'vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
@@ -181,12 +181,15 @@ import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import type { FMenuOption } from '@/components/FMenu.vue';
 export type FSelectSize = 'small' | 'medium';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FSelectModelValue = any;
+
 export interface FSelectProps {
   /**
    * Current option of the select
    * @model
    */
-  modelValue?: any;
+  modelValue?: FSelectModelValue;
   /**
    * Label, placed on top of select
    */
@@ -354,14 +357,14 @@ const props = withDefaults(defineProps<FSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: any): void;
+  (name: 'update:modelValue', value: FSelectModelValue): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
   (name: 'clear'): void;
   /** @deprecated Use before-select-option instead */
-  (name: 'select-option', value: any): void;
-  (name: 'before-select-option', value: any): void;
+  (name: 'select-option', value: FSelectModelValue): void;
+  (name: 'before-select-option', value: FSelectModelValue): void;
 }>();
 
 defineExpose<{
@@ -375,7 +378,7 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation<any>(props, {
+} = useFieldWithValidation<FSelectModelValue>(props, {
   validateOnMount: props?.validateOnMount,
 });
 const { handleFocus, handleChange } = useInputEventBindings(
@@ -436,7 +439,7 @@ watch(fieldValue, newValue => handleChange(newValue));
  * Get the label of the selected option
  * @param value
  */
-function getValueLabel(value: string) {
+function getValueLabel(value: string): string | undefined {
   return props.options.find(option => option.value === value)?.label;
 }
 
@@ -444,7 +447,7 @@ function getValueLabel(value: string) {
  * Handle click on select action icon.
  * @param event - Click event
  */
-function handleIconClick(event: Event) {
+function handleIconClick(event: Event): void {
   if (props.clearable && isMenuOpen.value && fieldValue.value) {
     event.stopPropagation();
     fieldValue.value = null;
@@ -468,14 +471,14 @@ const selectRef = ref<HTMLElement>();
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   selectRef.value?.focus();
 }
 
 /**
  * Handle before select option event
  */
-function onBeforeSelectOption(value: any) {
+function onBeforeSelectOption(value: FSelectModelValue): void {
   emit('select-option', value);
   emit('before-select-option', value);
 }

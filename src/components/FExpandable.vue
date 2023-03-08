@@ -80,29 +80,30 @@
   > *
     transition all 0.3s var(--transition--ease-out)
 
-  &:hover
-    color var(--FExpandable--text-hover-color)
+  +hover()
+    &:hover
+      color var(--FExpandable--text-hover-color)
 
-    .FExpandable__title__highlighter
-      transform translateY(-100%)
+      .FExpandable__title__highlighter
+        transform translateY(-100%)
 
-    > *
-      transform translateX($animation-padding)
+      > *
+        transform translateX($animation-padding)
 
-    &:after
-      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding) rotate(90deg)
+      &:after
+        transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding) rotate(90deg)
 
-    &:before
-      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding)
+      &:before
+        transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding)
 
-    .FExpandable--toggled &,
-    .FExpandable__title
-      &:hover
-        &:before
-          transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
+      .FExpandable--toggled &,
+      .FExpandable__title
+        &:hover
+          &:before
+            transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
 
-        &:after
-          transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
+          &:after
+            transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
 
 .FExpandable__container
   height 0

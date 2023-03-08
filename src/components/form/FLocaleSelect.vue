@@ -1,7 +1,7 @@
 <template lang="pug">
 FSelect.FLocaleSelect(
-  :class="classes"
   v-model="locale"
+  :class="classes"
   :label="label"
   :color="color"
   :text-color="textColor"
@@ -18,6 +18,7 @@ FSelect.FLocaleSelect(
   :hint-text-color="hintTextColor"
   :hint-icon="hintIcon"
   :placeholder="placeholder"
+  ref="localeSelectRef"
   :clearable="clearable"
   :options="selectOptions"
   :error-message="errorMessage"
@@ -26,11 +27,10 @@ FSelect.FLocaleSelect(
   :loading="loading"
   :rules="rules"
   :size="size"
-  @focus="handleFocus"
-  @blur="handleBlur"
-  ref="localeSelectRef"
   :validation-trigger="validationTrigger"
   :validate-on-mount="validateOnMount"
+  @focus="handleFocus"
+  @blur="handleBlur"
 )
   template(#selected-value="{ value, label }")
     .FLocaleSelect__selectedValue
@@ -57,11 +57,11 @@ FSelect.FLocaleSelect(
 </style>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue';
+
 import FFlagIcon from '@/components/FFlagIcon.vue';
 import FSelect from '@/components/form/FSelect.vue';
-import { computed, ref } from 'vue';
 import { getFlagIconList } from '@/constants/icons/.utils';
-
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
@@ -85,7 +85,7 @@ export interface FLocaleSelectProps {
    */
   name?: string;
   /**
-   * Optionnally format the label. Defaults to locale value
+   * Optionally format the label. Defaults to locale value
    */
   optionLabelFormat?: (locale: string) => string;
   /**

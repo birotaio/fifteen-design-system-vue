@@ -250,7 +250,7 @@ defineExpose<{
 });
 
 const { isValid, hint, value, validate, resetValidation } =
-  useFieldWithValidation<string | number>(props, {
+  useFieldWithValidation<string>(props, {
     validateOnMount: props?.validateOnMount,
     rules: [isValidCreditCard],
   });

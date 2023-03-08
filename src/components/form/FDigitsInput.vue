@@ -220,7 +220,7 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation(props, {
+} = useFieldWithValidation<string>(props, {
   validateOnMount: props.validateOnMount,
 });
 

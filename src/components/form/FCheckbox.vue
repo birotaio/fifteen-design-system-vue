@@ -268,7 +268,9 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation(props, { validateOnMount: props.validateOnMount });
+} = useFieldWithValidation<boolean>(props, {
+  validateOnMount: props.validateOnMount,
+});
 const { handleBlur, handleFocus } = useInputEventBindings(
   validate,
   props.validationTrigger,

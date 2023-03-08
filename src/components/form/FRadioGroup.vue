@@ -149,7 +149,9 @@ defineExpose<{
   focus,
 });
 
-const { value, isValid, hint, validate } = useFieldWithValidation(props, {
+const { value, isValid, hint, validate } = useFieldWithValidation<
+  string | number
+>(props, {
   validateOnMount: props.validateOnMount,
 });
 const { handleChange, handleFocus, handleBlur } = useInputEventBindings(

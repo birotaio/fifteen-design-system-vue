@@ -34,7 +34,7 @@ interface UseFieldWithValidationOptions {
   rules?: ValidationRule | ValidationRule[];
 }
 
-interface UseFieldWithValidationReturns {
+interface UseFieldWithValidationReturn<T> {
   /**
    * Function which handles field update, with validation or not
    */
@@ -49,7 +49,7 @@ interface UseFieldWithValidationReturns {
   /**
    * Input field ref value
    */
-  value: Ref;
+  value: Ref<T>;
   /**
    * Input hint, coming from props.hint, or props.errorMessage if the validation fails
    */
@@ -91,7 +91,7 @@ export function useFieldWithValidation<
   options?: UseFieldWithValidationOptions,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   emit?: (name: Name, ...args: any[]) => void
-): UseFieldWithValidationReturns {
+): UseFieldWithValidationReturn<Value> {
   const fieldName = toRef<Props, 'name'>(props, 'name');
 
   const rules = [
@@ -101,7 +101,7 @@ export function useFieldWithValidation<
 
   // Bypass form binding if the input has no props.name
   if (!fieldName.value) {
-    const fieldValue = useVModelProxy({ props });
+    const fieldValue = useVModelProxy<Value>({ props });
 
     const isValid = ref(true);
     const errors = ref<string[]>([]);

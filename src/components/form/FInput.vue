@@ -313,9 +313,12 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, value, validate } = useFieldWithValidation(props, {
-  validateOnMount: props.validateOnMount,
-});
+const { isValid, hint, value, validate } = useFieldWithValidation<string>(
+  props,
+  {
+    validateOnMount: props.validateOnMount,
+  }
+);
 const { handleBlur, handleChange, handleInput, handleFocus } =
   useInputEventBindings(validate, props.validationTrigger, emit);
 
@@ -348,7 +351,7 @@ const hintTextColor = computed(() =>
 );
 
 function handleClear(): void {
-  value.value = undefined;
+  value.value = '';
   emit('clear');
 }
 /**

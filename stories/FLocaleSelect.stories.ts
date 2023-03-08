@@ -1,11 +1,11 @@
 import { Story } from '@storybook/vue3';
+import { ref } from 'vue';
 
 import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
-import FSelect, { FSelectProps } from '@/components/form/FSelect.vue';
+import FSelect from '@/components/form/FSelect.vue';
 import FButton from '@/components/FButton.vue';
 
 import type { FLocaleSelectProps } from '@/components/form/FLocaleSelect.vue';
-import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FLocaleSelect',

@@ -1,5 +1,6 @@
 <template lang="pug">
 FSelect.FLocaleSelect(
+  ref="localeSelectRef"
   v-model="locale"
   :class="classes"
   :label="label"
@@ -18,7 +19,6 @@ FSelect.FLocaleSelect(
   :hint-text-color="hintTextColor"
   :hint-icon="hintIcon"
   :placeholder="placeholder"
-  ref="localeSelectRef"
   :clearable="clearable"
   :options="selectOptions"
   :error-message="errorMessage"
@@ -32,13 +32,13 @@ FSelect.FLocaleSelect(
   @focus="handleFocus"
   @blur="handleBlur"
 )
-  template(#selected-value="{ value, label }")
+  template(#selected-value="{ value, label: flagLabel }")
     .FLocaleSelect__selectedValue
       FFlagIcon.FLocaleSelect__flag(
         :country-code="value"
         :size="flagIconSize"
       )
-      span {{ label }}
+      span {{ flagLabel }}
   template(#option-prefix="{ option }")
     FFlagIcon.FLocaleSelect__flag(
       :country-code="option.value"
@@ -71,7 +71,7 @@ export interface FLocaleSelectProps {
   /**
    * Value of the locale select
    */
-  modelValue?: CountryCode;
+  modelValue?: CountryCode | null;
   /**
    * List of locales to use. Default to all availables country codes
    */
@@ -238,7 +238,7 @@ const props = withDefaults(defineProps<FLocaleSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: any): void;
+  (name: 'update:modelValue', value: CountryCode): void;
   (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -249,7 +249,7 @@ const {
   hint,
   value: locale,
   validate,
-} = useFieldWithValidation<any>(props, {
+} = useFieldWithValidation<CountryCode>(props, {
   validateOnMount: props?.validateOnMount,
 });
 const { handleFocus, handleBlur } = useInputEventBindings(
@@ -275,7 +275,7 @@ const flagIconSize = computed(() => (props.size === 'medium' ? 24 : 20));
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   localeSelectRef.value?.focus();
 }
 

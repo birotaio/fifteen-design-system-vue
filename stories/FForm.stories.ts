@@ -27,6 +27,7 @@ Default.args = {
     FPhoneInput: '',
     FRadioGroup: 'b',
     FSelect: 'c',
+    FLocaleSelect: 'FR',
     FTextarea: 'Default value',
     FAutocomplete: 'a',
   },

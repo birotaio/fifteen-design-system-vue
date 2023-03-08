@@ -18,7 +18,6 @@ interface UseFBreakpointsReturn {
 /**
  * Returns breakpoints boolean values and utils breakpoints functions
  */
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export function useFBreakpoints(): UseFBreakpointsReturn {
   const breakpoints = useBreakpoints(breakpointsValues);
   const isMounted = useMounted();

@@ -11,7 +11,7 @@ import { useField, validate } from 'vee-validate';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
 type BaseProps<Value> = {
-  modelValue: Value | null;
+  modelValue?: Value | null;
   name: string;
   rules?: ValidationRule | ValidationRule[];
   hint?: string;

@@ -70,6 +70,7 @@ import type { FSelectSize } from '@/components/form/FSelect.vue';
 export interface FLocaleSelectProps {
   /**
    * Value of the locale select
+   * @model
    */
   modelValue?: CountryCode | null;
   /**
@@ -238,7 +239,7 @@ const props = withDefaults(defineProps<FLocaleSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: CountryCode): void;
+  (name: 'update:modelValue', value: CountryCode | null): void;
   (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;

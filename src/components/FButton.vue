@@ -12,9 +12,9 @@ component.FButton(
   .FButton__container
     slot
     FLoader.FButton__loader(
+      v-if="loading"
       height="100%"
       width="100%"
-      v-if="loading"
       :color="baseColor"
     )
 </template>
@@ -43,7 +43,7 @@ square($size)
   background-image none
   background-color var(--fbutton--background-color)
 
-  @media (prefers-reduced-motion)
+  @media (prefers-reduced-motion )
     transition none
 
   &,
@@ -61,7 +61,7 @@ square($size)
       &:hover:not(.FButton--static)
         transition transform 0.5s var(--transition--ease-out), background-color 0.2s 0.3s, $outline-transition
 
-      @media (prefers-reduced-motion)
+      @media (prefers-reduced-motion )
         transition none
 
   .FButton__container
@@ -84,7 +84,7 @@ square($size)
     transition transform 0.5s var(--transition--ease-out), background-color 0.2s 0.3s
     color var(--fbutton--text-color--hover)
 
-    @media (prefers-reduced-motion)
+    @media (prefers-reduced-motion )
       transition none
 
     .FLink__content
@@ -100,7 +100,7 @@ square($size)
       box-shadow 0 0 0 rem(2) transparent inset
       transition transform 0.5s var(--transition--ease-out), box-shadow 0.2s 0.3s
 
-      @media (prefers-reduced-motion)
+      @media (prefers-reduced-motion )
         transition none
 
   .FIcon__content
@@ -296,7 +296,7 @@ square($size)
       position relative
       transition color 0.5s var(--transition--ease-out)
 
-      @media (prefers-reduced-motion)
+      @media (prefers-reduced-motion )
         transition none
 
     &::after
@@ -310,7 +310,7 @@ square($size)
       transform translateX(-101%)
       transition transform 0.5s var(--transition--ease-out)
 
-      @media (prefers-reduced-motion)
+      @media (prefers-reduced-motion )
         transition none
 
   &:not(.FButton--ghost):not(.FButton--disabled):not(.FButton--static)
@@ -326,10 +326,10 @@ square($size)
 </style>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+
 import FLink from '@/components/FLink.vue';
 import FLoader from '@/components/FLoader.vue';
-
-import { ref, computed } from 'vue';
 import { colorDesignTokens } from '@/constants/colors';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFBreakpoints } from '@/composables/useFBreakpoints';

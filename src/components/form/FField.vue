@@ -1,7 +1,7 @@
 <template lang="pug">
 component.FField(
-  :style="style"
   :is="fieldset ? 'fieldset' : 'div'"
+  :style="style"
 )
   FFieldLabel(
     v-if="label"
@@ -37,9 +37,10 @@ fieldset.FField
 </style>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import FFieldLabel from '@/components/form/FFieldLabel.vue';
 import FFieldHint from '@/components/form/FFieldHint.vue';
-import { computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FFieldProps {

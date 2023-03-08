@@ -1,10 +1,11 @@
 import { Story } from '@storybook/vue3';
+import { ref } from 'vue';
+import { required } from '@vee-validate/rules';
+
 import FAutocomplete, {
   FAutocompleteProps,
 } from '@/components/form/FAutocomplete.vue';
 import FButton from '@/components/FButton.vue';
-import { ref } from 'vue';
-import { required } from '@vee-validate/rules';
 
 export default {
   title: 'Components/Form/FAutocomplete',

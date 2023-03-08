@@ -1,6 +1,9 @@
 <template lang="pug">
 .FsIconGrid
-  .FsIconGrid__item(v-for="icon in icons")
+  .FsIconGrid__item(
+    v-for="icon in icons"
+    :key="icon"
+  )
     //- TS error on `name` prop is expected because it has a partial litteral type
     FIcon(
       :size="size"
@@ -33,9 +36,9 @@ $border = lightgay
 </style>
 
 <script setup lang="ts">
-import FIcon from '@/components/FIcon.vue';
-
 import { withDefaults } from 'vue';
+
+import FIcon from '@/components/FIcon.vue';
 import { getIconList } from '@/constants/icons/.utils';
 
 export interface FsIconGridProps {

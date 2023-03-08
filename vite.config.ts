@@ -1,4 +1,5 @@
 import * as path from 'path';
+
 import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import ViteSvgLoader from 'vite-svg-loader';

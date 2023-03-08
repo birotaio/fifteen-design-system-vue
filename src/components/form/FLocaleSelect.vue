@@ -1,7 +1,8 @@
 <template lang="pug">
 FSelect.FLocaleSelect(
-  :class="classes"
+  ref="localeSelectRef"
   v-model="locale"
+  :class="classes"
   :label="label"
   :color="color"
   :text-color="textColor"
@@ -26,19 +27,18 @@ FSelect.FLocaleSelect(
   :loading="loading"
   :rules="rules"
   :size="size"
-  @focus="handleFocus"
-  @blur="handleBlur"
-  ref="localeSelectRef"
   :validation-trigger="validationTrigger"
   :validate-on-mount="validateOnMount"
+  @focus="handleFocus"
+  @blur="handleBlur"
 )
-  template(#selected-value="{ value, label }")
+  template(#selected-value="{ value, label: flagLabel }")
     .FLocaleSelect__selectedValue
       FFlagIcon.FLocaleSelect__flag(
         :country-code="value"
         :size="flagIconSize"
       )
-      span {{ label }}
+      span {{ flagLabel }}
   template(#option-prefix="{ option }")
     FFlagIcon.FLocaleSelect__flag(
       :country-code="option.value"
@@ -57,11 +57,11 @@ FSelect.FLocaleSelect(
 </style>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue';
+
 import FFlagIcon from '@/components/FFlagIcon.vue';
 import FSelect from '@/components/form/FSelect.vue';
-import { computed, ref } from 'vue';
 import { getFlagIconList } from '@/constants/icons/.utils';
-
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
@@ -70,8 +70,9 @@ import type { FSelectSize } from '@/components/form/FSelect.vue';
 export interface FLocaleSelectProps {
   /**
    * Value of the locale select
+   * @model
    */
-  modelValue?: CountryCode;
+  modelValue?: CountryCode | null;
   /**
    * List of locales to use. Default to all availables country codes
    */
@@ -85,7 +86,7 @@ export interface FLocaleSelectProps {
    */
   name?: string;
   /**
-   * Optionnally format the label. Defaults to locale value
+   * Optionally format the label. Defaults to locale value
    */
   optionLabelFormat?: (locale: string) => string;
   /**
@@ -238,7 +239,7 @@ const props = withDefaults(defineProps<FLocaleSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: any): void;
+  (name: 'update:modelValue', value: CountryCode | null): void;
   (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -249,7 +250,7 @@ const {
   hint,
   value: locale,
   validate,
-} = useFieldWithValidation<any>(props, {
+} = useFieldWithValidation<CountryCode>(props, {
   validateOnMount: props?.validateOnMount,
 });
 const { handleFocus, handleBlur } = useInputEventBindings(
@@ -275,7 +276,7 @@ const flagIconSize = computed(() => (props.size === 'medium' ? 24 : 20));
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   localeSelectRef.value?.focus();
 }
 

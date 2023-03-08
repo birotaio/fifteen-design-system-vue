@@ -6,9 +6,10 @@ FField.FDigitsInput(
   .FDigitsInput__input
     FInput(
       v-for="(_, index) in digits"
+      :key="index"
       ref="digitRefs"
-      text-align="center"
       v-model="digitsValue[index]"
+      text-align="center"
       validation-trigger="input"
       hide-hint
       mask="#"
@@ -67,11 +68,12 @@ FField.FDigitsInput(
 </style>
 
 <script setup lang="ts">
+import { computed, ref, watch, nextTick } from 'vue';
+
 import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
 import FLoader from '@/components/FLoader.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { computed, ref, watch, nextTick } from 'vue';
 
 import type { InputHTMLAttributes } from 'vue';
 
@@ -218,7 +220,7 @@ const {
   hint,
   value: fieldValue,
   validate,
-} = useFieldWithValidation(props, {
+} = useFieldWithValidation<string>(props, {
   validateOnMount: props.validateOnMount,
 });
 
@@ -247,7 +249,7 @@ watch(digitsValue, () => {
  * Select the prevous digit of the digits input
  * @param index - Index of currently selected index
  */
-function selectPrevDigit(index: number) {
+function selectPrevDigit(index: number): void {
   // Trick to clear the current field value before select the previous one
   setTimeout(() => {
     if (index > 0) {
@@ -262,7 +264,7 @@ function selectPrevDigit(index: number) {
 /** Select the next digit of the digits input
  * @param index - Index of currently selected index
  */
-async function selectNextDigit(index: number) {
+async function selectNextDigit(index: number): Promise<void> {
   await nextTick();
   if (!/[0-9]/.test(digitsValue.value[index])) {
     return;
@@ -280,26 +282,26 @@ async function selectNextDigit(index: number) {
  * Select the current input field on focus
  * @param index - Index of focused field
  */
-function handleFocus(index: number) {
+function handleFocus(index: number): void {
   digitRefs.value[index].ref?.select();
 }
 
 /**
  * Force validation for each field digit, to sync validation status with digits input
  */
-function forceDigitsValidation() {
+function forceDigitsValidation(): void {
   digitRefs.value.forEach(digitRef => digitRef?.forceValidation());
 }
 watch(isValid, forceDigitsValidation);
 
-function handleDigitChange() {
+function handleDigitChange(): void {
   validate(digitsValue.value.join(''));
 }
 
 /**
  * Focus the first digit
  */
-function focus() {
+function focus(): void {
   digitRefs.value[0]?.ref?.focus();
 }
 

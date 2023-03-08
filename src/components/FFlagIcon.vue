@@ -17,8 +17,11 @@
 </style>
 
 <script setup lang="ts">
-import FSvgImage from './FSvgImage.vue';
 import { computed } from 'vue';
+
+import FSvgImage from './FSvgImage.vue';
+
+import type { CountryCode } from 'libphonenumber-js';
 
 export interface FFlagIconProps {
   /**

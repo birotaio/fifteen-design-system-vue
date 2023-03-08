@@ -3,26 +3,94 @@
     "browser": true,
     "es2021": true
   },
+  "parser": "vue-eslint-parser",
+  "plugins": ["eslint-plugin-import", "vue"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
-    "plugin:vue/vue3-recommended"
+    "plugin:vue/vue3-recommended",
+    "plugin:vue-pug/vue3-recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
+    // TODO: enable and refactor occurences
+    // See: https://zoov-eu.atlassian.net/browse/SVC-7971
+    // "plugin:vuejs-accessibility/recommended"
   ],
-  "ignorePatterns": ["auto-imports.d.ts", "components.d.ts", "dist/**/*"],
+
+  "ignorePatterns": ["auto-imports.d.ts", "components.d.ts", "dist"],
+  "overrides": [
+    {
+      "files": ["stories/**"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    },
+    {
+      "files": ["**/*.ts", "**/*.d.ts"],
+      "parser": "@typescript-eslint/parser",
+      "settings": {
+        "import/parsers": {
+          "@typescript-eslint/parser": [".ts", ".d.ts"]
+        }
+      },
+      "rules": {
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "variableLike",
+            "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+            "leadingUnderscore": "allowSingleOrDouble"
+          },
+          {
+            "selector": ["typeLike", "enumMember"],
+            "format": ["PascalCase"]
+          }
+        ]
+      }
+    }
+  ],
   "parserOptions": {
-    "ecmaVersion": "latest",
-    "parser": "@typescript-eslint/parser",
-    "sourceType": "module"
+    "parser": {
+      "ts": "@typescript-eslint/parser",
+      "<template>": "espree"
+    }
   },
-  "plugins": ["vue"],
   "rules": {
-    "@typescript-eslint/triple-slash-reference": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+    ],
     "vue/component-tags-order": [
       "error",
       {
         "order": ["template", "style", "script"]
       }
-    ]
+    ],
+    "vue/no-v-html": "off",
+    "import/order": [
+      1,
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "unknown",
+          "type"
+        ],
+        "newlines-between": "always"
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": [
+      1,
+      {
+        "allowExpressions": true,
+        "allowTypedFunctionExpressions": true
+      }
+    ],
+    "import/no-unresolved": "off"
   }
 }

@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FSkeleton, { FSkeletonProps } from '@/components/FSkeleton.vue';
 
 export default {

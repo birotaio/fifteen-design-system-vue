@@ -17,10 +17,13 @@
 </style>
 
 <script setup lang="ts">
-import FSvgImage from './FSvgImage.vue';
 import { computed } from 'vue';
-import type { CreditCardBrandId } from '@/helpers/credit-cards';
+
+import FSvgImage from './FSvgImage.vue';
+
 import { genSize } from '@/utils/genSize';
+
+import type { CreditCardBrandId } from '@/helpers/credit-cards';
 
 export interface FCreditCardIconProps {
   /**

@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FCard, { FCardProps } from '@/components/FCard.vue';
 import { colorDesignTokens } from '@/constants/colors';
 

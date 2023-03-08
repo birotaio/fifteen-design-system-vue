@@ -5,7 +5,8 @@ svg.FLogoAnimatable(
   :viewBox="viewBox"
 )
   line(
-    v-for="line in lines"
+    v-for="(line, index) in lines"
+    :key="index"
     v-bind="line"
   )
 </template>
@@ -25,6 +26,7 @@ svg.FLogoAnimatable(
 
 <script setup lang="ts">
 import { computed } from 'vue';
+
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 

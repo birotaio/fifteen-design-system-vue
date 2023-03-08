@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<FGridItemProps>(), {
   lg: null,
 });
 
-function getSpanValue(span: Span | null) {
+function getSpanValue(span: Span | null): string {
   return span ? String(span) : '';
 }
 

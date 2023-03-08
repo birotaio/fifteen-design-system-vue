@@ -5,8 +5,8 @@ FField.FFileUpload(
 )
   .FFileUpload__content
     input(
-      ref="underlyingFileInputRef"
       :id="name"
+      ref="underlyingFileInputRef"
       :name="name"
       :multiple="multiple"
       :disabled="disabled"
@@ -31,7 +31,10 @@ FField.FFileUpload(
       )
       span {{ buttonText }}
     ul.FFileUpload__fileNames
-      li(v-for="file in value") {{ file?.name ?? '' }}
+      li(
+        v-for="file in value"
+        :key="file.name"
+      ) {{ file?.name ?? '' }}
 </template>
 
 <style lang="stylus">
@@ -62,12 +65,14 @@ FField.FFileUpload(
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
+
 import FButton from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
+
 import type { Icon } from '@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
 
@@ -194,10 +199,13 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
 
-const { isValid, hint, value, validate } = useFieldWithValidation(props, {
-  validateOnMount: props?.validateOnMount,
-  rules: [isValidFile],
-});
+const { isValid, hint, value, validate } = useFieldWithValidation<File[]>(
+  props,
+  {
+    validateOnMount: props?.validateOnMount,
+    rules: [isValidFile],
+  }
+);
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: File[] | null | undefined): void;

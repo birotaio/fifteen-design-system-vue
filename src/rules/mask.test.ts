@@ -1,5 +1,6 @@
-import { mask } from './mask';
 import { describe, it, expect } from 'vitest';
+
+import { mask } from './mask';
 
 describe('Mask validation', () => {
   it('Returns true if the value match a birth date pattern', () => {

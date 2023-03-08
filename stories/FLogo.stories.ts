@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FLogo, { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
 import { colorDesignTokens } from '@/constants/colors';
 

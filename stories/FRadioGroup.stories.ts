@@ -1,9 +1,10 @@
 import { Story } from '@storybook/vue3';
+import { ref } from 'vue';
+
 import FRadioGroup, {
   FRadioGroupProps,
 } from '@/components/form/FRadioGroup.vue';
 import FButton from '@/components/FButton.vue';
-import { ref } from 'vue';
 
 export default {
   title: 'Components/Form/FRadioGroup',

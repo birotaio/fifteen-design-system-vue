@@ -71,23 +71,26 @@ FField.FAutocomplete(
 </style>
 
 <script setup lang="ts">
+import equal from 'fast-deep-equal/es6';
+import { computed, ref, watch } from 'vue';
+import { composeSearchRegex } from '@fifteen/shared-lib';
+
 import FInput from '@/components/form/FInput.vue';
 import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
-
-import equal from 'fast-deep-equal/es6';
-import { computed, ref, watch } from 'vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { composeSearchRegex } from '@fifteen/shared-lib';
 
 import type { FMenuOption } from '@/components/FMenu.vue';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FAutocompleteModelValue = any;
 
 export interface FAutocompleteProps {
   /**
    * Option value
    * @model
    */
-  modelValue?: any;
+  modelValue?: FAutocompleteModelValue;
   /**
    * Propositions based on user input
    */
@@ -268,7 +271,7 @@ const props = withDefaults(defineProps<FAutocompleteProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: any): void;
+  (name: 'update:modelValue', value: FAutocompleteModelValue): void;
   (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -299,7 +302,7 @@ const matchingOptions = computed(() => {
   return props.options.filter(option => option.label.match(filterRegex.value));
 });
 
-function formatOption(option: FMenuOption) {
+function formatOption(option: FMenuOption): string {
   if (!inputValue.value || !props.options.length) return option.label;
   return option.label.replace(
     filterRegex.value,
@@ -316,7 +319,7 @@ watch(isMenuOpen, value => {
   }
 });
 
-function formatInputValue() {
+function formatInputValue(): void {
   inputValue.value = props.formatInputFn
     ? props.formatInputFn(
         currentOptionMatched.value?.label ?? '',
@@ -329,31 +332,31 @@ const {
   isValid,
   hint,
   value: fieldValue,
-} = useFieldWithValidation<any>(props, {
+} = useFieldWithValidation<FAutocompleteModelValue>(props, {
   validateOnMount: props?.validateOnMount,
   validateOnModelValueUpdate: true,
   rules: [isValidMatch],
 });
 
-function handleBlur(event: Event) {
+function handleBlur(event: Event): void {
   emit('blur', event);
 }
 
-function handleFocus(event: Event) {
+function handleFocus(event: Event): void {
   emit('focus', event);
   isMenuOpen.value = true;
 }
 
-function handleChange(event: Event) {
+function handleChange(event: Event): void {
   emit('change', event);
 }
 
-function handleInput(e: InputEvent) {
+function handleInput(e: InputEvent): void {
   emit('input', e, inputValue.value ?? '');
   isMenuOpen.value = true;
 }
 
-function isValidMatch() {
+function isValidMatch(): boolean {
   return !inputValue.value || !!currentOptionMatched.value;
 }
 
@@ -375,7 +378,7 @@ const inputRef = ref();
 /**
  * Force validation to sync FAutocomplete validation status with underlying FInput
  */
-function forceValidation() {
+function forceValidation(): void {
   inputRef.value.forceValidation();
 }
 
@@ -385,7 +388,7 @@ const menuRef = ref<InstanceType<typeof FMenu>>();
 
 watch(() => props.modelValue, matchModelValue, { immediate: true });
 
-function matchModelValue(modelValue: FAutocompleteProps['modelValue']) {
+function matchModelValue(modelValue: FAutocompleteProps['modelValue']): void {
   const matchingOption = props.options.find(option =>
     equal(modelValue, option.value)
   );
@@ -400,7 +403,7 @@ watch(inputValue, newInputValue => {
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   inputRef.value?.ref?.focus();
 }
 </script>

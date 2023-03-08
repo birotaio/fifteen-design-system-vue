@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FRouterLink, {
   FRouterLinkProps,
 } from '@/components/router/FRouterLink.vue';

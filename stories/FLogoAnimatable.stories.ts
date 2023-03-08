@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FLogoAnimatable, {
   FLogoAnimatableProps,
 } from '@/components/FLogoAnimatable.vue';

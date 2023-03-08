@@ -1,6 +1,9 @@
 <template lang="pug">
 .FsCreditCardIconGrid
-  .FsCreditCardIconGrid__item(v-for="cardType in cardTypes")
+  .FsCreditCardIconGrid__item(
+    v-for="cardType in cardTypes"
+    :key="cardType"
+  )
     FCreditCardIcon(
       :size="size"
       :card-type="cardType"

@@ -1,7 +1,7 @@
 <template lang="pug">
 component.FFieldLabel(
-  v-if="label !== ''"
   :is="type"
+  v-if="label !== ''"
   :for="type === 'label' ? name : null"
   :style="style"
 ) {{ label }}
@@ -16,8 +16,9 @@ component.FFieldLabel(
 </style>
 
 <script setup lang="ts">
-import { getCssColor } from '@/utils/getCssColor';
 import { computed } from 'vue';
+
+import { getCssColor } from '@/utils/getCssColor';
 
 export interface FFieldLabelProps {
   /**

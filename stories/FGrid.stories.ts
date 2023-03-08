@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FGrid, { FGridProps } from '@/components/FGrid.vue';
 
 export default {

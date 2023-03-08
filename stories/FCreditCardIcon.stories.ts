@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FsCreditCardIconsGrid, {
   FsCreditCardIconGridProps,
 } from './components/FsCreditCardIconsGrid.vue';

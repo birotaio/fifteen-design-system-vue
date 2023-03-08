@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FAvatar, { FAvatarProps } from '@/components/FAvatar.vue';
 
 export default {

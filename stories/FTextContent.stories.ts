@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FTextContent, { FTextContentProps } from '@/components/FTextContent.vue';
 
 export default {

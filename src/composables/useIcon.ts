@@ -1,6 +1,8 @@
-import * as icons from '@/constants/icons';
-import type { Ref, ComputedRef, SVGAttributes } from 'vue';
 import { computed, unref } from 'vue';
+
+import * as icons from '@/constants/icons';
+
+import type { Ref, ComputedRef, SVGAttributes } from 'vue';
 
 type PickedIcon = keyof typeof import('@/constants/icons');
 

@@ -1,10 +1,10 @@
 <template lang="pug">
 template(v-if="location && !isHref")
   RouterLink(
+    v-slot="{ navigate, href }"
     :to="location"
     :replace="replace"
     custom
-    v-slot="{ navigate, href }"
   )
     FButton(
       v-bind="{ ...$attrs, ...getProps(href) }"
@@ -28,8 +28,9 @@ template(v-else)
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
-import FButton from '@/components/FButton.vue';
 import { computed } from 'vue';
+
+import FButton from '@/components/FButton.vue';
 import { useSmartLink } from '@/composables/useSmartLink';
 
 import type { RouteLocationRaw, NavigationFailure } from 'vue-router';
@@ -164,7 +165,7 @@ const emit = defineEmits<{
 function handleClick(
   e: MouseEvent,
   navigate: (e?: MouseEvent) => Promise<void | NavigationFailure>
-) {
+): void {
   navigate(e);
   emit('click', e);
 }

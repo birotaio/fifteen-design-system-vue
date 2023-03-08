@@ -19,7 +19,8 @@
       :aria-label="altText"
     )
       path(
-        v-for="path in iconPaths"
+        v-for="(path, index) in iconPaths"
+        :key="index"
         v-bind="path"
       )
     img(
@@ -50,7 +51,7 @@
     stroke-width var(--ficon--stroke-width)
     transition fill 0.12s var(--transition--ease-out)
 
-  @media (prefers-reduced-motion)
+  @media (prefers-reduced-motion )
     transition none
 
     path
@@ -59,6 +60,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { useIcon } from '@/composables/useIcon';

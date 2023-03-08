@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FButton, { FButtonProps } from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
 import { colorDesignTokens } from '@/constants/colors';

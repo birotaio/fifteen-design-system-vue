@@ -2,7 +2,10 @@
 .FsFontsMixins
   caption Use the stylus mixin <code>use-font($name)</code>, where <code>$name</code> is in the following names.
   hr
-  template(v-for="typography in typographies")
+  template(
+    v-for="(typography, index) in typographies"
+    :key="index"
+  )
     div(:class="typography") {{ typography }}
 </template>
 

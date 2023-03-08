@@ -1,6 +1,7 @@
-import type { RouteLocationRaw } from 'vue-router';
 import { useRoute } from 'vue-router';
 import { computed, ComputedRef } from 'vue';
+
+import type { RouteLocationRaw } from 'vue-router';
 
 export interface UseSmartLinkBaseProps {
   /**
@@ -78,7 +79,7 @@ export function useSmartLink<Props extends UseSmartLinkBaseProps>(
     isExternal,
     isHref,
     getProps: (href?: string) => {
-      const { location, replace, ...linkProps } = props;
+      const { location, replace: _, ...linkProps } = props;
 
       if (!location) {
         return linkProps;

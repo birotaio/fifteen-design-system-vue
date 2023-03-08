@@ -3,10 +3,14 @@
   caption Use the following CSS variables. You can also append <code>--rgb</code> to get the RGB values.
   hr
   .FsColorsCssVars__container
-    .FsColorsCssVars__color(v-for="baseColor in baseColorDesignTokens")
+    .FsColorsCssVars__color(
+      v-for="baseColor in baseColorDesignTokens"
+      :key="baseColor"
+    )
       span {{ baseColor }}
       template(
         v-for="color in colorDesignTokens.filter(c => c.includes(baseColor))"
+        :key="color"
       )
         .FsColorsCssVars__item
           caption: code {{ color }}

@@ -37,10 +37,11 @@
 </style>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import FImage from '@/components/FImage.vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
-import { computed } from 'vue';
 
 export interface FAvatarProps {
   /**

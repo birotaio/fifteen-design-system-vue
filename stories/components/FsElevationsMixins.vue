@@ -5,22 +5,34 @@
   .FsElevationsMixins__container
     .FsElevationsMixins__row
       span normal shadow
-      template(v-for="z in elevationsValues")
+      template(
+        v-for="z in elevationsValues"
+        :key="z"
+      )
         .FsElevationsMixins__item
           caption: code {{ `elevation(${JSON.stringify(z)})` }}
           div(:class="`FsElevationsMixins__elevation--${z}`")
 
     .FsElevationsMixins__row
       span lighter shadow
-      template(v-for="z in elevationsValues")
+      template(
+        v-for="z in elevationsValues"
+        :key="z"
+      )
         .FsElevationsMixins__item
           caption: code {{ `elevation-light(${JSON.stringify(z)})` }}
           div(:class="`FsElevationsMixins__elevation-light--${z}`")
 
-    template(v-for="pseudoClass in pseudoClasses")
+    template(
+      v-for="pseudoClass in pseudoClasses"
+      :key="pseudoClass"
+    )
       .FsElevationsMixins__row
         span with transition, on {{ pseudoClass }}
-        template(v-for="z in elevationsValues")
+        template(
+          v-for="z in elevationsValues"
+          :key="z"
+        )
           .FsElevationsMixins__item
             caption: code {{ `elevation-transition()` }}
             caption: code :{{ pseudoClass }} <br/> {{ ` elevation(${JSON.stringify(z)})` }}

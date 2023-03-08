@@ -96,18 +96,19 @@ FField.FTextarea(
 </style>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useElementBounding } from '@vueuse/core';
+
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 import FLoader from '@/components/FLoader.vue';
-
-import type CSS from 'csstype';
-import type { TextareaHTMLAttributes } from 'vue';
-import { ref, computed } from 'vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { useElementBounding } from '@vueuse/core';
+
+import type { TextareaHTMLAttributes } from 'vue';
+import type CSS from 'csstype';
 
 export interface FTextareaProps {
   /**
@@ -310,7 +311,7 @@ const classes = computed(() => ({
 /**
  * Focus the input
  */
-function focus() {
+function focus(): void {
   textareaRef.value?.focus();
 }
 </script>

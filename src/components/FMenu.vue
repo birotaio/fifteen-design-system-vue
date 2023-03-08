@@ -1,7 +1,7 @@
 <template lang="pug">
 .FMenu(
-  :style="style"
   ref="menuRef"
+  :style="style"
   :class="menuClasses"
   @keydown="handlePreselectSearch"
 )
@@ -39,9 +39,9 @@
           .FMenu__option(
             v-for="(option, index) in options"
             ref="optionRefs"
+            :key="stringify(option.value)"
             role="option"
             tabindex="-1"
-            :key="stringify(option.value)"
             :class="selectOptionClasses(index)"
             :aria-selected="isSelected(index)"
             @click="selectOption(option)"
@@ -153,8 +153,6 @@
 </style>
 
 <script setup lang="ts">
-import FLoader from '@/components/FLoader.vue';
-
 import Popper from 'vue3-popper/dist/popper.esm';
 import equal from 'fast-deep-equal/es6';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
@@ -163,14 +161,22 @@ import {
   useElementBounding,
   useMutationObserver,
 } from '@vueuse/core';
+import {
+  useVModelProxy,
+  removeDiacritics,
+  stringify,
+} from '@fifteen/shared-lib';
+
 import { getCssColor } from '@/utils/getCssColor';
-import { useVModelProxy } from '@fifteen/shared-lib';
 import { genSize } from '@/utils/genSize';
-import { removeDiacritics, stringify } from '@fifteen/shared-lib';
+import FLoader from '@/components/FLoader.vue';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FMenuOptionValue = any;
 
 export interface FMenuOption {
   label: string;
-  value: any;
+  value: FMenuOptionValue;
   description?: string;
 }
 
@@ -184,7 +190,7 @@ export interface FMenuProps {
    * Selected value of the menu
    * @model
    */
-  selectedOption?: any;
+  selectedOption?: FMenuOptionValue;
   /**
    * Array of options
    */
@@ -295,8 +301,8 @@ defineExpose<{
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: boolean): void;
-  (name: 'update:selectedOption', value: any): void;
-  (name: 'before-select-option', value: any): void;
+  (name: 'update:selectedOption', value: FMenuOptionValue): void;
+  (name: 'before-select-option', value: FMenuOptionValue): void;
 }>();
 
 const style = computed(
@@ -323,7 +329,7 @@ const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
 );
 
 const isOpen = useVModelProxy<boolean>({ props });
-const selectedOption = useVModelProxy<any>({
+const selectedOption = useVModelProxy<FMenuOptionValue>({
   props,
   propName: 'selectedOption',
 });
@@ -342,7 +348,7 @@ const isKeyboardInteracting = ref(false);
 /**
  * Toggle the menu
  */
-async function toggleMenu() {
+async function toggleMenu(): Promise<void> {
   if (props.disabled) return;
   isOpen.value = !isOpen.value;
 }
@@ -359,7 +365,7 @@ const anyFocusableElementSelector = [
 /**
  * Focus the activator
  */
-function focusActivator() {
+function focusActivator(): void {
   if (!isOpen.value || props.disabled) return;
   const hasFocusableChild = Array.from(
     activatorRef.value?.querySelectorAll(anyFocusableElementSelector) ?? []
@@ -371,7 +377,7 @@ function focusActivator() {
 /**
  * Open the menu
  */
-function openMenu() {
+function openMenu(): void {
   if (props.disabled) return;
   isOpen.value = true;
 }
@@ -379,7 +385,7 @@ function openMenu() {
 /**
  * Close the menu
  */
-function closeMenu() {
+function closeMenu(): void {
   if (props.disabled) return;
   isOpen.value = false;
 }
@@ -404,7 +410,7 @@ watch(
  * Preselect an option
  * @param index - Index of option to preselect
  */
-function preselectOption(index: number) {
+function preselectOption(index: number): void {
   preselectedOptionIndex.value = index;
 }
 
@@ -424,7 +430,7 @@ function isSelected(index: number): boolean {
  * Classes to apply to select option
  * @param index - Index of the option
  */
-function selectOptionClasses(index: number) {
+function selectOptionClasses(index: number): VueClasses {
   return {
     'FMenu__option--preselected': preselectedOptionIndex.value === index,
     'FMenu__option--selected': isSelected(index),
@@ -435,7 +441,7 @@ function selectOptionClasses(index: number) {
  * Preselect an option from a mouse interaction
  * @param index - Index of the option
  */
-function mousePreselectOption(index: number) {
+function mousePreselectOption(index: number): void {
   if (isKeyboardInteracting.value) return;
   preselectOption(index);
 }
@@ -446,7 +452,7 @@ type PreselectionMode = 'first' | 'last' | 'prev' | 'next';
  * get the option index to be preselected, based on mode
  * @param mode - The preselection mode
  */
-function getPreselectIndex(mode: PreselectionMode) {
+function getPreselectIndex(mode: PreselectionMode): number {
   switch (mode) {
     case 'first':
       return 0;
@@ -488,7 +494,7 @@ const {
  * Scroll to the selected option
  * @param index - Index of the option to scroll into view
  */
-function scrollOptionIntoView(index: number) {
+function scrollOptionIntoView(index: number): void {
   const el = optionRefs.value[index];
   const {
     top: itemTop,
@@ -546,7 +552,7 @@ const DELAY_BETWEEN_KEYSTROKES_IN_MS = 800;
  * Preselect an option based on input keys (search)
  * @param event - Keyboard event
  */
-function handlePreselectSearch(event: KeyboardEvent) {
+function handlePreselectSearch(event: KeyboardEvent): void {
   event.stopPropagation();
   if (!isOpen.value || props.preventSearch) return;
 
@@ -554,7 +560,7 @@ function handlePreselectSearch(event: KeyboardEvent) {
     preselectSearchTerm + event.key
   ).toLocaleLowerCase();
 
-  function matchResult(option: FMenuOption) {
+  function matchResult(option: FMenuOption): boolean {
     const optionLabel = removeDiacritics(option.label.toLowerCase());
     const optionValue = removeDiacritics(stringify(option.value).toLowerCase());
 
@@ -584,7 +590,7 @@ function handlePreselectSearch(event: KeyboardEvent) {
   }
 }
 
-function handleKeydownEnter(event: KeyboardEvent) {
+function handleKeydownEnter(event: KeyboardEvent): void {
   if (!props.preventActivation) {
     openMenu();
     event.preventDefault();

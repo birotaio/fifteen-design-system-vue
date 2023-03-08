@@ -1,4 +1,5 @@
 import { Story } from '@storybook/vue3';
+
 import FButtonLink, {
   FButtonLinkProps,
 } from '@/components/router/FButtonLink.vue';

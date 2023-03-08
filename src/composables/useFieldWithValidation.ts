@@ -1,10 +1,17 @@
-import { Ref, ComputedRef, ref } from 'vue';
-import { computed, watch, toRef, getCurrentInstance } from 'vue';
+import {
+  Ref,
+  ComputedRef,
+  ref,
+  computed,
+  watch,
+  toRef,
+  getCurrentInstance,
+} from 'vue';
 import { useField, validate } from 'vee-validate';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
 type BaseProps<Value> = {
-  modelValue: Value | null;
+  modelValue?: Value | null;
   name: string;
   rules?: ValidationRule | ValidationRule[];
   hint?: string;
@@ -27,7 +34,7 @@ interface UseFieldWithValidationOptions {
   rules?: ValidationRule | ValidationRule[];
 }
 
-interface UseFieldWithValidationReturns {
+interface UseFieldWithValidationReturn<T> {
   /**
    * Function which handles field update, with validation or not
    */
@@ -42,7 +49,7 @@ interface UseFieldWithValidationReturns {
   /**
    * Input field ref value
    */
-  value: Ref;
+  value: Ref<T>;
   /**
    * Input hint, coming from props.hint, or props.errorMessage if the validation fails
    */
@@ -58,7 +65,10 @@ interface UseFieldWithValidationReturns {
  * @param props - Props of the component
  * @param errors - Validation errors
  */
-function getHint<Value>(props: BaseProps<Value>, errors: Ref<string[]>) {
+function getHint<Value>(
+  props: BaseProps<Value>,
+  errors: Ref<string[]>
+): ComputedRef<string> {
   return computed(() =>
     errors.value?.length > 0
       ? props?.errorMessage || errors.value?.[0]
@@ -81,7 +91,7 @@ export function useFieldWithValidation<
   options?: UseFieldWithValidationOptions,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   emit?: (name: Name, ...args: any[]) => void
-): UseFieldWithValidationReturns {
+): UseFieldWithValidationReturn<Value> {
   const fieldName = toRef<Props, 'name'>(props, 'name');
 
   const rules = [
@@ -91,7 +101,7 @@ export function useFieldWithValidation<
 
   // Bypass form binding if the input has no props.name
   if (!fieldName.value) {
-    const fieldValue = useVModelProxy({ props });
+    const fieldValue = useVModelProxy<Value>({ props });
 
     const isValid = ref(true);
     const errors = ref<string[]>([]);

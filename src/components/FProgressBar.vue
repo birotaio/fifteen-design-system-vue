@@ -26,6 +26,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 

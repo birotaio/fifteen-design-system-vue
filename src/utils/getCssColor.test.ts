@@ -1,7 +1,9 @@
-import { colorDesignTokens } from '@/constants/colors';
 import { ref } from 'vue';
-import { getCssColor } from './getCssColor';
 import { describe, it, expect } from 'vitest';
+
+import { getCssColor } from './getCssColor';
+
+import { colorDesignTokens } from '@/constants/colors';
 
 describe('Get CSS color', () => {
   it('Returns empty string if input is empty', () => {

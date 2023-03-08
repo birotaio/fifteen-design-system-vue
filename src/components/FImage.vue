@@ -1,8 +1,8 @@
 <template lang="pug">
 picture.FImage(
+  ref="imageRef"
   :style="style"
   :class="getImageClasses"
-  ref="imageRef"
 )
   source.FImage__image(
     v-if="imagePlaceholder"
@@ -63,13 +63,14 @@ picture.FImage(
 </style>
 
 <script setup lang="ts">
-import FIcon from '@/components/FIcon.vue';
-
-import type CSS from 'csstype';
 import { ref, computed } from 'vue';
+
+import FIcon from '@/components/FIcon.vue';
 import { genSize } from '@/utils/genSize';
 import { useLazyImage } from '@/composables/useLazyImage';
 import { getCssColor } from '@/utils/getCssColor';
+
+import type CSS from 'csstype';
 
 export interface FImageProps {
   /**

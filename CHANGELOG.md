@@ -1,3 +1,9 @@
+## 0.14.1 (March 9, 2023)
+
+### Features
+
+- [FExpandable] Add titleVerticalPadding prop on FExpandable
+
 ## 0.14.0 (March 8, 2023)
 
 ### Features 

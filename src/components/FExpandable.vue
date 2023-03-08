@@ -22,6 +22,7 @@
   position relative
   cursor pointer
   padding-right rem(48)
+  padding var(--FExpandable--title-padding) 0
   overflow hidden
 
   *:not(.FExpandable__title__highlighter)
@@ -67,6 +68,7 @@
   width 100%
   height 100%
   left 0
+  bottom -100%
   background-color var(--FExpandable--hover-color)
   transition transform 0.5s var(--transition--ease-out)
   z-index 1
@@ -136,6 +138,10 @@ export interface FExpandableProps {
    */
   gap?: string | number;
   /**
+   * Padding Top & bottom
+   */
+  titleVerticalPadding?: string | number;
+  /**
    * Scale the + / - icons, which base size is 20px
    */
   iconScale?: string | number;
@@ -160,6 +166,7 @@ const props = withDefaults(defineProps<FExpandableProps>(), {
   withHoverAnimation: false,
   hoverColor: 'primary',
   textHoverColor: 'neutral--light-5',
+  titleVerticalPadding: 16,
 });
 
 const isToggled = useVModelProxy<boolean>({ props });
@@ -178,6 +185,7 @@ const style = computed(
   (): Style => ({
     '--FExpandable--container-height': genSize(contentHeight.value),
     '--FExpandable--container-gap': genSize(props.gap),
+    '--FExpandable--title-padding': genSize(props.titleVerticalPadding),
     '--FExpandable--icon-scale': String(props.iconScale),
     '--FExpandable--hover-color': getCssColor(props.hoverColor),
     '--FExpandable--text-hover-color': getCssColor(props.textHoverColor),

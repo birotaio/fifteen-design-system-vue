@@ -22,7 +22,7 @@
   position relative
   cursor pointer
   padding-right rem(48)
-  padding var(--FExpandable--title-padding) 0
+  padding var(--FExpandable--title-vertical-padding) 0
   overflow hidden
 
   *:not(.FExpandable__title__highlighter)
@@ -80,7 +80,7 @@
   > *
     transition all 0.3s var(--transition--ease-out)
 
-  +hover()
+  +hover-desktop-only()
     &:hover
       color var(--FExpandable--text-hover-color)
 
@@ -186,7 +186,9 @@ const style = computed(
   (): Style => ({
     '--FExpandable--container-height': genSize(contentHeight.value),
     '--FExpandable--container-gap': genSize(props.gap),
-    '--FExpandable--title-padding': genSize(props.titleVerticalPadding),
+    '--FExpandable--title-vertical-padding': genSize(
+      props.titleVerticalPadding
+    ),
     '--FExpandable--icon-scale': String(props.iconScale),
     '--FExpandable--hover-color': getCssColor(props.hoverColor),
     '--FExpandable--text-hover-color': getCssColor(props.textHoverColor),

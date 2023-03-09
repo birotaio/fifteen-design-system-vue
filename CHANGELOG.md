@@ -3,6 +3,8 @@
 ### Features
 
 - [FExpandable] Add titleVerticalPadding prop on FExpandable
+- [FExpandable] Add hover behaviour (desktop only) on FExpandable
+- [styles/utils] Add hover mixin `hover-desktop-only()` to add hover behaviour only on desktop
 
 ## 0.14.0 (March 8, 2023)
 

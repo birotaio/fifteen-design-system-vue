@@ -22,6 +22,7 @@
   position relative
   cursor pointer
   padding-right rem(48)
+  padding var(--FExpandable--title-vertical-padding) 0
   overflow hidden
 
   *:not(.FExpandable__title__highlighter)
@@ -67,6 +68,7 @@
   width 100%
   height 100%
   left 0
+  bottom -100%
   background-color var(--FExpandable--hover-color)
   transition transform 0.5s var(--transition--ease-out)
   z-index 1
@@ -78,29 +80,30 @@
   > *
     transition all 0.3s var(--transition--ease-out)
 
-  &:hover
-    color var(--FExpandable--text-hover-color)
+  +hover-desktop-only()
+    &:hover
+      color var(--FExpandable--text-hover-color)
 
-    .FExpandable__title__highlighter
-      transform translateY(-100%)
+      .FExpandable__title__highlighter
+        transform translateY(-100%)
 
-    > *
-      transform translateX($animation-padding)
+      > *
+        transform translateX($animation-padding)
 
-    &:after
-      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding) rotate(90deg)
+      &:after
+        transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding) rotate(90deg)
 
-    &:before
-      transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding)
+      &:before
+        transform scale(var(--FExpandable--icon-scale)) translateY(-50%) translateX(-1 * $animation-padding)
 
-    .FExpandable--toggled &,
-    .FExpandable__title
-      &:hover
-        &:before
-          transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
+      .FExpandable--toggled &,
+      .FExpandable__title
+        &:hover
+          &:before
+            transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
 
-        &:after
-          transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
+          &:after
+            transform scale(var(--FExpandable--icon-scale)) translateX(-1 * $animation-padding) translateY(-50%) rotate(180deg)
 
 .FExpandable__container
   height 0
@@ -136,6 +139,10 @@ export interface FExpandableProps {
    */
   gap?: string | number;
   /**
+   * Padding Top & bottom
+   */
+  titleVerticalPadding?: string | number;
+  /**
    * Scale the + / - icons, which base size is 20px
    */
   iconScale?: string | number;
@@ -160,6 +167,7 @@ const props = withDefaults(defineProps<FExpandableProps>(), {
   withHoverAnimation: false,
   hoverColor: 'primary',
   textHoverColor: 'neutral--light-5',
+  titleVerticalPadding: 16,
 });
 
 const isToggled = useVModelProxy<boolean>({ props });
@@ -178,6 +186,9 @@ const style = computed(
   (): Style => ({
     '--FExpandable--container-height': genSize(contentHeight.value),
     '--FExpandable--container-gap': genSize(props.gap),
+    '--FExpandable--title-vertical-padding': genSize(
+      props.titleVerticalPadding
+    ),
     '--FExpandable--icon-scale': String(props.iconScale),
     '--FExpandable--hover-color': getCssColor(props.hoverColor),
     '--FExpandable--text-hover-color': getCssColor(props.textHoverColor),

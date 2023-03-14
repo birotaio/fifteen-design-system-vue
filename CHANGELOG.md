@@ -1,3 +1,9 @@
+### 0.15.1-beta.1 (March 14, 2023)
+
+### Fixes
+
+- [FLocaleSelect] Forward `menuWidth` prop to FSelect
+
 ## 0.15.0 (March 10, 2023)
 
 ### Features

@@ -1,3 +1,9 @@
+## 0.15.1 (March 14, 2023)
+
+### Changes
+
+- [icons] Add icons `bike-sharing`, `bike-leasing`
+
 ## 0.15.0 (March 10, 2023)
 
 ### Features

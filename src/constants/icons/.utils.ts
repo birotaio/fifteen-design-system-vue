@@ -25,6 +25,8 @@ const iconList = [
   'batteryThreeQuarters',
   'bellOn',
   'bell',
+  'bikeLeasing',
+  'bikeSharing',
   'birdie',
   'bluetooth',
   'bolt',

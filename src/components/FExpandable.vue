@@ -126,7 +126,7 @@ import { useVModelProxy } from '@fifteen/shared-lib';
 import { useElementSize } from '@vueuse/core';
 
 import { genSize } from '@/utils/genSize';
-import { getCssColor } from '@/utils/getCSSColor';
+import { getCssColor } from '@/utils/getCssColor';
 
 export interface FExpandableProps {
   /**

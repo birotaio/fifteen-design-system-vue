@@ -1,3 +1,9 @@
+## 0.15.2 (March 17, 2023)
+
+### Changes
+
+- [icons] Add icon `phone`
+
 ## 0.15.1 (March 14, 2023)
 
 ### Changes

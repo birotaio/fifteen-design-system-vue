@@ -121,6 +121,7 @@ const iconList = [
   'parking',
   'path',
   'pause',
+  'phone',
   'pinFocus',
   'pinOnMaps',
   'pinPlace',

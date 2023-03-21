@@ -21,13 +21,11 @@ import { computed } from 'vue';
 
 import FSvgImage from './FSvgImage.vue';
 
-import type { CountryCode } from 'libphonenumber-js';
-
 export interface FFlagIconProps {
   /**
    * Code of the country, following the ISO 3166 standard
    */
-  countryCode: CountryCode;
+  countryCode: FlagCode;
   /**
    * Size of the flag icon
    */

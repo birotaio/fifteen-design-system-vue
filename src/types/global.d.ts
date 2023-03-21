@@ -12,6 +12,7 @@ declare global {
   type Style = import('./styles').Style;
   type VueClasses = import('./styles').VueClasses;
   type CountryCode = import('./flags').CountryCode;
+  type FlagCode = import('./flags').FlagCode;
 }
 
 export {};

@@ -29,6 +29,7 @@ FSelect.FLocaleSelect(
   :size="size"
   :validation-trigger="validationTrigger"
   :validate-on-mount="validateOnMount"
+  :menu-width="menuWidth"
   @focus="handleFocus"
   @blur="handleBlur"
 )

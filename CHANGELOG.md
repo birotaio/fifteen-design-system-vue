@@ -1,3 +1,14 @@
+### 0.15.3 (March 21 2023)
+
+### Changes
+
+- [types] Expose `CountryCode` and `FlagCode` types
+- [FFlagIcon] Deprecate `countryCode`, replaced by `flagCode`
+
+### Fixes
+
+- [FLocaleSelect] Forward `menuWidth` prop to FSelect
+
 ## 0.15.2 (March 17, 2023)
 
 ### Changes

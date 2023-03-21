@@ -39,7 +39,6 @@ const preamble = `
 
 const utilsFileContents = [
   preamble,
-  `import type { CountryCode } from 'libphonenumber-js';`,
   `import type { CreditCardBrandId } from '@/helpers/credit-cards';\n`,
   `const iconList = ${JSON.stringify(
     icons.map(icon => icon.name)
@@ -51,7 +50,7 @@ const utilsFileContents = [
   `const flagIconList = ${JSON.stringify(
     flagIcons.map(icon => icon.name.toUpperCase())
   )} as const;\n`,
-  `export const getFlagIconList = (): CountryCode[] => flagIconList.map(name => name as CountryCode)\n`,
+  `export const getFlagIconList = (): FlagCode[] => flagIconList.map(name => name as FlagCode)\n`,
 
   `const creditCardIconList: CreditCardBrandId[] = ${JSON.stringify(
     creditCardIcons.map(icon => icon.name)

@@ -29,19 +29,20 @@ FSelect.FLocaleSelect(
   :size="size"
   :validation-trigger="validationTrigger"
   :validate-on-mount="validateOnMount"
+  :menu-width="menuWidth"
   @focus="handleFocus"
   @blur="handleBlur"
 )
   template(#selected-value="{ value, label: flagLabel }")
     .FLocaleSelect__selectedValue
       FFlagIcon.FLocaleSelect__flag(
-        :country-code="value"
+        :flag-code="value"
         :size="flagIconSize"
       )
       span {{ flagLabel }}
   template(#option-prefix="{ option }")
     FFlagIcon.FLocaleSelect__flag(
-      :country-code="option.value"
+      :flag-code="option.value"
       :size="flagIconSize"
     )
   template(#option="{ option }")
@@ -72,11 +73,11 @@ export interface FLocaleSelectProps {
    * Value of the locale select
    * @model
    */
-  modelValue?: CountryCode | null;
+  modelValue?: FlagCode | null;
   /**
    * List of locales to use. Default to all availables country codes
    */
-  locales?: CountryCode[];
+  locales?: FlagCode[];
   /**
    * Label, placed on top of select
    */
@@ -239,7 +240,7 @@ const props = withDefaults(defineProps<FLocaleSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: CountryCode | null): void;
+  (name: 'update:modelValue', value: FlagCode | null): void;
   (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -250,7 +251,7 @@ const {
   hint,
   value: locale,
   validate,
-} = useFieldWithValidation<CountryCode>(props, {
+} = useFieldWithValidation<FlagCode>(props, {
   validateOnMount: props?.validateOnMount,
 });
 const { handleFocus, handleBlur } = useInputEventBindings(

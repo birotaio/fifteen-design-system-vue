@@ -1,7 +1,6 @@
 // This file is generated automatically. Do not edit manually.
 // To update it, run `yarn build:icons`.
 
-import type { CountryCode } from 'libphonenumber-js';
 import type { CreditCardBrandId } from '@/helpers/credit-cards';
 
 const iconList = [
@@ -458,8 +457,8 @@ const flagIconList = [
   'ZW',
 ] as const;
 
-export const getFlagIconList = (): CountryCode[] =>
-  flagIconList.map(name => name as CountryCode);
+export const getFlagIconList = (): FlagCode[] =>
+  flagIconList.map(name => name as FlagCode);
 
 const creditCardIconList: CreditCardBrandId[] = [
   'american-express',

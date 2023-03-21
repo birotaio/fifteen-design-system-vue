@@ -6,7 +6,7 @@
   )
     FFlagIcon(
       :size="size"
-      :country-code="flag"
+      :flag-code="flag"
     )
     span {{ flag }}
 </template>

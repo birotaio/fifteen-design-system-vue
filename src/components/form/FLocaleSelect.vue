@@ -36,13 +36,13 @@ FSelect.FLocaleSelect(
   template(#selected-value="{ value, label: flagLabel }")
     .FLocaleSelect__selectedValue
       FFlagIcon.FLocaleSelect__flag(
-        :country-code="value"
+        :flag-code="value"
         :size="flagIconSize"
       )
       span {{ flagLabel }}
   template(#option-prefix="{ option }")
     FFlagIcon.FLocaleSelect__flag(
-      :country-code="option.value"
+      :flag-code="option.value"
       :size="flagIconSize"
     )
   template(#option="{ option }")

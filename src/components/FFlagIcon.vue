@@ -24,8 +24,13 @@ import FSvgImage from './FSvgImage.vue';
 export interface FFlagIconProps {
   /**
    * Code of the country, following the ISO 3166 standard
+   * @deprecated Use flagCode prop instead
    */
-  countryCode: FlagCode;
+  countryCode?: FlagCode;
+  /**
+   * Code of the flag, following the ISO 3166 standard + regional flags (see /src/flags.ts for full list)
+   */
+  flagCode: FlagCode;
   /**
    * Size of the flag icon
    */
@@ -33,7 +38,8 @@ export interface FFlagIconProps {
 }
 
 const props = withDefaults(defineProps<FFlagIconProps>(), {
-  countryCode: 'FR',
+  countryCode: undefined,
+  flagCode: 'FR',
   size: 24,
 });
 
@@ -50,7 +56,7 @@ const flagPaths = Object.keys(flagFiles);
 const currentFlagPath = computed(
   () =>
     flagPaths.find(path =>
-      new RegExp(`/${props.countryCode}.svg`).test(path)
+      new RegExp(`/${props.countryCode ?? props.flagCode}.svg`).test(path)
     ) ?? flagPaths[0]
 );
 </script>

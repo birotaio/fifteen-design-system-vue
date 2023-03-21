@@ -3,6 +3,7 @@
 ### Changes
 
 - [types] Expose `CountryCode` and `FlagCode` types
+- [FFlagIcon] Deprecate `countryCode`, replaced by `flagCode`
 
 ### Fixes
 

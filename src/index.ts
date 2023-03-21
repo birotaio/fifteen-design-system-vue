@@ -143,3 +143,4 @@ export type { ValidationRule } from '@/types/forms';
 export type { Span } from '@/types/grid';
 export type { Icon } from '@/types/icons';
 export type { CSSVariable, Style } from '@/types/styles';
+export type { CountryCode } from '@/types/flags';

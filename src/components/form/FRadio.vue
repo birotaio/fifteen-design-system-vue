@@ -4,9 +4,10 @@ FField.FRadio(
   :style="style"
   v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
-  label.FRadio__label
+  label.FRadio__label(:for="name")
     .FRadio__wrapper
       input.FRadio__radio(
+        :id="name"
         ref="radioRef"
         v-model="fieldValue"
         :name="name"

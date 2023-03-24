@@ -26,10 +26,10 @@ export const Default: Story<FRadioGroupProps> = Template.bind({});
 Default.args = {
   label: 'Pick a fruit',
   options: [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Pear', value: 'pear' },
-    { label: 'Kiwi', value: 'kiwi' },
+    { label: 'Apple', value: 'apple', name: 'apple' },
+    { label: 'Banana', value: 'banana', name: 'banana' },
+    { label: 'Pear', value: 'pear', name: 'pear' },
+    { label: 'Kiwi', value: 'kiwi', name: 'kiwi' },
   ],
 };
 
@@ -38,21 +38,21 @@ Horizontal.args = {
   label: 'Pick a fruit',
   displayMode: 'horizontal',
   options: [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Pear', value: 'pear' },
-    { label: 'Kiwi', value: 'kiwi' },
+    { label: 'Apple', value: 'apple', name: 'apple' },
+    { label: 'Banana', value: 'banana', name: 'banana' },
+    { label: 'Pear', value: 'pear', name: 'pear' },
+    { label: 'Kiwi', value: 'kiwi', name: 'kiwi' },
   ],
 };
 
 export const WithHint: Story<FRadioGroupProps> = Template.bind({});
 WithHint.args = {
-  hint: 'You can use your personal or professional email',
+  hint: 'Choose your favorite fruit 🍏 🍌 🍐 🥝 ',
   options: [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Pear', value: 'pear' },
-    { label: 'Kiwi', value: 'kiwi' },
+    { label: 'Apple', value: 'apple', name: 'apple' },
+    { label: 'Banana', value: 'banana', name: 'banana' },
+    { label: 'Pear', value: 'pear', name: 'pear' },
+    { label: 'Kiwi', value: 'kiwi', name: 'kiwi' },
   ],
 };
 
@@ -62,10 +62,10 @@ Disabled.args = {
   label: 'Pick a fruit',
   displayMode: 'horizontal',
   options: [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Pear', value: 'pear' },
-    { label: 'Kiwi', value: 'kiwi' },
+    { label: 'Apple', value: 'apple', name: 'apple' },
+    { label: 'Banana', value: 'banana', name: 'banana' },
+    { label: 'Pear', value: 'pear', name: 'pear' },
+    { label: 'Kiwi', value: 'kiwi', name: 'kiwi' },
   ],
 };
 
@@ -75,10 +75,10 @@ Error.args = {
   label: 'Pick the greenest fruit',
   displayMode: 'horizontal',
   options: [
-    { label: 'Apple', value: 'apple' },
-    { label: 'Banana', value: 'banana' },
-    { label: 'Pear', value: 'pear' },
-    { label: 'Kiwi', value: 'kiwi' },
+    { label: 'Apple', value: 'apple', name: 'apple' },
+    { label: 'Banana', value: 'banana', name: 'banana' },
+    { label: 'Pear', value: 'pear', name: 'pear' },
+    { label: 'Kiwi', value: 'kiwi', name: 'kiwi' },
   ],
   modelValue: 'apple',
   errorMessage: 'Select "kiwi" to dismiss the error',
@@ -104,8 +104,8 @@ export const FocusProgrammatically: Story<FRadioGroupProps> =
   FocusTemplate.bind({});
 FocusProgrammatically.args = {
   options: [
-    { label: 'Option A', value: 'a' },
-    { label: 'Option B', value: 'b' },
-    { label: 'Option C', value: 'c' },
+    { label: 'Option A', value: 'a', name: 'a' },
+    { label: 'Option B', value: 'b', name: 'b' },
+    { label: 'Option C', value: 'c', name: 'c' },
   ],
 };

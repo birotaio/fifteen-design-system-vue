@@ -18,6 +18,7 @@ const Template = (args: FCheckboxProps) => ({
 export const Default: Story<FCheckboxProps> = Template.bind({});
 Default.args = {
   label: 'Check me',
+  name: 'checkbox'
 };
 
 export const Indeterminate: Story<FCheckboxProps> = Template.bind({});
@@ -30,12 +31,14 @@ export const Disabled: Story<FCheckboxProps> = Template.bind({});
 Disabled.args = {
   label: 'A disabled one',
   disabled: true,
+  name: 'checkbox'
 };
 
 export const WithHint: Story<FCheckboxProps> = Template.bind({});
 WithHint.args = {
   label: 'Receive our monthly newsletter',
   hint: 'Check this if you want to receive our amazing newsletter',
+  name: 'checkbox'
 };
 
 export const Error: Story<FCheckboxProps> = Template.bind({});
@@ -44,6 +47,7 @@ Error.args = {
   errorMessage: 'Check the checkbox to dismiss the error',
   rules: [value => value === true],
   validateOnMount: true,
+  name: 'checkbox'
 };
 
 const FocusTemplate = (args: FCheckboxProps) => ({
@@ -66,4 +70,5 @@ export const FocusProgrammatically: Story<FCheckboxProps> = FocusTemplate.bind(
 );
 FocusProgrammatically.args = {
   label: 'Focus me by clicking on the button',
+  name: 'checkbox'
 };

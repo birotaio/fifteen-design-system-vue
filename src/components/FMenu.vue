@@ -3,6 +3,8 @@
   ref="menuRef"
   :style="style"
   :class="menuClasses"
+  role="button"
+  tabindex="-1"
   @keydown="handlePreselectSearch"
 )
   Popper(
@@ -11,6 +13,7 @@
   )
     .FMenu__activator(
       ref="activatorRef"
+      role="button"
       tabindex="-1"
       @keydown.down.prevent="keyboardPreselectOption('next')"
       @keydown.up.prevent="keyboardPreselectOption('prev')"
@@ -29,13 +32,19 @@
     template(#content)
       .FMenu__content(
         ref="contentRef"
+        role="listbox"
+        tabindex="-1"
         @click="focusActivator"
+        @keydown.enter="focusActivator"
         @mousemove="isKeyboardInteracting = false"
       )
         .FMenu__optionsMenu(
           v-if="options.length"
           ref="menuOptionsRef"
         )
+          //- Even though we add @focus and @focusout events on options, they will in reality not trigger
+          //- because the FMenu activator prevents tabbing default behavior 
+          //- (in order to always stay in menu when tabbing)
           .FMenu__option(
             v-for="(option, index) in options"
             ref="optionRefs"
@@ -45,8 +54,11 @@
             :class="selectOptionClasses(index)"
             :aria-selected="isSelected(index)"
             @click="selectOption(option)"
+            @keydown.enter="selectOption(option)"
             @mouseenter="mousePreselectOption(index)"
             @mouseleave="mousePreselectOption(-1)"
+            @focus="mousePreselectOption(index)"
+            @focusout="mousePreselectOption(-1)"
           )
             slot(
               name="option-prefix"

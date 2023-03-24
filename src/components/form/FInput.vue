@@ -19,6 +19,7 @@ FField.FInput(
       :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
+      :aria-label="name"
       @blur="handleBlur"
       @change="handleChange"
       @focus="handleFocus"

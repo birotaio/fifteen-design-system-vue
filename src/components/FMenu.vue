@@ -137,6 +137,9 @@
     background var(--fmenu--selected-option-color)
     font-weight 700
 
+  &--preselected.FMenu__option--selected
+    outline rem(2) solid var(--fmenu--selected-option-text-color)
+
 .FMenu__option__content
   display flex
   flex-direction column

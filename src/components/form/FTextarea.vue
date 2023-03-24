@@ -12,6 +12,7 @@ FField.FTextarea(
       :placeholder="placeholder"
       :disabled="disabled"
       :rows="rows"
+      :aria-label="label"
       @blur="handleBlur"
       @change="handleChange"
       @focus="handleFocus"

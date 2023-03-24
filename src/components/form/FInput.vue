@@ -5,8 +5,11 @@ FField.FInput(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   .FInput__input(
-    role="button"
+    role="textbox"
+    tabindex="0"
     @focus="focus"
+    @click="focus"
+    @keydown.enter="focus"
   )
     .FInput__input__prefix(v-if="$slots['prefix']")
       slot(name="prefix")

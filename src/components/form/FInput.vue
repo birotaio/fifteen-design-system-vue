@@ -6,10 +6,8 @@ FField.FInput(
 )
   .FInput__input(
     role="textbox"
-    tabindex="0"
+    tabindex="-1"
     @focus="focus"
-    @click="focus"
-    @keydown.enter="focus"
   )
     .FInput__input__prefix(v-if="$slots['prefix']")
       slot(name="prefix")

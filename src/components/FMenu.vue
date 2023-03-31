@@ -44,7 +44,7 @@
         )
           //- Even though we bind @focus and @focusout events, they will not be fired in reality
           //- because the FMenu activator prevents tabbing default behavior 
-          //- (in order to always stay in menu when tabbing)
+          //- in order to always stay in menu when tabbing
           .FMenu__option(
             v-for="(option, index) in options"
             ref="optionRefs"

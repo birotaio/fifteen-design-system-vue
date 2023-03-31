@@ -42,7 +42,7 @@
           v-if="options.length"
           ref="menuOptionsRef"
         )
-          //- Even though we add @focus and @focusout events on options, they will in reality not trigger
+          //- Even though we bind @focus and @focusout events, they will not be fired in reality
           //- because the FMenu activator prevents tabbing default behavior 
           //- (in order to always stay in menu when tabbing)
           .FMenu__option(

@@ -57,8 +57,8 @@
             @keydown.enter="selectOption(option)"
             @mouseenter="mousePreselectOption(index)"
             @mouseleave="mousePreselectOption(-1)"
-            @focus="mousePreselectOption(index)"
-            @focusout="mousePreselectOption(-1)"
+            @focus="noop"
+            @focusout="noop"
           )
             slot(
               name="option-prefix"
@@ -182,6 +182,7 @@ import {
   stringify,
 } from '@fifteen/shared-lib';
 
+import { noop } from '@/utils/noop';
 import { getCssColor } from '@/utils/getCssColor';
 import { genSize } from '@/utils/genSize';
 import FLoader from '@/components/FLoader.vue';

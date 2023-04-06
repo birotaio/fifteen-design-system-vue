@@ -4,7 +4,11 @@ FField.FInput(
   :class="classes"
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
-  .FInput__input(@click="focus")
+  .FInput__input(
+    role="textbox"
+    tabindex="-1"
+    @focus="focus"
+  )
     .FInput__input__prefix(v-if="$slots['prefix']")
       slot(name="prefix")
     input(
@@ -16,6 +20,7 @@ FField.FInput(
       :type="type"
       :placeholder="placeholder"
       :disabled="disabled"
+      :aria-label="label"
       @blur="handleBlur"
       @change="handleChange"
       @focus="handleFocus"

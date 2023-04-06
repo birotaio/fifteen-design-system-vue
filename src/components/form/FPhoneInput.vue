@@ -42,12 +42,13 @@ FField.FPhoneInput(
         @input="handleInput"
       )
         template(#prefix)
-          .FPhoneInput__prefix(
-            @keydown.enter="openMenu"
-            @click.stop="toggleMenu"
-          )
+          .FPhoneInput__prefix
             .FPhoneInput__selectedValue(
+              role="switch"
+              :aria-checked="isMenuOpen"
               tabindex="0"
+              @keydown.enter="openMenu"
+              @click.stop="toggleMenu"
               @blur="closeMenu"
             )
               FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
@@ -65,7 +66,14 @@ FField.FPhoneInput(
               :margins="false"
               color="neutral--light-5"
             )
-            span.FPhoneInput__phonePrefix {{ phonePrefix }}
+            span.FPhoneInput__phonePrefix(
+              role="switch"
+              :aria-checked="isMenuOpen"
+              tabindex="-1"
+              @keydown.enter="openMenu"
+              @click.stop="toggleMenu"
+              @blur="closeMenu"
+            ) {{ phonePrefix }}
     template(#option-prefix="{ option }")
       FFlagIcon.FPhoneInput__optionPrefix(
         :country-code="getCountryCode(option)"

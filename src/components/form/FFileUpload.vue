@@ -11,6 +11,7 @@ FField.FFileUpload(
       :multiple="multiple"
       :disabled="disabled"
       :accept="allowedMimeTypes?.join(',')"
+      :aria-label="buttonText"
       type="file"
       @change="handleChange"
     )

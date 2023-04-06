@@ -6,6 +6,8 @@
   .FExpandable__title(
     tabindex="0"
     :class="titleClasses"
+    role="switch"
+    :aria-checked="isToggled"
     @click="handleToggle"
     @keyup.enter="handleToggle"
   )

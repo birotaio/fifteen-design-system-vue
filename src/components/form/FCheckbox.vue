@@ -4,9 +4,10 @@ FField.FCheckbox(
   :style="style"
   v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
-  label.FCheckbox__label
+  label.FCheckbox__label(:for="name")
     .FCheckbox__wrapper
       input.FCheckbox__checkbox(
+        :id="name"
         ref="checkboxRef"
         v-model="checked"
         :name="name"

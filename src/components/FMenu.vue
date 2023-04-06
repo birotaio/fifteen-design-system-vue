@@ -3,6 +3,8 @@
   ref="menuRef"
   :style="style"
   :class="menuClasses"
+  role="button"
+  tabindex="-1"
   @keydown="handlePreselectSearch"
 )
   Popper(
@@ -11,6 +13,7 @@
   )
     .FMenu__activator(
       ref="activatorRef"
+      role="button"
       tabindex="-1"
       @keydown.down.prevent="keyboardPreselectOption('next')"
       @keydown.up.prevent="keyboardPreselectOption('prev')"
@@ -29,13 +32,19 @@
     template(#content)
       .FMenu__content(
         ref="contentRef"
+        role="listbox"
+        tabindex="-1"
         @click="focusActivator"
+        @keydown.enter="focusActivator"
         @mousemove="isKeyboardInteracting = false"
       )
         .FMenu__optionsMenu(
           v-if="options.length"
           ref="menuOptionsRef"
         )
+          //- Even though we bind @focus and @focusout events, they will not be fired in reality
+          //- because the FMenu activator prevents tabbing default behavior 
+          //- in order to always stay in menu when tabbing
           .FMenu__option(
             v-for="(option, index) in options"
             ref="optionRefs"
@@ -45,8 +54,11 @@
             :class="selectOptionClasses(index)"
             :aria-selected="isSelected(index)"
             @click="selectOption(option)"
+            @keydown.enter="selectOption(option)"
             @mouseenter="mousePreselectOption(index)"
             @mouseleave="mousePreselectOption(-1)"
+            @focus="noop"
+            @focusout="noop"
           )
             slot(
               name="option-prefix"
@@ -125,6 +137,9 @@
     background var(--fmenu--selected-option-color)
     font-weight 700
 
+  &--preselected.FMenu__option--selected
+    outline rem(2) solid var(--fmenu--selected-option-text-color)
+
 .FMenu__option__content
   display flex
   flex-direction column
@@ -167,6 +182,7 @@ import {
   stringify,
 } from '@fifteen/shared-lib';
 
+import { noop } from '@/utils/noop';
 import { getCssColor } from '@/utils/getCssColor';
 import { genSize } from '@/utils/genSize';
 import FLoader from '@/components/FLoader.vue';

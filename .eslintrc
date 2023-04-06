@@ -11,10 +11,8 @@
     "plugin:vue-pug/vue3-recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript"
-    // TODO: enable and refactor occurences
-    // See: https://zoov-eu.atlassian.net/browse/SVC-7971
-    // "plugin:vuejs-accessibility/recommended"
+    "plugin:import/typescript",
+    "plugin:vuejs-accessibility/recommended"
   ],
 
   "ignorePatterns": ["auto-imports.d.ts", "components.d.ts", "dist"],

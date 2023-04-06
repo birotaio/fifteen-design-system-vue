@@ -8,10 +8,10 @@ FField.FRadioGroup(
   .FRadioGroup__options
     FRadio(
       v-for="option in options"
-      :key="option.label"
+      :key="option.name"
       ref="radioRefs"
       v-model="value"
-      :name="name"
+      :name="option.name"
       :value="option.value"
       :label="option.label"
       :disabled="disabled"
@@ -50,6 +50,7 @@ import { useInputEventBindings } from '@/composables/useInputEventBindings';
 export interface FRadioGroupOption {
   label: string;
   value: string | number | boolean;
+  name?: string;
 }
 
 export interface FRadioGroupProps {

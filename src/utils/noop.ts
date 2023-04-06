@@ -2,4 +2,4 @@
  * No operation function
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-export const noop = (): void => {};
+export function noop(): void {};

@@ -1,4 +1,10 @@
-### 0.15.3 (March 21 2023)
+### 0.16.0 (April 6, 2023)
+
+### Features
+
+- [a11y] Add plugin `vuejs-accessibility` to improve accessibility on form components
+
+### 0.15.3 (March 21, 2023)
 
 ### Changes
 

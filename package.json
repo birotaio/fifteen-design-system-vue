@@ -68,7 +68,7 @@
     "build:rules": "vite build --config vite.config.rules.ts",
     "build:router": "vite build --config vite.config.router.ts",
     "build": "zx scripts/build.mjs",
-    "release": "make release",
+    "release-deprecated": "make release",
     "lint-staged": "lint-staged",
     "lint": "eslint --ext .ts,.vue .",
     "type-check": "vue-tsc --noEmit",
@@ -79,9 +79,12 @@
     "test-related": "vitest related",
     "coverage": "vitest run --coverage",
     "husky": "husky install",
-    "prepush": "yarn husky:pre-commit"
+    "prepush": "yarn husky:pre-commit",
+    "release": "npm-release",
+    "release:beta": "npm-release --tag beta"
   },
   "devDependencies": {
+    "@fifteen/tooling": "^0.1.0",
     "@babel/core": "^7.18.2",
     "@fifteen/shared-lib": "^0.6.0",
     "@prettier/plugin-pug": "^2.0.0",
@@ -135,6 +138,7 @@
     "vee-validate": "^4.5.11",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
-    "xss": "^1.0.14"
+    "xss": "^1.0.14",
+    "commander": "^9.4.1"
   }
 }

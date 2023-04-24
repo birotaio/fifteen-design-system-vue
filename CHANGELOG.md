@@ -1,3 +1,10 @@
+## 0.16.1-beta.1 (April 24, 2023)
+
+### Features
+
+- [FCheckbox] Add linkColor prop on FCheckbox
+- [FCheckbox] Add label prop rendered as HTML
+
 ### 0.16.0 (April 6, 2023)
 
 ### Features

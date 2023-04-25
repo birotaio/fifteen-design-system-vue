@@ -41,11 +41,19 @@ WithHint.args = {
   name: 'checkbox',
 };
 
-export const WithLinks: Story<FCheckboxProps> = Template.bind({});
+const LinkTemplate = (args: FCheckboxProps) => ({
+  components: { FCheckbox },
+  setup: () => ({ args }),
+  template: `<FCheckbox v-bind="args">
+      <template v-slot:label>
+        I have read and accept <a href="https://fifteen.eu/fr/legal" target="_blank" style="color:var(--color--primary);">terms</a> 
+        and <a href="https://fifteen.eu/fr/privacy" target="_blank" style="color:var(--color--primary);">privacy policy</a>.
+      </template>
+  </FCheckbox>`,
+});
+
+export const WithLinks: Story<FCheckboxProps> = LinkTemplate.bind({});
 WithLinks.args = {
-  label:
-    'I have read and accept <a href="https://fifteen.eu/fr/legal" target="_blank">terms</a> and <a href="https://fifteen.eu/fr/privacy" target="_blank" >privacy policy</a>.',
-  linkColor: 'primary',
   name: 'checkbox',
 };
 

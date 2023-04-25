@@ -31,7 +31,10 @@ FField.FCheckbox(
         color="neutral--light-5"
         size="10"
       )
-    span.FCheckbox__labelText(v-html="label")
+    span.FCheckbox__labelText(v-if="label") {{ label }}
+
+    span.FCheckbox__labelText(v-if="!label")
+      slot(name="label")
 </template>
 
 <style lang="stylus">
@@ -106,8 +109,6 @@ FField.FCheckbox(
   max-width rem(640)
 
 .FCheckbox__labelText a
-  text-decoration underline
-  color var(--fcheckbox--link-color) !important
   use-font('caption')
 
 .FCheckbox--disabled
@@ -207,10 +208,6 @@ export interface FCheckboxProps {
    */
   checkedBorderColor?: Color;
   /**
-   * Link color
-   */
-  linkColor?: Color;
-  /**
    * Hint error color
    */
   errorColor?: Color;
@@ -246,7 +243,6 @@ const props = withDefaults(defineProps<FCheckboxProps>(), {
   errorMessage: '',
   focusBorderColor: 'neutral--dark-2',
   focusColor: 'neutral--light-2',
-  linkColor: 'secondary',
   hideHint: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
@@ -308,7 +304,6 @@ const style = computed(
     '--fcheckbox--focus-color': getCssColor(props.focusColor),
     '--fcheckbox--hover-border-color': getCssColor(props.hoverBorderColor),
     '--fcheckbox--text-color': getCssColor(props.textColor),
-    '--fcheckbox--link-color': getCssColor(props.linkColor),
   })
 );
 

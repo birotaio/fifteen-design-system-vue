@@ -20,7 +20,10 @@ FField.FRadio(
         @focus="handleFocus"
         @keypress.enter="fieldValue = value"
       )
-    span.FRadio__labelText {{ label }}
+    span.FRadio__labelText(v-if="label") {{ label }}
+
+    span.FRadio__labelText
+      slot(name="label")
 </template>
 
 <style lang="stylus">
@@ -84,6 +87,9 @@ FField.FRadio(
   user-select none
   margin-left rem(8)
   cursor pointer
+
+.FRadio__labelText a
+  use-font('caption')
 
 .FRadio--disabled
   cursor default

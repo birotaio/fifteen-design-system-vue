@@ -18,7 +18,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm install
+          yarn install
           yarn build:sb
 
       - name: Deploy 🚀

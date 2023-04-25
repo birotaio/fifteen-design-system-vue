@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - fix/github-actions-build-and-deploy
 permissions:
   contents: write
 jobs:

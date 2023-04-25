@@ -33,7 +33,7 @@ FField.FCheckbox(
       )
     span.FCheckbox__labelText(v-if="label") {{ label }}
 
-    span.FCheckbox__labelText(v-if="!label")
+    span.FCheckbox__labelText(v-else)
       slot(name="label")
 </template>
 

@@ -22,7 +22,7 @@ FField.FRadio(
       )
     span.FRadio__labelText(v-if="label") {{ label }}
 
-    span.FRadio__labelText
+    span.FRadio__labelText(v-else)
       slot(name="label")
 </template>
 

@@ -19,7 +19,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           yarn install
-          yarn build:sb -openssl-legacy-provider
+          yarn build:sb --openssl-legacy-provider
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

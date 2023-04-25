@@ -31,14 +31,17 @@ FField.FCheckbox(
         color="neutral--light-5"
         size="10"
       )
-    span.FCheckbox__labelText {{ label }}
+    span.FCheckbox__labelText(v-if="label") {{ label }}
+
+    span.FCheckbox__labelText(v-else)
+      slot(name="label")
 </template>
 
 <style lang="stylus">
 .FCheckbox__label
   position relative
   display flex
-  align-items center
+  align-items flex-start
   cursor pointer
   z-index 1
 
@@ -101,7 +104,12 @@ FField.FCheckbox(
   use-font('caption')
   user-select none
   margin-left rem(8)
+  margin-top rem(3)
   cursor pointer
+  max-width rem(640)
+
+.FCheckbox__label .FCheckbox__labelText *
+  use-font('caption')
 
 .FCheckbox--disabled
   cursor default

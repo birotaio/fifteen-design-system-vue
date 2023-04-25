@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/no-v-html -->
+<!-- The purpose of FTextContent is to render any HTML content -->
 <template lang="pug">
 .FTextContent(
   :class="classes"

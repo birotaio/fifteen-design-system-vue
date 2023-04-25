@@ -1,3 +1,11 @@
+## 0.17.0 (April 25, 2023)
+
+### Features
+
+- [FCheckbox] Add linkColor prop on FCheckbox
+- [FCheckbox] Add label prop rendered as HTML
+- [scipts] Add release scripts with @fifteen/tooling library
+
 ### 0.16.0 (April 6, 2023)
 
 ### Features

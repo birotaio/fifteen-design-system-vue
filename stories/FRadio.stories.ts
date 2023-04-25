@@ -19,14 +19,14 @@ export const Default: Story<FRadioProps> = Template.bind({});
 Default.args = {
   label: 'Check me',
   value: 'check-me',
-  name: 'radio'
+  name: 'radio',
 };
 
 export const Disabled: Story<FRadioProps> = Template.bind({});
 Disabled.args = {
   label: 'A disabled one',
   disabled: true,
-  name: 'radio'
+  name: 'radio',
 };
 
 export const WithHint: Story<FRadioProps> = Template.bind({});
@@ -34,7 +34,28 @@ WithHint.args = {
   label: 'Receive our monthly newsletter',
   hint: 'Check this if you want to receive our amazing newsletter',
   value: 'newsletter',
-  name: 'radio'
+  name: 'radio',
+};
+
+const LinkTemplate = (args: FRadioProps) => ({
+  components: { FRadio },
+  setup: () => ({ args }),
+  template: `
+  <FRadio v-bind="args">
+    <template v-slot:label>
+      Fifteen <a href="https://fifteen.eu/fr/smart-station" target="_blank" style="color:var(--color--primary);">smart station</a> 
+    </template>
+  </FRadio>
+  <FRadio v-bind="args">
+    <template v-slot:label>
+      Fifteen <a href="https://fifteen.eu/fr/electric-bike" target="_blank" style="color:var(--color--primary);">electric bikes</a> 
+    </template>
+  </FRadio>`,
+});
+
+export const WithLinks: Story<FCheckboxProps> = LinkTemplate.bind({});
+WithLinks.args = {
+  name: 'checkbox',
 };
 
 export const Error: Story<FRadioProps> = Template.bind({});
@@ -44,7 +65,7 @@ Error.args = {
   errorMessage: 'Select the radio button to dismiss the error',
   rules: [value => value === 'privacy-policy'],
   validateOnMount: true,
-  name: 'radio'
+  name: 'radio',
 };
 
 const FocusTemplate = (args: FRadioProps) => ({
@@ -65,5 +86,5 @@ const FocusTemplate = (args: FRadioProps) => ({
 export const FocusProgrammatically: Story<FRadioProps> = FocusTemplate.bind({});
 FocusProgrammatically.args = {
   label: 'Focus me by clicking on the button',
-  name: 'radio'
+  name: 'radio',
 };

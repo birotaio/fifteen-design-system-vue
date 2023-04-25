@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/no-v-html -->
+<!-- An XSS attack is not a risk here -->
 <template lang="pug">
 FField.FAutocomplete(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"

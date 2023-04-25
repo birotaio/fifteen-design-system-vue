@@ -64,7 +64,7 @@
         "order": ["template", "style", "script"]
       }
     ],
-    "vue/no-v-html": "off",
+    "vue/no-v-html": "error",
     "import/order": [
       1,
       {

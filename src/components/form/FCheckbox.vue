@@ -108,7 +108,7 @@ FField.FCheckbox(
   cursor pointer
   max-width rem(640)
 
-.FCheckbox__labelText a
+.FCheckbox__label .FCheckbox__labelText *
   use-font('caption')
 
 .FCheckbox--disabled

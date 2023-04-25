@@ -68,7 +68,6 @@
     "build:rules": "vite build --config vite.config.rules.ts",
     "build:router": "vite build --config vite.config.router.ts",
     "build": "zx scripts/build.mjs",
-    "release-deprecated": "make release",
     "lint-staged": "lint-staged",
     "lint": "eslint --ext .ts,.vue .",
     "type-check": "vue-tsc --noEmit",

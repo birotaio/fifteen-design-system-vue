@@ -88,7 +88,7 @@ FField.FRadio(
   margin-left rem(8)
   cursor pointer
 
-.FRadio__labelText a
+.FRadio__label .FRadio__labelText *
   use-font('caption')
 
 .FRadio--disabled

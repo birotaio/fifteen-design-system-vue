@@ -12,9 +12,12 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
 
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - name: Install and Build 🔧
         run: |
-          yarn install
+          npm install
           yarn build:sb
 
       - name: Deploy 🚀

@@ -21,7 +21,7 @@
       @keydown.end.prevent="keyboardPreselectOption('last')"
       @keydown.tab.exact="keyboardPreselectOption('next'); isOpen && $event.preventDefault()"
       @keydown.shift.tab="keyboardPreselectOption('prev'); isOpen && $event.preventDefault()"
-      @keydown.enter.space="handleKeydownEnter($event)"
+      @keydown.enter="handleKeydownEnter($event)"
       @keydown.esc.prevent="closeMenu()"
       @click="!preventActivation && toggleMenu()"
     )

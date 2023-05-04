@@ -1,3 +1,7 @@
+## 0.17.2 (May 4, 2023)
+
+- Isolate components in dedicated stacking contexts to avoid overlapping at usage
+
 ## 0.17.1 (May 2, 2023)
 
 ### Fixes

@@ -1,6 +1,6 @@
 import '@/styles/elements.styl';
 import '@/styles/theme.styl';
-import { app } from '@storybook/vue3';
+import { setup } from '@storybook/vue3';
 
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -61,4 +61,6 @@ const router = createRouter({
   ],
 });
 
-app.use(router);
+setup((app) => {
+  app.use(router);
+})

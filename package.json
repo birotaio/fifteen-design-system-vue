@@ -53,7 +53,7 @@
   },
   "scripts": {
     "dev": "yarn sb",
-    "sb": "start-storybook -p 3003",
+    "sb": "storybook dev -p 3003",
     "dev:build": "DEV_BUILD=1 yarn build",
     "build:sb": "zx scripts/build-sb.mjs",
     "build:lib": "vite build",
@@ -83,16 +83,16 @@
     "release:beta": "npm-release --tag beta"
   },
   "devDependencies": {
-    "@fifteen/tooling": "^0.1.0",
     "@babel/core": "^7.18.2",
     "@fifteen/shared-lib": "^0.6.0",
+    "@fifteen/tooling": "^0.1.0",
     "@prettier/plugin-pug": "^2.0.0",
     "@qnp/lus": "^0.3.0",
-    "@storybook/addon-essentials": "^6.5.6",
-    "@storybook/addon-links": "^6.5.6",
-    "@storybook/builder-vite": "^0.1.35",
-    "@storybook/testing-library": "^0.0.11",
-    "@storybook/vue3": "^6.5.6",
+    "@storybook/addon-essentials": "^7.0.8",
+    "@storybook/addon-links": "^7.0.8",
+    "@storybook/testing-library": "^0.1.0",
+    "@storybook/vue3": "^7.0.8",
+    "@storybook/vue3-vite": "^7.0.8",
     "@types/react": "file:./stubs/types__react",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
@@ -115,8 +115,11 @@
     "node-html-parser": "^5.3.3",
     "prettier": "^2.6.2",
     "pug": "^3.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rollup-plugin-visualizer": "^5.6.0",
-    "stylus": "^0.58.0",
+    "storybook": "^7.0.8",
+    "stylus": "^0.59.0",
     "stylus-supremacy": "^2.15.0",
     "tsc-alias": "^1.6.8",
     "typescript": "^4.8.4",
@@ -133,11 +136,11 @@
   "dependencies": {
     "@vee-validate/rules": "^4.5.11",
     "@vueuse/core": "^9.5.0",
+    "commander": "^9.4.1",
     "libphonenumber-js": "^1.10.6",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6",
-    "xss": "^1.0.14",
-    "commander": "^9.4.1"
+    "xss": "^1.0.14"
   }
 }

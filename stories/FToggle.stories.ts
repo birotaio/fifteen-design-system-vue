@@ -55,6 +55,12 @@ Error.args = {
   validateOnMount: true,
 };
 
+export const NoCheckmarkIcon: Story<FToggleProps> = Template.bind({});
+NoCheckmarkIcon.args = {
+  label: 'I agree with the privacy policy',
+  noCheckmarkIcon: true
+};
+
 const FocusTemplate = (args: FToggleProps) => ({
   components: { FToggle, FButton },
   setup() {

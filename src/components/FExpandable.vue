@@ -20,6 +20,9 @@
 </template>
 
 <style lang="stylus">
+.FExpandable
+  isolation isolate
+
 .FExpandable__title
   position relative
   cursor pointer

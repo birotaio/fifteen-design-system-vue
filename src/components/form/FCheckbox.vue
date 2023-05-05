@@ -38,6 +38,9 @@ FField.FCheckbox(
 </template>
 
 <style lang="stylus">
+.FCheckbox
+  isolation isolate
+
 .FCheckbox__label
   position relative
   display flex

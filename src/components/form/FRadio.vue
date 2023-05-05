@@ -27,6 +27,9 @@ FField.FRadio(
 </template>
 
 <style lang="stylus">
+.FRadio
+  isolation isolate
+
 .FRadio__label
   position relative
   display flex

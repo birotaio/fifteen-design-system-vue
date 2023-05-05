@@ -83,6 +83,7 @@ FField.FPhoneInput(
 <style lang="stylus">
 .FPhoneInput
   background none
+  isolation isolate
 
 .FPhoneInput__select
   display flex

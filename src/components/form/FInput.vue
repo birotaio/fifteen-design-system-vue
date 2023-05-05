@@ -51,6 +51,9 @@ FField.FInput(
 </template>
 
 <style lang="stylus">
+.FInput
+  isolation isolate
+
 .FInput__input
   display flex
   position relative

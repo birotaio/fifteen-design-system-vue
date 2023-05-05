@@ -42,6 +42,7 @@ square($size)
   box-sizing border-box
   background-image none
   background-color var(--fbutton--background-color)
+  isolation isolate
 
   @media (prefers-reduced-motion )
     transition none

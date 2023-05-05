@@ -21,6 +21,7 @@ FField.FToggle(
       .FToggle__track(:class="toggleClasses")
         .FToggle__track__thumb
           FIcon.FToggle__toggledIcon(
+            v-if="!noCheckmarkIcon"
             name="checkmark"
             :color="toggledColor"
             size="10"
@@ -198,6 +199,10 @@ export interface FToggleProps {
    */
   toggledBorderColor?: Color;
   /**
+   * Don't show a checkmark icon when toggle is on
+   */
+  noCheckmarkIcon?: boolean;
+  /**
    * Hint error color
    */
   errorColor?: Color;
@@ -234,6 +239,7 @@ const props = withDefaults(defineProps<FToggleProps>(), {
   errorColor: 'danger',
   errorMessage: '',
   hideHint: false,
+  noCheckmarkIcon: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
   hintIcon: null,

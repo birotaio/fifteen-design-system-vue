@@ -48,6 +48,7 @@ export { default as FFileUpload } from '@/components/form/FFileUpload.vue';
 /** @deprecated Use FAutocomplete instead */
 export { default as FAutocompleteInput } from '@/components/form/FAutocomplete.vue';
 export { default as FAutocomplete } from '@/components/form/FAutocomplete.vue';
+export { default as FToggle } from '@/components/form/FToggle.vue';
 
 /**
  * Components props interfaces
@@ -102,6 +103,7 @@ export type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
 /** @deprecated Use FAutocompleteProps instead */
 export type { FAutocompleteProps as FAutocompleteInputProps } from '@/components/form/FAutocomplete.vue';
 export type { FAutocompleteProps } from '@/components/form/FAutocomplete.vue';
+export type { FToggleProps } from '@/components/form/FToggle.vue';
 export type { FTextContentProps } from '@/components/FTextContent.vue';
 
 /**

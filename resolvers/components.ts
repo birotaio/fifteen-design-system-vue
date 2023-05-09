@@ -40,6 +40,7 @@ const components = [
   'FFileUpload',
   'FAutocompleteInput' /** @deprecated */,
   'FAutocomplete',
+  'FToggle'
 ];
 
 const routerComponents = ['FRouterLink', 'FButtonLink'];

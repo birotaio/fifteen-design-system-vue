@@ -55,24 +55,18 @@ Error.args = {
   validateOnMount: true,
 };
 
-export const NoCheckmarkIcon: Story<FToggleProps> = Template.bind({});
-NoCheckmarkIcon.args = {
-  label: 'I agree with the privacy policy',
-  noCheckmarkIcon: true
-};
-
 const FocusTemplate = (args: FToggleProps) => ({
   components: { FToggle, FButton },
   setup() {
-    const checkboxRef = ref();
+    const toggleRef = ref();
     function focus() {
-      checkboxRef.value?.focus();
+      toggleRef.value?.focus();
     }
-    return { args, focus, checkboxRef };
+    return { args, focus, toggleRef };
   },
   template: `
 <div>
-  <FToggle ref="checkboxRef" v-bind="args" />
+  <FToggle ref="toggleRef" v-bind="args" />
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
@@ -81,4 +75,25 @@ export const FocusProgrammatically: Story<FToggleProps> = FocusTemplate.bind(
 );
 FocusProgrammatically.args = {
   label: 'Focus me by clicking on the button',
+};
+
+export const NoCheckmarkIcon: Story<FToggleProps> = Template.bind({});
+NoCheckmarkIcon.args = {
+  label: 'I agree with the privacy policy',
+  noCheckmarkIcon: true
+};
+
+const ReverseTemplate = (args: FToggleProps) => ({
+  components: { FToggle },
+  setup: () => ({ args }),
+  template: `
+<div style="width: 250px;">
+  <FToggle v-bind="args" />
+</div>`,
+});
+
+export const Reverse: Story<FToggleProps> = ReverseTemplate.bind({});
+Reverse.args = {
+  label: 'I agree with the privacy policy',
+  reverse: true
 };

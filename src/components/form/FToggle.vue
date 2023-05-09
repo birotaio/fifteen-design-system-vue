@@ -9,14 +9,14 @@ FField.FToggle(
       input.FToggle__hiddenCheckbox(
         :id="name"
         ref="toggleRef"
-        v-model="toggled"
+        v-model="fieldValue"
         :name="name"
         type="checkbox"
         :disabled="disabled"
         @blur="handleBlur"
         @change="handleChange"
         @focus="handleFocus"
-        @keypress.enter="toggled = !toggled"
+        @keypress.enter="fieldValue = !fieldValue"
       )
       .FToggle__track(:class="toggleClasses")
         .FToggle__track__thumb
@@ -264,7 +264,7 @@ const props = withDefaults(defineProps<FToggleProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: boolean | null): void;
+  (name: 'update:modelValue', value: boolean): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
@@ -292,13 +292,6 @@ const { handleBlur, handleFocus } = useInputEventBindings(
   emit
 );
 
-const toggled = ref(false)
-
-watch(toggled, value => {
-  fieldValue.value = value
-  validate(value)
-})
-
 const style = computed(
   (): Style => ({
     '--FToggle--border-color': getCssColor(props.borderColor),
@@ -321,7 +314,7 @@ const hintTextColor = computed(() =>
 );
 
 const iconClasses = computed(() => ({
-  'FToggle__toggledIcon--visible': toggled.value,
+  'FToggle__toggledIcon--visible': fieldValue.value,
 }));
 
 const classes = computed(() => ({
@@ -335,7 +328,7 @@ const labelClasses = computed(() => ({
 }));
 
 const toggleClasses = computed(() => ({
-  'FToggle__track--toggled': toggled.value,
+  'FToggle__track--toggled': fieldValue.value,
 }));
 
 /**

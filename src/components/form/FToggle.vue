@@ -40,14 +40,11 @@ FField.FToggle(
   cursor pointer
   z-index 1
   align-items flex-start
-  gap rem(8)
+  gap rem(12)
 
   &--reverse
     flex-direction row-reverse
     justify-content space-between
-  
-  .FToggle__labelText
-    margin-top 0.5ch
   
 .FToggle__wrapper
   display flex
@@ -109,13 +106,16 @@ FField.FToggle(
   
 .FToggle__labelText
     color var(--FToggle--text-color) !important
-    use-font('caption')
     user-select none
-    margin-top rem(3)
     cursor pointer
     max-width rem(640)
+
+.FToggle--smallText
+  .FToggle__labelText
+    use-font('caption')
+    margin-top rem(3)
   
-.FToggle__label .FToggle__labelText *
+  .FToggle__labelText *
     use-font('caption')
   
 .FToggle--disabled
@@ -208,6 +208,10 @@ export interface FToggleProps {
    */
   noCheckmarkIcon?: boolean;
   /**
+   * Smaller label text
+   */
+  smallText?: boolean;
+  /**
    * Hint error color
    */
   errorColor?: Color;
@@ -245,6 +249,7 @@ const props = withDefaults(defineProps<FToggleProps>(), {
   errorMessage: '',
   hideHint: false,
   noCheckmarkIcon: false,
+  smallText: false,
   hint: '',
   hintTextColor: 'neutral--dark-4',
   hintIcon: null,
@@ -253,7 +258,7 @@ const props = withDefaults(defineProps<FToggleProps>(), {
   reverse: false,
   name: 'toggle',
   rules: () => [],
-  textColor: 'neutral--dark-3',
+  textColor: 'neutral--dark-4',
   validateOnMount: false,
   validationTrigger: 'change',
 });
@@ -322,6 +327,7 @@ const iconClasses = computed(() => ({
 const classes = computed(() => ({
   'FToggle--error': !isValid.value,
   'FToggle--disabled': props.disabled,
+  'FToggle--smallText': props.smallText,
 }));
 
 const labelClasses = computed(() => ({

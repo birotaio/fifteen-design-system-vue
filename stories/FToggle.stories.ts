@@ -87,7 +87,7 @@ const ReverseTemplate = (args: FToggleProps) => ({
   components: { FToggle },
   setup: () => ({ args }),
   template: `
-<div style="width: 250px;">
+<div style="width: 325px;">
   <FToggle v-bind="args" />
 </div>`,
 });
@@ -96,4 +96,10 @@ export const Reverse: Story<FToggleProps> = ReverseTemplate.bind({});
 Reverse.args = {
   label: 'I agree with the privacy policy',
   reverse: true
+};
+
+export const SmallText: Story<FToggleProps> = Template.bind({});
+SmallText.args = {
+  label: 'I agree with the privacy policy',
+  smallText: true
 };

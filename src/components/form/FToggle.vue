@@ -4,7 +4,7 @@ FField.FToggle(
   :style="style"
   v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
-  label.FToggle__label(:for="name")
+  label.FToggle__label(:for="name" :class="labelClasses")
     .FToggle__wrapper
       input.FToggle__hiddenCheckbox(
         :id="name"
@@ -35,22 +35,24 @@ FField.FToggle(
   
 <style lang="stylus">
 .FToggle__label
-    position relative
-    display flex
-    align-items flex-start
-    cursor pointer
-    z-index 1
+  position relative
+  display flex
+  cursor pointer
+  z-index 1
+  align-items flex-start
+  gap rem(8)
+
+  &--reverse
+    flex-direction row-reverse
+    justify-content space-between
   
-    +media-down('sm')
-      align-items flex-start
-  
-      .FToggle__labelText
-        margin-top 0.5ch
+  .FToggle__labelText
+    margin-top 0.5ch
   
 .FToggle__wrapper
-    display flex
-    position relative
-    align-items center
+  display flex
+  position relative
+  align-items center
 
 .FToggle__track
   width rem(44)
@@ -109,7 +111,6 @@ FField.FToggle(
     color var(--FToggle--text-color) !important
     use-font('caption')
     user-select none
-    margin-left rem(8)
     margin-top rem(3)
     cursor pointer
     max-width rem(640)
@@ -150,6 +151,10 @@ export interface FToggleProps {
    * Label of the toggle
    */
   label?: string;
+  /**
+   * Position the label to the right of the toggle
+   */
+  reverse?: boolean;
   /**
    * Disable the toggle usage
    */
@@ -245,6 +250,7 @@ const props = withDefaults(defineProps<FToggleProps>(), {
   hintIcon: null,
   hoverBorderColor: 'secondary',
   label: '',
+  reverse: false,
   name: 'toggle',
   rules: () => [],
   textColor: 'neutral--dark-3',
@@ -316,6 +322,10 @@ const iconClasses = computed(() => ({
 const classes = computed(() => ({
   'FToggle--error': !isValid.value,
   'FToggle--disabled': props.disabled,
+}));
+
+const labelClasses = computed(() => ({
+  'FToggle__label--reverse': props.reverse,
 }));
 
 const toggleClasses = computed(() => ({

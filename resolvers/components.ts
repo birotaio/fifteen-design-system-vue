@@ -38,7 +38,6 @@ const components = [
   'FField',
   'FRadio',
   'FFileUpload',
-  'FAutocompleteInput' /** @deprecated */,
   'FAutocomplete',
   'FToggle'
 ];

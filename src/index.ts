@@ -45,8 +45,6 @@ export { default as FSelect } from '@/components/form/FSelect.vue';
 export { default as FLocaleSelect } from '@/components/form/FLocaleSelect.vue';
 export { default as FTextarea } from '@/components/form/FTextarea.vue';
 export { default as FFileUpload } from '@/components/form/FFileUpload.vue';
-/** @deprecated Use FAutocomplete instead */
-export { default as FAutocompleteInput } from '@/components/form/FAutocomplete.vue';
 export { default as FAutocomplete } from '@/components/form/FAutocomplete.vue';
 export { default as FToggle } from '@/components/form/FToggle.vue';
 
@@ -100,8 +98,6 @@ export type { FSkeletonProps } from '@/components/FSkeleton.vue';
 export type { FSvgImageProps } from '@/components/FSvgImage.vue';
 export type { FTextareaProps } from '@/components/form/FTextarea.vue';
 export type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
-/** @deprecated Use FAutocompleteProps instead */
-export type { FAutocompleteProps as FAutocompleteInputProps } from '@/components/form/FAutocomplete.vue';
 export type { FAutocompleteProps } from '@/components/form/FAutocomplete.vue';
 export type { FToggleProps } from '@/components/form/FToggle.vue';
 export type { FTextContentProps } from '@/components/FTextContent.vue';

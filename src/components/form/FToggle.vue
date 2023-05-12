@@ -134,7 +134,7 @@ FField.FToggle(
 </style>
   
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref } from 'vue';
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';

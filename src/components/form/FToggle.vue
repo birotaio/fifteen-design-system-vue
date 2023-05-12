@@ -113,7 +113,7 @@ FField.FToggle(
 .FToggle--smallText
   .FToggle__labelText
     use-font('caption')
-    margin-top rem(3)
+    margin-top rem(4)
   
   .FToggle__labelText *
     use-font('caption')

@@ -4,7 +4,10 @@ FField.FToggle(
   :style="style"
   v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
-  label.FToggle__label(:for="name" :class="labelClasses")
+  label.FToggle__label(
+    :for="name"
+    :class="labelClasses"
+  )
     .FToggle__wrapper
       input.FToggle__hiddenCheckbox(
         :id="name"
@@ -32,7 +35,7 @@ FField.FToggle(
     span.FToggle__labelText(v-else)
       slot(name="label")
 </template>
-  
+
 <style lang="stylus">
 .FToggle__label
   position relative
@@ -45,7 +48,7 @@ FField.FToggle(
   &--reverse
     flex-direction row-reverse
     justify-content space-between
-  
+
 .FToggle__wrapper
   display flex
   position relative
@@ -83,7 +86,7 @@ FField.FToggle(
       background var(--FToggle--toggled-border-color)
     .FToggle__track__thumb
       left 'calc(100% - %s)' % rem(22)
-  
+
 .FToggle__track__thumb
   position absolute
   left rem(2)
@@ -102,7 +105,7 @@ FField.FToggle(
     transform translate(-50%, -50%)
     opacity 0
     transition opacity .1s, transform .1s
-    
+
     &--visible
       opacity 1
 
@@ -114,7 +117,7 @@ FField.FToggle(
     &:focus + .FToggle__track
       &::before
         box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color)
-  
+
 .FToggle__labelText
     color var(--FToggle--text-color) !important
     user-select none
@@ -128,7 +131,7 @@ FField.FToggle(
   .FToggle__labelText
     use-font('caption')
     margin-top rem(4)
-  
+
 .FToggle--disabled
   cursor default
   .FToggle__track
@@ -141,11 +144,11 @@ FField.FToggle(
   .FToggle__labelText
     cursor default
     color var(--color--neutral--dark-1) !important
-  
+
 .FToggle--error
     color var(--FToggle--error-color)
 </style>
-  
+
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import FIcon from '@/components/FIcon.vue';
@@ -316,8 +319,8 @@ const hintTextColor = computed(() =>
   props.disabled
     ? 'neutral--dark-1'
     : isValid.value
-      ? props.hintTextColor
-      : props.errorColor
+    ? props.hintTextColor
+    : props.errorColor
 );
 
 const iconClasses = computed(() => ({
@@ -352,4 +355,3 @@ function focus(): void {
   toggleRef.value?.focus();
 }
 </script>
-  

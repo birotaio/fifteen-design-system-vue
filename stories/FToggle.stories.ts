@@ -44,8 +44,7 @@ const LinkTemplate = (args: FToggleProps) => ({
 });
 
 export const WithLinks: Story<FToggleProps> = LinkTemplate.bind({});
-WithLinks.args = {
-};
+WithLinks.args = {};
 
 export const Error: Story<FToggleProps> = Template.bind({});
 Error.args = {
@@ -80,7 +79,7 @@ FocusProgrammatically.args = {
 export const NoCheckmarkIcon: Story<FToggleProps> = Template.bind({});
 NoCheckmarkIcon.args = {
   label: 'I agree with the privacy policy',
-  noCheckmarkIcon: true
+  noCheckmarkIcon: true,
 };
 
 const ReverseTemplate = (args: FToggleProps) => ({
@@ -95,11 +94,11 @@ const ReverseTemplate = (args: FToggleProps) => ({
 export const Reverse: Story<FToggleProps> = ReverseTemplate.bind({});
 Reverse.args = {
   label: 'I agree with the privacy policy',
-  reverse: true
+  reverse: true,
 };
 
 export const SmallText: Story<FToggleProps> = Template.bind({});
 SmallText.args = {
   label: 'I agree with the privacy policy',
-  smallText: true
+  smallText: true,
 };

@@ -74,7 +74,7 @@ FField.FToggle(
   &:hover, &:focus
     &::before
     background red
-      box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color) !important
+      box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color)
 
   &--toggled
     background-color var(--FToggle--toggled-color)
@@ -113,7 +113,7 @@ FField.FToggle(
 
     &:focus + .FToggle__track
       &::before
-        box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color) !important
+        box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color)
   
 .FToggle__labelText
     color var(--FToggle--text-color) !important
@@ -132,8 +132,10 @@ FField.FToggle(
 .FToggle--disabled
   cursor default
   .FToggle__track
-    border-width rem(1) !important
-    border-color var(--FToggle--border-color) !important
+    background-color var(--color--neutral--light-3)
+    bow-shadow none
+    &::before
+      box-shadow none
 
   .FToggle__label,
   .FToggle__labelText

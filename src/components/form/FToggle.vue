@@ -57,9 +57,9 @@ FField.FToggle(
   background-color var(--FToggle--color)
   position relative
   border-radius rem(12)
-  elevation('inset')
+  elevation-light('inset')
   outline-style solid
-  outline-width rem(1)
+  outline-width rem(0)
   outline-color var(--FToggle--border-color)
   transition outline .1s, background-color .2s
 
@@ -82,7 +82,7 @@ FField.FToggle(
   border-radius rem(50%)
   transition left .2s
   background-color var(--FToggle--thumb-color)
-  elevation(2)
+  elevation-light(2)
 
 .FToggle__toggledIcon
     position absolute
@@ -121,8 +121,8 @@ FField.FToggle(
 .FToggle--disabled
   cursor default
   .FToggle__track
-    outline-width rem(1) !important
-    outline-color var(--FToggle--border-color) !important
+    border-width rem(1) !important
+    border-color var(--FToggle--border-color) !important
 
   .FToggle__label,
   .FToggle__labelText

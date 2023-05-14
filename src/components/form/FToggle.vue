@@ -110,13 +110,13 @@ FField.FToggle(
     cursor pointer
     max-width rem(640)
 
+  .FToggle__labelText *
+    font-size inherit
+
 .FToggle--smallText
   .FToggle__labelText
     use-font('caption')
     margin-top rem(4)
-  
-  .FToggle__labelText *
-    use-font('caption')
   
 .FToggle--disabled
   cursor default

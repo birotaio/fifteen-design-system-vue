@@ -58,18 +58,29 @@ FField.FToggle(
   position relative
   border-radius rem(12)
   elevation-light('inset')
-  outline-style solid
-  outline-width rem(0)
-  outline-color var(--FToggle--border-color)
-  transition outline .1s, background-color .2s
+  transition border .1s, background-color .2s
+
+  &::before
+    content ''
+    position absolute
+    top rem(0)
+    right rem(0)
+    left rem(0)
+    bottom rem(0)
+    border-radius rem(14)
+    box-shadow 0px 0px 0px 0px var(--FToggle--hover-border-color)
+    transition box-shadow .1s
 
   &:hover, &:focus
-    outline-width rem(2)
-    outline-color var(--FToggle--hover-border-color)
+    &::before
+    background red
+      box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color) !important
 
   &--toggled
     background-color var(--FToggle--toggled-color)
-    outline-color var(--FToggle--toggled-border-color)
+    &::before
+      box-shadow 0px 0px 0px rem(0) var(--FToggle--toggled-border-color)
+      background var(--FToggle--toggled-border-color)
     .FToggle__track__thumb
       left 'calc(100% - %s)' % rem(22)
   
@@ -101,8 +112,8 @@ FField.FToggle(
     height 0
 
     &:focus + .FToggle__track
-      outline-width rem(2)
-      outline-color var(--FToggle--hover-border-color)
+      &::before
+        box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color) !important
   
 .FToggle__labelText
     color var(--FToggle--text-color) !important
@@ -188,10 +199,6 @@ export interface FToggleProps {
    */
   textColor?: Color;
   /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
    * Color of the border on hover
    */
   hoverBorderColor?: Color;
@@ -239,7 +246,6 @@ export interface FToggleProps {
 
 const props = withDefaults(defineProps<FToggleProps>(), {
   modelValue: false,
-  borderColor: 'neutral--light-2',
   toggledBorderColor: 'secondary',
   toggledColor: 'secondary',
   color: 'neutral--light-2',
@@ -294,7 +300,6 @@ const { handleBlur, handleFocus } = useInputEventBindings(
 
 const style = computed(
   (): Style => ({
-    '--FToggle--border-color': getCssColor(props.borderColor),
     '--FToggle--toggled-border-color': getCssColor(props.toggledBorderColor),
     '--FToggle--toggled-color': getCssColor(props.toggledColor),
     '--FToggle--color': getCssColor(props.color),

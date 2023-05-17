@@ -1,4 +1,12 @@
+## 0.18.0 (May 9, 2023)
+
+### Features
+
+- [FToggle] Add FToggle component and stories
+
 ## 0.17.2 (May 4, 2023)
+
+### Features
 
 - Isolate components in dedicated stacking contexts to avoid overlapping at usage
 

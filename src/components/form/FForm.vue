@@ -36,9 +36,17 @@ const {
   initialValues: props.initialValues,
 });
 
-async function submit(): Promise<void> {
+async function submit(): Promise<{
+  error: Error | null;
+  values: Record<string, unknown>;
+}> {
   const result = await validate();
   result.valid && emit('valid', values);
+
+  return {
+    error: result.errors.length ? new Error('Validation failed') : null,
+    values,
+  };
 }
 
 defineExpose({

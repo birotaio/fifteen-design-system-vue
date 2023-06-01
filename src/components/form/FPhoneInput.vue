@@ -189,7 +189,7 @@ export interface FPhoneInputProps {
   /**
    * Initial country code
    */
-  countryCode: CountryCode;
+  countryCode?: CountryCode;
   /**
    * Label, placed on top of select
    */

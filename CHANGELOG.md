@@ -1,3 +1,9 @@
+## 0.18.1-beta.1 (June 1, 2023)
+
+### Fixes
+
+- [FPhoneInput] Fix initial value and add `countryCode` prop
+
 ## 0.18.0 (May 9, 2023)
 
 ### Features

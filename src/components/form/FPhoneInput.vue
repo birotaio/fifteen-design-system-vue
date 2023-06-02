@@ -83,7 +83,6 @@ FField.FPhoneInput(
 <style lang="stylus">
 .FPhoneInput
   background none
-  isolation isolate
 
 .FPhoneInput__select
   display flex
@@ -184,14 +183,13 @@ import type { FMenuOption } from '@/components/FMenu.vue';
 
 export interface FPhoneInputProps {
   /**
-   * Full phone number value
-   * @model
-   */
-  modelValue?: string | null;
-  /**
    * Phone number without prefix. Value of the input field
    */
   phoneNumber?: string;
+  /**
+   * Country code, used to show the appropriate flag
+   */
+  countryCode?: CountryCode;
   /**
    * Label, placed on top of select
    */
@@ -291,8 +289,8 @@ export interface FPhoneInputProps {
 }
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
-  modelValue: '',
   phoneNumber: '',
+  countryCode: 'FR',
   label: '',
   labelTextColor: 'neutral--dark-4',
   name: '',
@@ -317,7 +315,6 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: string | null): void;
   (name: 'update:phoneNumber', value: string | null): void;
   (name: 'input', value: InputEvent): void;
   (name: 'change', value: Event): void;
@@ -331,7 +328,10 @@ defineExpose<{
   focus,
 });
 
-const countryCode = ref<CountryCode>('FR');
+const countryCode = useVModelProxy<CountryCode>({
+  props,
+  propName: 'countryCode',
+});
 
 const {
   isValid,
@@ -428,18 +428,6 @@ function isValidPhone(value: unknown): boolean {
   return isValidPhoneNumber(value);
 }
 
-watch(
-  () => props.modelValue,
-  newModelValue => {
-    if (!newModelValue) return;
-    if (!isValidPhoneNumber(newModelValue)) return;
-    const parsedNumber = parsePhoneNumber(newModelValue);
-    phoneNumber.value = parsedNumber.nationalNumber;
-    if (parsedNumber.country) countryCode.value = parsedNumber.country;
-  },
-  { immediate: true }
-);
-
 const isMenuOpen = ref(false);
 
 const hintTextColor = computed(() =>
@@ -470,11 +458,22 @@ function focus(): void {
   inputRef.value?.ref?.focus();
 }
 
-watch(rawValue, newValue => {
-  // The raw value (from useFieldWithValidation and so vee-validate) is the source of truth.
-  // So if it is different than the local fullPhone value, actually, it means that the form has been reset
-  if (newValue !== fullPhone.value) {
-    phoneNumber.value = '';
-  }
-});
+watch(
+  rawValue,
+  newValue => {
+    // Handle initial value
+    const value = String(newValue);
+    if (!isValidPhoneNumber(value)) return;
+    const parsedNumber = parsePhoneNumber(value);
+    phoneNumber.value = parsedNumber.nationalNumber;
+    if (parsedNumber.country) countryCode.value = parsedNumber.country;
+
+    // The raw value (from useFieldWithValidation and so vee-validate) is the source of truth.
+    // So if it is different than the local fullPhone value, actually, it means that the form has been reset
+    if (newValue !== fullPhone.value) {
+      phoneNumber.value = '';
+    }
+  },
+  { immediate: true }
+);
 </script>

@@ -187,7 +187,7 @@ export interface FPhoneInputProps {
    */
   phoneNumber?: string;
   /**
-   * Initial country code
+   * Country code, used to show the appropriate flag
    */
   countryCode?: CountryCode;
   /**

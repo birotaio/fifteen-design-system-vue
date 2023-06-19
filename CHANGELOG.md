@@ -1,3 +1,10 @@
+## 0.18.2 (June 19, 2023)
+
+### Fixes
+
+- [FFileUpload] Fix a bug with the mime types rule
+- [FFileUpload] Correctly display the uploaded file when `multiple` is false
+
 ## 0.18.1 (June 1, 2023)
 
 ### Fixes

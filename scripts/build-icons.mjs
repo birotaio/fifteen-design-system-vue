@@ -23,13 +23,13 @@ function getIconsInfos(icons, nameTocamelCase = true) {
   });
 }
 
-const iconUrls = await globby('src/assets/icons/*');
+const iconUrls = await globby('./icons/*');
 const icons = getIconsInfos(iconUrls);
 
-const flagIconURLs = await globby('src/assets/icons/country-flags/*');
+const flagIconURLs = await globby('./icons/country-flags/*');
 const flagIcons = getIconsInfos(flagIconURLs);
 
-const creditCardIconsURLs = await globby('src/assets/icons/credit-cards/*');
+const creditCardIconsURLs = await globby('./icons/credit-cards/*');
 const creditCardIcons = getIconsInfos(creditCardIconsURLs, false);
 
 const preamble = `

@@ -49,7 +49,8 @@
     },
     "./styles/*.styl": "./dist/styles/*.styl",
     "./style.css": "./dist/style.css",
-    "./theme.css": "./dist/theme.css"
+    "./theme.css": "./dist/theme.css",
+    "./icons/*.svg": "./icons/*.svg"
   },
   "scripts": {
     "dev": "yarn sb",

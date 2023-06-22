@@ -136,7 +136,7 @@ FField.FToggle(
   cursor default
   .FToggle__track
     background-color var(--color--neutral--light-3)
-    bow-shadow none
+    box-shadow none
     &::before
       box-shadow none
 

@@ -1,3 +1,9 @@
+## 0.18.3 (June 21, 2023)
+
+### Changes
+
+- [icons] Move `icons` from `assets` to root and include it in package `files`
+
 ## 0.18.2 (June 19, 2023)
 
 ### Fixes

@@ -8,6 +8,7 @@ const logoVariants: FLogoVariant[] = [
   'horizontal',
   'text-only',
   'image-only',
+  'product',
 ];
 
 export default {

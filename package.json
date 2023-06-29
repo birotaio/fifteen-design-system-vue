@@ -85,9 +85,9 @@
     "release:beta": "npm-release --tag beta"
   },
   "devDependencies": {
-    "@fifteen/tooling": "^0.1.0",
     "@babel/core": "^7.18.2",
-    "@fifteen/shared-lib": "^0.6.0",
+    "@fifteen/shared-lib": "^0.9.0",
+    "@fifteen/tooling": "^0.1.0",
     "@prettier/plugin-pug": "^2.0.0",
     "@qnp/lus": "^0.3.0",
     "@storybook/addon-essentials": "^6.5.6",
@@ -135,11 +135,11 @@
   "dependencies": {
     "@vee-validate/rules": "^4.5.11",
     "@vueuse/core": "^9.5.0",
+    "commander": "^9.4.1",
     "libphonenumber-js": "^1.10.6",
     "vee-validate": "^4.5.11",
     "vue": "^3.3.4",
     "vue-router": "^4.1.6",
-    "xss": "^1.0.14",
-    "commander": "^9.4.1"
+    "xss": "^1.0.14"
   }
 }

@@ -17,12 +17,13 @@
   width fit-content
 
 .FLogo__productName
-  font-family $font-family-heading
+  font-family $font-family-text
   text-align right
   color var(--FLogo--productNameColor)
   font-size var(--FLogo--productNameFontSize)
   letter-spacing 0
   font-weight 700
+  margin-top 0.1ch
   transform translate(0.4%, -10%)
 </style>
 

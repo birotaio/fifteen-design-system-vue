@@ -1,3 +1,9 @@
+## 0.18.4 (June 29, 2023)
+
+### Fixes
+
+- [FLogo] Fix font and alignment to ensure cross-browser consistency
+
 ## 0.18.3 (June 21, 2023)
 
 ### Changes
@@ -82,7 +88,7 @@
 
 ## 0.14.0 (March 8, 2023)
 
-### Features 
+### Features
 
 - [FLocaleSelect] Add locale select component
 - [FSelect] Add size prop, handling `medium` and `small` values
@@ -90,7 +96,7 @@
 
 ### Fixes
 
-- [FSelect] Prevent interactions when loading 
+- [FSelect] Prevent interactions when loading
 
 ## 0.13.2 (March 6, 2023)
 

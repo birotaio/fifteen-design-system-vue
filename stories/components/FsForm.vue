@@ -76,6 +76,13 @@ FForm.FsForm(
         :options="autocompleteOptions"
         :loading="loading"
       )
+    FGridItem(span="12")
+      FToggle(
+        label="FToggle"
+        name="FToggle"
+        hint="Hint for FToggle"
+        :loading="loading"
+      ) 
     FGridItem.FsForm__actions(span="12")
       FButton(
         :loading="loading"
@@ -108,6 +115,7 @@ import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
 import FTextarea from '@/components/form/FTextarea.vue';
 import FAutocomplete from '@/components/form/FAutocomplete.vue';
 import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
+import FToggle from '@/components/form/FToggle.vue';
 
 import type { FFormProps } from '@/components/form/FForm.vue';
 

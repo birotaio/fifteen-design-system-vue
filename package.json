@@ -133,11 +133,11 @@
     "zx": "^6.1.0"
   },
   "dependencies": {
-    "@vee-validate/rules": "^4.5.11",
+    "@vee-validate/rules": "^4.10.5",
     "@vueuse/core": "^9.5.0",
     "commander": "^9.4.1",
     "libphonenumber-js": "^1.10.6",
-    "vee-validate": "^4.5.11",
+    "vee-validate": "4.10.5",
     "vue": "^3.3.4",
     "vue-router": "^4.1.6",
     "xss": "^1.0.14"

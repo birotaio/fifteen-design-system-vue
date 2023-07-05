@@ -4,10 +4,10 @@ FField.FRadio(
   :style="style"
   v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
-  label.FRadio__label(:for="name")
+  label.FRadio__label(:for="id")
     .FRadio__wrapper
       input.FRadio__radio(
-        :id="name"
+        :id="id"
         ref="radioRef"
         v-model="fieldValue"
         :name="name"
@@ -129,6 +129,7 @@ import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
+import { getUid } from '@/utils/uid';
 
 export interface FRadioProps {
   /**
@@ -254,6 +255,8 @@ defineExpose<{
 }>({
   focus,
 });
+
+const id = computed(() => `radio-${getUid()}`);
 
 const {
   isValid,

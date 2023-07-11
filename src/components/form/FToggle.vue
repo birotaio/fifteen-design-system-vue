@@ -61,7 +61,7 @@ FField.FToggle(
   position relative
   border-radius rem(12)
   elevation-light('inset')
-  transition border .1s, background-color .2s
+  transition border 0.1s, background-color 0.2s
 
   &::before
     content ''
@@ -71,19 +71,22 @@ FField.FToggle(
     left rem(0)
     bottom rem(0)
     border-radius rem(14)
-    box-shadow 0px 0px 0px 0px var(--FToggle--hover-border-color)
-    transition box-shadow .1s
+    box-shadow 0 0 0 0 var(--FToggle--hover-border-color)
+    transition box-shadow 0.1s
 
-  &:hover, &:focus
-    &::before
+  &:hover,
+  &:focus
+    &::before,
     background red
-      box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color)
+      box-shadow 0 0 0 rem(2) var(--FToggle--toggled-color)
 
   &--toggled
     background-color var(--FToggle--toggled-color)
+
     &::before
-      box-shadow 0px 0px 0px rem(0) var(--FToggle--toggled-border-color)
+      box-shadow 0 0 0 rem(0) var(--FToggle--toggled-border-color)
       background var(--FToggle--toggled-border-color)
+
     .FToggle__track__thumb
       left 'calc(100% - %s)' % rem(22)
 
@@ -94,38 +97,38 @@ FField.FToggle(
   width rem(20)
   height rem(20)
   border-radius rem(50%)
-  transition left .2s
+  transition left 0.2s
   background-color var(--FToggle--thumb-color)
   elevation-light(2)
 
 .FToggle__toggledIcon
-    position absolute
-    left 50%
-    top calc(50% + 1px)
-    transform translate(-50%, -50%)
-    opacity 0
-    transition opacity .1s, transform .1s
+  position absolute
+  left 50%
+  top calc(50% + 1px)
+  transform translate(-50%, -50%)
+  opacity 0
+  transition opacity 0.1s, transform 0.1s
 
-    &--visible
-      opacity 1
+  &--visible
+    opacity 1
 
 .FToggle__hiddenCheckbox
-    opacity 0
-    width 0
-    height 0
+  opacity 0
+  width 0
+  height 0
 
-    &:focus + .FToggle__track
-      &::before
-        box-shadow 0px 0px 0px rem(2) var(--FToggle--toggled-color)
+  &:focus + .FToggle__track
+    &::before
+      box-shadow 0 0 0 rem(2) var(--FToggle--toggled-color)
 
 .FToggle__labelText
-    color var(--FToggle--text-color) !important
-    user-select none
-    cursor pointer
-    max-width rem(640)
+  color var(--FToggle--text-color) !important
+  user-select none
+  cursor pointer
+  max-width rem(640)
 
-  .FToggle__labelText *
-    font-size inherit
+.FToggle__labelText *
+  font-size inherit
 
 .FToggle--smallText
   .FToggle__labelText
@@ -134,9 +137,11 @@ FField.FToggle(
 
 .FToggle--disabled
   cursor default
+
   .FToggle__track
     background-color var(--color--neutral--light-3)
     box-shadow none
+
     &::before
       box-shadow none
 
@@ -146,11 +151,12 @@ FField.FToggle(
     color var(--color--neutral--dark-1) !important
 
 .FToggle--error
-    color var(--FToggle--error-color)
+  color var(--FToggle--error-color)
 </style>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+
 import FIcon from '@/components/FIcon.vue';
 import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';
@@ -250,7 +256,7 @@ export interface FToggleProps {
 }
 
 const props = withDefaults(defineProps<FToggleProps>(), {
-  modelValue: false,
+  modelValue: undefined,
   toggledBorderColor: 'secondary',
   toggledColor: 'secondary',
   color: 'neutral--light-2',

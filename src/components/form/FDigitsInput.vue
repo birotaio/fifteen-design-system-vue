@@ -182,7 +182,7 @@ const props = withDefaults(defineProps<FDigitsInputProps>(), {
   hintIcon: null,
   label: '',
   labelTextColor: 'neutral--dark-4',
-  modelValue: '',
+  modelValue: undefined,
   name: '',
   rules: () => [],
   validationTrigger: 'change',

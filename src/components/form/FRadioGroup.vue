@@ -129,7 +129,7 @@ const props = withDefaults(defineProps<FRadioGroupProps>(), {
   hintTextColor: 'neutral--dark-4',
   hintIcon: null,
   label: '',
-  modelValue: '',
+  modelValue: undefined,
   name: '',
   rules: () => [],
   validationTrigger: 'change',

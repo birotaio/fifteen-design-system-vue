@@ -209,7 +209,7 @@ export interface FCreditCardInputProps {
 }
 
 const props = withDefaults(defineProps<FCreditCardInputProps>(), {
-  modelValue: '',
+  modelValue: undefined,
   label: '',
   labelTextColor: 'neutral--dark-4',
   name: '',

@@ -32,6 +32,7 @@ Default.args = {
     FLocaleSelect: 'FR',
     FTextarea: 'Default value',
     FAutocomplete: 'a',
+    FToggle: true,
   },
 };
 

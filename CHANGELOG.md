@@ -1,3 +1,10 @@
+## 0.18.5 (July 11, 2023)
+
+### Fixes 
+
+- [FRadio] Add an UID to radio to make the label clickable
+- [forms] Prevent some initial values to be ignored
+
 ## 0.18.4 (June 29, 2023)
 
 ### Fixes

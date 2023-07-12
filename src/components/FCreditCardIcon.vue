@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<FCreditCardIconProps>(), {
 });
 
 const creditCardFiles: Record<string, string> = import.meta.globEager(
-  '@/assets/icons/credit-cards/*.svg',
+  '@@/icons/credit-cards/*.svg',
   {
     as: 'raw',
   }

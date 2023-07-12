@@ -26,12 +26,13 @@ Default.args = {
     FInput: 'Default value',
     FCheckbox: true,
     FDigitsInput: '1234',
-    FPhoneInput: '',
+    FPhoneInput: '+12345678910',
     FRadioGroup: 'b',
     FSelect: 'c',
     FLocaleSelect: 'FR',
     FTextarea: 'Default value',
     FAutocomplete: 'a',
+    FToggle: true,
   },
 };
 

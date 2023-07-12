@@ -45,7 +45,7 @@ const props = withDefaults(defineProps<FFlagIconProps>(), {
 
 // TODO: dynamic import to reduce bundle size
 const flagFiles: Record<string, string> = import.meta.glob(
-  '@/assets/icons/country-flags/*.svg',
+  '@@/icons/country-flags/*.svg',
   {
     as: 'raw',
     eager: true,

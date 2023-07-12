@@ -271,7 +271,7 @@ export interface FInputProps {
 }
 
 const props = withDefaults(defineProps<FInputProps>(), {
-  modelValue: '',
+  modelValue: undefined,
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
   label: '',

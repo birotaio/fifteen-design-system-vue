@@ -1,3 +1,35 @@
+## 0.18.5 (July 11, 2023)
+
+### Fixes 
+
+- [FRadio] Add an UID to radio to make the label clickable
+- [forms] Prevent some initial values to be ignored
+
+## 0.18.4 (June 29, 2023)
+
+### Fixes
+
+- [FLogo] Fix font and alignment to ensure cross-browser consistency
+
+## 0.18.3 (June 21, 2023)
+
+### Changes
+
+- [icons] Move `icons` from `assets` to root and include it in package `files`
+
+## 0.18.2 (June 19, 2023)
+
+### Fixes
+
+- [FFileUpload] Fix a bug with the mime types rule
+- [FFileUpload] Correctly display the uploaded file when `multiple` is false
+
+## 0.18.1 (June 1, 2023)
+
+### Fixes
+
+- [FPhoneInput] Fix initial value and add `countryCode` prop
+
 ## 0.18.0 (May 9, 2023)
 
 ### Features
@@ -63,7 +95,7 @@
 
 ## 0.14.0 (March 8, 2023)
 
-### Features 
+### Features
 
 - [FLocaleSelect] Add locale select component
 - [FSelect] Add size prop, handling `medium` and `small` values
@@ -71,7 +103,7 @@
 
 ### Fixes
 
-- [FSelect] Prevent interactions when loading 
+- [FSelect] Prevent interactions when loading
 
 ## 0.13.2 (March 6, 2023)
 

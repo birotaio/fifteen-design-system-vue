@@ -256,7 +256,7 @@ export interface FToggleProps {
 }
 
 const props = withDefaults(defineProps<FToggleProps>(), {
-  modelValue: false,
+  modelValue: undefined,
   toggledBorderColor: 'secondary',
   toggledColor: 'secondary',
   color: 'neutral--light-2',

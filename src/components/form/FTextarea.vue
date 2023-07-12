@@ -116,7 +116,7 @@ export interface FTextareaProps {
    * Text area value
    * @model
    */
-  modelValue?: string | null;
+  modelValue?: string;
   /**
    * Label, placed on top of select
    */
@@ -222,7 +222,7 @@ export interface FTextareaProps {
 }
 
 const props = withDefaults(defineProps<FTextareaProps>(), {
-  modelValue: null,
+  modelValue: undefined,
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
   label: '',

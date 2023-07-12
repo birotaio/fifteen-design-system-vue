@@ -33,7 +33,7 @@ FField.FFileUpload(
       span {{ buttonText }}
     ul.FFileUpload__fileNames
       li(
-        v-for="file in value"
+        v-for="file in uploadedFiles"
         :key="file.name"
       ) {{ file?.name ?? '' }}
 </template>
@@ -200,13 +200,12 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
 
-const { isValid, hint, value, validate } = useFieldWithValidation<File[]>(
-  props,
-  {
-    validateOnMount: props?.validateOnMount,
-    rules: [isValidFile],
-  }
-);
+const { isValid, hint, value, validate } = useFieldWithValidation<
+  File[] | File | undefined
+>(props, {
+  validateOnMount: props?.validateOnMount,
+  rules: [isValidFile],
+});
 
 const emit = defineEmits<{
   (name: 'update:modelValue', value: File[] | null | undefined): void;
@@ -215,7 +214,12 @@ const emit = defineEmits<{
 }>();
 
 function isValidFile(value: unknown): boolean {
-  const isValidFormat = mimesRule(value, props.allowedMimeTypes);
+  // Vee-validate mimes rule seems broken when `mimes` is empty
+  const isValidFormat =
+    props.allowedMimeTypes.length > 0
+      ? mimesRule(value, props.allowedMimeTypes)
+      : true;
+
   const isValidSize = sizeRule(value, { size: props.maximumSize });
 
   const isValidFormatAndSize = isValidFormat && isValidSize;
@@ -223,9 +227,17 @@ function isValidFile(value: unknown): boolean {
   return isValidFormatAndSize;
 }
 
+const uploadedFiles = ref<File[]>([]);
+
 watch(value, newValue => {
-  if (!!newValue?.length && isValidFile(newValue)) {
-    emit('files', newValue as File[]);
+  uploadedFiles.value = !newValue
+    ? []
+    : Array.isArray(newValue)
+    ? newValue
+    : [newValue];
+
+  if (uploadedFiles.value.length > 0 && isValidFile(newValue)) {
+    emit('files', uploadedFiles.value);
   }
 });
 

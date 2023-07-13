@@ -26,6 +26,7 @@ const props = defineProps<FFormProps>();
 
 const emit = defineEmits<{
   (name: 'valid', values: FormValues): void | Promise<void>;
+  (name: 'error', errors: Record<string, unknown>): void;
 }>();
 
 const {
@@ -36,9 +37,21 @@ const {
   initialValues: props.initialValues,
 });
 
-async function submit(): Promise<void> {
+async function submit(): Promise<{
+  errors: Record<string, unknown>;
+  values: Record<string, unknown>;
+}> {
   const result = await validate();
   result.valid && emit('valid', values);
+
+  if (result.errors.length) {
+    emit('error', result.errors);
+  }
+
+  return {
+    errors: result.errors,
+    values,
+  };
 }
 
 defineExpose({

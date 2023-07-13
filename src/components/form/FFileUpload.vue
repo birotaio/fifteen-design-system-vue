@@ -215,7 +215,10 @@ const emit = defineEmits<{
 
 function isValidFile(value: unknown): boolean {
   // Vee-validate mimes rule seems broken when `mimes` is empty
-  const isValidFormat = props.allowedMimeTypes.length > 0 ? mimesRule(value, props.allowedMimeTypes) : true;
+  const isValidFormat =
+    props.allowedMimeTypes.length > 0
+      ? mimesRule(value, props.allowedMimeTypes)
+      : true;
 
   const isValidSize = sizeRule(value, { size: props.maximumSize });
 

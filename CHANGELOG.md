@@ -1,3 +1,10 @@
+## 0.18.6 (July 13, 2023)
+
+### Features
+
+- [FForm] Make submit return form `errors` and `values`
+- [FForm] Add `error` event to emits
+
 ## 0.18.5 (July 11, 2023)
 
 ### Fixes 

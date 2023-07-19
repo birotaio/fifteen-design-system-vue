@@ -74,10 +74,11 @@ import FField from '@/components/form/FField.vue';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { Icon } from '@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
 
-export interface FFileUploadProps {
+export interface FFileUploadProps extends FFieldProps {
   /**
    * Input value
    * @model
@@ -120,41 +121,13 @@ export interface FFileUploadProps {
    */
   textColor?: string;
   /**
-   * Label, placed on top of input
-   */
-  label?: string;
-  /**
    * Disable the field
    */
   disabled?: boolean;
   /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
    * Text and caret error color
    */
   errorColor?: Color;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the input
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
   /**
    * Event that triggers validation
    */
@@ -184,13 +157,7 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
   rules: () => [],
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   errorColor: 'danger',
-  hint: '',
-  hideHint: false,
-  hintIcon: null,
-  hintTextColor: 'neutral--dark-4',
   disabled: false,
   name: 'defaultName',
   validateOnMount: false,

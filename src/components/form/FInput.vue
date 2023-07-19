@@ -144,19 +144,16 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes, Ref } from 'vue';
 import type CSS from 'csstype';
 
-export interface FInputProps {
+export interface FInputProps extends FFieldProps {
   /**
    * Input value
    * @model
    */
   modelValue?: string;
-  /**
-   * Label, placed on top of input
-   */
-  label?: string;
   /**
    * Disable the field
    */
@@ -189,10 +186,6 @@ export interface FInputProps {
    */
   textColor?: Color;
   /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -216,26 +209,6 @@ export interface FInputProps {
    * Hide error exclamation circle icon
    */
   hideErrorIcon?: boolean;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the input
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
   /**
    * Event that triggers validation
    */
@@ -274,8 +247,6 @@ const props = withDefaults(defineProps<FInputProps>(), {
   modelValue: undefined,
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   type: 'text',
   placeholderTextColor: 'neutral--dark-2',
@@ -284,10 +255,6 @@ const props = withDefaults(defineProps<FInputProps>(), {
   focusBorderColor: 'secondary',
   errorColor: 'danger',
   hideErrorIcon: false,
-  hint: '',
-  hideHint: false,
-  hintIcon: null,
-  hintTextColor: 'neutral--dark-4',
   placeholder: '',
   disabled: false,
   attrs: () => ({}),

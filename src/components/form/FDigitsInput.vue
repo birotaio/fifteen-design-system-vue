@@ -75,9 +75,10 @@ import FField from '@/components/form/FField.vue';
 import FLoader from '@/components/FLoader.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes } from 'vue';
 
-export interface FDigitsInputProps {
+export interface FDigitsInputProps extends FFieldProps {
   /**
    * Number of digits
    */
@@ -116,41 +117,13 @@ export interface FDigitsInputProps {
    */
   focusBorderColor?: Color;
   /**
-   * Label, placed on top of digit input
-   */
-  label?: string;
-  /**
    * Disable the field
    */
   disabled?: boolean;
   /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
    * Whether the input should be validated on mount
    */
   validateOnMount?: boolean;
-  /**
-   * A hint to display under the digits input
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
   /**
    * Digits input validation rule
    */
@@ -177,11 +150,6 @@ const props = withDefaults(defineProps<FDigitsInputProps>(), {
   digits: 4,
   errorColor: 'danger',
   errorMessage: '',
-  hint: '',
-  hintTextColor: 'neutral--dark-4',
-  hintIcon: null,
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   modelValue: undefined,
   name: '',
   rules: () => [],

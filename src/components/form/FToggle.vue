@@ -163,16 +163,14 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
-export interface FToggleProps {
+import type { FFieldProps } from '@/components/form/FField.vue';
+
+export interface FToggleProps extends FFieldProps {
   /**
    * Checkbox v-model value
    * @model
    */
   modelValue?: boolean;
-  /**
-   * Label of the toggle
-   */
-  label?: string;
   /**
    * Position the label to the right of the toggle
    */
@@ -181,22 +179,6 @@ export interface FToggleProps {
    * Disable the toggle usage
    */
   disabled?: boolean;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the toggle
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
   /**
    * Background color of the toggle
    */
@@ -233,10 +215,6 @@ export interface FToggleProps {
    * Hint error color
    */
   errorColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
   /**
    * Event that triggers validation
    */

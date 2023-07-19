@@ -102,50 +102,23 @@ import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { getCardInfo } from '@/helpers/credit-cards';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CreditCardInfo } from '@/helpers/credit-cards';
 
-export interface FCreditCardInputProps {
+export interface FCreditCardInputProps extends FFieldProps {
   /**
    * Credit card value
    * @model
    */
   modelValue?: string;
   /**
-   * Label, placed on top of select
-   */
-  label?: string;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
    * Validate the number on mount
    */
   validateOnMount?: boolean;
   /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
    * Text, hint and caret error color
    */
   errorColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the select
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
   /**
    * Rules form validation
    */
@@ -210,13 +183,8 @@ export interface FCreditCardInputProps {
 
 const props = withDefaults(defineProps<FCreditCardInputProps>(), {
   modelValue: undefined,
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   name: '',
   validateOnMount: false,
-  hint: '',
-  hintTextColor: 'neutral--dark-4',
-  hintIcon: null,
   placeholder: '4000 1234 5678 9012',
   rules: () => [],
   errorMessage: '',

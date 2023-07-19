@@ -178,22 +178,19 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';
 export type FSelectSize = 'small' | 'medium';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FSelectModelValue = any;
 
-export interface FSelectProps {
+export interface FSelectProps extends FFieldProps {
   /**
    * Current option of the select
    * @model
    */
   modelValue?: FSelectModelValue;
-  /**
-   * Label, placed on top of select
-   */
-  label?: string;
   /**
    * Array of options
    */
@@ -231,10 +228,6 @@ export interface FSelectProps {
    */
   textColor?: Color;
   /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -254,22 +247,6 @@ export interface FSelectProps {
    * Text, hint and caret error color
    */
   errorColor?: Color;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the select
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
   /**
    * Width of the options menu
    */
@@ -302,10 +279,7 @@ export interface FSelectProps {
    * Whether the input should be validated on mount
    */
   validateOnMount?: boolean;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
+
   /**
    * Message to use as hint when validation fails
    */
@@ -329,12 +303,6 @@ const props = withDefaults(defineProps<FSelectProps>(), {
   errorMessage: '',
   focusBorderColor: 'secondary',
   focusColor: 'neutral--light-5',
-  hideHint: false,
-  hint: '',
-  hintIcon: null,
-  hintTextColor: 'neutral--dark-4',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   menuWidth: 300,
   modelValue: undefined,
   name: '',

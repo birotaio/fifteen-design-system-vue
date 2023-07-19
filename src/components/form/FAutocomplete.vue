@@ -82,12 +82,13 @@ import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FAutocompleteModelValue = any;
 
-export interface FAutocompleteProps {
+export interface FAutocompleteProps extends FFieldProps {
   /**
    * Option value
    * @model
@@ -97,42 +98,15 @@ export interface FAutocompleteProps {
    * Propositions based on user input
    */
   options?: FMenuOption[];
-  /**
-   * Label, placed on top of select
-   */
-  label?: string;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
+
   /**
    * Validate the number on mount
    */
   validateOnMount?: boolean;
   /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
    * Text, hint and caret error color
    */
   errorColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the select
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
   /**
    * Rules form validation
    */
@@ -240,7 +214,6 @@ const props = withDefaults(defineProps<FAutocompleteProps>(), {
   modelValue: undefined,
   options: () => [],
   label: '',
-  labelTextColor: 'neutral--dark-4',
   name: '',
   validateOnMount: false,
   hint: '',

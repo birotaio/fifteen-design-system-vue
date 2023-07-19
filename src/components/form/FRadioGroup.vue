@@ -47,13 +47,15 @@ import FRadio from '@/components/form/FRadio.vue';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
+
 export interface FRadioGroupOption {
   label: string;
   value: string | number | boolean;
   name?: string;
 }
 
-export interface FRadioGroupProps {
+export interface FRadioGroupProps extends FFieldProps {
   /**
    * Selected value or values
    * @model
@@ -63,14 +65,6 @@ export interface FRadioGroupProps {
    * Radio group options
    */
   options: FRadioGroupOption[];
-  /**
-   * Label, placed on top of radio group
-   */
-  label?: string;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
   /**
    * Display mode of the radio group
    */
@@ -96,22 +90,6 @@ export interface FRadioGroupProps {
    */
   disabled?: boolean;
   /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the radio group
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
    * Message to use as hint when validation fails
    */
   errorMessage?: string;
@@ -133,7 +111,6 @@ const props = withDefaults(defineProps<FRadioGroupProps>(), {
   name: '',
   rules: () => [],
   validationTrigger: 'change',
-  labelTextColor: 'neutral--dark-4',
 });
 
 const emit = defineEmits<{

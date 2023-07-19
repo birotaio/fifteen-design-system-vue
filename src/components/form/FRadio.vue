@@ -131,7 +131,9 @@ import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { getUid } from '@/utils/uid';
 
-export interface FRadioProps {
+import type { FFieldProps } from '@/components/form/FField.vue';
+
+export interface FRadioProps extends FFieldProps {
   /**
    * Radio v-model value
    * @model
@@ -142,29 +144,9 @@ export interface FRadioProps {
    */
   value?: string | boolean | number | null;
   /**
-   * Label of the radio
-   */
-  label?: string;
-  /**
    * Disable the radio usage
    */
   disabled?: boolean;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the radio
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
   /**
    * Background color of the radio
    */
@@ -197,10 +179,6 @@ export interface FRadioProps {
    * Hint error color
    */
   errorColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
   /**
    * Event that triggers validation
    */

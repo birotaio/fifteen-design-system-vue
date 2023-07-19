@@ -108,19 +108,16 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { TextareaHTMLAttributes } from 'vue';
 import type CSS from 'csstype';
 
-export interface FTextareaProps {
+export interface FTextareaProps extends FFieldProps {
   /**
    * Text area value
    * @model
    */
   modelValue?: string;
-  /**
-   * Label, placed on top of select
-   */
-  label?: string;
   /**
    * Disable the attribute
    */
@@ -156,10 +153,6 @@ export interface FTextareaProps {
    */
   textColor?: Color;
   /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -179,26 +172,6 @@ export interface FTextareaProps {
    * Text, hint and caret error color
    */
   errorColor?: Color;
-  /**
-   * A hint to display under the textarea
-   */
-  hint?: string;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
   /**
    * Event that triggers validation
    */
@@ -225,8 +198,6 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
   modelValue: undefined,
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   outlineColor: 'neutral--light-3',
   placeholderTextColor: 'neutral--dark-2',
   focusColor: 'neutral--light-5',
@@ -235,10 +206,6 @@ const props = withDefaults(defineProps<FTextareaProps>(), {
   errorColor: 'danger',
   placeholder: '',
   disabled: false,
-  hint: '',
-  hideHint: false,
-  hintTextColor: 'neutral--dark-4',
-  hintIcon: null,
   rows: 3,
   resize: 'vertical',
   rules: () => [],

@@ -178,10 +178,11 @@ import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { getCssColor } from '@/utils/getCssColor';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CountryCode } from 'libphonenumber-js';
 import type { FMenuOption } from '@/components/FMenu.vue';
 
-export interface FPhoneInputProps {
+export interface FPhoneInputProps extends FFieldProps {
   /**
    * Phone number without prefix. Value of the input field
    */
@@ -191,41 +192,13 @@ export interface FPhoneInputProps {
    */
   countryCode?: CountryCode;
   /**
-   * Label, placed on top of select
-   */
-  label?: string;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
    * Validate the number on mount
    */
   validateOnMount?: boolean;
   /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
    * Text, hint and caret error color
    */
   errorColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the select
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
   /**
    * Rules form validation
    */
@@ -291,13 +264,8 @@ export interface FPhoneInputProps {
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
   phoneNumber: '',
   countryCode: 'FR',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   name: '',
   validateOnMount: false,
-  hint: '',
-  hintTextColor: 'neutral--dark-4',
-  hintIcon: null,
   rules: () => [],
   errorMessage: '',
   errorColor: 'danger',

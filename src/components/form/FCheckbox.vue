@@ -148,36 +148,18 @@ import { getCssColor } from '@/utils/getCssColor';
 import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
-export interface FCheckboxProps {
+import type { FFieldProps } from '@/components/form/FField.vue';
+
+export interface FCheckboxProps extends FFieldProps {
   /**
    * Checkbox v-model value
    * @model
    */
   modelValue?: boolean | null;
   /**
-   * Label of the checkbox
-   */
-  label?: string;
-  /**
    * Disable the checkbox usage
    */
   disabled?: boolean;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the checkbox
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
   /**
    * Background color of the checkbox
    */
@@ -214,10 +196,6 @@ export interface FCheckboxProps {
    * Hint error color
    */
   errorColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
   /**
    * Event that triggers validation
    */

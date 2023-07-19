@@ -225,7 +225,9 @@ const {
 });
 
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
-const digitsValue = computed<string[]>(() => fieldValue.value.split(''));
+const digitsValue = computed<string[]>(() =>
+  (fieldValue.value ?? '').split('')
+);
 
 const hintTextColor = computed(() =>
   props.disabled

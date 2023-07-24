@@ -65,14 +65,7 @@ FField.FFileUpload(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
 import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
-
-import FButton from '@/components/FButton.vue';
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { Icon } from '@/types/icons';

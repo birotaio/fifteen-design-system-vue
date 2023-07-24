@@ -39,9 +39,6 @@
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import FLink from '@/components/FLink.vue';
 import { getCssColor } from '@/utils/getCssColor';
 
 import type { FLinkProps } from '@/components/FLink.vue';

@@ -27,13 +27,11 @@ template(v-else)
 <style lang="stylus"></style>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router';
-import { computed } from 'vue';
-
-import FButton from '@/components/FButton.vue';
-import { useSmartLink } from '@/composables/useSmartLink';
-
-import type { RouteLocationRaw, NavigationFailure } from 'vue-router';
+import type {
+  RouterLink,
+  RouteLocationRaw,
+  NavigationFailure,
+} from 'vue-router';
 import type { FButtonAnchorPoint, FButtonSize } from '@/components/FButton.vue';
 
 export interface FButtonLinkProps {

@@ -26,7 +26,8 @@
     "./src/index.ts",
     "./src/components/**/*.vue",
     "./src/(composables|utils|config)/*.ts",
-    "./src/types/*.d.ts"
+    "./src/types/*.d.ts",
+    "auto-imports.d.ts"
   ],
   "exclude": ["./src/components/router/*"]
 }

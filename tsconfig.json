@@ -25,6 +25,11 @@
     "plugins": ["@volar/vue-language-plugin-pug"]
   },
   "exclude": ["./dist/**/*"],
-  "include": ["./src/**/*.ts", "./src/**/*.d.ts", "./src/**/*.vue"],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.d.ts",
+    "./src/**/*.vue",
+    "auto-imports.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -168,15 +168,8 @@ FField.FSelect(
 
 <script setup lang="ts">
 import equal from 'fast-deep-equal/es6';
-import { ref, computed, watch } from 'vue';
 
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-import FMenu from '@/components/FMenu.vue';
-import FLoader from '@/components/FLoader.vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';

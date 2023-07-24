@@ -134,15 +134,9 @@ FField.FInput(
 </style>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { maska as vMaska } from 'maska';
 
-import FLoader from '@/components/FLoader.vue';
-import FField from '@/components/form/FField.vue';
-import FIcon from '@/components/FIcon.vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes, Ref } from 'vue';

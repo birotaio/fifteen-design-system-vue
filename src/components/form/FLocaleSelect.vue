@@ -34,13 +34,7 @@ FSelect.FLocaleSelect(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import FFlagIcon from '@/components/FFlagIcon.vue';
-import FSelect from '@/components/form/FSelect.vue';
 import { getFlagIconList } from '@/constants/icons/.utils';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FSelectSize } from '@/components/form/FSelect.vue';
 import type { FFieldProps } from './FField.vue';

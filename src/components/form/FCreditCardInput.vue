@@ -91,15 +91,6 @@ FField.FCreditCardInput(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-
-import FInput from '@/components/form/FInput.vue';
-import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
-import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
-import FIcon from '@/components/FIcon.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { getCardInfo } from '@/helpers/credit-cards';
 
 import type { FFieldProps } from '@/components/form/FField.vue';

@@ -68,12 +68,7 @@ FField.FDigitsInput(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick } from 'vue';
-
 import FInput from '@/components/form/FInput.vue';
-import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes } from 'vue';

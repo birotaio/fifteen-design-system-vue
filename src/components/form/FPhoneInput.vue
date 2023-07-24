@@ -164,19 +164,11 @@ import {
   getExampleNumber,
   parsePhoneNumber,
 } from 'libphonenumber-js';
-import { computed, ref, watch } from 'vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
 import FInput from '@/components/form/FInput.vue';
-import FDivider from '@/components/FDivider.vue';
-import FFlagIcon from '@/components/FFlagIcon.vue';
-import FMenu from '@/components/FMenu.vue';
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { getCssColor } from '@/utils/getCssColor';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CountryCode } from 'libphonenumber-js';

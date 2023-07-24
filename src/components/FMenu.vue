@@ -170,7 +170,6 @@
 <script setup lang="ts">
 import Popper from 'vue3-popper/dist/popper.esm';
 import equal from 'fast-deep-equal/es6';
-import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import {
   onClickOutside,
   useElementBounding,
@@ -185,7 +184,6 @@ import {
 import { noop } from '@/utils/noop';
 import { getCssColor } from '@/utils/getCssColor';
 import { genSize } from '@/utils/genSize';
-import FLoader from '@/components/FLoader.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FMenuOptionValue = any;

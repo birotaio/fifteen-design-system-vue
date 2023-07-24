@@ -327,13 +327,9 @@ square($size)
 </style>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-
 import FLink from '@/components/FLink.vue';
-import FLoader from '@/components/FLoader.vue';
 import { colorDesignTokens } from '@/constants/colors';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFBreakpoints } from '@/composables/useFBreakpoints';
 
 export type FButtonAnchorPoint = 'left' | 'right' | 'center';
 export type FButtonSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
@@ -451,9 +447,9 @@ const emit = defineEmits<{
   (name: 'blur', e: FocusEvent): void;
 }>();
 
-const buttonRef = ref<HTMLButtonElement>();
-
 const { isXsAndDown } = useFBreakpoints();
+
+const buttonRef = ref<HTMLButtonElement>();
 
 const multipleColors = computed<boolean>(
   () => !!(props.color && props.background)

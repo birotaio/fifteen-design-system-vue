@@ -37,10 +37,6 @@ fieldset.FField
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import FFieldLabel from '@/components/form/FFieldLabel.vue';
-import FFieldHint from '@/components/form/FFieldHint.vue';
 import { genSize } from '@/utils/genSize';
 
 export interface FFieldProps {

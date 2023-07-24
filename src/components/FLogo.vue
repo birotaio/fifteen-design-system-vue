@@ -28,9 +28,6 @@
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
-import FSvgImage from '@/components/FSvgImage.vue';
 import { getCssColor } from '@/utils/getCssColor';
 import { genSize } from '@/utils/genSize';
 import logoHorizontal from '@/assets/logos/fifteen_horizontal.svg?component';

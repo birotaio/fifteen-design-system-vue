@@ -74,13 +74,9 @@ FField.FAutocomplete(
 
 <script setup lang="ts">
 import equal from 'fast-deep-equal/es6';
-import { computed, ref, watch } from 'vue';
 import { composeSearchRegex } from '@fifteen/shared-lib';
 
-import FInput from '@/components/form/FInput.vue';
-import FField from '@/components/form/FField.vue';
 import FMenu from '@/components/FMenu.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';

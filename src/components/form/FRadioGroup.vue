@@ -40,13 +40,6 @@ FField.FRadioGroup(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-
-import FField from '@/components/form/FField.vue';
-import FRadio from '@/components/form/FRadio.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
-
 import type { FFieldProps } from '@/components/form/FField.vue';
 
 export interface FRadioGroupOption {

@@ -140,13 +140,7 @@ FField.FCheckbox(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 

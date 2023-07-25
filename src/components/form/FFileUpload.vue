@@ -33,9 +33,9 @@ FField.FFileUpload(
       span {{ buttonText }}
     ul.FFileUpload__fileNames
       li(
-        v-for="file in uploadedFiles"
-        :key="file.name"
-      ) {{ file?.name ?? '' }}
+        v-for="uploadedFile in uploadedFiles"
+        :key="uploadedFile.name"
+      ) {{ uploadedFile?.name ?? '' }}
 </template>
 
 <style lang="stylus">
@@ -122,9 +122,12 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
 
-const { isValid, hint, value, validate } = useFieldWithValidation<
-  File[] | File | undefined
->(props, {
+const {
+  isValid,
+  hint,
+  value: fieldValue,
+  validate,
+} = useFieldWithValidation<File[] | File | undefined>(props, {
   validateOnMount: props?.validateOnMount,
   rules: [isValidFile],
 });
@@ -149,17 +152,17 @@ function isValidFile(value: unknown): boolean {
   return isValidFormatAndSize;
 }
 
-const uploadedFiles = ref<File[]>([]);
-
-watch(value, newValue => {
-  uploadedFiles.value = !newValue
+const uploadedFiles = computed<File[]>(() =>
+  !fieldValue.value
     ? []
-    : Array.isArray(newValue)
-    ? newValue
-    : [newValue];
+    : Array.isArray(fieldValue.value)
+    ? fieldValue.value
+    : [fieldValue.value]
+);
 
-  if (uploadedFiles.value.length > 0 && isValidFile(newValue)) {
-    emit('files', uploadedFiles.value);
+watch(uploadedFiles, newValue => {
+  if (newValue.length > 0 && isValidFile(newValue)) {
+    emit('files', newValue);
   }
 });
 

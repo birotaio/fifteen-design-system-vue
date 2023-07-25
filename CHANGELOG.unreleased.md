@@ -3,3 +3,4 @@
 ### Changes
 
 - [DX] Add auto-imports for Vue, Vue-Router, components and composables
+- [FFileUpload] Code cleanup

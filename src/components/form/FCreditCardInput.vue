@@ -132,8 +132,13 @@ export interface FCreditCardInputProps
 
 const props = withDefaults(defineProps<FCreditCardInputProps>(), {
   modelValue: undefined,
+  label: '',
+  labelTextColor: 'neutral--dark-4',
   name: '',
   validateOnMount: false,
+  hint: '',
+  hintTextColor: 'neutral--dark-4',
+  hintIcon: null,
   placeholder: '4000 1234 5678 9012',
   rules: () => [],
   errorMessage: '',

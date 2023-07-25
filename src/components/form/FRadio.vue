@@ -172,6 +172,7 @@ const props = withDefaults(defineProps<FRadioProps>(), {
   modelValue: false,
   name: '',
   outlineColor: 'neutral--light-2',
+  rules: () => [],
   textColor: 'neutral--dark-3',
   validateOnMount: false,
   validationTrigger: 'change',

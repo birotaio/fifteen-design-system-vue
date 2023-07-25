@@ -167,6 +167,7 @@ const props = withDefaults(defineProps<FAutocompleteProps>(), {
   modelValue: undefined,
   options: () => [],
   label: '',
+  labelTextColor: 'neutral--dark-4',
   name: '',
   validateOnMount: false,
   hint: '',

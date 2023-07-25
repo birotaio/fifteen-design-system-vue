@@ -24,8 +24,6 @@ template(v-else)
     slot
 </template>
 
-<style lang="stylus"></style>
-
 <script setup lang="ts">
 import type {
   RouterLink,

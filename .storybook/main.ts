@@ -17,8 +17,8 @@ module.exports = {
       path.resolve(__dirname, '../vite.config.ts')
     )) as { config: UserConfig };
 
-    userConfig.plugins = (userConfig.plugins ?? []).filter(
-      // @ts-ignore
+    // Base config and FDS vite config are both registering vite:vue, which causes issues
+    baseConfig.plugins = (baseConfig.plugins ?? []).filter(
       plugin => plugin && plugin.name !== 'vite:vue'
     );
 

@@ -24,11 +24,7 @@ template(v-else)
     slot
 </template>
 
-<style lang="stylus"></style>
-
 <script setup lang="ts">
-import FLink from '@/components/FLink.vue';
-
 import type { RouterLink, RouteLocationRaw } from 'vue-router';
 
 export interface FRouterLinkProps {

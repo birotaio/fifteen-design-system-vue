@@ -95,49 +95,15 @@ import { getCardInfo } from '@/helpers/credit-cards';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CreditCardInfo } from '@/helpers/credit-cards';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FCreditCardInputProps extends FFieldProps {
-  /**
-   * Credit card value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Validate the number on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
+export interface FCreditCardInputProps
+  extends FFieldProps,
+    CommonFormFieldProps<string> {
   /**
    * Input placeholder
    */
   placeholder?: string;
-  /**
-   * Background color of the input
-   */
-  color?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the input
-   */
-  textColor?: Color;
   /**
    * Color of the digits outline
    */
@@ -162,14 +128,6 @@ export interface FCreditCardInputProps extends FFieldProps {
    * Text color of option item
    */
   optionTextColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FCreditCardInputProps>(), {

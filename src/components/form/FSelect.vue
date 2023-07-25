@@ -173,17 +173,16 @@ import { getCssColor } from '@/utils/getCssColor';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
+
 export type FSelectSize = 'small' | 'medium';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FSelectModelValue = any;
 
-export interface FSelectProps extends FFieldProps {
-  /**
-   * Current option of the select
-   * @model
-   */
-  modelValue?: FSelectModelValue;
+export interface FSelectProps
+  extends FFieldProps,
+    CommonFormFieldProps<FSelectModelValue> {
   /**
    * Array of options
    */
@@ -192,10 +191,6 @@ export interface FSelectProps extends FFieldProps {
    * Placeholder text
    */
   placeholder?: string;
-  /**
-   * Background color of the select
-   */
-  color?: Color;
   /**
    * Background color of the options menu
    */
@@ -213,14 +208,6 @@ export interface FSelectProps extends FFieldProps {
    */
   selectedOptionTextColor?: Color;
   /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the select
-   */
-  textColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -237,10 +224,6 @@ export interface FSelectProps extends FFieldProps {
    */
   focusBorderColor?: Color;
   /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
    * Width of the options menu
    */
   menuWidth?: string | number;
@@ -253,38 +236,17 @@ export interface FSelectProps extends FFieldProps {
    */
   emptyText?: string;
   /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
-  /**
    * Size of the select input
    */
   size?: FSelectSize;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
   /**
    * Event that triggers validation
    */
   validationTrigger?: 'change' | 'focus';
   /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
    * Prevent item selection
    */
   preventSelection?: boolean;
-  /**
-   * Loading state of the select
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FSelectProps>(), {

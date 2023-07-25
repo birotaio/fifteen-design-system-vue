@@ -74,9 +74,6 @@ FField.FInput(
     background var(--finput--focus-color)
     box-shadow 0 0 0 2px var(--finput--focus-border-color), 0 0 0 6px 'rgba(%s, 0.8)' % var(--finput--outline-color)
 
-    input
-      background var(--finput--focus-color)
-
   input
     width 100%
     border none
@@ -138,20 +135,12 @@ import { maska as vMaska } from 'maska';
 
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { CommonFormFieldProps } from '@/types/forms';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes, Ref } from 'vue';
 import type CSS from 'csstype';
 
-export interface FInputProps extends FFieldProps {
-  /**
-   * Input value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Disable the field
-   */
-  disabled?: boolean;
+export interface FInputProps extends FFieldProps, CommonFormFieldProps<string> {
   /**
    * Input placeholder
    */
@@ -167,18 +156,6 @@ export interface FInputProps extends FFieldProps {
     InputHTMLAttributes,
     'disabled' | 'placeholder' | 'type' | 'class' | 'style'
   >;
-  /**
-   * Background color of the input
-   */
-  color?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the input
-   */
-  textColor?: Color;
   /**
    * Color of the outline
    */
@@ -196,29 +173,9 @@ export interface FInputProps extends FFieldProps {
    */
   focusBorderColor?: Color;
   /**
-   * Text and caret error color
-   */
-  errorColor?: Color;
-  /**
    * Hide error exclamation circle icon
    */
   hideErrorIcon?: boolean;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
   /**
    * Input value alignment
    */
@@ -227,10 +184,6 @@ export interface FInputProps extends FFieldProps {
    * Restrict input value to a specific mask
    */
   mask?: string | string[];
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
   /**
    * Can clear the current value
    */

@@ -143,29 +143,11 @@ FField.FCheckbox(
 import { getCssColor } from '@/utils/getCssColor';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FCheckboxProps extends FFieldProps {
-  /**
-   * Checkbox v-model value
-   * @model
-   */
-  modelValue?: boolean | null;
-  /**
-   * Disable the checkbox usage
-   */
-  disabled?: boolean;
-  /**
-   * Background color of the checkbox
-   */
-  color?: Color;
-  /**
-   * Text color of the checkbox
-   */
-  textColor?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
+export interface FCheckboxProps
+  extends FFieldProps,
+    CommonFormFieldProps<boolean | null> {
   /**
    * Color of the border on hover
    */
@@ -186,26 +168,6 @@ export interface FCheckboxProps extends FFieldProps {
    * Border color when checkbox is checked
    */
   checkedBorderColor?: Color;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
 }
 
 const props = withDefaults(defineProps<FCheckboxProps>(), {

@@ -105,17 +105,11 @@ import { getCssColor } from '@/utils/getCssColor';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { TextareaHTMLAttributes } from 'vue';
 import type CSS from 'csstype';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FTextareaProps extends FFieldProps {
-  /**
-   * Text area value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Disable the attribute
-   */
-  disabled?: boolean;
+export interface FTextareaProps
+  extends FFieldProps,
+    CommonFormFieldProps<string> {
   /**
    * Text area placeholder
    */
@@ -135,18 +129,6 @@ export interface FTextareaProps extends FFieldProps {
     'disabled' | 'placeholder' | 'class' | 'style' | 'rows'
   >;
   /**
-   * Background color of the textarea
-   */
-  color?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the textarea
-   */
-  textColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -162,30 +144,6 @@ export interface FTextareaProps extends FFieldProps {
    * Border focus color
    */
   focusBorderColor?: Color;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FTextareaProps>(), {

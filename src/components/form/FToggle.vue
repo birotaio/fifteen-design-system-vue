@@ -158,33 +158,19 @@ FField.FToggle(
 import { getCssColor } from '@/utils/getCssColor';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FToggleProps extends FFieldProps {
-  /**
-   * Checkbox v-model value
-   * @model
-   */
-  modelValue?: boolean;
+export interface FToggleProps
+  extends FFieldProps,
+    CommonFormFieldProps<boolean> {
   /**
    * Position the label to the right of the toggle
    */
   reverse?: boolean;
   /**
-   * Disable the toggle usage
-   */
-  disabled?: boolean;
-  /**
-   * Background color of the toggle
-   */
-  color?: Color;
-  /**
    * Background color of the thumb
    */
   thumbColor?: Color;
-  /**
-   * Text color of the toggle
-   */
-  textColor?: Color;
   /**
    * Color of the border on hover
    */
@@ -205,26 +191,6 @@ export interface FToggleProps extends FFieldProps {
    * Smaller label text
    */
   smallText?: boolean;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
 }
 
 const props = withDefaults(defineProps<FToggleProps>(), {
@@ -245,7 +211,7 @@ const props = withDefaults(defineProps<FToggleProps>(), {
   hoverBorderColor: 'secondary',
   label: '',
   reverse: false,
-  name: 'toggle',
+  name: '',
   rules: () => [],
   textColor: 'neutral--dark-4',
   validateOnMount: false,

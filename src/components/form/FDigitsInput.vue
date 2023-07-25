@@ -72,29 +72,15 @@ import FInput from '@/components/form/FInput.vue';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes } from 'vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FDigitsInputProps extends FFieldProps {
+export interface FDigitsInputProps
+  extends FFieldProps,
+    CommonFormFieldProps<string> {
   /**
    * Number of digits
    */
   digits?: number;
-  /**
-   * Digits input value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Background color of the digits
-   */
-  color?: Color;
-  /**
-   * Color of the digits border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the digits
-   */
-  textColor?: Color;
   /**
    * Color of the digits outline
    */
@@ -111,34 +97,6 @@ export interface FDigitsInputProps extends FFieldProps {
    * Border focus color
    */
   focusBorderColor?: Color;
-  /**
-   * Disable the field
-   */
-  disabled?: boolean;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Digits input validation rule
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Text and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FDigitsInputProps>(), {

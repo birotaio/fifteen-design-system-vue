@@ -51,7 +51,7 @@ FField.FPhoneInput(
               @click.stop="toggleMenu"
               @blur="closeMenu"
             )
-              FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
+              FFlagIcon.FPhoneInput__selectedFlag(:flag-code="countryCode")
               FIcon.FPhoneInput__icon(
                 name="chevronDown"
                 :class="iconClasses"
@@ -75,9 +75,7 @@ FField.FPhoneInput(
               @blur="closeMenu"
             ) {{ phonePrefix }}
     template(#option-prefix="{ option }")
-      FFlagIcon.FPhoneInput__optionPrefix(
-        :country-code="getCountryCode(option)"
-      )
+      FFlagIcon.FPhoneInput__optionPrefix(:flag-code="getCountryCode(option)")
 </template>
 
 <style lang="stylus">
@@ -173,8 +171,11 @@ import { getCssColor } from '@/utils/getCssColor';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CountryCode } from 'libphonenumber-js';
 import type { FMenuOption } from '@/components/FMenu.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FPhoneInputProps extends FFieldProps {
+export interface FPhoneInputProps
+  extends FFieldProps,
+    CommonFormFieldProps<null> {
   /**
    * Phone number without prefix. Value of the input field
    */
@@ -183,38 +184,6 @@ export interface FPhoneInputProps extends FFieldProps {
    * Country code, used to show the appropriate flag
    */
   countryCode?: CountryCode;
-  /**
-   * Validate the number on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
-  /**
-   * Background color of the input
-   */
-  color?: Color;
-  /**
-   * Color of the digits border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the input
-   */
-  textColor?: Color;
   /**
    * Color of the digits outline
    */
@@ -247,10 +216,6 @@ export interface FPhoneInputProps extends FFieldProps {
    * Event that triggers validation
    */
   validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
@@ -301,7 +266,8 @@ const {
 } = useFieldWithValidation<string | number>(props, {
   validateOnMount: props?.validateOnMount,
   rules: [
-    value => isEmptyPhone(value) || isValidPhone(value),
+    isEmptyPhone,
+    isValidPhone,
     ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
   ],
 });

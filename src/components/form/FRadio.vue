@@ -127,33 +127,16 @@ import { getCssColor } from '@/utils/getCssColor';
 import { getUid } from '@/utils/uid';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FRadioProps extends FFieldProps {
-  /**
-   * Radio v-model value
-   * @model
-   */
-  modelValue?: string | boolean | number | null;
+export interface FRadioProps
+  extends FFieldProps,
+    CommonFormFieldProps<boolean | string | number | null> {
   /**
    * Value of the radio
    */
   value?: string | boolean | number | null;
-  /**
-   * Disable the radio usage
-   */
-  disabled?: boolean;
-  /**
-   * Background color of the radio
-   */
-  color?: Color;
-  /**
-   * Text color of the radio
-   */
-  textColor?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
+
   /**
    * Color of the outline
    */
@@ -170,26 +153,6 @@ export interface FRadioProps extends FFieldProps {
    * Border color when radio is checked
    */
   checkedBorderColor?: Color;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
 }
 
 const props = withDefaults(defineProps<FRadioProps>(), {
@@ -209,7 +172,6 @@ const props = withDefaults(defineProps<FRadioProps>(), {
   modelValue: false,
   name: '',
   outlineColor: 'neutral--light-2',
-  rules: () => [],
   textColor: 'neutral--dark-3',
   validateOnMount: false,
   validationTrigger: 'change',

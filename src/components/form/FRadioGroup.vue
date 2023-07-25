@@ -41,6 +41,7 @@ FField.FRadioGroup(
 
 <script setup lang="ts">
 import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
 export interface FRadioGroupOption {
   label: string;
@@ -48,12 +49,9 @@ export interface FRadioGroupOption {
   name?: string;
 }
 
-export interface FRadioGroupProps extends FFieldProps {
-  /**
-   * Selected value or values
-   * @model
-   */
-  modelValue?: string | number | null;
+export interface FRadioGroupProps
+  extends FFieldProps,
+    CommonFormFieldProps<string | number | null> {
   /**
    * Radio group options
    */
@@ -62,34 +60,6 @@ export interface FRadioGroupProps extends FFieldProps {
    * Display mode of the radio group
    */
   displayMode?: 'horizontal' | 'vertical';
-  /**
-   * Whether the radio group should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Field name
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Disable interactions with the radio group
-   */
-  disabled?: boolean;
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
 }
 
 const props = withDefaults(defineProps<FRadioGroupProps>(), {

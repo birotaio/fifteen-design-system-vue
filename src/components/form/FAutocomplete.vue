@@ -78,59 +78,24 @@ import { composeSearchRegex } from '@fifteen/shared-lib';
 
 import FMenu from '@/components/FMenu.vue';
 
+import type { CommonFormFieldProps } from '@/types/forms';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FAutocompleteModelValue = any;
 
-export interface FAutocompleteProps extends FFieldProps {
-  /**
-   * Option value
-   * @model
-   */
-  modelValue?: FAutocompleteModelValue;
+export interface FAutocompleteProps
+  extends FFieldProps,
+    CommonFormFieldProps<FAutocompleteModelValue> {
   /**
    * Propositions based on user input
    */
   options?: FMenuOption[];
-
-  /**
-   * Validate the number on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
   /**
    * Input placeholder
    */
   placeholder?: string;
-  /**
-   * Background color of the input
-   */
-  color?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the input
-   */
-  textColor?: Color;
   /**
    * Color of the digits outline
    */
@@ -163,14 +128,6 @@ export interface FAutocompleteProps extends FFieldProps {
    * Text color of the selected option
    */
   selectedOptionTextColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
   /**
    * Width of the options menu
    */

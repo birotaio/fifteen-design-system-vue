@@ -38,13 +38,11 @@ import { getFlagIconList } from '@/constants/icons/.utils';
 
 import type { FSelectSize } from '@/components/form/FSelect.vue';
 import type { FFieldProps } from './FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FLocaleSelectProps extends FFieldProps {
-  /**
-   * Value of the locale select
-   * @model
-   */
-  modelValue?: FlagCode | null;
+export interface FLocaleSelectProps
+  extends FFieldProps,
+    CommonFormFieldProps<FlagCode | null> {
   /**
    * List of locales to use. Default to all availables country codes
    */
@@ -53,10 +51,6 @@ export interface FLocaleSelectProps extends FFieldProps {
    * Optionally format the label. Defaults to locale value
    */
   optionLabelFormat?: (locale: string) => string;
-  /**
-   * Background color of the select
-   */
-  color?: Color;
   /**
    * Background color of the options menu
    */
@@ -74,14 +68,6 @@ export interface FLocaleSelectProps extends FFieldProps {
    */
   selectedOptionTextColor?: Color;
   /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the select
-   */
-  textColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -94,17 +80,9 @@ export interface FLocaleSelectProps extends FFieldProps {
    */
   placeholderTextColor?: Color;
   /**
-   * Background focus color
-   */
-  focusColor?: Color;
-  /**
    * Border focus color
    */
   focusBorderColor?: Color;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
   /**
    * Width of the options menu
    */
@@ -118,14 +96,6 @@ export interface FLocaleSelectProps extends FFieldProps {
    */
   emptyText?: string;
   /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
    * Size of the select input
    */
   size?: FSelectSize;
@@ -134,21 +104,9 @@ export interface FLocaleSelectProps extends FFieldProps {
    */
   validationTrigger?: 'change' | 'focus';
   /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
    * Prevent item selection
    */
   preventSelection?: boolean;
-  /**
-   * Loading state of the select
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FLocaleSelectProps>(), {
@@ -158,7 +116,7 @@ const props = withDefaults(defineProps<FLocaleSelectProps>(), {
   errorColor: 'danger',
   errorMessage: '',
   focusBorderColor: 'secondary',
-  focusColor: 'neutral--light-5',
+  // focusColor: 'neutral--light-5',
   locales: () => [],
   menuWidth: 300,
   modelValue: undefined,
@@ -169,7 +127,6 @@ const props = withDefaults(defineProps<FLocaleSelectProps>(), {
   outlineColor: 'neutral--light-3',
   placeholder: '',
   placeholderTextColor: 'neutral--dark-2',
-  rules: () => [],
   selectedOptionColor: 'neutral--light-2',
   selectedOptionTextColor: 'primary--dark-2',
   size: 'medium',

@@ -70,13 +70,11 @@ import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { Icon } from '@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FFileUploadProps extends FFieldProps {
-  /**
-   * Input value
-   * @model
-   */
-  modelValue?: File[] | null;
+export interface FFileUploadProps
+  extends FFieldProps,
+    CommonFormFieldProps<File[] | null> {
   /**
    * Allow importing multiple files
    */
@@ -90,10 +88,6 @@ export interface FFileUploadProps extends FFieldProps {
    */
   maximumSize?: number;
   /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
    * Icon displayed inside the button
    */
   iconName?: Icon;
@@ -105,38 +99,6 @@ export interface FFileUploadProps extends FFieldProps {
    * Button text
    */
   buttonText?: string;
-  /**
-   * Button background color
-   */
-  color?: string;
-  /**
-   * Button text color
-   */
-  textColor?: string;
-  /**
-   * Disable the field
-   */
-  disabled?: boolean;
-  /**
-   * Text and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FFileUploadProps>(), {

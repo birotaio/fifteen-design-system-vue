@@ -1,6 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
-  "version": "0.18.6",
+  "version": "0.18.6-a",
   "private": false,
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
@@ -15,7 +15,7 @@
     "composition api",
     "typescript"
   ],
-  "author": "Birota SAS",
+  "author": "Fifteen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/birotaio/fifteen-design-system-vue/issues"

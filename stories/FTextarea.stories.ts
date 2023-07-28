@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FTextarea, { FTextareaProps } from '@/components/form/FTextarea.vue';
@@ -22,7 +22,7 @@ const Template = (args: FTextareaProps) => ({
   template: '<FTextarea v-bind="args" />',
 });
 
-export const Default: Story<FTextareaProps> = Template.bind({});
+export const Default: StoryFn<FTextareaProps> = Template.bind({});
 Default.parameters = {
   backgrounds: { default: 'primary' },
 };
@@ -30,7 +30,7 @@ Default.args = {
   placeholder: 'Email address',
 };
 
-export const WithLabel: Story<FTextareaProps> = Template.bind({});
+export const WithLabel: StoryFn<FTextareaProps> = Template.bind({});
 WithLabel.parameters = {
   backgrounds: { default: 'success' },
 };
@@ -39,7 +39,7 @@ WithLabel.args = {
   placeholder: 'I contact you today because...',
 };
 
-export const WithHint: Story<FTextareaProps> = Template.bind({});
+export const WithHint: StoryFn<FTextareaProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'success' },
 };
@@ -48,7 +48,7 @@ WithHint.args = {
   hint: 'Feel free to write anything',
 };
 
-export const Full: Story<FTextareaProps> = Template.bind({});
+export const Full: StoryFn<FTextareaProps> = Template.bind({});
 Full.parameters = {
   backgrounds: { default: 'success' },
 };
@@ -59,7 +59,7 @@ Full.args = {
   hint: 'Feel free to write anything',
 };
 
-export const Error: Story<FTextareaProps> = Template.bind({});
+export const Error: StoryFn<FTextareaProps> = Template.bind({});
 Error.parameters = {
   backgrounds: { default: 'secondary' },
 };
@@ -70,7 +70,7 @@ Error.args = {
   hideHint: true,
 };
 
-export const ErrorWithHint: Story<FTextareaProps> = Template.bind({});
+export const ErrorWithHint: StoryFn<FTextareaProps> = Template.bind({});
 ErrorWithHint.parameters = {
   backgrounds: { default: 'secondary' },
 };
@@ -81,7 +81,7 @@ ErrorWithHint.args = {
   errorMessage: `Type "Augmented Bike Networks" to dismiss the error`,
 };
 
-export const Disabled: Story<FTextareaProps> = Template.bind({});
+export const Disabled: StoryFn<FTextareaProps> = Template.bind({});
 Disabled.args = {
   placeholder: 'Email address',
   errorColor: 'danger',
@@ -89,7 +89,7 @@ Disabled.args = {
   disabled: true,
 };
 
-export const Loading: Story<FTextareaProps> = Template.bind({});
+export const Loading: StoryFn<FTextareaProps> = Template.bind({});
 Loading.args = {
   placeholder: 'Email address',
   errorColor: 'danger',
@@ -112,6 +112,5 @@ const FocusTemplate = (args: FTextareaProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FTextareaProps> = FocusTemplate.bind(
-  {}
-);
+export const FocusProgrammatically: StoryFn<FTextareaProps> =
+  FocusTemplate.bind({});

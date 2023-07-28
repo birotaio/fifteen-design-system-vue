@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FDigitsInput, {
@@ -17,28 +17,28 @@ const Template = (args: FDigitsInputProps) => ({
   template: '<FDigitsInput v-bind="args" />',
 });
 
-export const Default: Story<FDigitsInputProps> = Template.bind({});
+export const Default: StoryFn<FDigitsInputProps> = Template.bind({});
 Default.args = {
   label: 'Enter validation code',
 };
 
-export const WithLabel: Story<FDigitsInputProps> = Template.bind({});
+export const WithLabel: StoryFn<FDigitsInputProps> = Template.bind({});
 WithLabel.args = {
   label: 'Enter validation code',
 };
 
-export const WithHint: Story<FDigitsInputProps> = Template.bind({});
+export const WithHint: StoryFn<FDigitsInputProps> = Template.bind({});
 WithHint.args = {
   hint: 'Check the SMS on your phone',
 };
 
-export const Full: Story<FDigitsInputProps> = Template.bind({});
+export const Full: StoryFn<FDigitsInputProps> = Template.bind({});
 Full.args = {
   label: 'Enter validation code',
   hint: 'Check your SMS',
 };
 
-export const Error: Story<FDigitsInputProps> = Template.bind({});
+export const Error: StoryFn<FDigitsInputProps> = Template.bind({});
 Error.args = {
   digits: 5,
   rules: [value => value === '12345'],
@@ -46,14 +46,14 @@ Error.args = {
   validateOnMount: true,
 };
 
-export const Disabled: Story<FDigitsInputProps> = Template.bind({});
+export const Disabled: StoryFn<FDigitsInputProps> = Template.bind({});
 Disabled.args = {
   label: 'Enter validation code',
   hint: 'Check your SMS',
   disabled: true,
 };
 
-export const Loading: Story<FDigitsInputProps> = Template.bind({});
+export const Loading: StoryFn<FDigitsInputProps> = Template.bind({});
 Loading.args = {
   label: 'Enter validation code',
   hint: 'Check your SMS',
@@ -75,5 +75,5 @@ const FocusTemplate = (args: FDigitsInputProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FDigitsInputProps> =
+export const FocusProgrammatically: StoryFn<FDigitsInputProps> =
   FocusTemplate.bind({});

@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import FImage, { FImageProps } from '@/components/FImage.vue';
 
@@ -13,7 +13,7 @@ const Template = (args: FImageProps) => ({
   template: '<FImage v-bind="args" />',
 });
 
-export const Default: Story<FImageProps> = Template.bind({});
+export const Default: StoryFn<FImageProps> = Template.bind({});
 Default.args = {
   src: 'https://picsum.photos/seed/picsum/400/400',
   placeholder: 'https://picsum.photos/seed/picsum/20/20',
@@ -22,7 +22,7 @@ Default.args = {
   alt: '',
 };
 
-export const SharpCorners: Story<FImageProps> = Template.bind({});
+export const SharpCorners: StoryFn<FImageProps> = Template.bind({});
 SharpCorners.args = {
   width: '400px',
   height: '600px',
@@ -31,7 +31,7 @@ SharpCorners.args = {
   corners: 'sharp',
 };
 
-export const Circular: Story<FImageProps> = Template.bind({});
+export const Circular: StoryFn<FImageProps> = Template.bind({});
 Circular.args = {
   width: '400px',
   height: '400px',
@@ -40,14 +40,14 @@ Circular.args = {
   corners: 'circular',
 };
 
-export const FullWidth: Story<FImageProps> = Template.bind({});
+export const FullWidth: StoryFn<FImageProps> = Template.bind({});
 FullWidth.args = {
   width: '100%',
   src: 'https://picsum.photos/seed/picsum/1200/1200',
   alt: '',
 };
 
-export const NoSource: Story<FImageProps> = Template.bind({});
+export const NoSource: StoryFn<FImageProps> = Template.bind({});
 NoSource.args = {
   width: '100%',
   height: '400px',
@@ -55,7 +55,7 @@ NoSource.args = {
   alt: '',
 };
 
-export const Background: Story<FImageProps> = Template.bind({});
+export const Background: StoryFn<FImageProps> = Template.bind({});
 Background.args = {
   width: '100%',
   height: '400px',
@@ -64,7 +64,7 @@ Background.args = {
   backgroundColor: 'secondary',
 };
 
-export const NoSourceBackground: Story<FImageProps> = Template.bind({});
+export const NoSourceBackground: StoryFn<FImageProps> = Template.bind({});
 NoSourceBackground.args = {
   width: '200px',
   height: '200px',

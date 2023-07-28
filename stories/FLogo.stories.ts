@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import FLogo, { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
 import { colorDesignTokens } from '@/constants/colors';
@@ -32,33 +32,33 @@ const Template = (args: FLogoProps) => ({
   template: '<FLogo v-bind="args" />',
 });
 
-export const Horizontal: Story<FLogoProps> = Template.bind({});
+export const Horizontal: StoryFn<FLogoProps> = Template.bind({});
 Horizontal.args = {
   width: '200px',
 };
 
-export const Vertical: Story<FLogoProps> = Template.bind({});
+export const Vertical: StoryFn<FLogoProps> = Template.bind({});
 Vertical.args = {
   width: '140px',
   variant: 'vertical',
   color: 'success',
 };
 
-export const ImageOnly: Story<FLogoProps> = Template.bind({});
+export const ImageOnly: StoryFn<FLogoProps> = Template.bind({});
 ImageOnly.args = {
   width: '140px',
   variant: 'image-only',
   color: 'secondary',
 };
 
-export const TextOnly: Story<FLogoProps> = Template.bind({});
+export const TextOnly: StoryFn<FLogoProps> = Template.bind({});
 TextOnly.args = {
   width: '200px',
   variant: 'text-only',
   color: 'info',
 };
 
-export const Product: Story<FLogoProps> = Template.bind({});
+export const Product: StoryFn<FLogoProps> = Template.bind({});
 Product.args = {
   width: '200px',
   variant: 'product',

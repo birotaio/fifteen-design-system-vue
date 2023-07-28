@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
@@ -18,50 +18,50 @@ const Template = (args: FLocaleSelectProps) => ({
   template: `<FLocaleSelect v-bind="args" />`,
 });
 
-export const Default: Story<FLocaleSelectProps> = Template.bind({});
+export const Default: StoryFn<FLocaleSelectProps> = Template.bind({});
 Default.args = {
   modelValue: 'FR',
 };
 
-export const Small: Story<FLocaleSelectProps> = Template.bind({});
+export const Small: StoryFn<FLocaleSelectProps> = Template.bind({});
 Small.args = {
   size: 'small',
   modelValue: 'FR',
 };
 
-export const LimitedLocales: Story<FLocaleSelectProps> = Template.bind({});
+export const LimitedLocales: StoryFn<FLocaleSelectProps> = Template.bind({});
 LimitedLocales.args = {
   modelValue: 'FR',
   locales: ['FR', 'AST', 'ES'],
 };
 
-export const FormattedLabel: Story<FLocaleSelectProps> = Template.bind({});
+export const FormattedLabel: StoryFn<FLocaleSelectProps> = Template.bind({});
 FormattedLabel.args = {
   modelValue: 'ES',
   optionLabelFormat: locale => `app__lang__${locale.toLowerCase()}`,
   locales: ['FR', 'AST', 'ES'],
 };
 
-export const WithLabel: Story<FLocaleSelectProps> = Template.bind({});
+export const WithLabel: StoryFn<FLocaleSelectProps> = Template.bind({});
 WithLabel.args = {
   label: 'Pick a locale',
   placeholder: 'FR',
 };
 
-export const WithHint: Story<FLocaleSelectProps> = Template.bind({});
+export const WithHint: StoryFn<FLocaleSelectProps> = Template.bind({});
 WithHint.args = {
   placeholder: 'FR',
   hint: 'Pick a locale',
 };
 
-export const Full: Story<FLocaleSelectProps> = Template.bind({});
+export const Full: StoryFn<FLocaleSelectProps> = Template.bind({});
 Full.args = {
   label: 'Pick a locale',
   placeholder: 'FR',
   hint: 'Pick a locale',
 };
 
-export const Clearable: Story<FLocaleSelectProps> = Template.bind({});
+export const Clearable: StoryFn<FLocaleSelectProps> = Template.bind({});
 Clearable.args = {
   placeholder: 'Email address',
   errorColor: 'danger',
@@ -69,7 +69,7 @@ Clearable.args = {
   clearable: true,
 };
 
-export const Error: Story<FLocaleSelectProps> = Template.bind({});
+export const Error: StoryFn<FLocaleSelectProps> = Template.bind({});
 Error.args = {
   modelValue: 'ES',
   rules: [value => value === 'FR'],
@@ -79,13 +79,13 @@ Error.args = {
   validateOnMount: true,
 };
 
-export const Disabled: Story<FLocaleSelectProps> = Template.bind({});
+export const Disabled: StoryFn<FLocaleSelectProps> = Template.bind({});
 Disabled.args = {
   placeholder: 'FR',
   disabled: true,
 };
 
-export const Loading: Story<FLocaleSelectProps> = Template.bind({});
+export const Loading: StoryFn<FLocaleSelectProps> = Template.bind({});
 Loading.args = {
   placeholder: 'FR',
   loading: true,
@@ -106,7 +106,7 @@ const FocusTemplate = (args: FLocaleSelectProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FLocaleSelectProps> =
+export const FocusProgrammatically: StoryFn<FLocaleSelectProps> =
   FocusTemplate.bind({});
 FocusProgrammatically.args = {
   modelValue: 'ES',

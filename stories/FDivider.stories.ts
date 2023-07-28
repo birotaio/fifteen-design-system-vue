@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import FDivider, { FDividerProps } from '@/components/FDivider.vue';
 import { colorDesignTokens } from '@/constants/colors';
@@ -20,16 +20,16 @@ const Template = (args: FDividerProps) => ({
   template: '<FDivider v-bind="args" />',
 });
 
-export const Default: Story<FDividerProps> = Template.bind({});
+export const Default: StoryFn<FDividerProps> = Template.bind({});
 
-export const Vertical: Story<FDividerProps> = Template.bind({});
+export const Vertical: StoryFn<FDividerProps> = Template.bind({});
 Vertical.args = {
   vertical: true,
   height: '400px',
   color: 'danger--dark-1',
 };
 
-export const Light: Story<FDividerProps> = Template.bind({});
+export const Light: StoryFn<FDividerProps> = Template.bind({});
 Light.parameters = {
   backgrounds: { default: 'secondary' },
 };
@@ -37,12 +37,12 @@ Light.args = {
   theme: 'light',
 };
 
-export const Dark: Story<FDividerProps> = Template.bind({});
+export const Dark: StoryFn<FDividerProps> = Template.bind({});
 Dark.args = {
   theme: 'dark',
 };
 
-export const Primary: Story<FDividerProps> = Template.bind({});
+export const Primary: StoryFn<FDividerProps> = Template.bind({});
 Primary.args = {
   color: 'primary',
 };

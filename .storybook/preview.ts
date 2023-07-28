@@ -56,8 +56,7 @@ const vueRouter = createRouter({
     },
     {
       path: '/',
-      name: 'root',
-      redirect: '/',
+      component: {},
     },
   ],
 });

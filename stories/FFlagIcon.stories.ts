@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import FsFlagGrid, { FsFlagGridProps } from './components/FsFlagGrid.vue';
 
@@ -13,7 +13,7 @@ const Template = (args: FsFlagGridProps) => ({
   template: '<FsFlagGrid v-bind="args" />',
 });
 
-export const Default: Story<FsFlagGridProps> = Template.bind({});
+export const Default: StoryFn<FsFlagGridProps> = Template.bind({});
 Default.args = {
   size: 32,
 };

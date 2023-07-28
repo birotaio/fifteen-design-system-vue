@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FRadioGroup, {
@@ -22,7 +22,7 @@ const Template = (args: FRadioGroupProps) => ({
   template: '<FRadioGroup v-bind="args" />',
 });
 
-export const Default: Story<FRadioGroupProps> = Template.bind({});
+export const Default: StoryFn<FRadioGroupProps> = Template.bind({});
 Default.args = {
   label: 'Pick a fruit',
   options: [
@@ -33,7 +33,7 @@ Default.args = {
   ],
 };
 
-export const Horizontal: Story<FRadioGroupProps> = Template.bind({});
+export const Horizontal: StoryFn<FRadioGroupProps> = Template.bind({});
 Horizontal.args = {
   label: 'Pick a fruit',
   displayMode: 'horizontal',
@@ -45,7 +45,7 @@ Horizontal.args = {
   ],
 };
 
-export const WithHint: Story<FRadioGroupProps> = Template.bind({});
+export const WithHint: StoryFn<FRadioGroupProps> = Template.bind({});
 WithHint.args = {
   hint: 'Choose your favorite fruit 🍏 🍌 🍐 🥝 ',
   options: [
@@ -56,7 +56,7 @@ WithHint.args = {
   ],
 };
 
-export const Disabled: Story<FRadioGroupProps> = Template.bind({});
+export const Disabled: StoryFn<FRadioGroupProps> = Template.bind({});
 Disabled.args = {
   disabled: true,
   label: 'Pick a fruit',
@@ -69,7 +69,7 @@ Disabled.args = {
   ],
 };
 
-export const Error: Story<FRadioGroupProps> = Template.bind({});
+export const Error: StoryFn<FRadioGroupProps> = Template.bind({});
 Error.args = {
   rules: [value => value === 'kiwi'],
   label: 'Pick the greenest fruit',
@@ -100,7 +100,7 @@ const FocusTemplate = (args: FRadioGroupProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FRadioGroupProps> =
+export const FocusProgrammatically: StoryFn<FRadioGroupProps> =
   FocusTemplate.bind({});
 FocusProgrammatically.args = {
   options: [

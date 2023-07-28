@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import ponyLogoComponent from '@@/stories/assets/pony.svg?component';
 import ponyLogoMarkup from '@@/stories/assets/pony.svg?raw';
 
@@ -26,7 +26,7 @@ const Template = (args: FSvgImageProps) => ({
   template: '<FSvgImage v-bind="args" />',
 });
 
-export const SvgComponent: Story<FSvgImageProps> = Template.bind({});
+export const SvgComponent: StoryFn<FSvgImageProps> = Template.bind({});
 SvgComponent.args = {
   component: ponyLogoComponent,
   alt: 'component svg',
@@ -35,7 +35,7 @@ SvgComponent.args = {
   height: '80',
 };
 
-export const SvgMarkup: Story<FSvgImageProps> = Template.bind({});
+export const SvgMarkup: StoryFn<FSvgImageProps> = Template.bind({});
 SvgMarkup.args = {
   markup: ponyLogoMarkup,
   alt: 'markup svg',
@@ -44,7 +44,7 @@ SvgMarkup.args = {
   height: '80',
 };
 
-export const SvgSrc: Story<FSvgImageProps> = Template.bind({});
+export const SvgSrc: StoryFn<FSvgImageProps> = Template.bind({});
 SvgSrc.args = {
   src: 'https://placeholder.pics/svg/24',
   alt: 'src svg',

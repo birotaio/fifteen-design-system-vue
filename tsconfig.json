@@ -29,7 +29,8 @@
     "./src/**/*.ts",
     "./src/**/*.d.ts",
     "./src/**/*.vue",
-    "auto-imports.d.ts"
+    "auto-imports.d.ts",
+    "./stories/**/*"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

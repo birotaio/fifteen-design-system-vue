@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import { colorDesignTokens } from '@/constants/colors';
 import FProgressBar, { FProgressBarProps } from '@/components/FProgressBar.vue';
@@ -20,12 +20,12 @@ const Template = (args: FProgressBarProps) => ({
   template: '<FProgressBar v-bind="args" />',
 });
 
-export const Default: Story<FProgressBarProps> = Template.bind({});
+export const Default: StoryFn<FProgressBarProps> = Template.bind({});
 Default.args = {
   value: 20,
 };
 
-export const Larger: Story<FProgressBarProps> = Template.bind({});
+export const Larger: StoryFn<FProgressBarProps> = Template.bind({});
 Larger.args = {
   color: 'info',
   height: '20px',

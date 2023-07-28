@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FCheckbox, { FCheckboxProps } from '@/components/form/FCheckbox.vue';
@@ -15,26 +15,26 @@ const Template = (args: FCheckboxProps) => ({
   template: '<FCheckbox v-bind="args" />',
 });
 
-export const Default: Story<FCheckboxProps> = Template.bind({});
+export const Default: StoryFn<FCheckboxProps> = Template.bind({});
 Default.args = {
   label: 'Check me',
   name: 'checkbox',
 };
 
-export const Indeterminate: Story<FCheckboxProps> = Template.bind({});
+export const Indeterminate: StoryFn<FCheckboxProps> = Template.bind({});
 Indeterminate.args = {
   modelValue: null,
   label: 'Indeterminate state',
 };
 
-export const Disabled: Story<FCheckboxProps> = Template.bind({});
+export const Disabled: StoryFn<FCheckboxProps> = Template.bind({});
 Disabled.args = {
   label: 'A disabled one',
   disabled: true,
   name: 'checkbox',
 };
 
-export const WithHint: Story<FCheckboxProps> = Template.bind({});
+export const WithHint: StoryFn<FCheckboxProps> = Template.bind({});
 WithHint.args = {
   label: 'Receive our monthly newsletter',
   hint: 'Check this if you want to receive our amazing newsletter',
@@ -52,12 +52,12 @@ const LinkTemplate = (args: FCheckboxProps) => ({
   </FCheckbox>`,
 });
 
-export const WithLinks: Story<FCheckboxProps> = LinkTemplate.bind({});
+export const WithLinks: StoryFn<FCheckboxProps> = LinkTemplate.bind({});
 WithLinks.args = {
   name: 'checkbox',
 };
 
-export const Error: Story<FCheckboxProps> = Template.bind({});
+export const Error: StoryFn<FCheckboxProps> = Template.bind({});
 Error.args = {
   label: 'I agree with the privacy policy',
   errorMessage: 'Check the checkbox to dismiss the error',
@@ -81,9 +81,8 @@ const FocusTemplate = (args: FCheckboxProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FCheckboxProps> = FocusTemplate.bind(
-  {}
-);
+export const FocusProgrammatically: StoryFn<FCheckboxProps> =
+  FocusTemplate.bind({});
 FocusProgrammatically.args = {
   label: 'Focus me by clicking on the button',
   name: 'checkbox',

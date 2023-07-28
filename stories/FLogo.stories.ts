@@ -1,7 +1,9 @@
 import { StoryFn } from '@storybook/vue3';
 
-import FLogo, { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
+import FLogo from '@/components/FLogo.vue';
 import { colorDesignTokens } from '@/constants/colors';
+
+import type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
 
 const logoVariants: FLogoVariant[] = [
   'vertical',

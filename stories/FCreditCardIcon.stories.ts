@@ -1,8 +1,8 @@
 import { StoryFn } from '@storybook/vue3';
 
-import FsCreditCardIconsGrid, {
-  FsCreditCardIconGridProps,
-} from './components/FsCreditCardIconsGrid.vue';
+import FsCreditCardIconsGrid from './components/FsCreditCardIconsGrid.vue';
+
+import type { FsCreditCardIconGridProps } from './components/FsCreditCardIconsGrid.vue';
 
 export default {
   title: 'Components/FCreditCardIcon',

@@ -1,9 +1,10 @@
 import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FRadio, { FRadioProps } from '@/components/form/FRadio.vue';
+import FRadio from '@/components/form/FRadio.vue';
 import FButton from '@/components/FButton.vue';
 
+import type { FRadioProps } from '@/components/form/FRadio.vue';
 import type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
 
 export default {

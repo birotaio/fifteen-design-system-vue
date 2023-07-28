@@ -1,6 +1,8 @@
 import { StoryFn } from '@storybook/vue3';
 
-import FAvatar, { FAvatarProps } from '@/components/FAvatar.vue';
+import FAvatar from '@/components/FAvatar.vue';
+
+import type { FAvatarProps } from '@/components/FAvatar.vue';
 
 export default {
   title: 'Components/FAvatar',

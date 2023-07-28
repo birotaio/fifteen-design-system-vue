@@ -1,8 +1,10 @@
 import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FToggle, { FToggleProps } from '@/components/form/FToggle.vue';
+import FToggle from '@/components/form/FToggle.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FToggleProps } from '@/components/form/FToggle.vue';
 
 export default {
   title: 'Components/Form/FToggle',

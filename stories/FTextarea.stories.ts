@@ -1,8 +1,10 @@
 import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FTextarea, { FTextareaProps } from '@/components/form/FTextarea.vue';
+import FTextarea from '@/components/form/FTextarea.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FTextareaProps } from '@/components/form/FTextarea.vue';
 
 export default {
   title: 'Components/Form/FTextarea',

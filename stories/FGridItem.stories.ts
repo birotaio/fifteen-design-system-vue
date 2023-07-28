@@ -2,7 +2,9 @@ import { StoryFn } from '@storybook/vue3';
 
 import FGrid from '@/components/FGrid.vue';
 import FCard from '@/components/FCard.vue';
-import FGridItem, { FGridItemProps } from '@/components/FGridItem.vue';
+import FGridItem from '@/components/FGridItem.vue';
+
+import type { FGridItemProps } from '@/components/FGridItem.vue';
 
 export default {
   title: 'Components/FGridItem',

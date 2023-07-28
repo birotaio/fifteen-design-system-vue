@@ -1,10 +1,10 @@
 import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FCreditCardInput, {
-  FCreditCardInputProps,
-} from '@/components/form/FCreditCardInput.vue';
+import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FCreditCardInputProps } from '@/components/form/FCreditCardInput.vue';
 
 export default {
   title: 'Components/Form/FCreditCardInput',

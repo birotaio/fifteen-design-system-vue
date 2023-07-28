@@ -1,6 +1,8 @@
 import { StoryFn } from '@storybook/vue3';
 
-import FImage, { FImageProps } from '@/components/FImage.vue';
+import FImage from '@/components/FImage.vue';
+
+import type { FImageProps } from '@/components/FImage.vue';
 
 export default {
   title: 'Components/FImage',

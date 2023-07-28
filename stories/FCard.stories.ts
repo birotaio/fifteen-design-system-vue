@@ -1,7 +1,9 @@
 import { StoryFn } from '@storybook/vue3';
 
-import FCard, { FCardProps } from '@/components/FCard.vue';
+import FCard from '@/components/FCard.vue';
 import { colorDesignTokens } from '@/constants/colors';
+
+import type { FCardProps } from '@/components/FCard.vue';
 
 export default {
   title: 'Components/FCard',

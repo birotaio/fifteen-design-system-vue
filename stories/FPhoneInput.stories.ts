@@ -2,10 +2,10 @@ import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 import { required } from '@vee-validate/rules';
 
-import FPhoneInput, {
-  FPhoneInputProps,
-} from '@/components/form/FPhoneInput.vue';
+import FPhoneInput from '@/components/form/FPhoneInput.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
 
 export default {
   title: 'Components/Form/FPhoneInput',

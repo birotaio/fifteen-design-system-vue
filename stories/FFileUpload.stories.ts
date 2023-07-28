@@ -1,8 +1,8 @@
 import { StoryFn } from '@storybook/vue3';
 
-import FFileUpload, {
-  FFileUploadProps,
-} from '@/components/form/FFileUpload.vue';
+import FFileUpload from '@/components/form/FFileUpload.vue';
+
+import type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
 
 export default {
   title: 'Components/Form/FFileUpload',

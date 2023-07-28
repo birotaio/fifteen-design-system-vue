@@ -1,6 +1,8 @@
 import { StoryFn } from '@storybook/vue3';
 
-import FsFlagGrid, { FsFlagGridProps } from './components/FsFlagGrid.vue';
+import FsFlagGrid from './components/FsFlagGrid.vue';
+
+import type { FsFlagGridProps } from './components/FsFlagGrid.vue';
 
 export default {
   title: 'Components/FFlagIcon',

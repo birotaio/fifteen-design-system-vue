@@ -3,7 +3,9 @@ import ponyLogoComponent from '@@/stories/assets/pony.svg?component';
 import ponyLogoMarkup from '@@/stories/assets/pony.svg?raw';
 
 import { colorDesignTokens } from '@/constants/colors';
-import FSvgImage, { FSvgImageProps } from '@/components/FSvgImage.vue';
+import FSvgImage from '@/components/FSvgImage.vue';
+
+import type { FSvgImageProps } from '@/components/FSvgImage.vue';
 
 export default {
   title: 'Components/FSvgImage',

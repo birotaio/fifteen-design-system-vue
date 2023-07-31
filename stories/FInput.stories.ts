@@ -1,9 +1,11 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FInput, { FInputProps } from '@/components/form/FInput.vue';
+import FInput from '@/components/form/FInput.vue';
 import FButton from '@/components/FButton.vue';
 import { mask, required } from '@/rules';
+
+import type { FInputProps } from '@/components/form/FInput.vue';
 
 export default {
   title: 'Components/Form/FInput',
@@ -23,7 +25,7 @@ const Template = (args: FInputProps) => ({
   template: '<FInput v-bind="args" />',
 });
 
-export const Default: Story<FInputProps> = Template.bind({});
+export const Default: StoryFn<FInputProps> = Template.bind({});
 Default.parameters = {
   backgrounds: { default: 'primary' },
 };
@@ -31,7 +33,7 @@ Default.args = {
   placeholder: 'Email address',
 };
 
-export const WithLabel: Story<FInputProps> = Template.bind({});
+export const WithLabel: StoryFn<FInputProps> = Template.bind({});
 WithLabel.parameters = {
   backgrounds: { default: 'primary' },
 };
@@ -40,7 +42,7 @@ WithLabel.args = {
   placeholder: 'contact@fifteen.eu',
 };
 
-export const WithHint: Story<FInputProps> = Template.bind({});
+export const WithHint: StoryFn<FInputProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'success' },
 };
@@ -49,7 +51,7 @@ WithHint.args = {
   hint: 'You can use your personal or professional email',
 };
 
-export const Full: Story<FInputProps> = Template.bind({});
+export const Full: StoryFn<FInputProps> = Template.bind({});
 Full.parameters = {
   backgrounds: { default: 'success' },
 };
@@ -59,7 +61,7 @@ Full.args = {
   hint: 'You can use your personal or professional email',
 };
 
-export const Error: Story<FInputProps> = Template.bind({});
+export const Error: StoryFn<FInputProps> = Template.bind({});
 Error.parameters = {
   backgrounds: { default: 'secondary' },
 };
@@ -71,7 +73,7 @@ Error.args = {
   validateOnMount: true,
 };
 
-export const Disabled: Story<FInputProps> = Template.bind({});
+export const Disabled: StoryFn<FInputProps> = Template.bind({});
 Disabled.args = {
   placeholder: 'Email address',
   errorColor: 'danger',
@@ -79,7 +81,7 @@ Disabled.args = {
   disabled: true,
 };
 
-export const Loading: Story<FInputProps> = Template.bind({});
+export const Loading: StoryFn<FInputProps> = Template.bind({});
 Loading.args = {
   placeholder: 'Email address',
   errorColor: 'danger',
@@ -87,7 +89,7 @@ Loading.args = {
   loading: true,
 };
 
-export const Clearable: Story<FInputProps> = Template.bind({});
+export const Clearable: StoryFn<FInputProps> = Template.bind({});
 Clearable.args = {
   placeholder: 'Email address',
   errorColor: 'danger',
@@ -95,7 +97,7 @@ Clearable.args = {
   clearable: true,
 };
 
-export const Mask: Story<FInputProps> = Template.bind({});
+export const Mask: StoryFn<FInputProps> = Template.bind({});
 Mask.args = {
   label: 'Birth date',
   placeholder: 'DD/MM/YYYY',
@@ -105,7 +107,7 @@ Mask.args = {
   rules: [required, value => mask(value, '##/##/####')],
 };
 
-export const TypeNumber: Story<FInputProps> = Template.bind({});
+export const TypeNumber: StoryFn<FInputProps> = Template.bind({});
 TypeNumber.args = {
   placeholder: 'Number',
   type: 'number',
@@ -128,4 +130,6 @@ const FocusTemplate = (args: FInputProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FInputProps> = FocusTemplate.bind({});
+export const FocusProgrammatically: StoryFn<FInputProps> = FocusTemplate.bind(
+  {}
+);

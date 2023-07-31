@@ -1,8 +1,11 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FRadio, { FRadioProps } from '@/components/form/FRadio.vue';
+import FRadio from '@/components/form/FRadio.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FRadioProps } from '@/components/form/FRadio.vue';
+import type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
 
 export default {
   title: 'Components/Form/FRadio',
@@ -15,21 +18,21 @@ const Template = (args: FRadioProps) => ({
   template: '<FRadio v-bind="args" />',
 });
 
-export const Default: Story<FRadioProps> = Template.bind({});
+export const Default: StoryFn<FRadioProps> = Template.bind({});
 Default.args = {
   label: 'Check me',
   value: 'check-me',
   name: 'radio',
 };
 
-export const Disabled: Story<FRadioProps> = Template.bind({});
+export const Disabled: StoryFn<FRadioProps> = Template.bind({});
 Disabled.args = {
   label: 'A disabled one',
   disabled: true,
   name: 'radio',
 };
 
-export const WithHint: Story<FRadioProps> = Template.bind({});
+export const WithHint: StoryFn<FRadioProps> = Template.bind({});
 WithHint.args = {
   label: 'Receive our monthly newsletter',
   hint: 'Check this if you want to receive our amazing newsletter',
@@ -53,12 +56,12 @@ const LinkTemplate = (args: FRadioProps) => ({
   </FRadio>`,
 });
 
-export const WithLinks: Story<FCheckboxProps> = LinkTemplate.bind({});
+export const WithLinks: StoryFn<FCheckboxProps> = LinkTemplate.bind({});
 WithLinks.args = {
   name: 'checkbox',
 };
 
-export const Error: Story<FRadioProps> = Template.bind({});
+export const Error: StoryFn<FRadioProps> = Template.bind({});
 Error.args = {
   label: 'I agree with the privacy policy',
   value: 'privacy-policy',
@@ -83,7 +86,9 @@ const FocusTemplate = (args: FRadioProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FRadioProps> = FocusTemplate.bind({});
+export const FocusProgrammatically: StoryFn<FRadioProps> = FocusTemplate.bind(
+  {}
+);
 FocusProgrammatically.args = {
   label: 'Focus me by clicking on the button',
   name: 'radio',

@@ -1,5 +1,6 @@
-import { Story } from '@storybook/vue3';
-import FsElevationsMixins from '@@/stories/components/FsElevationsMixins.vue';
+import { StoryFn } from '@storybook/vue3';
+
+import FsElevationsMixins from '@/stories/components/FsElevationsMixins.vue';
 
 export default {
   title: 'Styles/Elevations',
@@ -10,4 +11,4 @@ const MixinsTemplate = () => ({
   template: `<FsElevationsMixins />`,
 });
 
-export const Mixins: Story = MixinsTemplate.bind({});
+export const Mixins: StoryFn = MixinsTemplate.bind({});

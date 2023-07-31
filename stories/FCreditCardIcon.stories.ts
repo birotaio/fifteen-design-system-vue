@@ -1,8 +1,8 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FsCreditCardIconsGrid, {
-  FsCreditCardIconGridProps,
-} from './components/FsCreditCardIconsGrid.vue';
+import FsCreditCardIconsGrid from './components/FsCreditCardIconsGrid.vue';
+
+import type { FsCreditCardIconGridProps } from './components/FsCreditCardIconsGrid.vue';
 
 export default {
   title: 'Components/FCreditCardIcon',
@@ -15,7 +15,7 @@ const Template = (args: FsCreditCardIconGridProps) => ({
   template: '<FsCreditCardIconsGrid v-bind="args" />',
 });
 
-export const Default: Story<FsCreditCardIconGridProps> = Template.bind({});
+export const Default: StoryFn<FsCreditCardIconGridProps> = Template.bind({});
 Default.args = {
   size: 32,
 };

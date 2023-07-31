@@ -1,6 +1,8 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FSkeleton, { FSkeletonProps } from '@/components/FSkeleton.vue';
+import FSkeleton from '@/components/FSkeleton.vue';
+
+import type { FSkeletonProps } from '@/components/FSkeleton.vue';
 
 export default {
   title: 'Components/FSkeleton',
@@ -13,22 +15,22 @@ const Template = (args: FSkeletonProps) => ({
   template: '<FSkeleton v-bind="args" />',
 });
 
-export const Default: Story<FSkeletonProps> = Template.bind({});
+export const Default: StoryFn<FSkeletonProps> = Template.bind({});
 Default.args = {};
 
-export const Rounded: Story<FSkeletonProps> = Template.bind({});
+export const Rounded: StoryFn<FSkeletonProps> = Template.bind({});
 Rounded.args = {
   rounded: true,
 };
 
-export const RoundedFull: Story<FSkeletonProps> = Template.bind({});
+export const RoundedFull: StoryFn<FSkeletonProps> = Template.bind({});
 RoundedFull.args = {
   roundedFull: true,
   height: 64,
   width: 150,
 };
 
-export const Colored: Story<FSkeletonProps> = Template.bind({});
+export const Colored: StoryFn<FSkeletonProps> = Template.bind({});
 Colored.args = {
   rounded: true,
   backgroundColor: 'primary',

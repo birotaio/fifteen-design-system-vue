@@ -1,6 +1,8 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FLoader, { FLoaderProps } from '@/components/FLoader.vue';
+import FLoader from '@/components/FLoader.vue';
+
+import type { FLoaderProps } from '@/components/FLoader.vue';
 
 export default {
   title: 'Components/FLoader',
@@ -13,7 +15,7 @@ const Template = (args: FLoaderProps) => ({
   template: '<FLoader v-bind="args" />',
 });
 
-export const Default: Story<FLoaderProps> = Template.bind({});
+export const Default: StoryFn<FLoaderProps> = Template.bind({});
 Default.args = {
   width: '64px',
   height: '64px',

@@ -155,60 +155,22 @@ FField.FToggle(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
-export interface FToggleProps {
-  /**
-   * Checkbox v-model value
-   * @model
-   */
-  modelValue?: boolean;
-  /**
-   * Label of the toggle
-   */
-  label?: string;
+import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
+
+export interface FToggleProps
+  extends FFieldProps,
+    CommonFormFieldProps<boolean> {
   /**
    * Position the label to the right of the toggle
    */
   reverse?: boolean;
   /**
-   * Disable the toggle usage
-   */
-  disabled?: boolean;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the toggle
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Background color of the toggle
-   */
-  color?: Color;
-  /**
    * Background color of the thumb
    */
   thumbColor?: Color;
-  /**
-   * Text color of the toggle
-   */
-  textColor?: Color;
   /**
    * Color of the border on hover
    */
@@ -229,30 +191,6 @@ export interface FToggleProps {
    * Smaller label text
    */
   smallText?: boolean;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
 }
 
 const props = withDefaults(defineProps<FToggleProps>(), {
@@ -273,7 +211,7 @@ const props = withDefaults(defineProps<FToggleProps>(), {
   hoverBorderColor: 'secondary',
   label: '',
   reverse: false,
-  name: 'toggle',
+  name: '',
   rules: () => [],
   textColor: 'neutral--dark-4',
   validateOnMount: false,

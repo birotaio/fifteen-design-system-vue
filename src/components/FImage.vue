@@ -63,11 +63,7 @@ picture.FImage(
 </style>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-
-import FIcon from '@/components/FIcon.vue';
 import { genSize } from '@/utils/genSize';
-import { useLazyImage } from '@/composables/useLazyImage';
 import { getCssColor } from '@/utils/getCssColor';
 
 import type CSS from 'csstype';

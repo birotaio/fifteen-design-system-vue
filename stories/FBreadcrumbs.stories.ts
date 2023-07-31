@@ -1,7 +1,9 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import { colorDesignTokens } from '@/constants/colors';
-import FBreadcrumbs, { FBreadcrumbsProps } from '@/components/FBreadcrumbs.vue';
+import FBreadcrumbs from '@/components/FBreadcrumbs.vue';
+
+import type { FBreadcrumbsProps } from '@/components/FBreadcrumbs.vue';
 
 export default {
   title: 'Components/FBreadcrumbs',
@@ -28,12 +30,12 @@ const Template = (args: FBreadcrumbsProps) => ({
   template: '<FBreadcrumbs v-bind="args" />',
 });
 
-export const OneItem: Story<FBreadcrumbsProps> = Template.bind({});
+export const OneItem: StoryFn<FBreadcrumbsProps> = Template.bind({});
 OneItem.args = {
   items: [{ text: 'Guide' }],
 };
 
-export const ThreeItems: Story<FBreadcrumbsProps> = Template.bind({});
+export const ThreeItems: StoryFn<FBreadcrumbsProps> = Template.bind({});
 ThreeItems.args = {
   items: [
     { text: 'Guide' },
@@ -43,7 +45,7 @@ ThreeItems.args = {
   activeItemColor: 'info',
 };
 
-export const FiveItems: Story<FBreadcrumbsProps> = Template.bind({});
+export const FiveItems: StoryFn<FBreadcrumbsProps> = Template.bind({});
 FiveItems.args = {
   items: [
     { text: 'Guide', href: '/resources/guides' },

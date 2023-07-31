@@ -51,7 +51,7 @@ FField.FPhoneInput(
               @click.stop="toggleMenu"
               @blur="closeMenu"
             )
-              FFlagIcon.FPhoneInput__selectedFlag(:country-code="countryCode")
+              FFlagIcon.FPhoneInput__selectedFlag(:flag-code="countryCode")
               FIcon.FPhoneInput__icon(
                 name="chevronDown"
                 :class="iconClasses"
@@ -75,9 +75,7 @@ FField.FPhoneInput(
               @blur="closeMenu"
             ) {{ phonePrefix }}
     template(#option-prefix="{ option }")
-      FFlagIcon.FPhoneInput__optionPrefix(
-        :country-code="getCountryCode(option)"
-      )
+      FFlagIcon.FPhoneInput__optionPrefix(:flag-code="getCountryCode(option)")
 </template>
 
 <style lang="stylus">
@@ -164,24 +162,20 @@ import {
   getExampleNumber,
   parsePhoneNumber,
 } from 'libphonenumber-js';
-import { computed, ref, watch } from 'vue';
 import examples from 'libphonenumber-js/mobile/examples';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
 import FInput from '@/components/form/FInput.vue';
-import FDivider from '@/components/FDivider.vue';
-import FFlagIcon from '@/components/FFlagIcon.vue';
-import FMenu from '@/components/FMenu.vue';
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 import { getCssColor } from '@/utils/getCssColor';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CountryCode } from 'libphonenumber-js';
 import type { FMenuOption } from '@/components/FMenu.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FPhoneInputProps {
+export interface FPhoneInputProps
+  extends FFieldProps,
+    CommonFormFieldProps<null> {
   /**
    * Phone number without prefix. Value of the input field
    */
@@ -190,66 +184,6 @@ export interface FPhoneInputProps {
    * Country code, used to show the appropriate flag
    */
   countryCode?: CountryCode;
-  /**
-   * Label, placed on top of select
-   */
-  label?: string;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Validate the number on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the select
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
-  /**
-   * Background color of the input
-   */
-  color?: Color;
-  /**
-   * Color of the digits border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the input
-   */
-  textColor?: Color;
   /**
    * Color of the digits outline
    */
@@ -282,22 +216,13 @@ export interface FPhoneInputProps {
    * Event that triggers validation
    */
   validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FPhoneInputProps>(), {
   phoneNumber: '',
   countryCode: 'FR',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   name: '',
   validateOnMount: false,
-  hint: '',
-  hintTextColor: 'neutral--dark-4',
-  hintIcon: null,
   rules: () => [],
   errorMessage: '',
   errorColor: 'danger',
@@ -341,7 +266,8 @@ const {
 } = useFieldWithValidation<string | number>(props, {
   validateOnMount: props?.validateOnMount,
   rules: [
-    value => isEmptyPhone(value) || isValidPhone(value),
+    isEmptyPhone,
+    isValidPhone,
     ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
   ],
 });

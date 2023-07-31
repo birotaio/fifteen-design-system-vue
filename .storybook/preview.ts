@@ -1,6 +1,7 @@
 import '@/styles/elements.styl';
 import '@/styles/theme.styl';
-import { app } from '@storybook/vue3';
+import { setup } from '@storybook/vue3';
+import type { App } from 'vue';
 
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -45,7 +46,7 @@ export const decorators = [
   }),
 ];
 
-const router = createRouter({
+const vueRouter = createRouter({
   history: createWebHistory(),
   routes: [
     {
@@ -55,10 +56,11 @@ const router = createRouter({
     },
     {
       path: '/',
-      name: 'root',
-      component: null, // it's only a mock
+      component: {},
     },
   ],
 });
 
-app.use(router);
+setup((app: App) => {
+  app.use(vueRouter);
+});

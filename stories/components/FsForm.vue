@@ -101,23 +101,7 @@ FForm.FsForm(
 </style>
 
 <script setup lang="ts">
-import FForm from '@/components/form/FForm.vue';
-import FGrid from '@/components/FGrid.vue';
-import FGridItem from '@/components/FGridItem.vue';
-import FButton from '@/components/FButton.vue';
-import FInput from '@/components/form/FInput.vue';
-import FCheckbox from '@/components//form/FCheckbox.vue';
-import FDigitsInput from '@/components/form/FDigitsInput.vue';
-import FPhoneInput from '@/components/form/FPhoneInput.vue';
-import FRadioGroup from '@/components/form/FRadioGroup.vue';
-import FSelect from '@/components/form/FSelect.vue';
-import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
-import FTextarea from '@/components/form/FTextarea.vue';
-import FAutocomplete from '@/components/form/FAutocomplete.vue';
-import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
-import FToggle from '@/components/form/FToggle.vue';
-
-import type { FFormProps } from '@/components/form/FForm.vue';
+import type { FFormProps } from '../../src/components/form/FForm.vue';
 
 export interface FsFormProps {
   /**

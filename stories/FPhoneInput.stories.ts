@@ -1,11 +1,11 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 import { required } from '@vee-validate/rules';
 
-import FPhoneInput, {
-  FPhoneInputProps,
-} from '@/components/form/FPhoneInput.vue';
+import FPhoneInput from '@/components/form/FPhoneInput.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
 
 export default {
   title: 'Components/Form/FPhoneInput',
@@ -18,32 +18,32 @@ const Template = (args: FPhoneInputProps) => ({
   template: '<FPhoneInput v-bind="args" />',
 });
 
-export const Default: Story<FPhoneInputProps> = Template.bind({});
+export const Default: StoryFn<FPhoneInputProps> = Template.bind({});
 Default.args = {
   errorMessage: 'The phone number does not match the expected format',
   rules: [required],
 };
 
-export const WithLabel: Story<FPhoneInputProps> = Template.bind({});
+export const WithLabel: StoryFn<FPhoneInputProps> = Template.bind({});
 WithLabel.args = {
   label: 'Enter your phone number',
   errorMessage: 'The phone number does not match the expected format',
 };
 
-export const WithHint: Story<FPhoneInputProps> = Template.bind({});
+export const WithHint: StoryFn<FPhoneInputProps> = Template.bind({});
 WithHint.args = {
   hint: `Don't forget to pick the right prefix`,
   errorMessage: 'The phone number does not match the expected format',
 };
 
-export const Full: Story<FPhoneInputProps> = Template.bind({});
+export const Full: StoryFn<FPhoneInputProps> = Template.bind({});
 Full.args = {
   label: 'Enter your phone number',
   hint: `Don't forget to pick the right prefix`,
   errorMessage: 'The phone number does not match the expected format',
 };
 
-export const Error: Story<FPhoneInputProps> = Template.bind({});
+export const Error: StoryFn<FPhoneInputProps> = Template.bind({});
 Error.args = {
   label: 'Enter your phone number',
   validateOnMount: true,
@@ -52,7 +52,7 @@ Error.args = {
   rules: [required],
 };
 
-export const Disabled: Story<FPhoneInputProps> = Template.bind({});
+export const Disabled: StoryFn<FPhoneInputProps> = Template.bind({});
 Disabled.args = {
   label: 'Enter your phone number',
   hint: `Don't forget to pick the right prefix`,
@@ -74,10 +74,10 @@ const FocusTemplate = (args: FPhoneInputProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FPhoneInputProps> =
+export const FocusProgrammatically: StoryFn<FPhoneInputProps> =
   FocusTemplate.bind({});
 
-export const Loading: Story<FPhoneInputProps> = Template.bind({});
+export const Loading: StoryFn<FPhoneInputProps> = Template.bind({});
 Loading.args = {
   label: 'Enter you phone number',
   hint: `Don't forget to pick the right prefix`,

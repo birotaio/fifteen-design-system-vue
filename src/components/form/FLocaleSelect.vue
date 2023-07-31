@@ -3,33 +3,9 @@ FSelect.FLocaleSelect(
   ref="localeSelectRef"
   v-model="locale"
   :class="classes"
-  :label="label"
-  :color="color"
-  :text-color="textColor"
-  :focus-color="focusColor"
-  :border-color="borderColor"
-  :focus-border-color="focusBorderColor"
-  :outline-color="outlineColor"
-  :options-menu-color="optionsMenuColor"
-  :option-text-color="optionTextColor"
-  :selected-option-text-color="selectedOptionTextColor"
-  :label-text-color="labelTextColor"
-  :hint="hint"
-  :hide-hint="hideHint"
-  :hint-text-color="hintTextColor"
-  :hint-icon="hintIcon"
-  :placeholder="placeholder"
-  :clearable="clearable"
+  v-bind="selectProps"
   :options="selectOptions"
-  :error-message="errorMessage"
-  :error-color="errorColor"
-  :disabled="disabled"
-  :loading="loading"
-  :rules="rules"
-  :size="size"
-  :validation-trigger="validationTrigger"
-  :validate-on-mount="validateOnMount"
-  :menu-width="menuWidth"
+  :hint="hint"
   @focus="handleFocus"
   @blur="handleBlur"
 )
@@ -58,42 +34,23 @@ FSelect.FLocaleSelect(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import FFlagIcon from '@/components/FFlagIcon.vue';
-import FSelect from '@/components/form/FSelect.vue';
 import { getFlagIconList } from '@/constants/icons/.utils';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
 import type { FSelectSize } from '@/components/form/FSelect.vue';
+import type { FFieldProps } from './FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FLocaleSelectProps {
-  /**
-   * Value of the locale select
-   * @model
-   */
-  modelValue?: FlagCode | null;
+export interface FLocaleSelectProps
+  extends FFieldProps,
+    CommonFormFieldProps<FlagCode | null> {
   /**
    * List of locales to use. Default to all availables country codes
    */
   locales?: FlagCode[];
   /**
-   * Label, placed on top of select
-   */
-  label?: string;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
    * Optionally format the label. Defaults to locale value
    */
   optionLabelFormat?: (locale: string) => string;
-  /**
-   * Background color of the select
-   */
-  color?: Color;
   /**
    * Background color of the options menu
    */
@@ -111,18 +68,6 @@ export interface FLocaleSelectProps {
    */
   selectedOptionTextColor?: Color;
   /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the select
-   */
-  textColor?: Color;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -135,33 +80,9 @@ export interface FLocaleSelectProps {
    */
   placeholderTextColor?: Color;
   /**
-   * Background focus color
-   */
-  focusColor?: Color;
-  /**
    * Border focus color
    */
   focusBorderColor?: Color;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the select
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
   /**
    * Width of the options menu
    */
@@ -175,14 +96,6 @@ export interface FLocaleSelectProps {
    */
   emptyText?: string;
   /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
    * Size of the select input
    */
   size?: FSelectSize;
@@ -191,21 +104,9 @@ export interface FLocaleSelectProps {
    */
   validationTrigger?: 'change' | 'focus';
   /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
    * Prevent item selection
    */
   preventSelection?: boolean;
-  /**
-   * Loading state of the select
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FLocaleSelectProps>(), {
@@ -246,6 +147,35 @@ const emit = defineEmits<{
   (name: 'focus', value: Event): void;
   (name: 'blur', value: Event): void;
 }>();
+
+const selectProps = {
+  label: props.label,
+  color: props.color,
+  textColor: props.textColor,
+  focusColor: props.focusColor,
+  borderColor: props.borderColor,
+  focusBorderColor: props.focusBorderColor,
+  outlineColor: props.outlineColor,
+  optionsMenuColor: props.optionsMenuColor,
+  optionTextColor: props.optionTextColor,
+  selectedOptionTextColor: props.selectedOptionTextColor,
+  labelTextColor: props.labelTextColor,
+  hint: props.hint,
+  hideHint: props.hideHint,
+  hintTextColor: props.hintTextColor,
+  hintIcon: props.hintIcon,
+  placeholder: props.placeholder,
+  clearable: props.clearable,
+  errorMessage: props.errorMessage,
+  errorColor: props.errorColor,
+  disabled: props.disabled,
+  loading: props.loading,
+  rules: props.rules,
+  size: props.size,
+  validationTrigger: props.validationTrigger,
+  validateOnMount: props.validateOnMount,
+  menuWidth: props.menuWidth,
+};
 
 const {
   hint,

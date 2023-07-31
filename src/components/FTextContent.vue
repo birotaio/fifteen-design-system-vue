@@ -184,7 +184,6 @@
 
 <script setup lang="ts">
 import xss from 'xss';
-import { computed } from 'vue';
 import { avoidOrphanPunct } from '@fifteen/shared-lib';
 
 export interface FTextContentProps {

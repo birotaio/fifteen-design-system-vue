@@ -1,6 +1,8 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FGrid, { FGridProps } from '@/components/FGrid.vue';
+import FGrid from '@/components/FGrid.vue';
+
+import type { FGridProps } from '@/components/FGrid.vue';
 
 export default {
   title: 'Components/FGrid',
@@ -20,15 +22,15 @@ const Template = (args: FGridProps) => ({
     </FGrid>`,
 });
 
-export const Default: Story<FGridProps> = Template.bind({});
+export const Default: StoryFn<FGridProps> = Template.bind({});
 Default.args = {};
 
-export const Columns: Story<FGridProps> = Template.bind({});
+export const Columns: StoryFn<FGridProps> = Template.bind({});
 Columns.args = {
   columns: 7,
 };
 
-export const Gutter: Story<FGridProps> = Template.bind({});
+export const Gutter: StoryFn<FGridProps> = Template.bind({});
 Gutter.args = {
   gap: 32,
 };

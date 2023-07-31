@@ -25,6 +25,7 @@
   "include": [
     "./src/components/router/*.vue",
     "./src/components/router/*.ts",
-    "./src/types/*.d.ts"
+    "./src/types/*.d.ts",
+    "auto-imports.d.ts"
   ]
 }

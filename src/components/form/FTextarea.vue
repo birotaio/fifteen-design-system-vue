@@ -97,34 +97,19 @@ FField.FTextarea(
 </style>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { useElementBounding } from '@vueuse/core';
 
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { TextareaHTMLAttributes } from 'vue';
 import type CSS from 'csstype';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FTextareaProps {
-  /**
-   * Text area value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Label, placed on top of select
-   */
-  label?: string;
-  /**
-   * Disable the attribute
-   */
-  disabled?: boolean;
+export interface FTextareaProps
+  extends FFieldProps,
+    CommonFormFieldProps<string> {
   /**
    * Text area placeholder
    */
@@ -144,22 +129,6 @@ export interface FTextareaProps {
     'disabled' | 'placeholder' | 'class' | 'style' | 'rows'
   >;
   /**
-   * Background color of the textarea
-   */
-  color?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the textarea
-   */
-  textColor?: Color;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
    * Color of the outline
    */
   outlineColor?: Color;
@@ -175,50 +144,6 @@ export interface FTextareaProps {
    * Border focus color
    */
   focusBorderColor?: Color;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * A hint to display under the textarea
-   */
-  hint?: string;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FTextareaProps>(), {

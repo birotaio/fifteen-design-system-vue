@@ -123,60 +123,20 @@ FField.FRadio(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { getUid } from '@/utils/uid';
 
-export interface FRadioProps {
-  /**
-   * Radio v-model value
-   * @model
-   */
-  modelValue?: string | boolean | number | null;
+import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
+
+export interface FRadioProps
+  extends FFieldProps,
+    CommonFormFieldProps<boolean | string | number | null> {
   /**
    * Value of the radio
    */
   value?: string | boolean | number | null;
-  /**
-   * Label of the radio
-   */
-  label?: string;
-  /**
-   * Disable the radio usage
-   */
-  disabled?: boolean;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the radio
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Background color of the radio
-   */
-  color?: Color;
-  /**
-   * Text color of the radio
-   */
-  textColor?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
+
   /**
    * Color of the outline
    */
@@ -193,30 +153,6 @@ export interface FRadioProps {
    * Border color when radio is checked
    */
   checkedBorderColor?: Color;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
 }
 
 const props = withDefaults(defineProps<FRadioProps>(), {

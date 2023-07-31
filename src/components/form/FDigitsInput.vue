@@ -68,37 +68,19 @@ FField.FDigitsInput(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick } from 'vue';
-
 import FInput from '@/components/form/FInput.vue';
-import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes } from 'vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FDigitsInputProps {
+export interface FDigitsInputProps
+  extends FFieldProps,
+    CommonFormFieldProps<string> {
   /**
    * Number of digits
    */
   digits?: number;
-  /**
-   * Digits input value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Background color of the digits
-   */
-  color?: Color;
-  /**
-   * Color of the digits border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the digits
-   */
-  textColor?: Color;
   /**
    * Color of the digits outline
    */
@@ -115,73 +97,12 @@ export interface FDigitsInputProps {
    * Border focus color
    */
   focusBorderColor?: Color;
-  /**
-   * Label, placed on top of digit input
-   */
-  label?: string;
-  /**
-   * Disable the field
-   */
-  disabled?: boolean;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * A hint to display under the digits input
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * Digits input validation rule
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Text and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FDigitsInputProps>(), {
   digits: 4,
   errorColor: 'danger',
   errorMessage: '',
-  hint: '',
-  hintTextColor: 'neutral--dark-4',
-  hintIcon: null,
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   modelValue: undefined,
   name: '',
   rules: () => [],
@@ -225,7 +146,9 @@ const {
 });
 
 const digitRefs = ref<InstanceType<typeof FInput>[]>([]);
-const digitsValue = computed<string[]>(() => fieldValue.value.split(''));
+const digitsValue = computed<string[]>(() =>
+  (fieldValue.value ?? '').split('')
+);
 
 const hintTextColor = computed(() =>
   props.disabled

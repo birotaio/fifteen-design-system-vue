@@ -91,89 +91,19 @@ FField.FCreditCardInput(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-
-import FInput from '@/components/form/FInput.vue';
-import FField from '@/components/form/FField.vue';
-import FLoader from '@/components/FLoader.vue';
-import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
-import FIcon from '@/components/FIcon.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 import { getCardInfo } from '@/helpers/credit-cards';
 
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CreditCardInfo } from '@/helpers/credit-cards';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FCreditCardInputProps {
-  /**
-   * Credit card value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Label, placed on top of select
-   */
-  label?: string;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Validate the number on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Text, hint and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the select
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Disable interactions with the select
-   */
-  disabled?: boolean;
+export interface FCreditCardInputProps
+  extends FFieldProps,
+    CommonFormFieldProps<string> {
   /**
    * Input placeholder
    */
   placeholder?: string;
-  /**
-   * Background color of the input
-   */
-  color?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the input
-   */
-  textColor?: Color;
   /**
    * Color of the digits outline
    */
@@ -198,14 +128,6 @@ export interface FCreditCardInputProps {
    * Text color of option item
    */
   optionTextColor?: Color;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FCreditCardInputProps>(), {

@@ -38,10 +38,7 @@
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { getCssColor } from '@/utils/getCssColor';
-import FIcon from '@/components/FIcon.vue';
 
 export interface FFieldHintProps {
   /**

@@ -1,7 +1,9 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FExpandable, { FExpandableProps } from '@/components/FExpandable.vue';
+import FExpandable from '@/components/FExpandable.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FExpandableProps } from '@/components/FExpandable.vue';
 
 export default {
   title: 'Components/FExpandable',
@@ -29,20 +31,20 @@ const Template = (args: FExpandableProps) => ({
     </FExpandable>`,
 });
 
-export const Default: Story<FExpandableArgs> = Template.bind({});
+export const Default: StoryFn<FExpandableArgs> = Template.bind({});
 Default.args = {
   title,
   text,
 };
 
-export const ContentGap: Story<FExpandableArgs> = Template.bind({});
+export const ContentGap: StoryFn<FExpandableArgs> = Template.bind({});
 ContentGap.args = {
   title,
   text,
   gap: 8,
 };
 
-export const IconScale: Story<FExpandableArgs> = Template.bind({});
+export const IconScale: StoryFn<FExpandableArgs> = Template.bind({});
 IconScale.args = {
   title,
   text,
@@ -62,13 +64,13 @@ const TemplateSlots = (args: FExpandableProps) => ({
       <FButton style="margin-top: 16px">Hello</FButton>
     </FExpandable>`,
 });
-export const Slots: Story<FExpandableArgs> = TemplateSlots.bind({});
+export const Slots: StoryFn<FExpandableArgs> = TemplateSlots.bind({});
 Slots.args = {
   title,
   text,
 };
 
-export const WithHoverAnimation: Story<FExpandableArgs> = Template.bind({});
+export const WithHoverAnimation: StoryFn<FExpandableArgs> = Template.bind({});
 
 WithHoverAnimation.args = {
   title,

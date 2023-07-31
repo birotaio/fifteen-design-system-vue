@@ -1,6 +1,8 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FLink, { FLinkProps } from '@/components/FLink.vue';
+import FLink from '@/components/FLink.vue';
+
+import type { FLinkProps } from '@/components/FLink.vue';
 
 export default {
   title: 'Components/FLink',
@@ -23,27 +25,27 @@ const Template = (args: FLinkArgs) => ({
   template: '<FLink v-bind="props">{{ text }}</FLink>',
 });
 
-export const Default: Story<FLinkArgs> = Template.bind({});
+export const Default: StoryFn<FLinkArgs> = Template.bind({});
 Default.args = {
   text: 'Default',
   href: '/',
 };
 
-export const Uppercase: Story<FLinkArgs> = Template.bind({});
+export const Uppercase: StoryFn<FLinkArgs> = Template.bind({});
 Uppercase.args = {
   text: 'Uppercase',
   href: '/',
   uppercase: true,
 };
 
-export const Info: Story<FLinkArgs> = Template.bind({});
+export const Info: StoryFn<FLinkArgs> = Template.bind({});
 Info.args = {
   text: 'Info',
   color: 'info',
   href: '/',
 };
 
-export const External: Story<FLinkArgs> = Template.bind({});
+export const External: StoryFn<FLinkArgs> = Template.bind({});
 External.args = {
   text: 'External',
   color: 'warning',
@@ -51,35 +53,35 @@ External.args = {
   target: '_blank',
 };
 
-export const AnchorLink: Story<FLinkArgs> = Template.bind({});
+export const AnchorLink: StoryFn<FLinkArgs> = Template.bind({});
 AnchorLink.args = {
   text: 'AnchorLink',
   color: 'success',
   href: '#anchor',
 };
 
-export const EmailLink: Story<FLinkArgs> = Template.bind({});
+export const EmailLink: StoryFn<FLinkArgs> = Template.bind({});
 EmailLink.args = {
   text: 'EmailLink',
   color: 'info',
   href: 'mailto:?subject=test',
 };
 
-export const Disabled: Story<FLinkArgs> = Template.bind({});
+export const Disabled: StoryFn<FLinkArgs> = Template.bind({});
 Disabled.args = {
   text: 'Disabled',
   disabled: true,
   href: '/',
 };
 
-export const WithoutArrow: Story<FLinkArgs> = Template.bind({});
+export const WithoutArrow: StoryFn<FLinkArgs> = Template.bind({});
 WithoutArrow.args = {
   text: 'Without Arrow',
   hideArrow: true,
   href: '/',
 };
 
-export const ArrowHover: Story<FLinkArgs> = Template.bind({});
+export const ArrowHover: StoryFn<FLinkArgs> = Template.bind({});
 ArrowHover.parameters = {
   backgrounds: { default: 'info' },
 };
@@ -91,7 +93,7 @@ ArrowHover.args = {
   arrowHoverColor: 'secondary',
 };
 
-export const NoLinkTabindex: Story<FLinkArgs> = Template.bind({});
+export const NoLinkTabindex: StoryFn<FLinkArgs> = Template.bind({});
 NoLinkTabindex.args = {
   text: 'No link but a tabindex',
   tabindex: 0,

@@ -1,10 +1,10 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FCreditCardInput, {
-  FCreditCardInputProps,
-} from '@/components/form/FCreditCardInput.vue';
+import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FCreditCardInputProps } from '@/components/form/FCreditCardInput.vue';
 
 export default {
   title: 'Components/Form/FCreditCardInput',
@@ -17,25 +17,25 @@ const Template = (args: FCreditCardInputProps) => ({
   template: '<FCreditCardInput v-bind="args" />',
 });
 
-export const Default: Story<FCreditCardInputProps> = Template.bind({});
+export const Default: StoryFn<FCreditCardInputProps> = Template.bind({});
 Default.args = {
   errorMessage: 'The credit card format is not a valid format',
 };
 
-export const WithLabel: Story<FCreditCardInputProps> = Template.bind({});
+export const WithLabel: StoryFn<FCreditCardInputProps> = Template.bind({});
 WithLabel.args = {
   label: 'Fill your credit card numbers',
   errorMessage: 'The credit card format is not a valid format',
 };
 
-export const WithHint: Story<FCreditCardInputProps> = Template.bind({});
+export const WithHint: StoryFn<FCreditCardInputProps> = Template.bind({});
 WithHint.args = {
   hint: `All credit cards operations are crypted`,
   hintIcon: 'lock',
   errorMessage: 'The credit card format is not a valid format',
 };
 
-export const Full: Story<FCreditCardInputProps> = Template.bind({});
+export const Full: StoryFn<FCreditCardInputProps> = Template.bind({});
 Full.args = {
   label: 'Enter your credit card',
   hint: `All credit cards operations are crypted`,
@@ -43,7 +43,7 @@ Full.args = {
   errorMessage: 'The credit card format is not a valid format',
 };
 
-export const Error: Story<FCreditCardInputProps> = Template.bind({});
+export const Error: StoryFn<FCreditCardInputProps> = Template.bind({});
 Error.args = {
   label: 'Enter your credit card',
   validateOnMount: true,
@@ -51,7 +51,7 @@ Error.args = {
   rules: value => value !== '',
 };
 
-export const Disabled: Story<FCreditCardInputProps> = Template.bind({});
+export const Disabled: StoryFn<FCreditCardInputProps> = Template.bind({});
 Disabled.args = {
   label: 'Enter your credit card',
   hint: `All credit cards operations are crypted`,
@@ -74,10 +74,10 @@ const FocusTemplate = (args: FCreditCardInputProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FCreditCardInputProps> =
+export const FocusProgrammatically: StoryFn<FCreditCardInputProps> =
   FocusTemplate.bind({});
 
-export const Loading: Story<FCreditCardInputProps> = Template.bind({});
+export const Loading: StoryFn<FCreditCardInputProps> = Template.bind({});
 Loading.args = {
   label: 'Enter your credit card',
   hint: `All credit cards operations are crypted`,

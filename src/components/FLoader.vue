@@ -20,8 +20,6 @@ FLogo.FLoader(
 </style>
 
 <script setup lang="ts">
-import FLogo from '@/components/FLogo.vue';
-
 export interface FLoaderProps {
   /**
    * Color of the loader icon

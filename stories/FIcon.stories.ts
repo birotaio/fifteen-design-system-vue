@@ -1,9 +1,9 @@
-import FsIconGrid, {
-  FsIconGridProps,
-} from '@@/stories/components/FsIconGrid.vue';
-import { Story } from '@storybook/vue3';
+import FsIconGrid from '@@/stories/components/FsIconGrid.vue';
+import { StoryFn } from '@storybook/vue3';
 
 import { colorDesignTokens } from '@/constants/colors';
+
+import type { FsIconGridProps } from '@@/stories/components/FsIconGrid.vue';
 
 export default {
   title: 'Components/FIcon',
@@ -27,17 +27,17 @@ const Template = (args: FsIconGridProps) => ({
   template: '<FsIconGrid v-bind="args" />',
 });
 
-export const Default: Story<FsIconGridProps> = Template.bind({});
+export const Default: StoryFn<FsIconGridProps> = Template.bind({});
 Default.args = {
   color: 'primary',
 };
 
-export const Secondary: Story<FsIconGridProps> = Template.bind({});
+export const Secondary: StoryFn<FsIconGridProps> = Template.bind({});
 Secondary.args = {
   color: 'secondary',
 };
 
-export const Danger: Story<FsIconGridProps> = Template.bind({});
+export const Danger: StoryFn<FsIconGridProps> = Template.bind({});
 Danger.args = {
   color: 'danger',
 };

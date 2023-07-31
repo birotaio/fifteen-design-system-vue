@@ -74,9 +74,6 @@ FField.FInput(
     background var(--finput--focus-color)
     box-shadow 0 0 0 2px var(--finput--focus-border-color), 0 0 0 6px 'rgba(%s, 0.8)' % var(--finput--outline-color)
 
-    input
-      background var(--finput--focus-color)
-
   input
     width 100%
     border none
@@ -134,33 +131,16 @@ FField.FInput(
 </style>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { maska as vMaska } from 'maska';
 
-import FLoader from '@/components/FLoader.vue';
-import FField from '@/components/form/FField.vue';
-import FIcon from '@/components/FIcon.vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
+import type { CommonFormFieldProps } from '@/types/forms';
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes, Ref } from 'vue';
 import type CSS from 'csstype';
 
-export interface FInputProps {
-  /**
-   * Input value
-   * @model
-   */
-  modelValue?: string;
-  /**
-   * Label, placed on top of input
-   */
-  label?: string;
-  /**
-   * Disable the field
-   */
-  disabled?: boolean;
+export interface FInputProps extends FFieldProps, CommonFormFieldProps<string> {
   /**
    * Input placeholder
    */
@@ -176,22 +156,6 @@ export interface FInputProps {
     InputHTMLAttributes,
     'disabled' | 'placeholder' | 'type' | 'class' | 'style'
   >;
-  /**
-   * Background color of the input
-   */
-  color?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
-  /**
-   * Text color of the input
-   */
-  textColor?: Color;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
   /**
    * Color of the outline
    */
@@ -209,49 +173,9 @@ export interface FInputProps {
    */
   focusBorderColor?: Color;
   /**
-   * Text and caret error color
-   */
-  errorColor?: Color;
-  /**
    * Hide error exclamation circle icon
    */
   hideErrorIcon?: boolean;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the input
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
   /**
    * Input value alignment
    */
@@ -260,10 +184,6 @@ export interface FInputProps {
    * Restrict input value to a specific mask
    */
   mask?: string | string[];
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
   /**
    * Can clear the current value
    */

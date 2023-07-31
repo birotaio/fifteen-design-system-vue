@@ -17,8 +17,6 @@
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import FSvgImage from './FSvgImage.vue';
 
 import { genSize } from '@/utils/genSize';

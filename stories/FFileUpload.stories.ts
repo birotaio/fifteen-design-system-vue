@@ -1,8 +1,8 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FFileUpload, {
-  FFileUploadProps,
-} from '@/components/form/FFileUpload.vue';
+import FFileUpload from '@/components/form/FFileUpload.vue';
+
+import type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
 
 export default {
   title: 'Components/Form/FFileUpload',
@@ -15,27 +15,27 @@ const Template = (args: FFileUploadProps) => ({
   template: '<FFileUpload v-bind="args" />',
 });
 
-export const Default: Story<FFileUploadProps> = Template.bind({});
+export const Default: StoryFn<FFileUploadProps> = Template.bind({});
 Default.args = {
   buttonText: 'Import a file',
   errorMessage: 'Invalid file',
 };
 
-export const WithLabel: Story<FFileUploadProps> = Template.bind({});
+export const WithLabel: StoryFn<FFileUploadProps> = Template.bind({});
 WithLabel.args = {
   label: 'Your student card',
   buttonText: 'Import a file',
   errorMessage: 'Invalid file',
 };
 
-export const WithHint: Story<FFileUploadProps> = Template.bind({});
+export const WithHint: StoryFn<FFileUploadProps> = Template.bind({});
 WithHint.args = {
   hint: 'Click the button to import a file',
   buttonText: 'Import a file',
   errorMessage: 'Invalid file',
 };
 
-export const Full: Story<FFileUploadProps> = Template.bind({});
+export const Full: StoryFn<FFileUploadProps> = Template.bind({});
 Full.args = {
   label: 'Your student card',
   buttonText: 'Import a file',
@@ -43,7 +43,7 @@ Full.args = {
   errorMessage: 'Invalid file',
 };
 
-export const AllowMultiple: Story<FFileUploadProps> = Template.bind({});
+export const AllowMultiple: StoryFn<FFileUploadProps> = Template.bind({});
 AllowMultiple.args = {
   buttonText: 'Import a file',
   hint: 'Click the button to import one or many files',
@@ -51,7 +51,7 @@ AllowMultiple.args = {
   multiple: true,
 };
 
-export const WithRestrictions: Story<FFileUploadProps> = Template.bind({});
+export const WithRestrictions: StoryFn<FFileUploadProps> = Template.bind({});
 WithRestrictions.args = {
   buttonText: 'Import a file',
   hint: 'Maximum size: 5 MB, Accepted format : PDF, JPG, PNG',
@@ -60,7 +60,7 @@ WithRestrictions.args = {
   maximumSize: 5000,
 };
 
-export const Disabled: Story<FFileUploadProps> = Template.bind({});
+export const Disabled: StoryFn<FFileUploadProps> = Template.bind({});
 Disabled.args = {
   label: 'Your student card',
   buttonText: 'Import a file',
@@ -68,7 +68,7 @@ Disabled.args = {
   disabled: true,
 };
 
-export const Loading: Story<FFileUploadProps> = Template.bind({});
+export const Loading: StoryFn<FFileUploadProps> = Template.bind({});
 Loading.args = {
   label: 'Your student card',
   buttonText: 'Import a file',

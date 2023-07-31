@@ -65,24 +65,16 @@ FField.FFileUpload(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
 import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
 
-import FButton from '@/components/FButton.vue';
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-
+import type { FFieldProps } from '@/components/form/FField.vue';
 import type { Icon } from '@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
-export interface FFileUploadProps {
-  /**
-   * Input value
-   * @model
-   */
-  modelValue?: File[] | null;
+export interface FFileUploadProps
+  extends FFieldProps,
+    CommonFormFieldProps<File[] | null> {
   /**
    * Allow importing multiple files
    */
@@ -96,10 +88,6 @@ export interface FFileUploadProps {
    */
   maximumSize?: number;
   /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
    * Icon displayed inside the button
    */
   iconName?: Icon;
@@ -111,66 +99,6 @@ export interface FFileUploadProps {
    * Button text
    */
   buttonText?: string;
-  /**
-   * Button background color
-   */
-  color?: string;
-  /**
-   * Button text color
-   */
-  textColor?: string;
-  /**
-   * Label, placed on top of input
-   */
-  label?: string;
-  /**
-   * Disable the field
-   */
-  disabled?: boolean;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
-   * Text and caret error color
-   */
-  errorColor?: Color;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the input
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'input' | 'change' | 'focus' | 'blur';
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Loading state of the input
-   */
-  loading?: boolean;
 }
 
 const props = withDefaults(defineProps<FFileUploadProps>(), {
@@ -184,13 +112,7 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
   rules: () => [],
   color: 'neutral--light-3',
   textColor: 'neutral--dark-4',
-  label: '',
-  labelTextColor: 'neutral--dark-4',
   errorColor: 'danger',
-  hint: '',
-  hideHint: false,
-  hintIcon: null,
-  hintTextColor: 'neutral--dark-4',
   disabled: false,
   name: 'defaultName',
   validateOnMount: false,

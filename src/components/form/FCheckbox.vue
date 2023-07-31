@@ -140,56 +140,14 @@ FField.FCheckbox(
 </style>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import FIcon from '@/components/FIcon.vue';
-import FField from '@/components/form/FField.vue';
 import { getCssColor } from '@/utils/getCssColor';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
 
-export interface FCheckboxProps {
-  /**
-   * Checkbox v-model value
-   * @model
-   */
-  modelValue?: boolean | null;
-  /**
-   * Label of the checkbox
-   */
-  label?: string;
-  /**
-   * Disable the checkbox usage
-   */
-  disabled?: boolean;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the checkbox
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Background color of the checkbox
-   */
-  color?: Color;
-  /**
-   * Text color of the checkbox
-   */
-  textColor?: Color;
-  /**
-   * Color of the border
-   */
-  borderColor?: Color;
+import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
+
+export interface FCheckboxProps
+  extends FFieldProps,
+    CommonFormFieldProps<boolean | null> {
   /**
    * Color of the border on hover
    */
@@ -210,30 +168,6 @@ export interface FCheckboxProps {
    * Border color when checkbox is checked
    */
   checkedBorderColor?: Color;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
-  /**
-   * Field name. Used in a form context
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Whether the input should be validated on mount
-   */
-  validateOnMount?: boolean;
 }
 
 const props = withDefaults(defineProps<FCheckboxProps>(), {

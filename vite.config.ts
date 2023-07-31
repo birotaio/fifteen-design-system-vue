@@ -4,6 +4,8 @@ import { defineConfig } from 'vite';
 import Vue from '@vitejs/plugin-vue';
 import ViteSvgLoader from 'vite-svg-loader';
 import Visualizer from 'rollup-plugin-visualizer';
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
 
 export default defineConfig({
   root: '.',
@@ -22,6 +24,13 @@ export default defineConfig({
       gzipSize: true,
       brotliSize: true,
       template: 'treemap',
+    }),
+    AutoImport({
+      imports: ['vue', 'vue-router'],
+      dirs: ['./src/composables/**'],
+    }),
+    Components({
+      dirs: ['./src/components/**'],
     }),
   ],
   css: {

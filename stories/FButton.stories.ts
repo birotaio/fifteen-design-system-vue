@@ -1,9 +1,11 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FButton, { FButtonProps } from '@/components/FButton.vue';
+import FButton from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
 import { colorDesignTokens } from '@/constants/colors';
 import { getIconList } from '@/constants/icons/.utils';
+
+import type { FButtonProps } from '@/components/FButton.vue';
 
 export default {
   title: 'Components/FButton',
@@ -56,20 +58,20 @@ const Template = (args: FButtonArgs) => ({
     '<FButton v-bind="props"><FIcon v-if="iconName" :name="iconName"/><span>{{ text }}</span></FButton>',
 });
 
-export const Default: Story<FButtonArgs> = Template.bind({});
+export const Default: StoryFn<FButtonArgs> = Template.bind({});
 Default.args = {
   text: 'Click me',
   color: 'info',
   ghost: false,
 };
 
-export const Disabled: Story<FButtonArgs> = Template.bind({});
+export const Disabled: StoryFn<FButtonArgs> = Template.bind({});
 Disabled.args = {
   text: 'Click me',
   color: 'info',
   disabled: true,
 };
-export const AnyColor: Story<FButtonArgs> = Template.bind({});
+export const AnyColor: StoryFn<FButtonArgs> = Template.bind({});
 AnyColor.args = {
   text: 'Click me',
   color: '#33C5FF',
@@ -77,21 +79,21 @@ AnyColor.args = {
   hoverColor: '#AAE6FF',
 };
 
-export const Ghost: Story<FButtonArgs> = Template.bind({});
+export const Ghost: StoryFn<FButtonArgs> = Template.bind({});
 Ghost.args = {
   text: 'Ghost',
   color: 'info',
   ghost: true,
 };
 
-export const Outlined: Story<FButtonArgs> = Template.bind({});
+export const Outlined: StoryFn<FButtonArgs> = Template.bind({});
 Outlined.args = {
   text: 'Outlined',
   color: 'info',
   outlined: true,
 };
 
-export const Link: Story<FButtonArgs> = Template.bind({});
+export const Link: StoryFn<FButtonArgs> = Template.bind({});
 Link.args = {
   text: 'I am a link',
   color: 'info',
@@ -99,14 +101,14 @@ Link.args = {
   target: '_blank',
 };
 
-export const WithIcon: Story<FButtonArgs> = Template.bind({});
+export const WithIcon: StoryFn<FButtonArgs> = Template.bind({});
 WithIcon.args = {
   text: 'With Icon, go square',
   color: 'info',
   iconName: 'crossSquare',
 };
 
-export const IconOnly: Story<FButtonArgs> = Template.bind({});
+export const IconOnly: StoryFn<FButtonArgs> = Template.bind({});
 IconOnly.args = {
   color: 'info',
   icon: true,
@@ -130,7 +132,7 @@ const AllSizesTemplate = (args: FButtonArgs) => ({
 `,
 });
 
-export const Loading: Story<FButtonArgs> = AllSizesTemplate.bind({});
+export const Loading: StoryFn<FButtonArgs> = AllSizesTemplate.bind({});
 Loading.args = {
   text: 'Loading',
   color: 'secondary',

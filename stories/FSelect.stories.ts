@@ -1,9 +1,11 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FSelect, { FSelectProps } from '@/components/form/FSelect.vue';
+import FSelect from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FSelectProps } from '@/components/form/FSelect.vue';
 
 export default {
   title: 'Components/Form/FSelect',
@@ -16,7 +18,7 @@ const Template = (args: FSelectProps) => ({
   template: '<FSelect v-bind="args" />',
 });
 
-export const Default: Story<FSelectProps> = Template.bind({});
+export const Default: StoryFn<FSelectProps> = Template.bind({});
 Default.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -29,7 +31,7 @@ Default.args = {
   ],
 };
 
-export const Small: Story<FSelectProps> = Template.bind({});
+export const Small: StoryFn<FSelectProps> = Template.bind({});
 Small.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -43,7 +45,7 @@ Small.args = {
   ],
 };
 
-export const WithLabel: Story<FSelectProps> = Template.bind({});
+export const WithLabel: StoryFn<FSelectProps> = Template.bind({});
 WithLabel.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -57,7 +59,7 @@ WithLabel.args = {
   ],
 };
 
-export const WithHint: Story<FSelectProps> = Template.bind({});
+export const WithHint: StoryFn<FSelectProps> = Template.bind({});
 WithHint.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -71,7 +73,7 @@ WithHint.args = {
   hint: 'Pick a contact motivation',
 };
 
-export const Full: Story<FSelectProps> = Template.bind({});
+export const Full: StoryFn<FSelectProps> = Template.bind({});
 Full.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -86,7 +88,7 @@ Full.args = {
   hint: 'Pick a contact motivation',
 };
 
-export const Clearable: Story<FSelectProps> = Template.bind({});
+export const Clearable: StoryFn<FSelectProps> = Template.bind({});
 Clearable.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -111,7 +113,9 @@ const CustomTemplate = (args: FSelectProps) => ({
 </FSelect>`,
 });
 
-export const CustomOptionPrefix: Story<FSelectProps> = CustomTemplate.bind({});
+export const CustomOptionPrefix: StoryFn<FSelectProps> = CustomTemplate.bind(
+  {}
+);
 CustomOptionPrefix.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -125,7 +129,7 @@ CustomOptionPrefix.args = {
   hint: 'Choose a contact motivation',
 };
 
-export const Error: Story<FSelectProps> = Template.bind({});
+export const Error: StoryFn<FSelectProps> = Template.bind({});
 Error.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -150,7 +154,7 @@ Error.args = {
   ],
 };
 
-export const NoOption: Story<FSelectProps> = Template.bind({});
+export const NoOption: StoryFn<FSelectProps> = Template.bind({});
 NoOption.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -168,7 +172,7 @@ NoOption.args = {
   hint: 'Pick a contact motivation',
 };
 
-export const Disabled: Story<FSelectProps> = Template.bind({});
+export const Disabled: StoryFn<FSelectProps> = Template.bind({});
 Disabled.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -179,7 +183,7 @@ Disabled.args = {
   disabled: true,
 };
 
-export const Loading: Story<FSelectProps> = Template.bind({});
+export const Loading: StoryFn<FSelectProps> = Template.bind({});
 Loading.args = {
   color: 'secondary',
   placeholder: 'All topics',
@@ -187,7 +191,7 @@ Loading.args = {
   loading: true,
 };
 
-export const LongOptionsLabel: Story<FSelectProps> = Template.bind({});
+export const LongOptionsLabel: StoryFn<FSelectProps> = Template.bind({});
 LongOptionsLabel.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -227,7 +231,7 @@ LongOptionsLabel.args = {
   ],
 };
 
-export const ManyOptions: Story<FSelectProps> = Template.bind({});
+export const ManyOptions: StoryFn<FSelectProps> = Template.bind({});
 ManyOptions.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -245,7 +249,7 @@ ManyOptions.args = {
   })),
 };
 
-export const Unselectable: Story<FSelectProps> = Template.bind({});
+export const Unselectable: StoryFn<FSelectProps> = Template.bind({});
 Unselectable.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -264,7 +268,7 @@ Unselectable.args = {
   })),
 };
 
-export const SmallWidthMenu: Story<FSelectProps> = Template.bind({});
+export const SmallWidthMenu: StoryFn<FSelectProps> = Template.bind({});
 SmallWidthMenu.parameters = {
   backgrounds: { default: 'neutral' },
 };
@@ -298,7 +302,7 @@ const FocusTemplate = (args: FSelectProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FSelectProps> = FocusTemplate.bind(
+export const FocusProgrammatically: StoryFn<FSelectProps> = FocusTemplate.bind(
   {}
 );
 FocusProgrammatically.args = {

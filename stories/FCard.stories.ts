@@ -1,7 +1,9 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
-import FCard, { FCardProps } from '@/components/FCard.vue';
+import FCard from '@/components/FCard.vue';
 import { colorDesignTokens } from '@/constants/colors';
+
+import type { FCardProps } from '@/components/FCard.vue';
 
 export default {
   title: 'Components/FCard',
@@ -25,7 +27,7 @@ const Template = (args: FCardProps) => ({
     '<FCard v-bind="args" style="padding: 24px">{{ args.text }}</FCard>',
 });
 
-export const Default: Story<FCardArgs> = Template.bind({});
+export const Default: StoryFn<FCardArgs> = Template.bind({});
 Default.args = {
   width: '800px',
   color: 'info',

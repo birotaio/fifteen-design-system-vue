@@ -61,11 +61,8 @@
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
-import { useIcon } from '@/composables/useIcon';
 
 export interface FIconProps {
   /**

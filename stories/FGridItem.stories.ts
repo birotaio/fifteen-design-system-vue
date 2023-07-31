@@ -1,8 +1,10 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import FGrid from '@/components/FGrid.vue';
 import FCard from '@/components/FCard.vue';
-import FGridItem, { FGridItemProps } from '@/components/FGridItem.vue';
+import FGridItem from '@/components/FGridItem.vue';
+
+import type { FGridItemProps } from '@/components/FGridItem.vue';
 
 export default {
   title: 'Components/FGridItem',
@@ -35,10 +37,10 @@ const Template = (args: FGridItemProps) => ({
     `,
 });
 
-export const Default: Story<FGridItemProps> = Template.bind({});
+export const Default: StoryFn<FGridItemProps> = Template.bind({});
 Default.args = {};
 
-export const Responsive: Story<FGridItemProps> = Template.bind({});
+export const Responsive: StoryFn<FGridItemProps> = Template.bind({});
 Responsive.args = {
   span: 2,
   xxs: 12,

@@ -126,7 +126,6 @@
 </style>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
 import { useVModelProxy } from '@fifteen/shared-lib';
 import { useElementSize } from '@vueuse/core';
 

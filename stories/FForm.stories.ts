@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 
 import FsForm from './components/FsForm.vue';
 
@@ -20,7 +20,7 @@ const Template = (args: FsFormProps) => ({
   template: `<FsForm v-bind="args" />`,
 });
 
-export const Default: Story<FsFormProps> = Template.bind({});
+export const Default: StoryFn<FsFormProps> = Template.bind({});
 Default.args = {
   initialValues: {
     FInput: 'Default value',
@@ -36,7 +36,7 @@ Default.args = {
   },
 };
 
-export const Loading: Story<FsFormProps> = Template.bind({});
+export const Loading: StoryFn<FsFormProps> = Template.bind({});
 Loading.args = {
   loading: true,
   initialValues: {

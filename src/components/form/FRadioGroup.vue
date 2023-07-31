@@ -40,12 +40,8 @@ FField.FRadioGroup(
 </style>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
-
-import FField from '@/components/form/FField.vue';
-import FRadio from '@/components/form/FRadio.vue';
-import { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-import { useInputEventBindings } from '@/composables/useInputEventBindings';
+import type { FFieldProps } from '@/components/form/FField.vue';
+import type { CommonFormFieldProps } from '@/types/forms';
 
 export interface FRadioGroupOption {
   label: string;
@@ -53,72 +49,17 @@ export interface FRadioGroupOption {
   name?: string;
 }
 
-export interface FRadioGroupProps {
-  /**
-   * Selected value or values
-   * @model
-   */
-  modelValue?: string | number | null;
+export interface FRadioGroupProps
+  extends FFieldProps,
+    CommonFormFieldProps<string | number | null> {
   /**
    * Radio group options
    */
   options: FRadioGroupOption[];
   /**
-   * Label, placed on top of radio group
-   */
-  label?: string;
-  /**
-   * Text color of the label
-   */
-  labelTextColor?: Color;
-  /**
    * Display mode of the radio group
    */
   displayMode?: 'horizontal' | 'vertical';
-  /**
-   * Whether the radio group should be validated on mount
-   */
-  validateOnMount?: boolean;
-  /**
-   * Rules form validation
-   */
-  rules?: ValidationRule | ValidationRule[];
-  /**
-   * Field name
-   */
-  name?: string;
-  /**
-   * Event that triggers validation
-   */
-  validationTrigger?: 'change' | 'focus' | 'blur';
-  /**
-   * Disable interactions with the radio group
-   */
-  disabled?: boolean;
-  /**
-   * Text color of the hint
-   */
-  hintTextColor?: Color;
-  /**
-   * Hide or not the hint / error message
-   */
-  hideHint?: boolean;
-  /**
-   * A hint to display under the radio group
-   */
-  hint?: string;
-  /**
-   * Icon, displayed before the hint
-   */
-  hintIcon?: Icon | null;
-  /**
-   * Message to use as hint when validation fails
-   */
-  errorMessage?: string;
-  /**
-   * Hint error color
-   */
-  errorColor?: Color;
 }
 
 const props = withDefaults(defineProps<FRadioGroupProps>(), {
@@ -133,7 +74,6 @@ const props = withDefaults(defineProps<FRadioGroupProps>(), {
   name: '',
   rules: () => [],
   validationTrigger: 'change',
-  labelTextColor: 'neutral--dark-4',
 });
 
 const emit = defineEmits<{

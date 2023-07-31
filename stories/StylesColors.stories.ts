@@ -1,4 +1,4 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import FsColorsCssVars from '@@/stories/components/FsColorsCssVars.vue';
 import FsColorsMixins from '@@/stories/components/FsColorsMixins.vue';
 
@@ -11,11 +11,11 @@ const CssVarsTemplate = () => ({
   template: `<FsColorsCssVars />`,
 });
 
-export const CssVars: Story = CssVarsTemplate.bind({});
+export const CssVars: StoryFn = CssVarsTemplate.bind({});
 
 const MixinsTemplate = () => ({
   components: { FsColorsMixins },
   template: `<FsColorsMixins />`,
 });
 
-export const Mixins: Story = MixinsTemplate.bind({});
+export const Mixins: StoryFn = MixinsTemplate.bind({});

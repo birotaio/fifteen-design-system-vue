@@ -1,9 +1,11 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref, watch } from 'vue';
 
-import FMenu, { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
+import FMenu from '@/components/FMenu.vue';
 import FButton from '@/components/FButton.vue';
 import FLink from '@/components/FLink.vue';
+
+import type { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
 
 export default {
   title: 'Components/FMenu',
@@ -27,12 +29,12 @@ const Template = (args: FMenuProps) => ({
 </FMenu>`,
 });
 
-export const Default: Story<FMenuProps> = Template.bind({});
+export const Default: StoryFn<FMenuProps> = Template.bind({});
 Default.args = {
   options,
 };
 
-export const WithDescriptions: Story<FMenuProps> = Template.bind({});
+export const WithDescriptions: StoryFn<FMenuProps> = Template.bind({});
 WithDescriptions.args = {
   options: [
     {
@@ -49,20 +51,20 @@ WithDescriptions.args = {
   ],
 };
 
-export const Disabled: Story<FMenuProps> = Template.bind({});
+export const Disabled: StoryFn<FMenuProps> = Template.bind({});
 Disabled.args = {
   options,
   disabled: true,
 };
 
-export const Offsets: Story<FMenuProps> = Template.bind({});
+export const Offsets: StoryFn<FMenuProps> = Template.bind({});
 Offsets.args = {
   options,
   offsetSkid: 24,
   offsetDistance: 48,
 };
 
-export const OptionHeight: Story<FMenuProps> = Template.bind({});
+export const OptionHeight: StoryFn<FMenuProps> = Template.bind({});
 OptionHeight.args = {
   options,
   optionHeight: 32,
@@ -97,7 +99,9 @@ const AutoPlacementTemplate = () => ({
 `,
 });
 
-export const AutoPlacement: Story<FMenuProps> = AutoPlacementTemplate.bind({});
+export const AutoPlacement: StoryFn<FMenuProps> = AutoPlacementTemplate.bind(
+  {}
+);
 
 const ToggleTemplate = (args: FMenuProps) => ({
   components: { FMenu, FButton },
@@ -114,7 +118,7 @@ const ToggleTemplate = (args: FMenuProps) => ({
 </FMenu>`,
 });
 
-export const ToggleExternally: Story<FMenuProps> = ToggleTemplate.bind({});
+export const ToggleExternally: StoryFn<FMenuProps> = ToggleTemplate.bind({});
 ToggleExternally.args = {
   options,
 };
@@ -140,7 +144,7 @@ const OptionSlotTemplate = (args: FMenuProps) => ({
 </FMenu>`,
 });
 
-export const OptionSlot: Story<FMenuProps> = OptionSlotTemplate.bind({});
+export const OptionSlot: StoryFn<FMenuProps> = OptionSlotTemplate.bind({});
 OptionSlot.args = {
   options,
   optionHeight: 180,

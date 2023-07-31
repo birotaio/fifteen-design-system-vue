@@ -1,8 +1,10 @@
-import { Story } from '@storybook/vue3';
+import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
-import FToggle, { FToggleProps } from '@/components/form/FToggle.vue';
+import FToggle from '@/components/form/FToggle.vue';
 import FButton from '@/components/FButton.vue';
+
+import type { FToggleProps } from '@/components/form/FToggle.vue';
 
 export default {
   title: 'Components/Form/FToggle',
@@ -15,18 +17,18 @@ const Template = (args: FToggleProps) => ({
   template: '<FToggle v-bind="args" />',
 });
 
-export const Default: Story<FToggleProps> = Template.bind({});
+export const Default: StoryFn<FToggleProps> = Template.bind({});
 Default.args = {
   label: 'Check me',
 };
 
-export const Disabled: Story<FToggleProps> = Template.bind({});
+export const Disabled: StoryFn<FToggleProps> = Template.bind({});
 Disabled.args = {
   label: 'The toggle is disabled',
   disabled: true,
 };
 
-export const WithHint: Story<FToggleProps> = Template.bind({});
+export const WithHint: StoryFn<FToggleProps> = Template.bind({});
 WithHint.args = {
   label: 'Receive our monthly newsletter',
   hint: 'Toggle on if you want to receive our amazing newsletter',
@@ -43,10 +45,10 @@ const LinkTemplate = (args: FToggleProps) => ({
   </FToggle>`,
 });
 
-export const WithLinks: Story<FToggleProps> = LinkTemplate.bind({});
+export const WithLinks: StoryFn<FToggleProps> = LinkTemplate.bind({});
 WithLinks.args = {};
 
-export const Error: Story<FToggleProps> = Template.bind({});
+export const Error: StoryFn<FToggleProps> = Template.bind({});
 Error.args = {
   label: 'I agree with the privacy policy',
   errorMessage: 'Check the checkbox to dismiss the error',
@@ -69,14 +71,14 @@ const FocusTemplate = (args: FToggleProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
-export const FocusProgrammatically: Story<FToggleProps> = FocusTemplate.bind(
+export const FocusProgrammatically: StoryFn<FToggleProps> = FocusTemplate.bind(
   {}
 );
 FocusProgrammatically.args = {
   label: 'Focus me by clicking on the button',
 };
 
-export const NoCheckmarkIcon: Story<FToggleProps> = Template.bind({});
+export const NoCheckmarkIcon: StoryFn<FToggleProps> = Template.bind({});
 NoCheckmarkIcon.args = {
   label: 'I agree with the privacy policy',
   noCheckmarkIcon: true,
@@ -91,13 +93,13 @@ const ReverseTemplate = (args: FToggleProps) => ({
 </div>`,
 });
 
-export const Reverse: Story<FToggleProps> = ReverseTemplate.bind({});
+export const Reverse: StoryFn<FToggleProps> = ReverseTemplate.bind({});
 Reverse.args = {
   label: 'I agree with the privacy policy',
   reverse: true,
 };
 
-export const SmallText: Story<FToggleProps> = Template.bind({});
+export const SmallText: StoryFn<FToggleProps> = Template.bind({});
 SmallText.args = {
   label: 'I agree with the privacy policy',
   smallText: true,

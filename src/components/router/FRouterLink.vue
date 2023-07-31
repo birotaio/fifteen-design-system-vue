@@ -25,7 +25,7 @@ template(v-else)
 </template>
 
 <script setup lang="ts">
-import type { RouterLink, RouteLocationRaw } from 'vue-router';
+import type { RouteLocationRaw } from 'vue-router';
 
 export interface FRouterLinkProps {
   /**

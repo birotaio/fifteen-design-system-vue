@@ -175,7 +175,7 @@ import type { CommonFormFieldProps } from '@/types/forms';
 
 export interface FPhoneInputProps
   extends FFieldProps,
-    CommonFormFieldProps<null> {
+    CommonFormFieldProps<string | null> {
   /**
    * Phone number without prefix. Value of the input field
    */
@@ -266,8 +266,7 @@ const {
 } = useFieldWithValidation<string | number>(props, {
   validateOnMount: props?.validateOnMount,
   rules: [
-    isEmptyPhone,
-    isValidPhone,
+    value => isValidPhone(value) || isEmptyPhone(value),
     ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
   ],
 });

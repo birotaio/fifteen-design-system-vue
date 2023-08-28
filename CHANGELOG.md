@@ -1,3 +1,9 @@
+## 0.19.1 (July 31, 2023)
+
+### Fixes
+
+- [FPhoneInput] Fix validation rules
+
 ## 0.19.0 (July 31, 2023)
 
 ### Fixes

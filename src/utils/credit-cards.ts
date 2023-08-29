@@ -147,7 +147,7 @@ export const cardTypes: CreditCardInfo[] = [
  * @param cardNumber - The card number to check for a match.
  * @param pattern - The pattern used for comparison.
  */
-function matchCardNumberByPattern(
+export function matchCardNumberByPattern(
   cardNumber: string,
   pattern: CreditCardPattern
 ): boolean {

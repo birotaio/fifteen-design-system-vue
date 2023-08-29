@@ -117,6 +117,7 @@ export { useSmartLink } from '@/composables/useSmartLink';
  */
 export { genSize } from '@/utils/genSize';
 export { getCssColor } from '@/utils/getCssColor';
+export { getCardInfo } from '@/utils/credit-cards';
 
 /**
  * Config constants

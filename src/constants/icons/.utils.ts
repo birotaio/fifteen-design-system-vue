@@ -1,7 +1,7 @@
 // This file is generated automatically. Do not edit manually.
 // To update it, run `yarn build:icons`.
 
-import type { CreditCardBrandId } from '@/helpers/credit-cards';
+import type { CreditCardBrandId } from '@/utils/credit-cards';
 
 const iconList = [
   'archive',

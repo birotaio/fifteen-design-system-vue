@@ -39,7 +39,7 @@ const preamble = `
 
 const utilsFileContents = [
   preamble,
-  `import type { CreditCardBrandId } from '@/helpers/credit-cards';\n`,
+  `import type { CreditCardBrandId } from '@/utils/credit-cards';\n`,
   `const iconList = ${JSON.stringify(
     icons.map(icon => icon.name)
   )} as const;\n`,

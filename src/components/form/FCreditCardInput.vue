@@ -91,10 +91,10 @@ FField.FCreditCardInput(
 </style>
 
 <script setup lang="ts">
-import { getCardInfo } from '@/helpers/credit-cards';
+import { getCardInfo } from '@/utils/credit-cards';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
-import type { CreditCardInfo } from '@/helpers/credit-cards';
+import type { CreditCardInfo } from '@/utils/credit-cards';
 import type { CommonFormFieldProps } from '@/types/forms';
 
 export interface FCreditCardInputProps

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { getCardInfo, matchCardNumberByPattern } from './credit-cards';
+import { getCardInfo, matchCardNumberByPattern, luhnCheck } from './credit-cards';
 
 describe('Credit Card Utils', () => {
   describe('matchCardNumberByPattern', () => {
@@ -30,6 +30,17 @@ describe('Credit Card Utils', () => {
 
     it('should correctly return a Mastercard card type', () => {
       expect(getCardInfo('5555555555554444')?.name).toBe('Mastercard');
+    });
+  });
+
+  describe('luhnCheck', () => {
+    it('should return true for a valid card number', () => {
+      expect(luhnCheck('4242424242424242')).toBe(true);
+      expect(luhnCheck('5555555555554444')).toBe(true);
+    });
+
+    it('should return false for an invalid card number', () => {
+      expect(luhnCheck('1234567890123456')).toBe(false);
     });
   });
 });

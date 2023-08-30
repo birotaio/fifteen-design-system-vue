@@ -186,3 +186,23 @@ export function getCardInfo(value: string): CreditCardInfo | null {
   // If multiple cards match the current value, show the most commonly used credit card
   return matchedCardTypes[0] ?? null;
 }
+
+/**
+ * Checks if a card number is valid using the Luhn algorithm.
+ * @param cardNumber - The card number to check.
+ */
+export function luhnCheck(cardNumber: string): boolean {
+  const cardNumbers = cardNumber
+    .split('')
+    .reverse()
+    .map(x => parseInt(x));
+  const lastDigit = cardNumbers.shift() ?? 0;
+
+  const sum =
+    cardNumbers.reduce(
+      (acc, val, i) =>
+        i % 2 !== 0 ? acc + val : acc + ((val *= 2) > 9 ? val - 9 : val),
+      0
+    ) + lastDigit;
+  return sum % 10 === 0;
+}

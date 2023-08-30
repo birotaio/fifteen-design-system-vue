@@ -91,7 +91,7 @@ FField.FCreditCardInput(
 </style>
 
 <script setup lang="ts">
-import { getCardInfo } from '@/utils/credit-cards';
+import { getCardInfo, luhnCheck } from '@/utils/credit-cards';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CreditCardInfo } from '@/utils/credit-cards';
@@ -182,22 +182,6 @@ const { handleBlur, handleChange, handleFocus, handleInput } =
 const classes = computed(() => ({
   'FCreditCardInput--disabled': props.disabled,
 }));
-
-function luhnCheck(cardNumber: string): boolean {
-  const cardNumbers = cardNumber
-    .split('')
-    .reverse()
-    .map(x => parseInt(x));
-  const lastDigit = cardNumbers.shift() ?? 0;
-
-  const sum =
-    cardNumbers.reduce(
-      (acc, val, i) =>
-        i % 2 !== 0 ? acc + val : acc + ((val *= 2) > 9 ? val - 9 : val),
-      0
-    ) + lastDigit;
-  return sum % 10 === 0;
-}
 
 const defaultMask = '#### #### #### ####';
 const creditCard = ref<CreditCardInfo | null>(null);

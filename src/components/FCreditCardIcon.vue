@@ -21,7 +21,7 @@ import FSvgImage from './FSvgImage.vue';
 
 import { genSize } from '@/utils/genSize';
 
-import type { CreditCardBrandId } from '@/helpers/credit-cards';
+import type { CreditCardBrandId } from '@/utils/credit-cards';
 
 export interface FCreditCardIconProps {
   /**

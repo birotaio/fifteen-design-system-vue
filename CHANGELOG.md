@@ -1,3 +1,9 @@
+## 0.19.2 (August 31, 2023)
+
+### Changes
+
+- [getCardInfo] Export `getCardInfo` helper, add tests
+
 ## 0.19.1 (July 31, 2023)
 
 ### Fixes

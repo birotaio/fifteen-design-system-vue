@@ -3,30 +3,17 @@
 <template lang="pug">
 .FIcon
   .FIcon__content(
-    v-if="markup"
+    v-if="resolvedMarkup"
     role="img"
     :aria-label="altText"
     :style="style"
-    v-html="markup"
+    v-html="resolvedMarkup"
   )
   .FIcon__content(
-    v-else
+    v-else-if="src"
     :style="style"
   )
-    svg(
-      v-if="iconName"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      role="img"
-      :aria-label="altText"
-    )
-      path(
-        v-for="(path, index) in iconPaths"
-        :key="index"
-        v-bind="path"
-      )
     img(
-      v-else-if="src"
       :src="src"
       :alt="altText"
     )

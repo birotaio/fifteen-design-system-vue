@@ -50,8 +50,7 @@
     },
     "./styles/*.styl": "./dist/styles/*.styl",
     "./style.css": "./dist/style.css",
-    "./theme.css": "./dist/theme.css",
-    "./icons/*.svg": "./icons/*.svg"
+    "./theme.css": "./dist/theme.css"
   },
   "scripts": {
     "dev": "yarn sb",

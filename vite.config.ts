@@ -6,6 +6,7 @@ import ViteSvgLoader from 'vite-svg-loader';
 import Visualizer from 'rollup-plugin-visualizer';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
+import dts from 'vite-plugin-dts';
 
 export default defineConfig({
   root: '.',
@@ -32,6 +33,12 @@ export default defineConfig({
     Components({
       dirs: ['./src/components/**'],
     }),
+    dts({
+      entryRoot: 'src',
+      outDir: 'dist/types',
+      cleanVueFileName: true,
+      exclude: ['stories', '**/*.test.ts'],
+    }),
   ],
   css: {
     preprocessorOptions: {
@@ -42,11 +49,11 @@ export default defineConfig({
     },
   },
   build: {
+    emptyOutDir: false,
+    target: 'esnext',
     lib: {
       formats: ['es', 'cjs'],
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'fifteen-design-system-vue',
-      fileName: format => `${format}/lib/index.js`,
     },
     rollupOptions: {
       // externalize deps that shouldn't be bundled into the library
@@ -59,6 +66,22 @@ export default defineConfig({
           ? []
           : ['vee-validate', '@vee-validate/rules']),
       ],
+      input: [
+        path.resolve(__dirname, 'src/index.ts'),
+        path.resolve(__dirname, 'src/icons.ts'),
+        path.resolve(__dirname, 'src/rules/index.ts'),
+        path.resolve(__dirname, 'src/resolvers/index.ts'),
+        path.resolve(__dirname, 'src/components/router/index.ts'),
+      ],
+      output: {
+        preserveModules: true,
+        entryFileNames: ({ name }) => {
+          return `[format]/${name
+            .replace(/^src\//, '')
+            .replace(/\.(vue|svg)$/, '')
+            .replace(/^node_modules/, 'third-party')}.js`;
+        },
+      },
     },
   },
 });

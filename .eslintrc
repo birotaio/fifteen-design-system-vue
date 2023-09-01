@@ -15,7 +15,7 @@
     "plugin:vuejs-accessibility/recommended"
   ],
 
-  "ignorePatterns": ["auto-imports.d.ts", "components.d.ts", "dist"],
+  "ignorePatterns": ["auto-imports.d.ts", "components.d.ts", "dist", "scripts"],
   "overrides": [
     {
       "files": ["stories/**"],

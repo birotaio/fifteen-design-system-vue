@@ -40,6 +40,48 @@ import '@fifteen/design-system-vue/theme.css';
 
 Alternatively, if you want to customize the theme, you can look for all the CSS variables that are exposed in `@fifteen/design-system-vue/theme.css` and declare yours.
 
+### Icons
+
+If you want to use any component that relies on icons (`FIcon`, `FFlagIcon` or `FCreditCardIcon`), you must instanciate and use the FDS plugin in your app, and import and register the icons you need. Thus you will benefit from **tree-shaking** !
+
+```ts
+// main.ts
+import { createApp } from 'vue';
+import { createFds } from '@fifteen/design-system-vue';
+
+import { /* icon names */ } from '@fifteen/design-system-vue/icons';
+import { /* flag icons names */ } from '@fifteen/design-system-vue/flag-icons';
+import { /* credit card icons names */ } from '@fifteen/design-system-vue/credit-card-icons';
+
+const app = createApp({ /* Vue app config */});
+
+const fds = createFds({
+  icons: { /* icons registration */ },
+  flagIcons: { /* flags icons registration */ },
+  creditCardIcons: { /* credit card icons registration */ },
+});
+app.use(fds);
+
+```
+
+Alternately, you can import all the icons directly in your app and register them, but this it not the recommended way as you cannot benefit from tree-shaking;
+
+```ts
+import * as icons from '@fifteen/design-system-vue/icons';
+import * as flagIcons from '@fifteen/design-system-vue/flag-icons';
+import * as creditCardIcons from '@fifteen/design-system-vue/credit-card-icons';
+
+const fds = createFds({
+  icons,
+  flagIcons,
+  creditCardIcons,
+});
+app.use(fds);
+
+```
+
+You can also import and use the svg markup direcly in an other context.
+
 ### Auto imports with Vite
 
 The lib ships two resolvers for auto-importing the components, and the composables and utils with Vite. They are based on [unplugin-auto-import](https://www.npmjs.com/package/unplugin-auto-import) and [unplugin-vue-components](https://www.npmjs.com/package/unplugin-vue-components), and can be used with the vite plugins exposed by these packages:

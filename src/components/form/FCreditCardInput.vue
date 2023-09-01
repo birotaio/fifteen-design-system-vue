@@ -70,6 +70,7 @@ FField.FCreditCardInput(
 
 .FCreditCardInput__suffix
   position relative
+  height 100%
 
   .FCreditCardIcon
     transition transform 0.3s ease

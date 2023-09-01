@@ -34,7 +34,7 @@ FSelect.FLocaleSelect(
 </style>
 
 <script setup lang="ts">
-import { getFlagIconList } from '@/constants/icons/.utils';
+import { getFlagIconList } from '@/.generated/utils';
 
 import type { FSelectSize } from '@/components/form/FSelect.vue';
 import type { FFieldProps } from './FField.vue';

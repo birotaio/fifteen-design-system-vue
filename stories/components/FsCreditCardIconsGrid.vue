@@ -17,7 +17,7 @@ $border = lightgay
 .FsCreditCardIconGrid
   display grid
   justify-content center
-  grid-template-columns repeat(auto-fill, 3rem)
+  grid-template-columns repeat(auto-fill, 5rem)
   gap rem(32)
 
 .FsCreditCardIconGrid__item
@@ -33,7 +33,7 @@ $border = lightgay
 
 <script setup lang="ts">
 import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
-import { getCreditCardIcons } from '@/constants/icons/.utils';
+import { getCreditCardIcons } from '@/.generated/utils';
 
 export interface FsCreditCardIconGridProps {
   /**

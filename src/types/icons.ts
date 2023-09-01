@@ -1,3 +1,3 @@
-import { IconName } from '@/constants/icons/.utils';
+import { IconName } from '@/.generated/utils';
 
 export type Icon = IconName;

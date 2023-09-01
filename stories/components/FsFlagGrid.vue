@@ -33,7 +33,7 @@ $border = lightgay
 
 <script setup lang="ts">
 import FFlagIcon from '@/components/FFlagIcon.vue';
-import { getFlagIconList } from '@/constants/icons/.utils';
+import { getFlagIconList } from '@/.generated/utils';
 
 export interface FsFlagGridProps {
   /**

@@ -36,10 +36,8 @@ $border = lightgay
 </style>
 
 <script setup lang="ts">
-import { withDefaults } from 'vue';
-
 import FIcon from '@/components/FIcon.vue';
-import { getIconList } from '@/constants/icons/.utils';
+import { getIconList } from '@/.generated/utils';
 
 export interface FsIconGridProps {
   /**

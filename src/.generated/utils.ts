@@ -3,6 +3,8 @@
 
 import type { CreditCardBrandId } from '@/utils/credit-cards';
 
+import type { CountryCode, FlagCode } from '@/types/flags';
+import type { Icon } from '@/types/icons';
 const iconList = [
   'archive',
   'archway',
@@ -202,6 +204,7 @@ const iconList = [
 export type IconName = typeof iconList[number];
 export const getIconList = (): IconName[] =>
   iconList.map(name => name as IconName);
+
 const flagIconList = [
   'AC',
   'AD',
@@ -461,8 +464,8 @@ export const getFlagIconList = (): FlagCode[] =>
   flagIconList.map(name => name as FlagCode);
 
 const creditCardIconList: CreditCardBrandId[] = [
-  'american-express',
-  'diners-club',
+  'americanExpress',
+  'dinersClub',
   'discover',
   'jcb',
   'mastercard',

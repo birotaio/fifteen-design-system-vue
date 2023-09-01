@@ -1,9 +1,13 @@
+import { createRouter, createWebHistory } from 'vue-router';
+
 import '@/styles/elements.styl';
 import '@/styles/theme.styl';
 import { setup } from '@storybook/vue3';
-import type { App } from 'vue';
 
-import { createRouter, createWebHistory } from 'vue-router';
+import { createFds } from '../src/fds';
+import { icons, flagIcons, creditCardIcons } from '../src/icons';
+
+import type { App } from 'vue';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -61,6 +65,13 @@ const vueRouter = createRouter({
   ],
 });
 
+const fds = createFds({
+  icons,
+  flagIcons,
+  creditCardIcons,
+});
+
 setup((app: App) => {
   app.use(vueRouter);
+  app.use(fds);
 });

@@ -105,12 +105,6 @@ const altText = computed(() => {
   return props.alt || props.name || '';
 });
 
-// computed icon name to watch changes on props name
-const iconName = computed<Icon | null>(() => {
-  return props.name;
-});
-const { iconPaths } = useIcon(iconName);
-
 const style = computed(
   (): Style => ({
     '--ficon--size': genSize(props.size),
@@ -119,4 +113,8 @@ const style = computed(
     '--ficon--stroke-width': genSize(props.strokeWidth),
   })
 );
+
+const name = toRef(props, 'name');
+const { markup } = useIcon('icons', name);
+const resolvedMarkup = computed(() => props.markup || markup.value);
 </script>

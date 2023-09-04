@@ -114,7 +114,9 @@ const style = computed(
   })
 );
 
-const name = toRef(props, 'name');
-const { markup } = useIcon('icons', name);
+const { markup } = useIcon(
+  'icons',
+  toRef(() => props.name)
+);
 const resolvedMarkup = computed(() => props.markup || markup.value);
 </script>

@@ -79,7 +79,9 @@ export default defineConfig({
           return `[format]/${name
             .replace(/^src\//, '')
             .replace(/\.(vue|svg)$/, '')
-            .replace(/^node_modules/, 'third-party')}.js`;
+            // We need to rename the node_modules sub-folder so that
+            // its content is copied when installing the package from npm
+            .replace(/^node_modules/, 'vendor')}.js`;
         },
       },
     },

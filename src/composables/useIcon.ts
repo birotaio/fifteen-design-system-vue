@@ -54,7 +54,7 @@ export function useIcon<C extends IconCollectionName>(
             unref(iconName) as string
           }" was not found for collection "${Symbol.keyFor(
             injectionKey as symbol
-          )}". For tree-shaking purpose, you must import and declare it in \`createFds\` options in your app entrypoint.'`
+          )}". Icons are not longer registered by default. You must import and declare them by using the \`createFds\` function in your app entry point.'`
         );
       }
     },

@@ -151,5 +151,5 @@ export type { FlagCode, CountryCode } from '@/types/flags';
 /**
  * FDS instance
  */
-export { createFds } from '@/fds';
-export type { FdsOptions } from '@/fds';
+export { createFds } from '@/createFds';
+export type { FdsOptions } from '@/createFds';

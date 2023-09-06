@@ -1,12 +1,12 @@
 <template lang="pug">
 .FCreditCardIcon(:style="style")
   FSvgImage(
-    :markup="creditCardFiles[currentCreditCardPath]"
-    fill-color="none"
-    use-svg-colors
+    :markup="markup"
     :alt="cardType ?? ''"
-    height="100%"
     :width="size"
+    fill-color="none"
+    height="100%"
+    use-svg-colors
   )
 </template>
 
@@ -39,24 +39,11 @@ const props = withDefaults(defineProps<FCreditCardIconProps>(), {
   size: 24,
 });
 
-const creditCardFiles: Record<string, string> = import.meta.globEager(
-  '@@/icons/credit-cards/*.svg',
-  {
-    as: 'raw',
-  }
-);
-const creditCardPaths = Object.keys(creditCardFiles);
-
-const currentCreditCardPath = computed(
-  () =>
-    creditCardPaths.find(path =>
-      new RegExp(`/${props.cardType}.svg`).test(path)
-    ) ?? ''
-);
-
 const style = computed(
   (): Style => ({
     '--FCreditCardIcon--size': genSize(props.size),
   })
 );
+
+const { markup } = useIcon('creditCards', toRef(props, 'cardType'));
 </script>

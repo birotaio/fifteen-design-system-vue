@@ -1,7 +1,7 @@
 <template lang="pug">
 .FFlagIcon
   FSvgImage(
-    :markup="flagFiles[currentFlagPath]"
+    :markup="markup"
     fill-color="none"
     use-svg-colors
     :alt="countryCode"
@@ -41,20 +41,6 @@ const props = withDefaults(defineProps<FFlagIconProps>(), {
   size: 24,
 });
 
-// TODO: dynamic import to reduce bundle size
-const flagFiles: Record<string, string> = import.meta.glob(
-  '@@/icons/country-flags/*.svg',
-  {
-    as: 'raw',
-    eager: true,
-  }
-);
-const flagPaths = Object.keys(flagFiles);
-
-const currentFlagPath = computed(
-  () =>
-    flagPaths.find(path =>
-      new RegExp(`/${props.countryCode ?? props.flagCode}.svg`).test(path)
-    ) ?? flagPaths[0]
-);
+const resolvedCode = computed(() => props.countryCode ?? props.flagCode);
+const { markup } = useIcon('flags', resolvedCode);
 </script>

@@ -1,3 +1,11 @@
+## 0.20.0 (September 4, 2023)
+
+### Changes
+
+- [Build] Enable code tree-shaking
+- [Build] Dramatically improve and simplify build steps
+- !BREAKING! [Core] Rework icons registration, enabling tree-shaking
+
 ## 0.19.2 (August 31, 2023)
 
 ### Changes
@@ -30,7 +38,7 @@
 
 ## 0.18.5 (July 11, 2023)
 
-### Fixes 
+### Fixes
 
 - [FRadio] Add an UID to radio to make the label clickable
 - [forms] Prevent some initial values to be ignored

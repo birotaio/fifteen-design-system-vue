@@ -39,7 +39,7 @@ const components = [
   'FRadio',
   'FFileUpload',
   'FAutocomplete',
-  'FToggle'
+  'FToggle',
 ];
 
 const routerComponents = ['FRouterLink', 'FButtonLink'];

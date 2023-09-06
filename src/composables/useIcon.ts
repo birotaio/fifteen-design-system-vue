@@ -1,27 +1,64 @@
-import { computed, unref } from 'vue';
+import type { Ref, ComputedRef, InjectionKey } from 'vue';
+import type { CreditCardBrandId } from '@/utils/credit-cards';
 
-import * as icons from '@/constants/icons';
+type IconCollection<T extends Icon | FlagCode | CreditCardBrandId> = {
+  [key in T]?: string;
+};
 
-import type { Ref, ComputedRef, SVGAttributes } from 'vue';
+export type Icons = IconCollection<Icon>;
+export type FlagIcons = IconCollection<FlagCode>;
+export type CreditCardIcons = IconCollection<CreditCardBrandId>;
 
-type PickedIcon = keyof typeof import('@/constants/icons');
+export type IconCollectionName = 'icons' | 'flags' | 'creditCards';
 
-interface UseIconReturn {
+export const iconsInjectionKeys = {
+  icons: Symbol.for('icons') as InjectionKey<Icons>,
+  flags: Symbol.for('flagIcons') as InjectionKey<FlagIcons>,
+  creditCards: Symbol.for('creditCardIcons') as InjectionKey<CreditCardIcons>,
+};
+
+type IconCollectionMap = {
+  icons: Icon;
+  flags: FlagCode;
+  creditCards: CreditCardBrandId;
+};
+
+export interface UseIconReturn {
   /**
-   * Render function that defines a proper svg for the icon
+   * Icon svg markup as string
    */
-  iconPaths: ComputedRef<SVGAttributes[]>;
+  markup: ComputedRef<string | null | undefined>;
 }
 
 /**
- * Composable that takes a image path and returns a SVG component render function
+ * Get SVG makup for an icon name given an icon collection injection key
+ * @param injectionKey - Injection key of the icon collection
  * @param name - Name of the icon
  */
-export function useIcon(name: Ref<Icon | null> | Icon | null): UseIconReturn {
-  const iconPaths = computed(() => {
-    const iconName = unref(name);
-    if (!iconName) return [];
-    return icons[iconName as PickedIcon];
+export function useIcon<C extends IconCollectionName>(
+  collectionName: C,
+  iconName: Ref<IconCollectionMap[C] | null> | IconCollectionMap[C] | null
+): UseIconReturn {
+  const injectionKey = iconsInjectionKeys[collectionName];
+  const icons = inject<IconCollection<IconCollectionMap[C]>>(injectionKey);
+  const markup = computed(() => {
+    const name = unref(iconName);
+    return name ? icons?.[name] : null;
   });
-  return { iconPaths };
+  watch(
+    markup,
+    value => {
+      if (!value) {
+        console.warn(
+          `[FDS] Markup for icon "${
+            unref(iconName) as string
+          }" was not found for collection "${Symbol.keyFor(
+            injectionKey as symbol
+          )}". Icons are not longer registered by default. You must import and declare them by using the \`createFds\` function in your app entry point.'`
+        );
+      }
+    },
+    { immediate: true }
+  );
+  return { markup };
 }

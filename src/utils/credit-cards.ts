@@ -1,14 +1,14 @@
 // Adapted from https://www.npmjs.com/package/credit-card-type
-
-export declare type CreditCardBrandId =
-  | 'american-express'
-  | 'diners-club'
+export type CreditCardBrandId =
+  | 'americanExpress'
+  | 'dinersClub'
   | 'discover'
   | 'jcb'
   | 'mastercard'
   | 'unionpay'
   | 'visa';
-declare type CreditCardBrandName =
+
+type CreditCardBrandName =
   | 'American Express'
   | 'Diners Club'
   | 'Discover'
@@ -16,10 +16,12 @@ declare type CreditCardBrandName =
   | 'Mastercard'
   | 'UnionPay'
   | 'Visa';
-declare type CreditCardSecurityCodeLabel = 'CVV' | 'CVC' | 'CID' | 'CVN';
-declare type Range = [number, number];
-declare type CreditCardPattern = number | Range;
-export declare type CreditCardInfo = {
+
+type CreditCardSecurityCodeLabel = 'CVV' | 'CVC' | 'CID' | 'CVN';
+type Range = [number, number];
+type CreditCardPattern = number | Range;
+
+export type CreditCardInfo = {
   name: CreditCardBrandName;
   type: CreditCardBrandId;
   patterns: CreditCardPattern[];
@@ -59,7 +61,7 @@ export const cardTypes: CreditCardInfo[] = [
   },
   {
     name: 'American Express',
-    type: 'american-express',
+    type: 'americanExpress',
     patterns: [34, 37],
     lengths: [15],
     code: {
@@ -70,7 +72,7 @@ export const cardTypes: CreditCardInfo[] = [
   },
   {
     name: 'Diners Club',
-    type: 'diners-club',
+    type: 'dinersClub',
     patterns: [[300, 305], 36, 38, 39],
     lengths: [14, 16],
     code: {

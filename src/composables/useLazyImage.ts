@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import { useIntersectionObserver } from '@vueuse/core';
 
 import type { Ref } from 'vue';

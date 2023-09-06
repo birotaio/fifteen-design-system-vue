@@ -3,30 +3,17 @@
 <template lang="pug">
 .FIcon
   .FIcon__content(
-    v-if="markup"
+    v-if="resolvedMarkup"
     role="img"
     :aria-label="altText"
     :style="style"
-    v-html="markup"
+    v-html="resolvedMarkup"
   )
   .FIcon__content(
-    v-else
+    v-else-if="src"
     :style="style"
   )
-    svg(
-      v-if="iconName"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      role="img"
-      :aria-label="altText"
-    )
-      path(
-        v-for="(path, index) in iconPaths"
-        :key="index"
-        v-bind="path"
-      )
     img(
-      v-else-if="src"
       :src="src"
       :alt="altText"
     )
@@ -118,12 +105,6 @@ const altText = computed(() => {
   return props.alt || props.name || '';
 });
 
-// computed icon name to watch changes on props name
-const iconName = computed<Icon | null>(() => {
-  return props.name;
-});
-const { iconPaths } = useIcon(iconName);
-
 const style = computed(
   (): Style => ({
     '--ficon--size': genSize(props.size),
@@ -132,4 +113,10 @@ const style = computed(
     '--ficon--stroke-width': genSize(props.strokeWidth),
   })
 );
+
+const { markup } = useIcon(
+  'icons',
+  toRef(() => props.name)
+);
+const resolvedMarkup = computed(() => props.markup || markup.value);
 </script>

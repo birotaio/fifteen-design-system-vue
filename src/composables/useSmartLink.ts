@@ -1,6 +1,4 @@
-import { useRoute } from 'vue-router';
-import { computed, ComputedRef } from 'vue';
-
+import type { ComputedRef } from 'vue';
 import type { RouteLocationRaw } from 'vue-router';
 
 export interface UseSmartLinkBaseProps {

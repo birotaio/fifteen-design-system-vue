@@ -3,7 +3,6 @@ import type { Resolver } from 'unplugin-auto-import/types';
 const composables = [
   'useFBreakpoints',
   'useFieldWithValidation',
-  'useIcon',
   'useInputEventBindings',
   'useLazyImage',
   'useSmartLink',

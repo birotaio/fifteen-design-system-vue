@@ -117,7 +117,11 @@ export { useSmartLink } from '@/composables/useSmartLink';
  */
 export { genSize } from '@/utils/genSize';
 export { getCssColor } from '@/utils/getCssColor';
-export { getCardInfo, luhnCheck, matchCardNumberByPattern } from '@/utils/credit-cards';
+export {
+  getCardInfo,
+  luhnCheck,
+  matchCardNumberByPattern,
+} from '@/utils/credit-cards';
 
 /**
  * Config constants
@@ -143,3 +147,9 @@ export type { Span } from '@/types/grid';
 export type { Icon } from '@/types/icons';
 export type { CSSVariable, Style } from '@/types/styles';
 export type { FlagCode, CountryCode } from '@/types/flags';
+
+/**
+ * FDS instance
+ */
+export { createFds } from '@/createFds';
+export type { FdsOptions } from '@/createFds';

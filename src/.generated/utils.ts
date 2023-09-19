@@ -4,7 +4,7 @@
 import type { CreditCardBrandId } from '@/utils/credit-cards';
 
 import type { CountryCode, FlagCode } from '@/types/flags';
-import type { Icon } from '@/types/icons';
+
 const iconList = [
   'archive',
   'archway',

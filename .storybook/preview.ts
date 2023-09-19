@@ -4,7 +4,7 @@ import '@/styles/elements.styl';
 import '@/styles/theme.styl';
 import { setup } from '@storybook/vue3';
 
-import { createFds } from '../src/fds';
+import { createFds } from '../src/createFds';
 import { icons, flagIcons, creditCardIcons } from '../src/icons';
 
 import type { App } from 'vue';

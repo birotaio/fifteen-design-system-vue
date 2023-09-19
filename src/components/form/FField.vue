@@ -10,7 +10,7 @@ component.FField(
     :text-color="labelTextColor"
     :type="fieldset ? 'legend' : 'label'"
   )
-  slot 
+  slot
   FFieldHint.FField__hint(
     :text="hint"
     :hidden="hideHint"
@@ -38,6 +38,9 @@ fieldset.FField
 
 <script setup lang="ts">
 import { genSize } from '@/utils/genSize';
+
+import type { Color } from '@/types/colors';
+import type { Icon } from '@/types/icons';
 
 export interface FFieldProps {
   /**

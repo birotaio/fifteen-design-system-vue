@@ -128,6 +128,7 @@ import { getUid } from '@/utils/uid';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
+import type { Color } from '@/types/colors';
 
 export interface FRadioProps
   extends FFieldProps,

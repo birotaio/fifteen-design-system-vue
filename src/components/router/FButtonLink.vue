@@ -27,6 +27,7 @@ template(v-else)
 <script setup lang="ts">
 import type { RouteLocationRaw, NavigationFailure } from 'vue-router';
 import type { FButtonAnchorPoint, FButtonSize } from '@/components/FButton.vue';
+import type { Color } from '@/types/colors';
 
 export interface FButtonLinkProps {
   /**

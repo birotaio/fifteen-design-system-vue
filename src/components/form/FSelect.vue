@@ -174,6 +174,7 @@ import { getCssColor } from '@/utils/getCssColor';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
+import type { Color } from '@/types/colors';
 
 export type FSelectSize = 'small' | 'medium';
 

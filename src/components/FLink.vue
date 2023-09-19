@@ -116,6 +116,8 @@ component.FLink(
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { Color } from '@/types/colors';
+
 export interface FLinkProps {
   /**
    * Color of the link

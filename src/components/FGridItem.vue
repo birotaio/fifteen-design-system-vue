@@ -18,6 +18,8 @@
 </style>
 
 <script setup lang="ts">
+import type { Span } from '@/types/grid';
+
 export interface FGridItemProps {
   /**
    * The span value for xxs breakpoint and below

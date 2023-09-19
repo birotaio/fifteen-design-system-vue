@@ -1,3 +1,5 @@
+import type { Color } from '@/types/colors';
+
 export type ValidationRule = (value: unknown) => boolean;
 
 export interface CommonFormFieldProps<T = void> {

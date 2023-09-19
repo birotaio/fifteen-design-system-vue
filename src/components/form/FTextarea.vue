@@ -106,6 +106,7 @@ import type { FFieldProps } from '@/components/form/FField.vue';
 import type { TextareaHTMLAttributes } from 'vue';
 import type CSS from 'csstype';
 import type { CommonFormFieldProps } from '@/types/forms';
+import type { Color } from '@/types/colors';
 
 export interface FTextareaProps
   extends FFieldProps,

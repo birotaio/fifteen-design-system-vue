@@ -40,6 +40,9 @@
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { Color } from '@/types/colors';
+import type { Icon } from '@/types/icons';
+
 export interface FFieldHintProps {
   /**
    * Text to display as a form field hint

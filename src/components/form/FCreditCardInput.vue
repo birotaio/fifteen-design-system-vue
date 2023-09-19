@@ -97,6 +97,7 @@ import { getCardInfo, luhnCheck } from '@/utils/credit-cards';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CreditCardInfo } from '@/utils/credit-cards';
 import type { CommonFormFieldProps } from '@/types/forms';
+import type { Color } from '@/types/colors';
 
 export interface FCreditCardInputProps
   extends FFieldProps,

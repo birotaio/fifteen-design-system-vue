@@ -17,7 +17,9 @@
 </style>
 
 <script setup lang="ts">
-import FSvgImage from './FSvgImage.vue';
+import FSvgImage from '@/components/FSvgImage.vue';
+
+import type { FlagCode } from '@/types/flags';
 
 export interface FFlagIconProps {
   /**

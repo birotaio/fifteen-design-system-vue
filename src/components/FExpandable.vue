@@ -132,6 +132,8 @@ import { useElementSize } from '@vueuse/core';
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { Color } from '@/types/colors';
+
 export interface FExpandableProps {
   /**
    * Value of the component

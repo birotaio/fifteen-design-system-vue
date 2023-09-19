@@ -20,6 +20,8 @@ FLogo.FLoader(
 </style>
 
 <script setup lang="ts">
+import type { Color } from '@/types/colors';
+
 export interface FLoaderProps {
   /**
    * Color of the loader icon

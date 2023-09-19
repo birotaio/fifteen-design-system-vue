@@ -67,6 +67,7 @@ import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 
 import type CSS from 'csstype';
+import type { Color } from '@/types/colors';
 
 export interface FImageProps {
   /**

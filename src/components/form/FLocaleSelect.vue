@@ -39,6 +39,8 @@ import { getFlagIconList } from '@/.generated/utils';
 import type { FSelectSize } from '@/components/form/FSelect.vue';
 import type { FFieldProps } from './FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
+import type { Color } from '@/types/colors';
+import type { FlagCode } from '@/types/flags';
 
 export interface FLocaleSelectProps
   extends FFieldProps,

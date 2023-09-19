@@ -20,6 +20,8 @@ import { computed } from 'vue';
 
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { Color } from '@/types/colors';
+
 export interface FFieldLabelProps {
   /**
    * Label text

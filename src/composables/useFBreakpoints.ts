@@ -21,22 +21,19 @@ interface UseFBreakpointsReturn {
  */
 export function useFBreakpoints(): UseFBreakpointsReturn {
   const breakpoints = useBreakpoints(breakpointsValues);
+  const smallerRefs = {
+    xxs: breakpoints.smaller('xxs'),
+    xs: breakpoints.smaller('xs'),
+    sm: breakpoints.smaller('sm'),
+    md: breakpoints.smaller('md'),
+    lg: breakpoints.smaller('lg'),
+  };
   const isMounted = useMounted();
-  const isXxsAndDown = computed(
-    () => isMounted.value && breakpoints.smaller('xxs').value
-  );
-  const isXsAndDown = computed(
-    () => isMounted.value && breakpoints.smaller('xs').value
-  );
-  const isSmAndDown = computed(
-    () => isMounted.value && breakpoints.smaller('sm').value
-  );
-  const isMdAndDown = computed(
-    () => isMounted.value && breakpoints.smaller('md').value
-  );
-  const isLgAndDown = computed(
-    () => isMounted.value && breakpoints.smaller('lg').value
-  );
+  const isXxsAndDown = computed(() => isMounted.value && smallerRefs.xxs.value);
+  const isXsAndDown = computed(() => isMounted.value && smallerRefs.xs.value);
+  const isSmAndDown = computed(() => isMounted.value && smallerRefs.sm.value);
+  const isMdAndDown = computed(() => isMounted.value && smallerRefs.md.value);
+  const isLgAndDown = computed(() => isMounted.value && smallerRefs.lg.value);
 
   /**
    *

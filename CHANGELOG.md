@@ -1,3 +1,10 @@
+## 0.20.2 (September 20, 2023)
+
+### Fixes
+
+- [Build] Set `vue-router` as an external dependency
+- [Composables] Avoid instance context being lost in useFBreakpoints composable, causing warnings whenever used
+
 ## 0.20.1 (September 19, 2023)
 
 ### Fixes

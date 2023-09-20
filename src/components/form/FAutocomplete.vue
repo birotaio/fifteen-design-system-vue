@@ -81,6 +81,7 @@ import FMenu from '@/components/FMenu.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';
+import type { Color } from '@/types/colors';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FAutocompleteModelValue = any;

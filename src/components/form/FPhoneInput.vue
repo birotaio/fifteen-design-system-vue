@@ -169,9 +169,10 @@ import FInput from '@/components/form/FInput.vue';
 import { getCssColor } from '@/utils/getCssColor';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
-import type { CountryCode } from 'libphonenumber-js';
+import type { CountryCode } from '@/types/flags';
 import type { FMenuOption } from '@/components/FMenu.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
+import type { Color } from '@/types/colors';
 
 export interface FPhoneInputProps
   extends FFieldProps,

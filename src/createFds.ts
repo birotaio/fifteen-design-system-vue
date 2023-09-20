@@ -15,7 +15,9 @@ const defaultOptions: FdsOptions = {
   creditCardIcons: {},
 };
 
-export function createFds(options: FdsOptions = defaultOptions): Plugin<void> {
+export function createFds(
+  options: FdsOptions = defaultOptions
+): Plugin<[FdsOptions?]> {
   return {
     install(app) {
       app.provide(iconsInjectionKeys.icons, options?.icons);

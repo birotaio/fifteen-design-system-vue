@@ -28,6 +28,8 @@ svg.FLogoAnimatable(
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { Color } from '@/types/colors';
+
 export type FLogoLineNumber =
   | 1
   | 2

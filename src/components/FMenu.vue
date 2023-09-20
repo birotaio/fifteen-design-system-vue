@@ -43,7 +43,7 @@
           ref="menuOptionsRef"
         )
           //- Even though we bind @focus and @focusout events, they will not be fired in reality
-          //- because the FMenu activator prevents tabbing default behavior 
+          //- because the FMenu activator prevents tabbing default behavior
           //- in order to always stay in menu when tabbing
           .FMenu__option(
             v-for="(option, index) in options"
@@ -184,6 +184,8 @@ import {
 import { noop } from '@/utils/noop';
 import { getCssColor } from '@/utils/getCssColor';
 import { genSize } from '@/utils/genSize';
+
+import type { Color } from '@/types/colors';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type FMenuOptionValue = any;

@@ -1,3 +1,10 @@
+## 0.20.1 (September 19, 2023)
+
+### Fixes
+
+- [Storybook] Fix wrong import causing build fail
+- [TypeScript] Fix wrong resolution of global types in exported props interfaces
+
 ## 0.20.0 (September 4, 2023)
 
 ### Changes

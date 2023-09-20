@@ -73,6 +73,7 @@ import FInput from '@/components/form/FInput.vue';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes } from 'vue';
 import type { CommonFormFieldProps } from '@/types/forms';
+import type { Color } from '@/types/colors';
 
 export interface FDigitsInputProps
   extends FFieldProps,

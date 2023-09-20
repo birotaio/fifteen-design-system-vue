@@ -7,6 +7,7 @@ const components = [
   'FButton',
   'FCard',
   'FCheckbox',
+  'FCreditCardIcon',
   'FCreditCardInput',
   'FDigitsInput',
   'FDivider',

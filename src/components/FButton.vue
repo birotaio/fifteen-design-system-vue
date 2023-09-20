@@ -331,6 +331,8 @@ import FLink from '@/components/FLink.vue';
 import { colorDesignTokens } from '@/constants/colors';
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { ColorDesignToken, Color } from '@/types/colors';
+
 export type FButtonAnchorPoint = 'left' | 'right' | 'center';
 export type FButtonSize = 'tiny' | 'small' | 'medium' | 'large' | 'giant';
 

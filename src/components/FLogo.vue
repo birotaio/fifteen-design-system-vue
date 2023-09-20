@@ -37,6 +37,7 @@ import logoImageOnly from '@/assets/logos/fifteen_image-only.svg?component';
 import logoHalfImageOnly from '@/assets/logos/fifteen_half-image-only.svg?component';
 
 import type { FunctionalComponent, SVGAttributes } from 'vue';
+import type { Color } from '@/types/colors';
 
 export type FLogoVariant =
   | 'horizontal'

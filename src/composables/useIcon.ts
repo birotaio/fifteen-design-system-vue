@@ -1,5 +1,7 @@
 import type { Ref, ComputedRef, InjectionKey } from 'vue';
 import type { CreditCardBrandId } from '@/utils/credit-cards';
+import type { Icon } from '@/types/icons';
+import type { FlagCode } from '@/types/flags';
 
 type IconCollection<T extends Icon | FlagCode | CreditCardBrandId> = {
   [key in T]?: string;

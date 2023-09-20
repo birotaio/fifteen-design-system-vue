@@ -35,6 +35,8 @@ $border = lightgay
 import FFlagIcon from '@/components/FFlagIcon.vue';
 import { getFlagIconList } from '@/.generated/utils';
 
+import type { Color } from '@/types/colors';
+
 export interface FsFlagGridProps {
   /**
    * Size of each flag

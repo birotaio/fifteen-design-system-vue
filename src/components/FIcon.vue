@@ -51,6 +51,9 @@
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { Color } from '@/types/colors';
+import type { Icon } from '@/types/icons';
+
 export interface FIconProps {
   /**
    * Name of the icon

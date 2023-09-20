@@ -138,6 +138,7 @@ import { getCssColor } from '@/utils/getCssColor';
 import type { CommonFormFieldProps } from '@/types/forms';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes, Ref } from 'vue';
+import type { Color } from '@/types/colors';
 import type CSS from 'csstype';
 
 export interface FInputProps extends FFieldProps, CommonFormFieldProps<string> {

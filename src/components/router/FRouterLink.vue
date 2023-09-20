@@ -26,6 +26,7 @@ template(v-else)
 
 <script setup lang="ts">
 import type { RouteLocationRaw } from 'vue-router';
+import type { Color } from '@/types/colors';
 
 export interface FRouterLinkProps {
   /**

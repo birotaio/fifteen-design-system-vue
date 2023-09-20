@@ -33,6 +33,8 @@
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { Color } from '@/types/colors';
+
 export interface FSkeletonProps {
   /**
    * Default background color of the skeleton

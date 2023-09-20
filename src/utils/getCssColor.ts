@@ -2,6 +2,8 @@ import { unref, Ref } from 'vue';
 
 import { colorDesignTokens } from '@/constants/colors';
 
+import type { Color } from '@/types/colors';
+
 const designSystemColorRegex = new RegExp(
   `^(${colorDesignTokens.join('|')})(--rgb)?$`
 );

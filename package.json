@@ -62,7 +62,11 @@
     },
     "./styles/*.styl": "./dist/styles/*.styl",
     "./style.css": "./dist/style.css",
-    "./theme.css": "./dist/theme.css"
+    "./theme.css": "./dist/theme.css",
+    "./*": {
+      "import": "./dist/es/*",
+      "require": "./dist/cjs/*"
+    }
   },
   "scripts": {
     "dev": "yarn sb",

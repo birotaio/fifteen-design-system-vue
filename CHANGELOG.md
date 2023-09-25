@@ -1,3 +1,13 @@
+## 0.20.3 (September 25, 2023)
+
+### Changes
+
+- [Build] Expose dist with a wildcard (works for js files)
+
+### Fixes
+
+- [Utils] Fix `luhnCheck` function
+
 ## 0.20.2 (September 20, 2023)
 
 ### Fixes

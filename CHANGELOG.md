@@ -6,7 +6,7 @@
 
 ### Fixes
 
-- [Utils] Fix `luhnCheck` function
+- [Utils] Simplify `luhnCheck` implementation
 
 ## 0.20.2 (September 20, 2023)
 

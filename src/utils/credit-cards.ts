@@ -196,9 +196,8 @@ export function getCardInfo(value: string): CreditCardInfo | null {
 export function luhnCheck(cardNumber: string): boolean {
   const cardNumbers = cardNumber
     .split('')
-    .reverse()
     .map(x => parseInt(x));
-  const lastDigit = cardNumbers.shift() ?? 0;
+  const lastDigit = cardNumbers.pop() ?? 0;
 
   const sum =
     cardNumbers.reduce(

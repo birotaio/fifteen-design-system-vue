@@ -15,7 +15,7 @@ jobs:
       - name: Node setup 📦
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18.17.1
 
       - name: Authenticate for private NPM packages 🔑
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc

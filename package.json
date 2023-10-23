@@ -1,7 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
   "version": "0.20.3",
-  "private": false,
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
     "type": "git",
@@ -154,5 +153,9 @@
     "vue": "^3.3.4",
     "vue-router": "^4.1.6",
     "xss": "^1.0.14"
-  }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@3.6.3"
 }

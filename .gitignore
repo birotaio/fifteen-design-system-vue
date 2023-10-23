@@ -11,3 +11,4 @@ dist
 resolvers/dist
 report
 storybook-static/
+.yarn

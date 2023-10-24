@@ -70,6 +70,7 @@
   "scripts": {
     "dev": "yarn sb",
     "sb": "storybook dev -p 3003",
+    "build-storybook": "storybook build",
     "dev:build": "DEV_BUILD=1 yarn build",
     "build:clean": "rimraf dist/*",
     "build:sb": "zx scripts/build-sb.mjs",

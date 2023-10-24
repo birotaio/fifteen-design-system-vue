@@ -1,3 +1,9 @@
+## 0.21.0 (October 23, 2023)
+
+### Features
+
+- [Icons] Add X icon
+
 ## 0.20.3 (September 25, 2023)
 
 ### Changes

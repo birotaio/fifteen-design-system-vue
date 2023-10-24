@@ -1,8 +1,11 @@
-## 0.21.1 (October 23, 2023)
+## 0.21.2 (October 24, 2023)
 
 ### Fixes
 
-- [Build] Fix build
+- [Icons] Add padding to X icon
+
+## 0.21.1 (October 23, 2023)
+
 
 ## 0.21.0 (October 23, 2023)
 

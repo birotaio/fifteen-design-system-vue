@@ -77,7 +77,6 @@
     "build:lib": "vite build",
     "build:theme": "zx scripts/build-theme.mjs && mkdir -p dist/assets/fonts && cp src/assets/fonts/* dist/assets/fonts && mkdir -p dist/styles && cp -r src/styles/* dist/styles",
     "build:icons": "zx scripts/build-icons.mjs",
-    "build:end": "rimraf dist/es/lib/components/**/*2.js && rimraf dist/cjs/lib/components/**/*2.js",
     "build": "zx scripts/build.mjs",
     "lint-staged": "lint-staged",
     "lint": "eslint --ext .ts,.vue .",

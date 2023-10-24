@@ -1,3 +1,9 @@
+## 0.21.1 (October 23, 2023)
+
+### Fixes
+
+- [Build] Fix build
+
 ## 0.21.0 (October 23, 2023)
 
 ### Features

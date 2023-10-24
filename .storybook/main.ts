@@ -1,16 +1,13 @@
 import path from 'path';
-import ViteSvgLoader from 'vite-svg-loader';
-import AutoImport from 'unplugin-auto-import/vite';
-
-import Components from 'unplugin-vue-components/vite';
 import { UserConfig, loadConfigFromFile, mergeConfig } from 'vite';
 
-module.exports = {
+export default {
   stories: ['../stories/**/*.stories.ts'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: {
     name: '@storybook/vue3-vite',
   },
+
   async viteFinal(baseConfig) {
     const { config: userConfig } = (await loadConfigFromFile(
       { command: 'serve', mode: 'production' },

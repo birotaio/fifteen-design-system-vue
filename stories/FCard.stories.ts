@@ -13,6 +13,18 @@ export default {
       type: 'select',
       options: colorDesignTokens,
     },
+    hoverColor: {
+      type: 'select',
+      options: colorDesignTokens,
+    },
+    textColor: {
+      type: 'select',
+      options: colorDesignTokens,
+    },
+    hoverTextColor: {
+      type: 'select',
+      options: colorDesignTokens,
+    },
   },
 };
 
@@ -31,5 +43,8 @@ export const Default: StoryFn<FCardArgs> = Template.bind({});
 Default.args = {
   width: '800px',
   color: 'info',
+  hoverColor: 'info',
   text: `“Choisir Fifteen, c’est choisir la fiabilité, la sécurité et la technologie. Pour nous c’était un choix facile.”`,
+  textColor: 'neutral--light-5',
+  hoverTextColor: 'neutral--light-5',
 };

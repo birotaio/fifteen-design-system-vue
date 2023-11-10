@@ -1,5 +1,8 @@
 <template lang="pug">
-.FCard(:style="style")
+.FCard(
+  :style="style"
+  :class="classes"
+)
   // @slot The card content
   slot
 </template>
@@ -11,11 +14,12 @@
   width var(--fcard--width)
   border-radius rem(16px)
   background-color var(--fcard--color)
-  transition all 0.5s var(--transition--ease-out)
+  transition color 0.5s var(--transition--ease-out), background-color 1s var(--transition--ease-out)
 
-  &:hover
-    color var(--fcard--hover-text-color)
-    background-color var(--fcard--hover-color)
+  &--hoverAnimated
+    &:hover
+      color var(--fcard--hover-text-color)
+      background-color var(--fcard--hover-color)
 </style>
 
 <script setup lang="ts">
@@ -49,19 +53,25 @@ export interface FCardProps {
 
 const props = withDefaults(defineProps<FCardProps>(), {
   color: 'primary',
-  hoverColor: 'primary',
+  hoverColor: undefined,
   textColor: 'neutral--light-5',
-  hoverTextColor: 'neutral--light-5',
+  hoverTextColor: undefined,
   width: '',
 });
 
 const style = computed(
   (): Style => ({
     '--fcard--color': getCssColor(props.color),
-    '--fcard--hover-color': getCssColor(props.hoverColor),
+    '--fcard--hover-color': getCssColor(props.hoverColor ?? props.color),
     '--fcard--width': genSize(props.width),
     '--fcard--text-color': getCssColor(props.textColor),
-    '--fcard--hover-text-color': getCssColor(props.hoverTextColor),
+    '--fcard--hover-text-color': getCssColor(
+      props.hoverTextColor ?? props.textColor
+    ),
   })
 );
+
+const classes = computed(() => ({
+  'FCard--hoverAnimated': !!props.hoverColor || !!props.hoverTextColor,
+}));
 </script>

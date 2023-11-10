@@ -1,6 +1,6 @@
-## 0.21.3 (October 24, 2023)
+## 0.22.0 (November 10, 2023)
 
-### Changes
+### Features
 
 - [FCard] Add `hoverColor` and `hoverTextColor` props
 

@@ -13,6 +13,18 @@ export default {
       type: 'select',
       options: colorDesignTokens,
     },
+    hoverColor: {
+      type: 'select',
+      options: colorDesignTokens,
+    },
+    textColor: {
+      type: 'select',
+      options: colorDesignTokens,
+    },
+    hoverTextColor: {
+      type: 'select',
+      options: colorDesignTokens,
+    },
   },
 };
 
@@ -32,4 +44,14 @@ Default.args = {
   width: '800px',
   color: 'info',
   text: `“Choisir Fifteen, c’est choisir la fiabilité, la sécurité et la technologie. Pour nous c’était un choix facile.”`,
+};
+
+export const Hover: StoryFn<FCardArgs> = Template.bind({});
+Hover.args = {
+  width: '800px',
+  color: 'info',
+  hoverColor: 'secondary',
+  text: `“Choisir Fifteen, c’est choisir la fiabilité, la sécurité et la technologie. Pour nous c’était un choix facile.”`,
+  textColor: 'neutral--light-5',
+  hoverTextColor: 'primary',
 };

@@ -51,3 +51,19 @@ Loading.args = {
     FAutocomplete: 'a',
   },
 };
+
+export const Validation: StoryFn<FsFormProps> = Template.bind({});
+Validation.args = {
+  withValidation: true,
+  initialValues: {
+    FInput: '',
+    FCheckbox: false,
+    FDigitsInput: '',
+    FPhoneInput: '',
+    FRadioGroup: '',
+    FSelect: '',
+    FLocaleSelect: '',
+    FTextarea: '',
+    FAutocomplete: '',
+  },
+};

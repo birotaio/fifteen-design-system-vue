@@ -50,7 +50,7 @@ export function useIcon<C extends IconCollectionName>(
   watch(
     markup,
     value => {
-      if (!value) {
+      if (unref(iconName) && !value) {
         console.warn(
           `[FDS] Markup for icon "${
             unref(iconName) as string

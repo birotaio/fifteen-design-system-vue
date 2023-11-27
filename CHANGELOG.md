@@ -1,3 +1,14 @@
+## 0.22.1 (November 27, 2023)
+
+### Fixes
+
+- [FPhoneInput] Make the FInput carry the label, hint, and validation logic
+- [Typing] Upgrade tsconfig and ensure components link
+- [FForm] Add story to document validation behavior
+- [Icons] Warn about missing icon only if name is not null
+- [FSelect] Remove sync watcher conflicting with form reset
+- [FLocaleSelect] Properly send name to FSelect to ensure from reset
+
 ## 0.22.0 (November 10, 2023)
 
 ### Features

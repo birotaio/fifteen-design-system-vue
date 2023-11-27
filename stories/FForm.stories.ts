@@ -1,7 +1,6 @@
-import { StoryFn } from '@storybook/vue3';
-
 import FsForm from './components/FsForm.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FsFormProps } from './components/FsForm.vue';
 
 export default {

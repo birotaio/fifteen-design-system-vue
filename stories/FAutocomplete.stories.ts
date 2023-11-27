@@ -1,10 +1,10 @@
-import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 import { required } from '@vee-validate/rules';
 
 import FAutocomplete from '@/components/form/FAutocomplete.vue';
 import FButton from '@/components/FButton.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FAutocompleteProps } from '@/components/form/FAutocomplete.vue';
 
 export default {

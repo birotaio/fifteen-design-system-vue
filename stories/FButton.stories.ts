@@ -1,10 +1,10 @@
-import { StoryFn } from '@storybook/vue3';
 
 import FButton from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
 import { colorDesignTokens } from '@/constants/colors';
 import { getIconList } from '@/.generated/utils';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FButtonProps } from '@/components/FButton.vue';
 
 export default {

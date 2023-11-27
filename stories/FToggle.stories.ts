@@ -1,9 +1,9 @@
-import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FToggle from '@/components/form/FToggle.vue';
 import FButton from '@/components/FButton.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FToggleProps } from '@/components/form/FToggle.vue';
 
 export default {
@@ -39,7 +39,7 @@ const LinkTemplate = (args: FToggleProps) => ({
   setup: () => ({ args }),
   template: `<FToggle v-bind="args">
       <template v-slot:label>
-        I have read and accept <a href="https://fifteen.eu/fr/legal" target="_blank" style="color:var(--color--primary);">terms</a> 
+        I have read and accept <a href="https://fifteen.eu/fr/legal" target="_blank" style="color:var(--color--primary);">terms</a>
         and <a href="https://fifteen.eu/fr/privacy" target="_blank" style="color:var(--color--primary);">privacy policy</a>.
       </template>
   </FToggle>`,

@@ -1,7 +1,6 @@
-import { StoryFn } from '@storybook/vue3';
-
 import FGrid from '@/components/FGrid.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FGridProps } from '@/components/FGrid.vue';
 
 export default {

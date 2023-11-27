@@ -1,8 +1,8 @@
-import { StoryFn } from '@storybook/vue3';
 
 import FDivider from '@/components/FDivider.vue';
 import { colorDesignTokens } from '@/constants/colors';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FDividerProps } from '@/components/FDivider.vue';
 
 export default {

@@ -1,10 +1,10 @@
-import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FSelect from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 import FButton from '@/components/FButton.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FSelectProps } from '@/components/form/FSelect.vue';
 
 export default {

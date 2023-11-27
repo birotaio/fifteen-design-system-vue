@@ -1,7 +1,6 @@
-import { StoryFn } from '@storybook/vue3';
-
 import FRouterLink from '@/components/router/FRouterLink.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FRouterLinkProps } from '@/components/router/FRouterLink.vue';
 
 export default {

@@ -109,6 +109,7 @@
     "@typescript-eslint/typescript-estree": "^5.26.0",
     "@vitejs/plugin-vue": "^2.3.3",
     "@volar/vue-language-plugin-pug": "^1.0.3",
+    "@vue/tsconfig": "^0.4.0",
     "babel-loader": "^8.2.5",
     "camelcase": "^6.3.0",
     "csstype": "^3.1.0",

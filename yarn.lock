@@ -2381,6 +2381,7 @@ __metadata:
     "@vee-validate/rules": ^4.10.5
     "@vitejs/plugin-vue": ^2.3.3
     "@volar/vue-language-plugin-pug": ^1.0.3
+    "@vue/tsconfig": ^0.4.0
     "@vueuse/core": ^10.2.1
     babel-loader: ^8.2.5
     camelcase: ^6.3.0
@@ -5344,6 +5345,13 @@ __metadata:
   version: 3.3.4
   resolution: "@vue/shared@npm:3.3.4"
   checksum: 12fe53ff816bfa29ea53f89212067a86512c626b8d30149ff28b36705820f6150e1fb4e4e46897ad9eddb1d1cfc02d8941053939910eed69a905f7a5509baabe
+  languageName: node
+  linkType: hard
+
+"@vue/tsconfig@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@vue/tsconfig@npm:0.4.0"
+  checksum: 1acdd0c5702e163c071fec7ba4ad7eede0a37aaf473e4afc015dad2dd200f85c638831394ca9b9c058cf9d133f4cf92f8d1c99a401f173d5bf1e40700fdcd678
   languageName: node
   linkType: hard
 

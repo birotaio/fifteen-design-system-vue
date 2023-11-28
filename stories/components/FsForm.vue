@@ -98,7 +98,10 @@ FForm.FsForm(
         :loading="loading"
         @click="submit"
       ) Submit
-      FButton(@click="() => reset()") Reset
+      FButton(
+        v-if="!loading"
+        @click="() => reset()"
+      ) Reset
 </template>
 
 <style lang="stylus">
@@ -150,5 +153,5 @@ const autocompleteOptions = [
   { label: 'Option C', value: 'c' },
 ];
 
-const rules = computed(() => props.withValidation ? [required] : []);
+const rules = computed(() => (props.withValidation ? [required] : []));
 </script>

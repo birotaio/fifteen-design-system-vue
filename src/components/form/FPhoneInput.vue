@@ -1,7 +1,8 @@
 <template lang="pug">
-.FPhoneInput(
+FField.FPhoneInput(
   :class="classes"
   :style="style"
+  v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
 )
   FMenu(
     v-model="isMenuOpen"
@@ -18,9 +19,6 @@
       FInput(
         ref="inputRef"
         v-model="phoneNumber"
-        :name="name"
-        :label="label"
-        :label-text-color="labelTextColor"
         :color="color"
         :text-color="textColor"
         :error-message="errorMessage"
@@ -29,21 +27,19 @@
         :validate-on-mount="validateOnMount"
         :validation-trigger="validationTrigger"
         :disabled="disabled"
-        :rules="resolvedRules"
+        :rules="[() => isValid]"
         :outline-color="outlineColor"
         :focus-color="focusColor"
         :border-color="borderColor"
         :focus-border-color="focusBorderColor"
         :error-color="errorColor"
-        :hide-hint="hideHint"
-        :hint="hint"
-        :hint-icon="hintIcon"
+        hide-hint
         :mask="phoneNumberMask"
         :loading="loading"
-        @focus="emit('focus', $event)"
-        @blur="emit('blur', $event)"
-        @change="emit('change', $event)"
-        @input="emit('input', $event)"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @change="handleChange"
+        @input="handleInput"
       )
         template(#prefix)
           .FPhoneInput__prefix
@@ -78,7 +74,6 @@
               @click.stop="toggleMenu"
               @blur="closeMenu"
             ) {{ phonePrefix }}
-
     template(#option-prefix="{ option }")
       FFlagIcon.FPhoneInput__optionPrefix(:flag-code="getCountryCode(option)")
 </template>
@@ -86,8 +81,6 @@
 <style lang="stylus">
 .FPhoneInput
   background none
-  display flex
-  flex-direction column
 
 .FPhoneInput__select
   display flex
@@ -178,7 +171,7 @@ import { getCssColor } from '@/utils/getCssColor';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CountryCode } from '@/types/flags';
 import type { FMenuOption } from '@/components/FMenu.vue';
-import type { ValidationRule, CommonFormFieldProps } from '@/types/forms';
+import type { CommonFormFieldProps } from '@/types/forms';
 import type { Color } from '@/types/colors';
 
 export interface FPhoneInputProps
@@ -248,7 +241,6 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:countryCode', value: CountryCode): void;
   (name: 'update:phoneNumber', value: string | null): void;
   (name: 'input', value: InputEvent): void;
   (name: 'change', value: Event): void;
@@ -267,19 +259,24 @@ const countryCode = useVModelProxy<CountryCode>({
   propName: 'countryCode',
 });
 
-const fullPhone = computed(() => {
-  const phoneValue =
-    phoneNumber.value !== '' ? phonePrefix.value + phoneNumber.value : '';
-
-  return !isEmptyPhone(phoneValue) && isValidPhone(phoneValue)
-    ? parsePhoneNumber(phoneValue).number
-    : phoneValue;
+const {
+  isValid,
+  hint,
+  validate,
+  value: rawValue,
+} = useFieldWithValidation<string | number>(props, {
+  validateOnMount: props?.validateOnMount,
+  rules: [
+    value => isValidPhone(value) || isEmptyPhone(value),
+    ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
+  ],
 });
-
-const resolvedRules = computed<ValidationRule[]>(() => [
-  (value: unknown) => isValidPhone(fullPhone.value) || isEmptyPhone(value),
-  ...(Array.isArray(props.rules) ? props.rules : [props.rules]),
-]);
+const { handleBlur, handleChange, handleFocus, handleInput } =
+  useInputEventBindings(
+    () => validate(fullPhone.value),
+    props.validationTrigger,
+    emit
+  );
 
 const classes = computed(() => ({
   'FPhoneInput--disabled': props.disabled,
@@ -304,6 +301,20 @@ const phonePrefix = computed(
   () => `+${getCountryCallingCode(countryCode.value)}`
 );
 const phoneNumber = useVModelProxy<string>({ props, propName: 'phoneNumber' });
+
+const fullPhone = computed(() => {
+  const phoneValue =
+    phoneNumber.value !== '' ? phonePrefix.value + phoneNumber.value : '';
+
+  return !isEmptyPhone(phoneValue) && isValidPhone(phoneValue)
+    ? parsePhoneNumber(phoneValue).number
+    : phoneValue;
+});
+
+// Handle value update only. Validation is performed with 'validation-trigger' event
+watch([phonePrefix, phoneNumber], () => {
+  validate(fullPhone.value, false);
+});
 
 const countries = getCountries().map((country: CountryCode) => ({
   label: country,
@@ -345,11 +356,26 @@ function isValidPhone(value: unknown): boolean {
 
 const isMenuOpen = ref(false);
 
+const hintTextColor = computed(() =>
+  props.disabled
+    ? 'neutral--dark-1'
+    : isValid.value
+    ? props.hintTextColor
+    : props.errorColor
+);
+
 function getCountryCode(option: FMenuOption): CountryCode {
   return option.value as CountryCode;
 }
 
 const inputRef = ref<InstanceType<typeof FInput>>();
+/**
+ * Force validation to sync FPhoneInput validation status with underlying FInput
+ */
+function forceValidation(): void {
+  inputRef.value?.forceValidation();
+}
+watch(isValid, forceValidation);
 
 /**
  * Focus the input
@@ -357,4 +383,23 @@ const inputRef = ref<InstanceType<typeof FInput>>();
 function focus(): void {
   inputRef.value?.ref?.focus();
 }
+
+watch(
+  rawValue,
+  newValue => {
+    // Handle initial value
+    const value = String(newValue);
+    if (!isValidPhoneNumber(value)) return;
+    const parsedNumber = parsePhoneNumber(value);
+    phoneNumber.value = parsedNumber.nationalNumber;
+    if (parsedNumber.country) countryCode.value = parsedNumber.country;
+
+    // The raw value (from useFieldWithValidation and so vee-validate) is the source of truth.
+    // So if it is different than the local fullPhone value, actually, it means that the form has been reset
+    if (newValue !== fullPhone.value) {
+      phoneNumber.value = '';
+    }
+  },
+  { immediate: true }
+);
 </script>

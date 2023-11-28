@@ -2,7 +2,8 @@
 
 ### Fixes
 
-- [FPhoneInput] Make the FInput carry the label, hint, and validation logic
+- [FPhoneInput] Properly handle form reset logic
+- [FPhoneInput] Bump `maska` to avoid sometimes buggy mask behavior
 - [Typing] Upgrade tsconfig and ensure components link
 - [FForm] Add story to document validation behavior
 - [Icons] Warn about missing icon only if name is not null

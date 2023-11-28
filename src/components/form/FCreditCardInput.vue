@@ -5,7 +5,7 @@ FField.FCreditCardInput(
 )
   FInput(
     ref="inputRef"
-    v-model="value"
+    v-model="inputValue"
     :color="color"
     :border-color="borderColor"
     :text-color="textColor"
@@ -31,7 +31,7 @@ FField.FCreditCardInput(
   )
     template(#suffix)
       .FCreditCardInput__suffix(
-        :class="{ 'FCreditCardInput__suffix--valid': isValidCreditCard(value) }"
+        :class="{ 'FCreditCardInput__suffix--valid': isValidCreditCard(inputValue) }"
       )
         FIcon(
           name="checkmark"
@@ -173,7 +173,7 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, value, validate, resetValidation } =
+const { isValid, hint, value: inputValue, validate, resetValidation } =
   useFieldWithValidation<string>(props, {
     validateOnMount: props?.validateOnMount,
     rules: [isValidCreditCard],
@@ -188,36 +188,41 @@ const classes = computed(() => ({
 const defaultMask = '#### #### #### ####';
 const creditCard = ref<CreditCardInfo | null>(null);
 
-watch(value, newValue => {
-  const spacelessValue = newValue.replace(/\s/g, '');
-  const newCreditCard = getCardInfo(spacelessValue);
+watch(
+  inputValue,
+  newValue => {
+    const spacelessValue = newValue.replace(/\s/g, '');
+    const newCreditCard = getCardInfo(spacelessValue);
 
-  let lengthExceeded = newCreditCard?.lengths.every(
-    length => spacelessValue.length > length
-  );
-  if (lengthExceeded) return;
+    let lengthExceeded = newCreditCard?.lengths.every(
+      length => spacelessValue.length > length
+    );
+    if (lengthExceeded) return;
 
-  if (
-    (newCreditCard && newCreditCard.lengths.includes(spacelessValue.length)) ||
-    (!newCreditCard &&
-      spacelessValue.length === defaultMask.split('#').length - 1)
-  ) {
-    // Manually trigger validation if :
-    // - Input value length matches one of the lengths of the matched credit card
-    // - No credit card was found but input value length reached the number of digits of default mask
-    validate(newValue);
-  } else {
-    // Else trigger field validation reset to remove eventual errors while user is interacting with input
-    resetValidation();
-  }
+    if (
+      (newCreditCard &&
+        newCreditCard.lengths.includes(spacelessValue.length)) ||
+      (!newCreditCard &&
+        spacelessValue.length === defaultMask.split('#').length - 1)
+    ) {
+      // Manually trigger validation if :
+      // - Input value length matches one of the lengths of the matched credit card
+      // - No credit card was found but input value length reached the number of digits of default mask
+      validate(newValue);
+    } else {
+      // Else trigger field validation reset to remove eventual errors while user is interacting with input
+      resetValidation();
+    }
 
-  creditCard.value = newCreditCard;
-  emit('credit-card', newCreditCard);
+    creditCard.value = newCreditCard;
+    emit('credit-card', newCreditCard);
 
-  if (isValidCreditCard(newValue)) {
-    emit('complete');
-  }
-});
+    if (isValidCreditCard(newValue)) {
+      emit('complete');
+    }
+  },
+  { immediate: true }
+);
 
 /**
  * Internal validation rule, always applied

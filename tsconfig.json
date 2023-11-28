@@ -1,5 +1,7 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
+    "composite": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
@@ -19,7 +21,8 @@
       "react": ["./stubs/types__react"]
     },
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "types": ["./components.d.ts", "./auto-imports.d.ts"],
   },
   "vueCompilerOptions": {
     "plugins": ["@volar/vue-language-plugin-pug"]

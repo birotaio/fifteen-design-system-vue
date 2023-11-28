@@ -242,6 +242,7 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
 
 const emit = defineEmits<{
   (name: 'update:phoneNumber', value: string | null): void;
+  (name: 'update:countryCode', value: CountryCode): void;
   (name: 'input', value: InputEvent): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -387,18 +388,13 @@ function focus(): void {
 watch(
   rawValue,
   newValue => {
-    // Handle initial value
+    // Handle initial value or reset
     const value = String(newValue);
+    if (value === '') phoneNumber.value = '';
     if (!isValidPhoneNumber(value)) return;
     const parsedNumber = parsePhoneNumber(value);
     phoneNumber.value = parsedNumber.nationalNumber;
     if (parsedNumber.country) countryCode.value = parsedNumber.country;
-
-    // The raw value (from useFieldWithValidation and so vee-validate) is the source of truth.
-    // So if it is different than the local fullPhone value, actually, it means that the form has been reset
-    if (newValue !== fullPhone.value) {
-      phoneNumber.value = '';
-    }
   },
   { immediate: true }
 );

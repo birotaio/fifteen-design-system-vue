@@ -357,8 +357,6 @@ const iconName = computed(() =>
 
 const optionHeight = computed(() => (props.size === 'medium' ? 52 : 44));
 
-watch(fieldValue, newValue => handleChange(newValue));
-
 /**
  * Get the label of the selected option
  * @param value

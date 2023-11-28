@@ -1,7 +1,6 @@
-import { StoryFn } from '@storybook/vue3';
-
 import FsForm from './components/FsForm.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FsFormProps } from './components/FsForm.vue';
 
 export default {
@@ -27,6 +26,7 @@ Default.args = {
     FCheckbox: true,
     FDigitsInput: '1234',
     FPhoneInput: '+12345678910',
+    FCreditCardInput: '4242424242424242',
     FRadioGroup: 'b',
     FSelect: 'c',
     FLocaleSelect: 'FR',
@@ -44,10 +44,28 @@ Loading.args = {
     FCheckbox: true,
     FDigitsInput: '1234',
     FPhoneInput: '',
+    FCreditCardInput: '',
     FRadioGroup: 'b',
     FSelect: 'c',
     FLocaleSelect: 'FR',
     FTextarea: 'Default value',
     FAutocomplete: 'a',
+  },
+};
+
+export const Validation: StoryFn<FsFormProps> = Template.bind({});
+Validation.args = {
+  withValidation: true,
+  initialValues: {
+    FInput: '',
+    FCheckbox: false,
+    FDigitsInput: '',
+    FPhoneInput: '',
+    FCreditCardInput: '',
+    FRadioGroup: '',
+    FSelect: '',
+    FLocaleSelect: '',
+    FTextarea: '',
+    FAutocomplete: '',
   },
 };

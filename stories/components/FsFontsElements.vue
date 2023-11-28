@@ -16,6 +16,7 @@
     ul: li List item
     code li
   .FsFontsElements__element
+    // eslint-disable-next-line vuejs-accessibility/label-has-for
     label Label
     code label
   .FsFontsElements__element

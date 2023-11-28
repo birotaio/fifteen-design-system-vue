@@ -1,9 +1,9 @@
-import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FDigitsInput from '@/components/form/FDigitsInput.vue';
 import FButton from '@/components/FButton.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FDigitsInputProps } from '@/components/form/FDigitsInput.vue';
 
 export default {

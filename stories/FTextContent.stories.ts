@@ -1,7 +1,6 @@
-import { StoryFn } from '@storybook/vue3';
-
 import FTextContent from '@/components/FTextContent.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FTextContentProps } from '@/components/FTextContent.vue';
 
 export default {

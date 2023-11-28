@@ -1,9 +1,9 @@
-import { StoryFn } from '@storybook/vue3';
 import { ref } from 'vue';
 
 import FRadio from '@/components/form/FRadio.vue';
 import FButton from '@/components/FButton.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FRadioProps } from '@/components/form/FRadio.vue';
 import type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
 
@@ -46,12 +46,12 @@ const LinkTemplate = (args: FRadioProps) => ({
   template: `
   <FRadio v-bind="args">
     <template v-slot:label>
-      Fifteen <a href="https://fifteen.eu/fr/smart-station" target="_blank" style="color:var(--color--primary);">smart station</a> 
+      Fifteen <a href="https://fifteen.eu/fr/smart-station" target="_blank" style="color:var(--color--primary);">smart station</a>
     </template>
   </FRadio>
   <FRadio v-bind="args">
     <template v-slot:label>
-      Fifteen <a href="https://fifteen.eu/fr/electric-bike" target="_blank" style="color:var(--color--primary);">electric bikes</a> 
+      Fifteen <a href="https://fifteen.eu/fr/electric-bike" target="_blank" style="color:var(--color--primary);">electric bikes</a>
     </template>
   </FRadio>`,
 });

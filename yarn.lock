@@ -2381,6 +2381,7 @@ __metadata:
     "@vee-validate/rules": ^4.10.5
     "@vitejs/plugin-vue": ^2.3.3
     "@volar/vue-language-plugin-pug": ^1.0.3
+    "@vue/tsconfig": ^0.4.0
     "@vueuse/core": ^10.2.1
     babel-loader: ^8.2.5
     camelcase: ^6.3.0
@@ -2396,7 +2397,7 @@ __metadata:
     husky: ^8.0.1
     libphonenumber-js: ^1.10.6
     lint-staged: ^12.4.3
-    maska: ^1.5.0
+    maska: ^2.1.10
     node-html-parser: ^5.3.3
     prettier: ^2.6.2
     pug: ^3.0.2
@@ -5344,6 +5345,13 @@ __metadata:
   version: 3.3.4
   resolution: "@vue/shared@npm:3.3.4"
   checksum: 12fe53ff816bfa29ea53f89212067a86512c626b8d30149ff28b36705820f6150e1fb4e4e46897ad9eddb1d1cfc02d8941053939910eed69a905f7a5509baabe
+  languageName: node
+  linkType: hard
+
+"@vue/tsconfig@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@vue/tsconfig@npm:0.4.0"
+  checksum: 1acdd0c5702e163c071fec7ba4ad7eede0a37aaf473e4afc015dad2dd200f85c638831394ca9b9c058cf9d133f4cf92f8d1c99a401f173d5bf1e40700fdcd678
   languageName: node
   linkType: hard
 
@@ -10427,10 +10435,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"maska@npm:^1.5.0":
-  version: 1.5.2
-  resolution: "maska@npm:1.5.2"
-  checksum: e3c7d5ada403ac6a222ed520fe7ebd6bda8065e3c946c272940e1c5e0e46c325a69d4f017ba9562aa5f3a170c6a5a874fd413cd4977d2e3c562bfff6e8c7ccee
+"maska@npm:^2.1.10":
+  version: 2.1.10
+  resolution: "maska@npm:2.1.10"
+  checksum: 760d59a97d2634bba03353cb5f13bd314c4c7f39da44e1bbfb1ec3d3e8f9a2df2788c5e3fb6ccd842a3e9a20b6e2d9c239fb621190c51143164ac5c52c649632
   languageName: node
   linkType: hard
 

@@ -1,6 +1,7 @@
-import { StoryFn } from '@storybook/vue3';
 import FsFontsElements from '@@/stories/components/FsFontsElements.vue';
 import FsFontsMixins from '@@/stories/components/FsFontsMixins.vue';
+
+import type { StoryFn } from '@storybook/vue3';
 
 export default {
   title: 'Styles/Fonts',

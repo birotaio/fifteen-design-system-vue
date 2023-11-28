@@ -15,7 +15,7 @@ FField.FInput(
       ref="inputRef"
       v-bind="resolvedAttrs"
       v-model="value"
-      v-maska="mask"
+      v-maska:[maskaOptions]
       :name="name"
       :type="type"
       :placeholder="placeholder"
@@ -131,10 +131,11 @@ FField.FInput(
 </style>
 
 <script setup lang="ts">
-import { maska as vMaska } from 'maska';
+import { vMaska } from "maska"
 
 import { getCssColor } from '@/utils/getCssColor';
 
+import type { MaskOptions } from 'maska';
 import type { CommonFormFieldProps } from '@/types/forms';
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { InputHTMLAttributes, Ref } from 'vue';
@@ -250,6 +251,10 @@ const { isValid, hint, value, validate } = useFieldWithValidation<string>(
 );
 const { handleBlur, handleChange, handleInput, handleFocus } =
   useInputEventBindings(validate, props.validationTrigger, emit);
+
+const maskaOptions = computed<MaskOptions>(() => ({
+  mask: props.mask,
+}))
 
 const style = computed(
   (): Style => ({

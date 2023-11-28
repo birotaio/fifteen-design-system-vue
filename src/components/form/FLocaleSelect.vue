@@ -152,6 +152,7 @@ const emit = defineEmits<{
 
 const selectProps = {
   label: props.label,
+  name: props.name,
   color: props.color,
   textColor: props.textColor,
   focusColor: props.focusColor,

@@ -1,8 +1,8 @@
-import { StoryFn } from '@storybook/vue3';
 
 import FExpandable from '@/components/FExpandable.vue';
 import FButton from '@/components/FButton.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FExpandableProps } from '@/components/FExpandable.vue';
 
 export default {

@@ -16,6 +16,7 @@ FForm.FsForm(
         name="FDigitsInput"
         hint="Hint for FDigitsInput"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FInput(
@@ -23,6 +24,7 @@ FForm.FsForm(
         name="FInput"
         hint="Hint for FInput"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FPhoneInput(
@@ -30,6 +32,7 @@ FForm.FsForm(
         name="FPhoneInput"
         hint="Hint for FPhoneInput"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FCreditCardInput(
@@ -37,6 +40,7 @@ FForm.FsForm(
         name="FCreditCardInput"
         hint="Hint for FCreditCardInput"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FRadioGroup(
@@ -44,6 +48,7 @@ FForm.FsForm(
         name="FRadioGroup"
         hint="Hint for FRadioGroup"
         :options="radioGroupOptions"
+        :rules="rules"
       )
     FGridItem(span="12")
       FSelect(
@@ -52,6 +57,7 @@ FForm.FsForm(
         hint="Hint for FSelect"
         :options="selectOptions"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FLocaleSelect(
@@ -60,6 +66,7 @@ FForm.FsForm(
         hint="Hint for FLocaleSelect"
         :locales="['US', 'FR']"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FTextarea(
@@ -67,6 +74,7 @@ FForm.FsForm(
         name="FTextarea"
         hint="Hint for FTextarea"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FAutocomplete(
@@ -75,6 +83,7 @@ FForm.FsForm(
         hint="Hint for FAutocomplete"
         :options="autocompleteOptions"
         :loading="loading"
+        :rules="rules"
       )
     FGridItem(span="12")
       FToggle(
@@ -82,13 +91,17 @@ FForm.FsForm(
         name="FToggle"
         hint="Hint for FToggle"
         :loading="loading"
-      ) 
+        :rules="rules"
+      )
     FGridItem.FsForm__actions(span="12")
       FButton(
         :loading="loading"
         @click="submit"
       ) Submit
-      FButton(@click="() => reset()") Reset
+      FButton(
+        v-if="!loading"
+        @click="() => reset()"
+      ) Reset
 </template>
 
 <style lang="stylus">
@@ -101,6 +114,8 @@ FForm.FsForm(
 </style>
 
 <script setup lang="ts">
+import { required } from '@vee-validate/rules';
+
 import type { FFormProps } from '../../src/components/form/FForm.vue';
 
 export interface FsFormProps {
@@ -112,9 +127,13 @@ export interface FsFormProps {
    * Loading state of the form items
    */
   loading?: boolean;
+  /**
+   * With validation
+   */
+  withValidation?: boolean;
 }
 
-defineProps<FsFormProps>();
+const props = defineProps<FsFormProps>();
 
 const radioGroupOptions = [
   { label: 'Option A', value: 'a' },
@@ -133,4 +152,6 @@ const autocompleteOptions = [
   { label: 'Option B', value: 'b' },
   { label: 'Option C', value: 'c' },
 ];
+
+const rules = computed(() => (props.withValidation ? [required] : []));
 </script>

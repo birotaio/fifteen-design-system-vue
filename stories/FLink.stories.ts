@@ -1,7 +1,6 @@
-import { StoryFn } from '@storybook/vue3';
-
 import FLink from '@/components/FLink.vue';
 
+import type { StoryFn } from '@storybook/vue3';
 import type { FLinkProps } from '@/components/FLink.vue';
 
 export default {

@@ -191,7 +191,7 @@ const creditCard = ref<CreditCardInfo | null>(null);
 watch(
   inputValue,
   newValue => {
-    const spacelessValue = newValue.replace(/\s/g, '');
+    const spacelessValue = (newValue ?? '').replace(/\s/g, '');
     const newCreditCard = getCardInfo(spacelessValue);
 
     let lengthExceeded = newCreditCard?.lengths.every(

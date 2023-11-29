@@ -305,14 +305,18 @@ const {
 } = useFieldWithValidation<FSelectModelValue>(props, {
   validateOnMount: props?.validateOnMount,
 });
-const { handleFocus, handleChange } = useInputEventBindings(
+const { handleFocus } = useInputEventBindings(
   validate,
   props.validationTrigger,
   emit
 );
 
 // Any change on the field value should trigger validation
-watch(fieldValue, handleChange);
+watch(fieldValue, value => {
+  // When resetting to an empty value, we don't want to trigger validation
+  if (value === '' || value === null || value === undefined) return;
+  validate(value);
+});
 
 const preselectedOptionIndex = ref(0);
 const isMenuOpen = ref(false);

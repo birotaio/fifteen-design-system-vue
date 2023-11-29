@@ -305,7 +305,7 @@ const {
 } = useFieldWithValidation<FSelectModelValue>(props, {
   validateOnMount: props?.validateOnMount,
 });
-const { handleFocus, handleChange } = useInputEventBindings(
+const { handleFocus } = useInputEventBindings(
   validate,
   props.validationTrigger,
   emit
@@ -315,7 +315,7 @@ const { handleFocus, handleChange } = useInputEventBindings(
 watch(fieldValue, value => {
   // When resetting to an empty value, we don't want to trigger validation
   if (value === '' || value === null || value === undefined) return;
-  handleChange(value);
+  validate(value);
 });
 
 const preselectedOptionIndex = ref(0);

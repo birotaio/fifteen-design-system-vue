@@ -311,6 +311,9 @@ const { handleFocus, handleChange } = useInputEventBindings(
   emit
 );
 
+// Any change on the field value should trigger validation
+watch(fieldValue, handleChange);
+
 const preselectedOptionIndex = ref(0);
 const isMenuOpen = ref(false);
 

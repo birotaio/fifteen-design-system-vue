@@ -1,3 +1,9 @@
+## 0.22.2 (November 29, 2023)
+
+### Fixes
+
+- [FSelect] Retrigger validation when value changes
+
 ## 0.22.1 (November 27, 2023)
 
 ### Fixes

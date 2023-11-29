@@ -312,7 +312,11 @@ const { handleFocus, handleChange } = useInputEventBindings(
 );
 
 // Any change on the field value should trigger validation
-watch(fieldValue, handleChange);
+watch(fieldValue, value => {
+  // When resetting to an empty value, we don't want to trigger validation
+  if (value === '' || value === null || value === undefined) return;
+  handleChange(value);
+});
 
 const preselectedOptionIndex = ref(0);
 const isMenuOpen = ref(false);

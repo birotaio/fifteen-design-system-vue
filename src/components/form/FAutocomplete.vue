@@ -282,6 +282,8 @@ function handleChange(event: Event): void {
 }
 
 function handleInput(e: InputEvent): void {
+  if (!(e instanceof InputEvent)) return;
+
   emit('input', e, inputValue.value ?? '');
   isMenuOpen.value = true;
 }

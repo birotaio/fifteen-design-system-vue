@@ -1,3 +1,9 @@
+## 0.22.3 (January 17, 2024)
+
+### Fixes
+
+- [FAutocomplete] Prevent `input` event emit when emitted by maska 
+
 ## 0.22.2 (November 29, 2023)
 
 ### Fixes

@@ -1,7 +1,7 @@
 import { useField, validate } from 'vee-validate';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
-import type { Ref, ComputedRef } from 'vue';
+import type { Ref, ComputedRef, WritableComputedRef } from 'vue';
 import type { ValidationRule } from '@/types/forms';
 
 type BaseProps<Value> = {

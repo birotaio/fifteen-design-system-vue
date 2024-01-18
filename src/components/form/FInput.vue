@@ -258,7 +258,6 @@ const {
 
 const maskaOptions = computed<MaskOptions>(() => ({
   mask: props.mask,
-  eager: false,
 }));
 
 const style = computed(

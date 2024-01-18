@@ -131,7 +131,7 @@ FField.FInput(
 </style>
 
 <script setup lang="ts">
-import { vMaska } from "maska"
+import { vMaska } from 'maska';
 
 import { getCssColor } from '@/utils/getCssColor';
 
@@ -249,12 +249,17 @@ const { isValid, hint, value, validate } = useFieldWithValidation<string>(
     validateOnMount: props.validateOnMount,
   }
 );
-const { handleBlur, handleChange, handleInput, handleFocus } =
-  useInputEventBindings(validate, props.validationTrigger, emit);
+const {
+  handleBlur,
+  handleChange,
+  handleInput: _handleInput,
+  handleFocus,
+} = useInputEventBindings(validate, props.validationTrigger, emit);
 
 const maskaOptions = computed<MaskOptions>(() => ({
   mask: props.mask,
-}))
+  eager: false,
+}));
 
 const style = computed(
   (): Style => ({
@@ -300,6 +305,11 @@ function forceValidation(): void {
  */
 function focus(): void {
   inputRef.value?.focus();
+}
+
+function handleInput(e: Event): void {
+  if (!(e instanceof InputEvent)) return;
+  _handleInput(e);
 }
 
 // When the prop `type="number"` is given, we add a `pattern="[0-9]*` attribute

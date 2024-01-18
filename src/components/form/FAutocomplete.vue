@@ -74,7 +74,7 @@ FField.FAutocomplete(
 
 <script setup lang="ts">
 import equal from 'fast-deep-equal/es6';
-import { composeSearchRegex } from '@fifteen/shared-lib';
+import { createSearchRegexString } from '@fifteen/shared-lib';
 
 import FMenu from '@/components/FMenu.vue';
 
@@ -217,7 +217,7 @@ defineExpose<{
 const inputValue = ref<string>();
 
 const filterRegex = computed(
-  () => new RegExp(composeSearchRegex(inputValue.value), 'ig')
+  () => new RegExp(createSearchRegexString(inputValue.value), 'ig')
 );
 
 const matchingOptions = computed(() => {

@@ -22,7 +22,7 @@
     },
     "outDir": "dist",
     "declaration": true,
-    "types": ["./components.d.ts", "./auto-imports.d.ts"],
+    "types": ["./components.d.ts", "./auto-imports.d.ts"]
   },
   "vueCompilerOptions": {
     "plugins": ["@volar/vue-language-plugin-pug"]
@@ -32,6 +32,7 @@
     "./src/**/*.ts",
     "./src/**/*.d.ts",
     "./src/**/*.vue",
+    "./src/.generated/**/*",
     "auto-imports.d.ts",
     "./stories/**/*"
   ],

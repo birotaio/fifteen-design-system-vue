@@ -1,3 +1,9 @@
+## 0.23.0 (October 23, 2023)
+
+### Features
+
+- [Icons] Add `wrench` icon
+
 ## 0.22.4 (January 17, 2024)
 
 ### Fixes

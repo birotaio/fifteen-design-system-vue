@@ -192,6 +192,7 @@ const iconList = [
   'wallet',
   'webdesign',
   'wifi',
+  'wrench',
   'x',
   'youtube',
   'zoneForbidden',

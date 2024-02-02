@@ -30,6 +30,7 @@ export { default as FFlagIcon } from '@/components/FFlagIcon.vue';
 export { default as FCreditCardIcon } from '@/components/FCreditCardIcon.vue';
 export { default as FMenu } from '@/components/FMenu.vue';
 export { default as FTextContent } from '@/components/FTextContent.vue';
+export { default as FPopup } from '@/components/FPopup.vue';
 /**
  * Form components
  */
@@ -101,6 +102,7 @@ export type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
 export type { FAutocompleteProps } from '@/components/form/FAutocomplete.vue';
 export type { FToggleProps } from '@/components/form/FToggle.vue';
 export type { FTextContentProps } from '@/components/FTextContent.vue';
+export type { FPopupProps } from '@/components/FPopup.vue';
 
 /**
  * Composables

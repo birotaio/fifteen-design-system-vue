@@ -41,6 +41,7 @@ const components = [
   'FFileUpload',
   'FAutocomplete',
   'FToggle',
+  'FPopup',
 ];
 
 const routerComponents = ['FRouterLink', 'FButtonLink'];

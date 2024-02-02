@@ -1,8 +1,14 @@
+## 0.23.0 (February 2, 2024)
+
+### Features
+
+- [FPopup] Add `FPopup` component
+
 ## 0.22.4 (January 17, 2024)
 
 ### Fixes
 
-- [FAutocomplete] Prevent `input` event emit when emitted by maska 
+- [FAutocomplete] Prevent `input` event emit when emitted by maska
 
 ## 0.22.3 (November 29, 2023)
 

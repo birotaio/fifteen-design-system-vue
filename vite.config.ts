@@ -78,6 +78,7 @@ export default defineConfig({
         path.resolve(__dirname, 'src/rules/index.ts'),
         path.resolve(__dirname, 'src/resolvers/index.ts'),
         path.resolve(__dirname, 'src/components/router/index.ts'),
+        path.resolve(__dirname, 'src/ui/index.ts'),
       ],
       output: {
         preserveModules: true,

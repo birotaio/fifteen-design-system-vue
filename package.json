@@ -26,6 +26,7 @@
     "resolvers.d.ts",
     "rules.d.ts",
     "router.d.ts",
+    "ui.d.ts",
     "icons"
   ],
   "main": "./dist/cjs/index.js",
@@ -46,6 +47,10 @@
     "./router": {
       "import": "./dist/es/components/router/index.js",
       "require": "./dist/cjs/components/router/index.js"
+    },
+    "./ui": {
+      "import": "./dist/es/ui/index.js",
+      "require": "./dist/cjs/ui/index.js"
     },
     "./icons": {
       "import": "./dist/es/.generated/icons.js",

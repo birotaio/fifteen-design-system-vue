@@ -274,15 +274,7 @@ import {
   watchOnce,
 } from '@vueuse/core';
 
-import {
-  FPopup,
-  FCard,
-  FExpandable,
-  FButton,
-  FIcon,
-  FCheckbox,
-  genSize,
-} from '@/index';
+import { genSize } from '@/index';
 import {
   arrowExpand,
   arrowReduce,

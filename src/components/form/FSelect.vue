@@ -170,6 +170,7 @@ FField.FSelect(
 import equal from 'fast-deep-equal/es6';
 
 import { getCssColor } from '@/utils/getCssColor';
+import { chevronDown, close, exclamationCircle } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { FMenuOption } from '@/components/FMenu.vue';
@@ -295,6 +296,12 @@ defineExpose<{
   focus: () => void;
 }>({
   focus,
+});
+
+registerIcons('icons', {
+  chevronDown,
+  close,
+  exclamationCircle,
 });
 
 const {

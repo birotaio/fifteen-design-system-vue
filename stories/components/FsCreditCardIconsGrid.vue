@@ -34,6 +34,7 @@ $border = lightgay
 <script setup lang="ts">
 import FCreditCardIcon from '@/components/FCreditCardIcon.vue';
 import { getCreditCardIcons } from '@/.generated/utils';
+import * as creditCardIcons from '@/.generated/credit-cards';
 
 export interface FsCreditCardIconGridProps {
   /**
@@ -45,5 +46,8 @@ export interface FsCreditCardIconGridProps {
 withDefaults(defineProps<FsCreditCardIconGridProps>(), {
   size: '24px',
 });
+
+registerIcons('creditCards', creditCardIcons);
+
 const cardTypes = getCreditCardIcons();
 </script>

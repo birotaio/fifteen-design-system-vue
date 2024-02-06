@@ -93,6 +93,8 @@ FField.FCreditCardInput(
 
 <script setup lang="ts">
 import { getCardInfo, luhnCheck } from '@/utils/credit-cards';
+import { checkmark } from '@/.generated/icons';
+import * as creditCardIcons from '@/.generated/credit-cards';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CreditCardInfo } from '@/utils/credit-cards';
@@ -173,11 +175,20 @@ defineExpose<{
   focus,
 });
 
-const { isValid, hint, value: inputValue, validate, resetValidation } =
-  useFieldWithValidation<string>(props, {
-    validateOnMount: props?.validateOnMount,
-    rules: [isValidCreditCard],
-  });
+registerIcons('icons', { checkmark });
+// When we use the credit card input, we implicitly allow all credit card types to all icons must be present
+registerIcons('creditCards', creditCardIcons);
+
+const {
+  isValid,
+  hint,
+  value: inputValue,
+  validate,
+  resetValidation,
+} = useFieldWithValidation<string>(props, {
+  validateOnMount: props?.validateOnMount,
+  rules: [isValidCreditCard],
+});
 const { handleBlur, handleChange, handleFocus, handleInput } =
   useInputEventBindings(validate, props.validationTrigger, emit);
 

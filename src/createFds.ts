@@ -20,9 +20,15 @@ export function createFds(
 ): Plugin<[FdsOptions?]> {
   return {
     install(app) {
-      app.provide(iconsInjectionKeys.icons, options?.icons);
-      app.provide(iconsInjectionKeys.flags, options?.flagIcons);
-      app.provide(iconsInjectionKeys.creditCards, options?.creditCardIcons);
+      app.provide(iconsInjectionKeys.icons, {
+        ...options?.icons,
+      });
+      app.provide(iconsInjectionKeys.flags, {
+        ...options?.flagIcons,
+      });
+      app.provide(iconsInjectionKeys.creditCards, {
+        ...options?.creditCardIcons,
+      });
     },
   };
 }

@@ -141,6 +141,7 @@ FField.FCheckbox(
 
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
+import { checkmark, checkboxIndeterminate } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
@@ -206,6 +207,11 @@ defineExpose<{
   focus: () => void;
 }>({
   focus,
+});
+
+registerIcons('icons', {
+  checkmark,
+  checkboxIndeterminate,
 });
 
 const checkboxRef = ref<HTMLElement>();

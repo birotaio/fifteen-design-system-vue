@@ -1,8 +1,9 @@
-
 import FButton from '@/components/FButton.vue';
 import FIcon from '@/components/FIcon.vue';
 import { colorDesignTokens } from '@/constants/colors';
 import { getIconList } from '@/.generated/utils';
+import { registerIcons } from '@/composables/useIcon';
+import { icons } from '@/icons';
 
 import type { StoryFn } from '@storybook/vue3';
 import type { FButtonProps } from '@/components/FButton.vue';
@@ -51,6 +52,7 @@ interface FButtonArgs extends FButtonProps {
 const Template = (args: FButtonArgs) => ({
   components: { FButton, FIcon },
   setup() {
+    registerIcons('icons', icons);
     const { text, iconName, ...props } = args;
     return { text, iconName, props };
   },
@@ -118,6 +120,7 @@ IconOnly.args = {
 const AllSizesTemplate = (args: FButtonArgs) => ({
   components: { FButton, FIcon },
   setup() {
+    registerIcons('icons', icons);
     const { text, iconName, ...props } = args;
     return { text, iconName, props };
   },

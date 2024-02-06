@@ -281,6 +281,12 @@ import {
   FCheckbox,
   genSize,
 } from '@/index';
+import {
+  arrowExpand,
+  arrowReduce,
+  printedCircuitBoard,
+  close,
+} from '@/.generated/icons';
 
 import type { Ref, MaybeRef, WritableComputedRef } from 'vue';
 import type { BaseColorDesignToken, Color } from '@/index';
@@ -415,6 +421,13 @@ const props = withDefaults(defineProps<FDebugMenuProps>(), {
   maxWidth: 460,
   snapMode: 'edges',
   name: 'Debug menu',
+});
+
+registerIcons('icons', {
+  arrowExpand,
+  arrowReduce,
+  printedCircuitBoard,
+  close,
 });
 
 const popupRef = ref<InstanceType<typeof FPopup> | null>(null);

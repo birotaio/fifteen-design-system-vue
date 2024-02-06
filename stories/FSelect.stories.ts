@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import FSelect from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 import FButton from '@/components/FButton.vue';
+import { registerIcons } from '@/composables/useIcon';
+import { arrowRight } from '@/.generated/icons';
 
 import type { StoryFn } from '@storybook/vue3';
 import type { FSelectProps } from '@/components/form/FSelect.vue';
@@ -104,13 +106,16 @@ Clearable.args = {
 
 const CustomTemplate = (args: FSelectProps) => ({
   components: { FSelect, FIcon },
-  setup: () => ({ args }),
+  setup: () => {
+    registerIcons('icons', { arrowRight });
+    return { args };
+  },
   template: `
-<FSelect v-bind="args">
-  <template #option-prefix>
-    <FIcon name="arrowRight" />
-  </template>
-</FSelect>`,
+    <FSelect v-bind="args">
+      <template #option-prefix>
+        <FIcon name="arrowRight" />
+      </template>
+    </FSelect>`,
 });
 
 export const CustomOptionPrefix: StoryFn<FSelectProps> = CustomTemplate.bind(

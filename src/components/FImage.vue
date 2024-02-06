@@ -65,6 +65,7 @@ picture.FImage(
 <script setup lang="ts">
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
+import { landscape } from '@/.generated/icons';
 
 import type CSS from 'csstype';
 import type { Color } from '@/types/colors';
@@ -123,6 +124,8 @@ const props = withDefaults(defineProps<FImageProps>(), {
   corners: 'rounded',
   backgroundColor: '',
 });
+
+registerIcons('icons', { landscape });
 
 const imageRef = ref();
 const { isInit, isLoaded } = useLazyImage(imageRef, props.src);

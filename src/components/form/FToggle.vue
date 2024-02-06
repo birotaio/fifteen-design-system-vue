@@ -156,6 +156,7 @@ FField.FToggle(
 
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
+import { checkmark } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
@@ -231,6 +232,8 @@ defineExpose<{
 }>({
   focus,
 });
+
+registerIcons('icons', { checkmark });
 
 const toggleRef = ref<HTMLElement>();
 

@@ -34,6 +34,7 @@ $border = lightgay
 <script setup lang="ts">
 import FFlagIcon from '@/components/FFlagIcon.vue';
 import { getFlagIconList } from '@/.generated/utils';
+import * as flagIcons from '@/.generated/flags';
 
 import type { Color } from '@/types/colors';
 
@@ -57,5 +58,8 @@ withDefaults(defineProps<FsFlagGridProps>(), {
   color: 'secondary',
   strokeWidth: 0,
 });
+
+registerIcons('flags', flagIcons);
+
 const flags = getFlagIconList();
 </script>

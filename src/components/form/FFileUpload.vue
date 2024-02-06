@@ -67,6 +67,8 @@ FField.FFileUpload(
 <script setup lang="ts">
 import { mimes as mimesRule, size as sizeRule } from '@vee-validate/rules';
 
+import { upload } from '@/.generated/icons';
+
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { Icon } from '@/types/icons';
 import type { FButtonSize } from '@/components/FButton.vue';
@@ -119,6 +121,8 @@ const props = withDefaults(defineProps<FFileUploadProps>(), {
   validationTrigger: 'change',
   errorMessage: '',
 });
+
+registerIcons('icons', { upload });
 
 const underlyingFileInputRef = ref<HTMLInputElement>();
 

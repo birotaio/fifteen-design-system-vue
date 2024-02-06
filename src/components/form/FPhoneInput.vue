@@ -167,6 +167,8 @@ import { useVModelProxy } from '@fifteen/shared-lib';
 
 import FInput from '@/components/form/FInput.vue';
 import { getCssColor } from '@/utils/getCssColor';
+import { chevronDown } from '@/.generated/icons';
+import * as flagIcons from '@/.generated/flags';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CountryCode } from '@/types/flags';
@@ -254,6 +256,10 @@ defineExpose<{
 }>({
   focus,
 });
+
+registerIcons('icons', { chevronDown });
+// When using this component, all the flag icons are registered because all phone numbers are supported
+registerIcons('flags', flagIcons);
 
 const countryCode = useVModelProxy({
   props,

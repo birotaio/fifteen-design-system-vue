@@ -9,7 +9,7 @@
     role="switch"
     :aria-checked="isToggled"
     @click="handleToggle"
-    @keydown.enter="handleToggle"
+    @keydown.enter.stop="handleToggle"
     @keydown.space.prevent="handleToggle"
   )
     slot(name="title")

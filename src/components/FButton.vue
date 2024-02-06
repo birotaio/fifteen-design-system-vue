@@ -8,6 +8,8 @@ component.FButton(
   @blur="emit('blur', $event)"
   @click="handleClick($event)"
   @focus="emit('focus', $event)"
+  @keydown.space.stop="handleClick($event)"
+  @keydown.enter.stop="handleClick($event)"
 )
   .FButton__container
     slot

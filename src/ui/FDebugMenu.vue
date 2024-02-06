@@ -66,11 +66,13 @@ FPopup.FDebugMenu(
     )
       template(#title)
         h6 {{ group.title }}
+      // We disable a11y keyboard interactivity on menu item since the underlying button and checkbox can be properly focused
+      // eslint-disable-next-line vuejs-accessibility/click-events-have-key-events, vuejs-accessibility/no-static-element-interactions
       .FDebugMenu__item(
         v-for="(item, itemIndex) in group.items"
         :key="`${groupIndex}-${itemIndex}`"
         :class="getItemClasses(item)"
-        v-bind="item.disabled ? {} : { role: 'menuitem', tabindex: 0, onClick: () => clickItemHandler(item) }"
+        @click="clickItemHandler(item)"
       )
         .FDebugMenu__item__text
           .FDebugMenu__item__title {{ item.title }}
@@ -220,19 +222,9 @@ scroll-theme()
         background-color rgba(255, 255, 255, 0.15)
         border 2px solid rgba(255, 255, 255, 0.2)
 
-  &:focus-visible
-    outline none
-
   &:not(.FDebugMenu__item--disabled)
-    &:hover,
-    &:focus-visible
+    &:hover
       background-color rgba(255, 255, 255, 0.05)
-
-    &:focus-visible
-      border-radius rem(4)
-      outline-offset rem(-4)
-      outline solid rem(3) currentColor
-      transition $outline-transition
 
     &.FDebugMenu__item--clickable
       cursor pointer

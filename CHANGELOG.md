@@ -1,8 +1,14 @@
-## 0.23.0 (February 2, 2024)
+## 0.23.0 (February 6, 2024)
 
 ### Features
 
+- [UI] Add /ui subpath and build config to expose a UI kit
+- [FDebugMenu] Add `FDebugMenu` component to UI kit
 - [FPopup] Add `FPopup` component
+
+### Changes
+
+- [Core] All components are now responsible for registering the icons they rely on
 
 ## 0.22.4 (January 17, 2024)
 

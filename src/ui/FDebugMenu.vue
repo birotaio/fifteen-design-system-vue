@@ -18,6 +18,7 @@ FPopup.FDebugMenu(
       FIcon(name="printedCircuitBoard")
 
   FCard.FDebugMenu__content(
+    ref="contentRef"
     :color="color"
     :text-color="textColor"
   )
@@ -274,7 +275,7 @@ import {
   watchOnce,
 } from '@vueuse/core';
 
-import { genSize } from '@/index';
+import { FCard, FPopup, genSize } from '@/index';
 import {
   arrowExpand,
   arrowReduce,
@@ -435,6 +436,11 @@ const isOpen = useVModelProxy({ props });
 
 // Whenever re-opening the menu, make sure it's not in fullscreen mode
 watch(isOpen, value => value && (isFullscreen.value = false));
+
+// Whenever content height changes, trigger a resize event so that popper repositions
+const contentRef = ref<InstanceType<typeof FCard> | null>(null);
+const { height: contentHeight } = useElementSize(contentRef);
+watch(contentHeight, () => window.dispatchEvent(new Event('resize')));
 
 const offset = 8;
 

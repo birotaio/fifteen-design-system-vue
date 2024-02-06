@@ -13,7 +13,7 @@ type BaseProps<Value> = {
   [key: string]: unknown;
 };
 
-interface UseFieldWithValidationOptions {
+export interface UseFieldWithValidationOptions {
   /**
    * Valide the input on component mount
    */
@@ -28,7 +28,7 @@ interface UseFieldWithValidationOptions {
   rules?: ValidationRule | ValidationRule[];
 }
 
-interface UseFieldWithValidationReturn<T> {
+export interface UseFieldWithValidationReturn<T> {
   /**
    * Function which handles field update, with validation or not
    */
@@ -95,7 +95,7 @@ export function useFieldWithValidation<
 
   // Bypass form binding if the input has no props.name
   if (!fieldName.value) {
-    const fieldValue = useVModelProxy<Value>({ props });
+    const fieldValue = useVModelProxy({ props });
 
     const isValid = ref(true);
     const errors = ref<string[]>([]);
@@ -132,7 +132,7 @@ export function useFieldWithValidation<
         errors.value = [];
         isValid.value = true;
       },
-      value: fieldValue,
+      value: fieldValue as Ref<Value>,
       hint: getHint(props, errors),
       isValid,
     };

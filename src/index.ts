@@ -52,106 +52,86 @@ export { default as FToggle } from '@/components/form/FToggle.vue';
 /**
  * Components props interfaces
  */
-export type { FAvatarProps } from '@/components/FAvatar.vue';
-export type { FBackgroundImageProps } from '@/components/FBackgroundImage.vue';
-export type {
-  FButtonProps,
-  FButtonAnchorPoint,
-  FButtonSize,
-} from '@/components/FButton.vue';
-export type {
-  FBreadcrumbsProps,
-  FBreadcrumbLink,
-} from '@/components/FBreadcrumbs.vue';
-export type { FCardProps } from '@/components/FCard.vue';
-export type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
-export type { FCreditCardInputProps } from '@/components/form/FCreditCardInput.vue';
-export type { FDigitsInputProps } from '@/components/form/FDigitsInput.vue';
-export type { FDividerProps } from '@/components/FDivider.vue';
-export type { FExpandableProps } from '@/components/FExpandable.vue';
-export type { FFieldHintProps } from '@/components/form/FFieldHint.vue';
-export type { FFieldLabelProps } from '@/components/form/FFieldLabel.vue';
-export type { FCreditCardIconProps } from '@/components/FCreditCardIcon.vue';
-export type { FFlagIconProps } from '@/components/FFlagIcon.vue';
-export type { FFormProps } from '@/components/form/FForm.vue';
-export type { FGridItemProps } from '@/components/FGridItem.vue';
-export type { FGridProps } from '@/components/FGrid.vue';
-export type { FIconProps } from '@/components/FIcon.vue';
-export type { FImageProps } from '@/components/FImage.vue';
-export type { FInputProps } from '@/components/form/FInput.vue';
-export type { FLinkProps } from '@/components/FLink.vue';
-export type { FLoaderProps } from '@/components/FLoader.vue';
-export type {
-  FLogoAnimatableProps,
-  FLogoLineDelta,
-  FLogoLineNumber,
-} from '@/components/FLogoAnimatable.vue';
-export type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
-export type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
-export type { FProgressBarProps } from '@/components/FProgressBar.vue';
-export type { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
-export type { FFieldProps } from '@/components/form/FField.vue';
-export type { FSelectProps } from '@/components/form/FSelect.vue';
-export type { FLocaleSelectProps } from '@/components/form/FLocaleSelect.vue';
-export type { FRadioGroupProps } from '@/components/form/FRadioGroup.vue';
-export type { FRadioProps } from '@/components/form/FRadio.vue';
-export type { FSkeletonProps } from '@/components/FSkeleton.vue';
-export type { FSvgImageProps } from '@/components/FSvgImage.vue';
-export type { FTextareaProps } from '@/components/form/FTextarea.vue';
-export type { FFileUploadProps } from '@/components/form/FFileUpload.vue';
-export type { FAutocompleteProps } from '@/components/form/FAutocomplete.vue';
-export type { FToggleProps } from '@/components/form/FToggle.vue';
-export type { FTextContentProps } from '@/components/FTextContent.vue';
-export type { FPopupProps } from '@/components/FPopup.vue';
+export type * from '@/components/FAvatar.vue';
+export type * from '@/components/FBackgroundImage.vue';
+export type * from '@/components/FButton.vue';
+export type * from '@/components/FBreadcrumbs.vue';
+export type * from '@/components/FCard.vue';
+export type * from '@/components/form/FCheckbox.vue';
+export type * from '@/components/form/FCreditCardInput.vue';
+export type * from '@/components/form/FDigitsInput.vue';
+export type * from '@/components/FDivider.vue';
+export type * from '@/components/FExpandable.vue';
+export type * from '@/components/form/FFieldHint.vue';
+export type * from '@/components/form/FFieldLabel.vue';
+export type * from '@/components/FCreditCardIcon.vue';
+export type * from '@/components/FFlagIcon.vue';
+export type * from '@/components/form/FForm.vue';
+export type * from '@/components/FGridItem.vue';
+export type * from '@/components/FGrid.vue';
+export type * from '@/components/FIcon.vue';
+export type * from '@/components/FImage.vue';
+export type * from '@/components/form/FInput.vue';
+export type * from '@/components/FLink.vue';
+export type * from '@/components/FLoader.vue';
+export type * from '@/components/FLogoAnimatable.vue';
+export type * from '@/components/FLogo.vue';
+export type * from '@/components/form/FPhoneInput.vue';
+export type * from '@/components/FProgressBar.vue';
+export type * from '@/components/FMenu.vue';
+export type * from '@/components/form/FField.vue';
+export type * from '@/components/form/FSelect.vue';
+export type * from '@/components/form/FLocaleSelect.vue';
+export type * from '@/components/form/FRadioGroup.vue';
+export type * from '@/components/form/FRadio.vue';
+export type * from '@/components/FSkeleton.vue';
+export type * from '@/components/FSvgImage.vue';
+export type * from '@/components/form/FTextarea.vue';
+export type * from '@/components/form/FFileUpload.vue';
+export type * from '@/components/form/FAutocomplete.vue';
+export type * from '@/components/form/FToggle.vue';
+export type * from '@/components/FTextContent.vue';
+export type * from '@/components/FPopup.vue';
 
 /**
  * Composables
  */
-export { useFBreakpoints } from '@/composables/useFBreakpoints';
-export { useFieldWithValidation } from '@/composables/useFieldWithValidation';
-export { useIcon } from '@/composables/useIcon';
-export { useInputEventBindings } from '@/composables/useInputEventBindings';
-export { useLazyImage } from '@/composables/useLazyImage';
-export { useSmartLink } from '@/composables/useSmartLink';
+export * from '@/composables/useFBreakpoints';
+export * from '@/composables/useFieldWithValidation';
+export * from '@/composables/useIcon';
+export * from '@/composables/useInputEventBindings';
+export * from '@/composables/useLazyImage';
+export * from '@/composables/useSmartLink';
 
 /**
  * Utils
  */
-export { genSize } from '@/utils/genSize';
-export { getCssColor } from '@/utils/getCssColor';
-export {
-  getCardInfo,
-  luhnCheck,
-  matchCardNumberByPattern,
-} from '@/utils/credit-cards';
+export * from '@/utils/genSize';
+export * from '@/utils/getCssColor';
+export * from '@/utils/credit-cards';
 
 /**
  * Config constants
  */
-export { breakpointsValues } from '@/constants/breakpoints';
-export { baseColorDesignTokens, colorDesignTokens } from '@/constants/colors';
-export { columns, spanValues } from '@/constants/grid';
-export { typographies } from '@/constants/typography';
+export * from '@/constants/breakpoints';
+export * from '@/constants/colors';
+export * from '@/constants/grid';
+export * from '@/constants/typography';
 
 /**
  * Types
  */
-export type { Breakpoint } from '@/types/breakpoints';
-export type { Typography } from '@/types/typography';
-export type {
-  Color,
-  BaseColorDesignToken,
-  ColorDesignToken,
-} from '@/types/colors';
-export type { FontFamily } from '@/types/font';
-export type { ValidationRule } from '@/types/forms';
-export type { Span } from '@/types/grid';
-export type { Icon } from '@/types/icons';
-export type { CSSVariable, Style } from '@/types/styles';
-export type { FlagCode, CountryCode } from '@/types/flags';
+export type * from '@/types/breakpoints';
+export type * from '@/types/typography';
+export type * from '@/types/colors';
+export type * from '@/types/font';
+export type * from '@/types/forms';
+export type * from '@/types/grid';
+export type * from '@/types/icons';
+export type * from '@/types/styles';
+export type * from '@/types/flags';
 
 /**
  * FDS instance
  */
-export { createFds } from '@/createFds';
-export type { FdsOptions } from '@/createFds';
+export * from '@/createFds';

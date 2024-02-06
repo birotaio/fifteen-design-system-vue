@@ -344,8 +344,8 @@ const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
   })
 );
 
-const isOpen = useVModelProxy<boolean>({ props });
-const selectedOption = useVModelProxy<FMenuOptionValue>({
+const isOpen = useVModelProxy({ props });
+const selectedOption = useVModelProxy({
   props,
   propName: 'selectedOption',
 });

@@ -163,7 +163,7 @@ const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
   })
 );
 
-const isOpen = useVModelProxy<boolean>({ props });
+const isOpen = useVModelProxy({ props });
 
 const activatorRef = ref<HTMLDivElement>();
 

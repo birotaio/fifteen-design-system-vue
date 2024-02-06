@@ -2401,7 +2401,7 @@ __metadata:
   resolution: "@fifteen/design-system-vue@workspace:."
   dependencies:
     "@babel/core": ^7.18.2
-    "@fifteen/shared-lib": ^0.13.4
+    "@fifteen/shared-lib": ^0.13.5
     "@fifteen/tooling": ^0.5.3
     "@prettier/plugin-pug": ^2.0.0
     "@qnp/lus": ^0.3.0
@@ -2462,15 +2462,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@fifteen/shared-lib@npm:^0.13.4":
-  version: 0.13.4
-  resolution: "@fifteen/shared-lib@npm:0.13.4"
+"@fifteen/shared-lib@npm:^0.13.5":
+  version: 0.13.5
+  resolution: "@fifteen/shared-lib@npm:0.13.5"
   dependencies:
     "@vue/language-plugin-pug": ^1.8.27
     convert: ^4.13.1
     countup.js: 2.4.1
     date-fns: ^2.30.0
-  checksum: c6a7a81207c0db0c99fc136d11404bcc5fd77e4056a888ca022188280b4684509ecd49360537d36da7b2757b07ba3fdcfa4c82f198e8adb6ef25ea5eef99493a
+  checksum: 65c27ee021e33531ff9f082a630a82c742ba726fc8f8c8f40ff0403f94bb260b8e9f7f0efc00311e02dd49bb264a509cc91e0ea93c46a85fed67af09a1cb970e
   languageName: node
   linkType: hard
 

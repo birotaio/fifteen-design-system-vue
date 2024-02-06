@@ -176,7 +176,7 @@ const props = withDefaults(defineProps<FExpandableProps>(), {
   titleVerticalPadding: 16,
 });
 
-const isToggled = useVModelProxy<boolean>({ props });
+const isToggled = useVModelProxy({ props });
 
 const contentRef = ref();
 const { height: contentHeight } = useElementSize(contentRef);

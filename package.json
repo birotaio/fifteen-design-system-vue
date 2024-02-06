@@ -94,7 +94,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
-    "@fifteen/shared-lib": "^0.13.4",
+    "@fifteen/shared-lib": "^0.13.5",
     "@fifteen/tooling": "^0.5.3",
     "@prettier/plugin-pug": "^2.0.0",
     "@qnp/lus": "^0.3.0",

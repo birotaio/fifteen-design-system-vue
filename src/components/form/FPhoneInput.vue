@@ -255,7 +255,7 @@ defineExpose<{
   focus,
 });
 
-const countryCode = useVModelProxy<CountryCode>({
+const countryCode = useVModelProxy({
   props,
   propName: 'countryCode',
 });
@@ -301,7 +301,7 @@ const placeholder = computed(() =>
 const phonePrefix = computed(
   () => `+${getCountryCallingCode(countryCode.value)}`
 );
-const phoneNumber = useVModelProxy<string>({ props, propName: 'phoneNumber' });
+const phoneNumber = useVModelProxy({ props, propName: 'phoneNumber' });
 
 const fullPhone = computed(() => {
   const phoneValue =

@@ -82,7 +82,8 @@ FPopup.FDebugMenu(
             size="tiny"
             :color="controlColor"
             :hover-color="`${controlColor}--light-1`"
-            @click="callAction(item)"
+            :loading="itemLoadingKey === `${groupIndex}-${itemIndex}`"
+            @click="callAction(item, `${groupIndex}-${itemIndex}`)"
           ) {{ item.tiggerText }}
         template(v-if="item.type === 'toggle'")
           FCheckbox(
@@ -444,6 +445,7 @@ const elementRef = computed(() => popupRef.value?.$el);
 const isMoved = ref(false);
 const isTransitioning = ref(false);
 const isFullscreen = ref(false);
+const itemLoadingKey = ref<string | null>(null);
 
 const isOpen = useVModelProxy({ props });
 
@@ -610,15 +612,18 @@ watch(message, () => {
   }
 });
 
-async function callAction(item: DebugMenuItem): Promise<void> {
+async function callAction(item: DebugMenuItem, key: string): Promise<void> {
   if (item.disabled || item.type !== 'trigger') return;
   try {
+    itemLoadingKey.value = key;
     const actionMessage = await item.action();
     hasError.value = false;
     message.value = actionMessage ?? null;
   } catch (error) {
     hasError.value = true;
     message.value = (error as Error).message;
+  } finally {
+    itemLoadingKey.value = null;
   }
 }
 

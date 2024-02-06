@@ -9,7 +9,8 @@
     role="switch"
     :aria-checked="isToggled"
     @click="handleToggle"
-    @keyup.enter="handleToggle"
+    @keydown.enter="handleToggle"
+    @keydown.space.prevent="handleToggle"
   )
     slot(name="title")
     .FExpandable__title__highlighter

@@ -70,9 +70,7 @@ FPopup.FDebugMenu(
         v-for="(item, itemIndex) in group.items"
         :key="`${groupIndex}-${itemIndex}`"
         :class="getItemClasses(item)"
-        role="presentation"
-        @keyup.enter="clickItemHandler(item)"
-        @click="clickItemHandler(item)"
+        v-bind="item.disabled ? {} : { role: 'menuitem', tabindex: 0, onClick: () => clickItemHandler(item) }"
       )
         .FDebugMenu__item__text
           .FDebugMenu__item__title {{ item.title }}
@@ -217,12 +215,23 @@ scroll-theme()
     .FCheckbox--disabled .FCheckbox__checkbox
       &,
       &:hover
+        outline none
         background-color rgba(255, 255, 255, 0.15)
         border 2px solid rgba(255, 255, 255, 0.2)
 
+  &:focus-visible
+    outline none
+
   &:not(.FDebugMenu__item--disabled)
-    &:hover
+    &:hover,
+    &:focus-visible
       background-color rgba(255, 255, 255, 0.05)
+
+    &:focus-visible
+      border-radius rem(4)
+      outline-offset rem(-4)
+      outline solid rem(3) currentColor
+      transition $outline-transition
 
     &.FDebugMenu__item--clickable
       cursor pointer

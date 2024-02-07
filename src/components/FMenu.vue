@@ -171,11 +171,6 @@
 import Popper from 'vue3-popper/dist/popper.esm';
 import equal from 'fast-deep-equal/es6';
 import {
-  onClickOutside,
-  useElementBounding,
-  useMutationObserver,
-} from '@vueuse/core';
-import {
   useVModelProxy,
   removeDiacritics,
   stringify,

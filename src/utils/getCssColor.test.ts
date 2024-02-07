@@ -1,6 +1,3 @@
-import { ref } from 'vue';
-import { describe, it, expect } from 'vitest';
-
 import { getCssColor } from './getCssColor';
 
 import { colorDesignTokens } from '@/constants/colors';

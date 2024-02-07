@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FDebugMenu from '@/ui/FDebugMenu.vue';
 
 import type { StoryFn } from '@storybook/vue3';

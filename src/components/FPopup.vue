@@ -67,7 +67,6 @@
 
 <script setup lang="ts">
 import Popper from 'vue3-popper/dist/popper.esm';
-import { onClickOutside, useMutationObserver } from '@vueuse/core';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
 import { genSize } from '@/utils/genSize';

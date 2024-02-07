@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FRadioGroup from '@/components/form/FRadioGroup.vue';
 import FButton from '@/components/FButton.vue';
 

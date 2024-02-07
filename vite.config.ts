@@ -27,7 +27,7 @@ export default defineConfig({
       template: 'treemap',
     }),
     AutoImport({
-      imports: ['vue', 'vue-router'],
+      imports: ['vue', 'vue-router', '@vueuse/core', 'vitest'],
       dirs: ['./src/composables/**'],
     }),
     Components({

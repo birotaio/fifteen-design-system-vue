@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FSelect from '@/components/form/FSelect.vue';
 import FIcon from '@/components/FIcon.vue';
 import FButton from '@/components/FButton.vue';

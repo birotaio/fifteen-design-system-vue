@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FCheckbox from '@/components/form/FCheckbox.vue';
 import FButton from '@/components/FButton.vue';
 

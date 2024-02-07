@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FCreditCardInput from '@/components/form/FCreditCardInput.vue';
 import FButton from '@/components/FButton.vue';
 

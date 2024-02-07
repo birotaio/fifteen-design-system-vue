@@ -97,8 +97,6 @@ FField.FTextarea(
 </style>
 
 <script setup lang="ts">
-import { useElementBounding } from '@vueuse/core';
-
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
 import { exclamationCircle } from '@/.generated/icons';

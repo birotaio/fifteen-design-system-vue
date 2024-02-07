@@ -267,13 +267,6 @@ scroll-theme()
 
 <script setup lang="ts">
 import { useVModelProxy } from '@fifteen/shared-lib';
-import {
-  useLocalStorage,
-  useElementSize,
-  useDraggable,
-  useDebounceFn,
-  watchOnce,
-} from '@vueuse/core';
 
 import { FCard, FPopup, genSize } from '@/index';
 import {

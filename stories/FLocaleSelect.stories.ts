@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
 import FSelect from '@/components/form/FSelect.vue';
 import FButton from '@/components/FButton.vue';

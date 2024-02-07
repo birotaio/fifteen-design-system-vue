@@ -10,6 +10,10 @@
 
 - [Core] All components are now responsible for registering the icons they rely on
 
+### Fixes
+
+- [FToggle/FCheckbox] Generate unique id to ensure they work correctly if no name is given
+
 ## 0.22.4 (January 17, 2024)
 
 ### Fixes

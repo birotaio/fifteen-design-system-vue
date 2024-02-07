@@ -92,7 +92,6 @@ FPopup.FDebugMenu(
           FCheckbox(
             :key="`${groupIndex}-${itemIndex}`"
             :model-value="item.ref.value"
-            :name="`checkbox-${groupIndex}-${itemIndex}`"
             :disabled="item.disabled"
             size="tiny"
             :hover-border-color="`${controlColor}--light-1`"

@@ -32,7 +32,10 @@ FPopup.FDebugMenu(
           :color="textColor"
           @click="isFullscreen = !isFullscreen"
         )
-          FIcon(:name="isFullscreen ? 'arrowReduce' : 'arrowExpand'")
+          FIcon.FDebugMenu__header__icon(
+            :class="isFullscreen ? 'FDebugMenu__header__icon--reduce' : 'FDebugMenu__header__icon--expand'"
+            name="arrowExpand"
+          )
         FButton(
           icon
           ghost
@@ -197,6 +200,15 @@ scroll-theme()
   align-items center
   justify-content space-between
 
+  &__icon
+    transition transform 0.5s ease
+
+  &__icon--expand
+    transform rotate(45deg)
+
+  &__icon--reduce
+    transform rotate(0)
+
 .FDebugMenu__item
   display flex
   align-items center
@@ -268,12 +280,7 @@ scroll-theme()
 import { useVModelProxy } from '@fifteen/shared-lib';
 
 import { FCard, FPopup, genSize } from '@/index';
-import {
-  arrowExpand,
-  arrowReduce,
-  printedCircuitBoard,
-  close,
-} from '@/.generated/icons';
+import { arrowExpand, printedCircuitBoard, close } from '@/.generated/icons';
 
 import type { Ref, MaybeRef, WritableComputedRef } from 'vue';
 import type { BaseColorDesignToken, Color } from '@/index';
@@ -412,7 +419,6 @@ const props = withDefaults(defineProps<FDebugMenuProps>(), {
 
 registerIcons('icons', {
   arrowExpand,
-  arrowReduce,
   printedCircuitBoard,
   close,
 });

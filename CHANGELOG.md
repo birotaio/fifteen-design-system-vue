@@ -13,6 +13,7 @@
 ### Fixes
 
 - [FToggle/FCheckbox] Generate unique id to ensure they work correctly if no name is given
+- [Stories] Make sure spread args are kept reactive in stories
 
 ## 0.22.4 (January 17, 2024)
 

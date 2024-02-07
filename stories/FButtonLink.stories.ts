@@ -18,7 +18,8 @@ interface FButtonLinkArgs extends FButtonLinkProps {
 const Template = (args: FButtonLinkArgs) => ({
   components: { FButtonLink },
   setup() {
-    const { text, ...props } = args;
+    const { text, ...rest } = toRefs(args);
+    const props = toReactive(rest);
     return { text, props };
   },
   template: '<FButtonLink v-bind="props">{{ text }}</FButtonLink>',

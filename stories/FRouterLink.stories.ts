@@ -18,7 +18,8 @@ interface FRouterLinkArgs extends FRouterLinkProps {
 const Template = (args: FRouterLinkArgs) => ({
   components: { FRouterLink },
   setup() {
-    const { text, ...props } = args;
+    const { text, ...rest } = toRefs(args);
+    const props = toReactive(rest);
     return { text, props };
   },
   template: '<FRouterLink v-bind="props">{{ text }}</FRouterLink>',

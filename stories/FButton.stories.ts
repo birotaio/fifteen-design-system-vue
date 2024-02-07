@@ -53,7 +53,8 @@ const Template = (args: FButtonArgs) => ({
   components: { FButton, FIcon },
   setup() {
     registerIcons('icons', icons);
-    const { text, iconName, ...props } = args;
+    const { text, iconName, ...rest } = toRefs(args);
+    const props = toReactive(rest);
     return { text, iconName, props };
   },
   template:
@@ -121,7 +122,8 @@ const AllSizesTemplate = (args: FButtonArgs) => ({
   components: { FButton, FIcon },
   setup() {
     registerIcons('icons', icons);
-    const { text, iconName, ...props } = args;
+    const { text, iconName, ...rest } = toRefs(args);
+    const props = toReactive(rest);
     return { text, iconName, props };
   },
   template: `

@@ -199,7 +199,7 @@ defineExpose<{
   focus,
 });
 
-// Flag icons are not registered by the component, because it car restrict the available locales.
+// Flag icons are not registered by the component, because it can restrict the available locales.
 // Thus, we can benefit from significative bundle size reduction if we import the locales manually.
 
 const localeSelectRef = ref<HTMLElement>();

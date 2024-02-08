@@ -6,10 +6,10 @@ component.FButton(
   :class="classes"
   v-bind="specificProps"
   @blur="emit('blur', $event)"
-  @click="handleClick($event)"
+  @click="handleTrigger($event)"
   @focus="emit('focus', $event)"
-  @keydown.space.stop="handleClick($event)"
-  @keydown.enter.stop="handleClick($event)"
+  @keydown.space.stop="handleTrigger($event)"
+  @keydown.enter.stop="handleTrigger($event)"
 )
   .FButton__container
     slot
@@ -446,9 +446,9 @@ const props = withDefaults(defineProps<FButtonProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'click', e: MouseEvent): void;
-  (name: 'focus', e: FocusEvent): void;
-  (name: 'blur', e: FocusEvent): void;
+  (name: 'click', event: MouseEvent | KeyboardEvent): void;
+  (name: 'focus', event: FocusEvent): void;
+  (name: 'blur', event: FocusEvent): void;
 }>();
 
 const { isXsAndDown } = useFBreakpoints();
@@ -554,15 +554,15 @@ const style = computed(
   })
 );
 
-function handleClick(e: MouseEvent): void {
-  if (!props.href && !props.submit) e.preventDefault();
+function handleTrigger(event: MouseEvent | KeyboardEvent): void {
+  if (!props.href && !props.submit) event.preventDefault();
   if (!props.loading && !props.disabled && !props.preventClick) {
-    emit('click', e);
+    emit('click', event);
   }
 
   // The `detail` field from MouseEvent is a number incremented on mouse click, but not at keydown
-  const isKeyboardClick = !e.detail;
-  if (!isKeyboardClick && !props.preventBlurOnClick && !isLink.value) {
+  const isKeyboardEvent = !event.detail;
+  if (!isKeyboardEvent && !props.preventBlurOnClick && !isLink.value) {
     buttonRef.value?.blur();
   }
 }

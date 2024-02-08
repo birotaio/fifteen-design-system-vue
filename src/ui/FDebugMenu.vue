@@ -125,7 +125,7 @@ scroll-theme()
       inset 0 0 0 0 !important
 
     .FPopup__content
-      margin 8px
+      margin rem(8)
       position absolute
       transform none
       inset 0 0 0 0
@@ -135,20 +135,20 @@ scroll-theme()
       height 100%
 
   .FPopup__content
-    border-radius 16px
+    border-radius rem(16)
     overflow hidden
 
 .FDebugMenu__activator
   transition box-shadow 0.5s ease
 
   &:hover
-    box-shadow rgba(0, 0, 0, 0.2) 0 6px 24px
+    box-shadow rgba(0, 0, 0, 0.2) 0 rem(6) rem(24)
 
 .FDebugMenu__content
-  font-size 13px
-  padding 8px 16px
-  box-shadow rgba(0, 0, 0, 0.2) 0 6px 24px
-  min-width 360px
+  font-size rem(13)
+  padding rem(8) rem(16)
+  box-shadow rgba(0, 0, 0, 0.2) 0 rem(6) rem(24)
+  min-width rem(360)
   max-width var(--FDebugMenu--maxWidth)
   max-height var(--FDebugMenu--maxHeight)
   overflow auto
@@ -168,9 +168,9 @@ scroll-theme()
   top 0
   left 0
   right 0
-  margin 8px
-  padding 8px 6px 8px 8px
-  border-radius 8px
+  margin rem(8)
+  padding rem(8) rem(6) rem(8) rem(8)
+  border-radius rem(8)
   background-color var(--color--success--dark-1)
   display flex
   align-items center
@@ -192,10 +192,10 @@ scroll-theme()
     &-enter-from,
     &-leave-to
       opacity 0
-      transform translateY(-16px)
+      transform translateY(rem(-16))
 
 .FDebugMenu__header
-  margin-right -10px
+  margin-right rem(-10)
   display flex
   align-items center
   justify-content space-between
@@ -213,9 +213,9 @@ scroll-theme()
   display flex
   align-items center
   justify-content space-between
-  gap 8px
-  padding 8px 8px 8px 8px
-  border-radius 8px
+  gap rem(8)
+  padding rem(8) rem(8) rem(8) rem(8)
+  border-radius rem(8)
   transition background-color 0.3s ease
 
   &--block
@@ -243,9 +243,9 @@ scroll-theme()
 
   code
     --code--background-color rgba(0, 0, 0, 0.3)
-    margin-top 8px
-    padding 4px 8px
-    font-size 12px
+    margin-top rem(8)
+    padding rem(4) rem(8)
+    font-size rem(12)
     overflow auto
     width 100%
     scroll-theme()
@@ -254,15 +254,15 @@ scroll-theme()
       background-color 'rgba(%s, 0.4)' % var(--FDebugMenu--controlColor--rgb)
 
   &__text
-    margin-right 8px
+    margin-right rem(8)
     display flex
     flex-direction column
     overflow hidden
     flex 1 1 auto
-    gap 2px
+    gap rem(2)
 
   &__description
-    font-size 12px
+    font-size rem(12)
     opacity 0.73
     width 100%
     white-space nowrap

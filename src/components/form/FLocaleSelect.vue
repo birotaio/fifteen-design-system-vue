@@ -46,7 +46,8 @@ export interface FLocaleSelectProps
   extends FFieldProps,
     CommonFormFieldProps<FlagCode | null> {
   /**
-   * List of locales to use. Default to all availables country codes
+   * List of locales to use. Default to all availables country codes.
+   * @warning You will need to import the flag icons manually _via_ `createFds`
    */
   locales?: FlagCode[];
   /**

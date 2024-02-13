@@ -18,7 +18,8 @@ interface FLinkArgs extends FLinkProps {
 const Template = (args: FLinkArgs) => ({
   components: { FLink },
   setup() {
-    const { text, ...props } = args;
+    const { text, ...rest } = toRefs(args);
+    const props = toReactive(rest);
     return { text, props };
   },
   template: '<FLink v-bind="props">{{ text }}</FLink>',

@@ -46,7 +46,8 @@ export interface FLocaleSelectProps
   extends FFieldProps,
     CommonFormFieldProps<FlagCode | null> {
   /**
-   * List of locales to use. Default to all availables country codes
+   * List of locales to use. Default to all availables country codes.
+   * @warning You will need to import the flag icons manually _via_ `createFds`
    */
   locales?: FlagCode[];
   /**
@@ -198,6 +199,9 @@ defineExpose<{
 }>({
   focus,
 });
+
+// Flag icons are not registered by the component, because it can restrict the available locales.
+// Thus, we can benefit from significative bundle size reduction if we import the locales manually.
 
 const localeSelectRef = ref<HTMLElement>();
 

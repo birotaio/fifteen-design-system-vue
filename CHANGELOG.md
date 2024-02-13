@@ -1,8 +1,25 @@
+## 0.23.0 (February 6, 2024)
+
+### Features
+
+- [UI] Add /ui subpath and build config to expose a UI kit
+- [FDebugMenu] Add `FDebugMenu` component to UI kit
+- [FPopup] Add `FPopup` component
+
+### Changes
+
+- [Core] All components are now responsible for registering the icons they rely on
+
+### Fixes
+
+- [FToggle/FCheckbox] Generate unique id to ensure they work correctly if no name is given
+- [Stories] Make sure spread args are kept reactive in stories
+
 ## 0.22.4 (January 17, 2024)
 
 ### Fixes
 
-- [FAutocomplete] Prevent `input` event emit when emitted by maska 
+- [FAutocomplete] Prevent `input` event emit when emitted by maska
 
 ## 0.22.3 (November 29, 2023)
 

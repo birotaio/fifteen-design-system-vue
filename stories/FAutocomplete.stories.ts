@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import { required } from '@vee-validate/rules';
 
 import FAutocomplete from '@/components/form/FAutocomplete.vue';

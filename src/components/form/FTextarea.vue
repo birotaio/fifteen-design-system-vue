@@ -97,10 +97,9 @@ FField.FTextarea(
 </style>
 
 <script setup lang="ts">
-import { useElementBounding } from '@vueuse/core';
-
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
+import { exclamationCircle } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { TextareaHTMLAttributes } from 'vue';
@@ -187,6 +186,8 @@ defineExpose<{
 }>({
   focus,
 });
+
+registerIcons('icons', { exclamationCircle });
 
 const textareaRef = ref();
 

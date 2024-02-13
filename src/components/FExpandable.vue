@@ -9,7 +9,8 @@
     role="switch"
     :aria-checked="isToggled"
     @click="handleToggle"
-    @keyup.enter="handleToggle"
+    @keydown.enter.stop="handleToggle"
+    @keydown.space.prevent="handleToggle"
   )
     slot(name="title")
     .FExpandable__title__highlighter
@@ -127,7 +128,6 @@
 
 <script setup lang="ts">
 import { useVModelProxy } from '@fifteen/shared-lib';
-import { useElementSize } from '@vueuse/core';
 
 import { genSize } from '@/utils/genSize';
 import { getCssColor } from '@/utils/getCssColor';
@@ -176,7 +176,7 @@ const props = withDefaults(defineProps<FExpandableProps>(), {
   titleVerticalPadding: 16,
 });
 
-const isToggled = useVModelProxy<boolean>({ props });
+const isToggled = useVModelProxy({ props });
 
 const contentRef = ref();
 const { height: contentHeight } = useElementSize(contentRef);

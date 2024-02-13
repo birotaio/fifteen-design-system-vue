@@ -1,18 +1,18 @@
 <template lang="pug">
 .FsIconGrid
   .FsIconGrid__item(
-    v-for="icon in icons"
-    :key="icon"
+    v-for="iconName in iconNames"
+    :key="iconName"
   )
     //- TS error on `name` prop is expected because it has a partial litteral type
     FIcon(
       :size="size"
       :color="color"
-      :name="icon"
+      :name="iconName"
       :stroke-width="strokeWidth"
       :stroke-color="color"
     )
-    span {{ icon }}
+    span {{ iconName }}
 </template>
 
 <style lang="stylus">
@@ -38,6 +38,7 @@ $border = lightgay
 <script setup lang="ts">
 import FIcon from '@/components/FIcon.vue';
 import { getIconList } from '@/.generated/utils';
+import * as icons from '@/.generated/icons';
 
 import type { Color } from '@/types/colors';
 
@@ -62,5 +63,7 @@ withDefaults(defineProps<FsIconGridProps>(), {
   strokeWidth: 0,
 });
 
-const icons = getIconList();
+registerIcons('icons', icons);
+
+const iconNames = getIconList();
 </script>

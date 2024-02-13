@@ -1,6 +1,6 @@
 type TriggerEvent = 'focus' | 'blur' | 'change' | 'input' | null;
 
-interface UseInputEventBindingsReturn {
+export interface UseInputEventBindingsReturn {
   handleBlur: (event: Event) => void;
   handleFocus: (event: Event) => void;
   handleInput: (event: Event) => void;

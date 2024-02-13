@@ -27,7 +27,7 @@ export default defineConfig({
       template: 'treemap',
     }),
     AutoImport({
-      imports: ['vue', 'vue-router'],
+      imports: ['vue', 'vue-router', '@vueuse/core', 'vitest'],
       dirs: ['./src/composables/**'],
     }),
     Components({
@@ -47,6 +47,11 @@ export default defineConfig({
         imports: [path.resolve(__dirname, 'src/styles/components.styl')],
       },
     },
+  },
+  define: {
+    __VUE_OPTIONS_API__: false,
+    __VUE_PROD_DEVTOOLS__: false,
+    __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false,
   },
   build: {
     emptyOutDir: false,
@@ -73,6 +78,7 @@ export default defineConfig({
         path.resolve(__dirname, 'src/rules/index.ts'),
         path.resolve(__dirname, 'src/resolvers/index.ts'),
         path.resolve(__dirname, 'src/components/router/index.ts'),
+        path.resolve(__dirname, 'src/ui/index.ts'),
       ],
       output: {
         preserveModules: true,

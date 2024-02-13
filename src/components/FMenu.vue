@@ -171,11 +171,6 @@
 import Popper from 'vue3-popper/dist/popper.esm';
 import equal from 'fast-deep-equal/es6';
 import {
-  onClickOutside,
-  useElementBounding,
-  useMutationObserver,
-} from '@vueuse/core';
-import {
   useVModelProxy,
   removeDiacritics,
   stringify,
@@ -344,8 +339,8 @@ const resolvedPopperProps = computed<InstanceType<typeof Popper>['$props']>(
   })
 );
 
-const isOpen = useVModelProxy<boolean>({ props });
-const selectedOption = useVModelProxy<FMenuOptionValue>({
+const isOpen = useVModelProxy({ props });
+const selectedOption = useVModelProxy({
   props,
   propName: 'selectedOption',
 });

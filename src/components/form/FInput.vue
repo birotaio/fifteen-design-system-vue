@@ -134,6 +134,7 @@ FField.FInput(
 import { vMaska } from 'maska';
 
 import { getCssColor } from '@/utils/getCssColor';
+import { close, exclamationCircle } from '@/.generated/icons';
 
 import type { MaskOptions } from 'maska';
 import type { CommonFormFieldProps } from '@/types/forms';
@@ -242,6 +243,8 @@ defineExpose<{
   forceValidation,
   focus,
 });
+
+registerIcons('icons', { close, exclamationCircle });
 
 const { isValid, hint, value, validate } = useFieldWithValidation<string>(
   props,

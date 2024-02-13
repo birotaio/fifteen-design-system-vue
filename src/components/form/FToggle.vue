@@ -5,12 +5,12 @@ FField.FToggle(
   v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
   label.FToggle__label(
-    :for="name"
+    :for="id"
     :class="labelClasses"
   )
     .FToggle__wrapper
       input.FToggle__hiddenCheckbox(
-        :id="name"
+        :id="id"
         ref="toggleRef"
         v-model="fieldValue"
         :name="name"
@@ -156,6 +156,8 @@ FField.FToggle(
 
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
+import { getUid } from '@/utils/uid';
+import { checkmark } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
@@ -231,6 +233,10 @@ defineExpose<{
 }>({
   focus,
 });
+
+registerIcons('icons', { checkmark });
+
+const id = computed(() => `toggle-${getUid()}`);
 
 const toggleRef = ref<HTMLElement>();
 

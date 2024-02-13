@@ -16,8 +16,6 @@ component.FFieldLabel(
 </style>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-
 import { getCssColor } from '@/utils/getCssColor';
 
 import type { Color } from '@/types/colors';

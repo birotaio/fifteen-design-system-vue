@@ -1,10 +1,8 @@
-import { useBreakpoints, useMounted } from '@vueuse/core';
-
 import { breakpointsValues } from '@/constants/breakpoints';
 
 import type { ComputedRef } from 'vue';
 
-interface UseFBreakpointsReturn {
+export interface UseFBreakpointsReturn {
   isXxsAndDown: ComputedRef<boolean>;
   isXsAndDown: ComputedRef<boolean>;
   isSmAndDown: ComputedRef<boolean>;

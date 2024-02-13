@@ -1,8 +1,8 @@
-import { ref } from 'vue';
-
 import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
 import FSelect from '@/components/form/FSelect.vue';
 import FButton from '@/components/FButton.vue';
+import { registerIcons } from '@/composables/useIcon';
+import { flagIcons } from '@/icons';
 
 import type { StoryFn } from '@storybook/vue3';
 import type { FLocaleSelectProps } from '@/components/form/FLocaleSelect.vue';
@@ -14,7 +14,10 @@ export default {
 
 const Template = (args: FLocaleSelectProps) => ({
   components: { FLocaleSelect, FSelect },
-  setup: () => ({ args }),
+  setup: () => {
+    registerIcons('flags', flagIcons);
+    return { args };
+  },
   template: `<FLocaleSelect v-bind="args" />`,
 });
 

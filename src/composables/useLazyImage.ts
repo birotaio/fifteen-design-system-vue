@@ -1,5 +1,3 @@
-import { useIntersectionObserver } from '@vueuse/core';
-
 import type { Ref } from 'vue';
 
 // Arbitrary value to anticipate as much as possible image load before it is actually visible

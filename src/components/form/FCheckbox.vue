@@ -4,10 +4,10 @@ FField.FCheckbox(
   :style="style"
   v-bind="{ name, hint, hideHint, hintTextColor, hintIcon }"
 )
-  label.FCheckbox__label(:for="name")
+  label.FCheckbox__label(:for="id")
     .FCheckbox__wrapper
       input.FCheckbox__checkbox(
-        :id="name"
+        :id="id"
         ref="checkboxRef"
         v-model="checked"
         :name="name"
@@ -141,6 +141,8 @@ FField.FCheckbox(
 
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
+import { getUid } from '@/utils/uid';
+import { checkmark, checkboxIndeterminate } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
@@ -207,6 +209,13 @@ defineExpose<{
 }>({
   focus,
 });
+
+registerIcons('icons', {
+  checkmark,
+  checkboxIndeterminate,
+});
+
+const id = computed(() => `checkbox-${getUid()}`);
 
 const checkboxRef = ref<HTMLElement>();
 

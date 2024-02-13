@@ -64,3 +64,21 @@ export function useIcon<C extends IconCollectionName>(
   );
   return { markup };
 }
+
+/**
+ * Register icons _a posteriori_ to a specific collection, if they have not been registered by `createFds`
+ * @param collectionName - Name of the icon collection
+ * @param icons - Icons to register
+ */
+export function registerIcons<C extends IconCollectionName>(
+  collectionName: C,
+  icons: { [K in IconCollectionMap[C]]?: string }
+): void {
+  const injectionKey = iconsInjectionKeys[collectionName];
+  const _icons = inject<IconCollection<IconCollectionMap[C]>>(injectionKey);
+  if (_icons) {
+    (Object.keys(icons) as IconCollectionMap[C][]).forEach(name => {
+      _icons[name] = icons[name];
+    });
+  }
+}

@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FDigitsInput from '@/components/form/FDigitsInput.vue';
 import FButton from '@/components/FButton.vue';
 

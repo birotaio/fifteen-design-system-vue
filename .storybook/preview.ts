@@ -5,7 +5,6 @@ import '@/styles/theme.styl';
 import { setup } from '@storybook/vue3';
 
 import { createFds } from '../src/createFds';
-import { icons, flagIcons, creditCardIcons } from '../src/icons';
 
 import type { App } from 'vue';
 
@@ -65,11 +64,9 @@ const vueRouter = createRouter({
   ],
 });
 
-const fds = createFds({
-  icons,
-  flagIcons,
-  creditCardIcons,
-});
+// No icon is registered _a priori_ so we can test that
+// each component is registering its own icons properly
+const fds = createFds();
 
 setup((app: App) => {
   app.use(vueRouter);

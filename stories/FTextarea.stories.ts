@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FTextarea from '@/components/form/FTextarea.vue';
 import FButton from '@/components/FButton.vue';
 

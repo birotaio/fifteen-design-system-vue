@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FInput from '@/components/form/FInput.vue';
 import FButton from '@/components/FButton.vue';
 import { mask, required } from '@/rules';

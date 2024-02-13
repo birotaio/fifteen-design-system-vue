@@ -1,5 +1,3 @@
-import { ref } from 'vue';
-
 import FRadio from '@/components/form/FRadio.vue';
 import FButton from '@/components/FButton.vue';
 

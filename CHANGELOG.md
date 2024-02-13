@@ -1,4 +1,10 @@
-## 0.23.0 (February 6, 2024)
+## 0.23.1 (February 13, 2024)
+
+### Fixes
+
+- [FDebugMenu] Fix property name for trigger text
+
+## 0.23.0 (February 13, 2024)
 
 ### Features
 

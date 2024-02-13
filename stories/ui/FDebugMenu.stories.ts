@@ -92,7 +92,7 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
             type: 'trigger',
             title: 'First test action',
             description: 'This one will succeed',
-            tirggerText: 'Call',
+            triggerText: 'Call',
             action: async () => {
               await new Promise(resolve => setTimeout(resolve, 2000));
               return 'Success message after waiting 2 seconds';
@@ -102,7 +102,7 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
             type: 'trigger',
             title: 'Second test action',
             description: 'But this one will fail',
-            tirggerText: 'Try',
+            triggerText: 'Try',
             action: () => {
               throw new Error(
                 'When I throw, the error is handled and displayed'
@@ -112,14 +112,14 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
           {
             type: 'trigger',
             title: 'Third test action, no description',
-            tirggerText: 'Launch',
+            triggerText: 'Launch',
             action: () => 'Launched to Mars',
           },
           {
             type: 'trigger',
             title: 'Fourth test action',
             description: 'This is disabled',
-            tirggerText: 'Call',
+            triggerText: 'Call',
             disabled: true,
             action: () => {},
           },

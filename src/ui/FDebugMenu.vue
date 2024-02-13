@@ -90,7 +90,7 @@ FPopup.FDebugMenu(
             :hover-color="`${controlColor}--light-1`"
             :loading="itemLoadingKey === `${groupIndex}-${itemIndex}`"
             @click="callAction(item, `${groupIndex}-${itemIndex}`)"
-          ) {{ item.tirggerText }}
+          ) {{ item.triggerText }}
         template(v-if="item.type === 'toggle'")
           FCheckbox(
             :key="`${groupIndex}-${itemIndex}`"
@@ -313,7 +313,7 @@ export type DebugMenuItem<T extends DebugMenuItemType = DebugMenuItemType> =
           /**
            * Text to display on the action button.
            */
-          tirggerText: string;
+          triggerText: string;
           /**
            * Action to be executed when the menu item is clicked.
            * Returns a message to display on success,

@@ -1,3 +1,9 @@
+## 0.23.2 (March 20, 2024)
+
+### Fixes
+
+- [Lib] Add `types` for all export paths 
+
 ## 0.23.1 (February 13, 2024)
 
 ### Fixes

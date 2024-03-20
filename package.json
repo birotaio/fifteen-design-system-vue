@@ -1,6 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
-  "version": "0.23.1",
+  "version": "0.23.2",
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
     "type": "git",
@@ -34,23 +34,28 @@
   "exports": {
     ".": {
       "import": "./dist/es/index.js",
-      "require": "./dist/cjs/index.js"
+      "require": "./dist/cjs/index.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./resolvers": {
       "import": "./dist/es/resolvers/index.js",
-      "require": "./dist/cjs/resolvers/index.js"
+      "require": "./dist/cjs/resolvers/index.js",
+      "types": "./resolvers.d.ts"
     },
     "./rules": {
       "import": "./dist/es/rules/index.js",
-      "require": "./dist/cjs/rules/index.js"
+      "require": "./dist/cjs/rules/index.js",
+      "types": "./rules.d.ts"
     },
     "./router": {
       "import": "./dist/es/components/router/index.js",
-      "require": "./dist/cjs/components/router/index.js"
+      "require": "./dist/cjs/components/router/index.js",
+      "types": "./router.d.ts"
     },
     "./ui": {
       "import": "./dist/es/ui/index.js",
-      "require": "./dist/cjs/ui/index.js"
+      "require": "./dist/cjs/ui/index.js",
+      "types": "./ui.d.ts"
     },
     "./icons": {
       "import": "./dist/es/.generated/icons.js",

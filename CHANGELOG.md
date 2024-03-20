@@ -1,3 +1,9 @@
+## 0.23.3 (March 20, 2024)
+
+### Fixes
+
+- [Lib] Add `types` for all icon paths 
+
 ## 0.23.2 (March 20, 2024)
 
 ### Fixes

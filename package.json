@@ -1,6 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
-  "version": "0.23.2",
+  "version": "0.23.3",
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
     "type": "git",
@@ -59,15 +59,18 @@
     },
     "./icons": {
       "import": "./dist/es/.generated/icons.js",
-      "require": "./dist/cjs/.generated/icons.js"
+      "require": "./dist/cjs/.generated/icons.js",
+      "types": "./icons/index.d.ts"
     },
     "./icons/flags": {
       "import": "./dist/es/.generated/flags.js",
-      "require": "./dist/cjs/.generated/flags.js"
+      "require": "./dist/cjs/.generated/flags.js",
+      "types": "./icons/flags.d.ts"
     },
     "./icons/credit-cards": {
       "import": "./dist/es/.generated/credit-cards.js",
-      "require": "./dist/cjs/.generated/credit-cards.js"
+      "require": "./dist/cjs/.generated/credit-cards.js",
+      "types": "./icons/credit-cards.d.ts"
     },
     "./styles/*.styl": "./dist/styles/*.styl",
     "./style.css": "./dist/style.css",

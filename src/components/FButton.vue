@@ -74,8 +74,9 @@ square($size)
   .FLink__content
     color var(--fbutton--text-color)
 
-  path
-    fill var(--fbutton--text-color)
+  .FIcon__content
+    path
+      fill var(--fbutton--text-color)
 
   &.FButton--ghost,
   &.FButton--outlined
@@ -93,8 +94,9 @@ square($size)
     .FLink__content
       color var(--fbutton--text-color--hover)
 
-    path
-      fill var(--fbutton--text-color--hover)
+    .FIcon__content
+      path
+        fill var(--fbutton--text-color--hover)
 
   &.FButton--outlined
     box-shadow 0 0 0 rem(2) var(--fbutton--outline-color) inset

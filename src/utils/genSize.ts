@@ -1,4 +1,4 @@
-import type { Ref } from 'vue';
+import type { MaybeRef } from 'vue';
 
 export const cssUnits = [
   'em',
@@ -30,8 +30,8 @@ const unitRegexp = new RegExp('^(-?[0-9.]+)([a-z%]+)?$', 'i');
  * @returns Proper CSS size value
  */
 export function genSize(
-  size: Ref<SizeRaw> | SizeRaw,
-  factor?: Ref<number | null | undefined> | number | null
+  size: MaybeRef<SizeRaw>,
+  factor?: MaybeRef<number | null | undefined>
 ): string {
   const sizeValue = unref(size);
   const factorValue = unref(factor) ?? 1;

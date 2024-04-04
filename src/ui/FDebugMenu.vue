@@ -111,6 +111,9 @@ FPopup.FDebugMenu(
             :hover-border-color="`${controlColor}--light-1`"
             :checked-border-color="`${controlColor}--light-1`"
             :placeholder="getInputPlaceholder(item)"
+            :outline-color="controlColor"
+            :focus-color="`${controlColor}--light-2`"
+            :color="`${controlColor}--light-2`"
             @change="updateInputRef($event, item, `${groupIndex}-${itemIndex}`)"
             @click.stop
           )

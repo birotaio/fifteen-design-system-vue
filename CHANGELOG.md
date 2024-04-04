@@ -1,14 +1,20 @@
+## 0.24.0 (April 4, 2024)
+
+### Features
+
+- [FDebugMenu] Add `input` type for menu items
+
 ## 0.23.3 (March 20, 2024)
 
 ### Fixes
 
-- [Lib] Add `types` for all icon paths 
+- [Lib] Add `types` for all icon paths
 
 ## 0.23.2 (March 20, 2024)
 
 ### Fixes
 
-- [Lib] Add `types` for all export paths 
+- [Lib] Add `types` for all export paths
 
 ## 0.23.1 (February 13, 2024)
 

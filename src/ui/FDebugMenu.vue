@@ -85,7 +85,7 @@ FPopup.FDebugMenu(
           FButton(
             :key="`${groupIndex}-${itemIndex}`"
             :disabled="item.disabled"
-            size="tiny"
+            size="small"
             :color="controlColor"
             :hover-color="`${controlColor}--light-1`"
             :loading="itemLoadingKey === `${groupIndex}-${itemIndex}`"
@@ -96,11 +96,22 @@ FPopup.FDebugMenu(
             :key="`${groupIndex}-${itemIndex}`"
             :model-value="item.ref.value"
             :disabled="item.disabled"
-            size="tiny"
             :hover-border-color="`${controlColor}--light-1`"
             :checked-border-color="`${controlColor}--light-1`"
             :checked-color="controlColor"
             @update:model-value="updateToggleRef($event, item, `${groupIndex}-${itemIndex}`)"
+            @click.stop
+          )
+        template(v-if="item.type === 'input'")
+          FInput(
+            :key="`${groupIndex}-${itemIndex}`"
+            :style="getInputStyle(item)"
+            :model-value="item.ref.value"
+            :disabled="item.disabled"
+            :hover-border-color="`${controlColor}--light-1`"
+            :checked-border-color="`${controlColor}--light-1`"
+            :placeholder="getInputPlaceholder(item)"
+            @change="updateInputRef($event, item, `${groupIndex}-${itemIndex}`)"
             @click.stop
           )
         template(v-if="item.type === 'content'")
@@ -272,20 +283,28 @@ scroll-theme()
   .FCheckbox
     margin 0
 
-  .FCheckbox__labelText
+    &__labelText
+      margin 0
+
+  .FInput
     margin 0
+    height 2.5rem
+    width var(--FDebugMenu--inputWidth)
+
+    &__input input
+      font-size rem(14)
 </style>
 
 <script setup lang="ts">
 import { useVModelProxy } from '@fifteen/shared-lib';
 
-import { FCard, FPopup, genSize } from '@/index';
+import { FCard, FPopup, FInput, genSize } from '@/index';
 import { arrowExpand, printedCircuitBoard, close } from '@/.generated/icons';
 
 import type { Ref, MaybeRef, WritableComputedRef } from 'vue';
 import type { BaseColorDesignToken, Color } from '@/index';
 
-export type DebugMenuItemType = 'trigger' | 'toggle' | 'content';
+export type DebugMenuItemType = 'trigger' | 'toggle' | 'content' | 'input';
 
 interface DebugMenuItemBase {
   /**
@@ -350,6 +369,27 @@ export type DebugMenuItem<T extends DebugMenuItemType = DebugMenuItemType> =
            * Whether the menu item is disabled.
            */
           disabled?: false;
+        }
+      : T extends 'input'
+      ? {
+          /**
+           * Type of the menu item.
+           */
+          type: 'input';
+          /**
+           * Reference to the input value to update.
+           */
+          ref:
+            | Ref<string | undefined>
+            | WritableComputedRef<string | undefined>;
+          /**
+           * A placeholder for the input.
+           */
+          placeholder?: MaybeRef<string>;
+          /**
+           * Width of the input.
+           */
+          width?: MaybeRef<string>;
         }
       : never);
 
@@ -461,6 +501,9 @@ function restoreDebugValues(): void {
         if (item.type === 'toggle' && key === `${groupIndex}-${itemIndex}`) {
           updateToggleRef(value as boolean, item, key);
         }
+        if (item.type === 'input' && key === `${groupIndex}-${itemIndex}`) {
+          updateInputRef(value as string, item, key);
+        }
       });
     });
   }
@@ -507,7 +550,7 @@ function snap(withTransition?: boolean): void {
       /**
        * To compute if the point should be snapped to the edge, consider two
        * diagonals from the window corners, defining four quadrants. Then we
-       * whange the frame of reference to the center of the window, we normalize
+       * change the frame of reference to the center of the window, we normalize
        * the coordinates to be restricted between 0 and 1 and we compute
        * the angle of the point in polar coordinates. This easily allows us
        * to determine the quadrant the point is in, based on the angle value.
@@ -586,6 +629,27 @@ function updateToggleRef(
 ): void {
   item.ref.value = value ?? false;
   debugMenuStore.value.values[key] = item.ref.value;
+}
+
+function updateInputRef(
+  value: string | Event | null,
+  item: DebugMenuItem<'input'>,
+  key: string
+): void {
+  if (value instanceof Event) {
+    item.ref.value = (value.target as HTMLInputElement).value;
+  } else {
+    item.ref.value = value ?? '';
+  }
+  debugMenuStore.value.values[key] = item.ref.value;
+}
+
+function getInputPlaceholder(item: DebugMenuItem<'input'>): string {
+  return unref(item.placeholder) ?? '';
+}
+
+function getInputStyle(item: DebugMenuItem<'input'>): Style {
+  return { '--FDebugMenu--inputWidth': genSize(item.width) };
 }
 
 const message = ref<string | null>(null);

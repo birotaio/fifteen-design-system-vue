@@ -70,6 +70,8 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
   setup: () => {
     const testToggle1 = ref(false);
     const testToggle2 = ref(true);
+    const refInput1 = ref<string>();
+    const refInput2 = ref('World');
     const testContent = ref({
       projects: [
         {
@@ -141,6 +143,19 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
             description: 'I can be disabled',
             disabled: true,
             ref: testToggle2,
+          },
+          {
+            type: 'input',
+            title: 'Free input, no description, with placeholder',
+            placeholder: 'Type here',
+            ref: refInput1,
+          },
+          {
+            type: 'input',
+            title: 'Second input',
+            description: 'This one is disabled',
+            disabled: true,
+            ref: refInput2,
           },
         ],
       },

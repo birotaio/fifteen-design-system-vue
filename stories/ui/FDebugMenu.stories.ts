@@ -72,6 +72,8 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
     const testToggle2 = ref(true);
     const refInput1 = ref<string>();
     const refInput2 = ref('World');
+    const refSelect1 = ref<string>();
+    const refSelect2 = ref('Hallo');
     const testContent = ref({
       projects: [
         {
@@ -153,9 +155,31 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
           {
             type: 'input',
             title: 'Second input',
-            description: 'This one is disabled',
+            description: 'This one is disabled and prefilled',
             disabled: true,
             ref: refInput2,
+          },
+          {
+            type: 'select',
+            title: 'Select clearable with placeholder',
+            placeholder: 'Choose...',
+            clearable: true,
+            options: ['Me', 'Moi', 'Ich'].map(text => ({
+              value: text,
+              label: text,
+            })),
+            ref: refSelect1,
+          },
+          {
+            type: 'select',
+            title: 'Second select',
+            description: 'This one is disabled and prefilled',
+            disabled: true,
+            options: ['Hello', 'Bonjour', 'Hallo'].map(text => ({
+              value: text,
+              label: text,
+            })),
+            ref: refSelect2,
           },
         ],
       },

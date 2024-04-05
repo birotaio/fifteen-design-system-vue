@@ -44,7 +44,7 @@ FPopup.FDebugMenu(
           @click="isOpen = false"
         )
           FIcon(name="close")
-    transition(name="FDebugMenu__message--transition")
+    Transition(name="FDebugMenu__message--transition")
       .FDebugMenu__message(
         v-if="message"
         :class="{ 'FDebugMenu__message--error': hasError }"
@@ -84,7 +84,7 @@ FPopup.FDebugMenu(
         template(v-if="item.type === 'trigger'")
           FButton(
             :key="`${groupIndex}-${itemIndex}`"
-            :disabled="item.disabled"
+            :disabled="getValue(item.disabled)"
             size="small"
             :color="controlColor"
             :hover-color="`${controlColor}--light-1`"
@@ -95,7 +95,7 @@ FPopup.FDebugMenu(
           FCheckbox(
             :key="`${groupIndex}-${itemIndex}`"
             :model-value="item.ref.value"
-            :disabled="item.disabled"
+            :disabled="getValue(item.disabled)"
             :hover-border-color="`${controlColor}--light-1`"
             :checked-border-color="`${controlColor}--light-1`"
             :checked-color="controlColor"
@@ -107,14 +107,32 @@ FPopup.FDebugMenu(
             :key="`${groupIndex}-${itemIndex}`"
             :style="getInputStyle(item)"
             :model-value="item.ref.value"
-            :disabled="item.disabled"
+            :disabled="getValue(item.disabled)"
             :hover-border-color="`${controlColor}--light-1`"
             :checked-border-color="`${controlColor}--light-1`"
-            :placeholder="getInputPlaceholder(item)"
+            :placeholder="getValue(item.placeholder, '')"
             :outline-color="controlColor"
             :focus-color="`${controlColor}--light-2`"
             :color="`${controlColor}--light-2`"
             @change="updateInputRef($event, item, `${groupIndex}-${itemIndex}`)"
+            @click.stop
+          )
+        template(v-if="item.type === 'select'")
+          FSelect(
+            :key="`${groupIndex}-${itemIndex}`"
+            :style="getInputStyle(item)"
+            :model-value="item.ref.value"
+            :disabled="getValue(item.disabled)"
+            :hover-border-color="`${controlColor}--light-1`"
+            :checked-border-color="`${controlColor}--light-1`"
+            :placeholder="getValue(item.placeholder, '')"
+            :outline-color="controlColor"
+            :focus-color="`${controlColor}--light-2`"
+            :color="`${controlColor}--light-2`"
+            :options="getValue(item.options)"
+            :clearable="getValue(item.clearable)"
+            size="small"
+            @update:model-value="updateInputRef($event, item, `${groupIndex}-${itemIndex}`)"
             @click.stop
           )
         template(v-if="item.type === 'content'")
@@ -296,6 +314,9 @@ scroll-theme()
 
     &__input input
       font-size rem(14)
+
+  .FSelect
+    margin 0
 </style>
 
 <script setup lang="ts">
@@ -305,23 +326,28 @@ import { FCard, FPopup, FInput, genSize } from '@/index';
 import { arrowExpand, printedCircuitBoard, close } from '@/.generated/icons';
 
 import type { Ref, MaybeRef, WritableComputedRef } from 'vue';
-import type { BaseColorDesignToken, Color } from '@/index';
+import type { BaseColorDesignToken, Color, FMenuOption } from '@/index';
 
-export type DebugMenuItemType = 'trigger' | 'toggle' | 'content' | 'input';
+export type DebugMenuItemType =
+  | 'trigger'
+  | 'toggle'
+  | 'content'
+  | 'input'
+  | 'select';
 
 interface DebugMenuItemBase {
   /**
    * Title of the menu item.
    */
-  title: string;
+  title: MaybeRef<string>;
   /**
    * Optional description of the menu item.
    */
-  description?: string;
+  description?: MaybeRef<string>;
   /**
    * Whether the menu item is disabled.
    */
-  disabled?: boolean;
+  disabled?: MaybeRef<boolean>;
 }
 
 export type DebugMenuItem<T extends DebugMenuItemType = DebugMenuItemType> =
@@ -390,9 +416,38 @@ export type DebugMenuItem<T extends DebugMenuItemType = DebugMenuItemType> =
            */
           placeholder?: MaybeRef<string>;
           /**
-           * Width of the input.
+           * Width of the input. If given as a number, it will be treated as pixels.
            */
-          width?: MaybeRef<string>;
+          width?: MaybeRef<string | number>;
+        }
+      : T extends 'select'
+      ? {
+          /**
+           * Type of the menu item.
+           */
+          type: 'select';
+          /**
+           * Reference to the input value to update.
+           */
+          ref:
+            | Ref<string | undefined>
+            | WritableComputedRef<string | undefined>;
+          /**
+           * A placeholder for the input.
+           */
+          placeholder?: MaybeRef<string>;
+          /**
+           * Width of the input. If given as a number, it will be treated as pixels.
+           */
+          width?: MaybeRef<string | number>;
+          /**
+           * Whether the select input is clearable
+           */
+          clearable?: MaybeRef<boolean>;
+          /**
+           * Options for the select input
+           */
+          options: MaybeRef<FMenuOption[]>;
         }
       : never);
 
@@ -504,7 +559,10 @@ function restoreDebugValues(): void {
         if (item.type === 'toggle' && key === `${groupIndex}-${itemIndex}`) {
           updateToggleRef(value as boolean, item, key);
         }
-        if (item.type === 'input' && key === `${groupIndex}-${itemIndex}`) {
+        if (
+          (item.type === 'input' || item.type === 'select') &&
+          key === `${groupIndex}-${itemIndex}`
+        ) {
           updateInputRef(value as string, item, key);
         }
       });
@@ -612,7 +670,7 @@ function getItemClasses(
   item: DebugMenuItem
 ): Record<string, boolean | undefined> {
   return {
-    'FDebugMenu__item--disabled': item.disabled,
+    'FDebugMenu__item--disabled': getValue(item.disabled),
     'FDebugMenu__item--clickable': item.type === 'toggle',
     'FDebugMenu__item--block': item.type === 'content',
   };
@@ -636,7 +694,7 @@ function updateToggleRef(
 
 function updateInputRef(
   value: string | Event | null,
-  item: DebugMenuItem<'input'>,
+  item: DebugMenuItem<'input'> | DebugMenuItem<'select'>,
   key: string
 ): void {
   if (value instanceof Event) {
@@ -647,11 +705,13 @@ function updateInputRef(
   debugMenuStore.value.values[key] = item.ref.value;
 }
 
-function getInputPlaceholder(item: DebugMenuItem<'input'>): string {
-  return unref(item.placeholder) ?? '';
+function getValue<T>(maybeRef: MaybeRef<T>, defaultValue?: T): T | undefined {
+  return unref(maybeRef) ?? defaultValue;
 }
 
-function getInputStyle(item: DebugMenuItem<'input'>): Style {
+function getInputStyle(
+  item: DebugMenuItem<'input'> | DebugMenuItem<'select'>
+): Style {
   return { '--FDebugMenu--inputWidth': genSize(item.width) };
 }
 

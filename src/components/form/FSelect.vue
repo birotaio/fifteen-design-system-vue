@@ -31,6 +31,20 @@ FField.FSelect(
         v-bind="scope"
       )
 
+    template(#option-suffix="{ isSelected }")
+      Transition(name="FSelect__optionClearTransition")
+        FButton(
+          v-if="clearable && isSelected"
+          icon
+          ghost
+          size="tiny"
+          @click.stop="clear"
+        )
+          FIcon(
+            name="close"
+            color="textColor"
+          )
+
     template(#activator)
       .FSelect__select(
         ref="selectRef"
@@ -55,7 +69,7 @@ FField.FSelect(
               .FSelect__text {{ getValueLabel(fieldValue) }}
             .FSelect__placeholder(v-else) {{ placeholder }}
         FIcon.FSelect__icon(
-          v-if="!disabled && !loading"
+          v-if="!loading"
           :name="iconName"
           :size="16"
           color="transparent"
@@ -144,6 +158,9 @@ FField.FSelect(
   .FSelect__placeholder
     color var(--color--neutral--light-1)
 
+  .FSelect__icon
+    opacity 0.25
+
   &,
   &:hover,
   &:focus
@@ -161,9 +178,24 @@ FField.FSelect(
 
 .FSelect--small
   .FSelect__select
-    padding rem(12)
+    padding rem(12) rem(4) rem(12) rem(12)
     height rem(36)
     font-size rem(14)
+
+.FSelect__optionClearTransition
+  opacity 1
+
+  &-enter-active,
+  &-leave-active
+    transition opacity 1s
+
+  &-enter-to,
+  &-leave-from
+    opacity 1
+
+  &-enter-from,
+  &-leave-to
+    opacity 0
 </style>
 
 <script setup lang="ts">
@@ -386,9 +418,16 @@ function getValueLabel(value: string): string | undefined {
 function handleIconClick(event: Event): void {
   if (props.clearable && isMenuOpen.value && fieldValue.value) {
     event.stopPropagation();
-    fieldValue.value = null;
-    emit('clear');
+    clear();
   }
+}
+
+/**
+ * Clear selection
+ */
+function clear(): void {
+  fieldValue.value = null;
+  emit('clear');
 }
 
 /**

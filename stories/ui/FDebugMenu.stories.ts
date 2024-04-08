@@ -148,9 +148,11 @@ const ConfigTemplate = (args: FDebugMenuProps) => ({
           },
           {
             type: 'input',
-            title: 'Free input, no description, with placeholder',
+            title: 'Free input',
+            description: 'With placeholder, stored locally',
             placeholder: 'Type here',
             ref: refInput1,
+            localStorageKey: 'greetings',
           },
           {
             type: 'input',

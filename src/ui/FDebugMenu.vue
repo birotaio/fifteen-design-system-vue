@@ -99,7 +99,7 @@ FPopup.FDebugMenu(
             :hover-border-color="`${controlColor}--light-1`"
             :checked-border-color="`${controlColor}--light-1`"
             :checked-color="controlColor"
-            @update:model-value="updateToggleRef($event, item, `${groupIndex}-${itemIndex}`)"
+            @update:model-value="updateToggleRef($event, item)"
             @click.stop
           )
         template(v-if="item.type === 'input'")
@@ -114,7 +114,7 @@ FPopup.FDebugMenu(
             :outline-color="controlColor"
             :focus-color="`${controlColor}--light-2`"
             :color="`${controlColor}--light-2`"
-            @change="updateInputRef($event, item, `${groupIndex}-${itemIndex}`)"
+            @change="updateInputRef($event, item)"
             @click.stop
           )
         template(v-if="item.type === 'select'")
@@ -132,7 +132,7 @@ FPopup.FDebugMenu(
             :options="getValue(item.options)"
             :clearable="getValue(item.clearable)"
             size="small"
-            @update:model-value="updateInputRef($event, item, `${groupIndex}-${itemIndex}`)"
+            @update:model-value="updateInputRef($event, item)"
             @click.stop
           )
         template(v-if="item.type === 'content'")
@@ -348,6 +348,10 @@ interface DebugMenuItemBase {
    * Whether the menu item is disabled.
    */
   disabled?: MaybeRef<boolean>;
+  /**
+   * If given, store the value in local storage under this key.
+   */
+  localStorageKey?: string;
 }
 
 export type DebugMenuItem<T extends DebugMenuItemType = DebugMenuItemType> =
@@ -554,16 +558,15 @@ function restoreDebugValues(): void {
   for (const [key, value] of Object.entries(
     debugMenuStore.value?.values ?? {}
   )) {
-    props.config.forEach((group, groupIndex) => {
-      group.items.forEach((item, itemIndex) => {
-        if (item.type === 'toggle' && key === `${groupIndex}-${itemIndex}`) {
-          updateToggleRef(value as boolean, item, key);
-        }
-        if (
-          (item.type === 'input' || item.type === 'select') &&
-          key === `${groupIndex}-${itemIndex}`
-        ) {
-          updateInputRef(value as string, item, key);
+    props.config.forEach(group => {
+      group.items.forEach(item => {
+        if (key === item.localStorageKey) {
+          if (item.type === 'toggle') {
+            updateToggleRef(value as boolean, item);
+          }
+          if (item.type === 'input' || item.type === 'select') {
+            updateInputRef(value as string, item);
+          }
         }
       });
     });
@@ -685,24 +688,26 @@ function clickItemHandler(item: DebugMenuItem): void {
 
 function updateToggleRef(
   value: boolean | null,
-  item: DebugMenuItem<'toggle'>,
-  key: string
+  item: DebugMenuItem<'toggle'>
 ): void {
   item.ref.value = value ?? false;
-  debugMenuStore.value.values[key] = item.ref.value;
+  if (item.localStorageKey) {
+    debugMenuStore.value.values[item.localStorageKey] = item.ref.value;
+  }
 }
 
 function updateInputRef(
   value: string | Event | null,
-  item: DebugMenuItem<'input'> | DebugMenuItem<'select'>,
-  key: string
+  item: DebugMenuItem<'input'> | DebugMenuItem<'select'>
 ): void {
   if (value instanceof Event) {
     item.ref.value = (value.target as HTMLInputElement).value;
   } else {
     item.ref.value = value ?? '';
   }
-  debugMenuStore.value.values[key] = item.ref.value;
+  if (item.localStorageKey) {
+    debugMenuStore.value.values[item.localStorageKey] = item.ref.value;
+  }
 }
 
 function getValue<T>(maybeRef: MaybeRef<T>, defaultValue?: T): T | undefined {

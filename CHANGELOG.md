@@ -3,6 +3,12 @@
 ### Features
 
 - [FDebugMenu] Add `input` type for menu items
+- [FDebugMenu] Add `select` type for menu items
+
+### Changes
+
+- [FDebugMenu] Explicitly store data in local storage if a key is set in config
+- [Storybook] Bump Node version to 18.17.1 for Storybook build (github.io page)
 
 ## 0.23.3 (March 20, 2024)
 

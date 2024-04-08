@@ -125,6 +125,7 @@ FPopup.FDebugMenu(
             :disabled="getValue(item.disabled)"
             :hover-border-color="`${controlColor}--light-1`"
             :checked-border-color="`${controlColor}--light-1`"
+            :options-menu-color="`${controlColor}--light-2`"
             :placeholder="getValue(item.placeholder, '')"
             :outline-color="controlColor"
             :focus-color="`${controlColor}--light-2`"
@@ -518,6 +519,10 @@ const props = withDefaults(defineProps<FDebugMenuProps>(), {
   snapMode: 'edges',
   name: 'Debug menu',
 });
+
+defineEmits<{
+  (event: 'update:modelValue', value: boolean): void;
+}>();
 
 registerIcons('icons', {
   arrowExpand,

@@ -31,20 +31,6 @@ FField.FSelect(
         v-bind="scope"
       )
 
-    template(#option-suffix="{ isSelected }")
-      Transition(name="FSelect__optionClearTransition")
-        FButton(
-          v-if="clearable && isSelected"
-          icon
-          ghost
-          size="tiny"
-          @click.stop="clear"
-        )
-          FIcon(
-            name="close"
-            color="textColor"
-          )
-
     template(#activator)
       .FSelect__select(
         ref="selectRef"
@@ -181,21 +167,6 @@ FField.FSelect(
     padding rem(12) rem(4) rem(12) rem(12)
     height rem(36)
     font-size rem(14)
-
-.FSelect__optionClearTransition
-  opacity 1
-
-  &-enter-active,
-  &-leave-active
-    transition opacity 1s
-
-  &-enter-to,
-  &-leave-from
-    opacity 1
-
-  &-enter-from,
-  &-leave-to
-    opacity 0
 </style>
 
 <script setup lang="ts">

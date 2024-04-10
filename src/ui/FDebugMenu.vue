@@ -67,6 +67,7 @@ FPopup.FDebugMenu(
       :title-vertical-padding="8"
       :gap="8"
       :text-hover-color="controlColor"
+      no-isolation
     )
       template(#title)
         h6 {{ group.title }}
@@ -85,7 +86,6 @@ FPopup.FDebugMenu(
           FButton(
             :key="`${groupIndex}-${itemIndex}`"
             :disabled="getValue(item.disabled)"
-            size="small"
             :color="controlColor"
             :hover-color="`${controlColor}--light-1`"
             :loading="itemLoadingKey === `${groupIndex}-${itemIndex}`"

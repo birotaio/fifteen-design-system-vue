@@ -22,7 +22,7 @@
 
 <style lang="stylus">
 .FExpandable
-  isolation isolate
+  isolation var(--FExpandable--isolation)
 
 .FExpandable__title
   position relative
@@ -164,6 +164,10 @@ export interface FExpandableProps {
    * Color of the text when hover
    */
   textHoverColor?: Color;
+  /**
+   * In some cases, we need to disable isolation that creates a new stacking context for each expandable instance
+   */
+  noIsolation?: boolean;
 }
 
 const props = withDefaults(defineProps<FExpandableProps>(), {
@@ -174,6 +178,7 @@ const props = withDefaults(defineProps<FExpandableProps>(), {
   hoverColor: 'primary',
   textHoverColor: 'neutral--light-5',
   titleVerticalPadding: 16,
+  noIsolation: false,
 });
 
 const isToggled = useVModelProxy({ props });
@@ -198,6 +203,7 @@ const style = computed(
     '--FExpandable--icon-scale': String(props.iconScale),
     '--FExpandable--hover-color': getCssColor(props.hoverColor),
     '--FExpandable--text-hover-color': getCssColor(props.textHoverColor),
+    '--FExpandable--isolation': props.noIsolation ? 'auto' : 'isolate',
   })
 );
 

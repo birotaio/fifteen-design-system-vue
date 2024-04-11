@@ -1,14 +1,26 @@
+## 0.24.0 (April 4, 2024)
+
+### Features
+
+- [FDebugMenu] Add `input` type for menu items
+- [FDebugMenu] Add `select` type for menu items
+
+### Changes
+
+- [FDebugMenu] Explicitly store data in local storage if a key is set in config
+- [Storybook] Bump Node version to 18.17.1 for Storybook build (github.io page)
+
 ## 0.23.3 (March 20, 2024)
 
 ### Fixes
 
-- [Lib] Add `types` for all icon paths 
+- [Lib] Add `types` for all icon paths
 
 ## 0.23.2 (March 20, 2024)
 
 ### Fixes
 
-- [Lib] Add `types` for all export paths 
+- [Lib] Add `types` for all export paths
 
 ## 0.23.1 (February 13, 2024)
 

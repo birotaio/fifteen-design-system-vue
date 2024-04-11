@@ -44,7 +44,7 @@ FPopup.FDebugMenu(
           @click="isOpen = false"
         )
           FIcon(name="close")
-    transition(name="FDebugMenu__message--transition")
+    Transition(name="FDebugMenu__message--transition")
       .FDebugMenu__message(
         v-if="message"
         :class="{ 'FDebugMenu__message--error': hasError }"
@@ -67,6 +67,7 @@ FPopup.FDebugMenu(
       :title-vertical-padding="8"
       :gap="8"
       :text-hover-color="controlColor"
+      no-isolation
     )
       template(#title)
         h6 {{ group.title }}
@@ -84,8 +85,7 @@ FPopup.FDebugMenu(
         template(v-if="item.type === 'trigger'")
           FButton(
             :key="`${groupIndex}-${itemIndex}`"
-            :disabled="item.disabled"
-            size="tiny"
+            :disabled="getValue(item.disabled)"
             :color="controlColor"
             :hover-color="`${controlColor}--light-1`"
             :loading="itemLoadingKey === `${groupIndex}-${itemIndex}`"
@@ -95,12 +95,45 @@ FPopup.FDebugMenu(
           FCheckbox(
             :key="`${groupIndex}-${itemIndex}`"
             :model-value="item.ref.value"
-            :disabled="item.disabled"
-            size="tiny"
+            :disabled="getValue(item.disabled)"
             :hover-border-color="`${controlColor}--light-1`"
             :checked-border-color="`${controlColor}--light-1`"
             :checked-color="controlColor"
-            @update:model-value="updateToggleRef($event, item, `${groupIndex}-${itemIndex}`)"
+            @update:model-value="updateToggleRef($event, item)"
+            @click.stop
+          )
+        template(v-if="item.type === 'input'")
+          FInput(
+            :key="`${groupIndex}-${itemIndex}`"
+            :style="getInputStyle(item)"
+            :model-value="item.ref.value"
+            :disabled="getValue(item.disabled)"
+            :hover-border-color="`${controlColor}--light-1`"
+            :checked-border-color="`${controlColor}--light-1`"
+            :placeholder="getValue(item.placeholder, '')"
+            :outline-color="controlColor"
+            :focus-color="`${controlColor}--light-2`"
+            :color="`${controlColor}--light-2`"
+            @change="updateInputRef($event, item)"
+            @click.stop
+          )
+        template(v-if="item.type === 'select'")
+          FSelect(
+            :key="`${groupIndex}-${itemIndex}`"
+            :style="getInputStyle(item)"
+            :model-value="item.ref.value"
+            :disabled="getValue(item.disabled)"
+            :hover-border-color="`${controlColor}--light-1`"
+            :checked-border-color="`${controlColor}--light-1`"
+            :options-menu-color="`${controlColor}--light-2`"
+            :placeholder="getValue(item.placeholder, '')"
+            :outline-color="controlColor"
+            :focus-color="`${controlColor}--light-2`"
+            :color="`${controlColor}--light-2`"
+            :options="getValue(item.options)"
+            :clearable="getValue(item.clearable)"
+            size="small"
+            @update:model-value="updateInputRef($event, item)"
             @click.stop
           )
         template(v-if="item.type === 'content'")
@@ -272,34 +305,54 @@ scroll-theme()
   .FCheckbox
     margin 0
 
-  .FCheckbox__labelText
+    &__labelText
+      margin 0
+
+  .FInput
+    margin 0
+    height 2.5rem
+    width var(--FDebugMenu--inputWidth)
+
+    &__input input
+      font-size rem(14)
+
+  .FSelect
     margin 0
 </style>
 
 <script setup lang="ts">
 import { useVModelProxy } from '@fifteen/shared-lib';
 
-import { FCard, FPopup, genSize } from '@/index';
+import { FCard, FPopup, FInput, genSize } from '@/index';
 import { arrowExpand, printedCircuitBoard, close } from '@/.generated/icons';
 
 import type { Ref, MaybeRef, WritableComputedRef } from 'vue';
-import type { BaseColorDesignToken, Color } from '@/index';
+import type { BaseColorDesignToken, Color, FMenuOption } from '@/index';
 
-export type DebugMenuItemType = 'trigger' | 'toggle' | 'content';
+export type DebugMenuItemType =
+  | 'trigger'
+  | 'toggle'
+  | 'content'
+  | 'input'
+  | 'select';
 
 interface DebugMenuItemBase {
   /**
    * Title of the menu item.
    */
-  title: string;
+  title: MaybeRef<string>;
   /**
    * Optional description of the menu item.
    */
-  description?: string;
+  description?: MaybeRef<string>;
   /**
    * Whether the menu item is disabled.
    */
-  disabled?: boolean;
+  disabled?: MaybeRef<boolean>;
+  /**
+   * If given, store the value in local storage under this key.
+   */
+  localStorageKey?: string;
 }
 
 export type DebugMenuItem<T extends DebugMenuItemType = DebugMenuItemType> =
@@ -350,6 +403,56 @@ export type DebugMenuItem<T extends DebugMenuItemType = DebugMenuItemType> =
            * Whether the menu item is disabled.
            */
           disabled?: false;
+        }
+      : T extends 'input'
+      ? {
+          /**
+           * Type of the menu item.
+           */
+          type: 'input';
+          /**
+           * Reference to the input value to update.
+           */
+          ref:
+            | Ref<string | undefined>
+            | WritableComputedRef<string | undefined>;
+          /**
+           * A placeholder for the input.
+           */
+          placeholder?: MaybeRef<string>;
+          /**
+           * Width of the input. If given as a number, it will be treated as pixels.
+           */
+          width?: MaybeRef<string | number>;
+        }
+      : T extends 'select'
+      ? {
+          /**
+           * Type of the menu item.
+           */
+          type: 'select';
+          /**
+           * Reference to the input value to update.
+           */
+          ref:
+            | Ref<string | undefined>
+            | WritableComputedRef<string | undefined>;
+          /**
+           * A placeholder for the input.
+           */
+          placeholder?: MaybeRef<string>;
+          /**
+           * Width of the input. If given as a number, it will be treated as pixels.
+           */
+          width?: MaybeRef<string | number>;
+          /**
+           * Whether the select input is clearable
+           */
+          clearable?: MaybeRef<boolean>;
+          /**
+           * Options for the select input
+           */
+          options: MaybeRef<FMenuOption[]>;
         }
       : never);
 
@@ -417,6 +520,10 @@ const props = withDefaults(defineProps<FDebugMenuProps>(), {
   name: 'Debug menu',
 });
 
+defineEmits<{
+  (event: 'update:modelValue', value: boolean): void;
+}>();
+
 registerIcons('icons', {
   arrowExpand,
   printedCircuitBoard,
@@ -456,10 +563,15 @@ function restoreDebugValues(): void {
   for (const [key, value] of Object.entries(
     debugMenuStore.value?.values ?? {}
   )) {
-    props.config.forEach((group, groupIndex) => {
-      group.items.forEach((item, itemIndex) => {
-        if (item.type === 'toggle' && key === `${groupIndex}-${itemIndex}`) {
-          updateToggleRef(value as boolean, item, key);
+    props.config.forEach(group => {
+      group.items.forEach(item => {
+        if (key === item.localStorageKey) {
+          if (item.type === 'toggle') {
+            updateToggleRef(value as boolean, item);
+          }
+          if (item.type === 'input' || item.type === 'select') {
+            updateInputRef(value as string, item);
+          }
         }
       });
     });
@@ -507,7 +619,7 @@ function snap(withTransition?: boolean): void {
       /**
        * To compute if the point should be snapped to the edge, consider two
        * diagonals from the window corners, defining four quadrants. Then we
-       * whange the frame of reference to the center of the window, we normalize
+       * change the frame of reference to the center of the window, we normalize
        * the coordinates to be restricted between 0 and 1 and we compute
        * the angle of the point in polar coordinates. This easily allows us
        * to determine the quadrant the point is in, based on the angle value.
@@ -566,7 +678,7 @@ function getItemClasses(
   item: DebugMenuItem
 ): Record<string, boolean | undefined> {
   return {
-    'FDebugMenu__item--disabled': item.disabled,
+    'FDebugMenu__item--disabled': getValue(item.disabled),
     'FDebugMenu__item--clickable': item.type === 'toggle',
     'FDebugMenu__item--block': item.type === 'content',
   };
@@ -581,11 +693,36 @@ function clickItemHandler(item: DebugMenuItem): void {
 
 function updateToggleRef(
   value: boolean | null,
-  item: DebugMenuItem<'toggle'>,
-  key: string
+  item: DebugMenuItem<'toggle'>
 ): void {
   item.ref.value = value ?? false;
-  debugMenuStore.value.values[key] = item.ref.value;
+  if (item.localStorageKey) {
+    debugMenuStore.value.values[item.localStorageKey] = item.ref.value;
+  }
+}
+
+function updateInputRef(
+  value: string | Event | null,
+  item: DebugMenuItem<'input'> | DebugMenuItem<'select'>
+): void {
+  if (value instanceof Event) {
+    item.ref.value = (value.target as HTMLInputElement).value;
+  } else {
+    item.ref.value = value ?? '';
+  }
+  if (item.localStorageKey) {
+    debugMenuStore.value.values[item.localStorageKey] = item.ref.value;
+  }
+}
+
+function getValue<T>(maybeRef: MaybeRef<T>, defaultValue?: T): T | undefined {
+  return unref(maybeRef) ?? defaultValue;
+}
+
+function getInputStyle(
+  item: DebugMenuItem<'input'> | DebugMenuItem<'select'>
+): Style {
+  return { '--FDebugMenu--inputWidth': genSize(item.width) };
 }
 
 const message = ref<string | null>(null);

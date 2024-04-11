@@ -71,6 +71,11 @@
               )
                 span {{ option.label }}
               span.FMenu__option__description(v-if="option.description") {{ option.description }}
+            .FMenu__option__spacer
+            slot(
+              name="option-suffix"
+              v-bind="{ option, index, isSelected: isSelected(index) }"
+            )
         .FMenu__noOption(v-if="options.length === 0")
           FLoader.FMenu__loader(
             v-if="loading"
@@ -144,6 +149,9 @@
   display flex
   flex-direction column
   justify-content center
+
+.FMenu__option__spacer
+  flex-grow 1
 
 .FMenu__noOption
   display flex

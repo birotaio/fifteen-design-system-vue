@@ -105,7 +105,7 @@ FField.FInput(
   &:hover,
   &:focus
     color var(--color--neutral--light-1)
-    background var(--color--neutral--light-3)
+    background var(--finput--color)
     box-shadow none
 
 .FInput__errorIcon

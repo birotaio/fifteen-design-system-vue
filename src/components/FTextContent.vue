@@ -204,8 +204,8 @@ export interface FTextContentProps {
 const props = withDefaults(defineProps<FTextContentProps>(), {
   // prettier-ignore
   allowedTags: () => [
-  'a', 'abbr', 'address', 'b', 'bdo', 'blockquote', 'br', 'caption', 'cite', 'code', 'data', 'dd', 'del', 'dfn', 'div', 'dl', 'dt', 'em', 'figcaption', 'figure', 'h2', 'h3', 'h4', 'h5', 'h6', 'i', 'ins', 'img', 'kbd', 'li', 'mark', 'meter', 'ol', 'p', 'pre', 'q', 'ruby', 'rp', 'rt', 's', 'samp', 'small', 'span', 'strong', 'sub', 'sup', 'table', 'tbody', 'td', 'th', 'thead', 'time', 'tr', 'u', 'ul', 'var', 'wbr'
-  ],
+    'a', 'abbr', 'address', 'article', 'aside', 'audio', 'b','bdo', 'blockquote', 'br', 'caption', 'cite', 'code', 'data','datalist', 'dd', 'del', 'details', 'dfn', 'div', 'dl', 'dt', 'em', 'figcaption', 'figure', 'fieldset', 'footer', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'i', 'img', 'ins', 'kbd', 'li', 'legend', 'main', 'mark', 'meter', 'nav', 'ol', 'optgroup', 'option', 'output', 'p', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'section', 'small', 'source', 'span', 'strong', 'sub', 'summary', 'sup', 'table', 'tbody', 'td', 'th', 'thead', 'time', 'tr', 'u', 'ul', 'var', 'wbr',
+    ],
   dense: false,
 });
 
@@ -238,10 +238,10 @@ const xssOptions: XSS.IFilterXSSOptions = {
 
 // prettier-ignore
 const everySpaces = [
-  '\s', '\u200B', '\u0020', '\u00A0', '\u1680', '\u2000', '\u2001', '\u2002', '\u2003', '\u2004',
-  '\u2005', '\u2006', '\u2007', '\u2008', '\u2009', '\u200A', '\u202F', '\u205F', '\u3000',
-  '&nbsp;', '&ensp;', '&emsp;', '&emsp13;', '&numsp;', '&puncsp;', '&thinsp;', '&hairsp;',
-];
+    '\s', '\u200B', '\u0020', '\u00A0', '\u1680', '\u2000', '\u2001', '\u2002', '\u2003', '\u2004',
+    '\u2005', '\u2006', '\u2007', '\u2008', '\u2009', '\u200A', '\u202F', '\u205F', '\u3000',
+    '&nbsp;', '&ensp;', '&emsp;', '&emsp13;', '&numsp;', '&puncsp;', '&thinsp;', '&hairsp;',
+  ];
 const emptyParagraphRegex = new RegExp(
   `<p>(${everySpaces.join('|')})*<\/p>`,
   'gi'

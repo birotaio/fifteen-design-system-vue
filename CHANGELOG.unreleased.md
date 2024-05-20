@@ -2,4 +2,4 @@
 
 ### Fixes
 
-[FTextContent] Add more default allowed tags
+[FTextContent] Add missing default allowed tags ([SVC-13387](https://zoov-eu.atlassian.net/browse/SVC-13387))

@@ -153,7 +153,7 @@
     "vite": "^4.0.4",
     "vite-plugin-dts": "^3.5.3",
     "vite-svg-loader": "^3.3.0",
-    "vitest": "^0.13.0",
+    "vitest": "^1.6.0",
     "vue-tsc": "^2.0.21",
     "vue3-popper": "https://github.com/qnp/vue3-popper#build",
     "zx": "^6.1.0"

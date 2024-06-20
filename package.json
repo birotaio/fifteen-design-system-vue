@@ -1,6 +1,6 @@
 {
   "name": "@fifteen/design-system-vue",
-  "version": "0.24.0",
+  "version": "0.24.1",
   "description": "Vue 3 (Composition API + Typescript) implementation of the Fifteen Design System",
   "repository": {
     "type": "git",

@@ -1,5 +1,8 @@
 import type { ComputedRef } from 'vue';
-import type { RouteLocationRaw } from 'vue-router';
+import type {
+  RouteLocationNormalizedLoaded,
+  RouteLocationRaw,
+} from 'vue-router';
 
 export interface UseSmartLinkBaseProps {
   /**
@@ -63,8 +66,8 @@ export interface UseSmartLinkReturn<Props> {
 export function useSmartLink<Props extends UseSmartLinkBaseProps>(
   props: Props
 ): UseSmartLinkReturn<Props> {
-  // Use the current route if available
-  const route = typeof useRoute === 'function' ? useRoute() : null;
+  // Handle the case where the Vue Router context is lost
+  const route = useRoute() as RouteLocationNormalizedLoaded | null;
 
   const isExternal = computed(
     () =>

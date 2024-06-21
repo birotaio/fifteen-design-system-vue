@@ -202,7 +202,7 @@ const iconList = [
   'zoovStack',
 ] as const;
 
-export type IconName = typeof iconList[number];
+export type IconName = (typeof iconList)[number];
 export const getIconList = (): IconName[] =>
   iconList.map(name => name as IconName);
 

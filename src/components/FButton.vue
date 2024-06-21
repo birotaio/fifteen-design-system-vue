@@ -448,7 +448,7 @@ const props = withDefaults(defineProps<FButtonProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'click', event: MouseEvent | KeyboardEvent): void;
+  (name: 'click', event: MouseEvent): void;
   (name: 'focus', event: FocusEvent): void;
   (name: 'blur', event: FocusEvent): void;
 }>();
@@ -464,10 +464,10 @@ const baseColor = computed<string>(() =>
   props.disabled
     ? 'neutral--light-2'
     : multipleColors.value
-    ? props.color
-    : props.ghost || props.outlined
-    ? 'neutral--dark-5'
-    : 'neutral--light-5'
+      ? props.color
+      : props.ghost || props.outlined
+        ? 'neutral--dark-5'
+        : 'neutral--light-5'
 );
 const textHoverColor = computed<string>(() =>
   multipleColors.value && props.color.includes('-')
@@ -478,10 +478,10 @@ const backgroundColor = computed<string>(() =>
   props.ghost || props.outlined
     ? ''
     : props.disabled
-    ? 'neutral--light-4'
-    : multipleColors.value
-    ? props.background
-    : props.color
+      ? 'neutral--light-4'
+      : multipleColors.value
+        ? props.background
+        : props.color
 );
 const backgroundHoverColor = computed<string>(() => {
   // If props.hoverColor is given, use it
@@ -507,10 +507,10 @@ const computedFocusColor = computed<string>(
     (multipleColors.value
       ? 'neutral--light-2'
       : props.disabled
-      ? ''
-      : props.color.includes('-')
-      ? props.color
-      : props.color + '--light-2')
+        ? ''
+        : props.color.includes('-')
+          ? props.color
+          : props.color + '--light-2')
 );
 
 const classes = computed(() => ({
@@ -556,7 +556,7 @@ const style = computed(
   })
 );
 
-function handleTrigger(event: MouseEvent | KeyboardEvent): void {
+function handleTrigger(event: MouseEvent): void {
   if (!props.href && !props.submit) event.preventDefault();
   if (!props.loading && !props.disabled && !props.preventClick) {
     emit('click', event);

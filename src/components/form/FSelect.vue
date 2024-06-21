@@ -21,14 +21,14 @@ FField.FSelect(
   )
     template(#option-prefix="scope")
       slot(
-        name="option-prefix"
         v-bind="scope"
+        name="option-prefix"
       )
 
     template(#option="scope")
       slot(
-        name="option"
         v-bind="scope"
+        name="option"
       )
 
     template(#activator)
@@ -357,8 +357,8 @@ const hintTextColor = computed(() =>
   props.disabled
     ? 'neutral--dark-1'
     : isValid.value
-    ? props.hintTextColor
-    : props.errorColor
+      ? props.hintTextColor
+      : props.errorColor
 );
 
 const iconClasses = computed(() => ({

@@ -1,3 +1,10 @@
+## 0.24.1 (June 20, 2024)
+
+### Fixes
+
+- [useSmartLink] Prevent issues in contexts with no Vue Router context
+- [FTextContent] Add missing default allowed tags ([SVC-13387](https://zoov-eu.atlassian.net/browse/SVC-13387))
+
 ## 0.24.0 (April 4, 2024)
 
 ### Features

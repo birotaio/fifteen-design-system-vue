@@ -24,8 +24,8 @@ FField.FAutocomplete(
   )
     template(#option="scope")
       slot.FAutocomplete__option(
-        name="option"
         v-bind="scope"
+        name="option"
       )
         div(v-html="formatOption(scope.option)")
     template(#activator)
@@ -299,8 +299,8 @@ const hintTextColor = computed(() =>
   props.disabled
     ? 'neutral--dark-1'
     : isValid.value
-    ? props.hintTextColor
-    : props.errorColor
+      ? props.hintTextColor
+      : props.errorColor
 );
 
 const inputRef = ref();

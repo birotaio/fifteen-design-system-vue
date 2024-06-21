@@ -1,5 +1,8 @@
 import type { ComputedRef } from 'vue';
-import type { RouteLocationRaw } from 'vue-router';
+import type {
+  RouteLocationNormalizedLoaded,
+  RouteLocationRaw,
+} from 'vue-router';
 
 export interface UseSmartLinkBaseProps {
   /**
@@ -57,12 +60,15 @@ export interface UseSmartLinkReturn<Props> {
 }
 
 /**
- * Expose methods and poperties to compute link props and classes
+ * Expose methods and properties to compute link props and classes
  * @param props - The link component props, extending UseSmartLinkBaseProps
  */
 export function useSmartLink<Props extends UseSmartLinkBaseProps>(
   props: Props
 ): UseSmartLinkReturn<Props> {
+  // Handle the case where the Vue Router context is lost
+  const route = useRoute() as RouteLocationNormalizedLoaded | null;
+
   const isExternal = computed(
     () =>
       !!props.location &&
@@ -99,13 +105,11 @@ export function useSmartLink<Props extends UseSmartLinkBaseProps>(
       };
     },
     getClasses: (href: string) => {
-      const route = useRoute();
-
       const activeClass = props.activeClass ?? 'link--active';
       const exactActiveClass = props.exactActiveClass ?? 'link--exactActive';
-      const isActive = (href && route.path.startsWith(href)) || false;
+      const isActive = (href && route?.path.startsWith(href)) || false;
       // Remove the trailing slash
-      const isExactActive = href === route.path.replace(/\/$/, '');
+      const isExactActive = href === route?.path.replace(/\/$/, '');
 
       return {
         [activeClass]: isActive,

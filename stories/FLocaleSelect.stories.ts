@@ -97,6 +97,7 @@ Loading.args = {
 const FocusTemplate = (args: FLocaleSelectProps) => ({
   components: { FLocaleSelect, FButton },
   setup() {
+    registerIcons('flags', flagIcons);
     const selectRef = ref();
     function focus() {
       selectRef.value?.focus();

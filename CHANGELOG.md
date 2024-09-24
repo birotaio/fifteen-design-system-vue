@@ -1,3 +1,10 @@
+## 0.24.2 (September 24, 2024)
+
+### Changes
+
+- [Chore] Upgrade dependencies to fix security vulnerabilities
+- [Storybook] Migrate from version 7 to version 8
+
 ## 0.24.1 (June 20, 2024)
 
 ### Fixes

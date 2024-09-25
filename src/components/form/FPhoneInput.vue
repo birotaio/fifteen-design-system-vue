@@ -243,6 +243,7 @@ const props = withDefaults(defineProps<FPhoneInputProps>(), {
 });
 
 const emit = defineEmits<{
+  (name: 'update:modelValue', value: string | null): void;
   (name: 'update:phoneNumber', value: string | null): void;
   (name: 'update:countryCode', value: CountryCode): void;
   (name: 'input', value: InputEvent): void;

@@ -6,6 +6,9 @@ export default {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: {
     name: '@storybook/vue3-vite',
+    options: {
+      docgen: 'vue-component-meta',
+    },
   },
 
   async viteFinal(baseConfig) {

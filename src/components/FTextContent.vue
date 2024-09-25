@@ -238,7 +238,7 @@ const xssOptions: XSS.IFilterXSSOptions = {
 
 // prettier-ignore
 const everySpaces = [
-  '\s', '\u200B', '\u0020', '\u00A0', '\u1680', '\u2000', '\u2001', '\u2002', '\u2003', '\u2004',
+  '\\s', '\u200B', '\u0020', '\u00A0', '\u1680', '\u2000', '\u2001', '\u2002', '\u2003', '\u2004',
   '\u2005', '\u2006', '\u2007', '\u2008', '\u2009', '\u200A', '\u202F', '\u205F', '\u3000',
   '&nbsp;', '&ensp;', '&emsp;', '&emsp13;', '&numsp;', '&puncsp;', '&thinsp;', '&hairsp;',
 ];
@@ -246,6 +246,7 @@ const emptyParagraphRegex = new RegExp(
   `<p>(${everySpaces.join('|')})*<\/p>`,
   'gi'
 );
+console.log('emptyParagraphRegex', emptyParagraphRegex);
 
 const textContent = computed(() =>
   avoidOrphanPunct(xss(props.source, xssOptions))

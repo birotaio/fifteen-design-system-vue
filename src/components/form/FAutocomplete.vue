@@ -1,5 +1,3 @@
-<!-- eslint-disable vue/no-v-html -->
-<!-- An XSS attack is not a risk here -->
 <template lang="pug">
 FField.FAutocomplete(
   v-bind="{ name, label, labelTextColor, hint, hideHint, hintTextColor, hintIcon }"
@@ -27,6 +25,8 @@ FField.FAutocomplete(
         v-bind="scope"
         name="option"
       )
+        // An XSS attack is not a risk here
+        // eslint-disable-next-line vue/no-v-html
         div(v-html="formatOption(scope.option)")
     template(#activator)
       FInput(
@@ -299,8 +299,8 @@ const hintTextColor = computed(() =>
   props.disabled
     ? 'neutral--dark-1'
     : isValid.value
-      ? props.hintTextColor
-      : props.errorColor
+    ? props.hintTextColor
+    : props.errorColor
 );
 
 const inputRef = ref();

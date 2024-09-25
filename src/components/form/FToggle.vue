@@ -156,7 +156,6 @@ FField.FToggle(
 
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
-import { getUid } from '@/utils/uid';
 import { checkmark } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
@@ -236,7 +235,7 @@ defineExpose<{
 
 registerIcons('icons', { checkmark });
 
-const id = computed(() => `toggle-${getUid()}`);
+const id = useId();
 
 const toggleRef = ref<HTMLElement>();
 

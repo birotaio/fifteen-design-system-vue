@@ -141,7 +141,6 @@ FField.FCheckbox(
 
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
-import { getUid } from '@/utils/uid';
 import { checkmark, checkboxIndeterminate } from '@/.generated/icons';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
@@ -215,7 +214,7 @@ registerIcons('icons', {
   checkboxIndeterminate,
 });
 
-const id = computed(() => `checkbox-${getUid()}`);
+const id = useId();
 
 const checkboxRef = ref<HTMLElement>();
 

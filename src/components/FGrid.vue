@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { genSize } from '@/utils/genSize';
-import { columns } from '@/constants/grid';
+import { columns as defaultColumns } from '@/constants/grid';
 
 export interface FGridProps {
   /**
@@ -27,7 +27,7 @@ export interface FGridProps {
 }
 
 const props = withDefaults(defineProps<FGridProps>(), {
-  columns,
+  columns: defaultColumns,
   gap: '4px',
 });
 

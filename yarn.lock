@@ -463,7 +463,7 @@ __metadata:
   dependencies:
     "@fifteen/shared-lib": ^0.18.1
     "@fifteen/tooling": ^0.6.3
-    "@prettier/plugin-pug": ^3.0.0
+    "@prettier/plugin-pug": ^3.1.0
     "@qnp/lus": ^0.4.1
     "@storybook/addon-essentials": ^8.3.3
     "@storybook/addon-links": ^8.3.3
@@ -926,7 +926,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prettier/plugin-pug@npm:^3.0.0":
+"@prettier/plugin-pug@npm:^3.1.0":
   version: 3.1.0
   resolution: "@prettier/plugin-pug@npm:3.1.0"
   dependencies:

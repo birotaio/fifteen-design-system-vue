@@ -27,7 +27,7 @@ export interface FCreditCardIconProps {
   /**
    * Code of the country, following the ISO 3166 standard
    */
-  cardType: CreditCardBrandId | null;
+  cardType?: CreditCardBrandId | null;
   /**
    * Size of the credit card icon
    */

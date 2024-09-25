@@ -4,7 +4,10 @@
     "es2021": true
   },
   "parser": "vue-eslint-parser",
-  "plugins": ["eslint-plugin-import", "vue"],
+  "plugins": [
+    "eslint-plugin-import",
+    "vue"
+  ],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:vue/vue3-recommended",
@@ -14,21 +17,62 @@
     "plugin:import/typescript",
     "plugin:vuejs-accessibility/recommended"
   ],
-
-  "ignorePatterns": ["auto-imports.d.ts", "components.d.ts", "dist", "scripts"],
+  "ignorePatterns": [
+    "auto-imports.d.ts",
+    "components.d.ts",
+    "dist",
+    "scripts"
+  ],
   "overrides": [
     {
-      "files": ["stories/**"],
+      "files": [
+        "**/*.vue"
+      ],
+      "rules": {
+        "vue/no-required-prop-with-default": "error",
+        "vue/require-explicit-emits": "off",
+        "vue/no-deprecated-v-bind-sync": "off",
+        "vue-pug-sfc/component-name-in-template-casing": "off",
+        "vue/no-v-for-template-key-on-child": "off",
+        "vue/no-reserved-component-names": "off",
+        "vue/v-on-event-hyphenation": "off",
+        "vue/no-deprecated-functional-template": "off",
+        "vue/no-deprecated-destroyed-lifecycle": "off",
+        "vue/no-deprecated-v-on-native-modifier": "off",
+        "vue/no-deprecated-filter": "off",
+        "vue/no-deprecated-dollar-listeners-api": "off",
+        "vue/html-quotes": "off",
+        "vue/no-deprecated-dollar-scopedslots-api": "off",
+        "vue/valid-v-slot": "off",
+        "vue/require-slots-as-functions": "off",
+        "vue/require-prop-comment": [
+          "warn",
+          {
+            "type": "JSDoc"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "stories/**"
+      ],
       "rules": {
         "@typescript-eslint/explicit-function-return-type": "off"
       }
     },
     {
-      "files": ["**/*.ts", "**/*.d.ts"],
+      "files": [
+        "**/*.ts",
+        "**/*.d.ts"
+      ],
       "parser": "@typescript-eslint/parser",
       "settings": {
         "import/parsers": {
-          "@typescript-eslint/parser": [".ts", ".d.ts"]
+          "@typescript-eslint/parser": [
+            ".ts",
+            ".d.ts"
+          ]
         }
       },
       "rules": {
@@ -36,12 +80,21 @@
           "error",
           {
             "selector": "variableLike",
-            "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+            "format": [
+              "camelCase",
+              "UPPER_CASE",
+              "PascalCase"
+            ],
             "leadingUnderscore": "allowSingleOrDouble"
           },
           {
-            "selector": ["typeLike", "enumMember"],
-            "format": ["PascalCase"]
+            "selector": [
+              "typeLike",
+              "enumMember"
+            ],
+            "format": [
+              "PascalCase"
+            ]
           }
         ]
       }
@@ -56,12 +109,19 @@
   "rules": {
     "@typescript-eslint/no-unused-vars": [
       "warn",
-      { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
     ],
     "vue/component-tags-order": [
       "error",
       {
-        "order": ["template", "style", "script"]
+        "order": [
+          "template",
+          "style",
+          "script"
+        ]
       }
     ],
     "vue/no-v-html": "error",

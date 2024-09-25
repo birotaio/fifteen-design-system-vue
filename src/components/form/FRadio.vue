@@ -124,7 +124,6 @@ FField.FRadio(
 
 <script setup lang="ts">
 import { getCssColor } from '@/utils/getCssColor';
-import { getUid } from '@/utils/uid';
 
 import type { FFieldProps } from '@/components/form/FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
@@ -193,7 +192,7 @@ defineExpose<{
   focus,
 });
 
-const id = computed(() => `radio-${getUid()}`);
+const id = useId();
 
 const {
   isValid,

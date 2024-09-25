@@ -30,7 +30,7 @@ export interface FFlagIconProps {
   /**
    * Code of the flag, following the ISO 3166 standard + regional flags (see /src/flags.ts for full list)
    */
-  flagCode: FlagCode;
+  flagCode?: FlagCode;
   /**
    * Size of the flag icon
    */

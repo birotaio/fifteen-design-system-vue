@@ -191,7 +191,7 @@ export interface FSelectProps
   /**
    * Array of options
    */
-  options: FMenuOption[];
+  options?: FMenuOption[];
   /**
    * Placeholder text
    */
@@ -357,8 +357,8 @@ const hintTextColor = computed(() =>
   props.disabled
     ? 'neutral--dark-1'
     : isValid.value
-      ? props.hintTextColor
-      : props.errorColor
+    ? props.hintTextColor
+    : props.errorColor
 );
 
 const iconClasses = computed(() => ({

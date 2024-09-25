@@ -213,7 +213,7 @@ export interface FMenuProps {
   /**
    * Array of options
    */
-  options: FMenuOption[];
+  options?: FMenuOption[];
   /**
    * Prevent item selection
    */

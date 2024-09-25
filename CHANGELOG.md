@@ -1,8 +1,9 @@
-## 0.24.2 (September 24, 2024)
+## 0.25.0 (September 24, 2024)
 
 ### Changes
 
 - [Chore] Upgrade dependencies to fix security vulnerabilities
+- [Chore] Upgrade Vue to version 3.5, use `useId` [BREAKING]
 - [Storybook] Migrate from version 7 to version 8
 
 ## 0.24.1 (June 20, 2024)

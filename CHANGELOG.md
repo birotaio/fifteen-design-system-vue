@@ -1,3 +1,9 @@
+## 0.25.1 (October 3, 2024)
+
+### Fixes
+
+- [Chore] Remove missed `console.log`
+
 ## 0.25.0 (September 24, 2024)
 
 ### Changes

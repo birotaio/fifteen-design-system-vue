@@ -246,7 +246,6 @@ const emptyParagraphRegex = new RegExp(
   `<p>(${everySpaces.join('|')})*<\/p>`,
   'gi'
 );
-console.log('emptyParagraphRegex', emptyParagraphRegex);
 
 const textContent = computed(() =>
   avoidOrphanPunct(xss(props.source, xssOptions))

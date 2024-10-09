@@ -1,58 +1,44 @@
 <template lang="pug">
-FSelect.FCountryCodeSelect(
-  ref="countryCodeSelectRef"
-  v-model="countryCode"
+FSelect.FLocaleSelect(
+  ref="localeSelectRef"
+  v-model="localeCode"
   v-bind="selectProps"
   :options="selectOptions"
   :hint="hint"
   @focus="handleFocus"
   @blur="handleBlur"
 )
-  template(#selected-value="{ value, label: flagLabel }")
-    .FCountryCodeSelect__selectedValue
-      FFlagIcon.FCountryCodeSelect__flag(
-        :flag-code="value"
-        :size="flagIconSize"
-      )
-      span {{ flagLabel }}
-  template(#option-prefix="{ option }")
-    FFlagIcon.FCountryCodeSelect__flag(
-      :flag-code="option.value"
-      :size="flagIconSize"
-    )
   template(#option="{ option }")
     span {{ option.label }}
 </template>
 
 <style lang="stylus">
-.FCountryCodeSelect__selectedValue
+.FLocaleSelect__selectedValue
   display flex
-
-.FCountryCodeSelect__flag
-  margin-right rem(12)
 </style>
 
 <script setup lang="ts">
-import { getFlagIconList } from '@/.generated/utils';
+import * as allLocales from 'date-fns/locale';
 
 import type { FSelectSize } from '@/components/form/FSelect.vue';
 import type { FFieldProps } from './FField.vue';
 import type { CommonFormFieldProps } from '@/types/forms';
 import type { Color } from '@/types/colors';
-import type { FlagCode } from '@/types/flags';
+import type { Locale } from 'date-fns';
 
-export interface FCountryCodeSelectProps
+type LocaleCode = Locale['code'];
+
+export interface FLocaleSelectProps
   extends FFieldProps,
-    CommonFormFieldProps<FlagCode | null> {
+    CommonFormFieldProps<LocaleCode | null> {
   /**
-   * List of countryCodes to use. Default to all availables country codes.
-   * @warning You will need to import the flag icons manually _via_ `createFds`
+   * List of locales codes to use. Default to all available locales.
    */
-  countryCodes?: FlagCode[];
+  localeCodes?: LocaleCode[];
   /**
-   * Optionally format the label. Defaults to countryCode value
+   * Optionally format the label. Defaults to locale value
    */
-  optionLabelFormat?: (countryCode: string) => string;
+  optionLabelFormat?: (localeCode: LocaleCode) => string;
   /**
    * Background color of the options menu
    */
@@ -111,7 +97,8 @@ export interface FCountryCodeSelectProps
   preventSelection?: boolean;
 }
 
-const props = withDefaults(defineProps<FCountryCodeSelectProps>(), {
+const props = withDefaults(defineProps<FLocaleSelectProps>(), {
+  localeCodes: () => [],
   borderColor: 'secondary',
   color: 'neutral--light-3',
   emptyText: '',
@@ -124,7 +111,6 @@ const props = withDefaults(defineProps<FCountryCodeSelectProps>(), {
   hintTextColor: 'neutral--dark-4',
   label: '',
   labelTextColor: 'neutral--dark-4',
-  countryCodes: () => [],
   menuWidth: 300,
   modelValue: undefined,
   name: '',
@@ -143,7 +129,7 @@ const props = withDefaults(defineProps<FCountryCodeSelectProps>(), {
 });
 
 const emit = defineEmits<{
-  (name: 'update:modelValue', value: FlagCode | null): void;
+  (name: 'update:modelValue', value: LocaleCode | null): void;
   (name: 'input', value: InputEvent, inputValue: string): void;
   (name: 'change', value: Event): void;
   (name: 'focus', value: Event): void;
@@ -182,11 +168,12 @@ const selectProps = {
 
 const {
   hint,
-  value: countryCode,
+  value: localeCode,
   validate,
-} = useFieldWithValidation<FlagCode>(props, {
+} = useFieldWithValidation<LocaleCode>(props, {
   validateOnMount: props?.validateOnMount,
 });
+
 const { handleFocus, handleBlur } = useInputEventBindings(
   validate,
   props.validationTrigger,
@@ -199,27 +186,25 @@ defineExpose<{
   focus,
 });
 
-// Flag icons are not registered by the component, because it can restrict the available country codes.
-// Thus, we can benefit from significative bundle size reduction if we import the country codes manually.
-
-const countryCodeSelectRef = ref<HTMLElement>();
-
-const flagIconSize = computed(() => (props.size === 'medium' ? 24 : 20));
+const localeSelectRef = ref<HTMLElement>();
 
 /**
  * Focus the input
  */
 function focus(): void {
-  countryCodeSelectRef.value?.focus();
+  localeSelectRef.value?.focus();
 }
 
+const defaultLocaleCodes = Object.values(allLocales).map(locale => locale.code);
+
 const selectOptions = computed(() => {
-  const countryCodes = props.countryCodes.length
-    ? props.countryCodes
-    : getFlagIconList();
-  return countryCodes.map(countryCode => ({
-    label: props.optionLabelFormat?.(countryCode) ?? countryCode,
-    value: countryCode,
+  const locales = props.localeCodes.length
+    ? props.localeCodes
+    : defaultLocaleCodes;
+
+  return locales.map(locale => ({
+    label: props.optionLabelFormat?.(locale) ?? locale,
+    value: locale,
   }));
 });
 </script>

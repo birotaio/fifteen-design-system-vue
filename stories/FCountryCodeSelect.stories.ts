@@ -71,7 +71,7 @@ Full.args = {
 
 export const Clearable: StoryFn<FCountryCodeSelectProps> = Template.bind({});
 Clearable.args = {
-  placeholder: 'Email address',
+  placeholder: 'FR',
   errorColor: 'danger',
   hint: 'Clear the input clicking on the cross icon',
   clearable: true,

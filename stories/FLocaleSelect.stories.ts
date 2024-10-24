@@ -33,8 +33,8 @@ Small.args = {
   modelValue: 'fr',
 };
 
-export const LimitedCountries: StoryFn<FLocaleSelectProps> = Template.bind({});
-LimitedCountries.args = {
+export const LimitedLocales: StoryFn<FLocaleSelectProps> = Template.bind({});
+LimitedLocales.args = {
   modelValue: 'fr',
   localeCodes: ['fr', 'es'],
 };

@@ -1,5 +1,5 @@
 <template lang="pug">
-FSelect.FCountryCodeSelect(
+FSelect.FCountrySelect(
   ref="countryCodeSelectRef"
   v-model="countryCode"
   v-bind="selectProps"
@@ -9,14 +9,14 @@ FSelect.FCountryCodeSelect(
   @blur="handleBlur"
 )
   template(#selected-value="{ value, label: flagLabel }")
-    .FCountryCodeSelect__selectedValue
-      FFlagIcon.FCountryCodeSelect__flag(
+    .FCountrySelect__selectedValue
+      FFlagIcon.FCountrySelect__flag(
         :flag-code="value"
         :size="flagIconSize"
       )
       span {{ flagLabel }}
   template(#option-prefix="{ option }")
-    FFlagIcon.FCountryCodeSelect__flag(
+    FFlagIcon.FCountrySelect__flag(
       :flag-code="option.value"
       :size="flagIconSize"
     )
@@ -25,10 +25,10 @@ FSelect.FCountryCodeSelect(
 </template>
 
 <style lang="stylus">
-.FCountryCodeSelect__selectedValue
+.FCountrySelect__selectedValue
   display flex
 
-.FCountryCodeSelect__flag
+.FCountrySelect__flag
   margin-right rem(12)
 </style>
 
@@ -41,7 +41,7 @@ import type { CommonFormFieldProps } from '@/types/forms';
 import type { Color } from '@/types/colors';
 import type { FlagCode } from '@/types/flags';
 
-export interface FCountryCodeSelectProps
+export interface FCountrySelectProps
   extends FFieldProps,
     CommonFormFieldProps<FlagCode | null> {
   /**
@@ -111,7 +111,7 @@ export interface FCountryCodeSelectProps
   preventSelection?: boolean;
 }
 
-const props = withDefaults(defineProps<FCountryCodeSelectProps>(), {
+const props = withDefaults(defineProps<FCountrySelectProps>(), {
   borderColor: 'secondary',
   color: 'neutral--light-3',
   emptyText: '',

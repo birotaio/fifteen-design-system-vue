@@ -60,11 +60,20 @@ FForm.FsForm(
         :rules="rules"
       )
     FGridItem(span="12")
-      FCountryCodeSelect(
-        label="FCountryCodeSelect"
-        name="FCountryCodeSelect"
-        hint="Hint for FCountryCodeSelect"
+      FCountrySelect(
+        label="FCountrySelect"
+        name="FCountrySelect"
+        hint="Hint for FCountrySelect"
         :country-codes="['US', 'FR']"
+        :loading="loading"
+        :rules="rules"
+      )
+    FGridItem(span="12")
+      FLocaleSelect(
+        label="FLocaleSelect"
+        name="FLocaleSelect"
+        hint="Hint for FLocaleSelect"
+        :locale-codes="['en', 'fr']"
         :loading="loading"
         :rules="rules"
       )

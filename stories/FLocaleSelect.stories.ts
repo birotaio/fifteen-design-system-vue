@@ -1,8 +1,5 @@
 import FLocaleSelect from '@/components/form/FLocaleSelect.vue';
-import FSelect from '@/components/form/FSelect.vue';
 import FButton from '@/components/FButton.vue';
-import { registerIcons } from '@/composables/useIcon';
-import { flagIcons } from '@/icons';
 
 import type { StoryFn } from '@storybook/vue3';
 import type { FLocaleSelectProps } from '@/components/form/FLocaleSelect.vue';
@@ -10,63 +7,68 @@ import type { FLocaleSelectProps } from '@/components/form/FLocaleSelect.vue';
 export default {
   title: 'Components/Form/FLocaleSelect',
   component: FLocaleSelect,
+  argTypes: {
+    onClick: { action: 'click' },
+    onFocus: { action: 'focus' },
+    onBlur: { action: 'blur' },
+    onChange: { action: 'change' },
+    onInput: { action: 'input' },
+  },
 };
 
 const Template = (args: FLocaleSelectProps) => ({
-  components: { FLocaleSelect, FSelect },
-  setup: () => {
-    registerIcons('flags', flagIcons);
-    return { args };
-  },
-  template: `<FLocaleSelect v-bind="args" />`,
+  components: { FLocaleSelect },
+  setup: () => ({ args }),
+  template: '<FLocaleSelect v-bind="args" />',
 });
 
 export const Default: StoryFn<FLocaleSelectProps> = Template.bind({});
 Default.args = {
-  modelValue: 'FR',
+  modelValue: 'fr',
 };
 
 export const Small: StoryFn<FLocaleSelectProps> = Template.bind({});
 Small.args = {
   size: 'small',
-  modelValue: 'FR',
+  modelValue: 'fr',
 };
 
 export const LimitedLocales: StoryFn<FLocaleSelectProps> = Template.bind({});
 LimitedLocales.args = {
-  modelValue: 'FR',
-  locales: ['FR', 'AST', 'ES'],
+  modelValue: 'fr',
+  localeCodes: ['fr', 'es'],
 };
 
 export const FormattedLabel: StoryFn<FLocaleSelectProps> = Template.bind({});
 FormattedLabel.args = {
-  modelValue: 'ES',
-  optionLabelFormat: locale => `app__lang__${locale.toLowerCase()}`,
-  locales: ['FR', 'AST', 'ES'],
+  modelValue: 'es',
+  optionLabelFormat: countryCode =>
+    `app__country_code__${countryCode.toLowerCase()}`,
+  localeCodes: ['fr', 'es'],
 };
 
 export const WithLabel: StoryFn<FLocaleSelectProps> = Template.bind({});
 WithLabel.args = {
   label: 'Pick a locale',
-  placeholder: 'FR',
+  placeholder: 'fr',
 };
 
 export const WithHint: StoryFn<FLocaleSelectProps> = Template.bind({});
 WithHint.args = {
-  placeholder: 'FR',
+  placeholder: 'fr',
   hint: 'Pick a locale',
 };
 
 export const Full: StoryFn<FLocaleSelectProps> = Template.bind({});
 Full.args = {
   label: 'Pick a locale',
-  placeholder: 'FR',
+  placeholder: 'fr',
   hint: 'Pick a locale',
 };
 
 export const Clearable: StoryFn<FLocaleSelectProps> = Template.bind({});
 Clearable.args = {
-  placeholder: 'Email address',
+  placeholder: 'fr',
   errorColor: 'danger',
   hint: 'Clear the input clicking on the cross icon',
   clearable: true,
@@ -74,30 +76,29 @@ Clearable.args = {
 
 export const Error: StoryFn<FLocaleSelectProps> = Template.bind({});
 Error.args = {
-  modelValue: 'ES',
-  rules: [value => value === 'FR'],
-  errorMessage: 'Select "FR" to dismiss the error',
-  locales: ['FR', 'GB', 'ES'],
+  modelValue: 'es',
+  rules: [value => value === 'fr'],
+  errorMessage: 'Select "fr" to dismiss the error',
+  localeCodes: ['fr', 'pl', 'es'],
   validationTrigger: 'change',
   validateOnMount: true,
 };
 
 export const Disabled: StoryFn<FLocaleSelectProps> = Template.bind({});
 Disabled.args = {
-  placeholder: 'FR',
+  placeholder: 'fr',
   disabled: true,
 };
 
 export const Loading: StoryFn<FLocaleSelectProps> = Template.bind({});
 Loading.args = {
-  placeholder: 'FR',
+  placeholder: 'fr',
   loading: true,
 };
 
 const FocusTemplate = (args: FLocaleSelectProps) => ({
   components: { FLocaleSelect, FButton },
   setup() {
-    registerIcons('flags', flagIcons);
     const selectRef = ref();
     function focus() {
       selectRef.value?.focus();
@@ -110,8 +111,9 @@ const FocusTemplate = (args: FLocaleSelectProps) => ({
   <FButton @click="focus">Focus the input</FButton>
 </div>`,
 });
+
 export const FocusProgrammatically: StoryFn<FLocaleSelectProps> =
   FocusTemplate.bind({});
 FocusProgrammatically.args = {
-  modelValue: 'ES',
+  modelValue: 'es',
 };

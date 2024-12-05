@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    reviewers:
+      - 'birotaio/web'
+    groups:
+      dependencies:
+        dependency-type: 'production'
+      dev-dependencies:
+        dependency-type: 'development'
+    ignore:
+      - dependency-name: '*'
+        update-types: ['version-update:semver-major']

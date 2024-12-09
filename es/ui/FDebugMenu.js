@@ -29,8 +29,8 @@ import "../composables/useLazyImage.js";
 /* empty css                   */
 /* empty css                          */
 /* empty css                      */
-/* empty css                            */
 /* empty css                             */
+/* empty css                              */
 import "vee-validate";
 /* empty css                   */
 /* empty css                       */

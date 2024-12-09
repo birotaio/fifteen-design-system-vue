@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});function r(t){return(o={})=>{const n=o.width?String(o.width):t.defaultWidth;return t.formats[n]||t.formats[t.defaultWidth]}}exports.buildFormatLongFn=r;

@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const t=require("vue"),n=require("../constants/colors.js"),c=new RegExp(`^(${n.colorDesignTokens.join("|")})(--rgb)?$`);function l(r,s=!1){const e=t.unref(r);if(!e)return"";const o=`--color--${e}`;return c.test(e)?s?o:`var(${o})`:e}exports.getCssColor=l;

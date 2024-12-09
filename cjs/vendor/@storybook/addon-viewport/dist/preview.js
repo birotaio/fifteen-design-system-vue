@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});var e="viewport",t={[e]:{value:void 0,isRotated:!1}},o={viewport:"reset",viewportRotated:!1},i=FEATURES?.viewportStoryGlobals?t:o;exports.initialGlobals=i;

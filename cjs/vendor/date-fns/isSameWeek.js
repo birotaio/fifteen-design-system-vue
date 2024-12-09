@@ -1,0 +1,1 @@
+"use strict";Object.defineProperties(exports,{__esModule:{value:!0},[Symbol.toStringTag]:{value:"Module"}});const t=require("./startOfWeek.js");function r(a,s,e){const u=t.startOfWeek(a,e),f=t.startOfWeek(s,e);return+u==+f}exports.default=r;exports.isSameWeek=r;

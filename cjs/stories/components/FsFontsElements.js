@@ -1,0 +1,1 @@
+"use strict";const e=require("./FsFontsElements2.js");;/* empty css                  */const t=require("../../_virtual/_plugin-vue_export-helper.js"),r={},s=t(r,[["render",e.render]]);module.exports=s;

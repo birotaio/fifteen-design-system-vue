@@ -1,0 +1,51 @@
+const t = {
+  "./stories/FAutocomplete.stories.ts": async () => import("../stories/FAutocomplete.stories.js"),
+  "./stories/FAvatar.stories.ts": async () => import("../stories/FAvatar.stories.js"),
+  "./stories/FBreadcrumbs.stories.ts": async () => import("../stories/FBreadcrumbs.stories.js"),
+  "./stories/FButton.stories.ts": async () => import("../stories/FButton.stories.js"),
+  "./stories/FButtonLink.stories.ts": async () => import("../stories/FButtonLink.stories.js"),
+  "./stories/FCard.stories.ts": async () => import("../stories/FCard.stories.js"),
+  "./stories/FCheckbox.stories.ts": async () => import("../stories/FCheckbox.stories.js"),
+  "./stories/FCountrySelect.stories.ts": async () => import("../stories/FCountrySelect.stories.js"),
+  "./stories/FCreditCardIcon.stories.ts": async () => import("../stories/FCreditCardIcon.stories.js"),
+  "./stories/FCreditCardInput.stories.ts": async () => import("../stories/FCreditCardInput.stories.js"),
+  "./stories/FDigitsInput.stories.ts": async () => import("../stories/FDigitsInput.stories.js"),
+  "./stories/FDivider.stories.ts": async () => import("../stories/FDivider.stories.js"),
+  "./stories/FExpandable.stories.ts": async () => import("../stories/FExpandable.stories.js"),
+  "./stories/FFileUpload.stories.ts": async () => import("../stories/FFileUpload.stories.js"),
+  "./stories/FFlagIcon.stories.ts": async () => import("../stories/FFlagIcon.stories.js"),
+  "./stories/FForm.stories.ts": async () => import("../stories/FForm.stories.js"),
+  "./stories/FGrid.stories.ts": async () => import("../stories/FGrid.stories.js"),
+  "./stories/FGridItem.stories.ts": async () => import("../stories/FGridItem.stories.js"),
+  "./stories/FIcon.stories.ts": async () => import("../stories/FIcon.stories.js"),
+  "./stories/FImage.stories.ts": async () => import("../stories/FImage.stories.js"),
+  "./stories/FInput.stories.ts": async () => import("../stories/FInput.stories.js"),
+  "./stories/FLink.stories.ts": async () => import("../stories/FLink.stories.js"),
+  "./stories/FLoader.stories.ts": async () => import("../stories/FLoader.stories.js"),
+  "./stories/FLocaleSelect.stories.ts": async () => import("../stories/FLocaleSelect.stories.js"),
+  "./stories/FLogo.stories.ts": async () => import("../stories/FLogo.stories.js"),
+  "./stories/FLogoAnimatable.stories.ts": async () => import("../stories/FLogoAnimatable.stories.js"),
+  "./stories/FMenu.stories.ts": async () => import("../stories/FMenu.stories.js"),
+  "./stories/FPhoneInput.stories.ts": async () => import("../stories/FPhoneInput.stories.js"),
+  "./stories/FPopup.stories.ts": async () => import("../stories/FPopup.stories.js"),
+  "./stories/FProgressBar.stories.ts": async () => import("../stories/FProgressBar.stories.js"),
+  "./stories/FRadio.stories.ts": async () => import("../stories/FRadio.stories.js"),
+  "./stories/FRadioGroup.stories.ts": async () => import("../stories/FRadioGroup.stories.js"),
+  "./stories/FRouterLink.stories.ts": async () => import("../stories/FRouterLink.stories.js"),
+  "./stories/FSelect.stories.ts": async () => import("../stories/FSelect.stories.js"),
+  "./stories/FSkeleton.stories.ts": async () => import("../stories/FSkeleton.stories.js"),
+  "./stories/FSvgImage.stories.ts": async () => import("../stories/FSvgImage.stories.js"),
+  "./stories/FTextContent.stories.ts": async () => import("../stories/FTextContent.stories.js"),
+  "./stories/FTextarea.stories.ts": async () => import("../stories/FTextarea.stories.js"),
+  "./stories/FToggle.stories.ts": async () => import("../stories/FToggle.stories.js"),
+  "./stories/StylesColors.stories.ts": async () => import("../stories/StylesColors.stories.js"),
+  "./stories/StylesElevations.stories.ts": async () => import("../stories/StylesElevations.stories.js"),
+  "./stories/StylesFonts.stories.ts": async () => import("../stories/StylesFonts.stories.js"),
+  "./stories/ui/FDebugMenu.stories.ts": async () => import("../stories/ui/FDebugMenu.stories.js")
+};
+async function o(s) {
+  return t[s]();
+}
+export {
+  o as importFn
+};

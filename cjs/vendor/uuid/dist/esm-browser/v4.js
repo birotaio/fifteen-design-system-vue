@@ -1,0 +1,1 @@
+"use strict";const e=require("./native.js"),f=require("./rng.js"),u=require("./stringify.js");function i(r,t,s){if(e.randomUUID&&!t&&!r)return e.randomUUID();r=r||{};const n=r.random||(r.rng||f)();return n[6]=n[6]&15|64,n[8]=n[8]&63|128,u.unsafeStringify(n)}module.exports=i;

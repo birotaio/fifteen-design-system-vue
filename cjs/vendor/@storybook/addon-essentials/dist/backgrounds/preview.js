@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const e=require("../../../addon-backgrounds/dist/preview.js");exports.decorators=e.decorators;exports.initialGlobals=e.initialGlobals;exports.parameters=e.parameters;

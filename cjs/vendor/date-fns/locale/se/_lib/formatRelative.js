@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,Symbol.toStringTag,{value:"Module"});const t={lastWeek:"'ovddit' eeee 'dii.' p",yesterday:"'ikte dii.' p",today:"'odne dii.' p",tomorrow:"'ihtin dii.' p",nextWeek:"EEEE 'dii.' p",other:"P"},i=(e,o,a,d)=>t[e];exports.formatRelative=i;

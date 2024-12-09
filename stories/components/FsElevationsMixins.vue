@@ -1,6 +1,6 @@
 <template lang="pug">
 .FsElevationsMixins
-  caption Use the following elevation mixins, with <code>z</code> from <code>0</code> to <code>6</code>, or <code>"inset"</code>.
+  .FsElevationsMixins__caption Use the following elevation mixins, with <code>z</code> from <code>0</code> to <code>6</code>, or <code>"inset"</code>.
   hr
   .FsElevationsMixins__container
     .FsElevationsMixins__row
@@ -10,7 +10,7 @@
         :key="z"
       )
         .FsElevationsMixins__item
-          caption: code {{ `elevation(${JSON.stringify(z)})` }}
+          .FsElevationsMixins__caption: code {{ `elevation(${JSON.stringify(z)})` }}
           div(:class="`FsElevationsMixins__elevation--${z}`")
 
     .FsElevationsMixins__row
@@ -20,7 +20,7 @@
         :key="z"
       )
         .FsElevationsMixins__item
-          caption: code {{ `elevation-light(${JSON.stringify(z)})` }}
+          .FsElevationsMixins__caption: code {{ `elevation-light(${JSON.stringify(z)})` }}
           div(:class="`FsElevationsMixins__elevation-light--${z}`")
 
     template(
@@ -34,8 +34,8 @@
           :key="z"
         )
           .FsElevationsMixins__item
-            caption: code {{ `elevation-transition()` }}
-            caption: code :{{ pseudoClass }} <br/> {{ ` elevation(${JSON.stringify(z)})` }}
+            .FsElevationsMixins__caption: code {{ `elevation-transition()` }}
+            .FsElevationsMixins__caption: code :{{ pseudoClass }} <br/> {{ ` elevation(${JSON.stringify(z)})` }}
             div(
               :class="`FsElevationsMixins__elevation--${z}--${pseudoClass}`"
               v-bind="pseudoClass === 'focus' ? { tabindex: 0 } : {}"
@@ -52,6 +52,9 @@
 
 .FsElevationsMixins__container
   display flex
+
+.FsElevationsMixins__caption
+  use-font('caption')
 
 .FsElevationsMixins__row
   margin 0 rem(16)

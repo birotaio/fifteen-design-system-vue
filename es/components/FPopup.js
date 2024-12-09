@@ -1,5 +1,5 @@
 import { defineComponent as C, computed as d, ref as u, watch as z, onMounted as _, nextTick as A, openBlock as R, createElementBlock as E, normalizeClass as V, unref as a, normalizeStyle as D, createVNode as K, mergeProps as M, withCtx as v, createElementVNode as b, withKeys as p, renderSlot as y, normalizeProps as h, guardReactiveProps as w, withModifiers as $ } from "vue";
-import I from "../vendor/vue3-popper/dist/popper.esm.js";
+import I from "../vendor/@fifteen/vue3-popper/dist/popper.esm.js";
 import { useVModelProxy as O } from "../vendor/@fifteen/shared-lib/dist/es/composables/useVModelProxy.js";
 import "../vendor/countup.js/dist/countUp.min.js";
 import { onClickOutside as N, useMutationObserver as j } from "@vueuse/core";

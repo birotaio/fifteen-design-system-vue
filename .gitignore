@@ -4,8 +4,6 @@ node_modules
 .DS_Store
 .vscode
 dump.rdb
-components.d.ts
-auto-imports.d.ts
 coverage
 dist
 resolvers/dist

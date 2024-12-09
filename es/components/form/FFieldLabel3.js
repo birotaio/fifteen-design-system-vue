@@ -1,5 +1,5 @@
-import o from "./FFieldLabel2.js";
-/* empty css            */
+import o from "./FFieldLabel.js";
+/* empty css             */
 export {
   o as default
 };

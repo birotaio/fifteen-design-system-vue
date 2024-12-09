@@ -1,7 +1,7 @@
-import d from "./FFieldHint2.js";
-/* empty css           */
-import m from "./FFieldLabel2.js";
+import d from "./FFieldHint.js";
 /* empty css            */
+import m from "./FFieldLabel.js";
+/* empty css             */
 import { defineComponent as f, computed as s, openBlock as t, createBlock as l, resolveDynamicComponent as p, normalizeStyle as u, unref as c, withCtx as h, createCommentVNode as b, renderSlot as y, createVNode as F } from "vue";
 import { genSize as C } from "../../utils/genSize.js";
 const $ = /* @__PURE__ */ f({

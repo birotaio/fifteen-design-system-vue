@@ -1,10 +1,10 @@
-import { defineComponent as i, openBlock as t, createElementBlock as s, createElementVNode as n, createTextVNode as o, Fragment as m, renderList as u, unref as a, normalizeClass as d, toDisplayString as p } from "vue";
+import { defineComponent as r, openBlock as s, createElementBlock as t, createElementVNode as n, createTextVNode as o, Fragment as a, renderList as m, unref as u, normalizeClass as d, toDisplayString as p } from "vue";
 import { typographies as c } from "../../constants/typography.js";
-const f = { class: "FsFontsMixins" }, k = /* @__PURE__ */ i({
+const f = { class: "FsFontsMixins" }, k = /* @__PURE__ */ r({
   __name: "FsFontsMixins",
-  setup(x) {
-    return (_, e) => (t(), s("div", f, [
-      e[0] || (e[0] = n("caption", null, [
+  setup(_) {
+    return (x, e) => (s(), t("div", f, [
+      e[0] || (e[0] = n("div", { class: "FsFontsMixins__caption" }, [
         o("Use the stylus mixin "),
         n("code", null, "use-font($name)"),
         o(", where "),
@@ -12,10 +12,10 @@ const f = { class: "FsFontsMixins" }, k = /* @__PURE__ */ i({
         o(" is in the following names.")
       ], -1)),
       e[1] || (e[1] = n("hr", null, null, -1)),
-      (t(!0), s(m, null, u(a(c), (l, r) => (t(), s("div", {
-        key: r,
-        class: d(l)
-      }, p(l), 3))), 128))
+      (s(!0), t(a, null, m(u(c), (i, l) => (s(), t("div", {
+        key: l,
+        class: d(i)
+      }, p(i), 3))), 128))
     ]));
   }
 });

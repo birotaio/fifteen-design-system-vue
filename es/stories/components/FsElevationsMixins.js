@@ -1,82 +1,82 @@
-import { defineComponent as x, openBlock as e, createElementBlock as o, createElementVNode as n, createTextVNode as s, Fragment as a, renderList as r, toDisplayString as t, normalizeClass as d, mergeProps as c } from "vue";
-const m = { class: "FsElevationsMixins" }, p = { class: "FsElevationsMixins__container" }, E = { class: "FsElevationsMixins__row" }, F = { class: "FsElevationsMixins__row" }, w = /* @__PURE__ */ x({
+import { defineComponent as c, openBlock as e, createElementBlock as o, createElementVNode as s, createTextVNode as l, Fragment as a, renderList as r, toDisplayString as t, normalizeClass as d, mergeProps as x } from "vue";
+const E = { class: "FsElevationsMixins" }, F = { class: "FsElevationsMixins__container" }, M = { class: "FsElevationsMixins__row" }, m = { class: "FsElevationsMixins__caption" }, p = { class: "FsElevationsMixins__row" }, f = { class: "FsElevationsMixins__caption" }, g = { class: "FsElevationsMixins__caption" }, k = /* @__PURE__ */ c({
   __name: "FsElevationsMixins",
-  setup(f) {
-    const u = ["inset", 0, 1, 2, 3, 4, 5, 6], _ = ["hover", "focus"];
-    return (M, l) => (e(), o("div", m, [
-      l[5] || (l[5] = n("caption", null, [
-        s("Use the following elevation mixins, with "),
-        n("code", null, "z"),
-        s(" from "),
-        n("code", null, "0"),
-        s(" to "),
-        n("code", null, "6"),
-        s(", or "),
-        n("code", null, '"inset"'),
-        s(".")
+  setup(w) {
+    const v = ["inset", 0, 1, 2, 3, 4, 5, 6], u = ["hover", "focus"];
+    return (y, i) => (e(), o("div", E, [
+      i[5] || (i[5] = s("div", { class: "FsElevationsMixins__caption" }, [
+        l("Use the following elevation mixins, with "),
+        s("code", null, "z"),
+        l(" from "),
+        s("code", null, "0"),
+        l(" to "),
+        s("code", null, "6"),
+        l(", or "),
+        s("code", null, '"inset"'),
+        l(".")
       ], -1)),
-      l[6] || (l[6] = n("hr", null, null, -1)),
-      n("div", p, [
-        n("div", E, [
-          l[0] || (l[0] = n("span", null, "normal shadow", -1)),
-          (e(), o(a, null, r(u, (i) => n("div", {
-            key: i,
+      i[6] || (i[6] = s("hr", null, null, -1)),
+      s("div", F, [
+        s("div", M, [
+          i[0] || (i[0] = s("span", null, "normal shadow", -1)),
+          (e(), o(a, null, r(v, (n) => s("div", {
+            key: n,
             class: "FsElevationsMixins__item"
           }, [
-            n("caption", null, [
-              n("code", null, t(`elevation(${JSON.stringify(i)})`), 1)
+            s("div", m, [
+              s("code", null, t(`elevation(${JSON.stringify(n)})`), 1)
             ]),
-            n("div", {
-              class: d(`FsElevationsMixins__elevation--${i}`)
+            s("div", {
+              class: d(`FsElevationsMixins__elevation--${n}`)
             }, null, 2)
           ])), 64))
         ]),
-        n("div", F, [
-          l[1] || (l[1] = n("span", null, "lighter shadow", -1)),
-          (e(), o(a, null, r(u, (i) => n("div", {
-            key: i,
+        s("div", p, [
+          i[1] || (i[1] = s("span", null, "lighter shadow", -1)),
+          (e(), o(a, null, r(v, (n) => s("div", {
+            key: n,
             class: "FsElevationsMixins__item"
           }, [
-            n("caption", null, [
-              n("code", null, t(`elevation-light(${JSON.stringify(i)})`), 1)
+            s("div", f, [
+              s("code", null, t(`elevation-light(${JSON.stringify(n)})`), 1)
             ]),
-            n("div", {
-              class: d(`FsElevationsMixins__elevation-light--${i}`)
+            s("div", {
+              class: d(`FsElevationsMixins__elevation-light--${n}`)
             }, null, 2)
           ])), 64))
         ]),
-        (e(), o(a, null, r(_, (i) => n("div", {
-          key: i,
+        (e(), o(a, null, r(u, (n) => s("div", {
+          key: n,
           class: "FsElevationsMixins__row"
         }, [
-          n("span", null, "with transition, on " + t(i), 1),
-          (e(), o(a, null, r(u, (v) => n("div", {
-            key: v,
+          s("span", null, "with transition, on " + t(n), 1),
+          (e(), o(a, null, r(v, (_) => s("div", {
+            key: _,
             class: "FsElevationsMixins__item"
           }, [
-            l[3] || (l[3] = n("caption", null, [
-              n("code", null, t("elevation-transition()"))
+            i[3] || (i[3] = s("div", { class: "FsElevationsMixins__caption" }, [
+              s("code", null, t("elevation-transition()"))
             ], -1)),
-            n("caption", null, [
-              n("code", null, [
-                s(":" + t(i) + " ", 1),
-                l[2] || (l[2] = n("br", null, null, -1)),
-                s(" " + t(` elevation(${JSON.stringify(v)})`), 1)
+            s("div", g, [
+              s("code", null, [
+                l(":" + t(n) + " ", 1),
+                i[2] || (i[2] = s("br", null, null, -1)),
+                l(" " + t(` elevation(${JSON.stringify(_)})`), 1)
               ])
             ]),
-            n("div", c({
-              class: `FsElevationsMixins__elevation--${v}--${i}`,
+            s("div", x({
+              class: `FsElevationsMixins__elevation--${_}--${n}`,
               ref_for: !0
-            }, i === "focus" ? { tabindex: 0 } : {}), null, 16)
+            }, n === "focus" ? { tabindex: 0 } : {}), null, 16)
           ])), 64))
         ])), 64)),
-        l[4] || (l[4] = n("div", { class: "FsElevationsMixins__row" }, [
-          n("span", null, "etc...")
+        i[4] || (i[4] = s("div", { class: "FsElevationsMixins__row" }, [
+          s("span", null, "etc...")
         ], -1))
       ])
     ]));
   }
 });
 export {
-  w as default
+  k as default
 };

@@ -1,30 +1,30 @@
-import { defineComponent as d, openBlock as l, createElementBlock as o, createElementVNode as s, createTextVNode as t, Fragment as a, renderList as i, unref as u, toDisplayString as c, normalizeStyle as p } from "vue";
-import { baseColorDesignTokens as _, colorDesignTokens as m } from "../../constants/colors.js";
-const C = { class: "FsColorsCssVars" }, f = { class: "FsColorsCssVars__container" }, F = /* @__PURE__ */ d({
+import { defineComponent as d, openBlock as o, createElementBlock as r, createElementVNode as s, createTextVNode as t, Fragment as a, renderList as i, unref as u, toDisplayString as c, normalizeStyle as _ } from "vue";
+import { baseColorDesignTokens as C, colorDesignTokens as p } from "../../constants/colors.js";
+const m = { class: "FsColorsCssVars" }, v = { class: "FsColorsCssVars__container" }, V = { class: "FsColorsCssVars__caption" }, y = /* @__PURE__ */ d({
   __name: "FsColorsCssVars",
-  setup(g) {
-    return (v, n) => (l(), o("div", C, [
-      n[0] || (n[0] = s("caption", null, [
+  setup(f) {
+    return (g, l) => (o(), r("div", m, [
+      l[0] || (l[0] = s("div", { class: "FsColorsCssVars__caption" }, [
         t("Use the following CSS variables. You can also append "),
         s("code", null, "--rgb"),
         t(" to get the RGB values.")
       ], -1)),
-      n[1] || (n[1] = s("hr", null, null, -1)),
-      s("div", f, [
-        (l(!0), o(a, null, i(u(_), (r) => (l(), o("div", {
+      l[1] || (l[1] = s("hr", null, null, -1)),
+      s("div", v, [
+        (o(!0), r(a, null, i(u(C), (n) => (o(), r("div", {
           class: "FsColorsCssVars__color",
-          key: r
+          key: n
         }, [
-          s("span", null, c(r), 1),
-          (l(!0), o(a, null, i(u(m).filter((e) => e.includes(r)), (e) => (l(), o("div", {
+          s("span", null, c(n), 1),
+          (o(!0), r(a, null, i(u(p).filter((e) => e.includes(n)), (e) => (o(), r("div", {
             key: e,
             class: "FsColorsCssVars__item"
           }, [
-            s("caption", null, [
+            s("div", V, [
               s("code", null, c(e), 1)
             ]),
             s("div", {
-              style: p({ backgroundColor: `var(--color--${e})` })
+              style: _({ backgroundColor: `var(--color--${e})` })
             }, null, 4)
           ]))), 128))
         ]))), 128))
@@ -33,5 +33,5 @@ const C = { class: "FsColorsCssVars" }, f = { class: "FsColorsCssVars__container
   }
 });
 export {
-  F as default
+  y as default
 };

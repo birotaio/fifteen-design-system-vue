@@ -1,6 +1,6 @@
 <template lang="pug">
 .FsFontsMixins
-  caption Use the stylus mixin <code>use-font($name)</code>, where <code>$name</code> is in the following names.
+  .FsFontsMixins__caption Use the stylus mixin <code>use-font($name)</code>, where <code>$name</code> is in the following names.
   hr
   template(
     v-for="(typography, index) in typographies"
@@ -10,6 +10,9 @@
 </template>
 
 <style lang="stylus">
+.FsFontsMixins__caption
+  use-font('caption')
+
 for $key in $fonts
   .{$key}
     use-font($key)

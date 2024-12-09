@@ -1,6 +1,6 @@
 <template lang="pug">
 .FsFontsElements
-  caption Use the following html elements.
+  .FsFontsElements__caption Use the following html elements.
   hr
   template(
     v-for="index in 6"
@@ -39,4 +39,7 @@
   code
     font-size rem(12)
     margin-left rem(8)
+
+.FsFontsElements__caption
+  use-font('caption')
 </style>

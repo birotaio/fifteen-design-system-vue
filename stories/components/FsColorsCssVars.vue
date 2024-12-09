@@ -1,6 +1,6 @@
 <template lang="pug">
 .FsColorsCssVars
-  caption Use the following CSS variables. You can also append <code>--rgb</code> to get the RGB values.
+  .FsColorsCssVars__caption Use the following CSS variables. You can also append <code>--rgb</code> to get the RGB values.
   hr
   .FsColorsCssVars__container
     .FsColorsCssVars__color(
@@ -13,7 +13,7 @@
         :key="color"
       )
         .FsColorsCssVars__item
-          caption: code {{ color }}
+          .FsColorsCssVars__caption: code {{ color }}
           div(:style="{ backgroundColor: `var(--color--${color})` }")
 </template>
 
@@ -22,6 +22,9 @@
   padding-top rem(16)
   display flex
   flex-wrap wrap
+
+.FsColorsCssVars__caption
+  use-font('caption')
 
 .FsColorsCssVars__item
   width rem(230)

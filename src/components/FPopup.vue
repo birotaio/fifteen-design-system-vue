@@ -66,7 +66,7 @@
 </style>
 
 <script setup lang="ts">
-import Popper from 'vue3-popper/dist/popper.esm';
+import Popper from '@fifteen/vue3-popper';
 import { useVModelProxy } from '@fifteen/shared-lib';
 
 import { genSize } from '@/utils/genSize';

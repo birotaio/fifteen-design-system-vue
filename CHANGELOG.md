@@ -1,3 +1,11 @@
+## 0.25.2 (December 9, 2024)
+
+### Changes
+
+- [Chore] Use properly published private npm package for vue3-popper fork
+- [Chore] Allow dependabot to fetch private npm packages
+- [Chore] Upgrade dependencies (dependabot)
+
 ## 0.25.1 (October 3, 2024)
 
 ### Fixes

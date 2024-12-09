@@ -685,6 +685,7 @@ __metadata:
     "@commitlint/config-conventional": ^19.5.0
     "@fifteen/shared-lib": ^0.18.1
     "@fifteen/tooling": ^0.6.3
+    "@fifteen/vue3-popper": ^1.4.2-fifteen.0
     "@prettier/plugin-pug": ^3.1.0
     "@qnp/lus": ^0.4.1
     "@storybook/addon-essentials": ^8.4.7
@@ -768,6 +769,18 @@ __metadata:
     npm-release: scripts/npm-release-exec.mjs
     yault: scripts/yault-exec.mjs
   checksum: db501531a3f11294a756ef619f3234d2dfd6f75455c56477b21b4f7d2e7385ee73a64c97fd85ae7cad6e890664172d232083792988c0d2a2b022d3579dc2bf15
+  languageName: node
+  linkType: hard
+
+"@fifteen/vue3-popper@npm:^1.4.2-fifteen.0":
+  version: 1.4.2-fifteen.0
+  resolution: "@fifteen/vue3-popper@npm:1.4.2-fifteen.0"
+  dependencies:
+    "@popperjs/core": ^2.9.2
+    debounce: ^1.2.1
+  peerDependencies:
+    vue: ^3.2.20
+  checksum: 5ef99fc22587fa449626af0927a8f2ee4c4a9528b8344d66af3a1b6a6a115aad3ccda4465fc26c32b836c9d0c0b600fb58901de9b1276b9ce1b7c30e0463cb82
   languageName: node
   linkType: hard
 

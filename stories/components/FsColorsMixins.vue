@@ -1,6 +1,6 @@
 <template lang="pug">
 .FsColorsMixins
-  caption Use the following mixins
+  .FsColorsMixins__caption Use the following mixins
   hr
   span no transition
   .FsColorsMixins__container
@@ -9,10 +9,10 @@
       :key="color"
     )
       .FsColorsMixins__item
-        caption: code {{ `bg-color('${color}')` }}
+        .FsColorsMixins__caption: code {{ `bg-color('${color}')` }}
         div(:class="`FsColorsMixins__bg-color--${color}`")
         div
-        caption: code {{ `text-color('${color}')` }}
+        .FsColorsMixins__caption: code {{ `text-color('${color}')` }}
         div(:class="`FsColorsMixins__text-color--${color}`") {{ color }}
 
   template(
@@ -26,15 +26,15 @@
         :key="color"
       )
         .FsColorsMixins__item
-          caption: code {{ `bg-color-transition()` }}
-          caption: code :{{ pseudoClass }} <br/> {{ ` bg-color('${color}')` }}
+          .FsColorsMixins__caption: code {{ `bg-color-transition()` }}
+          .FsColorsMixins__caption: code :{{ pseudoClass }} <br/> {{ ` bg-color('${color}')` }}
           div(
             :class="`FsColorsMixins__bg-color--${color}--${pseudoClass}`"
             v-bind="pseudoClass === 'focus' ? { tabindex: 1 } : {}"
           )
           div
-          caption: code {{ `text-color-transition()` }}
-          caption: code :{{ pseudoClass }} <br/> {{ ` text-color('${color}')` }}
+          .FsColorsMixins__caption: code {{ `text-color-transition()` }}
+          .FsColorsMixins__caption: code :{{ pseudoClass }} <br/> {{ ` text-color('${color}')` }}
           div(
             :class="`FsColorsMixins__text-color--${color}--${pseudoClass}`"
             v-bind="pseudoClass === 'focus' ? { tabindex: 0 } : {}"
@@ -61,6 +61,9 @@
   div
     position relative
     height rem(36)
+
+.FsColorsMixins__caption
+  use-font('caption')
 
 for $color in 'primary' 'danger' 'success--dark-1' 'secondary--light-1'
   .FsColorsMixins__bg-color--{$color}

@@ -23,7 +23,10 @@
     small Small
     code small
   .FsFontsElements__element
-    caption Caption
+    figure: figcaption Figure caption
+    code figcaption
+  .FsFontsElements__element
+    table: caption Caption
     code caption
 </template>
 

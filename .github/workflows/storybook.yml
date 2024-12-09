@@ -11,18 +11,24 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
-        
+
       - name: Node setup 📦
         uses: actions/setup-node@v3
         with:
           node-version: 18.17.1
 
-      - name: Authenticate for private NPM packages 🔑
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Authenticate with yarn 🔑
+        run: echo "npmAuthToken:" "${{ secrets.NPM_TOKEN }}" > ~/.yarnrc.yml
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Prepare Yarn
+        run: corepack prepare yarn@3.6.3 --activate
 
       - name: Install and Build 🔧
         run: |
-          yarn install
+          yarn install --immutable
           yarn build:sb
 
       - name: Deploy 🚀

@@ -176,7 +176,7 @@
 </style>
 
 <script setup lang="ts">
-import Popper from 'vue3-popper/dist/popper.esm';
+import Popper from '@fifteen/vue3-popper';
 import equal from 'fast-deep-equal/es6';
 import {
   useVModelProxy,

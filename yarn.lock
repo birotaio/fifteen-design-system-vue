@@ -685,7 +685,7 @@ __metadata:
     "@commitlint/config-conventional": ^19.5.0
     "@fifteen/shared-lib": ^0.18.1
     "@fifteen/tooling": ^0.6.3
-    "@fifteen/vue3-popper": ^1.4.2-fifteen.2
+    "@fifteen/vue3-popper": ^1.4.2-fifteen.3
     "@prettier/plugin-pug": ^3.1.0
     "@qnp/lus": ^0.4.1
     "@storybook/addon-essentials": ^8.4.7
@@ -771,15 +771,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fifteen/vue3-popper@npm:^1.4.2-fifteen.2":
-  version: 1.4.2-fifteen.2
-  resolution: "@fifteen/vue3-popper@npm:1.4.2-fifteen.2"
+"@fifteen/vue3-popper@npm:^1.4.2-fifteen.3":
+  version: 1.4.2-fifteen.3
+  resolution: "@fifteen/vue3-popper@npm:1.4.2-fifteen.3"
   dependencies:
-    "@popperjs/core": ^2.9.2
-    debounce: ^1.2.1
+    "@popperjs/core": ^2.11.8
+    debounce: ^2.2.0
   peerDependencies:
-    vue: ^3.2.20
-  checksum: 5adaa609857fe0368fc5c88ce4b72ec4225f8cfea4a005d7c6ec64c233250d4d67ddc5084b82864f28e28c7392d19f35a7bd78fc3f20da4885ee5aa8746ef06c
+    vue: ^3.5.13
+  checksum: 55f998552062864841d56303d7eae220592b14ae3a0b53e290239f2d62a9e2c1096a5cc5993f72a3f4270c7c3af1fec07d9c0c338f5cf111c23929494ff192a2
   languageName: node
   linkType: hard
 
@@ -1153,7 +1153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:^2.9.2":
+"@popperjs/core@npm:^2.11.8":
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
   checksum: e5c69fdebf52a4012f6a1f14817ca8e9599cb1be73dd1387e1785e2ed5e5f0862ff817f420a87c7fc532add1f88a12e25aeb010ffcbdc98eace3d55ce2139cf0
@@ -3593,10 +3593,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debounce@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "debounce@npm:1.2.1"
-  checksum: 682a89506d9e54fb109526f4da255c5546102fbb8e3ae75eef3b04effaf5d4853756aee97475cd4650641869794e44f410eeb20ace2b18ea592287ab2038519e
+"debounce@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "debounce@npm:2.2.0"
+  checksum: c78301e376677827ade07d423dac24266218ebee59e79ac135f4eadc4b5ff453c022fb00acb8cad1988ab65e8576631316a5cc263516716e2d7d4def69cf975b
   languageName: node
   linkType: hard
 

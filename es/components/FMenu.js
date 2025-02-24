@@ -1,7 +1,7 @@
 import de from "./FLoader.js";
 /* empty css         */
 import { defineComponent as ce, computed as E, ref as d, watch as H, onMounted as me, nextTick as ve, openBlock as c, createElementBlock as b, normalizeClass as W, unref as r, normalizeStyle as ye, createVNode as be, mergeProps as C, withCtx as q, createElementVNode as g, withKeys as a, Fragment as ge, renderList as he, renderSlot as w, toDisplayString as I, createCommentVNode as S, createBlock as Me, withModifiers as m, normalizeProps as Oe, guardReactiveProps as ke } from "vue";
-import Ce from "../vendor/@fifteen/vue3-popper/dist/popper.esm.js";
+import Ce from "../vendor/@fifteen/vue3-popper/dist/popper.es.js";
 import Y from "../vendor/fast-deep-equal/es6/index.js";
 import { useVModelProxy as j } from "../vendor/@fifteen/shared-lib/dist/es/composables/useVModelProxy.js";
 import "../vendor/countup.js/dist/countUp.min.js";

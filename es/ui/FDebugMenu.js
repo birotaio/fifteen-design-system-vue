@@ -4,9 +4,9 @@ import fe from "../components/form/FSelect.js";
 /* empty css                          */
 import ve from "../components/form/FCheckbox.js";
 /* empty css                            */
-import ge from "../components/FButton.js";
+import me from "../components/FButton.js";
 /* empty css                     */
-import me from "../components/FIcon.js";
+import ge from "../components/FIcon.js";
 /* empty css                   */
 import { defineComponent as he, ref as v, computed as T, watch as W, openBlock as s, createBlock as D, unref as n, normalizeClass as R, isRef as be, normalizeStyle as P, withCtx as c, createVNode as d, createElementVNode as b, toDisplayString as M, Transition as _e, createElementBlock as S, createCommentVNode as V, Fragment as Q, renderList as Z, createTextVNode as Ce, withModifiers as j } from "vue";
 import { useVModelProxy as ye } from "../vendor/@fifteen/shared-lib/dist/es/composables/useVModelProxy.js";
@@ -42,6 +42,7 @@ import "vee-validate";
 /* empty css                       */
 /* empty css                       */
 /* empty css                             */
+import "../vendor/@fifteen/vue3-popper/dist/popper.es.js";
 /* empty css                   */
 import "xss";
 /* empty css                          */
@@ -67,7 +68,7 @@ import "@vee-validate/rules";
 /* empty css                          */
 import "../composables/useSmartLink.js";
 import "../createFds.js";
-const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__controls" }, Be = ["onClick"], ze = { class: "FDebugMenu__item__text" }, Ke = { class: "FDebugMenu__item__title" }, Ue = { class: "FDebugMenu__item__description" }, Le = { key: 4 }, a = 8, ll = /* @__PURE__ */ he({
+const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__controls" }, Be = ["onClick"], ze = { class: "FDebugMenu__item__text" }, Ke = { class: "FDebugMenu__item__title" }, Ue = { class: "FDebugMenu__item__description" }, Le = { key: 4 }, a = 8, rl = /* @__PURE__ */ he({
   __name: "FDebugMenu",
   props: {
     modelValue: { type: Boolean, default: !1 },
@@ -87,8 +88,8 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
       printedCircuitBoard: Ve,
       close: Ee
     });
-    const X = v(null), Y = T(() => X.value?.$el), B = v(!1), z = v(!1), C = v(!1), K = v(null), g = ye({ props: _ });
-    W(g, (e) => e && (C.value = !1));
+    const X = v(null), Y = T(() => X.value?.$el), B = v(!1), z = v(!1), C = v(!1), K = v(null), m = ye({ props: _ });
+    W(m, (e) => e && (C.value = !1));
     const q = v(null), { height: oe } = I(q);
     W(oe, () => window.dispatchEvent(new Event("resize")));
     const F = ke("debug-menu", {
@@ -116,7 +117,7 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
           return !1;
       },
       onMove: () => {
-        g.value = !1, B.value = !0;
+        m.value = !1, B.value = !0;
       },
       onEnd: () => U(!0)
     });
@@ -154,7 +155,7 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
         B.value = !1;
         return;
       }
-      g.value = !g.value;
+      m.value = !m.value;
     }
     function ne(e) {
       return {
@@ -178,18 +179,18 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
     function J(e) {
       return { "--FDebugMenu--inputWidth": A(e.width) };
     }
-    const m = v(null), N = v(!1), O = v(null);
-    W(m, () => {
-      O.value && clearTimeout(O.value), m.value && (O.value = setTimeout(() => m.value = null, 5e3));
+    const g = v(null), N = v(!1), O = v(null);
+    W(g, () => {
+      O.value && clearTimeout(O.value), g.value && (O.value = setTimeout(() => g.value = null, 5e3));
     });
     async function ue(e, o) {
       if (!(e.disabled || e.type !== "trigger"))
         try {
           K.value = o;
           const i = await e.action();
-          N.value = !1, m.value = i ?? null;
+          N.value = !1, g.value = i ?? null;
         } catch (i) {
-          N.value = !0, m.value = i.message;
+          N.value = !0, g.value = i.message;
         } finally {
           K.value = null;
         }
@@ -207,13 +208,13 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
       "--FDebugMenu--maxHeight": C.value ? "none" : A(re.value)
     }));
     return (e, o) => {
-      const i = me, t = ge, h = ve, ce = fe, de = pe;
+      const i = ge, t = me, h = ve, ce = fe, de = pe;
       return s(), D(n(He), {
         class: R(["FDebugMenu", n(ie)]),
         ref_key: "popupRef",
         ref: X,
-        modelValue: n(g),
-        "onUpdate:modelValue": o[6] || (o[6] = (f) => be(g) ? g.value = f : null),
+        modelValue: n(m),
+        "onUpdate:modelValue": o[6] || (o[6] = (f) => be(m) ? m.value = f : null),
         style: P(n(se)),
         "offset-distance": 8,
         "prevent-activation": ""
@@ -265,7 +266,7 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
                     ghost: "",
                     background: e.textColor,
                     color: e.textColor,
-                    onClick: o[1] || (o[1] = (f) => g.value = !1)
+                    onClick: o[1] || (o[1] = (f) => m.value = !1)
                   }, {
                     default: c(() => [
                       d(i, { name: "close" })
@@ -276,18 +277,18 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
               ]),
               d(_e, { name: "FDebugMenu__message--transition" }, {
                 default: c(() => [
-                  n(m) ? (s(), S("div", {
+                  n(g) ? (s(), S("div", {
                     key: 0,
                     class: R(["FDebugMenu__message", { "FDebugMenu__message--error": n(N) }])
                   }, [
-                    b("span", null, M(n(m)), 1),
+                    b("span", null, M(n(g)), 1),
                     d(t, {
                       icon: "",
                       ghost: "",
                       background: e.textColor,
                       color: e.textColor,
                       size: "tiny",
-                      onClick: o[2] || (o[2] = (f) => m.value = null)
+                      onClick: o[2] || (o[2] = (f) => g.value = null)
                     }, {
                       default: c(() => [
                         d(i, { name: "close" })
@@ -393,5 +394,5 @@ const We = { class: "FDebugMenu__header" }, Re = { class: "FDebugMenu__header__c
   }
 });
 export {
-  ll as default
+  rl as default
 };

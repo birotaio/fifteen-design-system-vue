@@ -1,5 +1,5 @@
-import { defineComponent as C, computed as d, ref as u, watch as z, onMounted as _, nextTick as A, openBlock as R, createElementBlock as E, normalizeClass as V, unref as a, normalizeStyle as D, createVNode as K, mergeProps as M, withCtx as v, createElementVNode as b, withKeys as p, renderSlot as y, normalizeProps as h, guardReactiveProps as w, withModifiers as $ } from "vue";
-import I from "../vendor/@fifteen/vue3-popper/dist/popper.esm.js";
+import { defineComponent as C, computed as d, ref as u, watch as z, onMounted as A, nextTick as R, openBlock as _, createElementBlock as E, normalizeClass as V, unref as a, normalizeStyle as D, createVNode as K, mergeProps as M, withCtx as v, createElementVNode as b, withKeys as p, renderSlot as y, normalizeProps as h, guardReactiveProps as w, withModifiers as $ } from "vue";
+import I from "../vendor/@fifteen/vue3-popper/dist/popper.es.js";
 import { useVModelProxy as O } from "../vendor/@fifteen/shared-lib/dist/es/composables/useVModelProxy.js";
 import "../vendor/countup.js/dist/countUp.min.js";
 import { onClickOutside as N, useMutationObserver as j } from "@vueuse/core";
@@ -73,13 +73,13 @@ const Y = /* @__PURE__ */ C({
       e.persistent || (t.value = !1);
     });
     const m = u();
-    return _(() => {
+    return A(() => {
       j(
         m,
-        () => A(() => window.dispatchEvent(new Event("resize"))),
+        () => R(() => window.dispatchEvent(new Event("resize"))),
         { childList: !0 }
       );
-    }), (o, n) => (R(), E("div", {
+    }), (o, n) => (_(), E("div", {
       class: V(["FPopup", a(F)]),
       ref_key: "popupRef",
       ref: c,

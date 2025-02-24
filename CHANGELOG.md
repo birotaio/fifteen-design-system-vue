@@ -1,3 +1,9 @@
+## 0.25.3 (February 13, 2025)
+
+### Changes
+
+- [Chore] Upgrade `@fifteen/vue3-popper` to latest to fix security vulnerabilities
+
 ## 0.25.2 (December 9, 2024)
 
 ### Changes

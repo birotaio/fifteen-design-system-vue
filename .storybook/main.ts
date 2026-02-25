@@ -1,9 +1,15 @@
-import path from 'path';
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { fileURLToPath } from "node:url";
+import path, { dirname } from 'path';
 import { UserConfig, loadConfigFromFile, mergeConfig } from 'vite';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default {
   stories: ['../stories/**/*.stories.ts'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: ['@storybook/addon-links', '@storybook/addon-docs'],
+
   framework: {
     name: '@storybook/vue3-vite',
     options: {
@@ -23,8 +29,5 @@ export default {
     );
 
     return mergeConfig(baseConfig, userConfig ?? {});
-  },
-  docs: {
-    autodocs: true,
-  },
+  }
 };

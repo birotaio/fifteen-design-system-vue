@@ -4,7 +4,7 @@ import FButton from '@/components/FButton.vue';
 import { registerIcons } from '@/composables/useIcon';
 import { flagIcons } from '@/icons';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FCountrySelectProps } from '@/components/form/FCountrySelect.vue';
 
 export default {

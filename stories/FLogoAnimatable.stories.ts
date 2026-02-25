@@ -2,7 +2,7 @@
 import FLogoAnimatable from '@/components/FLogoAnimatable.vue';
 import { colorDesignTokens } from '@/constants/colors';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FLogoAnimatableProps } from '@/components/FLogoAnimatable.vue';
 
 export default {

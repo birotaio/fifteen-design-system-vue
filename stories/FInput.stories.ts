@@ -2,7 +2,7 @@ import FInput from '@/components/form/FInput.vue';
 import FButton from '@/components/FButton.vue';
 import { mask, required } from '@/rules';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FInputProps } from '@/components/form/FInput.vue';
 
 export default {

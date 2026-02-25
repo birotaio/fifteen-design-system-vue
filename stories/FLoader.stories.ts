@@ -1,6 +1,6 @@
 import FLoader from '@/components/FLoader.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FLoaderProps } from '@/components/FLoader.vue';
 
 export default {

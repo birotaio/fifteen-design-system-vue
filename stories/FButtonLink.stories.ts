@@ -1,6 +1,6 @@
 import FButtonLink from '@/components/router/FButtonLink.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FButtonLinkProps } from '@/components/router/FButtonLink.vue';
 
 export default {

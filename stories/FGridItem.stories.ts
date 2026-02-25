@@ -3,7 +3,7 @@ import FGrid from '@/components/FGrid.vue';
 import FCard from '@/components/FCard.vue';
 import FGridItem from '@/components/FGridItem.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FGridItemProps } from '@/components/FGridItem.vue';
 
 export default {

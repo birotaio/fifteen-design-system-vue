@@ -1,5 +1,5 @@
 // This file has been automatically migrated to valid ESM format by Storybook.
-import { fileURLToPath } from "node:url";
+import { fileURLToPath } from 'node:url';
 import path, { dirname } from 'path';
 import { UserConfig, loadConfigFromFile, mergeConfig } from 'vite';
 
@@ -18,6 +18,8 @@ export default {
   },
 
   async viteFinal(baseConfig) {
+    baseConfig.base = './';
+
     const { config: userConfig } = (await loadConfigFromFile(
       { command: 'serve', mode: 'production' },
       path.resolve(__dirname, '../vite.config.ts')
@@ -28,6 +30,9 @@ export default {
       plugin => plugin && plugin.name !== 'vite:vue'
     );
 
-    return mergeConfig(baseConfig, userConfig ?? {});
-  }
+    // Exclude build config: vite.config is for the library (formats: es, cjs), not Storybook
+    const { build: _build, ...storybookSafeConfig } = userConfig ?? {};
+
+    return mergeConfig(baseConfig, storybookSafeConfig);
+  },
 };

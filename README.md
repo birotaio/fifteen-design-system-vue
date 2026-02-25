@@ -13,7 +13,7 @@ npm install @fifteen/design-system-vue
 or
 
 ```
-yarn add @fifteen/design-system-vue
+pnpm add @fifteen/design-system-vue
 ```
 
 ## Usage
@@ -178,19 +178,19 @@ The lib exposes some validation rules under `@fifteen/design-system-vue/rules` f
 
 ### Setup
 
-If you want to develop the library, you can clone the repository and install the dependencies using yarn:
+If you want to develop the library, you can clone the repository and install the dependencies using pnpm:
 
 ```
-yarn install
+pnpm install
 ```
 
 Install also the husky hooks by running:
 
 ```
-yarn husky
+pnpm husky
 ```
 
-Then you run `yarn sb` (or `yarn dev` which is an alias) and Storybook will launch with the components stories on port 3003.
+Then you run `pnpm sb` (or `pnpm dev` which is an alias) and Storybook will launch with the components stories on port 3003.
 
 ### Authoring
 
@@ -198,4 +198,4 @@ After having created a new component or modifying an existing one, must create o
 
 ### Release
 
-To create a new release as an `npm` package, you just need to increment the version in `package.json` and run `yarn release`.
+To create a new release as an `npm` package, you just need to increment the version in `package.json` and run `pnpm release`.

@@ -1,5 +1,5 @@
 // This file is generated automatically. Do not edit manually.
-// To update it, run `yarn build:icons`.
+// To update it, run `pnpm build:icons`.
 
 import type { CreditCardBrandId } from '@/utils/credit-cards';
 

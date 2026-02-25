@@ -81,10 +81,10 @@
     }
   },
   "scripts": {
-    "dev": "yarn sb",
+    "dev": "pnpm sb",
     "sb": "storybook dev -p 3003",
     "build-storybook": "storybook build",
-    "dev:build": "DEV_BUILD=1 yarn build",
+    "dev:build": "DEV_BUILD=1 pnpm build",
     "build:clean": "rimraf dist/*",
     "build:sb": "zx scripts/build-sb.mjs",
     "build:lib": "vite build",
@@ -101,7 +101,7 @@
     "test-related": "vitest related",
     "coverage": "vitest run --coverage",
     "husky": "husky install",
-    "prepush": "yarn husky:pre-commit",
+    "prepush": "pnpm exec lint-staged",
     "release": "npm-release",
     "release:beta": "npm-release --tag beta"
   },
@@ -160,6 +160,7 @@
   "dependencies": {
     "@vee-validate/rules": "^4.13.2",
     "@vueuse/core": "^11.1.0",
+    "date-fns": "^4.1.0",
     "libphonenumber-js": "^1.10.6",
     "vee-validate": "^4.13.2",
     "vue": "^3.5.8",
@@ -169,5 +170,5 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@3.6.3"
+  "packageManager": "pnpm@10.11.0"
 }

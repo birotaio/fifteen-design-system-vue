@@ -15,21 +15,21 @@ jobs:
       - name: Node setup 📦
         uses: actions/setup-node@v3
         with:
-          node-version: 18.17.1
+          node-version: 22.21.1
 
-      - name: Authenticate with yarn 🔑
-        run: echo "npmAuthToken:" "${{ secrets.NPM_TOKEN }}" > ~/.yarnrc.yml
+      - name: Authenticate with PNPM 🔑
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Prepare Yarn
-        run: corepack prepare yarn@3.6.3 --activate
+      - name: Prepare PNPM
+        run: corepack prepare pnpm@10.11.0 --activate
 
       - name: Install and Build 🔧
         run: |
-          yarn install --immutable
-          yarn build:sb
+          pnpm install --frozen-lockfile
+          pnpm build:sb
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

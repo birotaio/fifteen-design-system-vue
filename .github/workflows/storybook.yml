@@ -5,16 +5,24 @@ on:
       - master
       - fix-storybook-build
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Node setup 📦
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 22.21.1
 
@@ -27,12 +35,19 @@ jobs:
       - name: Prepare PNPM
         run: corepack prepare pnpm@10.11.0 --activate
 
-      - name: Install and Build 🔧
-        run: |
-          pnpm install --frozen-lockfile
-          pnpm build:sb
+      - name: Install dependenciesand
+        run: pnpm install --frozen-lockfile
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Build Storybook
+        run: pnpm build:sb
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: storybook-static # The folder the action should deploy.
+          path: 'storybook-static'
+
+      - id: deploy
+        name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ github.token }}

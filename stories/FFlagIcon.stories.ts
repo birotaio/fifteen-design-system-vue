@@ -1,6 +1,6 @@
 import FsFlagGrid from './components/FsFlagGrid.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FsFlagGridProps } from './components/FsFlagGrid.vue';
 
 export default {

@@ -1,7 +1,7 @@
 import FRadio from '@/components/form/FRadio.vue';
 import FButton from '@/components/FButton.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FRadioProps } from '@/components/form/FRadio.vue';
 import type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
 

@@ -5,7 +5,7 @@ import { getIconList } from '@/.generated/utils';
 import { registerIcons } from '@/composables/useIcon';
 import { icons } from '@/icons';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FButtonProps } from '@/components/FButton.vue';
 
 export default {

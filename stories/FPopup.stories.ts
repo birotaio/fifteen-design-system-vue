@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 import FPopup from '@/components/FPopup.vue';
 import FButton from '@/components/FButton.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FPopupProps } from '@/components/FPopup.vue';
 
 export default {

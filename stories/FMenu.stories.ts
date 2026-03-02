@@ -4,7 +4,7 @@ import FMenu from '@/components/FMenu.vue';
 import FButton from '@/components/FButton.vue';
 import FLink from '@/components/FLink.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FMenuProps, FMenuOption } from '@/components/FMenu.vue';
 
 export default {

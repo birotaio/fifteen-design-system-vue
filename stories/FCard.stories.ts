@@ -2,7 +2,7 @@
 import FCard from '@/components/FCard.vue';
 import { colorDesignTokens } from '@/constants/colors';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FCardProps } from '@/components/FCard.vue';
 
 export default {

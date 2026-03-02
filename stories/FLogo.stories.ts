@@ -2,7 +2,7 @@
 import FLogo from '@/components/FLogo.vue';
 import { colorDesignTokens } from '@/constants/colors';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FLogoProps, FLogoVariant } from '@/components/FLogo.vue';
 
 const logoVariants: FLogoVariant[] = [

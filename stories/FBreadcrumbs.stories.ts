@@ -2,7 +2,7 @@
 import { colorDesignTokens } from '@/constants/colors';
 import FBreadcrumbs from '@/components/FBreadcrumbs.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FBreadcrumbsProps } from '@/components/FBreadcrumbs.vue';
 
 export default {

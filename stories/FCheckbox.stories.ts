@@ -1,7 +1,7 @@
 import FCheckbox from '@/components/form/FCheckbox.vue';
 import FButton from '@/components/FButton.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FCheckboxProps } from '@/components/form/FCheckbox.vue';
 
 export default {

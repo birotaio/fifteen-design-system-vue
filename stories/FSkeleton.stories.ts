@@ -1,6 +1,6 @@
 import FSkeleton from '@/components/FSkeleton.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FSkeletonProps } from '@/components/FSkeleton.vue';
 
 export default {

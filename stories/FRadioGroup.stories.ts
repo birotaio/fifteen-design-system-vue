@@ -1,7 +1,7 @@
 import FRadioGroup from '@/components/form/FRadioGroup.vue';
 import FButton from '@/components/FButton.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FRadioGroupProps } from '@/components/form/FRadioGroup.vue';
 
 export default {

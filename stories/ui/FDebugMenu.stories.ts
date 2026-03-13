@@ -1,6 +1,6 @@
 import FDebugMenu from '@/ui/FDebugMenu.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FDebugMenuProps, DebugMenuConfig } from '@/ui/FDebugMenu.vue';
 
 export default {

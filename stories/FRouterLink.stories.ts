@@ -1,6 +1,6 @@
 import FRouterLink from '@/components/router/FRouterLink.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FRouterLinkProps } from '@/components/router/FRouterLink.vue';
 
 export default {

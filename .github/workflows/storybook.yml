@@ -35,7 +35,7 @@ jobs:
       - name: Prepare PNPM
         run: corepack prepare pnpm@10.11.0 --activate
 
-      - name: Install dependenciesand
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build Storybook

@@ -4,7 +4,7 @@ import ponyLogoMarkup from '@@/stories/assets/pony.svg?raw';
 import { colorDesignTokens } from '@/constants/colors';
 import FSvgImage from '@/components/FSvgImage.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FSvgImageProps } from '@/components/FSvgImage.vue';
 
 export default {

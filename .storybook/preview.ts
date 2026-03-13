@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import '@/styles/elements.styl';
 import '@/styles/theme.styl';
-import { setup } from '@storybook/vue3';
+import { setup } from '@storybook/vue3-vite';
 
 import { createFds } from '../src/createFds';
 
@@ -16,29 +16,32 @@ export const parameters = {
     },
   },
   backgrounds: {
-    default: 'neutral',
-    values: [
-      {
+    options: {
+      neutral: {
         name: 'neutral',
         value: '#FFFFFF',
       },
-      {
+
+      primary: {
         name: 'primary',
         value: '#FF0062',
       },
-      {
+
+      secondary: {
         name: 'secondary',
         value: '#012433',
       },
-      {
+
+      success: {
         name: 'success',
         value: '#83DEC9',
       },
-      {
+
+      info: {
         name: 'info',
         value: '#A900E7',
-      },
-    ],
+      }
+    }
   },
 };
 
@@ -72,3 +75,10 @@ setup((app: App) => {
   app.use(vueRouter);
   app.use(fds);
 });
+
+export const initialGlobals = {
+  backgrounds: {
+    value: 'neutral'
+  }
+};
+export const tags = ['autodocs'];

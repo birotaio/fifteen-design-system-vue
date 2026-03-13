@@ -4,7 +4,7 @@ import FButton from '@/components/FButton.vue';
 import { registerIcons } from '@/composables/useIcon';
 import { arrowRight } from '@/.generated/icons';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FSelectProps } from '@/components/form/FSelect.vue';
 
 export default {

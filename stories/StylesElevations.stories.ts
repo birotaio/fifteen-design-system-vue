@@ -1,6 +1,6 @@
 import FsElevationsMixins from '@@/stories/components/FsElevationsMixins.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 
 export default {
   title: 'Styles/Elevations',

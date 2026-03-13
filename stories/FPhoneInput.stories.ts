@@ -3,7 +3,7 @@ import { required } from '@vee-validate/rules';
 import FPhoneInput from '@/components/form/FPhoneInput.vue';
 import FButton from '@/components/FButton.vue';
 
-import type { StoryFn } from '@storybook/vue3';
+import type { StoryFn } from '@storybook/vue3-vite';
 import type { FPhoneInputProps } from '@/components/form/FPhoneInput.vue';
 
 export default {

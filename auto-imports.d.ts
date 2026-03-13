@@ -316,4 +316,19 @@ declare global {
   // @ts-ignore
   export type { Component, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
+  // @ts-ignore
+  export type { UseFBreakpointsReturn } from './src/composables/useFBreakpoints'
+  import('./src/composables/useFBreakpoints')
+  // @ts-ignore
+  export type { UseFieldWithValidationOptions, UseFieldWithValidationReturn } from './src/composables/useFieldWithValidation'
+  import('./src/composables/useFieldWithValidation')
+  // @ts-ignore
+  export type { Icons, FlagIcons, CreditCardIcons, IconCollectionName, UseIconReturn } from './src/composables/useIcon'
+  import('./src/composables/useIcon')
+  // @ts-ignore
+  export type { UseInputEventBindingsReturn } from './src/composables/useInputEventBindings'
+  import('./src/composables/useInputEventBindings')
+  // @ts-ignore
+  export type { UseSmartLinkBaseProps, UseSmartLinkProps, UseSmartLinkReturn } from './src/composables/useSmartLink'
+  import('./src/composables/useSmartLink')
 }
